@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 4: Diseño a Cortante y Tensión Diagonal en Vigas | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 04 de 09 • Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Diseño a Cortante y Tensión Diagonal en Vigas</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠</span> Portal Principal
+      </a>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero láser virtual para el docente (Tecla L)">
+        <span>🔴</span> Puntero (L)
+      </button>
+      <button id="btn-presentation" class="btn-control" onclick="togglePresentationMode()" title="Conmutar entre Modo Estudio y Modo Clase Magistral (Tecla P)">
+        <span>🖥️</span> Modo Clase Magistral (P)
+      </button>
+      <button id="btn-theme" class="btn-control" onclick="toggleTheme()">
+        <span>🌙</span> Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <div class="workspace-layout">
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-section-title">Contenido del Módulo 04</div>
+        <ul class="toc-list">
+          <li><a href="#portada-mod04" class="toc-link active"><span class="toc-num">00</span> Portada y Bibliografía</a></li>
+          <li><a href="#sec-tension-diagonal" class="toc-link"><span class="toc-num">1.0</span> 1. Tensión Diagonal y Cercha 45°</a></li>
+          <li><a href="#sec-seccion-critica" class="toc-link"><span class="toc-num">2.0</span> 2. Ecuación Base y Sección Crítica</a></li>
+          <li><a href="#sec-aporte-concreto" class="toc-link"><span class="toc-num">3.0</span> 3. Resistencia del Concreto $V_c$</a></li>
+          <li><a href="#sec-aporte-acero" class="toc-link"><span class="toc-num">4.0</span> 4. Estribos $V_s$, $A_{v,\min}$ y Zonas</a></li>
+          <li><a href="#sec-detallamiento-sismo" class="toc-link"><span class="toc-num">5.0</span> 5. Ganchos 135°, Cortante $V_e$ y CFRP</a></li>
+          <li><a href="#sec-lab-mod04" class="toc-link"><span class="toc-num">6.0</span> 6. Laboratorio Interactivo</a></li>
+          <li><a href="#sec-ejemplos-mod04" class="toc-link"><span class="toc-num">7.0</span> 7. Ejemplos Resueltos Paso a Paso</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-1" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.1</span> Viga 30×50 y Zonificación</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.2</span> Vigueta y Viga Principal B</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.3</span> Carga Axial y $V_e$ en DES</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.4</span> Carga Puntual y Zonificación (Mulet)</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.5</span> Estribos y Barras Dobladas a 45°</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.6</span> Cortante y Torsión Combinados</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">Ruta de Módulos</div>
+        <div class="module-switcher">
+          <a href="modulo-01-introduccion.html" class="module-pill">
+            <span>Mód. 01: Introducción y Filosofías</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-02-predimensionamiento.html" class="module-pill">
+            <span>Mód. 02: Predimensionamiento</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-03-flexion-vigas.html" class="module-pill">
+            <span>Mód. 03: Flexión en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-04-cortante-vigas.html" class="module-pill current">
+            <span>Mód. 04: Cortante en Vigas</span>
+            <span>●</span>
+          </a>
+          <a href="modulo-05-columnas.html" class="module-pill">
+            <span>Mód. 05: Diseño de Columnas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-06-losas.html" class="module-pill">
+            <span>Mód. 06: Losas de Entrepiso</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-07-cimentaciones.html" class="module-pill">
+            <span>Mód. 07: Cimentaciones</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-08-despiece.html" class="module-pill">
+            <span>Mód. 08: Longitud de Desarrollo y Despiece</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-09-sismico.html" class="module-pill">
+            <span>Mód. 09: Diseño Sismorresistente</span>
+            <span>✓</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- ===================================================================
+           LÁMINA 00: PORTADA DEL MÓDULO 04 Y BIBLIOGRAFÍA DE REFERENCIA
+           =================================================================== -->
+      <section id="portada-mod04" class="hero-banner content-section">
+        <div class="hero-kicker">
+          <span>MÓDULO TÉCNICO 04</span>
+          <span>•</span>
+          <span>ESFUERZOS PRINCIPALES, CERCHA DE RITTER-MÖRSCH Y CORTANTE SÍSMICO</span>
+        </div>
+        <h1 class="hero-title">Diseño a Cortante y Tensión Diagonal en Vigas de Concreto Reforzado</h1>
+        <p class="hero-subtitle">
+          A diferencia de la falla por flexión en secciones controladas por tracción —que es gradual, dúctil y precedida por amplias deflexiones—, la <strong>falla por fuerza cortante (tensión diagonal)</strong> es repentina, frágil y catastrófica. En este módulo estudiaremos el estado biaxial de esfuerzos principales en una viga, los modos de fisuración inclinada, la analogía de la cercha reticulada de Ritter-Mörsch a $45^\circ$, la formulación normativa de resistencia del concreto ($V_c$) y de los estribos ($V_s$), la zonificación rigurosa del diagrama de cortante y el diseño por capacidad sísmica ($V_e$).
+        </p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Autoría Académica</span>
+            <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Respaldo Normativo</span>
+            <span class="hero-meta-value">NSR-10 Cap. C.11, C.7.1, C.8.6 y C.21</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Simuladores Interactivos</span>
+            <span class="hero-meta-value">2 Laboratorios (Zonificador y Capacidad $V_e$)</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ejemplos con Pizarra Docente</span>
+            <span class="hero-meta-value">3 Problemas Completos Paso a Paso</span>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1.5rem;">
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #38BDF8;">🎯 Competencias Específicas del Módulo 04</h3>
+              <div class="tech-card-icon">🧭</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.6; color: #E2E8F0; margin: 0;">
+              <li>Transformar el estado combinado de esfuerzos normales por flexión ($\sigma_x$) y cortantes ($\tau_{xy}$) en esfuerzos principales ($\sigma_1, \sigma_2$) e identificar la génesis de las grietas de <strong>flexo-cortante</strong> y <strong>cortante en el alma</strong>.</li>
+              <li>Ubicar correctamente la sección crítica de diseño a una distancia $d$ de la cara del apoyo (<code>NSR-10 C.11.1.3.1</code>) y distinguir los casos donde es obligatorio diseñar en la cara del apoyo ($x = 0$).</li>
+              <li>Calcular la resistencia aportada por el concreto $V_c$ mediante las ecuaciones simplificadas (<code>C.11.2.1</code>) y detalladas (<code>C.11.2.2</code>) con o sin carga axial ($N_u$).</li>
+              <li>Diseñar y zonificar el refuerzo transversal ($V_s$) con estribos de 2, 3 o 4 ramas, verificando $V_{s,\max} = 0.66\sqrt{f'_c}\,b_w d$, $A_{v,\min}$, $s_{\max}$ y el cortante sísmico por capacidad $V_e$.</li>
+            </ul>
+          </div>
+
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #FBBF24;">📚 Bibliografía Fundamental del Módulo</h3>
+              <div class="tech-card-icon">📖</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.6; color: #E2E8F0; margin: 0;">
+              <li><strong>AIS (Asociación Colombiana de Ingeniería Sísmica).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente NSR-10</em> — Título C, Capítulos C.7, C.8, C.9, C.11 y C.21.</li>
+              <li><strong>Wight, J. K., &amp; MacGregor, J. G.</strong> <em>Reinforced Concrete: Mechanics and Design</em>, 7th Ed., Pearson. (Cap. 6: Shear in Beams).</li>
+              <li><strong>Darwin, D., Dolan, C. W., &amp; Nilson, A. H.</strong> <em>Design of Concrete Structures</em>, 15th Ed., McGraw-Hill. (Cap. 4: Shear and Diagonal Tension in Beams).</li>
+              <li><strong>Rochel Awad, R.</strong> <em>Hormigón Reforzado (Primera Parte)</em>, Universidad EAFIT.</li>
+              <li><strong>ACI Committee 318.</strong> <em>Building Code Requirements for Structural Concrete (ACI 318) and Commentary</em>.</li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- TARJETA BIBLIOGRÁFICA Y TEXTOS GUÍA -->
+        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <div class="tech-card-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Referencias Bibliográficas y Textos Guía del Módulo</span>
+            <span class="norm-pill">NSR-10 / ACI 318</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5;">
+            Los modelos mecánicos de tensión diagonal, analogía de la cercha de Ritter-Mörsch, zonificación de cortante y torsión combinada se fundamentan en:
+          </p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 4: Tensión diagonal y cortante en vigas, sección crítica a $d$, espaciamientos máximos normativos y torsión).</li>
+            <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.11: Cortante y Torsión; y Capítulo C.21: Requisitos de Diseño Sismorresistente).</li>
+            <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
+            <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
+          </ul>
+        </div>
+</section>
+
+      <!-- ===================================================================
+           SECCIÓN 1.0: ESFUERZOS PRINCIPALES, TENSIÓN DIAGONAL Y CERCHA 45°
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">MECÁNICA DEL SÓLIDO 01</span>
+        <span class="chapter-divider-title">Esfuerzos Principales, Tensión Diagonal y Analogía de la Cercha de Ritter-Mörsch</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-tension-diagonal" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">1.0</span>
+          </div>
+          <h2 class="section-title">1. Estado Tensional Biaxial, Tensión Diagonal y Mecanismos de Transferencia</h2>
+          <p class="section-lead">
+            En el diseño de estructuras de concreto reforzado, el término <strong>«falla por cortante»</strong> es en realidad una denominación abreviada para referirse a la <strong>falla por tracción diagonal (o tensión diagonal)</strong>. El concreto posee una excelente resistencia a la compresión uniaxial ($f'_c$) y al cizallamiento puro en compresión, pero su resistencia a la tracción directa es apenas del orden del $8\%$ al $12\%$ de $f'_c$.
+          </p>
+        </div>
+
+        <div class="math-card">
+          <div class="math-card-header">
+            <span class="math-card-title">Esfuerzos Normales ($\sigma_x$), Cortantes ($\tau_{xy}$) y Transformación de Mohr a Esfuerzos Principales ($\sigma_{1,2}, \theta_p$)</span>
+            <span class="norm-pill">Mecánica del Medio Continuo</span>
+          </div>
+          <div class="math-formula">
+            $$\sigma_x = \frac{M \, y}{I}, \qquad \tau_{xy} = \frac{V \, Q}{I \, b_w}, \qquad \tau_{\max,\text{rect}} = \frac{3}{2}\,\frac{V}{b_w \, h} \;\; (\text{en el eje neutro } y = 0)$$
+          </div>
+          <div class="math-formula">
+            $$\sigma_{1,2} = \frac{\sigma_x}{2} \pm \sqrt{\left(\frac{\sigma_x}{2}\right)^2 + \tau_{xy}^2}, \qquad \tan(2\theta_p) = \frac{2\,\tau_{xy}}{\sigma_x}$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Estado de Cortante Puro en el Eje Neutro ($\sigma_x = 0$):</strong> En el eje neutro el esfuerzo normal de flexión se anula ($\sigma_x = 0$) y el esfuerzo cortante es máximo ($\tau_{xy} = \tau_{\max}$). Al sustituir en las ecuaciones de transformación se obtiene $\mathbf{\sigma_1 = +\tau_{\max}}$ (tracción principal), $\mathbf{\sigma_2 = -\tau_{\max}}$ (compresión principal) y $\mathbf{\theta_p = 45^\circ}$.</div>
+            <div><strong>Génesis de la Fisura Inclinada:</strong> Cuando el esfuerzo principal de tracción $\sigma_1$ supera la resistencia a la tracción del concreto ($f'_t$), se abre una <strong>fisura perpendicular a la dirección de $\sigma_1$</strong> (y paralela a las bielas comprimidas $\sigma_2$), es decir, inclinada aproximadamente a $45^\circ$ respecto al eje longitudinal de la viga.</div>
+          </div>
+        </div>
+
+        <!-- DIAGRAMA SVG TÉCNICO: TRAYECTORIAS DE TENSIONES PRINCIPALES Y TIPOS DE GRIETAS -->
+        <div class="tech-card" style="margin: 1.25rem 0;">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Figura 4.1 — Trayectorias de Esfuerzos Principales, Cortante Puro a 45° y Tipología de Grietas</h3>
+            <div class="tech-card-icon">📐</div>
+          </div>
+          <svg viewBox="0 0 880 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #0B1120;">
+            <!-- Fondo de la viga -->
+            <rect x="45" y="45" width="540" height="150" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <!-- Apoyos -->
+            <polygon points="65,195 45,230 85,230" fill="#475569" stroke="#94A3B8" stroke-width="1.5"/>
+            <polygon points="565,195 545,230 585,230" fill="#475569" stroke="#94A3B8" stroke-width="1.5"/>
+            <!-- Eje Neutro -->
+            <line x1="45" y1="120" x2="585" y2="120" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="6,4"/>
+            <text x="54" y="114" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">Eje Neutro (σx = 0, θp = 45°)</text>
+
+            <!-- Armadura longitudinal inferior -->
+            <line x1="55" y1="180" x2="575" y2="180" stroke="#FBBF24" stroke-width="3.5"/>
+
+            <!-- Trayectorias de compresión principal (arcos azules punteados) -->
+            <path d="M 70,180 Q 315,35 560,180" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-dasharray="5,4"/>
+            <path d="M 110,180 Q 315,65 520,180" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-dasharray="5,4"/>
+
+            <!-- 1. Grietas de Cortante en el Alma (Web-shear cracks) cerca de los apoyos -->
+            <path d="M 88,155 L 118,120 L 148,82" fill="none" stroke="#FB7185" stroke-width="2.6" stroke-linecap="round"/>
+            <text x="72" y="70" fill="#FB7185" font-family="Inter, sans-serif" font-weight="700" font-size="11">(3) Cortante en el alma</text>
+            <text x="72" y="83" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="9.5">(Web-shear: V alto, M bajo)</text>
+
+            <!-- 2. Grietas de Flexo-Cortante (Flexure-shear cracks) en zona intermedia -->
+            <path d="M 185,195 L 188,158 L 215,122 L 248,88" fill="none" stroke="#F97316" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 445,195 L 442,158 L 415,122 L 382,88" fill="none" stroke="#F97316" stroke-width="2.6" stroke-linecap="round"/>
+            <text x="160" y="216" fill="#F97316" font-family="Inter, sans-serif" font-weight="700" font-size="11">(2) Grieta de Flexo-Cortante</text>
+            <text x="160" y="229" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="9.5">(Inicia vertical por M y se inclina por V)</text>
+
+            <!-- 3. Grietas verticales de Flexión pura en el centro de la luz -->
+            <path d="M 290,195 L 290,130" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M 315,195 L 315,125" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M 340,195 L 340,130" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
+            <text x="270" y="248" fill="#FBBF24" font-family="Inter, sans-serif" font-weight="700" font-size="11">(1) Grietas de Flexión Pura (V ≈ 0, M máx)</text>
+
+            <!-- Panel Derecho: Elemento diferencial en el Eje Neutro rotado a 45° -->
+            <rect x="615" y="25" width="245" height="225" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+            <text x="737" y="47" text-anchor="middle" fill="#F8FAFC" font-family="Inter, sans-serif" font-weight="700" font-size="11.5">ELEMENTO EN EL EJE NEUTRO (45°)</text>
+            <!-- Rombo rotado a 45 grados -->
+            <polygon points="737,82 787,132 737,182 687,132" fill="#1E293B" stroke="#94A3B8" stroke-width="1.8"/>
+            <!-- Fisura diagonal a 45 grados dentro del elemento -->
+            <line x1="705" y1="164" x2="769" y2="100" stroke="#FB7185" stroke-width="2.8" stroke-dasharray="4,3"/>
+            <!-- Flechas de tracción principal sigma_1 = tau -->
+            <line x1="708" y1="103" x2="682" y2="77" stroke="#FB7185" stroke-width="2.2"/>
+            <polygon points="678,73 688,76 681,83" fill="#FB7185"/>
+            <line x1="766" y1="161" x2="792" y2="187" stroke="#FB7185" stroke-width="2.2"/>
+            <polygon points="796,191 786,188 793,181" fill="#FB7185"/>
+            <!-- Flechas de compresión principal sigma_2 = -tau -->
+            <line x1="788" y1="81" x2="766" y2="103" stroke="#38BDF8" stroke-width="2.2"/>
+            <polygon points="762,107 772,104 765,97" fill="#38BDF8"/>
+            <line x1="686" y1="183" x2="708" y2="161" stroke="#38BDF8" stroke-width="2.2"/>
+            <polygon points="712,157 702,160 709,167" fill="#38BDF8"/>
+
+            <text x="737" y="212" text-anchor="middle" fill="#FB7185" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">σ₁ = +τ_máx (Tracción Diagonal)</text>
+            <text x="737" y="230" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">σ₂ = -τ_máx (Biela Comprimida)</text>
+          </svg>
+        </div>
+
+        <div class="cards-grid-3">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">1. Grietas Verticales de Flexión</h3>
+              <div class="tech-card-icon">📏</div>
+            </div>
+            <p style="font-size: 0.9rem;">
+              Ocurren en la región central donde $M$ es grande y $V \approx 0$. El esfuerzo principal $\sigma_1 \approx \sigma_x$ es horizontal, por lo que las fisuras nacen casi verticales ($\theta_p \approx 90^\circ$) desde la fibra extrema en tracción y son controladas por el acero longitudinal $A_s$.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">2. Grietas de Flexo-Cortante</h3>
+              <div class="tech-card-icon">⚡</div>
+            </div>
+            <p style="font-size: 0.9rem;">
+              Son las más comunes en vigas esbeltas convencionales (<em>flexure-shear cracks</em>). Primero se forma una grieta vertical por flexión cuando $M > M_{cr}$; luego, la concentración de cortante en la punta de esa grieta hace que se incline diagonalmente hacia el eje neutro.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">3. Cortante en el Alma</h3>
+              <div class="tech-card-icon">💥</div>
+            </div>
+            <p style="font-size: 0.9rem;">
+              Se originan directamente en el interior del alma (<em>web-shear cracks</em>, cerca del eje neutro) antes de que exista fisuración por flexión en esa sección. Son típicas cerca de los apoyos de vigas de alma delgada (secciones I o T) o vigas preesforzadas con alto $V$ y bajo $M$.
+            </p>
+          </div>
+        </div>
+
+        <div class="data-table-wrap" style="margin-top: 1.25rem;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ensayo / Parámetro de Tracción en el Concreto</th>
+                <th>Expresión Experimental / Normativa (MPa)</th>
+                <th>Aplicación y Valores del Factor de Concreto Liviano $\lambda$ (NSR-10 C.8.6.1)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Módulo de Rotura (Flexión en viga sin refuerzo)</strong></td>
+                <td>$f_r = 0.62\,\lambda\sqrt{f'_c}$ &nbsp;(<code>Ec. C.9-10</code>)</td>
+                <td>Control de fisuración inicial a flexión ($M_{cr}$) y cálculo de deflexiones inmediatas ($I_e$).</td>
+              </tr>
+              <tr>
+                <td><strong>2. Tracción Indirecta por Hendimiento (Ensayo Brasileño)</strong></td>
+                <td>$f_{ct} \approx 0.56\,\sqrt{f'_c}$</td>
+                <td>Si se especifica $f_{ct}$ experimental para concreto liviano: $\lambda = \dfrac{f_{ct}}{0.56\sqrt{f'_c}} \le 1.0$.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Tracción Uniaxial Directa / Tensión Diagonal</strong></td>
+                <td>$f'_t \approx 0.29\text{ a }0.33\,\lambda\sqrt{f'_c}$</td>
+                <td>
+                  Valores por defecto de $\lambda$: <strong>$\lambda = 1.00$</strong> (concreto de peso normal); <strong>$\lambda = 0.85$</strong> (concreto liviano con arena de peso normal); <strong>$\lambda = 0.75$</strong> (concreto liviano en todos sus agregados).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="math-card normative-emerald" style="margin-top: 1.25rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Equilibrio Interno en una Viga Fisurada y Analogía de la Cercha Reticulada de Ritter-Mörsch (45°)</span>
+            <span class="norm-pill">NSR-10 C.11.1.1 (Ec. C.11-2)</span>
+          </div>
+          <div class="math-formula">
+            $$V_n = \underbrace{V_{cz} + V_a + V_d}_{\text{Aporte englobado en } V_c} + \underbrace{V_s}_{\text{Aporte de los estribos}}$$
+          </div>
+          <div class="math-vars">
+            <div><strong>$V_{cz}$ (Zona de concreto comprimido no fisurada, $20\%\text{–}40\%$):</strong> Esfuerzo tangencial resistido por la cabeza superior comprimida por encima de la punta de la fisura diagonal.</div>
+            <div><strong>$V_a$ (Trabazón de agregados — <em>Aggregate Interlock</em>, $33\%\text{–}50\%$):</strong> Fricción tangencial entre las caras rugosas de los agregados gruesos a lo largo de la grieta inclinada.</div>
+            <div><strong>$V_d$ (Efecto pasador o dovela — <em>Dowel Action</em>, $15\%\text{–}25\%$):</strong> Fuerza transversal resistida por las barras longitudinales inferiores $A_s$ al oponerse al desplazamiento vertical relativo de la fisura.</div>
+            <div><strong>$V_s$ y la Cercha de Ritter-Mörsch (1899/1902):</strong> La viga fisurada se idealiza como una cercha reticulada donde el cordón superior horizontal es el bloque de concreto comprimido, el cordón inferior es el acero longitudinal $A_s$, las diagonales comprimidas a $45^\circ$ son las <strong>bielas de concreto del alma</strong> y los montantes verticales en tracción son los <strong>estribos</strong>. Además de aportar $V_s$, los estribos cosen la grieta impidiendo que se abra, con lo cual preservan la trabazón de agregados $V_a$ y restringen el desgarramiento del recubrimiento inferior bajo la acción de dovela $V_d$.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 2.0: ECUACIÓN BASE Y UBICACIÓN DE LA SECCIÓN CRÍTICA
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">SECCIÓN CRÍTICA 02</span>
+        <span class="chapter-divider-title">Ecuación Fundamental LRFD y Ubicación de la Sección Crítica de Cortante</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-seccion-critica" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">2.0</span>
+          </div>
+          <h2 class="section-title">2. Ecuación Fundamental de Diseño ($\phi V_n \ge V_u$) y Sección Crítica a Distancia $d$</h2>
+          <p class="section-lead">
+            El diseño de secciones transversales sometidas a cortante se rige por la condición de resistencia última de <code>NSR-10 C.11.1.1</code> empleando un factor de reducción de resistencia $\mathbf{\phi = 0.75}$ (<code>NSR-10 C.9.3.2.3</code>), menor que el de flexión ($\phi = 0.90$) debido a la naturaleza más súbita y sensible a la tracción del concreto de los modos de falla por cortante.
+          </p>
+        </div>
+
+        <div class="math-card">
+          <div class="math-card-header">
+            <span class="math-card-title">Ecuaciones Fundamentales de Diseño a Fuerza Cortante</span>
+            <span class="norm-pill">NSR-10 Ec. C.11-1, Ec. C.11-2 y C.9.3.2.3</span>
+          </div>
+          <div class="math-formula">
+            $$\phi V_n \ge V_u \qquad \text{con} \qquad V_n = V_c + V_s \implies \mathbf{\phi V_c + \phi V_s \ge V_u} \qquad (\phi = 0.75)$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Condiciones simultáneas de <code>NSR-10 C.11.1.3.1</code> para diseñar a una distancia $d$ de la cara del apoyo:</strong> Se permite diseñar las secciones situadas entre la cara del apoyo y una distancia $d$ medida desde ella para el mismo cortante mayorado $\mathbf{V_{u,d}}$ únicamente cuando: <strong>(a)</strong> la reacción del apoyo, en dirección del cortante aplicado, introduce compresión en las regiones extremas del elemento; <strong>(b)</strong> las cargas se aplican en o cerca de la cara superior del elemento; y <strong>(c)</strong> no existe ninguna carga concentrada entre la cara del apoyo y la sección crítica ubicada a $d$.</div>
+            <div><strong>Casos donde es obligatorio diseñar con el cortante EN LA CARA del apoyo ($x = 0$):</strong> Cuando la reacción del apoyo induce tracción (viga colgada de un tensor o péndola), cuando la carga está suspendida de la cara inferior de la viga, o cuando actúa una carga puntual importante dentro de la distancia $d$ desde la cara del apoyo.</div>
+          </div>
+        </div>
+
+        <!-- DIAGRAMA SVG COMPARATIVO: SECCIÓN CRÍTICA A 'd' VS EN LA CARA DEL APOYO -->
+        <div class="tech-card" style="margin-top: 1.25rem;">
+          <div class="tech-card-header">
+            <h3 class="tech-card-title">Figura 4.2 — Comparación entre Sección Crítica a Distancia $d$ de la Cara vs. En la Cara del Apoyo ($x = 0$)</h3>
+            <div class="tech-card-icon">🔍</div>
+          </div>
+          <svg viewBox="0 0 880 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #0B1120;">
+            <!-- CASO A: Sección crítica a 'd' de la cara del apoyo -->
+            <rect x="20" y="15" width="410" height="205" rx="8" fill="#0F172A" stroke="#059669" stroke-width="1.6"/>
+            <text x="225" y="38" text-anchor="middle" fill="#34D399" font-family="Inter, sans-serif" font-weight="700" font-size="12">CASO A: SECCIÓN CRÍTICA A DISTANCIA "d" DE LA CARA</text>
+            <!-- Columna inferior (compresión en el apoyo) -->
+            <rect x="45" y="130" width="50" height="65" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
+            <!-- Viga -->
+            <rect x="45" y="75" width="355" height="55" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
+            <!-- Flechas de carga distribuida arriba -->
+            <line x1="60" y1="52" x2="380" y2="52" stroke="#38BDF8" stroke-width="1.8"/>
+            <line x1="80" y1="52" x2="80" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="130" y1="52" x2="130" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="180" y1="52" x2="180" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="230" y1="52" x2="230" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="280" y1="52" x2="280" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="330" y1="52" x2="330" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
+            <!-- Fisura a 45 grados desde cara del apoyo hasta x = d -->
+            <line x1="95" y1="130" x2="165" y2="75" stroke="#FB7185" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <!-- Sección crítica en x = d -->
+            <line x1="165" y1="62" x2="165" y2="148" stroke="#34D399" stroke-width="2.4"/>
+            <!-- Cota d -->
+            <line x1="95" y1="146" x2="165" y2="146" stroke="#34D399" stroke-width="1.5"/>
+            <text x="130" y="160" text-anchor="middle" fill="#34D399" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">d</text>
+            <text x="172" y="158" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10">Sección Crítica: Vu(d)</text>
+            <text x="225" y="186" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">(a) Reacción introduce compresión • (b) Carga arriba</text>
+            <text x="225" y="203" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">(c) Sin carga puntual concentrada entre la cara y "d"</text>
+
+            <!-- CASO B: Sección crítica EN LA CARA DEL APOYO (x = 0) -->
+            <rect x="450" y="15" width="410" height="205" rx="8" fill="#0F172A" stroke="#E11D48" stroke-width="1.6"/>
+            <text x="655" y="38" text-anchor="middle" fill="#FB7185" font-family="Inter, sans-serif" font-weight="700" font-size="12">CASO B: SECCIÓN CRÍTICA EN LA CARA DEL APOYO (x = 0)</text>
+            <!-- Tensor / Colgante superior en tracción o carga puntual dentro de d -->
+            <rect x="475" y="45" width="50" height="35" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
+            <!-- Viga colgada -->
+            <rect x="475" y="80" width="355" height="55" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
+            <!-- Carga concentrada Pu dentro de la distancia d -->
+            <line x1="560" y1="45" x2="560" y2="78" stroke="#FBBF24" stroke-width="3"/>
+            <polygon points="560,80 554,68 566,68" fill="#FBBF24"/>
+            <text x="568" y="62" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">Pu dentro de "d"</text>
+            <!-- Fisura interna hacia el interior del apoyo en tracción -->
+            <line x1="525" y1="80" x2="485" y2="135" stroke="#FB7185" stroke-width="2.5" stroke-dasharray="4,3"/>
+            <!-- Sección crítica en x = 0 (cara del apoyo) -->
+            <line x1="525" y1="62" x2="525" y2="152" stroke="#FB7185" stroke-width="2.6"/>
+            <text x="533" y="155" fill="#FB7185" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">Sección Crítica en la Cara: Vu(0)</text>
+            <text x="655" y="186" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">• Apoyo en tracción (péndola/tensor) o carga colgada abajo</text>
+            <text x="655" y="203" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">• O presencia de carga concentrada Pu entre la cara y "d"</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 3.0: RESISTENCIA AL CORTANTE PROPORCIONADA POR EL CONCRETO Vc
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">APORTE DEL CONCRETO 03</span>
+        <span class="chapter-divider-title">Resistencia Nominal al Cortante Proporcionada por el Concreto ($V_c$)</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-aporte-concreto" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">3.0</span>
+          </div>
+          <h2 class="section-title">3. Fórmulas Simplificadas y Detalladas para $V_c$ (NSR-10 C.11.2)</h2>
+          <p class="section-lead">
+            La resistencia nominal del concreto $V_c$ representa la fuerza cortante que provoca la formación de la primera fisura inclinada significativa de tensión diagonal. La compresión axial ($N_u > 0$) retrasa la fisuración e incrementa $V_c$, mientras que la tracción axial ($N_u < 0$) acelera el agrietamiento y reduce drásticamente $V_c$.
+          </p>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Solicitación Actuante en el Elemento</th>
+                <th>Método Simplificado (NSR-10 C.11.2.1)</th>
+                <th>Método Detallado (NSR-10 C.11.2.2)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Flexión y Cortante Únicamente</strong><br/><span style="font-size:0.82rem; color:var(--text-muted);">($N_u = 0$)</span></td>
+                <td>
+                  $$V_c = 0.17\,\lambda\sqrt{f'_c}\,b_w d$$
+                  <span style="font-size:0.8rem; color:var(--text-muted);">(<code>Ec. C.11-3</code>)</span>
+                </td>
+                <td>
+                  $$V_c = \left(0.16\,\lambda\sqrt{f'_c} + 17\,\rho_w\,\frac{V_u d}{M_u}\right)b_w d \le 0.29\,\lambda\sqrt{f'_c}\,b_w d$$
+                  <span style="font-size:0.8rem; color:var(--text-muted);">(<code>Ec. C.11-5</code>, exigiendo $\frac{V_u d}{M_u} \le 1.0$ y $\rho_w = \frac{A_s}{b_w d}$)</span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>2. Cortante + Compresión Axial</strong><br/><span style="font-size:0.82rem; color:var(--text-muted);">($N_u > 0$ positiva en compresión; $\frac{N_u}{A_g}$ en MPa)</span></td>
+                <td>
+                  $$V_c = 0.17\left(1 + \frac{N_u}{14\,A_g}\right)\lambda\sqrt{f'_c}\,b_w d$$
+                  <span style="font-size:0.8rem; color:var(--text-muted);">(<code>Ec. C.11-4</code>)</span>
+                </td>
+                <td>
+                  Se usa la <code>Ec. C.11-5</code> reemplazando $M_u$ por el <strong>momento modificado $M_m$</strong> (sin limitar $\frac{V_u d}{M_m}$ a $1.0$):
+                  $$M_m = M_u - N_u\left(\frac{4h - d}{8}\right) \quad (\text{Ec. C.11-6})$$
+                  Con el límite superior (o directamente si $M_m \le 0$):
+                  $$V_c \le 0.29\,\lambda\sqrt{f'_c}\,b_w d\sqrt{1 + \frac{0.29\,N_u}{A_g}} \quad (\text{Ec. C.11-7})$$
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3. Cortante + Tracción Axial</strong><br/><span style="font-size:0.82rem; color:var(--text-muted);">($N_u < 0$ negativa en tracción; $\frac{N_u}{A_g}$ en MPa)</span></td>
+                <td>
+                  $$V_c = 0$$
+                  <span style="font-size:0.8rem; color:var(--text-muted);">(<code>C.11.2.1.3</code>: el acero transversal debe resistir el 100% del cortante)</span>
+                </td>
+                <td>
+                  $$V_c = 0.17\left(1 + \frac{0.29\,N_u}{A_g}\right)\lambda\sqrt{f'_c}\,b_w d \ge 0$$
+                  <span style="font-size:0.8rem; color:var(--text-muted);">(<code>Ec. C.11-8</code>, con $N_u$ negativo en tracción)</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-note" style="margin-top: 1.25rem;">
+          <div class="callout-title">📌 Reglas Geométricas Especiales para el Cálculo de $V_c$ (NSR-10 C.11.1.2 y C.11.2.3)</div>
+          <ul style="padding-left: 1.15rem; margin-bottom: 0; font-size: 0.91rem;">
+            <li><strong>Tope al valor de $\sqrt{f'_c}$ (<code>C.11.1.2</code>):</strong> En todas las ecuaciones de cortante y torsión, el valor de $\sqrt{f'_c}$ no debe exceder $8.3\text{ MPa}$ (correspondiente a $f'_c \approx 70\text{ MPa}$), salvo que se disponga la armadura mínima reforzada de <code>C.11.1.2.1</code>.</li>
+            <li><strong>Ancho del alma $b_w$:</strong> En vigas rectangulares $b_w = b$; en vigas de sección en T o en L se toma únicamente el ancho del nervio o alma ($b_w$), despreciando los voladizos de la aleta.</li>
+            <li><strong>Secciones circulares (<code>C.11.2.3</code>):</strong> En columnas, pilotes o elementos circulares con refuerzo longitudinal distribuido perimetralmente, el área efectiva de cortante $b_w d$ se calcula tomando $\mathbf{b_w = D}$ (diámetro exterior total) y $\mathbf{d = 0.80\,D}$.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 4.0: RESISTENCIA DEL ACERO TRANSVERSAL Vs, LÍMITES Y ZONAS
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">REFUERZO TRANSVERSAL 04</span>
+        <span class="chapter-divider-title">Resistencia de los Estribos ($V_s$), Cuantía Mínima ($A_{v,\min}$) y Zonificación</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-aporte-acero" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">4.0</span>
+          </div>
+          <h2 class="section-title">4. Diseño de Estribos ($V_s$), Límites de Espaciamiento y Las 4 Zonas del Diagrama</h2>
+          <p class="section-lead">
+            Cuando el cortante mayorado $V_u$ supera la resistencia de diseño del concreto $\phi V_c$, la diferencia debe ser absorbida por el refuerzo transversal ($\phi V_s \ge V_u - \phi V_c$). De acuerdo con <code>NSR-10 C.11.4.2</code>, la resistencia a la fluencia de diseño del refuerzo transversal no debe exceder $\mathbf{f_{yt} \le 420\text{ MPa}}$ ($550\text{ MPa}$ para malla electrosoldada corrugada) para controlar el ancho de las grietas diagonales.
+          </p>
+        </div>
+
+        <div class="cards-grid-3">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">1. Estribos Perpendiculares ($\alpha = 90^\circ$)</h3>
+              <div class="tech-card-icon">🔗</div>
+            </div>
+            <p style="font-size: 0.89rem;">
+              Estándar en vigas sismorresistentes (<code>NSR-10 C.11.4.7.2, Ec. C.11-15</code>):
+              $$V_s = \frac{A_v \, f_{yt} \, d}{s} \implies s_{\text{req}} = \frac{\phi \, A_v \, f_{yt} \, d}{V_u - \phi V_c}$$
+              Donde $\mathbf{A_v = n_{\text{ramas}} \times A_{b,\text{estribo}}}$ es el área total de todas las ramas verticales que cortan el plano de la fisura.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">2. Estribos Inclinados o Serie Doblada</h3>
+              <div class="tech-card-icon">📐</div>
+            </div>
+            <p style="font-size: 0.89rem;">
+              Estribos a $\alpha \ge 45^\circ$ o serie de barras dobladas a $\alpha \ge 30^\circ$ (<code>Ec. C.11-16</code>):
+              $$V_s = \frac{A_v \, f_{yt}(\sin\alpha + \cos\alpha)d}{s}$$
+              No se recomiendan en zonas sísmicas porque ante la inversión del cortante quedan paralelos a las grietas conjugadas.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">3. Barra o Grupo Simple Doblado</h3>
+              <div class="tech-card-icon">↪️</div>
+            </div>
+            <p style="font-size: 0.89rem;">
+              Cuando el refuerzo doblado consiste en una sola barra o un único grupo a la misma distancia del apoyo (<code>Ec. C.11-17</code>):
+              $$V_s = A_v \, f_y \sin\alpha \le 0.25\sqrt{f'_c}\,b_w d$$
+              Solo se consideran efectivas las $\frac{3}{4}$ partes centrales del tramo inclinado.
+            </p>
+          </div>
+        </div>
+
+        <div class="math-card normative-amber" style="margin-top: 1.25rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Límite de Aplastamiento del Alma ($V_{s,\max}$), Espaciamiento Máximo ($s_{\max}$) y Armadura Mínima ($A_{v,\min}$)</span>
+            <span class="norm-pill">NSR-10 C.11.4.5, C.11.4.6.3 y C.11.4.7.9</span>
+          </div>
+          <div class="math-formula">
+            $$V_s \le V_{s,\max} = 0.66\sqrt{f'_c}\,b_w d \qquad \text{(Si } V_s > 0.66\sqrt{f'_c}\,b_w d \implies \text{¡Sección Insuficiente! Aumentar } b_w, d \text{ o } f'_c\text{)}$$
+          </div>
+          <div class="math-formula">
+            $$s_{\max,\text{geom}} = \begin{cases} \min\left(\dfrac{d}{2},\; 600\text{ mm}\right) & \text{si } V_s \le 0.33\sqrt{f'_c}\,b_w d \quad (\text{C.11.4.5.1}) \\[10pt] \min\left(\dfrac{d}{4},\; 300\text{ mm}\right) & \text{si } 0.33\sqrt{f'_c}\,b_w d < V_s \le 0.66\sqrt{f'_c}\,b_w d \quad (\text{C.11.4.5.3}) \end{cases}$$
+          </div>
+          <div class="math-formula">
+            $$A_{v,\min} = \max\left(0.062\sqrt{f'_c}\,\frac{b_w \, s}{f_{yt}},\;\; \frac{0.35 \, b_w \, s}{f_{yt}}\right) \implies s_{\max,\text{por } A_{v,\min}} = \min\left(\frac{A_v \, f_{yt}}{0.062\sqrt{f'_c}\,b_w},\;\; \frac{A_v \, f_{yt}}{0.35 \, b_w}\right)$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Obligatoriedad de $A_{v,\min}$ (<code>NSR-10 C.11.4.6.1</code>):</strong> Debe proporcionarse al menos un área $A_{v,\min}$ en todas las regiones donde $\mathbf{V_u > 0.5\,\phi V_c}$ (salvo en zapatas y losas macizas, viguetas que cumplan <code>C.8.13</code> y vigas de poca altura con $h \le 250\text{ mm}$).</div>
+          </div>
+        </div>
+
+        <div class="data-table-wrap" style="margin-top: 1.25rem;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Zona del Diagrama</th>
+                <th>Intervalo de Fuerza Cortante $V_u$</th>
+                <th>Requisito de Diseño de Estribos (NSR-10 C.11.4)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Zona 1</strong></td>
+                <td>$V_u \le 0.5\,\phi V_c$</td>
+                <td>No requiere refuerzo transversal por cálculo de resistencia (en la práctica sísmica se colocan estribos constructivos de montaje a $s \le d/2$).</td>
+              </tr>
+              <tr>
+                <td><strong>Zona 2</strong></td>
+                <td>$0.5\,\phi V_c < V_u \le \phi V_c$</td>
+                <td>El concreto resiste $V_u$, pero es <strong>obligatorio colocar armadura mínima $A_{v,\min}$</strong> a separación $s_{\max} = \min\left(s_{\max,\text{geom}},\; s_{\max,\text{por } A_{v,\min}}\right)$.</td>
+              </tr>
+              <tr>
+                <td><strong>Zona 3</strong></td>
+                <td>$\phi V_c < V_u \le \phi V_c + \phi V_{s,\max}$</td>
+                <td>Zona de diseño por resistencia: $s = \min\left(\dfrac{\phi A_v f_{yt} d}{V_u - \phi V_c},\; s_{\max}\right)$. Se extiende en una longitud $S$ medida desde la cara del apoyo hasta donde $V_u(x) = \phi V_c$.</td>
+              </tr>
+              <tr>
+                <td><strong>Zona 4</strong></td>
+                <td>$V_u > \phi V_c + 0.66\,\phi\sqrt{f'_c}\,b_w d$</td>
+                <td><strong>Sección insuficiente:</strong> falla frágil por aplastamiento diagonal del alma. Es obligatorio aumentar las dimensiones $b_w \times h$ o la resistencia $f'_c$.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="math-card normative-emerald" style="margin-top: 1.25rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Deducción por Triángulos Semejantes de la Longitud de Zonificación ($S$) para Carga Uniforme</span>
+            <span class="norm-pill">Geometría del Diagrama de Cortante</span>
+          </div>
+          <div class="math-formula">
+            $$\frac{L_{\text{total}}}{V_{u,\text{cara}}} = \frac{S}{V_{u,\text{cara}} - \phi V_c} \implies \mathbf{S = L_{\text{total}}\left(\frac{V_{u,\text{cara}} - \phi V_c}{V_{u,\text{cara}}}\right) = \frac{V_{u,\text{cara}} - \phi V_c}{w_u}}$$
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 5.0: DETALLES CONSTRUCTIVOS, CORTANTE SÍSMICO Ve Y CFRP
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">DISEÑO SÍSMICO Y DETALLAMIENTO 05</span>
+        <span class="chapter-divider-title">Ganchos Sísmicos de 135°, Cortante por Capacidad ($V_e$) y Rehabilitación con CFRP</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-detallamiento-sismo" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">5.0</span>
+          </div>
+          <h2 class="section-title">5. Ganchos a 135°, Cortante Sísmico por Capacidad ($V_e$) y Rehabilitación con CFRP</h2>
+          <p class="section-lead">
+            En pórticos sismorresistentes con capacidad Moderada (<strong>DMO</strong>, <code>NSR-10 C.21.3.4</code>) o Especial (<strong>DES</strong>, <code>NSR-10 C.21.5.4</code>) de disipación de energía, los estribos deben diseñarse por <strong>capacidad</strong> para resistir el cortante $V_e$ asociado a la formación simultánea de rótulas plásticas de flexión en ambos extremos de la viga.
+          </p>
+        </div>
+
+        <div class="cards-grid-2">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">Diámetros de Mandril y Ganchos Sísmicos de 135°</h3>
+              <div class="tech-card-icon">📏</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.9rem; line-height: 1.65;">
+              <li><strong>Diámetro interior mínimo de doblado (<code>C.7.2.2</code>):</strong> Para estribos $\text{No. }5$ ($5/8"$) y menores, el diámetro del mandril es $\mathbf{D_{\min} = 4\,d_b}$. Para barras $\text{No. }6$ a $\text{No. }8$, es $6\,d_b$.</li>
+              <li><strong>Gancho estándar para estribos generales (<code>C.7.1.3</code>):</strong> Doblez de $90^\circ$ o $135^\circ$ más una extensión recta de $6\,d_b$ para $\text{No. }5$ y menores.</li>
+              <li><strong>Gancho sísmico obligatorio en DMO y DES (<code>C.7.1.4</code> y <code>C.21.1.1</code>):</strong> Doblez de <strong>$135^\circ$</strong> más una extensión recta de al menos $\mathbf{\max(6\,d_b,\; 75\text{ mm})}$, alojada hacia el interior del núcleo confinado. Los ganchos a $90^\circ$ se abren cuando el recubrimiento se descascara durante un sismo.</li>
+            </ul>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">Rehabilitación a Cortante con Tejidos CFRP</h3>
+              <div class="tech-card-icon">🛠️</div>
+            </div>
+            <p style="font-size: 0.9rem;">
+              Cuando una viga existente presenta deficiencia de estribos o fisuración diagonal por cambio de uso o actualización normativa, la técnica moderna de reforzamiento consiste en adherir externamente láminas o tejidos de <strong>Polímeros Reforzados con Fibra de Carbono (CFRP — <em>ACI 440.2R</em>)</strong>:
+            </p>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.65; margin-bottom: 0;">
+              <li><strong>Envoltura completa (360°):</strong> Máxima eficiencia en vigas aisladas.</li>
+              <li><strong>Camisa en U (3 caras) con anclajes mecánicos:</strong> Solución estándar cuando existe losa monolítica superior, dispuesta en franjas verticales o inclinadas a $45^\circ$ perpendiculares a la fisura.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="math-card normative-amber" style="margin-top: 1.25rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Cortante Sísmico por Capacidad ($V_e$), Criterio de $V_c = 0$ en DES y Zona de Confinamiento $2h$</span>
+            <span class="norm-pill">NSR-10 C.21.3.4 (DMO) y C.21.5.4 (DES)</span>
+          </div>
+          <div class="math-formula">
+            $$V_e = \underbrace{\frac{M_{pr1} + M_{pr2}}{l_n}}_{V_{\text{sway}}\text{ (Cortante hiperestático sísmico)}} \pm \underbrace{\frac{w_g \, l_n}{2}}_{V_g\text{ (Gravitacional aferente, } 1.2D + 1.0L\text{)}}$$
+          </div>
+          <div class="math-formula">
+            $$\begin{cases} \textbf{Pórticos DES (C.21.5.4.1):} & M_{pr} \text{ se calcula con } \mathbf{\phi = 1.0} \text{ y esfuerzo en el acero } \mathbf{1.25\,f_y} \\ \textbf{Pórticos DMO (C.21.3.4.1):} & \text{Se usa el momento nominal } M_n \text{ con } \mathbf{\phi = 1.0} \text{ y esfuerzo } \mathbf{1.00\,f_y} \end{cases}$$
+          </div>
+          <div class="math-formula">
+            $$\textbf{Espaciamiento en Zona de Confinamiento } 2h\textbf{:} \qquad s_{\text{conf}} \le \min\left(\frac{d}{4},\;\; 8\,d_{b,\text{long mín}},\;\; 24\,d_{b,\text{estribo}},\;\; 300\text{ mm}\right)$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Regla obligatoria de $V_c = 0$ en vigas DES (<code>NSR-10 C.21.5.4.2</code>):</strong> En la zona de plastificación de vigas DES debe asumirse $\mathbf{V_c = 0}$ cuando simultáneamente: (1) el cortante sísmico inducido por los momentos probables representa la mitad o más de la demanda ($V_{\text{sway}} \ge 0.5\,V_e$), y (2) la fuerza axial de compresión mayorada es baja ($N_u < \frac{A_g f'_c}{20}$).</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 6.0: LABORATORIO INTERACTIVO DE CORTANTE Y CAPACIDAD SÍSMICA
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">LABORATORIO INTERACTIVO 06</span>
+        <span class="chapter-divider-title">Simuladores de Zonificación de Estribos y Cortante Sísmico por Capacidad ($V_e$)</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-lab-mod04" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">6.0</span>
+          </div>
+          <h2 class="section-title">6. Laboratorio Interactivo de Diseño a Cortante, Zonificación y Capacidad Sísmica</h2>
+          <p class="section-lead">
+            Experimente en tiempo real con la geometría ($L, c_{\text{apoyo}}, b_w, h, d$), cargas ($w_u, N_u$), materiales ($f'_c, f_{yt}, \lambda$), calibre y número de ramas ($n_{\text{ramas}} = 2, 3, 4$). Cargue con un clic cualquiera de los problemas de referencia o configure su propia viga.
+          </p>
+        </div>
+
+        <!-- SIMULADOR 4.1 -->
+        <div class="sim-box" style="margin-bottom: 2.25rem;">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 4.1: Diseñador y Zonificador del Diagrama de Cortante y Estribos en Vigas</h3>
+              <p class="sim-box-subtitle">Traza el diagrama $V_u(x)$, sombrea $\phi V_c$ y $(V_u - \phi V_c)$, verifica $V_{s,\max}$ y dibuja a escala el despiece por zonas y la sección transversal</p>
+            </div>
+            <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+              <button type="button" class="btn-control" onclick="loadSim41Preset('ej41_clasico')">📌 Ej. 4.1 (Viga 30×50, fyt=240)</button>
+              <button type="button" class="btn-control" onclick="loadSim41Preset('ej42_vigueta')">📌 Ej. 4.2A (Vigueta 12×40)</button>
+              <button type="button" class="btn-control" onclick="loadSim41Preset('ej42_vigaB')">📌 Ej. 4.2B (Viga B 40×40)</button>
+              <button type="button" class="btn-control" onclick="loadSim41Preset('alta_demanda')">⚡ Cortante Alto (4 Ramas)</button>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Luz entre ejes $L$</span>
+                  <span id="val-sim41-L" class="control-value">6.13 m</span>
+                </div>
+                <input id="sim41-L" type="range" min="3.00" max="10.00" step="0.01" value="6.13" oninput="updateSim41()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Ancho de apoyo $c_{\text{apoyo}}$</span>
+                  <span id="val-sim41-c" class="control-value">0.25 m</span>
+                </div>
+                <input id="sim41-c" type="range" min="0.20" max="0.80" step="0.05" value="0.25" oninput="updateSim41()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga mayorada $w_u$</span>
+                  <span id="val-sim41-wu" class="control-value">52.9 kN/m</span>
+                </div>
+                <input id="sim41-wu" type="range" min="8.0" max="240.0" step="0.05" value="52.85" oninput="updateSim41()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga axial $N_u$ (+Comp / -Trac)</span>
+                  <span id="val-sim41-nu" class="control-value">+0 kN</span>
+                </div>
+                <input id="sim41-nu" type="range" min="-200" max="500" step="10" value="0" oninput="updateSim41()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Ancho del alma $b_w$ y Altura $h$</span>
+                  <span><strong id="val-sim41-bw">30 cm</strong> × <strong id="val-sim41-h">50 cm</strong></span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <input id="sim41-bw" type="range" min="10" max="70" step="1" value="30" oninput="updateSim41()" />
+                  <input id="sim41-h" type="range" min="25" max="90" step="1" value="50" oninput="updateSim41()" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Recubrimiento al centroide $(h - d)$</span>
+                  <span id="val-sim41-rec" class="control-value">9.0 cm</span>
+                </div>
+                <input id="sim41-rec" type="range" min="4.0" max="12.0" step="0.5" value="9.0" oninput="updateSim41()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Concreto $f'_c$ y Fluencia Estribo $f_{yt}$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <select id="sim41-fc" class="sim-select" onchange="updateSim41()">
+                    <option value="21.1" selected>f'c = 21.1 MPa</option>
+                    <option value="24">f'c = 24.0 MPa</option>
+                    <option value="28">f'c = 28.0 MPa</option>
+                    <option value="35">f'c = 35.0 MPa</option>
+                  </select>
+                  <select id="sim41-fyt" class="sim-select" onchange="updateSim41()">
+                    <option value="240" selected>fyt = 240 MPa</option>
+                    <option value="420">fyt = 420 MPa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Calibre Estribo y N° de Ramas ($n_r$)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <select id="sim41-bar" class="sim-select" onchange="updateSim41()">
+                    <option value="2">No. 2 (1/4" - 0.32 cm²)</option>
+                    <option value="3" selected>No. 3 (3/8" - 0.71 cm²)</option>
+                    <option value="4">No. 4 (1/2" - 1.29 cm²)</option>
+                  </select>
+                  <select id="sim41-legs" class="sim-select" onchange="updateSim41()">
+                    <option value="2" selected>2 Ramas (1 Estribo)</option>
+                    <option value="3">3 Ramas (Estribo + Gancho)</option>
+                    <option value="4">4 Ramas (2 Estribos)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Factor $\lambda$ y Sección Crítica</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <select id="sim41-lambda" class="sim-select" onchange="updateSim41()">
+                    <option value="1.0" selected>λ = 1.00 (Peso normal)</option>
+                    <option value="0.85">λ = 0.85 (Liviano c/arena)</option>
+                    <option value="0.75">λ = 0.75 (Liviano total)</option>
+                  </select>
+                  <select id="sim41-crit" class="sim-select" onchange="updateSim41()">
+                    <option value="d" selected>A distancia "d" de la cara</option>
+                    <option value="0">En la cara del apoyo (x=0)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-canvas-wrapper">
+              <canvas id="canvas-sim41" width="920" height="430"></canvas>
+              <div id="res41-status" class="status-badge status-ok" style="margin: 0.65rem 0;">
+                Calculando estado de cortante...
+              </div>
+              <div class="sim-metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">$V_u$ Eje / $V_u$ Cara</span>
+                  <span class="sim-metric-value" style="font-size:0.9rem;"><span id="res41-vu-eje">-</span> / <span id="res41-vu-cara">-</span></span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">$V_u$ Sección Crítica</span>
+                  <span id="res41-vu-crit" class="sim-metric-value">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Resistencia Concreto $\phi V_c$</span>
+                  <span id="res41-phivc" class="sim-metric-value" style="font-size:0.88rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Demanda Estribos $\phi V_s$</span>
+                  <span id="res41-phivs" class="sim-metric-value" style="font-size:0.88rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Área Transversal $A_v$</span>
+                  <span id="res41-av" class="sim-metric-value" style="font-size:0.86rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">$s_{\text{req}}$ por Resistencia</span>
+                  <span id="res41-sreq" class="sim-metric-value">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">$s_{\max}$ Normativo</span>
+                  <span id="res41-smax" class="sim-metric-value" style="font-size:0.84rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Despiece Adoptado</span>
+                  <span id="res41-sadopt" class="sim-metric-value" style="font-size:0.83rem;">-</span>
+                </div>
+              </div>
+              <div style="margin-top:0.55rem; font-family:'JetBrains Mono',monospace; font-size:0.81rem; color:var(--text-muted);">
+                📏 <strong>Zonificación desde la cara del apoyo:</strong> <span id="res41-zonas">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULADOR 4.2 -->
+        <div class="sim-box">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 4.2: Método Detallado ($V_c$) y Cortante Sísmico por Capacidad ($V_e$ en Vigas DMO / DES)</h3>
+              <p class="sim-box-subtitle">Evalúa los momentos probables $M_{pr1}, M_{pr2}$, la condición $V_c = 0$ en pórticos DES y el confinamiento en la zona plástica $2h$</p>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Capacidad de Disipación Sísmica</span>
+                </div>
+                <select id="sim42-sys" class="sim-select" onchange="updateSim42()">
+                  <option value="DES" selected>DES — Especial (Mpr con 1.25 fy, C.21.5.4)</option>
+                  <option value="DMO">DMO — Moderada (Mn con 1.00 fy, C.21.3.4)</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Luz libre de la viga $l_n$</span>
+                  <span id="val-sim42-ln" class="control-value">5.40 m</span>
+                </div>
+                <input id="sim42-ln" type="range" min="3.00" max="9.00" step="0.10" value="5.40" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Ancho $b_w$ y Altura $h$</span>
+                  <span><strong id="val-sim42-bw">35 cm</strong> × <strong id="val-sim42-h">55 cm</strong></span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                  <input id="sim42-bw" type="range" min="25" max="60" step="5" value="35" oninput="updateSim42()" />
+                  <input id="sim42-h" type="range" min="40" max="80" step="5" value="55" oninput="updateSim42()" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Altura efectiva $d$</span>
+                  <span id="val-sim42-d" class="control-value">49.0 cm</span>
+                </div>
+                <input id="sim42-d" type="range" min="32.0" max="72.0" step="0.5" value="49.0" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acero Superior $A_s^-$ en el nudo</span>
+                  <span id="val-sim42-astop" class="control-value">14.20 cm²</span>
+                </div>
+                <input id="sim42-astop" type="range" min="4.0" max="35.0" step="0.2" value="14.20" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acero Inferior $A_s^+$ en el nudo</span>
+                  <span id="val-sim42-asbot" class="control-value">9.45 cm²</span>
+                </div>
+                <input id="sim42-asbot" type="range" min="4.0" max="30.0" step="0.2" value="9.45" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga gravitacional $w_g = 1.2D + 1.0L$</span>
+                  <span id="val-sim42-wg" class="control-value">38.0 kN/m</span>
+                </div>
+                <input id="sim42-wg" type="range" min="10.0" max="110.0" step="1.0" value="38.0" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga axial $N_u$ (+Compresión)</span>
+                  <span id="val-sim42-nu" class="control-value">+0 kN</span>
+                </div>
+                <input id="sim42-nu" type="range" min="-100" max="600" step="20" value="0" oninput="updateSim42()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>$f'_c$, $f_y$ y Diámetro Long. Mínimo $d_{b,\min}$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
+                  <select id="sim42-fc" class="sim-select" onchange="updateSim42()">
+                    <option value="21">21 MPa</option>
+                    <option value="28" selected>28 MPa</option>
+                    <option value="35">35 MPa</option>
+                  </select>
+                  <select id="sim42-fy" class="sim-select" onchange="updateSim42()">
+                    <option value="420" selected>420 MPa</option>
+                  </select>
+                  <select id="sim42-dblong" class="sim-select" onchange="updateSim42()">
+                    <option value="12.7">No. 4</option>
+                    <option value="15.9" selected>No. 5</option>
+                    <option value="19.1">No. 6</option>
+                    <option value="22.2">No. 7</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-canvas-wrapper">
+              <canvas id="canvas-sim42" width="920" height="390"></canvas>
+              <div id="res42-status" class="status-badge status-warn" style="margin: 0.65rem 0;">
+                Evaluando cortante por capacidad...
+              </div>
+              <div class="sim-metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Momentos en los Nudos</span>
+                  <span id="res42-mpr" class="sim-metric-value" style="font-size:0.84rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Cortante Sísmico $V_{\text{sway}}$</span>
+                  <span id="res42-vsway" class="sim-metric-value">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Cortante Gravitacional $V_g$</span>
+                  <span id="res42-vg" class="sim-metric-value">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Cortante por Capacidad $V_e$</span>
+                  <span id="res42-ve" class="sim-metric-value" style="font-size:0.86rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Comparación $V_c$ (C.11-3 vs C.11-5)</span>
+                  <span id="res42-vc-comp" class="sim-metric-value" style="font-size:0.81rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Criterio Sísmico de $V_c$</span>
+                  <span id="res42-vc-sism" class="sim-metric-value" style="font-size:0.81rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">$s_{\text{conf,máx}}$ en Zona $2h$</span>
+                  <span id="res42-sconf" class="sim-metric-value" style="font-size:0.81rem;">-</span>
+                </div>
+                <div class="sim-metric-card">
+                  <span class="sim-metric-label">Estribos de Confinamiento</span>
+                  <span id="res42-sadopt" class="sim-metric-value" style="font-size:0.82rem;">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 7.0: EJEMPLOS NUMÉRICOS RESUELTOS PASO A PASO (PIZARRA DOCENTE)
+           =================================================================== -->
+      <div class="chapter-divider">
+        <span class="chapter-divider-num">EJERCICIOS DE APLICACIÓN 07</span>
+        <span class="chapter-divider-title">Tres Ejemplos Resueltos Paso a Paso con Modo Pizarra Docente</span>
+        <span class="chapter-divider-line"></span>
+      </div>
+
+      <section id="sec-ejemplos-mod04" class="content-section">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num-badge">7.0</span>
+          </div>
+          <h2 class="section-title">7. Ejemplos Resueltos Paso a Paso: Zonificación, Entrepiso y Cortante Sísmico $V_e$</h2>
+          <p class="section-lead">
+            A continuación se desarrollan detalladamente tres ejercicios integrales de diseño a fuerza cortante. Utilice los botones del <strong>Modo Pizarra Docente</strong> para ocultar o descubrir progresivamente cada etapa de cálculo durante la clase magistral.
+          </p>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 4.1: VIGA DE 0.30 X 0.50 M CON ARMADURA EN DOS CAPAS Y ZONIFICACIÓN
+             =============================================================== -->
+        <div id="ej-4-1" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.1: Diseño a Cortante y Zonificación de Viga de $0.30 \times 0.50\text{ m}$ ($d = 0.41\text{ m}$, $f'_c = 21.1\text{ MPa}$, $f_{yt} = 240\text{ MPa}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Diseñar el refuerzo transversal a cortante y realizar la zonificación completa del diagrama para una viga simplemente apoyada de sección rectangular $b_w = 0.30\text{ m}$ y altura total $h = 0.50\text{ m}$, apoyada sobre columnas de $0.25\text{ m}$ de ancho. La armadura longitudinal en tracción está dispuesta en <strong>dos capas</strong> ($2\text{ barras No. }10\text{ }[1\text{-}1/4"]$ en la segunda fila y $5\text{ barras No. }9\text{ }[1\text{-}1/8"]$ en la primera fila), lo cual define una altura efectiva al centroide del grupo de $\mathbf{d = 0.41\text{ m}}$ ($410\text{ mm}$). La distancia desde la cara del apoyo hasta el punto de cortante nulo es $L_{\text{total}} = 2.94\text{ m}$, con $V_{u,\text{eje}} = 162.00\text{ kN}$, $V_{u,\text{cara}} = 155.39\text{ kN}$ y un cortante en la sección crítica a distancia $d = 0.41\text{ m}$ de la cara del apoyo igual a $\mathbf{V_{u,d} = 133.72\text{ kN}}$ ($w_u = 52.85\text{ kN/m}$). Materiales: $\lambda = 1.0$, $f'_c = 21.1\text{ MPa}$ y $f_{yt} = 240\text{ MPa}$. Evaluar estribos de 2 ramas de $\phi 1/4"$, $\phi 3/8"$ y $\phi 1/2"$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-1', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-1', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Resistencia al Cortante del Concreto ($\phi V_c$) y Demanda en los Estribos ($\phi V_s$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Aplicación de la Ecuación Simplificada NSR-10 C.11.2.1.1 (Ec. C.11-3)</span>
+                  <span class="norm-pill">NSR-10 C.11.1.1 y C.11.2.1.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\phi V_c = \phi \left(0.17\,\lambda\sqrt{f'_c}\,b_w d\right) = 0.75 \times 0.17 \times 1.0 \times \sqrt{21.1\text{ MPa}} \times 300\text{ mm} \times 410\text{ mm} = 71\,984\text{ N} = \mathbf{71.98\text{ kN}}$$
+                  $$0.5\,\phi V_c = \mathbf{35.99\text{ kN}}$$
+                </div>
+                <div class="math-formula">
+                  $$\phi V_s = V_{u,d} - \phi V_c = 133.72\text{ kN} - 71.98\text{ kN} = \mathbf{61.74\text{ kN}} \implies V_s = \frac{61.74}{0.75} = \mathbf{82.32\text{ kN}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Verificación de Suficiencia Seccional ($V_{s,\max}$) y Espaciamiento Máximo Geométrico ($s_{\max}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Chequeo de Aplastamiento Diagonal del Alma y Tope $d/2$</span>
+                  <span class="norm-pill">NSR-10 C.11.4.5.1, C.11.4.5.3 y C.11.4.7.9</span>
+                </div>
+                <div class="math-formula">
+                  $$0.33\sqrt{f'_c}\,b_w d = 0.33\sqrt{21.1}\times 300 \times 410 = \mathbf{186.44\text{ kN}}, \qquad V_{s,\max} = 0.66\sqrt{f'_c}\,b_w d = \mathbf{372.88\text{ kN}}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Como } V_s = 82.32\text{ kN} \le 186.44\text{ kN} \implies s_{\max,\text{geom}} = \min\left(\frac{d}{2},\; 600\text{ mm}\right) = \min(20.5\text{ cm},\; 60\text{ cm}) = \mathbf{20.5\text{ cm}} \approx 20\text{ cm}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Comparación de Separaciones Requeridas para Estribos de 2 Ramas de $\phi 1/4"$, $\phi 3/8"$ y $\phi 1/2"$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Evaluación de $s_{\text{req}} = \frac{\phi A_v f_{yt} d}{V_u - \phi V_c}$ y $s_{\max,\text{por } A_{v,\min}} = \frac{A_v f_{yt}}{0.35 b_w}$</span>
+                  <span class="norm-pill">NSR-10 Ec. C.11-13 y Ec. C.11-15</span>
+                </div>
+                <div class="math-formula">
+                  $$\textbf{1) Con } \phi 1/4"\;(\text{No. }2,\; A_v = 2 \times 0.32 = 0.64\text{ cm}^2 = 64\text{ mm}^2): \quad s_{\text{req}} = \frac{0.75 \times 64 \times 240 \times 410}{61\,740} = \mathbf{7.65\text{ cm}} \;\; (s_{\max,A_{v,\min}} = 14.6\text{ cm})$$
+                </div>
+                <div class="math-formula">
+                  $$\textbf{2) Con } \phi 3/8"\;(\text{No. }3,\; A_v = 2 \times 0.71 = 1.42\text{ cm}^2 = 142\text{ mm}^2): \quad s_{\text{req}} = \frac{0.75 \times 142 \times 240 \times 410}{61\,740} = \mathbf{16.97\text{ cm} \approx 17.0\text{ cm}} \;\; (s_{\max,A_{v,\min}} = 32.5\text{ cm})$$
+                </div>
+                <div class="math-formula">
+                  $$\textbf{3) Con } \phi 1/2"\;(\text{No. }4,\; A_v = 2 \times 1.29 = 2.58\text{ cm}^2 = 258\text{ mm}^2): \quad s_{\text{req}} = \frac{0.75 \times 258 \times 240 \times 410}{61\,740} = \mathbf{30.84\text{ cm}} > s_{\max,\text{geom}} = 20.5\text{ cm}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Selección ingenieril:</strong> El calibre $\phi 3/8"$ ($\text{No. }3$) a $s = 17.0\text{ cm}$ es el óptimo: aprovecha el $100\%$ de su capacidad resistente y mantiene un espaciamiento constructivo amplio ($\le 20\text{ cm}$).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 4</span>
+                <span>Longitud de Zonificación ($S$) por Triángulos Semejantes y Despiece Final</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Zonificación del Diagrama de Cortante y Despiece Adoptado</span>
+                  <span class="norm-pill">NSR-10 C.11.4.6.1</span>
+                </div>
+                <div class="math-formula">
+                  $$S_{\text{desde cara}} = L_{\text{total}}\left(\frac{V_{u,\text{cara}} - \phi V_c}{V_{u,\text{cara}}}\right) = 2.94\text{ m}\times\left(\frac{155.39 - 71.98}{155.39}\right) = \mathbf{1.58\text{ m}} \quad \left(\text{o conservadoramente } S \approx 2.01\text{ m}\right)$$
+                  $$X_{\text{Zona 2}} = 2.94\text{ m}\times\left(\frac{155.39 - 35.99}{155.39}\right) = \mathbf{2.26\text{ m}}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Despiece definitivo adoptado en cada mitad de la viga:</strong> $\mathbf{1\text{ E No. }3\text{ a }0.05\text{ m} + 11\text{ E No. }3\text{ @ }0.17\text{ m}\text{ (Zona 3)} + 5\text{ E No. }3\text{ @ }0.20\text{ m}\text{ (hasta el centro de la luz)}}$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 4.2: VIGUETA Y VIGA PRINCIPAL B DE UN ENTREPISO ALIGERADO
+             =============================================================== -->
+        <div id="ej-4-2" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.2: Diseño a Cortante de Vigueta ($0.12 \times 0.40\text{ m}$) y Viga Principal B ($0.40 \times 0.40\text{ m}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Para el entrepiso del edificio diseñado a flexión en el Módulo 03 ($f'_c = 28\text{ MPa}$, $f_{yt} = 420\text{ MPa}$, $\lambda = 1.0$), diseñar a cortante: <strong>(Parte A)</strong> Una vigueta de $b_w = 120\text{ mm}$, $h = 400\text{ mm}$, $d = 355\text{ mm}$, con cortante último en el apoyo $V_{u,\text{cara}} = 33.76\text{ kN}$ y a distancia $d$ igual a $V_{u,d} = 30.00\text{ kN}$, empleando estribos $\text{No. }2$ ($\phi 1/4"$, $A_v = 0.64\text{ cm}^2$). <strong>(Parte B)</strong> La Viga Principal B de $b_w = 400\text{ mm}$, $h = 400\text{ mm}$, $d = 340\text{ mm}$, luz $L = 5.78\text{ m}$ (apoyos de $0.35\text{ m}$), sometida a $V_{u,\text{cara}} = 257.1\text{ kN}$ y en la sección crítica a distancia $d$ igual a $\mathbf{V_{u,d} = 224.9\text{ kN}}$ ($w_u = 94.7\text{ kN/m}$), empleando estribos cerrados $\text{No. }3$ ($A_v = 1.42\text{ cm}^2$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-2', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-2', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Parte A: Verificación y Espaciamiento de Estribos $\text{No. }2$ en la Vigueta ($120 \times 400\text{ mm}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Resistencia del Concreto en el Nervio y Estribos Constructivos a $d/2$</span>
+                  <span class="norm-pill">NSR-10 C.11.2.1.1 y C.8.13.8</span>
+                </div>
+                <div class="math-formula">
+                  $$\phi V_c = 0.75 \times 0.17 \times 1.0 \times \sqrt{28} \times 120\text{ mm} \times 355\text{ mm} = \mathbf{28.74\text{ kN}} \quad \left(\text{con }+10\%\text{ de C.8.13.8: } 1.10\phi V_c = 31.61\text{ kN} \ge 30.00\text{ kN}\right)$$
+                </div>
+                <div class="math-formula">
+                  $$s_{\max,\text{geom}} = \frac{d}{2} = \frac{35.5\text{ cm}}{2} = \mathbf{17.75\text{ cm}} \implies \text{Adoptando } \mathbf{\text{E No. }2\text{ @ }17.5\text{ cm}:} \quad \phi V_n = 28.74 + 40.90 = \mathbf{69.64\text{ kN}} \gg 30.00\text{ kN}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Parte B: Diseño por Resistencia y Zonificación de la Viga Principal B ($400 \times 400\text{ mm}$, $d = 340\text{ mm}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cálculo de $\phi V_c$, $\phi V_s$, Separación $s_{\text{req}}$ y Longitud Crítica $S$</span>
+                  <span class="norm-pill">NSR-10 C.11.4.7.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\phi V_c = 0.75 \times 0.17\sqrt{28}\times 400 \times 340 = \mathbf{91.75\text{ kN}} \implies \phi V_s = 224.90 - 91.75 = \mathbf{133.15\text{ kN}}\;\;(V_s = 177.53\text{ kN} \le 0.33\sqrt{28}b_w d = 237.48\text{ kN})$$
+                </div>
+                <div class="math-formula">
+                  $$s_{\text{req}} = \frac{\phi A_v f_{yt} d}{\phi V_s} = \frac{0.75 \times 142\text{ mm}^2 \times 420\text{ MPa} \times 340\text{ mm}}{133\,150\text{ N}} = 114.2\text{ mm} = \mathbf{11.4\text{ cm}} \implies \text{Adoptar } \mathbf{s = 11.0\text{ cm}}$$
+                  $$S = \frac{V_{u,\text{cara}} - \phi V_c}{w_u} = \frac{257.10 - 91.75}{94.7\text{ kN/m}} = \mathbf{1.75\text{ m}}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Despiece final Viga Principal B:</strong> $\mathbf{1\text{ E No. }3\text{ a }0.05\text{ m} + 16\text{ E No. }3\text{ @ }0.11\text{ m}\text{ (cubre }1.81\text{ m)} + \text{resto @ }0.17\text{ m}\;(d/2)}$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 4.3: CARGA AXIAL Y CORTANTE SÍSMICO POR CAPACIDAD Ve EN DES
+             =============================================================== -->
+        <div id="ej-4-3" style="margin-bottom: 1rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.3: Efecto de Carga Axial ($N_u$) y Cortante Sísmico por Capacidad $V_e$ en Viga de Pórtico DES (NSR-10 C.21.5.4)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una viga de un pórtico con Capacidad Especial de Disipación de Energía (<strong>DES</strong>) tiene sección $b_w = 350\text{ mm}$, $h = 550\text{ mm}$, $d = 490\text{ mm}$, luz libre $l_n = 5.40\text{ m}$, $f'_c = 28\text{ MPa}$ y $f_y = f_{yt} = 420\text{ MPa}$. El acero longitudinal negativo en los nudos es $A_s^- = 14.20\text{ cm}^2$ y el positivo es $A_s^+ = 9.45\text{ cm}^2$ ($d_{b,\text{long mín}} = 15.9\text{ mm}$). La carga gravitacional aferente es $w_g = 1.2D + 1.0L = 38.0\text{ kN/m}$. Determinar: <strong>(a)</strong> El incremento de $V_c$ si actúa una compresión axial $N_u = +240\text{ kN}$. <strong>(b)</strong> El cortante sísmico por capacidad $V_e$ cuando $N_u = 0$ y el despiece de estribos cerrados en la zona de confinamiento $2h$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-3', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-3', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Parte (a): Incremento de $V_c$ por Compresión Axial $N_u = +240\text{ kN}$ (Ec. C.11-4 y Ec. C.11-7)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Evaluación de $\frac{N_u}{A_g} = 1.247\text{ MPa}$ sobre la Resistencia del Concreto</span>
+                  <span class="norm-pill">NSR-10 C.11.2.1.2 y C.11.2.2.2</span>
+                </div>
+                <div class="math-formula">
+                  $$V_{c0}\;(N_u = 0) = 0.17\sqrt{28}\times 350 \times 490 = \mathbf{154.21\text{ kN}} \quad (\phi V_{c0} = 115.66\text{ kN})$$
+                  $$V_c\;(N_u = +240\text{ kN}) = 154.21\left(1 + \frac{1.247\text{ MPa}}{14}\right) = \mathbf{167.94\text{ kN}} \quad (\phi V_c = \mathbf{125.96\text{ kN}},\; +8.9\%)$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Parte (b): Momentos Probables $M_{pr1}, M_{pr2}$ ($1.25\,f_y = 525\text{ MPa}$) y Cortante por Capacidad $V_e$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-amber">
+                <div class="math-card-header">
+                  <span class="math-card-title">Equilibrio Hiperestático Sísmico ($V_{\text{sway}}$) + Gravitacional ($V_g$) y Regla $V_c = 0$</span>
+                  <span class="norm-pill">NSR-10 C.21.5.4.1 y C.21.5.4.2</span>
+                </div>
+                <div class="math-formula">
+                  $$a_1 = \frac{1420 \times 525}{0.85 \times 28 \times 350} = 89.50\text{ mm} \implies M_{pr1} = 1420 \times 525\left(490 - \frac{89.50}{2}\right) = \mathbf{331.95\text{ kN}\cdot\text{m}}$$
+                  $$a_2 = \frac{945 \times 525}{0.85 \times 28 \times 350} = 59.56\text{ mm} \implies M_{pr2} = 945 \times 525\left(490 - \frac{59.56}{2}\right) = \mathbf{228.38\text{ kN}\cdot\text{m}}$$
+                </div>
+                <div class="math-formula">
+                  $$V_{\text{sway}} = \frac{331.95 + 228.38}{5.40\text{ m}} = \mathbf{103.76\text{ kN}}, \qquad V_g = \frac{38.0 \times 5.40}{2} = \mathbf{102.60\text{ kN}} \implies \mathbf{V_e = 103.76 + 102.60 = 206.36\text{ kN}}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Como } V_{\text{sway}} = 103.76\text{ kN} \ge 0.5\,V_e = 103.18\text{ kN} \text{ y } N_u = 0 < \frac{A_g f'_c}{20} \implies \mathbf{V_c = 0} \quad (\text{C.21.5.4.2})$$
+                  $$s_{\text{por } V_e} = \frac{0.75 \times 142 \times 420 \times 490}{206\,360} = \mathbf{10.6\text{ cm}}, \qquad s_{\text{conf,máx}} = \min\left(\frac{49}{4},\; 8(1.59),\; 24(0.95),\; 30\right) = \mathbf{12.25\text{ cm}}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Despiece sísmico adoptado en la zona de confinamiento $2h = 1.10\text{ m}$ en cada extremo:</strong> $\mathbf{1\text{ E cerrado No. }3\text{ a }5\text{ cm} + 11\text{ E cerrados No. }3\text{ @ }10.0\text{ cm}}$ (con ganchos sísmicos de $135^\circ$).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+        <!-- ===============================================================
+             EJEMPLO 4.4: ENVOLVENTE DE CORTANTE CON CARGA PUNTUAL Y DISTRIBUIDA (MULET EJEMPLO 4.1)
+             =============================================================== -->
+        <div id="ej-4-4" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.4: Envolvente de Cortante con Cargas Puntuales y Distribuidas, Sección Crítica a $d$ y Zonificación (Mulet Ejemplo 4.1)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado (Adaptado de Emel Mulet, 2024, Cap. 4, pág. 115):</strong> Una viga simplemente apoyada de luz libre $L_n = 6.00\text{ m}$ con apoyos en columnas de $0.40\times 0.40\text{ m}$ soporta una carga uniforme mayorada $w_u = 45.0\text{ kN/m}$ y una carga concentrada mayorada $P_u = 80.0\text{ kN}$ transmitida por una viga secundaria a $x = 2.00\text{ m}$ de la cara del apoyo izquierdo. Sección rectangular: $b_w = 300\text{ mm}$, $h = 600\text{ mm}$, $d = 530\text{ mm}$. Materiales: $f'_c = 21\text{ MPa}$, $f_{yt} = 420\text{ MPa}$. Determine: <strong>1)</strong> Las reacciones y el cortante crítico a la distancia $d = 0.53\text{ m}$ de la cara del apoyo; <strong>2)</strong> La resistencia nominal del concreto ($\phi V_c$); <strong>3)</strong> El espaciamiento requerido de estribos $\#3$ ($A_v = 142\text{ mm}^2$); <strong>4)</strong> La zonificación técnica longitudinal completa en 3 tramos de colocación.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-4', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-4', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 4.4 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Esquema de Cargas, Diagrama Envolvente de Cortante y Despiece de Estribos Zonificado</div>
+            <svg viewBox="0 0 820 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- 1. Viga con Cargas -->
+              <g transform="translate(60, 20)">
+                <!-- Apoyo A y B -->
+                <rect x="0" y="35" width="20" height="20" fill="#475569" stroke="#94A3B8" stroke-width="1.2"/>
+                <rect x="420" y="35" width="20" height="20" fill="#475569" stroke="#94A3B8" stroke-width="1.2"/>
+                <!-- Cuerpo Viga -->
+                <rect x="0" y="15" width="440" height="20" fill="rgba(56, 189, 248, 0.2)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Carga distribuida wu -->
+                <rect x="0" y="2" width="440" height="12" fill="none" stroke="#FBBF24" stroke-width="1" stroke-dasharray="3 2"/>
+                <text x="220" y="-1" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">wu = 45 kN/m</text>
+                <!-- Carga puntual Pu a 2.0 m (x = 146.7 px) -->
+                <line x1="147" y1="-8" x2="147" y2="15" stroke="#EF4444" stroke-width="2.5"/>
+                <polygon points="147,15 142,5 152,5" fill="#EF4444"/>
+                <text x="147" y="-12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Pu = 80 kN</text>
+                <!-- Cotas de vano -->
+                <g stroke="#94A3B8" stroke-width="1">
+                  <line x1="0" y1="62" x2="147" y2="62"/><line x1="147" y1="62" x2="440" y2="62"/>
+                  <line x1="0" y1="58" x2="0" y2="66"/><line x1="147" y1="58" x2="147" y2="66"/><line x1="440" y1="58" x2="440" y2="66"/>
+                </g>
+                <text x="73" y="74" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">2.00 m</text>
+                <text x="293" y="74" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">4.00 m (Ln = 6.00 m)</text>
+              </g>
+              <!-- 2. Diagrama de Cortante Vu -->
+              <g transform="translate(60, 115)">
+                <!-- Eje cero -->
+                <line x1="0" y1="60" x2="440" y2="60" stroke="#64748B" stroke-width="1.2"/>
+                <!-- Polígono de Cortante -->
+                <path d="M 0 60 L 0 5 L 147 38 L 147 95 L 440 120 L 440 60 Z" fill="rgba(239, 68, 68, 0.15)" stroke="#EF4444" stroke-width="2"/>
+                <!-- Líneas phi Vc y 0.5 phi Vc -->
+                <line x1="0" y1="33" x2="440" y2="33" stroke="#34D399" stroke-width="1" stroke-dasharray="3 3"/>
+                <text x="445" y="36" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5">φ Vc = 92.9 kN</text>
+                <line x1="0" y1="46" x2="440" y2="46" stroke="#38BDF8" stroke-width="1" stroke-dasharray="3 3"/>
+                <text x="445" y="50" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5">0.5 φ Vc = 46.4 kN</text>
+                <!-- Sección crítica d = 0.53 m (x = 38.8 px) -->
+                <line x1="39" y1="10" x2="39" y2="60" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="2 2"/>
+                <text x="42" y="18" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5">Vu,d = 164.5 kN</text>
+                <text x="-5" y="8" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="end">VA = 188.3</text>
+                <text x="-5" y="125" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="end">VB = -161.7</text>
+              </g>
+              <!-- 3. Detalle de Sección y Zonificación -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="245" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">ZONIFICACIÓN DE ESTRIBOS #3</text>
+                <!-- Sección corte -->
+                <rect x="25" y="38" width="55" height="110" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="1.8"/>
+                <rect x="30" y="43" width="45" height="100" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="2 1"/>
+                <circle cx="36" cy="138" r="4" fill="#34D399"/><circle cx="52" cy="138" r="4" fill="#34D399"/><circle cx="68" cy="138" r="4" fill="#34D399"/>
+                <text x="52" y="162" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">30 × 60 cm</text>
+                <!-- Especificación de zonas -->
+                <g transform="translate(90, 42)">
+                  <text x="0" y="12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Zona 1 (Apoyo Izq.):</text>
+                  <text x="0" y="26" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">1 @ 5 cm + 13 @ 15 cm</text>
+                  <text x="0" y="48" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Zona 2 (Central):</text>
+                  <text x="0" y="62" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Estribos @ 25 cm</text>
+                  <text x="0" y="84" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Zona 3 (Apoyo Der.):</text>
+                  <text x="0" y="98" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">1 @ 5 cm + 11 @ 20 cm</text>
+                </g>
+                <text x="110" y="215" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">s_máx = d/2 = 26.5 cm</text>
+                <text x="110" y="232" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11 y Mulet Cap. 4</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: REACCIONES Y CORTANTE CRÍTICO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Cálculo de Reacciones, Diagrama de Cortante y Sección Crítica a Distancia $d$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Estática y Sección Crítica (NSR-10 C.11.1.3.1)</span>
+                  <span class="norm-pill">NSR-10 C.11.1.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \sum M_B = 0 \implies & R_A(6.00) - 45.0\frac{(6.00)^2}{2} - 80.0(4.00) = 0 \implies R_A = \frac{810.0 + 320.0}{6.00} = \mathbf{188.33\text{ kN}} \\[4pt]
+                  \sum F_y = 0 \implies & R_B = 45.0(6.00) + 80.0 - 188.33 = \mathbf{161.67\text{ kN}} \\[6pt]
+                  \text{Cortante a distancia } d = 0.53\text{ m}: \quad & V_{u,d} = R_A - w_u \cdot d = 188.33\text{ kN} - 45.0\text{ kN/m} \times 0.53\text{ m} = \mathbf{164.48\text{ kN}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: CAPACIDAD DEL CONCRETO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Resistencia Nominal del Concreto ($\phi V_c$) y Demanda en Estribos ($\phi V_s$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Contribución del Concreto (NSR-10 C.11.2.1.1)</span>
+                  <span class="norm-pill">NSR-10 C.11.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  V_c & = 0.17 \lambda \sqrt{f'_c} b_w d = 0.17(1.0)\sqrt{21\text{ MPa}} \times 300\text{ mm} \times 530\text{ mm} \times 10^{-3} = \mathbf{123.83\text{ kN}} \\[4pt]
+                  \phi V_c & = 0.75 \times 123.83 = \mathbf{92.87\text{ kN}}, \qquad 0.5\phi V_c = \mathbf{46.44\text{ kN}} \\[6pt]
+                  \phi V_s & = V_{u,d} - \phi V_c = 164.48 - 92.87 = \mathbf{71.61\text{ kN}} \implies V_s = \frac{71.61}{0.75} = \mathbf{95.48\text{ kN}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: ESPACIAMIENTO Y LÍMITES -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Espaciamiento de Estribos $\#3$ ($A_v = 142\text{ mm}^2$) y Límites Normativos</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Espaciamiento por Resistencia y Geometría</span>
+                  <span class="norm-pill">NSR-10 C.11.4.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  s_{\text{req}} & = \frac{A_v f_{yt} d}{V_s} = \frac{142\text{ mm}^2 \times 420\text{ MPa} \times 530\text{ mm}}{95\,480\text{ N}} = \mathbf{331.4\text{ mm}} \\[6pt]
+                  \text{Límite por } V_s \le 0.33\sqrt{f'_c}b_w d: \quad & s_{\max} \le \min\left(\frac{d}{2}, 600\text{ mm}\right) = \min(265\text{ mm}, 600\text{ mm}) = \mathbf{265\text{ mm}} \implies \text{Adopta } \mathbf{250\text{ mm}} \\[4pt]
+                  \text{En zona crítica izquierda: } & \text{Para absorber de forma holgada la carga puntual, se adopta } \mathbf{s = 150\text{ mm}}\;(15\text{ cm})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 4: ZONIFICACIÓN TÉCNICA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 4</span>
+                <span>Zonificación Longitudinal Completa del Diagrama de Cortante</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">4.1 Plan de Distribución Constructiva en Obra</span>
+                  <span class="norm-pill">Mulet Cap. 4</span>
+                </div>
+                <div class="math-vars">
+                  <div><strong>Distribución Definitiva de Estribos $\#3$ (2 ramas, $f_{yt} = 420\text{ MPa}$):</strong></div>
+                  <div>• <em>Zona 1 (Apoyo Izquierdo hasta $x = 2.00\text{ m}$):</em> $1 \text{ a } 5\text{ cm} + 13\text{ estribos @ } 15\text{ cm}$ ($1.95\text{ m}$). Cubre toda la zona donde $V_u \ge \phi V_c$ y la llegada de la carga puntual $P_u = 80\text{ kN}$.</div>
+                  <div>• <em>Zona 2 (Apoyo Derecho, desde B hacia el centro $2.40\text{ m}$):</em> $1 \text{ a } 5\text{ cm} + 6\text{ estribos @ } 15\text{ cm} + 7\text{ estribos @ } 20\text{ cm}$.</div>
+                  <div>• <em>Zona 3 (Tramo Central $1.60\text{ m}$):</em> $7\text{ estribos @ } 25\text{ cm}$ ($s \le d/2 = 265\text{ mm}$).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 4.5: ESTRIBOS VERTICALES Y BARRAS DOBLADAS A 45° (NSR-10 C.11.4.7)
+             =============================================================== -->
+        <div id="ej-4-5" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.5: Diseño a Cortante con Estribos Verticales y Barras Dobladas a $45^\circ$ (NSR-10 C.11.4.7 & Mulet Cap. 4)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una viga de gran capacidad en un puente canal está sometida a una fuerza cortante factorizada en la sección crítica de $V_u = 380.0\text{ kN}$. La sección rectangular es $b_w = 350\text{ mm}$, peralte efectivo $d = 620\text{ mm}$ y altura total $h = 700\text{ mm}$. Materiales: $f'_c = 28\text{ MPa}$, $f_y = f_{yt} = 420\text{ MPa}$. Del refuerzo longitudinal de tracción por flexión, se doblan hacia el apoyo $2\#8$ ($A_v = 1\,020\text{ mm}^2$) a un ángulo $\alpha = 45^\circ$ en la zona donde ya no son requeridas por momento flector. Determine: <strong>1)</strong> La resistencia al cortante aportada por el concreto ($\phi V_c$); <strong>2)</strong> El aporte resistente de las barras dobladas a $45^\circ$ ($V_{s,\text{dobladas}}$) y la verificación del límite normativo de NSR-10 C.11.4.7.2 ($0.25\sqrt{f'_c}b_w d$); <strong>3)</strong> El cortante remanente que deben absorber los estribos verticales y su espaciamiento definitivo.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-5', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-5', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 4.5 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Alzado con Barras Dobladas a 45°, Estribos Verticales y Mecanismo de Cercha</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Elevación de la viga -->
+              <g transform="translate(60, 20)">
+                <!-- Apoyo -->
+                <rect x="0" y="190" width="35" height="40" fill="#334155" stroke="#64748B" stroke-width="1.5"/>
+                <!-- Contorno Viga -->
+                <rect x="0" y="10" width="460" height="180" fill="rgba(56, 189, 248, 0.12)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Fisura inclinada a 45° -->
+                <line x1="50" y1="180" x2="190" y2="20" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 4"/>
+                <text x="135" y="85" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" transform="rotate(-45, 135, 85)">Fisura Cortante 45°</text>
+                <!-- Barras Longitudinales rectas de fondo (verde) -->
+                <line x1="0" y1="170" x2="460" y2="170" stroke="#34D399" stroke-width="2.5"/>
+                <!-- Barras Dobladas a 45° (naranja) -->
+                <path d="M 460 170 L 190 170 L 80 30 L 10 30" fill="none" stroke="#F97316" stroke-width="3"/>
+                <text x="145" y="115" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">2 #8 Dobladas a 45°</text>
+                <!-- Estribos verticales cerrados (amarillo) -->
+                <line x1="20" y1="20" x2="20" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="60" y1="20" x2="60" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="100" y1="20" x2="100" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="140" y1="20" x2="140" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="180" y1="20" x2="180" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="230" y1="20" x2="230" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="280" y1="20" x2="280" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="340" y1="20" x2="340" y2="180" stroke="#FBBF24" stroke-width="1.5"/>
+                <!-- Cotas de peralte -->
+                <line x1="-12" y1="10" x2="-12" y2="190" stroke="#94A3B8" stroke-width="1"/>
+                <text x="-16" y="105" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">h = 70 cm</text>
+              </g>
+              <!-- Detalle y Desglose de Fuerzas a la derecha -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="235" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">DESGLOSE DE CAPACIDAD RESISTENTE</text>
+                <g transform="translate(15, 45)">
+                  <text x="0" y="12" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Demanda:</text>
+                  <text x="190" y="12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">Vu = 380.0 kN</text>
+                  <line x1="0" y1="22" x2="190" y2="22" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="38" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">1. Concreto (φ Vc):</text>
+                  <text x="190" y="38" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">146.4 kN (38.5%)</text>
+                  <text x="0" y="60" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">2. Barras Dobladas:</text>
+                  <text x="190" y="60" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">215.3 kN (56.6%)</text>
+                  <text x="0" y="82" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">3. Estribos Vert.:</text>
+                  <text x="190" y="82" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">18.3 kN (4.9%)</text>
+                  <line x1="0" y1="94" x2="190" y2="94" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="112" fill="#34D399" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">Capacidad Total:</text>
+                  <text x="190" y="112" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">φ Vn = 380.0 kN</text>
+                </g>
+                <text x="110" y="185" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Estribos #3 @ 20 cm</text>
+                <text x="110" y="202" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">s_máx = d/2 = 31 cm &gt; 20 cm (✓)</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: APORTE DEL CONCRETO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Resistencia a Cortante del Concreto ($\phi V_c$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Ecuación Básica de Cortante del Concreto</span>
+                  <span class="norm-pill">NSR-10 C.11.2.1.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  V_c & = 0.17 \lambda \sqrt{f'_c} b_w d = 0.17(1.0)\sqrt{28\text{ MPa}} \times 350\text{ mm} \times 620\text{ mm} \times 10^{-3} = \mathbf{195.18\text{ kN}} \\[4pt]
+                  \phi V_c & = 0.75 \times 195.18 = \mathbf{146.38\text{ kN}} \\[6pt]
+                  V_{s,\text{total requerido}} & = \frac{V_u - \phi V_c}{\phi} = \frac{380.0 - 146.38}{0.75} = \mathbf{311.49\text{ kN}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: APORTE DE BARRAS DOBLADAS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Aporte Resistente de Barras Dobladas a $45^\circ$ y Límite Normativo</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Formulación y Restricción de NSR-10 C.11.4.7.2</span>
+                  <span class="norm-pill">NSR-10 C.11.4.7</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Área de } 2\#8: \quad & A_v = 2 \times 510 = \mathbf{1\,020\text{ mm}^2} \\[4pt]
+                  V_{s,\text{doblada (teórico)}} & = A_v f_y \sin(\alpha) = 1\,020\text{ mm}^2 \times 420\text{ MPa} \times \sin(45^\circ) \times 10^{-3} = \mathbf{302.90\text{ kN}} \\[6pt]
+                  \text{Límite normativo C.11.4.7.2:} \quad & V_{s,\max,\text{doblada}} \le 0.25 \sqrt{f'_c} b_w d = 0.25 \sqrt{28} \times 350 \times 620 \times 10^{-3} = \mathbf{287.03\text{ kN}} \\[4pt]
+                  \text{Aporte admisible adoptado: } \quad & V_{s,\text{doblada}} = \mathbf{287.03\text{ kN}} \implies \phi V_{s,\text{doblada}} = 0.75(287.03) = \mathbf{215.27\text{ kN}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: ESTRIBOS VERTICALES COMPLEMENTARIOS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Cortante Remanente y Diseño de Estribos Verticales</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Dimensionamiento del Refuerzo Vertical</span>
+                  <span class="norm-pill">NSR-10 C.11.4.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  V_{s,\text{estribos}} & = V_{s,\text{total}} - V_{s,\text{doblada}} = 311.49 - 287.03 = \mathbf{24.46\text{ kN}} \\[6pt]
+                  s_{\text{req}} & = \frac{A_v f_{yt} d}{V_{s,\text{estribos}}} = \frac{142 \times 420 \times 620}{24\,460} = \mathbf{1\,511.9\text{ mm}} \\[6pt]
+                  \text{Rige espaciamiento máximo normativo: } & s_{\max} \le \min\left(\frac{d}{2}, 600\text{ mm}\right) = \min(310\text{ mm}, 600\text{ mm}) = \mathbf{310\text{ mm}} \\[4pt]
+                  \text{Por seguridad y confinamiento constructivo: } & \text{Se adopta } \mathbf{s = 200\text{ mm}}\;(20\text{ cm})
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Diseño:</strong> Las barras dobladas absorben el $56.6\%$ del cortante total, aliviando de forma decisiva la congestión de armadura transversal en el apoyo y permitiendo un espaciamiento de estribos vertical holgado de $20\text{ cm}$ en vez de $8\text{ cm}$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 4.6: CORTANTE Y TORSIÓN COMBINADOS EN VIGA PERIMETRAL (NSR-10 C.11.5)
+             =============================================================== -->
+        <div id="ej-4-6" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 4.6: Diseño Combinado a Cortante y Torsión en Viga de Borde Perimetral (NSR-10 C.11.5 & Mulet Cap. 4)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una viga perimetral de fachada ($b = 300\text{ mm}, h = 550\text{ mm}, d = 490\text{ mm}$) recibe una losa en voladizo de balcón que induce simultáneamente una fuerza cortante última $V_u = 115.0\text{ kN}$ y un momento torsor último mayorado $T_u = 26.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$, $f_y = f_{yt} = 420\text{ MPa}$, recubrimiento libre $r = 40\text{ mm}$. Se pide: <strong>1)</strong> Calcular el umbral de torsión ($\phi T_{th}$) para verificar si es obligatorio diseñar por torsión; <strong>2)</strong> Verificar la sección transversal frente al esfuerzo límite de aplastamiento del alma según NSR-10 C.11.5.3.1; <strong>3)</strong> Diseñar los estribos cerrados con ganchos a $135^\circ$ para cortante y torsión combinados ($A_{v+t}/s$); <strong>4)</strong> Diseñar el refuerzo longitudinal adicional por torsión ($A_l$) y detallar su distribución en el perímetro de la sección.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-6', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-4-6', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 4.6 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Mecanismo de Tubo de Pared Delgada, Flujo de Corte Torsional y Sección Acotada</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Sección con Flujo de Torsión -->
+              <g transform="translate(60, 20)">
+                <!-- Sección Exterior Acp -->
+                <rect x="0" y="0" width="130" height="230" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Núcleo Confinado Aoh (x1 = 210 mm, y1 = 460 mm) -->
+                <rect x="18" y="18" width="94" height="194" rx="4" fill="rgba(249, 115, 22, 0.2)" stroke="#F97316" stroke-width="2"/>
+                <!-- Flechas de Flujo de Corte q = T / (2 Ao) -->
+                <g stroke="#EF4444" stroke-width="2">
+                  <line x1="28" y1="18" x2="102" y2="18"/><polygon points="102,18 94,14 94,22" fill="#EF4444"/>
+                  <line x1="112" y1="28" x2="112" y2="202"/><polygon points="112,202 108,194 116,194" fill="#EF4444"/>
+                  <line x1="102" y1="212" x2="28" y2="212"/><polygon points="28,212 36,216 36,208" fill="#EF4444"/>
+                  <line x1="18" y1="202" x2="18" y2="28"/><polygon points="18,28 22,36 14,36" fill="#EF4444"/>
+                </g>
+                <!-- Barras Longitudinales de Torsión Al (6 #5 en esquinas y caras) -->
+                <circle cx="24" cy="24" r="5" fill="#34D399"/><circle cx="106" cy="24" r="5" fill="#34D399"/>
+                <circle cx="24" cy="115" r="5" fill="#34D399"/><circle cx="106" cy="115" r="5" fill="#34D399"/>
+                <circle cx="24" cy="206" r="5" fill="#34D399"/><circle cx="106" cy="206" r="5" fill="#34D399"/>
+                <!-- Cotas -->
+                <g stroke="#94A3B8" stroke-width="1">
+                  <line x1="0" y1="242" x2="130" y2="242"/>
+                  <line x1="-12" y1="0" x2="-12" y2="230"/>
+                </g>
+                <text x="65" y="256" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">b = 300 mm</text>
+                <text x="-16" y="115" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">h = 550</text>
+                <text x="65" y="115" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Aoh = 96,935 mm²</text>
+              </g>
+              <!-- Diagrama de Esfuerzos Combinados Cortante + Torsión -->
+              <g transform="translate(300, 20)">
+                <rect x="0" y="0" width="220" height="235" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">SUPERPOSICIÓN DE ESFUERZOS</text>
+                <!-- Gráfico de suma de esfuerzos en la cara crítica -->
+                <g transform="translate(20, 45)">
+                  <text x="0" y="15" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Cortante 1D (Vu / b·d):</text>
+                  <text x="180" y="15" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">0.78 MPa</text>
+                  <text x="0" y="40" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Torsión (Tu·ph / 1.7·Aoh²):</text>
+                  <text x="180" y="40" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">2.18 MPa</text>
+                  <line x1="0" y1="52" x2="180" y2="52" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="70" fill="#EF4444" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">Esfuerzo Combinado:</text>
+                  <text x="180" y="70" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">2.32 MPa</text>
+                  <text x="0" y="95" fill="#34D399" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">Límite Admisible:</text>
+                  <text x="180" y="95" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">2.85 MPa (✓)</text>
+                </g>
+                <text x="110" y="180" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">2.32 MPa ≤ 2.85 MPa</text>
+                <text x="110" y="200" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Sección Suficiente (Sin Aplastamiento)</text>
+              </g>
+              <!-- Detalle de Armadura Definitiva -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="235" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">ARMADURAS ADOPTADAS</text>
+                <g transform="translate(15, 45)">
+                  <text x="0" y="15" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Estribos Cerrados #3:</text>
+                  <text x="0" y="32" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">@ 10.0 cm continuo</text>
+                  <text x="0" y="48" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Gancho sísmico 135° alternado</text>
+                  <line x1="0" y1="60" x2="190" y2="60" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="78" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Armadura Longitudinal Al:</text>
+                  <text x="0" y="95" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">6 #5 (Al = 1,194 mm²)</text>
+                  <text x="0" y="110" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Al,req = 672 mm² ≤ 1,194 mm² (✓)</text>
+                </g>
+                <text x="110" y="195" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Separación longitudinal ≤ 30 cm</text>
+                <text x="110" y="215" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11.5 y Mulet</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: UMBRAL DE TORSIÓN -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Cálculo del Umbral de Torsión ($\phi T_{th}$) y Necesidad de Diseño</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Umbral Normativo de Desprecio de Torsión</span>
+                  <span class="norm-pill">NSR-10 C.11.5.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_{cp} & = b \cdot h = 300\text{ mm} \times 550\text{ mm} = \mathbf{165\,000\text{ mm}^2} \\[4pt]
+                  p_{cp} & = 2(b + h) = 2(300 + 550) = \mathbf{1\,700\text{ mm}} \\[6pt]
+                  T_{th} & = 0.083 \lambda \sqrt{f'_c} \left(\frac{A_{cp}^2}{p_{cp}}\right) = 0.083(1.0)\sqrt{21} \left(\frac{165\,000^2}{1\,700}\right) \times 10^{-6} = \mathbf{6.08\text{ kN}\cdot\text{m}} \\[4pt]
+                  \phi T_{th} & = 0.75 \times 6.08\text{ kN}\cdot\text{m} = \mathbf{4.56\text{ kN}\cdot\text{m}}
+                  \end{aligned}$$
+                </div>
+                <div class="callout danger" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Conclusión del Chequeo de Umbral:</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    Dado que $T_u = \mathbf{26.0\text{ kN}\cdot\text{m}} > \phi T_{th} = 4.56\text{ kN}\cdot\text{m}$, <strong>los efectos de torsión no pueden ignorarse</strong>. Debe proveerse refuerzo transversal en estribos cerrados y refuerzo longitudinal adicional.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: CONTROL DE APLASTAMIENTO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Verificación de las Dimensiones de la Sección Transversal (C.11.5.3.1)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Esfuerzo Máximo Combinado Cortante + Torsión</span>
+                  <span class="norm-pill">NSR-10 C.11.5.3.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  x_1 & = 300 - 2(40 + 4.75) = \mathbf{210.5\text{ mm}}, \quad y_1 = 550 - 2(40 + 4.75) = \mathbf{460.5\text{ mm}} \\[4pt]
+                  A_{oh} & = x_1 y_1 = 210.5 \times 460.5 = \mathbf{96\,935\text{ mm}^2}, \quad A_o = 0.85 A_{oh} = \mathbf{82\,395\text{ mm}^2} \\[4pt]
+                  p_h & = 2(x_1 + y_1) = 2(210.5 + 460.5) = \mathbf{1\,342\text{ mm}} \\[6pt]
+                  \text{Esfuerzo actuante: } & \sqrt{\left(\frac{V_u}{b_w d}\right)^2 + \left(\frac{T_u p_h}{1.7 A_{oh}^2}\right)^2} = \sqrt{\left(\frac{115\,000}{300 \times 490}\right)^2 + \left(\frac{26.0 \times 10^6 \times 1\,342}{1.7 \times (96\,935)^2}\right)^2} \\
+                  & = \sqrt{(0.782)^2 + (2.184)^2} = \mathbf{2.320\text{ MPa}} \\[6pt]
+                  \text{Esfuerzo admisible: } & \phi \left(\frac{V_c}{b_w d} + 0.66\sqrt{f'_c}\right) = 0.75 \left(0.17\sqrt{21} + 0.66\sqrt{21}\right) = \mathbf{2.853\text{ MPa}} \\
+                  & \mathbf{2.320\text{ MPa} \le 2.853\text{ MPa}} \quad \checkmark \quad (\text{Sección no se aplasta})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: ESTRIBOS CERRADOS COMBINADOS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Cálculo de Estribos Cerrados para Cortante y Torsión Combinados ($A_{v+t}/s$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Superposición de Armaduras Transversales</span>
+                  <span class="norm-pill">NSR-10 C.11.5.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Torsión: } \frac{A_t}{s} & = \frac{T_u}{\phi 2 A_o f_{yt} \cot(45^\circ)} = \frac{26.0 \times 10^6\text{ N}\cdot\text{mm}}{0.75 \times 2(82\,395\text{ mm}^2) \times 420\text{ MPa} \times 1.0} = \mathbf{0.501\text{ mm}^2/\text{mm}} \\[6pt]
+                  \text{Cortante: } \frac{A_v}{2s} & = \frac{V_s}{2 f_{yt} d} = \frac{38\,830\text{ N}}{2 \times 420\text{ MPa} \times 490\text{ mm}} = \mathbf{0.0945\text{ mm}^2/\text{mm}} \\[6pt]
+                  \text{Suma por rama vertical: } & \frac{A_{v+t}}{s} = \frac{A_v}{2s} + \frac{A_t}{s} = 0.0945 + 0.501 = \mathbf{0.5955\text{ mm}^2/\text{mm}} \\[6pt]
+                  \text{Con estribo cerrado } \#3 \;(A_b = 71\text{ mm}^2): & \quad s = \frac{71\text{ mm}^2}{0.5955\text{ mm}^2/\text{mm}} = 119.2\text{ mm} \implies \mathbf{s = 100\text{ mm}}\;(10\text{ cm})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 4: ARMADURA LONGITUDINAL AL -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 4</span>
+                <span>Refuerzo Longitudinal Adicional ($A_l$) y Detallamiento Perimetral</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">4.1 Armadura Longitudinal de Torsión (NSR-10 C.11.5.3.7)</span>
+                  <span class="norm-pill">NSR-10 C.11.5.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_l & = \left(\frac{A_t}{s}\right) p_h \left(\frac{f_{yt}}{f_y}\right) \cot^2(45^\circ) = 0.501 \times 1\,342\text{ mm} \times 1.0 \times 1.0 = \mathbf{672.3\text{ mm}^2} \\[6pt]
+                  \text{Selección: } & \text{Se disponen } \mathbf{6\#5} \;(6 \times 199 = \mathbf{1\,194\text{ mm}^2} \ge 672.3\text{ mm}^2) \\[4pt]
+                  \text{Distribución: } & 1\#5 \text{ en cada una de las 4 esquinas del estribo cerrado } + 2\#5 \text{ a mitad de altura de las caras laterales}
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Diseño:</strong> La combinación de estribos cerrados $\#3$ @ $10\text{ cm}$ con ganchos sísmicos de $135^\circ$ y $6\#5$ perimetrales satisface cabalmente la interacción cortante-torsión, garantizando la integridad de la viga perimetral bajo las cargas excéntricas del balcón.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TARJETA DE NAVEGACIÓN INFERIOR -->
+      <div class="tech-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+            Continúa tu ruta de aprendizaje
+          </div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 0.2rem;">
+            Siguiente: Módulo 05 — Diseño de Columnas (Flexocompresión Uniaxial, Biaxial y Esbeltez)
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="modulo-03-flexion-vigas.html" class="btn-control" style="background: var(--bg-subtle); color: var(--text-main); border-color: var(--border-strong);">← Volver al Módulo 03</a>
+          <a href="modulo-05-columnas.html" class="btn-primary">Ir al Módulo 05 →</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Globales y Simulador del Módulo 04 -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-04.js"></script>
+</body>
+</html>

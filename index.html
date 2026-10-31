@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diplomado en Diseño Estructural de Concreto Reforzado | Prof. Daniel Abudinen</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para ecuaciones matemáticas tipográficas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Estilos del Sistema de Diseño -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo" title="Sección de Viga de Concreto Reforzado">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Contorno de concreto de la viga -->
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <!-- Estribo de confinamiento -->
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <!-- Gancho sísmico a 135° -->
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Barras superiores (compresión) -->
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <!-- Barras inferiores (tracción) -->
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </div>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Diplomado en Estructuras</span>
+        <span class="topbar-title">Diseño de Estructuras de Concreto Reforzado</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="modulos/modulo-01-introduccion.html" class="btn-control active-mode">
+        <span>🚀</span> Ir al Módulo 1: Introducción
+      </a>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero láser para clase (Tecla L)">
+        <span>🔴</span> Puntero (L)
+      </button>
+      <button id="btn-presentation" class="btn-control" onclick="togglePresentationMode()" title="Activar vista de láminas para proyector (Tecla P)">
+        <span>🖥️</span> Modo Clase Magistral (P)
+      </button>
+      <button id="btn-theme" class="btn-control" onclick="toggleTheme()">
+        <span>🌙</span> Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <main class="hub-container">
+    <!-- HERO INSTITUCIONAL -->
+    <section class="hero-banner">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge-row">
+            <span class="hero-badge">Universidad de la Costa CUC</span>
+          </div>
+          <h1 class="hero-title">
+            Diseño Estructural de <span>Concreto Reforzado</span>
+          </h1>
+          <p class="hero-subtitle">
+            Plataforma interactiva de cátedra magistral y estudio autónomo con rigor matemático, respaldo normativo estricto en la <strong>NSR-10 (ACI 318)</strong>, simuladores físico-matemáticos en tiempo real y ejemplos aplicados de ingeniería estructural.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+            <div class="professor-card">
+              <div class="professor-avatar">DA</div>
+              <div class="professor-info">
+                <span class="professor-label">Profesor Titular del Módulo</span>
+                <span class="professor-name">Ing. Daniel Abudinen, I.C., M.Sc.</span>
+                <span class="professor-inst">dabudine@cuc.edu.co • Departamento de Civil y Ambiental</span>
+              </div>
+            </div>
+            <a href="modulos/modulo-01-introduccion.html" class="btn-outline" style="padding: 0.9rem 1.25rem; font-size: 0.92rem; color: #FFFFFF; border-color: rgba(255,255,255,0.3);">
+              Módulo 1: Introducción →
+            </a>
+            <a href="modulos/modulo-02-predimensionamiento.html" class="btn-primary" style="padding: 0.95rem 1.45rem; font-size: 0.95rem;">
+              Abrir Módulo 2: Predimensionamiento →
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual-box">
+          <img src="assets/img/mod01/image1.png" alt="Diseño de Estructuras de Concreto Reforzado" />
+          <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: #CBD5E1;">
+            <span>Enfoque: Filosofía LRFD ($\phi R_n \ge U$) &amp; Diseño Sísmico</span>
+            <span style="color: #38BDF8; font-weight: 700;">9 Módulos Técnicos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAPA CURRICULAR DE LOS 9 MÓDULOS -->
+    <section class="lesson-section" id="modulos-curso">
+      <div class="section-header">
+        <div>
+          <div class="section-tag-row">
+            <span class="section-num-badge">PLAN DE ESTUDIOS</span>
+          </div>
+          <h2 class="section-title">Estructura Modular del Curso</h2>
+          <p class="section-lead" style="margin-bottom: 0;">
+            Cada módulo integra contexto conceptual, formulación teórica y matemática rigurosa, laboratorios interactivos y desarrollo aplicado bajo la normativa colombiana.
+          </p>
+        </div>
+        <div style="min-width: 280px;">
+          <input
+            type="search"
+            id="module-search"
+            placeholder="🔍 Filtrar módulo o tema (ej. flexión, cortante, columnas)..."
+            style="width: 100%; padding: 0.65rem 0.95rem; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--bg-subtle); color: var(--text-main); font-size: 0.86rem;"
+          />
+        </div>
+      </div>
+
+      <div class="modules-grid">
+        <!-- MÓDULO 1 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 01</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Introducción, Normatividad y Filosofías de Diseño Estructural
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Fundamentos del diseño estructural, sinergia físico-química acero-concreto, evolución normativa colombiana y formulación matemática de las filosofías ASD, LRFD, Estados Límites y Diseño por Desempeño.
+            </p>
+            <ul class="module-topics">
+              <li>5 consideraciones (Funcionalidad, Economía, Adecuación, Durabilidad, Estética) y 4 restricciones.</li>
+              <li>Los dos "milagros" físico-químicos: compatibilidad térmica ($\alpha_c \approx \alpha_s$) y pasivación alcalina ($\text{pH} \approx 13$).</li>
+              <li>Evolución CCCSR-84, Ley 400/1997, NSR-98, NSR-10 y procedimiento de diseño.</li>
+              <li>Teoría probabilística ($Q$ vs $S$, índice $\beta$), Método Elástico ASD vs. Resistencia Última LRFD y Bloque de Whitney.</li>
+              <li>Diseño por Desempeño Sísmico (SEAOC Vision 2000, retorno $T_R = 475\text{ años}$).</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-01-introduccion.html" class="btn-primary">Entrar al Módulo 1 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 2 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 02</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Predimensionamiento de Elementos Estructurales
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Formulación normativa y matemática organizada por elemento estructural: Vigas, Viguetas, Losas, Columnas y Zapatas superficiales.
+            </p>
+            <ul class="module-topics">
+              <li><strong>1. Vigas y 2. Viguetas:</strong> Control de deflexiones (Tablas C.9.5(a) y CR.9.5), geometría de nervios y riostras (C.8.13.2, C.8.13.3, C.8.13.3.1) y límites sísmicos.</li>
+              <li><strong>3. Losas:</strong> Loseta superior (C.8.13.6), losas macizas 1D/2D ($\beta = l_{\text{larga}}/l_{\text{corta}}$, Ec. C.9-12 y C.9-13) y escaleras.</li>
+              <li><strong>4. Columnas y 5. Zapatas:</strong> Áreas aferentes, bajada de cargas, sección de columna (DMI, DMO, DES) y dimensionamiento de zapatas en planta ($q_{\text{adm}}$) y espesor por punzonamiento.</li>
+              <li>2 laboratorios interactivos con diagnóstico por numeral y 2 ejemplos numéricos paso a paso.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-02-predimensionamiento.html" class="btn-primary">Entrar al Módulo 2 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 3 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 03</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Diseño a Flexión de Vigas de Concreto Reforzado
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Mecánica seccional en flexión pura, cuantía balanceada, límites de ductilidad y diseño de secciones rectangulares simplemente reforzadas, doblemente reforzadas y vigas T/L.
+            </p>
+            <ul class="module-topics">
+              <li>Hipótesis de Bernoulli y Bloque Rectangular de Whitney ($0.85 f'_c$, $a = \beta_1 c$, diferencia entre $d$ y $d_t$).</li>
+              <li>Deducción de cuantías $\rho_b$, $\rho_{\min}$ y $\rho_{\max}$ para $\varepsilon_t \ge 0.005$ ($\phi = 0.90$) y $\varepsilon_t \ge 0.004$.</li>
+              <li>Vigas simplemente reforzadas ($R_n = M_u / \phi b d^2$) y doblemente reforzadas ($A'_s, A_s$ con verificación $\varepsilon'_s \ge \varepsilon_y$).</li>
+              <li>Vigas en T y en L: ancho efectivo $b_{\text{ef}}$, Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$), 2 simuladores y 3 ejemplos paso a paso.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-03-flexion-vigas.html" class="btn-primary">Entrar al Módulo 3 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 4 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 04</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Diseño a Cortante y Tensión Diagonal en Vigas
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Estado biaxial de esfuerzos principales, fisuración inclinada, analogía de la cercha de Ritter-Mörsch a 45°, resistencia del concreto ($V_c$), zonificación de estribos ($V_s$) y cortante por capacidad sísmica ($V_e$).
+            </p>
+            <ul class="module-topics">
+              <li>Esfuerzos principales ($\sigma_{1,2}, \theta_p = 45^\circ$), grietas de flexo-cortante y cortante en el alma, y factor $\lambda$ (C.8.6.1).</li>
+              <li>Sección crítica a distancia $d$ de la cara del apoyo vs. en la cara ($x = 0$) y fórmulas simplificadas/detalladas de $V_c$ con carga axial.</li>
+              <li>Estribos verticales e inclinados ($V_s$), tope $V_{s,\max} = 0.66\sqrt{f'_c}b_w d$, $A_{v,\min}$, $s_{\max}$ y las 4 zonas del diagrama de cortante ($S$).</li>
+              <li>Ganchos sísmicos de $135^\circ$, cortante por capacidad $V_e = \frac{M_{pr1} + M_{pr2}}{l_n} \pm V_g$ (DMO/DES), rehabilitación con CFRP, 2 simuladores y 3 ejemplos.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-04-cortante-vigas.html" class="btn-primary">Entrar al Módulo 4 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 5 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 05</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Diseño de Columnas: Flexocompresión Uniaxial, Biaxial y Esbeltez
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Análisis de elementos sometidos a carga axial y momento flector simultáneo, construcción analítica de los 8 puntos del diagrama de interacción, flexocompresión biaxial y efectos de segundo orden ($P\text{-}\Delta$ y $P\text{-}\delta$).
+            </p>
+            <ul class="module-topics">
+              <li>Clasificación: pedestales ($h/b \le 3$), columnas cortas y esbeltas; cuantía $0.01 \le \rho_g \le 0.04$, espirales ($\rho_{s,\min}$) y confinamiento DMO/DES.</li>
+              <li>Centroide Plástico ($x_{cp}$), descuento de orificios ($U_1, U_2$) y los 8 puntos notables de las curvas $P_n\text{-}M_n$ y $\phi P_n\text{-}\phi M_n$.</li>
+              <li>Flexocompresión biaxial: Carga Recíproca de Bresler, Contorno de Carga de Bresler ($\alpha = 1.50$) y Contorno de la PCA ($\beta = 0.65$).</li>
+              <li>Columnas esbeltas (C.10.10): índice de estabilidad $Q$, factor $k$ (Jackson &amp; Moreland), carga crítica de Euler $P_c$, $\delta_{ns}, \delta_s$, 2 simuladores y 4 ejemplos.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-05-columnas.html" class="btn-primary">Entrar al Módulo 5 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 6 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 06</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Diseño de Losas de Entrepiso (Macizas, Aligeradas y Dos Direcciones)
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Comportamiento unidireccional y bidireccional, espesores mínimos normativos (Tablas C.9.5(a) y C.9.5(c)), diseño de viguetas y loseta superior, escaleras y Método de Diseño Directo con punzonamiento.
+            </p>
+            <ul class="module-topics">
+              <li>Criterio de rectangularidad ($l_{\text{larga}}/l_{\text{corta}} \ge 2.0$ unidireccional vs. $< 2.0$ bidireccional) y control de deflexiones.</li>
+              <li>Diseño de losas macizas por franja unitaria ($b = 1.00\text{ m}$), coeficientes C.8.3.3 y acero de retracción y temperatura ($0.0018 b h$).</li>
+              <li>Losas aligeradas (C.8.13): viguetas como sección T, loseta superior, riostras transversales y cortante con $1.10\,\phi V_c$.</li>
+              <li>Escaleras en proyección horizontal y Método de Diseño Directo (C.13.6) en placas planas con verificación de punzonamiento, 2 simuladores y 4 ejemplos.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-06-losas.html" class="btn-primary">Entrar al Módulo 6 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 7 -->
+        <article class="module-card featured">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 07</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Cimentaciones Superficiales: Zapatas, Vigas de Amarre y de Enlace
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Dimensionamiento geotécnico bajo cargas de servicio y diseño estructural bajo presiones últimas del suelo para zapatas aisladas, excéntricas, combinadas y vigas de cimentación.
+            </p>
+            <ul class="module-topics">
+              <li>Dimensionamiento en planta con $q_{\text{adm}}$ bajo combinaciones de servicio y cálculo de esfuerzo neto último $q_u$.</li>
+              <li>Doble verificación de cortante en zapatas: punzonamiento bidireccional a $d/2$ (3 ecuaciones normativas) y cortante como viga a $d$.</li>
+              <li>Diseño a flexión de zapatas, aplastamiento en la interfaz columna-zapata (C.15.8) y longitud de desarrollo de parrilla.</li>
+              <li>Diseño de vigas de amarre sísmico ($A_a P_u$) y vigas de enlace (cantiléver) para zapatas medianeras excéntricas, 2 simuladores y 4 ejemplos.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-07-cimentaciones.html" class="btn-primary">Entrar al Módulo 7 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 8 -->
+        <article class="module-card">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 08</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Despiece de Armaduras, Longitud de Desarrollo y Anclaje (NSR-10 Cap. C.12)
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Mecánica de adherencia acero-concreto, longitudes de desarrollo en tracción y compresión, ganchos estándar, traslapos Clase A/B, momentos desplazados en d y detallamiento sísmico.
+            </p>
+            <ul class="module-topics">
+              <li>Esfuerzos de adherencia y cálculo de longitud de desarrollo en tracción $l_d$ (Ec. C.12-1 vs Tabla C.12.2.2) y compresión $l_{dc}$.</li>
+              <li>Anclaje con ganchos estándar a $90^\circ$ y $180^\circ$: longitud de desarrollo $l_{dh}$, mandril de doblado y extensión recta.</li>
+              <li>Empalmes por traslapo Clase A ($1.0 l_d$) y Clase B ($1.3 l_d$), traslapos en compresión y zonas reglamentarias según NSR-10 C.21.</li>
+              <li>Diagrama de momentos desplazados, puntos teóricos y prácticos de corte ($\max(d, 12 d_b)$) y anclaje de armadura positiva en apoyos.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-08-despiece.html" class="btn-primary">Entrar al Módulo 8 →</a>
+          </div>
+        </article>
+
+        <!-- MÓDULO 9 -->
+        <article class="module-card">
+          <div>
+            <div class="module-card-top">
+              <span class="module-number">MÓDULO 09</span>
+              <span class="module-status status-ready">● Disponible y Activo</span>
+            </div>
+            <h3 class="module-card-title" style="margin-top: 0.85rem;">
+              Detallamiento Sismorresistente por Niveles de Amenaza Sísmica (DMI, DMO, DES)
+            </h3>
+            <p class="module-card-desc" style="margin: 0.5rem 0 0.85rem;">
+              Requisitos especiales para garantizar la formación de rótulas plásticas dúctiles, criterio Columna Fuerte - Viga Débil, cortante por capacidad y diseño de nudos y muros según NSR-10 C.21.
+            </p>
+            <ul class="module-topics">
+              <li>Asociación entre Zona de Amenaza Sísmica (Baja, Intermedia, Alta) y Capacidad de Disipación de Energía (DMI, DMO, DES).</li>
+              <li>Detallamiento de vigas DMO vs. DES: relación de acero positivo/negativo en la cara del nudo, zonas de confinamiento $2h$ y espaciamiento $s_0$.</li>
+              <li>Detallamiento de columnas DMO/DES: criterio Columna Fuerte–Viga Débil ($\sum M_{nc} \ge 1.20 \sum M_{nb}$), longitud $l_o$ y cuantía volumétrica de estribos $A_{sh}$.</li>
+              <li>Diseño y confinamiento de nudos viga-columna (cortante $V_{jh}$ y $\phi V_n$) y elementos de borde en muros estructurales.</li>
+            </ul>
+          </div>
+          <div class="module-card-footer" style="justify-content: flex-end;">
+            <a href="modulos/modulo-09-sismico.html" class="btn-primary">Entrar al Módulo 9 →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ESQUEMA DE ENTREGABLES APLICADOS DEL CURSO -->
+    <section class="lesson-section" id="entregables-curso">
+      <div class="section-header">
+        <div>
+          <div class="section-tag-row">
+            <span class="section-num-badge">APLICACIÓN PRÁCTICA</span>
+            <span class="ref-badge">Metodología Basada en Proyectos (PBL)</span>
+          </div>
+          <h2 class="section-title">Estructura de Entregables Aplicados</h2>
+          <p class="section-lead" style="margin-bottom: 0;">
+            Aplicación progresiva de los conceptos del curso sobre el proyecto arquitectónico-estructural asignado en cada cohorte.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="tech-card accent-blue" style="background: var(--bg-accent-soft);">
+          <div class="tech-card-title">
+            <span>Entregable 1 (Fase Inicial Activa)</span>
+            <span class="ref-badge">Módulos 1 y 2</span>
+          </div>
+          <p><strong>Introducción, Criterios Normativos y Predimensionamiento Estructural:</strong></p>
+          <ul>
+            <li>Definición de parámetros normativos del proyecto (Uso, localización, $A_a, A_v$, sistema estructural y grado de disipación DMI/DMO/DES).</li>
+            <li>Planteamiento del sistema de entrepiso y ejes estructurales.</li>
+            <li>Predimensionamiento integral de losas, vigas principales, vigas secundarias y columnas.</li>
+          </ul>
+        </div>
+
+        <div class="tech-card accent-cyan">
+          <div class="tech-card-title">
+            <span>Siguientes Entregas (Fase Intermedia)</span>
+            <span class="ref-badge">Módulos 3, 4, 5 y 6</span>
+          </div>
+          <p><strong>Diseño de Superestructura (Vigas, Losas y Columnas):</strong></p>
+          <ul>
+            <li>Se definirán de acuerdo con el alcance específico del proyecto del semestre correspondiente, abarcando el diseño a flexión, cortante, losas de entrepiso y flexocompresión en columnas.</li>
+          </ul>
+        </div>
+
+        <div class="tech-card accent-emerald">
+          <div class="tech-card-title">
+            <span>Entrega de Cierre (Fase Final)</span>
+            <span class="ref-badge">Módulos 7, 8 y 9</span>
+          </div>
+          <p><strong>Cimentaciones, Despiece y Detallamiento Sismorresistente:</strong></p>
+          <ul>
+            <li>Se definirá posteriormente en función del proyecto semestral para integrar el diseño de cimentaciones superficiales, el despiece normativo y el detallamiento según amenaza sísmica.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIBLIOGRAFÍA OFICIAL EXTRAÍDA DEL PPTX -->
+    <section class="lesson-section" id="bibliografia-oficial">
+      <div class="section-header">
+        <div>
+          <div class="section-tag-row">
+            <span class="section-num-badge">RESPALDO ACADÉMICO</span>
+            <span class="ref-badge">Textos Guía</span>
+          </div>
+          <h2 class="section-title">Bibliografía Fundamental del Curso</h2>
+          <p class="section-lead" style="margin-bottom: 0;">
+            Todas las deducciones teóricas, ecuaciones y criterios de diseño presentados en los módulos están estrictamente respaldados por la normativa vigente y estos textos clásicos de ingeniería estructural (haz clic en cualquier portada para ampliarla).
+          </p>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 0.85rem; color: var(--primary);">
+        1. Concreto Reforzado, Mecánica Estructural y Materiales
+      </h3>
+      <div class="grid-4" style="margin-bottom: 1.75rem;">
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image2.jpeg" alt="Estructuras de Concreto - Jorge Ignacio Segura Franco" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Estructuras de Concreto</span>
+            <span class="book-title">Estructuras de Concreto I</span>
+            <span class="book-author">Jorge Ignacio Segura Franco (Univ. Nacional)</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <div style="background: linear-gradient(135deg, #0f172a, #1e293b); width: 100%; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #38bdf8; font-weight: 800; font-size: 0.95rem; text-align: center; padding: 12px; border-radius: 6px; border: 1px solid rgba(56,189,248,0.3);">
+              <span style="font-size: 1.4rem; margin-bottom: 4px;">📘</span>
+              Concreto Reforzado<br>
+              <span style="font-size: 0.75rem; color: #f59e0b; margin-top: 4px;">Fundamentos y Diseño NSR-10</span>
+              <span style="font-size: 0.65rem; color: #94a3b8; margin-top: 6px;">Editorial Unisucre (2024)</span>
+            </div>
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Referencia Colombiana</span>
+            <span class="book-title">Concreto Reforzado: Fundamentos y Diseño NSR-10</span>
+            <span class="book-author">Emel Eduardo Mulet Rodríguez (Univ. de Sucre)</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image3.jpeg" alt="Tecnología del Concreto - Diego Sánchez de Guzmán" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Materiales de Construcción</span>
+            <span class="book-title">Tecnología del Concreto y del Mortero</span>
+            <span class="book-author">Diego Sánchez de Guzmán</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image4.jpeg" alt="Design of Concrete Structures - Nilson, Darwin, Dolan" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Esencia del Diseño</span>
+            <span class="book-title">Design of Concrete Structures (Diseño de Estructuras de Concreto)</span>
+            <span class="book-author">Arthur H. Nilson • David Darwin • Charles W. Dolan</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image5.jpeg" alt="Reinforced Concrete Mechanics and Design - Wight & MacGregor" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Mecánica Estructural</span>
+            <span class="book-title">Reinforced Concrete: Mechanics and Design</span>
+            <span class="book-author">James K. Wight • James G. MacGregor</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.05rem; font-weight: 800; margin-bottom: 0.85rem; color: var(--amber);">
+        2. Ingeniería Sísmica, Ductilidad y Edificios de Concreto
+      </h3>
+      <div class="grid-4">
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image7.jpeg" alt="Seismic Design of Reinforced Concrete and Masonry Buildings - Paulay & Priestley" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Ductilidad y Capacidad</span>
+            <span class="book-title">Seismic Design of Reinforced Concrete and Masonry Buildings</span>
+            <span class="book-author">T. Paulay • M.J.N. Priestley</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image6.jpeg" alt="Tall and Supertall Buildings - Mahamid & Taranath" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Gran Altura</span>
+            <span class="book-title">Tall and Supertall Buildings: Planning and Design</span>
+            <span class="book-author">Mustafa Mahamid • Bungale S. Taranath</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image8.jpeg" alt="Diseño Sísmico de Edificios - Roberto Rochel Awad" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Análisis Dinámico</span>
+            <span class="book-title">Diseño Sísmico de Edificios</span>
+            <span class="book-author">Roberto Rochel Awad (Universidad EAFIT)</span>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover-wrap">
+            <img src="assets/img/mod01/image9.png" alt="Seismic Design of Reinforced Concrete Buildings - Jack Moehle" />
+          </div>
+          <div class="book-meta">
+            <span class="book-category">Concreto Sismorresistente</span>
+            <span class="book-title">Seismic Design of Reinforced Concrete Buildings</span>
+            <span class="book-author">Jack P. Moehle (McGraw-Hill)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGLAS DE JUEGO Y CONTACTO INSTITUCIONAL -->
+    <section class="lesson-section" id="reglas-contacto">
+      <div class="section-header">
+        <div>
+          <div class="section-tag-row">
+            <span class="section-num-badge">LINEAMIENTOS ACADÉMICOS</span>
+          </div>
+          <h2 class="section-title">Reglas de Juego y Canales Oficiales de Contacto</h2>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="tech-card accent-blue">
+          <div class="tech-card-title">1. Compromiso con la Asistencia</div>
+          <p>Puntualidad y continuidad rigurosa en las sesiones del curso. Cada módulo construye directamente sobre las hipótesis mecánicas y normativas del módulo anterior.</p>
+        </div>
+        <div class="tech-card accent-emerald">
+          <div class="tech-card-title">2. Trabajo Colaborativo</div>
+          <p>Participación activa con los compañeros en el análisis crítico de la norma, la discusión en clase y el desarrollo de las entregas aplicadas.</p>
+        </div>
+        <div class="tech-card accent-violet">
+          <div class="tech-card-title">3. Investigación Independiente</div>
+          <p>Indagación autónoma previa y posterior a cada sesión en los textos de Nilson, Segura Franco, Wight &amp; MacGregor y la normativa vigente.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; padding: 1.15rem 1.5rem; background: var(--bg-subtle); border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+        <div>
+          <strong>Canales Oficiales del Curso:</strong> Plataforma Virtual <strong>Microsoft Teams</strong> &amp; Correo Institucional: <a href="mailto:dabudine@cuc.edu.co"><strong>dabudine@cuc.edu.co</strong></a>
+        </div>
+        <a href="modulos/modulo-01-introduccion.html" class="btn-primary">
+          Iniciar Clase — Módulo 1: Introducción →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- HUD FLOTANTE PARA MODO PRESENTACIÓN -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 5</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <script src="assets/js/core.js"></script>
+</body>
+</html>

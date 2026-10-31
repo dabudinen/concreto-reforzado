@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 9: Detallamiento Sismorresistente (DMI, DMO, DES) | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 09 de 09 (Módulo Cúspide) — Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Detallamiento Sismorresistente por Niveles de Amenaza (DMI, DMO, DES)</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠 Portal</span>
+      </a>
+      <button id="theme-toggle" class="btn-control" title="Alternar tema oscuro / claro">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <button id="btn-presentation" class="btn-control btn-accent" onclick="togglePresentationMode()" title="Activar Modo Clase Magistral (Tecla P)">
+        <span>📽️ Modo Clase Magistral (P)</span>
+      </button>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero Láser Virtual (Tecla L)">
+        <span>🔴 Puntero (L)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HUD DEL MODO PRESENTACIÓN -->
+  <div id="presentation-hud" class="presentation-hud" style="display: none;">
+    <div class="hud-left">
+      <span class="hud-badge">DIAPOSITIVA <span id="hud-slide-num">1</span> / <span id="hud-total-slides">8</span></span>
+      <span class="hud-slide-title" id="hud-slide-title">Filosofía Sismorresistente y Niveles de Amenaza</span>
+    </div>
+    <div class="hud-right">
+      <button id="hud-prev" class="btn-control">◀ Anterior</button>
+      <button id="hud-next" class="btn-control btn-accent">Siguiente ▶</button>
+      <button id="hud-exit" class="btn-control">✕ Salir</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- PANEL DE NAVEGACIÓN LATERAL -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-header">
+          <span class="sidebar-caption">CONTENIDO DEL MÓDULO 09</span>
+          <h3>Detallamiento Sísmico</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li><a href="#sec-filosofia" class="active"><span class="menu-num">01</span> Filosofía y Amenaza Sísmica</a></li>
+          <li><a href="#sec-cfvd"><span class="menu-num">02</span> Columna Fuerte - Viga Débil</a></li>
+          <li><a href="#sec-cortante-capacidad"><span class="menu-num">03</span> Cortante por Capacidad</a></li>
+          <li><a href="#sec-vigas-sismicas"><span class="menu-num">04</span> Vigas Sísmicas DMO / DES</a></li>
+          <li><a href="#sec-columnas-sismicas"><span class="menu-num">05</span> Columnas Sísmicas DMO / DES</a></li>
+          <li><a href="#sec-nudos-sismicos"><span class="menu-num">06</span> Nudos Viga-Columna</a></li>
+          <li><a href="#sec-muros-sismicos"><span class="menu-num">07</span> Muros y Elementos de Borde</a></li>
+          <li><a href="#sec-laboratorio-ejemplos"><span class="menu-num">08</span> Simuladores y Ejemplos Numéricos</a></li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-header">
+          <span class="sidebar-caption">DIPLOMADO ESTRUCTURAL</span>
+          <h4>Todos los Módulos</h4>
+        </div>
+        <ul class="sidebar-menu sidebar-sublevel">
+          <li><a href="modulo-01-introduccion.html">01. Filosofía y Requisitos NSR-10</a></li>
+          <li><a href="modulo-02-predimensionamiento.html">02. Predimensionamiento y Materiales</a></li>
+          <li><a href="modulo-03-flexion-vigas.html">03. Flexión en Vigas</a></li>
+          <li><a href="modulo-04-cortante-vigas.html">04. Cortante y Torsión en Vigas</a></li>
+          <li><a href="modulo-05-columnas.html">05. Columnas y Flexocompresión</a></li>
+          <li><a href="modulo-06-losas.html">06. Sistemas de Losas y Entrepisos</a></li>
+          <li><a href="modulo-07-cimentaciones.html">07. Cimentaciones Superficiales</a></li>
+          <li><a href="modulo-08-despiece.html">08. Despiece, Desarrollo y Anclaje</a></li>
+          <li><a href="modulo-09-sismico.html" class="active">09. Detallamiento Sísmico DMO / DES</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="content-area">
+
+      <!-- ====================================================================
+           SLIDE 1: FILOSOFÍA SISMORRESISTENTE Y NIVELES DE AMENAZA
+           ==================================================================== -->
+      <section id="sec-filosofia" class="content-section" data-slide="1">
+        <div class="section-badge">DIAPOSITIVA 01 / 08 • FUNDAMENTOS SÍSMICOS</div>
+        <h1 class="section-title">Filosofía del Diseño Sismorresistente y Niveles de Disipación de Energía (NSR-10 Cap. C.21)</h1>
+        <p class="lead-text">
+          El objetivo primordial del diseño sismorresistente moderno <strong>no es mantener la estructura totalmente elástica</strong> durante el sismo de diseño (lo cual resultaría técnica y económicamente inviable), sino dotarla de una <strong>capacidad de disipación de energía inelástica estable</strong> a través de deformaciones dúctiles controladas, previniendo en todo momento el colapso parcial o total y salvaguardando la vida humana.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card info-card">
+            <h3>Niveles de Capacidad de Disipación de Energía</h3>
+            <p>La NSR-10 clasifica los sistemas estructurales de concreto reforzado en tres categorías según la demanda de ductilidad:</p>
+            <ul>
+              <li><strong>DMI (Capacidad Mínima):</strong> Aplica exclusivamente en zonas de <em>Amenaza Sísmica Baja</em> (\(A_a \le 0.10\)). La estructura se diseña para fuerzas laterales mayores (\(R_0\) bajo, típicamente \(R_0 = 2.5\)), por lo que requiere requisitos de detallamiento convencionales según Capítulos C.1 a C.18.</li>
+              <li><strong>DMO (Capacidad Moderada):</strong> Obligatorio en zonas de <em>Amenaza Sísmica Intermedia</em> (\(0.10 < A_a \le 0.20\)). Se reduce la fuerza sísmica elástica (\(R_0 = 5.0\)), exigiendo confinamientos moderados en extremos de vigas, columnas y nudos (Sección C.21.3).</li>
+              <li><strong>DES (Capacidad Especial):</strong> Obligatorio en zonas de <em>Amenaza Sísmica Alta</em> (\(A_a > 0.20\)) y en edificaciones indispensables (Grupo de Uso IV) en cualquier zona sísmica. Emplea la mayor reducción de fuerza sísmica (\(R_0 = 7.0\)), demandando el cumplimiento estricto del <strong>diseño por capacidad</strong> y confinamiento masivo para desarrollar ductilidades de curvatura elevadas (Secciones C.21.5 a C.21.8).</li>
+            </ul>
+          </div>
+
+          <div class="card card-tech">
+            <h3>Jerarquía del Diseño por Capacidad (Capacity Design)</h3>
+            <p>El diseño por capacidad establece una clara jerarquía de resistencias dentro de la estructura:</p>
+            <ol>
+              <li><strong>Modos de Falla Dúctiles Gobernantes:</strong> Se eligen zonas específicas donde se permite y promueve la disipación inelástica mediante <strong>rótulas plásticas por flexión</strong> (vigas en sus extremos y base de columnas del primer nivel).</li>
+              <li><strong>Supresión de Modos de Falla Frágiles:</strong> Todos los mecanismos que no poseen ductilidad (cortante en vigas y columnas, cortante en nudos, adherencia y anclaje) se diseñan con una <strong>sobrerresistencia</strong> tal que nunca fallen antes de que las rótulas plásticas a flexión se hayan desarrollado plenamente y alcancen su endurecimiento por deformación (\(1.25 f_y\)).</li>
+            </ol>
+            <div class="callout callout-accent">
+              <strong>Principio Axiomático:</strong> <em>"La estructura debe romperse por donde el ingeniero estructural decidió que se rompiera de forma segura, y jamás por donde el sismo decida."</em>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: COLUMNA FUERTE - VIGA DÉBIL (NSR-10 C.21.6.2.2)
+           ==================================================================== -->
+      <section id="sec-cfvd" class="content-section" data-slide="2">
+        <div class="section-badge">DIAPOSITIVA 02 / 08 • MECANISMO PLÁSTICO GLOBAL</div>
+        <h2 class="section-title">Principio de Columna Fuerte - Viga Débil (NSR-10 C.21.6.2.2)</h2>
+        <p>
+          Si las columnas de un entrepiso fluyen plásticamente antes que las vigas, se produce un <strong>mecanismo de piso blando (mecanismo cinemático local)</strong>. Todas las deformaciones laterales del edificio se concentran en ese único nivel, agotando rápidamente la ductilidad y provocando el colapso catastrófico tipo sándwich (*pancake collapse*). Para evitarlo, la NSR-10 exige forzar el <strong>mecanismo de viga débil - columna fuerte</strong>.
+        </p>
+
+        <div class="card card-tech">
+          <h3>Ecuación Normativa Fundamental (NSR-10 Ec. C.21-3)</h3>
+          <p>En todo nudo viga-columna de pórticos resistentes a momentos con capacidad especial de disipación de energía (DES), debe satisfacerse:</p>
+          <div class="math-box">
+            $$\sum M_{nc} \ge 1.20 \sum M_{nb}$$
+          </div>
+          <div class="grid-2col" style="margin-top: 15px;">
+            <div>
+              <ul>
+                <li><strong>\(\sum M_{nc}\):</strong> Suma de las resistencias nominales a flexión de las columnas (superior e inferior) que convergen en el nudo, evaluadas para la carga axial mayorada \(P_u\) que produzca el menor momento resistente en la dirección del sismo considerado.</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li><strong>\(\sum M_{nb}\):</strong> Suma de las resistencias nominales a flexión de las vigas que convergen en el nudo en la dirección del análisis. En un nudo interior bajo sismo lateral, una viga aporta su momento negativo (\(M_n^-\)) y la opuesta su momento positivo (\(M_n^+\)).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card warning-card">
+            <h3>Evaluación Crítica de la Carga Axial (\(P_u\))</h3>
+            <p>La capacidad a flexión de la columna (\(M_{nc}\)) depende críticamente de la carga axial actuante en el diagrama de interacción \(P-M\):</p>
+            <ul>
+              <li><strong>Sismo + Carga Mínima de Gravedad:</strong> La combinación \(0.9 D \pm 1.0 E\) produce tensión o compresiones muy bajas en columnas exteriores, reduciendo drásticamente su capacidad a flexión \(M_{nc}\).</li>
+              <li><strong>Sismo + Carga Máxima de Gravedad:</strong> La combinación \(1.2 D + 1.0 L \pm 1.0 E\) incrementa la compresión axial, lo que puede aumentar \(M_{nc}\) si está por debajo del punto balanceado, pero aumenta el riesgo de aplastamiento frágil.</li>
+              <li><strong>Exigencia:</strong> Debe verificarse que la relación \(1.20\) se cumpla para <strong>todas</strong> las combinaciones de carga axial del diseño sísmico.</li>
+            </ul>
+          </div>
+
+          <div class="card danger-card">
+            <h3>Consecuencias del Incumplimiento</h3>
+            <p>Si en un nudo no se cumple la relación \(\sum M_{nc} \ge 1.20 \sum M_{nb}\):</p>
+            <ul>
+              <li>La columna no puede considerarse como parte del sistema resistente a fuerzas sísmicas para efectos de rigidez lateral (C.21.6.2.3).</li>
+              <li>Toda la altura libre de la columna debe confinarse con estribos cerrados de ductilidad especial en toda su longitud.</li>
+              <li>En la práctica profesional colombiana, la única solución aprobada por los revisores estructurales es <strong>aumentar la sección de la columna o incrementar su cuantía longitudinal</strong> hasta garantizar holgadamente \(\sum M_{nc} / \sum M_{nb} \ge 1.20\).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: CORTANTE DE DISEÑO POR CAPACIDAD (NSR-10 C.21.5.4 Y C.21.6.5)
+           ==================================================================== -->
+      <section id="sec-cortante-capacidad" class="content-section" data-slide="3">
+        <div class="section-badge">DIAPOSITIVA 03 / 08 • DISEÑO POR CAPACIDAD</div>
+        <h2 class="section-title">Cortante de Diseño por Capacidad en Vigas y Columnas</h2>
+        <p>
+          Las fuerzas cortantes obtenidas directamente del análisis estructural elástico lineal son ficticias durante un terremoto severo, ya que la estructura ingresa profundamente al rango inelástico. Si las vigas o columnas alcanzan su capacidad última a flexión, <strong>el cortante real que se desarrollará en el elemento estará determinado por los momentos probables (\(M_{pr}\)) de las rótulas plásticas de extremo</strong>.
+        </p>
+
+        <div class="card card-tech">
+          <h3>Cortante de Diseño Sísmico en Vigas DES (\(V_e\))</h3>
+          <p>La fuerza cortante de diseño \(V_e\) se calcula a partir de la suma de momentos probables en las caras de los apoyos más la carga gravitacional:</p>
+          <div class="math-box">
+            $$V_e = \frac{M_{pr1} + M_{pr2}}{L_n} \pm \frac{w_u L_n}{2}$$
+          </div>
+          <h4>Definición de Momento Probable (\(M_{pr}\)):</h4>
+          <p>
+            Es el momento resistente nominal evaluado con un esfuerzo en el acero de tracción de <strong>\(1.25 f_y\)</strong> (para tener en cuenta la sobrerresistencia real del acero por encima de la nominal y el endurecimiento por deformación) y factor de reducción de resistencia <strong>\(\phi = 1.0\)</strong>:
+          </p>
+          <div class="math-box">
+            $$M_{pr} = A_s (1.25 f_y) \left( d - \frac{a_{pr}}{2} \right) \qquad \text{con } a_{pr} = \frac{A_s (1.25 f_y)}{0.85 f'_c b}$$
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card danger-card">
+            <h3>Anulación del Concreto a Cortante (\(V_c = 0\))</h3>
+            <p>Conforme a NSR-10 C.21.5.4.2, en vigas DES debe asumirse <strong>\(V_c = 0\)</strong> (toda la fuerza cortante debe ser resistida exclusivamente por estribos de acero, \(V_s = V_e / \phi\)) cuando se cumplan simultáneamente dos condiciones:</p>
+            <ul>
+              <li><strong>1.</strong> La fuerza cortante inducida por los momentos sísmicos probables (\(V_{\text{sway}} = \frac{M_{pr1} + M_{pr2}}{L_n}\)) representa el <strong>\(50\%\) o más</strong> de la fuerza cortante máxima de diseño.</li>
+              <li><strong>2.</strong> La fuerza axial mayorada de compresión \(P_u\) es menor que \(\frac{A_g f'_c}{20}\) (lo cual es típico en vigas de entrepiso).</li>
+            </ul>
+            <div class="callout callout-warning">
+              <strong>Razón Física:</strong> En la zona de rótula plástica (\(2h\)), las grietas de flexión se abren y cierran cíclicamente en ambas caras, fracturando completamente el concreto a través de todo el peralte y destruyendo el engrane de agregados.
+            </div>
+          </div>
+
+          <div class="card info-card">
+            <h3>Cortante de Diseño Sísmico en Columnas DES</h3>
+            <p>Similarmente, el cortante de diseño en columnas no debe ser menor que el cortante asociado al desarrollo de los momentos probables en sus extremos:</p>
+            <div class="math-box">
+              $$V_e = \frac{M_{pr,\text{top}} + M_{pr,\text{bot}}}{H_u}$$
+            </div>
+            <p>
+              donde \(M_{pr}\) de la columna se calcula con \(1.25 f_y\) para la carga axial \(P_u\) que maximice la capacidad de la columna. En ningún caso \(V_e\) puede ser menor que el cortante resultante del análisis elástico mayorado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: DETALLAMIENTO SÍSMICO DE VIGAS (DMO VS DES)
+           ==================================================================== -->
+      <section id="sec-vigas-sismicas" class="content-section" data-slide="4">
+        <div class="section-badge">DIAPOSITIVA 04 / 08 • VIGAS SÍSMICAS</div>
+        <h2 class="section-title">Detallamiento Sísmico de Vigas en Pórticos DMO y DES</h2>
+        <p>
+          Las vigas en pórticos con disipación de energía moderada y especial deben satisfacer rigurosas restricciones geométricas y de armado para asegurar ductilidad local y prevenir pandeo prematuro de barras longitudinales comprimidas.
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Parámetro Normativo</th>
+                <th>Capacidad Moderada (DMO, C.21.3)</th>
+                <th>Capacidad Especial (DES, C.21.5)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Luz libre mínima (\(L_n\))</strong></td>
+                <td>\(L_n \ge 4 d\)</td>
+                <td>\(L_n \ge 4 d\)</td>
+              </tr>
+              <tr>
+                <td><strong>Ancho mínimo (\(b_w\))</strong></td>
+                <td>\(b_w \ge 200\text{ mm}\)</td>
+                <td>\(b_w \ge 250\text{ mm}\)</td>
+              </tr>
+              <tr>
+                <td><strong>Relación ancho / peralte (\(b_w / h\))</strong></td>
+                <td>\(b_w / h \ge 0.30\)</td>
+                <td>\(b_w / h \ge 0.30\) y \(b_w \le b_c + 2(0.75 h)\)</td>
+              </tr>
+              <tr>
+                <td><strong>Cuantía mínima (\(\rho_{\min}\))</strong></td>
+                <td>\(\ge \frac{1.4}{f_y}\) y \(\ge \frac{\sqrt{f'_c}}{4 f_y}\)</td>
+                <td>\(\ge \frac{1.4}{f_y}\) y \(\ge \frac{\sqrt{f'_c}}{4 f_y}\)</td>
+              </tr>
+              <tr>
+                <td><strong>Cuantía máxima (\(\rho_{\max}\))</strong></td>
+                <td>\(\le 0.025\) (\(2.5\%\))</td>
+                <td>\(\le 0.025\) (\(2.5\%\))</td>
+              </tr>
+              <tr>
+                <td><strong>Momento positivo en apoyo (\(M_n^+\))</strong></td>
+                <td>\(\ge \frac{1}{3} M_n^-\) en la cara del nudo</td>
+                <td>\(\ge \frac{1}{2} M_n^-\) en la cara del nudo</td>
+              </tr>
+              <tr>
+                <td><strong>Momento mínimo en cualquier sección</strong></td>
+                <td>\(\ge \frac{1}{5} \max(M_n)\) de los extremos</td>
+                <td>\(\ge \frac{1}{4} \max(M_n)\) de los extremos</td>
+              </tr>
+              <tr>
+                <td><strong>Longitud zona confinada (\(L_{\text{conf}}\))</strong></td>
+                <td>\(2h\) desde la cara del apoyo</td>
+                <td>\(2h\) desde la cara del apoyo</td>
+              </tr>
+              <tr>
+                <td><strong>Espaciamiento máximo de estribos en \(2h\)</strong></td>
+                <td>$$s \le \min\left( \frac{d}{4}, 8 d_b, 24 d_{est}, 300\text{ mm} \right)$$</td>
+                <td>$$s \le \min\left( \frac{d}{4}, 6 d_b, 150\text{ mm} \right)$$</td>
+              </tr>
+              <tr>
+                <td><strong>Primer estribo cerrado</strong></td>
+                <td>A \(\le 50\text{ mm}\) de la cara del apoyo</td>
+                <td>A \(\le 50\text{ mm}\) de la cara del apoyo</td>
+              </tr>
+              <tr>
+                <td><strong>Espaciamiento fuera de zona confinada</strong></td>
+                <td>\(s \le d/2\)</td>
+                <td>\(s \le d/2\)</td>
+              </tr>
+              <tr>
+                <td><strong>Ganchos de remate de estribos</strong></td>
+                <td>Ganchos sísmicos a \(135^\circ\) (\(\ge 6 d_b, 75\text{ mm}\))</td>
+                <td>Ganchos sísmicos a \(135^\circ\) (\(\ge 6 d_b, 75\text{ mm}\))</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: DETALLAMIENTO SÍSMICO DE COLUMNAS (DMO VS DES)
+           ==================================================================== -->
+      <section id="sec-columnas-sismicas" class="content-section" data-slide="5">
+        <div class="section-badge">DIAPOSITIVA 05 / 08 • COLUMNAS SÍSMICAS</div>
+        <h2 class="section-title">Detallamiento Sísmico de Columnas en Pórticos DMO y DES</h2>
+        <p>
+          Las columnas representan los componentes más críticos de la estructura: su falla conduce inevitablemente al colapso global. En zonas de plastificación potencial (extremos superiores e inferiores de cada piso), el concreto del núcleo debe quedar confinado triaxialmente por estribos cerrados y grapas suplementarias.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card card-tech">
+            <h3>Longitud de Confinamiento en Extremos (\(l_o\))</h3>
+            <p>En ambos extremos de la columna, el refuerzo transversal de confinamiento debe extenderse una longitud \(l_o\) no menor a la mayor de:</p>
+            <div class="math-box">
+              $$l_o \ge \max\left( h_{\max}, \; \frac{L_u}{6}, \; 450\text{ mm} \text{ [DMO]} \text{ o } 500\text{ mm} \text{ [DES]} \right)$$
+            </div>
+            <h4>Espaciamiento Máximo de Estribos en \(l_o\) (DES, C.21.6.4.3):</h4>
+            <div class="math-box">
+              $$s \le \min\left( \frac{b_{\min}}{4}, \; 6 d_{bl}, \; s_o \right)$$
+              $$s_o = 100 + \left( \frac{350 - h_x}{3} \right) \quad (100\text{ mm} \le s_o \le 150\text{ mm})$$
+            </div>
+            <p class="caption">donde \(h_x\) es la separación horizontal máxima entre ramas de estribos o grapas (\(h_x \le 350\text{ mm}\)).</p>
+          </div>
+
+          <div class="card info-card">
+            <h3>Área Total de Refuerzo Transversal (\(A_{sh}\))</h3>
+            <p>Para columnas rectangulares DES, el área transversal de ramas de estribos en cada dirección perpendicular no debe ser menor que el mayor de:</p>
+            <div class="math-box">
+              $$A_{sh} \ge 0.30 \left( \frac{s b_c f'_c}{f_{yt}} \right) \left[ \frac{A_g}{A_{ch}} - 1 \right]$$
+              $$A_{sh} \ge 0.09 \left( \frac{s b_c f'_c}{f_{yt}} \right)$$
+            </div>
+            <ul>
+              <li><strong>\(A_{ch}\):</strong> Área del núcleo confinado medida a los bordes exteriores de los estribos cerrados (\(\text{mm}^2\)).</li>
+              <li><strong>\(b_c\):</strong> Dimensión del núcleo confinado centro a centro de ramas exteriores (\(\text{mm}\)).</li>
+              <li><strong>Grapas Suplementarias:</strong> Toda barra longitudinal de esquina o barra alternada debe estar arriostrada por una rama de estribo o grapa con gancho a \(135^\circ\) en un extremo y \(90^\circ\) en el otro.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: NUDOS VIGA-COLUMNA (NSR-10 C.21.7)
+           ==================================================================== -->
+      <section id="sec-nudos-sismicos" class="content-section" data-slide="6">
+        <div class="section-badge">DIAPOSITIVA 06 / 08 • COMPORTAMIENTO DE NUDOS</div>
+        <h2 class="section-title">Nudos Viga-Columna: Cortante Horizontal y Confinamiento</h2>
+        <p>
+          Los nudos viga-columna son las regiones más severamente esforzadas de la estructura sismorresistente. Durante sismos intensos, las armaduras superiores e inferiores de las vigas fluyen simultáneamente en tracción y compresión en caras opuestas del nudo, transfiriendo una fuerza cortante horizontal \(V_{jh}\) que puede superar de \(4\text{ a }6\text{ veces}\) el cortante de las columnas adyacentes.
+        </p>
+
+        <div class="card card-tech">
+          <h3>Equilibrio de Fuerzas y Cortante Horizontal en el Nudo (\(V_{jh}\))</h3>
+          <p>Para sismo actuando de izquierda a derecha:</p>
+          <div class="math-box">
+            $$V_{jh} = T_1 + C_2 - V_{col} = 1.25 A_{s1} f_y + 1.25 A_{s2} f_y - V_{col}$$
+          </div>
+          <div class="grid-2col" style="margin-top: 15px;">
+            <div>
+              <p><strong>Resistencia Nominal al Cortante del Nudo (C.21.7.4):</strong></p>
+              <div class="math-box">
+                $$\phi V_n = \phi \gamma \sqrt{f'_c} A_j \qquad (\phi = 0.85)$$
+              </div>
+            </div>
+            <div>
+              <p><strong>Área Efectiva del Nudo (\(A_j = b_j \cdot h_c\)):</strong></p>
+              <div class="math-box">
+                $$b_j = \min\left( b_c, \; b_b + h_c, \; b_b + 2x \right)$$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card">
+            <h3>Factores de Confinamiento del Nudo (\(\gamma\))</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Configuración del Nudo</th>
+                    <th>Factor \(\gamma\)</th>
+                    <th>Resistencia \(\phi V_n\)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Nudo Interior Confinado en 4 Caras:</strong> Vigas en las 4 caras cubren al menos el \(75\%\) del ancho de la columna</td>
+                    <td>\(\mathbf{1.7}\)</td>
+                    <td>\(1.45 \sqrt{f'_c} A_j\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Nudo Confinado en 3 Caras o 2 Caras Opuestas:</strong> Vigas continuas en una dirección</td>
+                    <td>\(\mathbf{1.2}\)</td>
+                    <td>\(1.02 \sqrt{f'_c} A_j\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Otros Casos:</strong> Nudos exteriores sin vigas transversales o nudos de esquina</td>
+                    <td>\(\mathbf{1.0}\)</td>
+                    <td>\(0.85 \sqrt{f'_c} A_j\)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card warning-card">
+            <h3>Confinamiento Transversal Pasante</h3>
+            <p>El acero transversal de confinamiento de la columna no debe interrumpirse al pasar por el nudo:</p>
+            <ul>
+              <li><strong>Nudos DES:</strong> Deben colocarse estribos cerrados de confinamiento idénticos a los de la zona \(l_o\) de la columna dentro de toda la altura del nudo viga-columna (C.21.7.2).</li>
+              <li><strong>Excepción Parcial:</strong> Si el nudo está confinado por vigas en sus 4 caras con ancho \(\ge 0.75 b_c\), se permite reducir la cantidad de estribos al \(50\%\) y aumentar el espaciamiento hasta \(150\text{ mm}\).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: MUROS ESTRUCTURALES Y ELEMENTOS DE BORDE (NSR-10 C.21.9)
+           ==================================================================== -->
+      <section id="sec-muros-sismicos" class="content-section" data-slide="7">
+        <div class="section-badge">DIAPOSITIVA 07 / 08 • MUROS DE CORTE</div>
+        <h2 class="section-title">Muros Estructurales de Concreto y Elementos de Borde (NSR-10 C.21.9)</h2>
+        <p>
+          En edificios aporticados combinados con muros (sistemas duales) o edificios de muros de carga, los <strong>muros estructurales (pantallas)</strong> absorben la mayor parte del cortante basal y controlan las derivas de entrepiso. Para garantizar que los muros disipen energía sin pandeo lateral del concreto ni fractura frágil por aplastamiento en las zonas comprimidas, se exige el diseño de <strong>Elementos Especiales de Borde (Boundary Elements)</strong>.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card card-tech">
+            <h3>Criterio de Desplazamiento Relativo (C.21.9.6.2)</h3>
+            <p>Se requieren elementos especiales de borde en los extremos del muro si la profundidad del eje neutro \(c\) excede:</p>
+            <div class="math-box">
+              $$c \ge \frac{l_w}{600 \left( \dfrac{\delta_u}{h_w} \right)}$$
+            </div>
+            <ul>
+              <li><strong>\(\delta_u / h_w\):</strong> Deriva elástica de diseño en el tope del muro multiplicada por \(0.75 R_0\) (deriva inelástica de diseño, no menor a \(0.007\)).</li>
+              <li><strong>\(l_w\):</strong> Longitud horizontal total del muro (\(\text{m}\)).</li>
+              <li><strong>\(c\):</strong> Profundidad del eje neutro calculada para la carga axial mayorada y momento nominal resistente en la base.</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <h3>Criterio de Esfuerzos en la Fibra Extrema (C.21.9.6.3)</h3>
+            <p>Alternativamente, se requieren elementos especiales de borde en cualquier sección donde los esfuerzos máximos de compresión en la fibra extrema calculados mediante un análisis elástico lineal excedan:</p>
+            <div class="math-box">
+              $$\sigma_{\max} = \frac{P_u}{A_g} + \frac{M_u y}{I_g} \ge 0.20 f'_c$$
+            </div>
+            <p>
+              El elemento de borde puede descontinuarse en la altura del muro donde el esfuerzo de compresión caiga por debajo de \(0.15 f'_c\).
+            </p>
+            <h4>Extensión Horizontal del Elemento de Borde:</h4>
+            <p>El confinamiento debe extenderse horizontalmente desde la fibra extrema una distancia mínima de:
+              $$b_e \ge \max\left( c - 0.1 l_w, \; \frac{c}{2} \right)$$
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: LABORATORIO INTERACTIVO Y 4 EJEMPLOS NUMÉRICOS
+           ==================================================================== -->
+      <section id="sec-laboratorio-ejemplos" class="content-section" data-slide="8">
+        <div class="section-badge">DIAPOSITIVA 08 / 08 • SIMULACIÓN Y APLICACIÓN</div>
+        <h2 class="section-title">Laboratorio Interactivo y Casos Numéricos Resueltos Paso a Paso</h2>
+        <p class="lead-text">
+          Experimente con los dos simuladores sismorresistentes y analice las soluciones paso a paso con el <strong>Modo Pizarra Docente</strong>.
+        </p>
+
+        <!-- ==================================================================
+             SIMULADOR 9.1: VERIFICADOR DE PÓRTICO SÍSMICO
+             ================================================================== -->
+        <div class="simulator-card">
+          <div class="sim-header">
+            <div>
+              <span class="sim-tag">SIMULADOR 9.1</span>
+              <h3 class="sim-title">Verificador Integral de Pórtico Sismorresistente (Columna Fuerte y Cortante de Capacidad)</h3>
+              <p class="sim-subtitle">
+                Evalúe en tiempo real la relación \(\sum M_{nc} / \sum M_{nb} \ge 1.20\), los momentos probables (\(M_{pr}\)), el cortante de capacidad (\(V_e\)), el estado de \(V_c = 0\) y los espaciamientos normativos de confinamiento en DMO y DES.
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-body">
+            <div class="sim-controls">
+              <!-- Fila 1: Nivel Sísmico y Materiales -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-level">Capacidad de Disipación:</label>
+                  <select id="sim91-level" class="sim-select">
+                    <option value="DES" selected>Capacidad Especial (DES - Amenaza Alta)</option>
+                    <option value="DMO">Capacidad Moderada (DMO - Amenaza Intermedia)</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-fc">Resistencia Concreto \(f'_c\):</label>
+                  <select id="sim91-fc" class="sim-select">
+                    <option value="21">21 MPa (3000 psi)</option>
+                    <option value="28" selected>28 MPa (4000 psi)</option>
+                    <option value="35">35 MPa (5000 psi)</option>
+                    <option value="42">42 MPa (6000 psi)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group">
+                <label for="sim91-fy">Fluencia del Acero \(f_y\):</label>
+                <select id="sim91-fy" class="sim-select">
+                  <option value="420" selected>420 MPa (NTC 2289 / ASTM A706 Sismorresistente)</option>
+                </select>
+              </div>
+
+              <!-- Fila 2: Sección de Viga -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-bw">Ancho Viga \(b_w\) (mm):</label>
+                  <select id="sim91-bw" class="sim-select">
+                    <option value="300">300 mm</option>
+                    <option value="350" selected>350 mm</option>
+                    <option value="400">400 mm</option>
+                    <option value="450">450 mm</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-hbeam">Peralte Viga \(h\) (mm):</label>
+                  <select id="sim91-hbeam" class="sim-select">
+                    <option value="450">450 mm</option>
+                    <option value="500">500 mm</option>
+                    <option value="550" selected>550 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim91-ln">Luz libre de la viga (\(L_n\)):</label>
+                  <span id="sim91-ln-val" class="sim-val-badge">6.0 m</span>
+                </div>
+                <input type="range" id="sim91-ln" min="4.0" max="9.0" step="0.5" value="6.0" class="sim-slider" />
+              </div>
+
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim91-wu">Carga gravitacional factorizada (\(w_u\)):</label>
+                  <span id="sim91-wu-val" class="sim-val-badge">35.0 kN/m</span>
+                </div>
+                <input type="range" id="sim91-wu" min="20.0" max="60.0" step="2.5" value="35.0" class="sim-slider" />
+              </div>
+
+              <!-- Fila 3: Armadura Viga -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-ntop">Barras Superiores Negativo:</label>
+                  <select id="sim91-ntop" class="sim-select">
+                    <option value="3">3 Barras</option>
+                    <option value="4" selected>4 Barras</option>
+                    <option value="5">5 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-bartop">Diámetro Superior:</label>
+                  <select id="sim91-bartop" class="sim-select">
+                    <option value="6">#6 (19.1 mm)</option>
+                    <option value="7" selected>#7 (22.2 mm)</option>
+                    <option value="8">#8 (25.4 mm)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-nbot">Barras Inferiores Positivo:</label>
+                  <select id="sim91-nbot" class="sim-select">
+                    <option value="2">2 Barras</option>
+                    <option value="3" selected>3 Barras</option>
+                    <option value="4">4 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-barbot">Diámetro Inferior:</label>
+                  <select id="sim91-barbot" class="sim-select">
+                    <option value="6">#6 (19.1 mm)</option>
+                    <option value="7" selected>#7 (22.2 mm)</option>
+                    <option value="8">#8 (25.4 mm)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Fila 4: Columna -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-bc">Ancho Columna \(b_c\) (mm):</label>
+                  <select id="sim91-bc" class="sim-select">
+                    <option value="400">400 mm</option>
+                    <option value="450" selected>450 mm</option>
+                    <option value="500">500 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-hc">Peralte Columna \(h_c\) (mm):</label>
+                  <select id="sim91-hc" class="sim-select">
+                    <option value="400">400 mm</option>
+                    <option value="450" selected>450 mm</option>
+                    <option value="500">500 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim91-hcol">Altura libre columna (\(H_{\text{col}}\)):</label>
+                    <span id="sim91-hcol-val" class="sim-val-badge">3.2 m</span>
+                  </div>
+                  <input type="range" id="sim91-hcol" min="2.6" max="4.5" step="0.1" value="3.2" class="sim-slider" />
+                </div>
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim91-pucol">Carga axial columna (\(P_u\)):</label>
+                    <span id="sim91-pucol-val" class="sim-val-badge">800 kN</span>
+                  </div>
+                  <input type="range" id="sim91-pucol" min="200" max="2500" step="100" value="800" class="sim-slider" />
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim91-ncolbars">Total Barras Columna:</label>
+                  <select id="sim91-ncolbars" class="sim-select">
+                    <option value="8" selected>8 Barras</option>
+                    <option value="12">12 Barras</option>
+                    <option value="16">16 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim91-barcol">Diámetro Columna:</label>
+                  <select id="sim91-barcol" class="sim-select">
+                    <option value="7">#7 (22.2 mm)</option>
+                    <option value="8" selected>#8 (25.4 mm)</option>
+                    <option value="9">#9 (28.7 mm)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Canvas Simulador 9.1 -->
+            <div class="sim-canvas-container">
+              <canvas id="sim91-canvas" width="620" height="390" class="sim-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Métricas de Salida Simulador 9.1 -->
+          <div class="sim-results-grid">
+            <div class="res-card">
+              <span class="res-label">Capacidad Nominal Vigas (\(M_n\))</span>
+              <span id="res91-mn-beam" class="res-val highlight">M⁻ = 293.4 | M⁺ = 227.1 kN·m</span>
+              <span class="res-sub">Flexión negativa y positiva</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Momentos Probables Vigas (\(M_{pr}\))</span>
+              <span id="res91-mpr-beam" class="res-val highlight-accent">Mpr⁻ = 358.2 | Mpr⁺ = 279.4 kN·m</span>
+              <span class="res-sub">Con \(1.25 f_y\) y \(\phi = 1.0\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">\(\sum M_{nb}\) (Demanda en el Nudo)</span>
+              <span id="res91-sum-mnb" class="res-val highlight">520.5 kN·m</span>
+              <span class="res-sub">Suma vigas concurrentes</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">\(\sum M_{nc}\) (Capacidad Columnas)</span>
+              <span id="res91-sum-mnc" class="res-val highlight-green">695.8 kN·m (2 columnas)</span>
+              <span class="res-sub">Superior + Inferior con \(P_u\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Relación Columna Fuerte / Viga Débil</span>
+              <span id="res91-ratio-cfvd" class="res-val highlight-green">1.34 ✓ CUMPLE (≥ 1.20)</span>
+              <span class="res-sub">\(\sum M_{nc} / \sum M_{nb} \ge 1.20\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Cortante por Capacidad Viga (\(V_e\))</span>
+              <span id="res91-ve" class="res-val highlight-accent">211.3 kN (Sway: 106.3 + Grav: 105.0)</span>
+              <span class="res-sub">\((M_{pr1}+M_{pr2})/L_n + w_u L_n/2\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Condición \(V_c = 0\) en Rótula (2h)</span>
+              <span id="res91-vc-status" class="res-val highlight">0.0 kN (Vc = 0 por rótula sísmica DES)</span>
+              <span class="res-sub">NSR-10 C.21.5.4.2</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Cortante Requerido Estribos (\(V_s\))</span>
+              <span id="res91-vs-req" class="res-val highlight-accent">281.7 kN</span>
+              <span class="res-sub">Para absorber todo \(V_e / \phi\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Estribos Vigas en Zona \(2h\)</span>
+              <span id="res91-s-beam" class="res-val highlight-green">s ≤ 120 mm (en L = 110 cm)</span>
+              <span class="res-sub">Con ganchos sísmicos a \(135^\circ\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Estribos Columnas en Zona \(l_o\)</span>
+              <span id="res91-s-col" class="res-val highlight-green">s ≤ 100 mm (en lo = 53 cm)</span>
+              <span class="res-sub">Confinamiento volumétrico \(A_{sh}\)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             SIMULADOR 9.2: DISEÑADOR DE NUDOS VIGA-COLUMNA
+             ================================================================== -->
+        <div class="simulator-card" style="margin-top: 35px;">
+          <div class="sim-header">
+            <div>
+              <span class="sim-tag">SIMULADOR 9.2</span>
+              <h3 class="sim-title">Diseñador y Verificador de Nudos Viga-Columna Sísmicos (NSR-10 C.21.7)</h3>
+              <p class="sim-subtitle">
+                Calcule la demanda de cortante horizontal en el nudo (\(V_{jh}\)), el ancho efectivo \(b_j\), el factor de confinamiento \(\gamma\), la resistencia de diseño \(\phi V_n\) y el refuerzo transversal de confinamiento pasante \(A_{sh}\).
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-body">
+            <div class="sim-controls">
+              <!-- Parámetros del Nudo -->
+              <div class="sim-group">
+                <label for="sim92-nodetype">Tipo de Confinamiento del Nudo:</label>
+                <select id="sim92-nodetype" class="sim-select">
+                  <option value="int4" selected>Nudo Interior Confinado en 4 Caras (γ = 1.7)</option>
+                  <option value="int2">Nudo Interior Confinado en 2 Caras Opuestas (γ = 1.2)</option>
+                  <option value="ext">Nudo Exterior (γ = 1.0)</option>
+                  <option value="corner">Nudo de Esquina (γ = 1.0)</option>
+                </select>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim92-fc">Resistencia Concreto \(f'_c\):</label>
+                  <select id="sim92-fc" class="sim-select">
+                    <option value="21">21 MPa</option>
+                    <option value="28" selected>28 MPa</option>
+                    <option value="35">35 MPa</option>
+                    <option value="42">42 MPa</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim92-fy">Fluencia Acero \(f_y\):</label>
+                  <select id="sim92-fy" class="sim-select">
+                    <option value="420" selected>420 MPa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim92-bc">Ancho Columna \(b_c\) (mm):</label>
+                  <select id="sim92-bc" class="sim-select">
+                    <option value="400">400 mm</option>
+                    <option value="450" selected>450 mm</option>
+                    <option value="500">500 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim92-hc">Peralte Columna \(h_c\) (mm):</label>
+                  <select id="sim92-hc" class="sim-select">
+                    <option value="400">400 mm</option>
+                    <option value="450" selected>450 mm</option>
+                    <option value="500">500 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim92-bb">Ancho Viga \(b_b\) (mm):</label>
+                  <select id="sim92-bb" class="sim-select">
+                    <option value="300">300 mm</option>
+                    <option value="350" selected>350 mm</option>
+                    <option value="400">400 mm</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim92-hb">Peralte Viga \(h_b\) (mm):</label>
+                  <select id="sim92-hb" class="sim-select">
+                    <option value="500">500 mm</option>
+                    <option value="550" selected>550 mm</option>
+                    <option value="600">600 mm</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Armaduras Viga en el Nudo -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim92-ntop">Barras Superiores Viga:</label>
+                  <select id="sim92-ntop" class="sim-select">
+                    <option value="3">3 Barras</option>
+                    <option value="4" selected>4 Barras</option>
+                    <option value="5">5 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim92-bartop">Diámetro Superior:</label>
+                  <select id="sim92-bartop" class="sim-select">
+                    <option value="6">#6 (19.1 mm)</option>
+                    <option value="7" selected>#7 (22.2 mm)</option>
+                    <option value="8">#8 (25.4 mm)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim92-nbot">Barras Inferiores Viga:</label>
+                  <select id="sim92-nbot" class="sim-select">
+                    <option value="2">2 Barras</option>
+                    <option value="3" selected>3 Barras</option>
+                    <option value="4">4 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim92-barbot">Diámetro Inferior:</label>
+                  <select id="sim92-barbot" class="sim-select">
+                    <option value="6">#6 (19.1 mm)</option>
+                    <option value="7" selected>#7 (22.2 mm)</option>
+                    <option value="8">#8 (25.4 mm)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group">
+                <label for="sim92-vcol">Cortante en Columna Superior \(V_{\text{col}}\) (kN):</label>
+                <select id="sim92-vcol" class="sim-select">
+                  <option value="80">80 kN</option>
+                  <option value="120" selected>120 kN</option>
+                  <option value="160">160 kN</option>
+                  <option value="200">200 kN</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Canvas Simulador 9.2 -->
+            <div class="sim-canvas-container">
+              <canvas id="sim92-canvas" width="620" height="390" class="sim-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Métricas de Salida Simulador 9.2 -->
+          <div class="sim-results-grid">
+            <div class="res-card">
+              <span class="res-label">Factor de Confinamiento</span>
+              <span id="res92-gamma" class="res-val highlight">γ = 1.7 (Interior 4 caras)</span>
+              <span class="res-sub">NSR-10 C.21.7.4.1</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Geometría Efectiva del Nudo</span>
+              <span id="res92-bj-aj" class="res-val highlight">bj = 450 mm | Aj = 2025 cm²</span>
+              <span class="res-sub">Área de cortante horizontal</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Tracción Superior Viga (\(T_1\))</span>
+              <span id="res92-t1" class="res-val highlight-accent">812.7 kN (1.25·As·fy)</span>
+              <span class="res-sub">Capacidad probable rótula</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Compresión Inferior Viga (\(C_2\))</span>
+              <span id="res92-c2" class="res-val highlight">609.5 kN</span>
+              <span class="res-sub">Viga opuesta en nudo</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Cortante Horizontal Demandado (\(V_{jh}\))</span>
+              <span id="res92-vjh" class="res-val highlight-accent">1302.2 kN (T1 + C2 - Vcol)</span>
+              <span class="res-sub">Solicitación total en el núcleo</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Cortante de Diseño Nudo (\(\phi V_n\))</span>
+              <span id="res92-phivn" class="res-val highlight-green">1550.5 kN (Vn = 1824.1 kN, φ = 0.85)</span>
+              <span class="res-sub">Capacidad resistente máxima</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Ratio Demanda / Capacidad (D/C)</span>
+              <span id="res92-dc" class="res-val highlight-green">0.84 ✓ CUMPLE (Vjh ≤ φVn)</span>
+              <span class="res-sub">Seguridad contra fractura diagonal</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Estribos Confinamiento Pasantes (\(A_{sh}\))</span>
+              <span id="res92-ash" class="res-val highlight">312 mm² (cada 100 mm de altura)</span>
+              <span class="res-sub">Estribos cerrados en el nudo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             EJEMPLOS NUMÉRICOS PASO A PASO CON MODO PIZARRA DOCENTE
+             ================================================================== -->
+        <div class="examples-section-container" style="margin-top: 50px;">
+          <div class="section-header-compact">
+            <span class="section-tag">EJEMPLOS DE APLICACIÓN PROFESIONAL</span>
+            <h2>Casos Numéricos Sismorresistentes Resueltos con Modo Pizarra Docente</h2>
+            <p>
+              Haga clic en cada paso para desplegar las comprobaciones analíticas, deducciones de capacidad y verificación de artículos de la NSR-10.
+            </p>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 9.1: COLUMNA FUERTE - VIGA DÉBIL
+               ================================================================ -->
+          <div class="example-card" id="ej-9-1">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.1</span>
+                <h3>Verificación del Principio de Columna Fuerte - Viga Débil (\(\sum M_{nc} \ge 1.20 \sum M_{nb}\)) en Nudo Interior DES</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex91', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex91', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En un edificio comercial de 6 niveles ubicado en Bucaramanga (Zona de Amenaza Sísmica Alta, \(A_a = 0.25\)), se analiza un nudo interior típico del tercer nivel diseñado como pórtico resistente a momentos DES.
+              </p>
+              <ul>
+                <li><strong>Vigas (Eje Este-Oeste):</strong> Sección \(b_w = 350\text{ mm}, h = 550\text{ mm}\) (\(d = 490\text{ mm}\)).
+                  <ul>
+                    <li>Refuerzo superior: <strong>4 barras No. 7</strong> (\(A_s = 1548\text{ mm}^2\)).</li>
+                    <li>Refuerzo inferior: <strong>3 barras No. 7</strong> (\(A_s = 1161\text{ mm}^2\)).</li>
+                  </ul>
+                </li>
+                <li><strong>Columnas:</strong> Sección \(500 \times 500\text{ mm}\), armada con <strong>12 barras No. 8</strong> (\(A_{st} = 6120\text{ mm}^2, \rho_g = 2.45\%\)).
+                  <ul>
+                    <li>Concreto \(f'_c = 28\text{ MPa}\), acero \(f_y = 420\text{ MPa}\).</li>
+                    <li>Carga axial mayorada en la columna durante el sismo hacia el Este: Columna superior \(P_{u,\text{sup}} = 950\text{ kN}\), Columna inferior \(P_{u,\text{inf}} = 1250\text{ kN}\).</li>
+                  </ul>
+                </li>
+              </ul>
+              <p>
+                <em>Se pide:</em> Calcular las capacidades nominales a flexión de las vigas y columnas y verificar el cumplimiento estricto del criterio de Columna Fuerte - Viga Débil según NSR-10 C.21.6.2.2.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.1 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex91', 1)">
+                <span>Paso 1: Capacidad a Flexión de las Vigas Concurrentes (\(\sum M_{nb}\))</span>
+                <span class="step-arrow" id="ex91-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex91-step-1">
+                <p>Bajo la acción del sismo hacia el Este, la viga a la izquierda del nudo se flecta con momento positivo (tracción inferior), mientras que la viga a la derecha se flecta con momento negativo (tracción superior):</p>
+                <ul>
+                  <li><strong>Momento Negativo Viga Derecha (\(M_{nb}^-\)):</strong>
+                    $$a = \frac{A_s f_y}{0.85 f'_c b_w} = \frac{1548 \times 420}{0.85 \times 28 \times 350} = \frac{650160}{8330} = 78.05\text{ mm}$$
+                    $$M_{nb}^- = A_s f_y \left( d - \frac{a}{2} \right) = 1548 \times 420 \times \left( 490 - \frac{78.05}{2} \right) \times 10^{-6} = 293.2\text{ kN}\cdot\text{m}$$
+                  </li>
+                  <li><strong>Momento Positivo Viga Izquierda (\(M_{nb}^+\)):</strong>
+                    $$a = \frac{1161 \times 420}{0.85 \times 28 \times 350} = \frac{487620}{8330} = 58.54\text{ mm}$$
+                    $$M_{nb}^+ = 1161 \times 420 \times \left( 490 - \frac{58.54}{2} \right) \times 10^{-6} = 224.7\text{ kN}\cdot\text{m}$$
+                  </li>
+                </ul>
+                <p>Suma total de momentos nominales de las vigas en el centro del nudo:</p>
+                <div class="math-box">
+                  $$\sum M_{nb} = M_{nb}^- + M_{nb}^+ = 293.2 + 224.7 = \mathbf{517.9\text{ kN}\cdot\text{m}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex91', 2)">
+                <span>Paso 2: Capacidad a Flexión de las Columnas con Carga Axial (\(\sum M_{nc}\))</span>
+                <span class="step-arrow" id="ex91-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex91-step-2">
+                <p>
+                  Para la sección de columna de \(500 \times 500\text{ mm}\) con 12 barras No. 8 distribuidas simétricamente, evaluamos el momento nominal resistente \(M_{nc}\) correspondiente a cada nivel de carga axial \(P_u\) a partir de su diagrama de interacción:
+                </p>
+                <ul>
+                  <li><strong>Columna Superior (\(P_{u,\text{sup}} = 950\text{ kN}\)):</strong>
+                    <p>La carga axial representa \(P_u / (A_g f'_c) = 950\text{ kN} / (2500\text{ cm}^2 \times 28\text{ MPa}) = 0.136\). En este rango sub-balanceado, el momento nominal resistente es:</p>
+                    $$M_{nc,\text{sup}} = \mathbf{412.5\text{ kN}\cdot\text{m}}$$
+                  </li>
+                  <li><strong>Columna Inferior (\(P_{u,\text{inf}} = 1250\text{ kN}\)):</strong>
+                    <p>Con \(P_u / (A_g f'_c) = 1250 / 7000 = 0.179\), el confinamiento axial incrementa ligeramente la resistencia a flexión:</p>
+                    $$M_{nc,\text{inf}} = \mathbf{448.0\text{ kN}\cdot\text{m}}$$
+                  </li>
+                </ul>
+                <p>Suma total de momentos nominales de las columnas:</p>
+                <div class="math-box">
+                  $$\sum M_{nc} = M_{nc,\text{sup}} + M_{nc,\text{inf}} = 412.5 + 448.0 = \mathbf{860.5\text{ kN}\cdot\text{m}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex91', 3)">
+                <span>Paso 3: Verificación de la Relación Normativa (\(\ge 1.20\))</span>
+                <span class="step-arrow" id="ex91-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex91-step-3">
+                <p>Evaluamos el cociente estipulado en NSR-10 C.21.6.2.2:</p>
+                <div class="math-box">
+                  $$\frac{\sum M_{nc}}{\sum M_{nb}} = \frac{860.5\text{ kN}\cdot\text{m}}{517.9\text{ kN}\cdot\text{m}} = \mathbf{1.66} \ge 1.20 \quad \text{¡CUMPLE CON EXCELENTE MARGEN!}$$
+                </div>
+                <div class="callout callout-accent">
+                  <strong>Interpretación Estructural:</strong> Las columnas son un <strong>\(66\%\) más resistentes</strong> que las vigas concurrentes. Esto garantiza con total certeza matemática que, durante el terremoto máximo de diseño, las rótulas plásticas se formarán en las vigas disipando energía de manera dúctil, mientras que las columnas permanecerán elásticas sin riesgo de colapso de piso.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 9.2: CORTANTE POR CAPACIDAD EN VIGAS DES
+               ================================================================ -->
+          <div class="example-card" id="ej-9-2">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.2</span>
+                <h3>Diseño por Capacidad a Cortante en Viga DES: Momentos Probables (\(M_{pr}\)) y Anulación de \(V_c\)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex92', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex92', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Para la viga del pórtico DES del Ejemplo 9.1 (\(b_w = 350\text{ mm}, h = 550\text{ mm}, d = 490\text{ mm}, f'_c = 28\text{ MPa}, f_y = 420\text{ MPa}\)), con luz libre \(L_n = 5.80\text{ m}\), sometida a una carga gravitacional mayorada \(w_u = 1.2 D + 1.0 L = 38\text{ kN/m}\):
+              </p>
+              <ul>
+                <li>Refuerzo superior en apoyos: 4#7 (\(A_s = 1548\text{ mm}^2\)).</li>
+                <li>Refuerzo inferior en apoyos: 3#7 (\(A_s = 1161\text{ mm}^2\)).</li>
+              </ul>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular los momentos probables \(M_{pr1}\) y \(M_{pr2}\) en los extremos de la viga.<br>
+                2. Determinar la fuerza cortante máxima de diseño por capacidad \(V_e\).<br>
+                3. Verificar si aplica la condición de anulación del concreto \(V_c = 0\).<br>
+                4. Diseñar los estribos de confinamiento en la zona de rótula plástica (\(2h\)) con ganchos a \(135^\circ\).
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.2 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex92', 1)">
+                <span>Paso 1: Cálculo de los Momentos Probables a Flexión (\(M_{pr}\))</span>
+                <span class="step-arrow" id="ex92-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex92-step-1">
+                <p>El momento probable se calcula con \(f_s = 1.25 f_y = 1.25 \times 420 = 525\text{ MPa}\) y \(\phi = 1.0\):</p>
+                <ul>
+                  <li><strong>Momento Probable Negativo (\(M_{pr}^-\)):</strong>
+                    $$a_{pr} = \frac{A_s (1.25 f_y)}{0.85 f'_c b_w} = \frac{1548 \times 525}{0.85 \times 28 \times 350} = \frac{812700}{8330} = 97.56\text{ mm}$$
+                    $$M_{pr}^- = 1548 \times 525 \times \left( 490 - \frac{97.56}{2} \right) \times 10^{-6} = \mathbf{358.6\text{ kN}\cdot\text{m}}$$
+                  </li>
+                  <li><strong>Momento Probable Positivo (\(M_{pr}^+\)):</strong>
+                    $$a_{pr} = \frac{1161 \times 525}{0.85 \times 28 \times 350} = \frac{609525}{8330} = 73.17\text{ mm}$$
+                    $$M_{pr}^+ = 1161 \times 525 \times \left( 490 - \frac{73.17}{2} \right) \times 10^{-6} = \mathbf{276.4\text{ kN}\cdot\text{m}}$$
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex92', 2)">
+                <span>Paso 2: Cortante por Capacidad Sísmica (\(V_e\))</span>
+                <span class="step-arrow" id="ex92-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex92-step-2">
+                <p>El cortante inducido por el mecanismo de rótulas plásticas de extremos es:</p>
+                <div class="math-box">
+                  $$V_{\text{sway}} = \frac{M_{pr}^- + M_{pr}^+}{L_n} = \frac{358.6 + 276.4}{5.80} = \frac{635.0}{5.80} = \mathbf{109.5\text{ kN}}$$
+                </div>
+                <p>El cortante isostático debido a la carga gravitacional mayorada es:</p>
+                <div class="math-box">
+                  $$V_{\text{grav}} = \frac{w_u L_n}{2} = \frac{38 \times 5.80}{2} = \mathbf{110.2\text{ kN}}$$
+                </div>
+                <p>La fuerza cortante total máxima de diseño por capacidad en el apoyo es:</p>
+                <div class="math-box">
+                  $$V_e = V_{\text{sway}} + V_{\text{grav}} = 109.5 + 110.2 = \mathbf{219.7\text{ kN}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex92', 3)">
+                <span>Paso 3: Verificación de Anulación del Concreto (\(V_c = 0\))</span>
+                <span class="step-arrow" id="ex92-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex92-step-3">
+                <p>Verificamos las dos condiciones de NSR-10 C.21.5.4.2:</p>
+                <ol>
+                  <li>Porcentaje de cortante sísmico:
+                    $$\frac{V_{\text{sway}}}{V_e} = \frac{109.5\text{ kN}}{219.7\text{ kN}} = 49.8\% \approx 50.0\%$$
+                  </li>
+                  <li>Carga axial en la viga: Al ser una viga de entrepiso, \(P_u \approx 0 < \frac{A_g f'_c}{20} = \frac{350 \times 550 \times 28}{20} = 269.5\text{ kN}\).</li>
+                </ol>
+                <div class="callout callout-danger">
+                  <strong>Decisión Normativa Conservadora:</strong> Al alcanzar prácticamente el \(50\%\) y estar en pórtico DES, <strong>se adopta obligatoriamente \(V_c = 0\)</strong> en la zona de confinamiento de \(2h\). Todo el cortante debe ser absorbido por los estribos:
+                  $$V_s = \frac{V_e}{\phi} = \frac{219.7}{0.75} = \mathbf{292.9\text{ kN}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex92', 4)">
+                <span>Paso 4: Dimensionamiento y Detallamiento de Estribos Sísmicos</span>
+                <span class="step-arrow" id="ex92-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex92-step-4">
+                <p>Empleamos estribos cerrados No. 3 (\(d_{est} = 9.5\text{ mm}, A_v = 2 \times 71 = 142\text{ mm}^2\)):</p>
+                <div class="math-box">
+                  $$s_{\text{req}} = \frac{A_v f_y d}{V_s} = \frac{142 \times 420 \times 490}{292900} = \frac{29223600}{292900} = 99.8\text{ mm} \approx 100\text{ mm}$$
+                </div>
+                <p>Verificamos los límites de espaciamiento máximo en zona confinada \(2h = 2 \times 550 = 1100\text{ mm} = 1.10\text{ m}\) (C.21.5.3.2):</p>
+                <ul>
+                  <li>\(d/4 = 490 / 4 = 122.5\text{ mm}\)</li>
+                  <li>\(6 d_b = 6 \times 22.2 = 133.2\text{ mm}\)</li>
+                  <li>\(150\text{ mm}\)</li>
+                </ul>
+                <div class="math-box">
+                  $$s_{\max} = \min(122.5, \; 133.2, \; 150) = 122.5\text{ mm}$$
+                  $$s = \min(s_{\text{req}}, \; s_{\max}) = \min(100, \; 122.5) = \mathbf{100\text{ mm} \text{ (10 cm)}}$$
+                </div>
+                <p>
+                  <strong>Especificación Final:</strong> Colocar el primer estribo a \(50\text{ mm}\) de la cara del apoyo, y luego <strong>estribos cerrados No. 3 cada 10 cm con gancho sísmico a \(135^\circ\)</strong> a lo largo de los primeros \(1.10\text{ m}\) a cada extremo de la viga. En la zona central restante: estribos cada \(d/2 = 24\text{ cm}\).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 9.3: DISEÑO DE NUDO VIGA-COLUMNA EXTERIOR
+               ================================================================ -->
+          <div class="example-card" id="ej-9-3">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.3</span>
+                <h3>Diseño y Verificación de Nudo Viga-Columna Exterior ante Cortante Sísmico Horizontal</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex93', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex93', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En un pórtico DES, una viga de \(350 \times 550\text{ mm}\) remata en una columna exterior de \(450 \times 450\text{ mm}\). El concreto es de \(f'_c = 28\text{ MPa}\) y el acero \(f_y = 420\text{ MPa}\). El refuerzo superior de la viga consta de <strong>4 barras No. 7</strong> (\(A_s = 1548\text{ mm}^2\)), ancladas en la columna mediante ganchos estándar a \(90^\circ\) orientados hacia abajo. El cortante en la columna inmediatamente por encima del nudo obtenido del análisis es \(V_{col} = 115\text{ kN}\). El nudo no cuenta con vigas perpendiculares en sus caras laterales.
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Clasificar el nudo y determinar el factor de resistencia al cortante \(\gamma\).<br>
+                2. Calcular el ancho efectivo del nudo \(b_j\) y el área efectiva \(A_j\).<br>
+                3. Calcular la fuerza cortante horizontal demandada en el núcleo del nudo (\(V_{jh}\)).<br>
+                4. Calcular la resistencia de diseño \(\phi V_n\) y verificar la seguridad del nudo.<br>
+                5. Determinar la armadura de confinamiento transversal pasante en el nudo.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.3 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 1)">
+                <span>Paso 1: Clasificación del Nudo y Factor de Confinamiento (\(\gamma\))</span>
+                <span class="step-arrow" id="ex93-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex93-step-1">
+                <p>Al tratarse de un nudo exterior que solo recibe una viga en una dirección y carece de vigas transversales confinantes en sus caras laterales, según NSR-10 C.21.7.4.1 clasifica como <strong>"Otros Casos"</strong>:</p>
+                <div class="math-box">
+                  $$\mathbf{\gamma = 1.0}$$
+                </div>
+                <p>Este es el caso más desfavorable de confinamiento que contempla el reglamento.</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 2)">
+                <span>Paso 2: Geometría Efectiva del Nudo (\(b_j\) y \(A_j\))</span>
+                <span class="step-arrow" id="ex93-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex93-step-2">
+                <p>Conforme a NSR-10 C.21.7.4.2, el ancho efectivo del nudo \(b_j\) es el menor de:</p>
+                <ul>
+                  <li>Ancho de columna: \(b_c = 450\text{ mm}\)</li>
+                  <li>\(b_b + h_c = 350 + 450 = 800\text{ mm}\)</li>
+                  <li>\(b_b + 2x = 350 + 2\left(\frac{450 - 350}{2}\right) = 350 + 100 = 450\text{ mm}\)</li>
+                </ul>
+                <div class="math-box">
+                  $$b_j = \min(450, \; 800, \; 450) = \mathbf{450\text{ mm}}$$
+                  $$A_j = b_j \cdot h_c = 450\text{ mm} \times 450\text{ mm} = 202500\text{ mm}^2 = \mathbf{2025\text{ cm}^2}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 3)">
+                <span>Paso 3: Fuerza Cortante Horizontal Demandada (\(V_{jh}\))</span>
+                <span class="step-arrow" id="ex93-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex93-step-3">
+                <p>En el nudo exterior bajo momento negativo sísmico, la armadura superior de la viga alcanza su esfuerzo probable de fluencia \(1.25 f_y\):</p>
+                <div class="math-box">
+                  $$T_1 = 1.25 A_s f_y = 1.25 \times 1548\text{ mm}^2 \times 420\text{ MPa} \times 10^{-3} = \mathbf{812.7\text{ kN}}$$
+                </div>
+                <p>Como no hay viga en la cara opuesta, \(C_2 = 0\). Por equilibrio horizontal en el nudo:</p>
+                <div class="math-box">
+                  $$V_{jh} = T_1 - V_{col} = 812.7\text{ kN} - 115.0\text{ kN} = \mathbf{697.7\text{ kN}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 4)">
+                <span>Paso 4: Resistencia al Cortante del Nudo y Verificación</span>
+                <span class="step-arrow" id="ex93-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex93-step-4">
+                <p>Calculamos la resistencia nominal \(V_n\) y la resistencia de diseño con \(\phi = 0.85\):</p>
+                <div class="math-box">
+                  $$V_n = \gamma \sqrt{f'_c} A_j = 1.0 \times \sqrt{28} \times 202500 \times 10^{-3} = 5.2915 \times 202.5 = 1071.5\text{ kN}$$
+                  $$\phi V_n = 0.85 \times 1071.5\text{ kN} = \mathbf{910.8\text{ kN}}$$
+                </div>
+                <p>Verificamos la condición de seguridad:</p>
+                <div class="math-box">
+                  $$V_{jh} = 697.7\text{ kN} \le \phi V_n = 910.8\text{ kN} \quad (\text{Ratio D/C} = 0.77) \quad \text{¡CUMPLE SATISFACTORIAMENTE!}$$
+                </div>
+                <p>El nudo posee un \(23\%\) de reserva frente al agrietamiento y falla por corte diagonal.</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 5)">
+                <span>Paso 5: Armadura de Confinamiento Transversal Pasante</span>
+                <span class="step-arrow" id="ex93-arrow-5">▼</span>
+              </button>
+              <div class="step-content" id="ex93-step-5">
+                <p>Conforme a NSR-10 C.21.7.2, la cantidad de estribos de confinamiento de la columna debe mantenerse a lo largo del nudo:</p>
+                <p>Con recubrimiento libre de \(40\text{ mm}\), el núcleo confinado tiene \(b_c = 450 - 80 = 370\text{ mm}\) y \(A_{ch} = 370^2 = 136900\text{ mm}^2\):</p>
+                <div class="math-box">
+                  $$A_{sh} \ge 0.30 \left( \frac{s b_c f'_c}{f_{yt}} \right) \left[ \frac{A_g}{A_{ch}} - 1 \right] = 0.30 \times \left( \frac{100 \times 370 \times 28}{420} \right) \times \left[ \frac{202500}{136900} - 1 \right] = 740 \times 0.479 = \mathbf{354\text{ mm}^2}$$
+                </div>
+                <p>
+                  Para una altura de nudo \(h_b = 550\text{ mm}\), se dispondrán <strong>5 juegos de estribos cerrados No. 4 de tres ramales (\(A_v = 3 \times 129 = 387\text{ mm}^2\)) cada 10 cm</strong> atravesando el nudo verticalmente.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 9.4: ELEMENTOS DE BORDE EN MURO ESTRUCTURAL DES
+               ================================================================ -->
+          <div class="example-card" id="ej-9-4">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.4</span>
+                <h3>Diseño de Elementos Especiales de Borde en Muro Estructural de Concreto DES (NSR-10 C.21.9)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex94', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex94', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En un edificio residencial de 14 pisos en Medellín (\(A_a = 0.15\), disipación DES), se diseña un muro estructural de cortante en concreto reforzado con sección rectangular de espesor \(b_w = 300\text{ mm}\) y longitud \(l_w = 6.00\text{ m}\). La altura total del muro es \(h_w = 36.0\text{ m}\).
+              </p>
+              <ul>
+                <li>Materiales: Concreto \(f'_c = 35\text{ MPa}\), Acero \(f_y = 420\text{ MPa}\).</li>
+                <li>Carga axial de diseño en la base: \(P_u = 3800\text{ kN}\).</li>
+                <li>Momento flector de diseño en la base: \(M_u = 24500\text{ kN}\cdot\text{m}\).</li>
+                <li>Desplazamiento lateral inelástico en la cubierta: \(\delta_u = 360\text{ mm}\) (deriva global \(\delta_u / h_w = 0.010\)).</li>
+                <li>La profundidad calculada del eje neutro bajo \(P_u\) y \(M_n\) es \(c = 1.35\text{ m}\) (\(1350\text{ mm}\)).</li>
+              </ul>
+              <p>
+                <em>Se pide:</em><br>
+                1. Verificar si se requieren Elementos Especiales de Borde según el criterio de desplazamiento de NSR-10 C.21.9.6.2.<br>
+                2. Determinar la longitud horizontal requerida de confinamiento en el borde del muro.<br>
+                3. Diseñar el refuerzo transversal de confinamiento en el elemento de borde.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.4 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex94', 1)">
+                <span>Paso 1: Verificación del Criterio de Desplazamiento (C.21.9.6.2)</span>
+                <span class="step-arrow" id="ex94-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex94-step-1">
+                <p>Evaluamos el límite de profundidad del eje neutro para el cual el confinamiento es obligatorio:</p>
+                <div class="math-box">
+                  $$c_{\text{límite}} = \frac{l_w}{600 \left( \dfrac{\delta_u}{h_w} \right)}$$
+                </div>
+                <p>Con deriva inelástica de diseño \(\delta_u / h_w = 0.010 \ge 0.007\):</p>
+                <div class="math-box">
+                  $$c_{\text{límite}} = \frac{6.00\text{ m}}{600 \times 0.010} = \frac{6.00}{6.00} = \mathbf{1.00\text{ m} \text{ (1000 mm)}}$$
+                </div>
+                <p>Comparamos con la profundidad real del eje neutro calculada (\(c = 1.35\text{ m}\)):</p>
+                <div class="math-box">
+                  $$c = 1.35\text{ m} \ge c_{\text{límite}} = 1.00\text{ m}$$
+                </div>
+                <div class="callout callout-danger">
+                  <strong>Conclusión Mandatoria:</strong> Dado que \(c > c_{\text{límite}}\), <strong>SE REQUIEREN OBLIGATORIAMENTE ELEMENTOS ESPECIALES DE BORDE</strong> en ambos extremos del muro para prevenir el aplastamiento frágil del concreto.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex94', 2)">
+                <span>Paso 2: Longitud Horizontal del Elemento de Borde (\(b_e\))</span>
+                <span class="step-arrow" id="ex94-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex94-step-2">
+                <p>Conforme a NSR-10 C.21.9.6.4, el elemento especial de borde debe extenderse horizontalmente desde la fibra extrema comprimida una distancia no menor a:</p>
+                <div class="math-box">
+                  $$b_e \ge \max\left( c - 0.1 l_w, \; \frac{c}{2} \right)$$
+                  $$c - 0.1 l_w = 1.35\text{ m} - 0.1(6.00\text{ m}) = 1.35 - 0.60 = 0.75\text{ m} = 750\text{ mm}$$
+                  $$\frac{c}{2} = \frac{1.35\text{ m}}{2} = 0.675\text{ m} = 675\text{ mm}$$
+                  $$b_e = \max(750\text{ mm}, \; 675\text{ mm}) = \mathbf{750\text{ mm}}$$
+                </div>
+                <p>Por razones constructivas y de modulación de armaduras, se adopta: <strong>\(b_e = 800\text{ mm}\) (\(80\text{ cm}\))</strong>.</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex94', 3)">
+                <span>Paso 3: Confinamiento y Refuerzo Transversal en el Borde</span>
+                <span class="step-arrow" id="ex94-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex94-step-3">
+                <p>El elemento de borde tiene dimensiones \(300 \times 800\text{ mm}\). Conforme a C.21.9.6.4, debe confinarse como una columna DES:</p>
+                <ul>
+                  <li><strong>Espaciamiento Máximo:</strong>
+                    $$s \le \min\left( \frac{b_w}{3}, \; 6 d_{bl}, \; 100\text{ mm} \right) = \min\left( \frac{300}{3}, \; 6 \times 22.2, \; 100 \right) = \min(100, 133, 100) = \mathbf{100\text{ mm}}$$
+                  </li>
+                  <li><strong>Refuerzo Transversal:</strong> Se disponen estribos cerrados No. 4 más grapas suplementarias con ramas perpendiculares cada 10 cm, garantizando un confinamiento volumétrico que previene la degradación por cargas cíclicas severas.</li>
+                </ul>
+                <div class="callout callout-accent">
+                  <strong>Extensión Vertical:</strong> Este confinamiento especial debe mantenerse desde la base del muro hasta una altura mínima igual a \(\max(l_w, M_u / 4 V_u) \approx 6.00\text{ m}\) (primeros dos niveles del edificio).
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <!-- ================================================================
+               EJEMPLO 9.5: CORTANTE POR CAPACIDAD EN COLUMNAS DES
+               ================================================================ -->
+          <div class="example-card" id="ej-9-5">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.5</span>
+                <h3>Diseño a Cortante por Capacidad en Columnas de Pórticos Especiales DES (\(V_e\), NSR-10 C.21.6.5)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex95', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex95', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Se diseña una columna intermedia de primer piso perteneciente a un pórtico resistente a momentos con Capacidad Especial de Disipación de Energía (DES) en zona de amenaza sísmica alta. La columna tiene una sección transversal de \(500 \times 500\text{ mm}\), altura libre entre caras de vigas \(H_u = 3.00\text{ m}\), y está construida con concreto \(f'_c = 28\text{ MPa}\) y acero de refuerzo \(f_y = 420\text{ MPa}\).
+              </p>
+              <p>
+                El análisis elástico bajo combinaciones sísmicas arrojó un cortante factorizado convencional \(V_u = 115\text{ kN}\) y una fuerza axial última de diseño \(P_u = 480\text{ kN}\) (compresión). Por diseño sismorresistente por capacidad (NSR-10 C.21.6.5.1), los momentos probables resistentes máximos desarrollables en los extremos superior e inferior asociados a la carga axial son \(M_{pr,\text{top}} = 420\text{ kN}\cdot\text{m}\) y \(M_{pr,\text{bot}} = 420\text{ kN}\cdot\text{m}\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la fuerza cortante sísmica de diseño por capacidad \(V_e\) conforme a NSR-10 C.21.6.5.1.<br>
+                2. Evaluar la condición reglamentaria de C.21.6.5.2 para determinar si el concreto aporta resistencia a cortante (\(V_c\)) o si debe anularse totalmente (\(V_c = 0\)).<br>
+                3. Delimitar la longitud de la zona de confinamiento especial (\(l_o\)) en ambos extremos de la columna.<br>
+                4. Diseñar la armadura transversal de confinamiento y cortante en la zona \(l_o\) (estribos cerrados y ramas suplementarias) verificando el área \(A_{sh}\) y el espaciamiento máximo permitido.<br>
+                5. Elaborar el plano de elevación SVG acotado con la zonificación del refuerzo transversal y las solicitaciones por capacidad.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.5 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Fuerza Cortante Sísmica de Diseño por Capacidad (\(V_e\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex95-step-1">
+                <p>
+                  En estructuras DES, las columnas deben diseñarse para resistir el cortante generado cuando se desarrollan los momentos probables plásticos (\(M_{pr}\)) en ambos extremos de la altura libre, garantizando que el elemento jamás falle frágilmente por cortante antes de alcanzar su ductilidad flexionante. Según <strong>NSR-10 C.21.6.5.1</strong>:
+                </p>
+                $$V_e = \frac{M_{pr,\text{top}} + M_{pr,\text{bot}}}{H_u}$$
+                <p>
+                  Sustituyendo los momentos probables y la altura libre \(H_u = 3.00\text{ m}\):
+                </p>
+                $$V_e = \frac{420\text{ kN}\cdot\text{m} + 420\text{ kN}\cdot\text{m}}{3.00\text{ m}} = \frac{840\text{ kN}\cdot\text{m}}{3.00\text{ m}} = \mathbf{280.0\text{ kN}}$$
+                <div class="callout callout-warning">
+                  <strong>Contraste con el cortante elástico convencional:</strong>
+                  El cortante elástico de análisis era apenas \(V_u = 115\text{ kN}\). El diseño por capacidad incrementa la demanda de cortante a \(V_e = 280\text{ kN}\) (un factor de amplificación de \(280 / 115 = 2.43\)). Diseñar con \(115\text{ kN}\) generaría una falla frágil catastrófica durante un sismo severo.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Evaluación de la Contribución del Concreto (\(V_c\)) según C.21.6.5.2</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex95-step-2">
+                <p>
+                  El artículo <strong>NSR-10 C.21.6.5.2</strong> exige asumir que la resistencia del concreto a cortante es nula (\(V_c = 0\)) si se cumplen simultáneamente las dos siguientes condiciones:
+                </p>
+                <ol>
+                  <li>
+                    La fuerza cortante inducida por sismo (\(V_e = 280\text{ kN}\)) representa la mitad o más de la resistencia a cortante requerida máxima dentro de la longitud \(l_o\).
+                    <br>Aquí el cortante sísmico es el \(100\%\) del cortante de diseño: \(280 / 280 = 100\% \ge 50\%\) <em>(Condición 1: Cumple)</em>.
+                  </li>
+                  <li>
+                    La fuerza axial de compresión mayorada por sismo \(P_u\) es menor que \(A_g f'_c / 20\):
+                    $$\frac{A_g f'_c}{20} = \frac{(500\text{ mm} \times 500\text{ mm}) \times 28\text{ MPa}}{20 \times 10^3} = \frac{7000\text{ kN}}{20} = 350.0\text{ kN}$$
+                    En nuestro caso:
+                    $$P_u = 480\text{ kN} > 350\text{ kN}$$
+                    Como \(P_u\) supera el umbral límite, <strong>no se cumple la condición 2</strong>.
+                  </li>
+                </ol>
+                <div class="callout callout-success">
+                  <strong>Conclusión sobre \(V_c\):</strong> Como la carga axial provee compresión transversal suficiente para retardar la apertura de grietas diagonales, el código permite considerar el aporte de \(V_c\) con compresión axial (NSR-10 C.11.2.1.2):
+                  \[ V_c = 0.17 \left(1 + \frac{P_u}{14 A_g}\right) \lambda \sqrt{f'_c} b_w d \]
+                  Con \(b_w = 500\text{ mm}\), \(d = 500 - 40 - 10 - 12.7 = 437\text{ mm}\):
+                  \[ \left(1 + \frac{480 \times 10^3}{14 \times 250000}\right) = 1 + 0.1371 = 1.137 \]
+                  \[ V_c = 0.17 \times 1.137 \times 1.0 \times \sqrt{28} \times 500 \times 437 \times 10^{-3} = 223.4\text{ kN} \]
+                  \[ \phi V_c = 0.75 \times 223.4\text{ kN} = 167.6\text{ kN} \]
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Zonificación de Confinamiento: Determinación de la Longitud \(l_o\)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex95-step-3">
+                <p>
+                  Conforme a <strong>NSR-10 C.21.6.4.1</strong>, en ambos extremos de la columna debe proveerse una zona de confinamiento especial de longitud no menor que \(l_o\):
+                </p>
+                $$l_o \ge \max\begin{cases}
+                  c_1, c_2 \quad (\text{dimensión mayor de la columna}) = 500\text{ mm} \\
+                  \frac{H_u}{6} = \frac{3000\text{ mm}}{6} = 500\text{ mm} \\
+                  450\text{ mm}
+                \end{cases} \implies \mathbf{l_o = 500\text{ mm} \quad (0.50\text{ m})}$$
+                <p>
+                  Por tanto, el confinamiento especial se extenderá en los primeros \(500\text{ mm}\) inferiores y en los \(500\text{ mm}\) superiores medidos desde las caras de las vigas. El tramo central de la columna tendrá una longitud de \(3000 - 2(500) = 2000\text{ mm} = 2.00\text{ m}\).
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Diseño de Armadura Transversal en la Zona \(l_o\): Cortante y Confinamiento (\(A_{sh}\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex95-step-4">
+                <p>
+                  <strong>A. Demanda por cortante (\(V_s\)):</strong>
+                </p>
+                $$V_s = \frac{V_e}{\phi} - V_c = \frac{280\text{ kN}}{0.75} - 223.4\text{ kN} = 373.3 - 223.4 = 149.9\text{ kN}$$
+                <p>
+                  <strong>B. Requisitos de confinamiento volumétrico \(A_{sh}\) (NSR-10 C.21.6.4.4):</strong><br>
+                  Para columnas cuadradas con estribos cerrados rectangulares y grapas suplementarias, el área total de ramas en la dirección perpendicular a la dimensión del núcleo \(b_c\) debe satisfacer el mayor de:
+                </p>
+                $$\begin{aligned}
+                  A_{sh,1} &= 0.30 \frac{s b_c f'_c}{f_{yt}} \left(\frac{A_g}{A_{ch}} - 1\right) \\
+                  A_{sh,2} &= 0.09 \frac{s b_c f'_c}{f_{yt}}
+                \end{aligned}$$
+                <p>
+                  Con recubrimiento libre de \(40\text{ mm}\), la dimensión del núcleo confinado es \(b_c = 500 - 2(40) = 420\text{ mm}\). El área del núcleo es \(A_{ch} = 420 \times 420 = 176400\text{ mm}^2\), y \(A_g = 250000\text{ mm}^2\).
+                </p>
+                $$\frac{A_g}{A_{ch}} - 1 = \frac{250000}{176400} - 1 = 1.417 - 1 = 0.417$$
+                <p>
+                  <strong>C. Espaciamiento máximo en zona \(l_o\) (NSR-10 C.21.6.4.3):</strong>
+                </p>
+                $$s \le \min\begin{cases}
+                  \frac{b_{\min}}{4} = \frac{500}{4} = 125\text{ mm} \\
+                  6 d_b \quad (\text{para barra longitudinal No. 8: } 6 \times 25.4) = 152.4\text{ mm} \\
+                  s_o = 100 + \left(\frac{350 - h_x}{3}\right) \quad (100 \le s_o \le 150\text{ mm})
+                \end{cases}$$
+                <p>
+                  Adoptamos un espaciamiento de <strong>\(s = 80\text{ mm}\)</strong>. Evaluando \(A_{sh}\) para \(s = 80\text{ mm}\):
+                </p>
+                $$\begin{aligned}
+                  A_{sh,1} &= 0.30 \times \frac{80 \times 420 \times 28}{420} \times 0.417 = 0.30 \times 672 \times 0.417 = 280.2\text{ mm}^2 \\
+                  A_{sh,2} &= 0.09 \times \frac{80 \times 420 \times 28}{420} = 0.09 \times 672 = 60.5\text{ mm}^2
+                \end{aligned}$$
+                <p>
+                  Disponiendo un estribo perimetral No. 3 (\(71\text{ mm}^2\)) más 2 grapas cruzadas No. 3 en cada dirección, tenemos <strong>4 ramas No. 3</strong> (\(A_v = 4 \times 71 = 284\text{ mm}^2 > 280.2\text{ mm}^2\)).
+                </p>
+                <div class="callout callout-success">
+                  <strong>Armadura transversal adoptada:</strong> Estribo perimetral No. 3 + 2 grapas interiores No. 3 (4 ramas en cada dirección) espaciadas a <strong>\(s = 80\text{ mm}\)</strong> en toda la longitud \(l_o = 500\text{ mm}\). En el tramo central se colocarán No. 3 @ \(150\text{ mm}\).
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Elevación Estructural y Esquema Técnico SVG Acotado</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex95-step-5">
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="340" viewBox="0 0 650 340" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Vigas superior e inferior -->
+                    <rect x="50" y="20" width="550" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                    <text x="325" y="45" fill="#94a3b8" font-size="12" text-anchor="middle">Viga Superior de Pórtico</text>
+
+                    <rect x="50" y="280" width="550" height="40" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                    <text x="325" y="305" fill="#94a3b8" font-size="12" text-anchor="middle">Viga Inferior / Cimentación</text>
+
+                    <!-- Cuerpo de la columna -->
+                    <rect x="250" y="60" width="150" height="220" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+
+                    <!-- Zona lo superior -->
+                    <rect x="250" y="60" width="150" height="50" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-dasharray="3,3"/>
+                    <text x="410" y="90" fill="#ef4444" font-size="11" font-weight="bold">lo = 500 mm (No. 3 @ 80 mm)</text>
+
+                    <!-- Zona lo inferior -->
+                    <rect x="250" y="230" width="150" height="50" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-dasharray="3,3"/>
+                    <text x="410" y="260" fill="#ef4444" font-size="11" font-weight="bold">lo = 500 mm (No. 3 @ 80 mm)</text>
+
+                    <!-- Zona central -->
+                    <text x="410" y="175" fill="#10b981" font-size="11">Tramo central 2000 mm (No. 3 @ 150 mm)</text>
+
+                    <!-- Estribos esquemáticos -->
+                    <line x1="260" y1="70" x2="390" y2="70" stroke="#ef4444" stroke-width="2"/>
+                    <line x1="260" y1="85" x2="390" y2="85" stroke="#ef4444" stroke-width="2"/>
+                    <line x1="260" y1="100" x2="390" y2="100" stroke="#ef4444" stroke-width="2"/>
+
+                    <line x1="260" y1="140" x2="390" y2="140" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="260" y1="170" x2="390" y2="170" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="260" y1="200" x2="390" y2="200" stroke="#10b981" stroke-width="1.5"/>
+
+                    <line x1="260" y1="240" x2="390" y2="240" stroke="#ef4444" stroke-width="2"/>
+                    <line x1="260" y1="255" x2="390" y2="255" stroke="#ef4444" stroke-width="2"/>
+                    <line x1="260" y1="270" x2="390" y2="270" stroke="#ef4444" stroke-width="2"/>
+
+                    <!-- Momentos plásticos probables Mpr -->
+                    <path d="M 230,85 A 25,25 0 0,1 230,65" fill="none" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow)"/>
+                    <polygon points="230,60 224,67 236,67" fill="#f59e0b"/>
+                    <text x="140" y="75" fill="#f59e0b" font-size="10" font-weight="bold">Mpr,top = 420 kN-m</text>
+
+                    <path d="M 230,275 A 25,25 0 0,1 230,255" fill="none" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow)"/>
+                    <polygon points="230,250 224,257 236,257" fill="#f59e0b"/>
+                    <text x="140" y="265" fill="#f59e0b" font-size="10" font-weight="bold">Mpr,bot = 420 kN-m</text>
+
+                    <!-- Cortante Ve = 280 kN -->
+                    <line x1="210" y1="170" x2="250" y2="170" stroke="#e11d48" stroke-width="3"/>
+                    <polygon points="255,170 245,165 245,175" fill="#e11d48"/>
+                    <text x="110" y="175" fill="#e11d48" font-size="12" font-weight="bold">Ve = 280 kN</text>
+
+                    <!-- Cota altura libre Hu = 3000 mm -->
+                    <line x1="190" y1="60" x2="190" y2="280" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="185" y1="60" x2="195" y2="60" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="185" y1="280" x2="195" y2="280" stroke="#38bdf8" stroke-width="1.5"/>
+                    <text x="140" y="140" fill="#38bdf8" font-size="11" font-weight="bold">Hu = 3.00 m</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ================================================================
+               EJEMPLO 9.6: NUDO INTERIOR CONFINADO EN CUATRO CARAS (γ = 1.7)
+               ================================================================ -->
+          <div class="example-card" id="ej-9-6">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.6</span>
+                <h3>Diseño de Nudo Viga-Columna Interior Confinado en las Cuatro Caras (\(\gamma = 1.7\)) con Cortante Bidireccional \(V_{jh}\) (NSR-10 C.21.7)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex96', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex96', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Se analiza un nudo viga-columna interior perteneciente al sistema de pórticos especiales resistentes a momentos (DES) de un edificio de 10 pisos. La columna tiene una sección transversal de \(550 \times 550\text{ mm}\). En la dirección de análisis sísmico concurren vigas principales de sección \(b_w = 420\text{ mm} \times h = 600\text{ mm}\), y en la dirección ortogonal concurren vigas transversales de sección \(b_w = 420\text{ mm} \times h = 550\text{ mm}\).
+              </p>
+              <p>
+                Los materiales son concreto de alta resistencia \(f'_c = 28\text{ MPa}\) y acero corrugado \(f_y = 420\text{ MPa}\). El refuerzo longitudinal de la viga principal que atraviesa el nudo consta de:
+                <br>• Lecho superior: <strong>4 barras No. 8</strong> (\(A_{s1} = 2040\text{ mm}^2\)).
+                <br>• Lecho inferior: <strong>3 barras No. 8</strong> (\(A_{s2} = 1530\text{ mm}^2\)).
+                <br>El cortante transmitido por la columna superior al nivel de la cara superior de la viga bajo la acción sísmica gobernante es \(V_{\text{col}} = 190\text{ kN}\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Verificar la condición de confinamiento del nudo en sus cuatro caras para la asignación del coeficiente \(\gamma\) según NSR-10 C.21.7.4.1.<br>
+                2. Calcular las fuerzas de tracción (\(T_1\)) y compresión (\(C_2\)) en las barras de la viga considerando sobre-resistencia sismorresistente (\(1.25 f_y\)).<br>
+                3. Determinar la fuerza cortante horizontal actuante en el nudo (\(V_{jh}\)).<br>
+                4. Calcular el área efectiva del nudo (\(A_j\)) y verificar la resistencia nominal a cortante \(\phi V_n\) con el factor de reducción \(\phi = 0.85\) (NSR-10 C.9.3.4.1).<br>
+                5. Determinar la armadura transversal de confinamiento dentro del nudo (estribos cerrados) y elaborar el detalle 3D/planta en formato SVG.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.6 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Verificación de Confinamiento en las Cuatro Caras y Factor \(\gamma\) (NSR-10 C.21.7.4.1)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex96-step-1">
+                <p>
+                  De acuerdo con <strong>NSR-10 C.21.7.4.1</strong>, un nudo se clasifica como <strong>confinado en las cuatro caras</strong> cuando concurren elementos de viga en las cuatro caras del nudo, y el ancho de cada viga llega al menos a las <strong>tres cuartas partes (\(3/4 = 75\%\))</strong> del ancho de la cara correspondiente de la columna:
+                </p>
+                $$b_{\text{viga,mín}} \ge 0.75 \times b_c = 0.75 \times 550\text{ mm} = 412.5\text{ mm}$$
+                <p>
+                  Como las vigas en ambas direcciones tienen un ancho \(b_w = 420\text{ mm} \ge 412.5\text{ mm}\), el confinamiento es total en las cuatro caras:
+                </p>
+                $$\frac{420\text{ mm}}{550\text{ mm}} = 76.4\% \ge 75.0\% \quad \mathbf{[CONFINAMIENTO COMPLETO EN 4 CARAS \checkmark]}$$
+                <p>
+                  Por tanto, el factor de resistencia a cortante del nudo según C.21.7.4.1 es el máximo que estipula el reglamento:
+                </p>
+                $$\gamma = 1.7 \quad (\text{en unidades SI: } V_n = 1.7 \lambda \sqrt{f'_c} A_j)$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Fuerzas Internas en el Nudo por Fluencia y Sobre-resistencia (\(1.25 f_y\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex96-step-2">
+                <p>
+                  Bajo la inversión de momentos sísmicos extremos, el refuerzo superior a un lado del nudo se encuentra en tracción máxima, mientras que el refuerzo inferior al otro lado entra en compresión o fluencia simultánea. Conforme a <strong>NSR-10 C.21.7.2.1</strong>, las fuerzas en el acero longitudinal de las vigas deben calcularse asumiendo una tensión de sobre-resistencia igual a \(1.25 f_y = 1.25 \times 420\text{ MPa} = 525\text{ MPa}\):
+                </p>
+                <ul>
+                  <li>
+                    <strong>Fuerza de tracción superior (\(T_1\)):</strong> Barra 4 No. 8 (\(A_{s1} = 2040\text{ mm}^2\)):
+                    $$T_1 = 1.25 A_{s1} f_y = 2040\text{ mm}^2 \times 525\text{ MPa} \times 10^{-3} = \mathbf{1071.0\text{ kN}}$$
+                  </li>
+                  <li>
+                    <strong>Fuerza de compresión inferior en el lado opuesto (\(C_2\)):</strong> Por equilibrio del bloque a flexión del nudo, la fuerza compresiva en el concreto y acero inferior equilibra la tracción del vano opuesto (\(A_{s2} = 1530\text{ mm}^2\)):
+                    $$C_2 \approx T_2 = 1.25 A_{s2} f_y = 1530\text{ mm}^2 \times 525\text{ MPa} \times 10^{-3} = \mathbf{803.25\text{ kN}}$$
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Fuerza Cortante Horizontal Actuante en el Nudo (\(V_{jh}\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex96-step-3">
+                <p>
+                  Por equilibrio horizontal del diagrama de cuerpo libre a media altura del nudo, la fuerza cortante horizontal neta \(V_{jh}\) que intenta cizallar diagonalmente el núcleo es:
+                </p>
+                $$V_{jh} = T_1 + C_2 - V_{\text{col}}$$
+                <p>
+                  Sustituyendo los valores calculados con \(V_{\text{col}} = 190.0\text{ kN}\):
+                </p>
+                $$V_{jh} = 1071.0\text{ kN} + 803.25\text{ kN} - 190.0\text{ kN} = \mathbf{1684.25\text{ kN}}$$
+                <div class="callout callout-info">
+                  <strong>Magnitud de la demanda sísmica:</strong> Obsérvese que la fuerza cortante horizontal interna en el nudo (\(1684\text{ kN}\)) es casi <strong>9 veces mayor</strong> que el cortante en la columna exterior (\(190\text{ kN}\)). Esta gigantesca fuerza de corte se concentra en un prisma de apenas \(55 \times 55\text{ cm}\).
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Área Efectiva del Nudo (\(A_j\)) y Verificación de la Capacidad \(\phi V_n\)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex96-step-4">
+                <p>
+                  El área efectiva del nudo \(A_j = b_j \times h_c\) se define en <strong>NSR-10 C.21.7.4.2</strong>. La dimensión en la dirección del corte es el peralte de la columna: \(h_c = 550\text{ mm}\).
+                  <br>El ancho efectivo \(b_j\) no debe exceder el menor de:
+                </p>
+                $$b_j \le \min\begin{cases}
+                  b_c = 550\text{ mm} \\
+                  b_w + 2 x = 420 + 2(65) = 550\text{ mm} \\
+                  b_w + h_c = 420 + 550 = 970\text{ mm}
+                \end{cases} \implies b_j = 550\text{ mm}$$
+                <p>
+                  Por tanto:
+                </p>
+                $$A_j = 550\text{ mm} \times 550\text{ mm} = 302500\text{ mm}^2$$
+                <p>
+                  <strong>Capacidad nominal y de diseño a cortante (NSR-10 C.21.7.4.1 y C.9.3.4.1):</strong><br>
+                  Para cortante en nudos de estructuras sismorresistentes, el factor de reducción de resistencia es \(\phi = 0.85\):
+                </p>
+                $$V_n = \gamma \lambda \sqrt{f'_c} A_j = 1.7 \times 1.0 \times \sqrt{28\text{ MPa}} \times 302500\text{ mm}^2 \times 10^{-3}$$
+                $$V_n = 1.7 \times 5.2915 \times 302500 \times 10^{-3} = 2721.2\text{ kN}$$
+                $$\phi V_n = 0.85 \times 2721.2\text{ kN} = \mathbf{2313.0\text{ kN}}$$
+                <div class="callout callout-success">
+                  <strong>Comprobación de diseño a cortante del nudo:</strong>
+                  \[ V_{jh} \le \phi V_n \iff 1684.25\text{ kN} \le 2313.0\text{ kN} \quad \mathbf{\checkmark \text{ [CUMPLE: Ratio D/C = 0.728]}} \]
+                  El concreto del nudo tiene suficiente sección para resistir las bielas diagonales de compresión sin peligro de aplastamiento o degradación frágil por corte.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Armadura de Confinamiento en el Nudo y Detalle Gráfico SVG</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex96-step-5">
+                <p>
+                  Conforme a <strong>NSR-10 C.21.7.3.2</strong>, como el nudo está confinado por vigas en sus cuatro caras, el área de refuerzo transversal requerida dentro de la altura de la viga se puede <strong>reducir al \(50\%\)</strong> de la estipulada para las zonas extremas de la columna (\(A_{sh}\)), y el espaciamiento de estribos puede incrementarse hasta \(150\text{ mm}\):
+                </p>
+                $$A_{sh,\text{nudo}} \ge 0.50 \times A_{sh,\text{col}} = 0.50 \times (280\text{ mm}^2) = 140\text{ mm}^2$$
+                <p>
+                  Disponiendo estribos perimetrales No. 3 con 1 grapa intermedia (\(3 \text{ ramas} \times 71 = 213\text{ mm}^2\)) espaciados a \(s = 120\text{ mm}\) dentro de la altura del nudo (\(h = 600\text{ mm}\)), se colocan 4 capas de estribos cerrados dentro del nudo.
+                </p>
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="300" viewBox="0 0 650 300" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Columna vertical -->
+                    <rect x="235" y="10" width="180" height="280" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                    <text x="325" y="30" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="bold">Columna 550x550 mm</text>
+
+                    <!-- Vigas horizontales cruzando -->
+                    <rect x="30" y="80" width="590" height="140" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+                    <text x="120" y="105" fill="#94a3b8" font-size="11">Viga 420x600 mm</text>
+                    <text x="520" y="105" fill="#94a3b8" font-size="11">Viga 420x600 mm</text>
+
+                    <!-- Núcleo del nudo ressaltado -->
+                    <rect x="235" y="80" width="180" height="140" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,2"/>
+                    <text x="325" y="155" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="bold">Núcleo Nudo Aj</text>
+                    <text x="325" y="172" fill="#38bdf8" font-size="10" text-anchor="middle">γ = 1.7 (4 caras)</text>
+
+                    <!-- Fuerzas internas -->
+                    <!-- T1 superior hacia la izquierda -->
+                    <line x1="220" y1="95" x2="130" y2="95" stroke="#ef4444" stroke-width="3"/>
+                    <polygon points="125,95 135,90 135,100" fill="#ef4444"/>
+                    <text x="175" y="88" fill="#ef4444" font-size="11" font-weight="bold">T1 = 1071 kN</text>
+
+                    <!-- C2 inferior hacia la izquierda -->
+                    <line x1="430" y1="205" x2="350" y2="205" stroke="#f97316" stroke-width="3"/>
+                    <polygon points="345,205 355,200 355,210" fill="#f97316"/>
+                    <text x="440" y="210" fill="#f97316" font-size="11" font-weight="bold">C2 = 803 kN</text>
+
+                    <!-- Vcol cortante columna -->
+                    <line x1="325" y1="50" x2="375" y2="50" stroke="#a855f7" stroke-width="2.5"/>
+                    <polygon points="380,50 372,46 372,54" fill="#a855f7"/>
+                    <text x="385" y="54" fill="#a855f7" font-size="10">Vcol = 190 kN</text>
+
+                    <!-- Flecha de cortante interno del nudo Vjh -->
+                    <line x1="250" y1="130" x2="390" y2="170" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,3"/>
+                    <polygon points="395,172 383,165 388,175" fill="#f59e0b"/>
+                    <text x="250" y="195" fill="#f59e0b" font-size="12" font-weight="bold">Vjh = 1684 kN</text>
+
+                    <!-- Estribos de nudo -->
+                    <line x1="245" y1="110" x2="405" y2="110" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="245" y1="140" x2="405" y2="140" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="245" y1="170" x2="405" y2="170" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="245" y1="200" x2="405" y2="200" stroke="#10b981" stroke-width="1.5"/>
+                    <text x="415" y="140" fill="#10b981" font-size="10">Estribos nudo No. 3 @ 120 mm</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ================================================================
+               EJEMPLO 9.7: VIGA DE ACOPLAMIENTO CON REFUERZO DIAGONAL
+               ================================================================ -->
+          <div class="example-card" id="ej-9-7">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 9.7</span>
+                <h3>Diseño de Viga de Acoplamiento (Coupling Beam) entre Muros Estructurales con Armadura Diagonal Cruzada (\(A_{vd}\), NSR-10 C.21.9.7)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex97', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex97', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En un edificio sismorresistente con muros de concreto reforzado (sistema DES), dos muros estructurales adyacentes que delimitan el pozo de ascensores están acoplados en cada nivel mediante una viga corta de acoplamiento de sección transversal \(b_w = 400\text{ mm} \times h = 1000\text{ mm}\) (\(d = 920\text{ mm}\)) y una luz libre entre caras de muros \(l_n = 1.80\text{ m}\).
+              </p>
+              <p>
+                Los materiales especificados son \(f'_c = 28\text{ MPa}\) y \(f_y = 420\text{ MPa}\). El análisis estructural tridimensional bajo la combinación sísmica más desfavorable reporta una fuerza cortante factorizada actuante \(V_u = 720.0\text{ kN}\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Determinar la relación de aspecto (\(l_n / h\)) y verificar los criterios reglamentarios de NSR-10 C.21.9.7 que hacen mandatorio el empleo de refuerzo diagonal cruzado.<br>
+                2. Comprobar que la fuerza cortante no sobrepase la capacidad máxima admisible del elemento (\(V_n \le 0.83 \sqrt{f'_c} b_w d\)).<br>
+                3. Calcular el ángulo de inclinación \(\alpha\) de las diagonales y el área total de acero requerida en cada grupo diagonal (\(A_{vd}\)).<br>
+                4. Diseñar la canastilla de confinamiento transversal para cada haz diagonal según C.21.6.4, junto con el refuerzo perimetral y de piel.<br>
+                5. Elaborar el plano de elevación estructural SVG acotado mostrando la disposición de las barras cruzadas, canastillas y anclaje dentro de los muros.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 9.7 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Relación de Aspecto y Criterios Mandatorios para Armadura Diagonal (NSR-10 C.21.9.7)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex97-step-1">
+                <p>
+                  Calculamos la relación de aspecto claro-peralte de la viga:
+                </p>
+                $$\frac{l_n}{h} = \frac{1800\text{ mm}}{1000\text{ mm}} = 1.80$$
+                <p>
+                  El artículo <strong>NSR-10 C.21.9.7.1</strong> establece que las vigas de acoplamiento con <strong>\(l_n / h < 2\)</strong> y que tengan un cortante último que exceda:
+                </p>
+                $$V_{u,\text{límite}} = 0.33 \lambda \sqrt{f'_c} b_w d$$
+                <p>
+                  deben reforzarse <strong>obligatoriamente</strong> con dos grupos intersecantes de barras diagonales dispuestas simétricamente. Evaluamos este umbral numérico con \(\lambda = 1.0, f'_c = 28\text{ MPa}, b_w = 400\text{ mm}, d = 920\text{ mm}\):
+                </p>
+                $$V_{u,\text{límite}} = 0.33 \times 1.0 \times \sqrt{28} \times 400\text{ mm} \times 920\text{ mm} \times 10^{-3} = 0.33 \times 5.2915 \times 368 = \mathbf{642.6\text{ kN}}$$
+                <div class="callout callout-warning">
+                  <strong>Evaluación de obligatoriedad:</strong>
+                  \[ \frac{l_n}{h} = 1.80 < 2.0 \quad \text{y} \quad V_u = 720.0\text{ kN} > 642.6\text{ kN} \]
+                  Se cumplen plenamente ambas condiciones: <strong>El refuerzo diagonal cruzado es ESTRICTAMENTE OBLIGATORIO</strong>. Los estribos verticales y barras longitudinales convencionales son incapaces de disipar energía bajo inversiones cíclicas sin experimentar una falla frágil por deslizamiento en las juntas o degradación por compresión diagonal.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Verificación de Cortante Máximo Admisible en la Sección (NSR-10 C.21.9.7.3)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex97-step-2">
+                <p>
+                  Para evitar el aplastamiento prematuro de las bielas de concreto antes de que las barras diagonales alcancen la fluencia plástica, el cortante nominal resistente \(V_n\) no debe superar el límite superior fijado por el código:
+                </p>
+                $$V_{n,\max} = 0.83 \sqrt{f'_c} b_w d$$
+                $$V_{n,\max} = 0.83 \times \sqrt{28\text{ MPa}} \times 400\text{ mm} \times 920\text{ mm} \times 10^{-3} = 0.83 \times 5.2915 \times 368 = \mathbf{1616.2\text{ kN}}$$
+                <p>
+                  Con el factor de reducción de resistencia a cortante \(\phi = 0.75\) (C.9.3.2.3):
+                </p>
+                $$\phi V_{n,\max} = 0.75 \times 1616.2\text{ kN} = \mathbf{1212.2\text{ kN}}$$
+                <p>
+                  Comprobación:
+                </p>
+                $$V_u = 720.0\text{ kN} \le \phi V_{n,\max} = 1212.2\text{ kN} \quad \mathbf{[SECCIÓN ADECUADA \checkmark]}$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Ángulo de Inclinación (\(\alpha\)) y Área Requerida de Armadura Diagonal (\(A_{vd}\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex97-step-3">
+                <p>
+                  Considerando una distancia desde la fibra extrema hasta el centro de gravedad del paquete diagonal en la cara de apoyo \(d' \approx 70\text{ mm}\), el brazo vertical entre los centros de los dos paquetes en caras opuestas es:
+                </p>
+                $$h_v = h - 2 d' = 1000\text{ mm} - 2(70\text{ mm}) = 860\text{ mm}$$
+                <p>
+                  El ángulo de inclinación \(\alpha\) de las diagonales respecto al eje horizontal de la viga es:
+                </p>
+                $$\tan\alpha = \frac{h_v}{l_n} = \frac{860\text{ mm}}{1800\text{ mm}} = 0.4778 \implies \mathbf{\alpha = 25.54^\circ}$$
+                $$\sin\alpha = \sin(25.54^\circ) = 0.4311$$
+                <p>
+                  En vigas de acoplamiento con refuerzo diagonal, <strong>todo el cortante y todo el momento flector</strong> son resistidos por las diagonales cruzadas (el concreto no aporta a \(V_c\)). Según <strong>NSR-10 C.21.9.7.3</strong>:
+                </p>
+                $$V_n = 2 A_{vd} f_y \sin\alpha \implies V_u \le \phi (2 A_{vd} f_y \sin\alpha)$$
+                <p>
+                  Despejando el área de acero requerida en cada uno de los dos haces diagonales (\(A_{vd}\)):
+                </p>
+                $$A_{vd} = \frac{V_u}{2 \phi f_y \sin\alpha} = \frac{720000\text{ N}}{2 \times 0.75 \times 420\text{ MPa} \times 0.4311} = \frac{720000}{271.59} = \mathbf{2651.1\text{ mm}^2}$$
+                <p>
+                  <strong>Selección de barras para cada grupo diagonal:</strong><br>
+                  Disponiendo <strong>6 barras No. 8</strong> (\(d_b = 25.4\text{ mm}, A_b = 510\text{ mm}^2\)) dispuestas en un arreglo de \(2 \times 3\) por cada haz diagonal:
+                </p>
+                $$A_{vd,\text{provisto}} = 6 \times 510\text{ mm}^2 = \mathbf{3060\text{ mm}^2} > 2651.1\text{ mm}^2 \quad \mathbf{\checkmark \text{ [CUMPLE]}}$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Confinamiento de las Canastillas Diagonales y Refuerzo Secundario</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex97-step-4">
+                <p>
+                  Conforme a <strong>NSR-10 C.21.9.7.4</strong>, cada grupo de barras diagonales debe estar confinado a lo largo de toda su trayectoria por una jaula o canastilla de estribos cerrados transversales que cumplan los requisitos de confinamiento de columnas (C.21.6.4):
+                </p>
+                <ul>
+                  <li>
+                    <strong>Estribos cerrados de la canastilla diagonal:</strong> Se colocan estribos cerrados de barra No. 3 (\(d_b = 9.5\text{ mm}\)) envolviendo las 6 barras No. 8 con un espaciamiento \(s \le \min(b_c/4, 6 d_b, 100\text{ mm}) = \min(180/4 = 45, 6 \times 25.4 = 152, 100)\). Se adoptan estribos <strong>No. 3 @ 75 mm</strong> a lo largo de cada haz diagonal.
+                  </li>
+                  <li>
+                    <strong>Anclaje dentro de los muros adyacentes:</strong> Las barras diagonales deben penetrar dentro del alma del muro estructural una longitud no menor que su longitud de desarrollo a tracción \(l_d\) multiplicada por <strong>\(1.25\)</strong> para garantizar anclaje plástico total:
+                    $$l_d = \left(\frac{420 \times 1.0 \times 1.0 \times 1.0}{1.7 \times 1.0 \times \sqrt{28}}\right) \times 25.4 = 1186\text{ mm} \implies L_{\text{anc}} = 1.25 \times 1186 \approx \mathbf{1500\text{ mm} \quad (1.50\text{ m})}$$
+                  </li>
+                  <li>
+                    <strong>Armadura longitudinal y estribos perimetrales secundarios:</strong> Para contener el concreto de recubrimiento y controlar la fisuración térmica, se disponen estribos cerrados perimetrales No. 4 @ \(150\text{ mm}\) con 2 ramas longitudinales de piel 2 No. 4 en cada cara de la viga.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Plano de Elevación Estructural SVG Acotado de la Viga de Acoplamiento</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex97-step-5">
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="320" viewBox="0 0 700 320" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Muro izquierdo -->
+                    <rect x="30" y="20" width="130" height="280" fill="#334155" stroke="#64748b" stroke-width="2"/>
+                    <text x="95" y="290" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="bold">Muro Pier 1</text>
+
+                    <!-- Muro derecho -->
+                    <rect x="540" y="20" width="130" height="280" fill="#334155" stroke="#64748b" stroke-width="2"/>
+                    <text x="605" y="290" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="bold">Muro Pier 2</text>
+
+                    <!-- Viga de acoplamiento central -->
+                    <rect x="160" y="50" width="380" height="200" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                    <text x="350" y="75" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="bold">Viga de Acoplamiento 400x1000 mm (ln = 1800 mm)</text>
+
+                    <!-- Diagonal 1 (arriba-izq a abajo-der) -->
+                    <line x1="60" y1="70" x2="640" y2="230" stroke="#ef4444" stroke-width="5"/>
+                    <text x="260" y="125" fill="#ef4444" font-size="11" font-weight="bold">6 No. 8 (Avd)</text>
+
+                    <!-- Diagonal 2 (abajo-izq a arriba-der) -->
+                    <line x1="60" y1="230" x2="640" y2="70" stroke="#f59e0b" stroke-width="5"/>
+                    <text x="440" y="125" fill="#f59e0b" font-size="11" font-weight="bold">6 No. 8 (Avd)</text>
+
+                    <!-- Ángulo alfa -->
+                    <path d="M 210,230 A 40,40 0 0,0 230,215" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                    <text x="240" y="228" fill="#38bdf8" font-size="11">α = 25.5°</text>
+
+                    <!-- Estribos perimetrales secundarios -->
+                    <line x1="200" y1="60" x2="200" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="250" y1="60" x2="250" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="300" y1="60" x2="300" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="350" y1="60" x2="350" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="400" y1="60" x2="400" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="450" y1="60" x2="450" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="500" y1="60" x2="500" y2="240" stroke="#10b981" stroke-width="1.5"/>
+                    <text x="350" y="235" fill="#10b981" font-size="10" text-anchor="middle">Estribos perimetrales No. 4 @ 150 mm</text>
+
+                    <!-- Acotado de anclaje dentro del muro -->
+                    <line x1="60" y1="40" x2="160" y2="40" stroke="#f59e0b" stroke-width="1.5"/>
+                    <line x1="60" y1="35" x2="60" y2="45" stroke="#f59e0b" stroke-width="1.5"/>
+                    <line x1="160" y1="35" x2="160" y2="45" stroke="#f59e0b" stroke-width="1.5"/>
+                    <text x="110" y="32" fill="#f59e0b" font-size="10" text-anchor="middle">Lanc ≥ 1.50 m</text>
+
+                    <!-- Cota de luz libre ln = 1800 mm -->
+                    <line x1="160" y1="265" x2="540" y2="265" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="160" y1="260" x2="160" y2="270" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="540" y1="260" x2="540" y2="270" stroke="#38bdf8" stroke-width="1.5"/>
+                    <text x="350" y="280" fill="#38bdf8" font-size="11" text-anchor="middle" font-weight="bold">ln = 1800 mm (ln / h = 1.80)</text>
+
+                    <!-- Cortante sísmico Vu = 720 kN -->
+                    <line x1="180" y1="120" x2="180" y2="180" stroke="#e11d48" stroke-width="3"/>
+                    <polygon points="180,185 175,172 185,172" fill="#e11d48"/>
+                    <text x="190" y="155" fill="#e11d48" font-size="11" font-weight="bold">Vu = 720 kN</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- REFERENCIA BIBLIOGRÁFICA MULET RODRÍGUEZ -->
+        <div class="callout callout-info" style="margin-top:35px; border-left:4px solid var(--accent); background:rgba(30, 41, 59, 0.7);">
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="font-size:2rem; line-height:1;">📚</div>
+            <div>
+              <h4 style="margin:0 0 8px 0; color:var(--accent);">Texto Guía de Referencia y Verificación Normativa</h4>
+              <p style="margin:0 0 6px 0; font-size:0.95rem; color:var(--text-secondary);">
+                <strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>. Editorial Universidad de Sucre, Colombia. ISBN: 978-628-95009-7-4.
+              </p>
+              <p style="margin:0; font-size:0.88rem; color:var(--text-muted);">
+                Capítulos 3, 4 y Fundamentos de Ductilidad Sísmica: <em>Diseño sismorresistente, mecanismos de disipación de energía, confinamiento en zonas de rótula plástica, cortante por capacidad, nudos rígidos y vigas de acoplamiento conforme a NSR-10 Título C (Capítulo C.21).</em>
+              </p>
+            </div>
+          </div>
+        </div>
+
+          </div>
+      </section>
+
+      <!-- BOTONES DE NAVEGACIÓN INFERIOR ENTRE MÓDULOS -->
+      <div class="module-nav-footer">
+        <a href="modulo-08-despiece.html" class="btn-control">
+          <span>← Módulo 08: Despiece y Longitud de Desarrollo</span>
+        </a>
+        <a href="../index.html" class="btn-control btn-accent">
+          <span>🎉 Felicitaciones: Regresar al Portal Principal del Diplomado →</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">◀ Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente ▶</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Core y del Módulo -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-09.js"></script>
+</body>
+</html>

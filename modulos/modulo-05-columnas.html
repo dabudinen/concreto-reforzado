@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 5: Diseño de Columnas en Concreto Reforzado | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 05 de 09 • Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Diseño de Columnas: Compresión, Flexocompresión y Esbeltez</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠</span> Portal Principal
+      </a>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero láser virtual para el docente (Tecla L)">
+        <span>🔴</span> Puntero (L)
+      </button>
+      <button id="btn-presentation" class="btn-control" onclick="togglePresentationMode()" title="Conmutar entre Modo Estudio y Modo Clase Magistral (Tecla P)">
+        <span>🖥️</span> Modo Clase Magistral (P)
+      </button>
+      <button id="btn-theme" class="btn-control" onclick="toggleTheme()">
+        <span>🌙</span> Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <div class="workspace-layout">
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-section-title">Contenido del Módulo 05</div>
+        <ul class="toc-list">
+          <li><a href="#portada-mod05" class="toc-link active"><span class="toc-num">00</span> Portada y Bibliografía</a></li>
+          <li><a href="#sec-tipologia-detallamiento" class="toc-link"><span class="toc-num">1.0</span> 1. Tipología, Cuantías y Confinamiento</a></li>
+          <li><a href="#sec-compresion-axial" class="toc-link"><span class="toc-num">2.0</span> 2. Compresión Axial y $P_{n,\max}$</a></li>
+          <li><a href="#sec-diagrama-interaccion" class="toc-link"><span class="toc-num">3.0</span> 3. Diagrama de Interacción (8 Puntos)</a></li>
+          <li><a href="#sec-biaxial-bresler" class="toc-link"><span class="toc-num">4.0</span> 4. Flexocompresión Biaxial (Bresler/PCA)</a></li>
+          <li><a href="#sec-columnas-esbeltas" class="toc-link"><span class="toc-num">5.0</span> 5. Columnas Esbeltas y Segundo Orden</a></li>
+          <li><a href="#sec-lab-mod05" class="toc-link"><span class="toc-num">6.0</span> 6. Laboratorios Interactivos</a></li>
+          <li><a href="#sec-ejemplos-mod05" class="toc-link"><span class="toc-num">7.0</span> 7. Ejemplos Resueltos Paso a Paso</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-1" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.1</span> Espiral, Cuadrada y Elástico</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.2</span> 8 Puntos Notables Interacción</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.3</span> Ábacos y Biaxial (3 Métodos)</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.4</span> Esbeltez Pórtico 2 Pisos</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.5</span> Columna Zunchada Circular DES</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.6</span> Esbeltez Pórtico Traslacional</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-5-7" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">5.7</span> Flexocompresión Biaxial Parme/PCA</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">Ruta de Módulos</div>
+        <div class="module-switcher">
+          <a href="modulo-01-introduccion.html" class="module-pill">
+            <span>Mód. 01: Introducción y Filosofías</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-02-predimensionamiento.html" class="module-pill">
+            <span>Mód. 02: Predimensionamiento</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-03-flexion-vigas.html" class="module-pill">
+            <span>Mód. 03: Flexión en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-04-cortante-vigas.html" class="module-pill">
+            <span>Mód. 04: Cortante en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-05-columnas.html" class="module-pill current">
+            <span>Mód. 05: Diseño de Columnas</span>
+            <span>●</span>
+          </a>
+          <a href="modulo-06-losas.html" class="module-pill">
+            <span>Mód. 06: Losas de Entrepiso</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-07-cimentaciones.html" class="module-pill">
+            <span>Mód. 07: Cimentaciones</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-08-despiece.html" class="module-pill">
+            <span>Mód. 08: Longitud de Desarrollo y Despiece</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-09-sismico.html" class="module-pill">
+            <span>Mód. 09: Diseño Sismorresistente</span>
+            <span>✓</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- ===================================================================
+           LÁMINA 00: PORTADA DEL MÓDULO 05 Y BIBLIOGRAFÍA DE REFERENCIA
+           =================================================================== -->
+      <section id="portada-mod05" class="hero-banner content-section">
+        <div class="hero-kicker">
+          <span>MÓDULO TÉCNICO 05</span>
+          <span>•</span>
+          <span>COMPRESIÓN AXIAL, INTERACCIÓN $P_n\text{-}M_n$, MÉTODO DE BRESLER Y EFECTOS $P\text{-}\delta / P\text{-}\Delta$</span>
+        </div>
+        <h1 class="hero-title">Diseño de Columnas en Concreto Reforzado: Flexocompresión Uniaxial, Biaxial y Esbeltez</h1>
+        <p class="hero-subtitle">
+          Las columnas constituyen el sistema primario de soporte gravitacional y sismorresistente de toda edificación; la falla de una columna en un piso inferior puede desencadenar el colapso progresivo de todos los pisos superiores. En este módulo estudiaremos la distinción normativa entre pedestales, vigas y columnas, los requisitos de refuerzo longitudinal y transversal (estribos cerrados, espirales continuas y zonas de confinamiento sísmico DMO/DES), la resistencia axial bajo excentricidad mínima, la deducción rigurosa de los <strong>8 puntos notables del diagrama de interacción</strong> (en secciones simétricas y asimétricas), la flexocompresión biaxial mediante la superficie de falla tridimensional de Bresler y la PCA, y la magnificación de momentos de segundo orden en columnas esbeltas.
+        </p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Autoría Académica</span>
+            <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Respaldo Normativo</span>
+            <span class="hero-meta-value">NSR-10 Cap. C.10, C.7.10 y C.21</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Simuladores Interactivos</span>
+            <span class="hero-meta-value">2 Laboratorios (8 Puntos + Esbeltez)</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ejemplos con Pizarra Docente</span>
+            <span class="hero-meta-value">4 Problemas Completos Paso a Paso</span>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1.5rem;">
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #38BDF8;">🎯 Competencias Específicas del Módulo 05</h3>
+              <div class="tech-card-icon">🧭</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.6; color: #E2E8F0; margin: 0;">
+              <li>Dimensionar y detallar el refuerzo longitudinal ($0.01 \le \rho_g \le 0.04$) y transversal en columnas con estribos y espirales continuas (<code>NSR-10 C.7.10</code>, <code>C.10.9</code> y <code>C.21</code>).</li>
+              <li>Calcular el <strong>Centroide Plástico ($x_{cp}$)</strong> en secciones asimétricas y deducir analíticamente los <strong>8 Puntos Notables</strong> del diagrama de interacción nominal ($P_n\text{-}M_n$) y de diseño ($\phi P_n\text{-}\phi M_n$).</li>
+              <li>Diseñar y verificar columnas sometidas a <strong>Flexocompresión Biaxial</strong> mediante el Método de la Carga Recíproca de Bresler, el Contorno de Carga de Bresler y el método de la PCA.</li>
+              <li>Evaluar el índice de estabilidad de piso ($Q$), el factor de longitud efectiva ($k$) con los nomogramas de Jackson &amp; Moreland, la carga crítica de pandeo de Euler ($P_c$) y los magnificadores de momento ($\delta_{ns}, \delta_s$) en columnas esbeltas (<code>NSR-10 C.10.10</code>).</li>
+            </ul>
+          </div>
+
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #FBBF24;">📚 Bibliografía de Referencia Recomendada</h3>
+              <div class="tech-card-icon">📖</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.87rem; line-height: 1.58; color: #E2E8F0; margin: 0;">
+              <li><strong>AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente NSR-10</em> — Título C, Capítulos C.7 (Detalles del refuerzo), C.10 (Flexión y cargas axiales) y C.21 (Requisitos sísmicos DMO/DES).</li>
+              <li><strong>ACI Committee 318.</strong> <em>Building Code Requirements for Structural Concrete (ACI 318) and Commentary</em> &amp; <em>SP-17: Design Handbook — Columns</em>.</li>
+              <li><strong>Nilson, A. H., Darwin, D., &amp; Dolan, C. W.</strong> <em>Diseño de Estructuras de Concreto</em>. McGraw-Hill.</li>
+              <li><strong>Wight, J. K., &amp; MacGregor, J. G.</strong> <em>Reinforced Concrete: Mechanics and Design</em>. Pearson.</li>
+              <li><strong>Rochel Awad, R.</strong> <em>Hormigón Reforzado (Primera y Segunda Parte)</em>. Universidad EAFIT.</li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- TARJETA BIBLIOGRÁFICA Y TEXTOS GUÍA -->
+        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <div class="tech-card-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Referencias Bibliográficas y Textos Guía del Módulo</span>
+            <span class="norm-pill">NSR-10 / ACI 318</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5;">
+            Los diagramas de interacción P-M, análisis de flexocompresión biaxial, confinamiento helicoidal y esbeltez se fundamentan en:
+          </p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 1: Cargas axiales y compatibilidad elástica; y fundamentos de flexocompresión uniaxial y biaxial).</li>
+            <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.10: Flexión y Cargas Axiales; y Capítulo C.21: Columnas en Pórticos DMO/DES).</li>
+            <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
+            <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
+          </ul>
+        </div>
+</section>
+
+      <!-- ===================================================================
+           SECCIÓN 1.0: TIPOLOGÍA, CUANTÍAS Y CONFINAMIENTO TRANSVERSAL
+           =================================================================== -->
+      <section id="sec-tipologia-detallamiento" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">1.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.2.2, C.7.8, C.7.10, C.10.8, C.10.9 y C.21 • Geometría, Armado y Confinamiento</div>
+            <h2 class="chapter-title">Definición Normativa, Tipología de Columnas, Cuantías Límites y Confinamiento Sísmico</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          De acuerdo con el Capítulo <code>C.2.2</code> de la NSR-10, una <strong>columna</strong> es un elemento con una relación entre altura libre y menor dimensión lateral superior a 3 ($l_u / b_{\min} > 3$), empleado principalmente para resistir carga axial de compresión acompañada de momentos flectores uniaxiales o biaxiales. El reglamento establece fronteras numéricas precisas para diferenciar un pedestal, una viga y una columna:
+        </p>
+
+        <div class="cards-grid-3">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">1. Pedestal vs. Columna</h3>
+              <div class="tech-card-icon">🧱</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              Un elemento vertical en compresión cuya relación entre altura no soportada y menor dimensión lateral sea <strong>menor o igual a 3</strong> ($h_{\text{libre}} / b_{\min} \le 3$) se clasifica como <strong>pedestal</strong> (<code>C.2.2</code>) y puede diseñarse como concreto estructural simple (Cap. <code>C.22</code>). Si $h_{\text{libre}} / b_{\min} > 3$, debe diseñarse obligatoriamente como columna.
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">2. Viga vs. Columna ($0.10\,f'_c A_g$)</h3>
+              <div class="tech-card-icon">⚖️</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              Según <code>NSR-10 C.10.3.5</code>, cuando la carga axial mayorada de compresión cumple $\mathbf{P_u < 0.10\,f'_c A_g}$, el elemento trabaja predominantemente a flexión y la deformación neta de tracción en el acero extremo debe cumplir $\mathbf{\varepsilon_t \ge 0.004}$. Si $\mathbf{P_u \ge 0.10\,f'_c A_g}$, el elemento puede trabajar en la zona controlada por compresión ($\varepsilon_t < \varepsilon_y$).
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">3. Área Efectiva Reducida (C.10.8.4)</h3>
+              <div class="tech-card-icon">📐</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              En columnas cuya sección transversal sea mucho mayor que la requerida por las cargas (por razones arquitectónicas), <code>C.10.8.4</code> permite usar un área efectiva reducida $\mathbf{A_{g,\text{ef}} \ge 0.50\,A_g}$ para calcular la resistencia y la cuantía mínima, siempre que en sistemas sísmicos <strong>DES</strong> se verifique con el área real $A_g$.
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.4rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          1.1 Tipología Constructiva y Comportamiento de Colapso: Estribos vs. Espirales Continuas
+        </h3>
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">Columnas con Estribos Cerrados (Flejes) y Zunchadas en Espiral</span>
+              <span class="norm-pill">NSR-10 C.7.10.4, C.7.10.5 y C.10.9.3</span>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.65rem;">
+              En una columna con <strong>estribos cerrados</strong>, al alcanzarse la carga máxima y desprenderse el recubrimiento exterior (<em>spalling</em>), las barras longitudinales tienden a pandearse entre estribos y el núcleo falla de forma relativamente brusca ($\phi = 0.65$). En cambio, en una columna con <strong>espiral continua</strong> poco espaciada, el zuncho helicoidal aplica una presión radial triaxial continua que confina el núcleo de concreto ($A_{ch}$), otorgando gran tenacidad y segunda rama de reserva dúctil ($\phi = 0.75$):
+            </p>
+            <div class="math-formula">
+              $$\rho_s = \frac{\text{Volumen de la espiral en una vuelta}}{\text{Volumen del núcleo confinado en un paso } s} = \frac{a_s\,\pi\,(D_c - d_s)}{\dfrac{\pi}{4}\,D_c^2\,s} \approx \frac{4\,a_s\,(D_c - d_s)}{s\,D_c^2}$$
+            </div>
+            <div class="math-formula">
+              $$\text{Cuantía volumétrica mínima (Ec. C.10-5):} \qquad \mathbf{\rho_{s,\min} = 0.45\left(\frac{A_g}{A_{ch}} - 1\right)\frac{f'_c}{f_{yt}}} \implies s_{\max} \le \frac{4\,a_s\,(D_c - d_s)}{\rho_{s,\min}\,D_c^2}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$D_c$ y $A_{ch}$:</strong> Diámetro del núcleo medido borde a borde exterior de la espiral ($D_c = D - 2\,\text{rec}$) y área del núcleo confinado ($A_{ch} = \frac{\pi}{4}D_c^2$).</div>
+              <div><strong>Límites constructivos de la espiral (C.7.10.4):</strong> Diámetro mínimo en elementos vaciados en sitio $\mathbf{d_s \ge 10\text{ mm}}$ ($\text{No. }3$ o $3/8"$); espaciamiento libre entre hélices entre $\mathbf{25\text{ mm}}$ y $\mathbf{75\text{ mm}}$ ($2.5\text{ cm} \le s - d_s \le 7.5\text{ cm}$); anclaje en cada extremo mediante $\mathbf{1.5\text{ vueltas adicionales}}$ de barra o alambre en espiral; fluencia de diseño $f_{yt} \le 700\text{ MPa}$ (con traslapo permitido solo si $f_{yt} \le 420\text{ MPa}$).</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">Límites de Refuerzo Longitudinal y Reglas de Estribos Cerrados</span>
+              <span class="norm-pill">NSR-10 C.10.9.1, C.10.9.2, C.7.6.3, C.7.8.1 y C.7.10.5</span>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.62; color: var(--text-body); margin: 0;">
+              <li><strong>Cuantía longitudinal ($\rho_g = A_{st}/A_g$, C.10.9.1):</strong> Debe cumplir $\mathbf{0.01 \le \rho_g \le 0.04}$ ($1\% \le \rho_g \le 4\%$). Aunque en secciones sin traslapos el código menciona un tope absoluto del $8\%$ ($6\%$ en estructuras sísmicas DES), en zonas de traslapo de barras la congestión duplica la cuantía local, por lo que en la práctica profesional la cuantía nominal se limita a $\mathbf{\rho_g \le 4\%}$ (e idealmente entre $1\%$ y $3\%$).</li>
+              <li><strong>Número mínimo de barras longitudinales (C.10.9.2):</strong> Mínimo <strong>4 barras</strong> dentro de estribos rectangulares o circulares, <strong>3 barras</strong> dentro de estribos triangulares y <strong>6 barras</strong> rodeadas por una espiral continua.</li>
+              <li><strong>Separación libre entre barras longitudinales (C.7.6.3):</strong> $s_{\text{libre}} \ge \max\left(1.5\,d_b,\; 40\text{ mm},\; \frac{4}{3}d_{\text{agregado}}\right)$.</li>
+              <li><strong>Cambios de sección en altura (C.7.8.1):</strong> La pendiente de las barras dobladas en el cambio de sección no debe exceder <strong>$1:6$ con respecto al eje de la columna</strong>. Si las caras de la columna están desalineadas en $\mathbf{75\text{ mm}\;(8\text{ cm})\text{ o más}}$, está prohibido doblar las barras longitudinales y deben empalmarse mediante <strong>espigos (<em>dowels</em>)</strong> traslapados.</li>
+              <li><strong>Diámetro y separación de estribos no sísmicos (C.7.10.5):</strong> Estribos mínimo $\mathbf{\text{No. }3}$ ($\phi 3/8"$) para barras longitudinales hasta $\text{No. }10$, y mínimo $\mathbf{\text{No. }4}$ ($\phi 1/2"$) para barras $\text{No. }11, 14, 18$ y paquetes de barras. Espaciamiento vertical:
+                $$s \le \min\left(16\,d_{b,\text{long}},\; 48\,d_{b,\text{estribo}},\; b_{\min}\right)$$
+              </li>
+              <li><strong>Soporte lateral de barras (C.7.10.5.3):</strong> Toda barra de esquina y una de cada dos barras intermedias deben tener soporte lateral mediante la esquina de un estribo o gancho suplementario con ángulo incluido $\le 135^\circ$. Ninguna barra sin soporte lateral puede estar separada más de <strong>$150\text{ mm}$ libres</strong> de una barra soportada lateralmente (si la separación libre entre barras es $> 15\text{ cm}$, todas requieren soporte lateral; si es $\le 15\text{ cm}$, se permite alternar una sí y una no).</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.4rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          1.2 Requisitos Sísmicos de Columnas en Sistemas DMO (C.21.3.5) y DES (C.21.6)
+        </h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Parámetro Normativo</th>
+                <th>Capacidad Moderada — DMO (<code>NSR-10 C.21.3.5</code>)</th>
+                <th>Capacidad Especial — DES (<code>NSR-10 C.21.6</code>)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dimensión mínima de sección</strong></td>
+                <td>$\mathbf{b_{\min} \ge 250\text{ mm}}\;\;(25\text{ cm})$ — <code>C.21.3.5.1</code></td>
+                <td>$\mathbf{b_{\min} \ge 300\text{ mm}}\;\;(30\text{ cm})$ y relación $\mathbf{b/h \ge 0.40}$ (o sección circular $\phi \ge 35\text{ cm}$, $\ge 30\text{ cm}$ en casas de 1 y 2 pisos) — <code>C.21.6.1</code></td>
+              </tr>
+              <tr>
+                <td><strong>Cuantía longitudinal $\rho_g$</strong></td>
+                <td>$\mathbf{0.01 \le \rho_g \le 0.04}$ — <code>C.21.3.5.2</code></td>
+                <td>$\mathbf{0.01 \le \rho_g \le 0.06}$ ($0.04$ en zonas de traslapo; traslapos solo en la mitad central de la altura libre diseñados en tracción) — <code>C.21.6.3</code></td>
+              </tr>
+              <tr>
+                <td><strong>Longitud de confinamiento $L_o$ en ambos extremos del nudo</strong></td>
+                <td>$$L_o \ge \max\left(h,\; \frac{l_n}{6},\; 500\text{ mm}\right)$$</td>
+                <td>$$L_o \ge \max\left(h,\; \frac{l_n}{6},\; 450\text{ mm}\right)$$</td>
+              </tr>
+              <tr>
+                <td><strong>Espaciamiento máximo $s_o$ dentro de la zona $L_o$</strong></td>
+                <td>$$s_o \le \min\left(\frac{b_{\min}}{3},\; 8\,d_{b,\text{long}},\; 16\,d_{b,\text{est}},\; 150\text{ mm}\right)$$ (1er estribo a $\le s_o/2$ de la cara del nudo).</td>
+                <td>$$s_o \le \min\left(\frac{b_{\min}}{4},\; 6\,d_{b,\text{long}},\; s_o = 100 + \frac{350 - h_x}{3} \in [100, 150]\text{ mm}\right)$$ con separación centro a centro entre ramas $h_x \le 350\text{ mm}$.</td>
+              </tr>
+              <tr>
+                <td><strong>Área mínima de estribos de confinamiento $A_{sh}$ dentro de $L_o$</strong></td>
+                <td>$$\rho_s \ge 0.30\left(\frac{A_g}{A_{ch}} - 1\right)\frac{f'_c}{f_{yt}} \ge 0.09\frac{f'_c}{f_{yt}}$$ $$A_{sh} \ge \max\left[0.20\,s\,b_c\frac{f'_c}{f_{yt}}\left(\frac{A_g}{A_{ch}}-1\right),\; 0.06\,s\,b_c\frac{f'_c}{f_{yt}}\right]$$</td>
+                <td>$$\rho_s \ge \max\left[0.45\left(\frac{A_g}{A_{ch}} - 1\right)\frac{f'_c}{f_{yt}},\; 0.12\frac{f'_c}{f_{yt}}\right]$$ $$A_{sh} \ge \max\left[0.30\,s\,b_c\frac{f'_c}{f_{yt}}\left(\frac{A_g}{A_{ch}}-1\right),\; 0.09\,s\,b_c\frac{f'_c}{f_{yt}}\right]$$</td>
+              </tr>
+              <tr>
+                <td><strong>Espaciamiento fuera de $L_o$ (zona central)</strong></td>
+                <td>Máximo $\mathbf{2\,s_o}$ y criterios generales de <code>C.7.10.5</code>.</td>
+                <td>$$s_{\text{central}} \le \min\left(6\,d_{b,\text{long}},\; 150\text{ mm}\right)$$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 2.0: COMPRESIÓN AXIAL ELÁSTICA, INELÁSTICA Y RESISTENCIA ÚLTIMA
+           =================================================================== -->
+      <section id="sec-compresion-axial" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">2.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.10.3.6 • Comportamiento Elástico de Servicio, Flujo Plástico y Meseta $\phi P_{n,\max}$</div>
+            <h2 class="chapter-title">Compresión Axial Centrada: Respuesta Elástica, Inelástica y Excentricidad Mínima Accidental</h2>
+          </div>
+        </div>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Rango Elástico bajo Cargas de Servicio ($\varepsilon_c = \varepsilon_s$)</span>
+              <span class="norm-pill">Sección Transformada</span>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.65rem;">
+              Para niveles bajos de esfuerzo axial ($f_c \le 0.45\,f'_c$ y $f_s \le 0.50\,f_y$), el concreto y el acero se comportan elásticamente y con adherencia perfecta ($\varepsilon_c = \varepsilon_s$). Con la relación modular $n = E_s / E_c \implies f_s = n\,f_c$, el área transformada equivalente en concreto es $A_t = A_g + (n - 1)A_{st}$:
+            </p>
+            <div class="math-formula">
+              $$P = f_c\,A_c + f_s\,A_{st} = f_c\,(A_g - A_{st}) + n\,f_c\,A_{st} \implies \mathbf{P_{\text{servicio}} = f_c\,\big[A_g + (n - 1)A_{st}\big]}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Redistribución por flujo plástico (<em>creep</em>) y retracción:</strong> Bajo cargas sostenidas a largo plazo, el concreto se acorta plásticamente y transfiere carga al acero longitudinal (pudiendo modelarse con una relación modular efectiva $2n$), incrementando el esfuerzo de compresión en las barras sin alterar la resistencia última $P_0$.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Resistencia Nominal Concéntrica ($P_0$) y Meseta por Excentricidad Mínima ($\phi P_{n,\max}$)</span>
+              <span class="norm-pill">NSR-10 C.10.3.6 (Ec. C.10-1 y C.10-2)</span>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.65rem;">
+              En el estado límite último de aplastamiento ($\varepsilon_c \approx 0.003 > \varepsilon_y = 0.0021$), ensayos experimentales a escala real demostraron que la resistencia del concreto vaciado verticalmente en columnas alcanza $\mathbf{0.85\,f'_c}$ (por migración de agua de sangrado hacia la parte superior) y todo el acero longitudinal fluye a $f_y$:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{P_0 = 0.85\,f'_c\,(A_g - A_{st}) + f_y\,A_{st}}$$
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin: 0.6rem 0;">
+              Para cubrir excentricidades accidentales inevitables en obra ($e_{\min} \approx 0.05\,h$ en columnas zunchadas en espiral y $e_{\min} \approx 0.10\,h$ en columnas con estribos), <code>NSR-10 C.10.3.6</code> trunca la punta superior del diagrama de interacción con una meseta horizontal máxima:
+            </p>
+            <div class="math-formula">
+              $$\text{Columnas con espiral (C.10.3.6.1, }\phi = 0.75\text{):} \qquad \mathbf{\phi P_{n,\max} = 0.85\,\phi\,\big[0.85\,f'_c(A_g - A_{st}) + f_y A_{st}\big]} \quad (\text{o } 0.80\,\phi P_0\text{ en guía clásica})$$
+              $$\text{Columnas con estribos (C.10.3.6.2, }\phi = 0.65\text{):} \qquad \mathbf{\phi P_{n,\max} = 0.80\,\phi\,\big[0.85\,f'_c(A_g - A_{st}) + f_y A_{st}\big]} \quad (\text{o } 0.75\,\phi P_0\text{ en guía clásica})$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 3.0: FLEXOCOMPRESIÓN UNIAXIAL, CENTROIDE PLÁSTICO Y LOS 8 PUNTOS
+           =================================================================== -->
+      <section id="sec-diagrama-interaccion" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">3.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.10.2 y C.9.3.2 • Compatibilidad de Deformaciones, Orificios $U_1, U_2$ y Ábacos Adimensionales</div>
+            <h2 class="chapter-title">Flexocompresión Uniaxial: Centroide Plástico ($x_{cp}$), Los 8 Puntos Notables y Ábacos de Interacción</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Toda combinación de carga axial $P_n$ y momento flector $M_n$ equivale estáticamente a la fuerza axial $P_n$ aplicada con una excentricidad $\mathbf{e = M_n / P_n}$ medida respecto al <strong>Centroide Plástico (CP)</strong> de la sección transversal. El Centroide Plástico es el punto por el cual debe pasar la resultante de compresión pura $P_0$ cuando toda la sección se deforma uniformemente a $\varepsilon_{cu} = 0.003$ sin producir rotación ni curvatura ($M_n = 0$):
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Ubicación del Centroide Plástico ($x_{cp}$) en Secciones Simétricas y Asimétricas</span>
+              <span class="norm-pill">Equilibrio bajo Compresión Uniforme</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              En una sección con geometría y armadura simétricas ($A_s = A'_s$), el centroide plástico coincide exactamente con el centroide geométrico ($x_{cp} = h/2$). Cuando la armadura es <strong>asimétrica</strong> ($A_s \ne A'_s$), tomando momentos respecto a la fibra extrema más comprimida y descontando los orificios ocupados por las barras:
+            </p>
+            <div class="math-formula">
+              $$C_c = 0.85\,f'_c\,b\,h, \qquad F'_s = A'_s(f_y - 0.85\,f'_c), \qquad F_s = A_s(f_y - 0.85\,f'_c)$$
+              $$\mathbf{x_{cp} = \frac{C_c\,(h/2) + F'_s\,d' + F_s\,d}{C_c + F'_s + F_s}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Distancias al Centroide Plástico:</strong> Si medimos $x_{cp}$ desde la fibra extrema comprimida, el brazo del acero comprimido es $(x_{cp} - d')$ y el brazo del acero en tracción es $(d - x_{cp})$.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Ecuaciones Generales de Equilibrio Seccional ($P_n, M_n$) Descontando Orificios $U_1, U_2$</span>
+              <span class="norm-pill">NSR-10 C.10.2.7</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Para una profundidad dada del eje neutro $c$ (bloque rectangular de Whitney $a = \beta_1 c \le h$), por triángulos semejantes con $\varepsilon_{cu} = 0.003$:
+            </p>
+            <div class="math-formula">
+              $$\varepsilon'_s = 0.003\,\frac{c - d'}{c}, \qquad \varepsilon_t = 0.003\,\frac{d - c}{c}, \qquad C_c = 0.85\,f'_c\,b\,a$$
+            </div>
+            <div class="math-formula">
+              $$U_1 = \begin{cases} 0.85\,f'_c\,A'_s & \text{si } a \ge d' \\ 0 & \text{si } a < d' \end{cases}, \qquad U_2 = \begin{cases} 0.85\,f'_c\,A_s & \text{si } a \ge d \\ 0 & \text{si } a < d \end{cases}$$
+              $$\mathbf{P_n = C_c + (A'_s f'_s - U_1) - (A_s f_s + U_2)}$$
+              $$\mathbf{M_n = C_c\left(x_{cp} - \frac{a}{2}\right) + (A'_s f'_s - U_1)(x_{cp} - d') + (A_s f_s + U_2)(d - x_{cp})}$$
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.35rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          3.1 Definición Analítica de los 8 Puntos Notables del Diagrama de Interacción
+        </h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Punto Notable</th>
+                <th>Condición Cinemática / Estática</th>
+                <th>Profundidad del Eje Neutro $c$ y Factor $\phi$ (Estribos / Espiral)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Punto 1 — Compresión Axial Pura</strong></td>
+                <td>$e = 0 \implies M_{n1} = 0$, $P_{n1} = P_0 = 0.85\,f'_c(A_g - A_{st}) + f_y A_{st}$</td>
+                <td>$c = \infty \quad \big|\quad \phi = 0.65\text{ (estribos) }/\; 0.75\text{ (espiral)}$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 2 — Carga Máxima en $M_n = 0$</strong></td>
+                <td>Inicio de la meseta horizontal: $M_{n2} = 0$, $P_{n2} = P_{n,\max} = \alpha\,P_0$ ($\alpha = 0.80\text{ o }0.75$ en estribos; $0.85\text{ o }0.80$ en espiral)</td>
+                <td>$c = \infty \quad \big|\quad \phi = 0.65\text{ / }0.75$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 3 — Excentricidad Mínima</strong></td>
+                <td>Extremo derecho de la meseta horizontal: $P_n(c_3) = P_{n,\max} \implies M_{n3} = P_{n,\max}\cdot e_{\min}$</td>
+                <td>Se halla $c_3$ tal que $P_n(c_3) = P_{n,\max} \quad \big|\quad \phi = 0.65\text{ / }0.75$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 4 — Condición Balanceada</strong></td>
+                <td>Aplastamiento del concreto ($\varepsilon_{cu}=0.003$) simultáneo con el inicio de fluencia en tracción ($\varepsilon_t = \varepsilon_y = f_y/E_s$)</td>
+                <td>$$c_b = \frac{0.003}{0.003 + \varepsilon_y}\,d = \frac{600}{600 + f_y}\,d \quad \big|\quad \phi = 0.65\text{ / }0.75$$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 5 — Límite de Flexión ($\varepsilon_t = 0.004$)</strong></td>
+                <td>Deformación neta de tracción mínima permitida cuando $P_u < 0.10\,f'_c A_g$ (en la región de transición)</td>
+                <td>$$c_5 = \frac{0.003}{0.003 + 0.004}\,d = \frac{3}{7}\,d \approx 0.4286\,d \quad \big|\quad \phi = 0.65 + (0.90-0.65)\frac{0.004-\varepsilon_y}{0.005-\varepsilon_y} \approx 0.814$$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 6 — Control por Tracción ($\varepsilon_t = 0.005$)</strong></td>
+                <td>Inicio de la zona controlada por tracción donde el factor de reducción alcanza $\phi = 0.90$</td>
+                <td>$$c_6 = \frac{0.003}{0.003 + 0.005}\,d = \frac{3}{8}\,d = 0.375\,d \quad \big|\quad \mathbf{\phi = 0.90}$$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 7 — Flexión Pura ($P_n = 0$)</strong></td>
+                <td>Equilibrio interno sin carga axial ($C_c + F'_s = T_s \implies P_{n7} = 0$, momento puro $M_{n0}$)</td>
+                <td>Se resuelve la ecuación cuadrática de $c_7$ tal que $P_n(c_7) = 0 \quad \big|\quad \phi = 0.90$</td>
+              </tr>
+              <tr>
+                <td><strong>Punto 8 — Tracción Axial Pura ($M_n = 0$)</strong></td>
+                <td>Concreto totalmente fisurado; todas las barras fluyen en tracción: $P_{nt} = -A_{st}\,f_y$, $M_{n8} = 0$</td>
+                <td>$c = 0 \quad \big|\quad \mathbf{\phi = 0.90} \implies \phi P_{nt} = -0.90\,A_{st}\,f_y$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="math-card" style="margin-top: 1.15rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">3.2 Parámetros Adimensionales para el Diseño con Ábacos de Interacción ($K,\; K\frac{e}{h},\; g,\; \rho m$)</span>
+            <span class="norm-pill">Ábacos de Columnas ACI / PCA</span>
+          </div>
+          <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.65rem;">
+            Para diseñar directamente la cuantía requerida $\rho_g = A_{st}/A_g$ sin iterar sobre las ecuaciones de compatibilidad, los diagramas de interacción se normalizan en función del índice geométrico de recubrimiento $\mathbf{g}$ (o $\gamma$):
+          </p>
+          <div class="math-formula">
+            $$g = \frac{h - 2\,d'}{h}, \qquad K = \frac{P_u}{\phi\,f'_c\,b\,h} = \frac{P_n}{f'_c\,A_g}, \qquad K\,\frac{e}{h} = \frac{M_u}{\phi\,f'_c\,b\,h^2} = \frac{M_n}{f'_c\,A_g\,h}$$
+          </div>
+          <div class="math-formula">
+            $$\text{Si los ábacos están parametrizados con } \rho\,m: \qquad m = \frac{f_y}{0.85\,f'_c} \implies \mathbf{\rho_g = \frac{(\rho\,m)_{\text{leído}}}{m}} \implies A_{st} = \rho_g\,b\,h$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Interpolación lineal entre ábacos:</strong> Como los ábacos vienen impresos para valores discretos de $g \in \{0.60,\; 0.70,\; 0.80,\; 0.90\}$, si la columna tiene por ejemplo $g = 0.74$, se lee $\rho_{0.70}$ y $\rho_{0.80}$ y se interpola linealmente: $\rho(0.74) = \rho_{0.70} + 0.40\,(\rho_{0.80} - \rho_{0.70})$.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 4.0: FLEXOCOMPRESIÓN BIAXIAL (BRESLER Y PCA)
+           =================================================================== -->
+      <section id="sec-biaxial-bresler" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">4.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 R.10.3.6 • Superficie Tridimensional de Falla ($P_n, M_{nx}, M_{ny}$), Carga Recíproca y Contorno de Carga</div>
+            <h2 class="chapter-title">Flexocompresión Biaxial: Método de la Carga Recíproca de Bresler, Contorno de Bresler y Método de la PCA</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Las columnas de esquina y la mayoría de las columnas pertenecientes a dos pórticos ortogonales están sometidas simultáneamente a carga axial $P_u$ y momentos flectores alrededor de ambos ejes principales: $\mathbf{M_{ux} = P_u\,e_y}$ y $\mathbf{M_{uy} = P_u\,e_x}$. En este caso, el eje neutro se inclina un ángulo $\theta$ que en general <strong>no coincide</strong> con la inclinación del eje de excentricidad ($\tan\alpha = e_y / e_x$), lo que hace que el bloque comprimido sea trapezoidal, triangular o pentagonal. Boris Bresler (1960) y Parme-Nieves-Gouwens (PCA) formularon tres superficies analíticas de interacción tridimensional $S_1(P_n, e_x, e_y)$, $S_2(1/P_n, e_x, e_y)$ y $S_3(P_n, M_{nx}, M_{ny})$ que permiten verificar y diseñar con extraordinaria precisión:
+        </p>
+
+        <div class="cards-grid-3">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Método de la Carga Recíproca de Bresler</span>
+              <span class="norm-pill">NSR-10 R.10.3.6 (Ec. CR.10-1)</span>
+            </div>
+            <p style="font-size: 0.87rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Aproxima el recíproco de la superficie de falla $1/P_n$ mediante un plano tangente definido por las resistencias uniaxiales bajo las mismas excentricidades $(e_x, 0)$ y $(0, e_y)$ y la resistencia concéntrica $P_0$:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{\frac{1}{P_n} = \frac{1}{P_{nx0}} + \frac{1}{P_{ny0}} - \frac{1}{P_0}}$$
+              $$\mathbf{\frac{1}{\phi P_n} = \frac{1}{\phi P_{nx0}} + \frac{1}{\phi P_{ny0}} - \frac{1}{\phi P_0} \implies \phi P_n \ge P_u}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$P_{nx0}$:</strong> Resistencia axial nominal cuando actúa únicamente la excentricidad $e_y = M_{ux}/P_u$ ($e_x = 0$).</div>
+              <div><strong>$P_{ny0}$:</strong> Resistencia axial nominal cuando actúa únicamente la excentricidad $e_x = M_{uy}/P_u$ ($e_y = 0$).</div>
+              <div><strong>Restricción de validez:</strong> El método de la carga recíproca solo es válido cuando $\mathbf{P_n \ge 0.10\,f'_c A_g}$ (por debajo de ese nivel, $P_{nx0}$ o $P_{ny0}$ pueden cambiar de signo y la ecuación pierde validez física).</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Método del Contorno de Carga de Bresler</span>
+              <span class="norm-pill">Corte Horizontal a $P_u = \text{cte.}$</span>
+            </div>
+            <p style="font-size: 0.87rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Al cortar horizontalmente la superficie tridimensional de interacción a una altura constante $P_u$, el contorno en el plano $(M_{nx}, M_{ny})$ queda descrito por la curva adimensional:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{\left(\frac{M_{ux}}{\phi M_{nx0}}\right)^{\alpha} + \left(\frac{M_{uy}}{\phi M_{ny0}}\right)^{\alpha} \le 1.0}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$\phi M_{nx0}$ y $\phi M_{ny0}$:</strong> Capacidades de momento de diseño uniaxiales alrededor del eje $x$ y del eje $y$, evaluadas al nivel de la carga axial actuante $P_u$.</div>
+              <div><strong>Exponente $\alpha$:</strong> Varía entre $1.15$ y $1.55$ para columnas rectangulares y cuadradas. Adoptar $\mathbf{\alpha = 1.50}$ para secciones rectangulares y $\mathbf{\alpha = 1.5\text{ a }2.0}$ para circulares proporciona resultados seguros y consistentes.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">3. Método del Contorno de Carga de la PCA ($\beta$)</span>
+              <span class="norm-pill">Parme, Nieves &amp; Gouwens</span>
+            </div>
+            <p style="font-size: 0.87rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Relaciona el exponente con el factor de contorno biaxial $\beta$ (para el cual $M_{nx} = \beta\,M_{nx0}$ cuando $M_{ny} = \beta\,M_{ny0}$), siendo $\mathbf{\beta \approx 0.65}$ el valor estándar de diseño ($\alpha = \frac{\log 0.5}{\log \beta} \approx 1.61$):
+            </p>
+            <div class="math-formula">
+              $$\text{Si } \frac{M_{uy}}{M_{ux}} \ge \frac{b}{h}: \quad \mathbf{M_{ny0,\text{req}} = M_{uy} + M_{ux}\,\frac{b}{h}\,\frac{1 - \beta}{\beta}}$$
+              $$\text{Si } \frac{M_{uy}}{M_{ux}} < \frac{b}{h}: \quad \mathbf{M_{nx0,\text{req}} = M_{ux} + M_{uy}\,\frac{h}{b}\,\frac{1 - \beta}{\beta}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Ventaja para diseño directo:</strong> Transforma el problema biaxial $(P_u, M_{ux}, M_{uy})$ en un único momento uniaxial equivalente amplificado ($M_{nx0,\text{req}}$ o $M_{ny0,\text{req}}$) con el cual se entra directamente al ábaco uniaxial.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 5.0: COLUMNAS ESBELTAS Y MAGNIFICACIÓN DE MOMENTOS
+           =================================================================== -->
+      <section id="sec-columnas-esbeltas" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">5.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.10.10 • Inercias Fisuradas, Índice de Estabilidad $Q$, Nomogramas de $k$, Carga de Euler $P_c$ y Efectos $P\text{-}\delta / P\text{-}\Delta$</div>
+            <h2 class="chapter-title">Columnas Esbeltas y Procedimiento de Magnificación de Momentos de Segundo Orden</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Una columna se define como <strong>corta</strong> cuando su resistencia está gobernada exclusivamente por la resistencia de los materiales y la geometría de su sección transversal (las deflexiones laterales son tan pequeñas que los momentos secundarios $P\cdot\delta$ son despreciables). En cambio, una <strong>columna esbelta</strong> sufre deflexiones transversales significativas que generan momentos adicionales de segundo orden, reduciendo su capacidad axial y desplazando la trayectoria de carga hacia el borde del diagrama de interacción. En la <code>NSR-10 C.10.10</code> se distinguen dos efectos de segundo orden:
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">1. Efecto Local $P\text{-}\delta$ (Pórticos No Desplazables / Arriostrados)</h3>
+              <div class="tech-card-icon">🏹</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin: 0;">
+              Producido por la curvatura y deflexión transversal $\delta$ del eje de la columna <strong>respecto a la cuerda que une sus nudos extremos</strong>. El factor de longitud efectiva cumple $\mathbf{0.50 \le k \le 1.00}$ y los momentos de primer orden debidos a cargas gravitacionales se amplifican mediante el factor $\mathbf{\delta_{ns}}$ (<code>NSR-10 C.10.10.6</code>).
+            </p>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">2. Efecto Global de Piso $P\text{-}\Delta$ (Pórticos Desplazables / No Arriostrados)</h3>
+              <div class="tech-card-icon">🏢</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin: 0;">
+              Producido por la deriva lateral relativa de entrepiso $\Delta_o$ de todas las cargas verticales del piso ($\sum P_u$). El factor de longitud efectiva cumple $\mathbf{k \ge 1.00}$ (pudiendo llegar a $2.0$ o más) y los momentos debidos a cargas laterales se amplifican mediante $\mathbf{\delta_s}$ (<code>NSR-10 C.10.10.7</code>).
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.35rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          5.1 Propiedades de la Sección Fisurada, Índice de Estabilidad ($Q$), Factor $k$ y Límites de Esbeltez
+        </h3>
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">Inercias Efectivas Fisuradas (C.10.10.4.1) e Índice de Estabilidad $Q$</span>
+              <span class="norm-pill">NSR-10 C.10.10.4 y C.10.10.5.2</span>
+            </div>
+            <div class="math-formula">
+              $$I_{\text{columnas}} = 0.70\,I_g, \qquad I_{\text{vigas}} = 0.35\,I_g, \qquad I_{\text{losas planas}} = 0.25\,I_g, \qquad r = \sqrt{\frac{I_g}{A_g}} = \begin{cases} 0.30\,h & \text{(rectangular)} \\ 0.25\,D & \text{(circular)} \end{cases}$$
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin: 0.55rem 0;">
+              Un entrepiso se puede considerar <strong>no desplazable (arriostrado)</strong> si el incremento de los momentos de extremo de segundo orden no supera el $5\%$ de los de primer orden, o si el <strong>Índice de Estabilidad del piso $Q$</strong> cumple (<code>Ec. C.10-10</code>):
+            </p>
+            <div class="math-formula">
+              $$\mathbf{Q = \frac{\sum P_u\,\Delta_o}{V_{us}\,l_c} \le 0.05}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$\sum P_u$:</strong> Carga vertical mayorada total de todas las columnas del piso en estudio.</div>
+              <div><strong>$V_{us}$ y $\Delta_o$:</strong> Fuerza cortante mayorada del piso y deriva elástica de primer orden entre la parte superior e inferior de dicho piso debida a $V_{us}$; $l_c$ es la altura del piso medida de eje a eje de los nudos.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">Rigidez Relativa $\Psi$ (Jackson &amp; Moreland) y Límites para Ignorar Esbeltez</span>
+              <span class="norm-pill">NSR-10 C.10.10.1 y R.10.10.1.1</span>
+            </div>
+            <div class="math-formula">
+              $$\mathbf{\Psi = \frac{\sum \left(E_c\,I_{\text{ef}} / l_c\right)_{\text{columnas}}}{\sum \left(E_c\,I_{\text{ef}} / l\right)_{\text{vigas}}}} \quad \left(\text{con } I_{\text{ef,col}} = 0.70\,I_{g,\text{col}}\text{ e } I_{\text{ef,viga}} = 0.35\,I_{g,\text{viga}}\right)$$
+            </div>
+            <div class="math-formula">
+              $$\text{Se permite ignorar la esbeltez (Columna Corta) si:} \qquad \begin{cases} \dfrac{k\,l_u}{r} \le 34 - 12\left(\dfrac{M_1}{M_2}\right) \le 40 & \text{(Pórtico No Desplazable)} \\[0.6em] \dfrac{k\,l_u}{r} \le 22 & \text{(Pórtico Desplazable)} \end{cases}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Convención de signos de $M_1 / M_2$:</strong> $M_2$ es siempre positivo (el mayor de los momentos en los extremos). La relación $\mathbf{M_1/M_2}$ es <strong>positiva ($+$)</strong> si la columna se flecta en <strong>curvatura simple</strong> y <strong>negativa ($-$)</strong> si se flecta en <strong>curvatura doble</strong>.</div>
+              <div><strong>Ecuaciones analíticas de los nomogramas de Jackson &amp; Moreland:</strong>
+                En pórticos no desplazables: $k = \min\big[0.7 + 0.05(\Psi_A + \Psi_B),\; 0.85 + 0.05\,\Psi_{\min},\; 1.0\big]$. En pórticos desplazables (con $\Psi_m = \frac{\Psi_A+\Psi_B}{2}$): si $\Psi_m < 2$, $k = \frac{20-\Psi_m}{20}\sqrt{1+\Psi_m}$; si $\Psi_m \ge 2$, $k = 0.9\sqrt{1+\Psi_m}$.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.35rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          5.2 Ecuaciones de Magnificación de Momentos ($\delta_{ns}$ y $\delta_s$) y Límite Normativo de Estabilidad ($1.40$)
+        </h3>
+        <div class="math-card normative-emerald">
+          <div class="math-card-header">
+            <span class="math-card-title">Carga Crítica de Pandeo de Euler ($P_c$), Rigidez Efectiva $EI$, Factor $C_m$ y Momento Amplificado $M_c$</span>
+            <span class="norm-pill">NSR-10 C.10.10.2.1, C.10.10.6 y C.10.10.7</span>
+          </div>
+          <div class="math-formula">
+            $$P_c = \frac{\pi^2\,E I}{(k\,l_u)^2}, \qquad E I = \frac{0.20\,E_c\,I_g + E_s\,I_{se}}{1 + \beta_{dns}} \quad \text{ó} \quad \mathbf{E I = \frac{0.40\,E_c\,I_g}{1 + \beta_{dns}}}, \qquad \beta_{dns} = \frac{P_{u,\text{sostenida }(1.2D)}}{P_{u,\text{total}}} \le 1.0$$
+          </div>
+          <div class="math-formula">
+            $$C_m = 0.60 + 0.40\left(\frac{M_1}{M_2}\right) \ge 0.40 \quad (\text{ó } C_m = 1.0\text{ si hay cargas transversales entre apoyos}), \qquad \mathbf{M_{2,\min} = P_u\,(15 + 0.03\,h)\;\text{[mm]}}$$
+          </div>
+          <div class="math-formula">
+            $$\text{1. Pórticos No Desplazables (C.10.10.6):} \qquad \mathbf{M_c = \delta_{ns}\,M_2}, \qquad \mathbf{\delta_{ns} = \frac{C_m}{1 - \dfrac{P_u}{0.75\,P_c}} \ge 1.0}$$
+          </div>
+          <div class="math-formula">
+            $$\text{2. Pórticos Desplazables (C.10.10.7):} \qquad \mathbf{M_1 = M_{1ns} + \delta_s\,M_{1s}}, \qquad \mathbf{M_2 = M_{2ns} + \delta_s\,M_{2s}}, \qquad \delta_s = \frac{1}{1 - Q} \quad \text{ó} \quad \delta_s = \frac{1}{1 - \dfrac{\sum P_u}{0.75\,\sum P_c}} \ge 1.0$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Tope normativo de efectos de segundo orden (NSR-10 C.10.10.2.1):</strong> En ningún caso el momento total incluyendo efectos de segundo orden puede exceder $\mathbf{1.40}$ veces el momento correspondiente de primer orden ($M_c / M_2 \le 1.40$). Si $\delta > 1.40$ o si $k\,l_u / r > 100$, la columna es excesivamente flexible y deben incrementarse sus dimensiones transversales.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 6.0: LABORATORIOS INTERACTIVOS DEL MÓDULO 05
+           =================================================================== -->
+      <section id="sec-lab-mod05" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">6.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Simuladores Interactivos en Tiempo Real • HTML5 Canvas</div>
+            <h2 class="chapter-title">Laboratorios de Diagrama de Interacción (8 Puntos + Bresler) y de Columnas Esbeltas</h2>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             SIMULADOR 5.1: DIAGRAMA DE INTERACCIÓN Y VERIFICADOR BIAXIAL
+             =============================================================== -->
+        <div class="sim-box" style="margin-bottom: 2.2rem;">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 5.1: Generador de los 8 Puntos Notables del Diagrama de Interacción y Verificador Biaxial de Bresler / PCA</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Calcula el centroide plástico $x_{cp}$, integra la compatibilidad de deformaciones descontando los orificios $U_1, U_2$, grafica las curvas nominal ($P_n\text{-}M_n$) y de diseño ($\phi P_n\text{-}\phi M_n$) con sus 8 puntos notables y evalúa el contorno biaxial de Bresler y PCA.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn-control" onclick="loadSim51Preset('ej52_simetrica')" title="Cargar Ejemplo 5.2A: Columna Simétrica 40x45 cm con 6 No. 8">
+                📌 Preset Ej. 5.2 (Simétrica)
+              </button>
+              <button class="btn-control" onclick="loadSim51Preset('ej52_asimetrica')" title="Cargar Ejemplo 5.2B: Columna Asimétrica 40x45 cm (3 No. 8 + 2 No. 6)">
+                📌 Preset Ej. 5.2 (Asimétrica)
+              </button>
+              <button class="btn-control" onclick="loadSim51Preset('ej53_biaxial')" title="Cargar Ejemplo 5.3: Verificación Biaxial Columna 60x60 cm">
+                📌 Preset Ej. 5.3 (Biaxial)
+              </button>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Ancho de la columna $b$</span>
+                  <span id="val-sim51-b" class="control-value">40 cm</span>
+                </div>
+                <input id="sim51-b" type="range" min="25" max="90" step="5" value="40" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Peralte en plano de flexión $h$</span>
+                  <span id="val-sim51-h" class="control-value">45 cm</span>
+                </div>
+                <input id="sim51-h" type="range" min="25" max="100" step="5" value="45" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Recubrimiento al centroide $d'$</span>
+                  <span id="val-sim51-dp" class="control-value">6.22 cm</span>
+                </div>
+                <input id="sim51-dp" type="range" min="4.50" max="9.00" step="0.02" value="6.22" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Concreto $f'_c$ y Acero $f_y$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <select id="sim51-fc" onchange="updateSim51()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="21">f'c = 21 MPa</option>
+                    <option value="28" selected>f'c = 28 MPa</option>
+                    <option value="35">f'c = 35 MPa</option>
+                    <option value="42">f'c = 42 MPa</option>
+                  </select>
+                  <select id="sim51-fy" onchange="updateSim51()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="420" selected>fy = 420 MPa</option>
+                    <option value="500">fy = 500 MPa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acero en cara comprimida $A'_s$</span>
+                  <span id="val-sim51-ascomp" class="control-value">15.30 cm²</span>
+                </div>
+                <input id="sim51-ascomp" type="range" min="3.00" max="45.00" step="0.10" value="15.30" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acero en cara en tracción $A_s$</span>
+                  <span id="val-sim51-astens" class="control-value">15.30 cm²</span>
+                </div>
+                <input id="sim51-astens" type="range" min="3.00" max="45.00" step="0.10" value="15.30" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Acero intermedio ($x = h/2$)</span>
+                  <span id="val-sim51-asmid" class="control-value">0.00 cm²</span>
+                </div>
+                <input id="sim51-asmid" type="range" min="0.00" max="30.00" step="0.10" value="0.00" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Confinamiento y Tope $P_{n,\max}$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <select id="sim51-type" onchange="updateSim51()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="tied" selected>Estribos (φ=0.65)</option>
+                    <option value="spiral">Espiral (φ=0.75)</option>
+                  </select>
+                  <select id="sim51-cap" onchange="updateSim51()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="0.80">0.80/0.85 P0 (C.10.3.6)</option>
+                    <option value="0.75" selected>0.75/0.80 P0 (Clásico)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga axial actuante $P_u$</span>
+                  <span id="val-sim51-pu" class="control-value">1200 kN</span>
+                </div>
+                <input id="sim51-pu" type="range" min="0" max="7500" step="25" value="1200" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Momento actuante $M_{ux}$ (eje fuerte)</span>
+                  <span id="val-sim51-mux" class="control-value">220 kN·m</span>
+                </div>
+                <input id="sim51-mux" type="range" min="0" max="900" step="5" value="220" oninput="updateSim51()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Momento biaxial $M_{uy}$ (eje débil)</span>
+                  <span id="val-sim51-muy" class="control-value">0 kN·m</span>
+                </div>
+                <input id="sim51-muy" type="range" min="0" max="600" step="5" value="0" oninput="updateSim51()" />
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim51" width="900" height="430" class="sim-canvas"></canvas>
+
+              <div id="res51-status" class="status-badge status-ok" style="margin-top: 0.75rem;">
+                Calculando diagrama de interacción...
+              </div>
+
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item">
+                  <span class="metric-label">Cuantía $\rho_g$</span>
+                  <span id="res51-rhog" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Centroide Plástico $x_{cp}$</span>
+                  <span id="res51-xcp" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Meseta $\phi P_{n,\max}$ (Pto. 2-3)</span>
+                  <span id="res51-pmax" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Falla Balanceada (Pto. 4)</span>
+                  <span id="res51-bal" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Flexión Pura (Pto. 7)</span>
+                  <span id="res51-m0" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Tracción Pura (Pto. 8)</span>
+                  <span id="res51-mnt" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Capacidad a $P_u$</span>
+                  <span id="res51-capu" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Índice Biaxial Bresler / PCA</span>
+                  <span id="res51-bresler" class="metric-val">—</span>
+                </div>
+              </div>
+
+              <!-- Tabla dinámica de los 8 Puntos Notables -->
+              <div class="table-container" style="margin-top: 0.85rem;">
+                <table class="data-table" style="font-size: 0.8rem;">
+                  <thead>
+                    <tr>
+                      <th>Punto Notable del Diagrama</th>
+                      <th>$c\;\text{[mm]}$</th>
+                      <th>$P_n\;\text{[kN]}$</th>
+                      <th>$M_n\;\text{[kN}\cdot\text{m]}$</th>
+                      <th>$\phi$</th>
+                      <th>$\phi P_n\;\text{[kN]}$</th>
+                      <th>$\phi M_n\;\text{[kN}\cdot\text{m]}$</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-sim51-pts"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             SIMULADOR 5.2: COLUMNAS ESBELTAS Y MAGNIFICACIÓN DE MOMENTOS
+             =============================================================== -->
+        <div class="sim-box">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 5.2: Analizador de Columnas Esbeltas, Factor $k$ (Jackson &amp; Moreland) y Magnificador de Momentos (NSR-10 C.10.10)</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Evalúa el factor de longitud efectiva $k$ en pórticos arriostrados y no arriostrados, la relación de esbeltez $k l_u / r$, la rigidez fisurada $EI$, la carga crítica de Euler $P_c$, el factor $C_m$, el momento mínimo $M_{2,\min}$ y el momento amplificado $M_c = \delta\,M_2$.
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Tipo de Pórtico y Concreto $f'_c$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 0.45rem;">
+                  <select id="sim52-frame" onchange="updateSim52()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="braced" selected>No Desplazable (Q ≤ 0.05)</option>
+                    <option value="unbraced">Desplazable (Q > 0.05)</option>
+                  </select>
+                  <select id="sim52-fc" onchange="updateSim52()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="21">f'c = 21 MPa</option>
+                    <option value="28" selected>f'c = 28 MPa</option>
+                    <option value="35">f'c = 35 MPa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Longitud libre no soportada $l_u$</span>
+                  <span id="val-sim52-lu" class="control-value">4.50 m</span>
+                </div>
+                <input id="sim52-lu" type="range" min="2.50" max="9.00" step="0.10" value="4.50" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Ancho perpendicular $b$</span>
+                  <span id="val-sim52-b" class="control-value">40 cm</span>
+                </div>
+                <input id="sim52-b" type="range" min="25" max="80" step="5" value="40" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Peralte en plano de pandeo $h$</span>
+                  <span id="val-sim52-h" class="control-value">40 cm</span>
+                </div>
+                <input id="sim52-h" type="range" min="25" max="80" step="5" value="40" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Rigidez relativa nudo sup. $\Psi_A$</span>
+                  <span id="val-sim52-psia" class="control-value">1.92</span>
+                </div>
+                <input id="sim52-psia" type="range" min="0.10" max="8.00" step="0.02" value="1.92" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Rigidez relativa nudo inf. $\Psi_B$</span>
+                  <span id="val-sim52-psib" class="control-value">1.03</span>
+                </div>
+                <input id="sim52-psib" type="range" min="0.10" max="8.00" step="0.02" value="1.03" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Carga axial mayorada $P_u$</span>
+                  <span id="val-sim52-pu" class="control-value">1400 kN</span>
+                </div>
+                <input id="sim52-pu" type="range" min="200" max="5000" step="50" value="1400" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Momento menor $M_1$ ($+$ simple / $-$ doble)</span>
+                  <span id="val-sim52-m1" class="control-value">-80.0 kN·m</span>
+                </div>
+                <input id="sim52-m1" type="range" min="-250" max="250" step="5" value="-80" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Momento mayor $M_2$ ($> 0$)</span>
+                  <span id="val-sim52-m2" class="control-value">120.0 kN·m</span>
+                </div>
+                <input id="sim52-m2" type="range" min="10" max="400" step="5" value="120" oninput="updateSim52()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Factor de flujo plástico $\beta_{dns}$</span>
+                  <span id="val-sim52-bdns" class="control-value">0.60</span>
+                </div>
+                <input id="sim52-bdns" type="range" min="0.00" max="0.90" step="0.05" value="0.60" oninput="updateSim52()" />
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim52" width="900" height="390" class="sim-canvas"></canvas>
+
+              <div id="res52-status" class="status-badge status-ok" style="margin-top: 0.75rem;">
+                Evaluando esbeltez y amplificación...
+              </div>
+
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item">
+                  <span class="metric-label">Factor Efectivo $k$</span>
+                  <span id="res52-k" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Esbeltez $k l_u / r$</span>
+                  <span id="res52-klur" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Rigidez Efectiva $EI$</span>
+                  <span id="res52-ei" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Carga Crítica $P_c$ (Euler)</span>
+                  <span id="res52-pc" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Coeficiente $C_m$</span>
+                  <span id="res52-cm" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Momento Mínimo $M_{2,\min}$</span>
+                  <span id="res52-m2min" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Factor Magnificador $\delta$</span>
+                  <span id="res52-delta" class="metric-val">—</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-label">Momento Amplificado $M_c$</span>
+                  <span id="res52-mc" class="metric-val">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 7.0: EJEMPLOS RESUELTOS PASO A PASO CON MODO PIZARRA DOCENTE
+           =================================================================== -->
+      <section id="sec-ejemplos-mod05" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">7.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Ejercicios de Aplicación Magistral • Modo Pizarra Docente</div>
+            <h2 class="chapter-title">4 Ejemplos Resueltos Paso a Paso: Compresión Axial, 8 Puntos Notables, Flexocompresión Biaxial y Esbeltez</h2>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 5.1: COMPRESIÓN AXIAL, ESPIRAL CONTINUA Y RANGO ELÁSTICO
+             =============================================================== -->
+        <div id="ej-5-1" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.1: Diseño y Verificación de Columna Circular Zunchada en Espiral ($\phi = 40\text{ cm}$), Cuadrada con Estribos ($40 \times 40\text{ cm}$) y Rango Elástico
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> <strong>(Parte A)</strong> Verificar los requisitos geométricos y de confinamiento de una columna circular de diámetro $D = 40\text{ cm}$ ($f'_c = 280\text{ kgf/cm}^2$, $f_y = f_{yt} = 4200\text{ kgf/cm}^2$, recubrimiento libre $4.0\text{ cm}$), armada con $8\phi 3/4"$ ($A_{st} = 22.80\text{ cm}^2$) y espiral continua $\phi 3/8"$ ($d_s = 0.95\text{ cm}$, $a_s = 0.71\text{ cm}^2$) propuesta inicialmente con paso $s = 5.0\text{ cm}$, y calcular su carga máxima admisible $\phi P_{n,\max}$. <strong>(Parte B)</strong> Evaluar la resistencia máxima $\phi P_{n,\max}$ y el espaciamiento de estribos cerrados $\phi 3/8"$ para una columna cuadrada de $40 \times 40\text{ cm}$ con $8\phi 3/4"$. <strong>(Parte C)</strong> Para una columna de $400 \times 450\text{ mm}$ ($f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$, $E_c = 3900\sqrt{28} = 20\,637\text{ MPa}$) con $6\text{ No. }8$ ($A_{st} = 30.60\text{ cm}^2$), determinar la carga axial máxima en el rango elástico de servicio ($f_c \le 0.45 f'_c$, $f_s \le 0.50 f_y$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-1', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-1', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Parte A: Columna Circular en Espiral ($\phi = 40\text{ cm}$) — Cuantía Volumétrica $\rho_{s,\min}$ y Carga Última $\phi P_{n,\max}$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Geometría del Núcleo Confinado $D_c$, Verificación del Paso de Espiral y Capacidad Axial</span>
+                  <span class="norm-pill">NSR-10 C.10.9.3 (Ec. C.10-5) y C.10.3.6.1</span>
+                </div>
+                <div class="math-formula">
+                  $$A_g = \frac{\pi}{4}(40)^2 = \mathbf{1256.64\text{ cm}^2}, \qquad \rho_g = \frac{22.80}{1256.64} = \mathbf{0.01814\;\;(1.81\%)} \in [1\%, 4\%] \;\checkmark$$
+                  $$D_c = 40 - 2(4.0) = \mathbf{32.0\text{ cm}} \implies A_{ch} = \frac{\pi}{4}(32.0)^2 = \mathbf{804.25\text{ cm}^2}$$
+                </div>
+                <div class="math-formula">
+                  $$\rho_{s,\min} = 0.45\left(\frac{1256.64}{804.25} - 1\right)\frac{280}{4200} = 0.45(0.5625)(0.06667) = \mathbf{0.01688}$$
+                  $$\text{Con } s = 5.0\text{ cm:} \quad \rho_{s,\text{prov}} = \frac{4(0.71)(32.0 - 0.95)}{5.0(32.0)^2} = \mathbf{0.0172}\quad \left(\text{ó } \frac{4 a_s}{s D_c} = 0.01775 \ge 0.01688\right)$$
+                  $$\text{Si se incluye el descuento de } d_s\text{ y margen sísmico DES }(\rho_s \ge 0.0169): \quad s_{\max} = \frac{4(0.71)(32.0 - 0.95)}{0.01688(32.0)^2} \implies \text{Adoptar } \mathbf{s = 3.8\text{ a }5.0\text{ cm}}\;(\text{libre } \ge 2.5\text{ cm})\;\checkmark$$
+                </div>
+                <div class="math-formula">
+                  $$P_0 = 0.85(280)(1256.64 - 22.80) + 4200(22.80) = 293\,654 + 95\,760 = \mathbf{389.41\text{ tonf}}\;\;(3819\text{ kN})$$
+                  $$\phi P_{n,\max}\;(\text{C.10.3.6.1, }0.85\phi P_0) = 0.85 \times 0.75 \times 389.41 = \mathbf{248.25\text{ tonf}}\quad \big(\text{ó con }0.80\phi P_0 = \mathbf{233.65\text{ tonf}}\big)$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Parte B y Parte C: Columna Cuadrada $40 \times 40\text{ cm}$ con Estribos y Carga Elástica en Servicio ($400 \times 450\text{ mm}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Espaciamiento de Estribos (C.7.10.5) y Sección Transformada Elástica ($n = E_s / E_c$)</span>
+                  <span class="norm-pill">NSR-10 C.7.10.5 y C.10.3.6.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\text{Parte B ($40 \times 40\text{ cm}$, $A_g = 1600\text{ cm}^2$, $8\phi 3/4"$):} \quad s_{\max} = \min\big(16(1.91)=30.5\text{ cm},\; 48(0.95)=45.6\text{ cm},\; 40\text{ cm}\big) = \mathbf{30.0\text{ cm}}$$
+                  $$P_0 = 0.85(280)(1600 - 22.80) + 4200(22.80) = \mathbf{471.13\text{ tonf}} \implies \phi P_{n,\max}\;(0.80\phi P_0) = 0.80(0.65)(471.13) = \mathbf{244.99\text{ tonf}}\;\;(\text{con }0.75\phi P_0 = \mathbf{229.68\text{ tonf}})$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Parte C (Rango Elástico, $400 \times 450\text{ mm}$, $A_g = 180\,000\text{ mm}^2$, $A_{st} = 3060\text{ mm}^2$):} \qquad n = \frac{200\,000}{20\,637} = \mathbf{9.69}$$
+                  $$f_{c,\text{máx}} = 0.45(28) = \mathbf{12.60\text{ MPa}} \implies f_s = n\,f_c = 9.69(12.60) = \mathbf{122.1\text{ MPa}} \le 0.50\,f_y = 210\text{ MPa}\;\checkmark$$
+                  $$\mathbf{P_{\text{elástica,máx}} = 12.60\text{ MPa}\times \big[180\,000 + (9.69 - 1)(3060)\big] = 12.60 \times 206\,591 = 2\,603\,052\text{ N} = 2603.1\text{ kN}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 5.2: CONSTRUCCIÓN ANALÍTICA DE LOS 8 PUNTOS NOTABLES
+             =============================================================== -->
+        <div id="ej-5-2" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.2: Construcción Analítica de los 8 Puntos Notables del Diagrama de Interacción ($400 \times 450\text{ mm}$ Simétrica y Asimétrica)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> <strong>(Caso Simétrico)</strong> Para una columna rectangular con estribos de ancho $b = 400\text{ mm}$, peralte $h = 450\text{ mm}$ ($f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$), recubrimiento libre $40\text{ mm}$, estribos $\text{No. }3$ ($9.5\text{ mm}$) y $6\text{ barras No. }8$ ($d_b = 25.4\text{ mm}$) distribuidas simétricamente en dos capas extremas ($3\text{ No. }8$ en compresión con $A'_s = 1530\text{ mm}^2$ y $3\text{ No. }8$ en tracción con $A_s = 1530\text{ mm}^2$, $d' = 40 + 9.5 + 12.7 = 62.2\text{ mm}$, $d = 450 - 62.2 = 387.8\text{ mm}$), deducir paso a paso los <strong>8 Puntos Notables</strong> del diagrama de interacción nominal y de diseño. <strong>(Extensión Asimétrica)</strong> Si la cara comprimida tiene $2\text{ No. }6$ ($A'_s = 570\text{ mm}^2$, $d' = 60.5\text{ mm}$) y la cara en tracción tiene $3\text{ No. }8$ ($A_s = 1530\text{ mm}^2$, $d = 389.5\text{ mm}$), determinar la posición exacta del <strong>Centroide Plástico ($x_{cp}$)</strong>.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-2', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-2', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Puntos 1, 2 y 3: Compresión Pura ($P_0$), Meseta Horizontal ($P_{n,\max}$) y Excentricidad Mínima ($c_3$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cálculo de $P_0$, $P_{n,\max}$ y Solución de la Ecuación Cuadrática de $c_3$</span>
+                  <span class="norm-pill">Puntos 1, 2 y 3</span>
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 1 }(e=0):} \quad P_0 = 0.85(28)(180\,000 - 3060) + 420(3060) = 4\,211\,172 + 1\,285\,200 = \mathbf{5496.4\text{ kN}}, \quad M_{n1} = 0$$
+                  $$\phi P_0 = 0.65(5496.4) = \mathbf{3572.6\text{ kN}}, \qquad x_{cp} = \frac{h}{2} = \mathbf{225.0\text{ mm}}$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 2 }(M_n=0,\text{ meseta }0.75 P_0):} \quad P_{n2} = 0.75(5496.4) = \mathbf{4122.3\text{ kN}}, \quad \phi P_{n2} = 0.65(4122.3) = \mathbf{2679.5\text{ kN}}$$
+                  $$\text{(Nota: Con el factor }0.80 P_0\text{ de C.10.3.6.2, } P_{n,\max} = 4397.1\text{ kN y }\phi P_{n,\max} = \mathbf{2858.1\text{ kN}}\text{)}$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 3 }(P_n(c_3) = 4122.3\text{ kN}):} \quad \text{Para } c_3 = \mathbf{431.7\text{ mm}} \implies a_3 = 0.85(431.7) = \mathbf{367.0\text{ mm}} < d = 387.8\text{ mm}\;(U_2 = 0,\; U_1 = 36.41\text{ kN})$$
+                  $$\varepsilon'_s = 0.003\frac{431.7 - 62.2}{431.7} = 0.00257 > \varepsilon_y \implies f'_s = 420\text{ MPa}; \qquad \varepsilon_s = 0.003\frac{431.7 - 387.8}{431.7} = 0.000305\text{ (compresión)} \implies f_s = -61.0\text{ MPa}$$
+                  $$C_c = 0.85(28)(400)(367.0) = 3493.8\text{ kN} \implies P_{n3} = 3493.8 + (642.6 - 36.4) + 93.3 - 36.4 = \mathbf{4122.3\text{ kN}}, \quad \mathbf{M_{n3} = 351.8\text{ kN}\cdot\text{m}}\;\;(\phi M_{n3} = \mathbf{228.7\text{ kN}\cdot\text{m}})$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Puntos 4, 5, 6, 7 y 8: Condición Balanceada, Transición ($\varepsilon_t = 0.004$), Control Tracción ($\varepsilon_t = 0.005$), Flexión Pura y Tracción Pura</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Evaluación Analítica de los Puntos 4 a 8</span>
+                  <span class="norm-pill">Puntos 4, 5, 6, 7 y 8</span>
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 4 (Falla Balanceada, }\varepsilon_t = \varepsilon_y = 0.0021\text{):}} \quad c_b = \frac{0.003}{0.003 + 0.0021}(387.8) = \mathbf{228.1\text{ mm}}, \quad a_b = 0.85(228.1) = \mathbf{193.9\text{ mm}}$$
+                  $$\varepsilon'_s = 0.003\frac{228.1 - 62.2}{228.1} = 0.00218 > \varepsilon_y \implies f'_s = f_s = 420\text{ MPa}, \quad C_c = 1846.0\text{ kN}, \quad U_1 = 36.4\text{ kN}$$
+                  $$\mathbf{P_{nb} = 1846.0 + (642.6 - 36.4) - 642.6 = 1809.6\text{ kN}}\;\;(\phi P_{nb} = \mathbf{1176.2\text{ kN}}), \qquad \mathbf{M_{nb} = 439.9\text{ kN}\cdot\text{m}}\;\;(\phi M_{nb} = \mathbf{285.9\text{ kN}\cdot\text{m}},\; e_b = 243.1\text{ mm})$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 5 }(\varepsilon_t = 0.004,\; \phi = 0.814):} \quad c_5 = \frac{3}{7}(387.8) = \mathbf{166.2\text{ mm}}, \quad a_5 = 141.3\text{ mm}, \quad \varepsilon'_s = 0.00188 < \varepsilon_y \implies f'_s = 375.6\text{ MPa}$$
+                  $$\mathbf{P_{n5} = 1239.0\text{ kN}}\;\;(\phi P_{n5} = \mathbf{1008.3\text{ kN}}), \qquad \mathbf{M_{n5} = 407.7\text{ kN}\cdot\text{m}}\;\;(\phi M_{n5} = \mathbf{331.8\text{ kN}\cdot\text{m}})$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 6 }(\varepsilon_t = 0.005,\; \phi = 0.900):} \quad c_6 = \frac{3}{8}(387.8) = \mathbf{145.4\text{ mm}}, \quad a_6 = 123.6\text{ mm}, \quad \varepsilon'_s = 0.00172 \implies f'_s = 343.5\text{ MPa}$$
+                  $$\mathbf{P_{n6} = 1023.4\text{ kN}}\;\;(\phi P_{n6} = \mathbf{921.1\text{ kN}}), \qquad \mathbf{M_{n6} = 390.8\text{ kN}\cdot\text{m}}\;\;(\phi M_{n6} = \mathbf{351.7\text{ kN}\cdot\text{m}})$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Punto 7 (Flexión Pura, }P_n = 0,\; \phi = 0.900\text{):}} \quad c_7 = \mathbf{64.9\text{ mm}}, \quad a_7 = 55.2\text{ mm}, \quad \varepsilon'_s = 0.000125 \implies f'_s = 25.0\text{ MPa}$$
+                  $$\mathbf{P_{n7} = 0.0\text{ kN}}, \qquad \mathbf{M_{n7} = 208.1\text{ kN}\cdot\text{m}}\;\;(\phi M_{n7} = \mathbf{187.3\text{ kN}\cdot\text{m}})$$
+                  $$\mathbf{\text{Punto 8 (Tracción Pura, }M_n = 0,\; \phi = 0.900\text{):}} \quad P_{n8} = -3060(420) = \mathbf{-1285.2\text{ kN}}\;\;(\phi P_{n8} = \mathbf{-1156.7\text{ kN}})$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Extensión Asimétrica: Ubicación del Centroide Plástico ($x_{cp}$) con $3\text{ No. }8$ y $2\text{ No. }6$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-amber">
+                <div class="math-card-header">
+                  <span class="math-card-title">Desplazamiento del Centroide Plástico hacia la Cara con Mayor Cuantía de Acero</span>
+                  <span class="norm-pill">Sección Asimétrica</span>
+                </div>
+                <div class="math-formula">
+                  $$C_c = 0.85(28)(400)(450) = \mathbf{4284.0\text{ kN}}\;\;(\text{en } x = 225.0\text{ mm})$$
+                  $$F'_s\;(2\text{ No. }6) = 570(420 - 0.85\times 28) = \mathbf{225.8\text{ kN}}\;\;(\text{en } d' = 60.5\text{ mm})$$
+                  $$F_s\;(3\text{ No. }8) = 1530(420 - 0.85\times 28) = \mathbf{606.2\text{ kN}}\;\;(\text{en } d = 389.5\text{ mm})$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{x_{cp} = \frac{4284.0(225.0) + 225.8(60.5) + 606.2(389.5)}{4284.0 + 225.8 + 606.2} = \frac{1\,213\,676\text{ kN}\cdot\text{mm}}{5116.0\text{ kN}} = 237.23\text{ mm}}\quad (\text{medido desde la cara de }2\text{ No. }6)$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Interpretación física:</strong> El Centroide Plástico se desplaza $237.23 - 225.00 = \mathbf{12.23\text{ mm}}$ hacia la cara que contiene mayor área de acero ($3\text{ No. }8$). Todos los momentos del diagrama de interacción de una sección asimétrica deben calcularse con respecto a $x_{cp}$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 5.3: DISEÑO CON ÁBACOS Y VERIFICACIÓN BIAXIAL (3 MÉTODOS)
+             =============================================================== -->
+        <div id="ej-5-3" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.3: Diseño Uniaxial por Ábacos ($40 \times 40\text{ cm}$) y Verificación de Flexocompresión Biaxial por los 3 Métodos ($60 \times 60\text{ cm}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> <strong>(Parte A)</strong> Diseñar mediante parámetros adimensionales una columna cuadrada de $40 \times 40\text{ cm}$ ($d' = 6.0\text{ cm}$, $f'_c = 210\text{ kgf/cm}^2$, $f_y = 4200\text{ kgf/cm}^2$) sometida a $P_u = 80\text{ tonf}$ y $M_u = 20\text{ tonf}\cdot\text{m}$. <strong>(Parte B)</strong> Una columna cuadrada de $60 \times 60\text{ cm}$ ($f'_c = 35\text{ MPa}$, $f_y = 420\text{ MPa}$) está sometida a solicitación biaxial mayorada $P_u = 5300\text{ kN}$, $M_{ux} = 405\text{ kN}\cdot\text{m}$ ($e_y = 76.4\text{ mm}$) y $M_{uy} = 170\text{ kN}\cdot\text{m}$ ($e_x = 32.1\text{ mm}$). Para la armadura propuesta, de los diagramas de interacción uniaxiales se obtienen: resistencia concéntrica de diseño $\phi P_0 = 10\,500\text{ kN}$, resistencias bajo excentricidad uniaxial $\phi P_{nx0}\;(e_y=76.4\text{ mm}) = 6650\text{ kN}$ y $\phi P_{ny0}\;(e_x=32.1\text{ mm}) = 8450\text{ kN}$, y capacidades de momento al nivel de $P_u = 5300\text{ kN}$ iguales a $\phi M_{nx0} = \phi M_{ny0} = 495\text{ kN}\cdot\text{m}$. Verificar la columna por los <strong>3 métodos biaxiales</strong>.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-3', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-3', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Parte A: Diseño Uniaxial por Interpolación en Ábacos ($40 \times 40\text{ cm}$, $g = 0.70$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cálculo de $g$, $K$, $K(e/h)$ y Selección Comercial de Barras</span>
+                  <span class="norm-pill">Ábacos Adimensionales</span>
+                </div>
+                <div class="math-formula">
+                  $$g = \frac{h - 2\,d'}{h} = \frac{40 - 2(6.0)}{40} = \mathbf{0.70}, \qquad e = \frac{M_u}{P_u} = \frac{2000\text{ tonf}\cdot\text{cm}}{80\text{ tonf}} = 25.0\text{ cm} \implies \frac{e}{h} = \frac{25.0}{40.0} = \mathbf{0.625}$$
+                </div>
+                <div class="math-formula">
+                  $$K = \frac{P_u}{\phi\,f'_c\,b\,h} = \frac{80\,000\text{ kgf}}{0.65 \times 210 \times 40 \times 40} = \mathbf{0.366}, \qquad K\frac{e}{h} = 0.366 \times 0.625 = \mathbf{0.229}$$
+                  $$\text{Entrando al ábaco con } g = 0.70,\; K = 0.37\text{ y } K(e/h) = 0.23 \implies \mathbf{\rho_g = 0.017\;\;(1.70\%)}$$
+                  $$A_{st,\text{req}} = 0.017 \times 40 \times 40 = \mathbf{27.20\text{ cm}^2} \implies \text{Adoptar } \mathbf{6\phi 1"}\;\;(A_{st} = 30.60\text{ cm}^2,\; 3\phi 1"\text{ por cara}) \quad \text{ó} \quad \mathbf{10\phi 3/4"}\;\;(28.40\text{ cm}^2)$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Parte B: Verificación de Flexocompresión Biaxial ($60 \times 60\text{ cm}$) por Bresler Recíproco, Contorno de Bresler y Contorno PCA</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Comparación de los 3 Métodos de Interacción Biaxial</span>
+                  <span class="norm-pill">NSR-10 R.10.3.6</span>
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{1. Carga Recíproca de Bresler:}} \quad \frac{1}{\phi P_n} = \frac{1}{6650} + \frac{1}{8450} - \frac{1}{10\,500} = 0.0001504 + 0.0001183 - 0.0000952 = 0.0001735\text{ kN}^{-1}$$
+                  $$\implies \mathbf{\phi P_n = 5764.3\text{ kN} \ge P_u = 5300\text{ kN}} \quad (\text{Cumple con margen de }+8.8\%)\;\checkmark$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{2. Contorno de Carga de Bresler }(\alpha = 1.50):} \quad \left(\frac{405}{495}\right)^{1.50} + \left(\frac{170}{495}\right)^{1.50} = (0.8182)^{1.50} + (0.3434)^{1.50} = 0.740 + 0.201 = \mathbf{0.941 \le 1.00}\;\checkmark$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{3. Contorno de Carga de la PCA }(\beta = 0.65,\; \alpha = 1.61):} \quad \left(\frac{405}{495}\right)^{1.61} + \left(\frac{170}{495}\right)^{1.61} = 0.724 + 0.179 = \mathbf{0.903 \le 1.00}\;\checkmark$$
+                  $$\text{Por momento uniaxial equivalente PCA }\left(\frac{M_{uy}}{M_{ux}} = 0.42 < \frac{b}{h} = 1.0\right): \quad M_{nx0,\text{req}} = 405 + 170(1.0)\left(\frac{1 - 0.65}{0.65}\right) = \mathbf{496.5\text{ kN}\cdot\text{m}} \approx 495\text{ kN}\cdot\text{m}\;\checkmark$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 5.4: COLUMNA ESBELTA EN UN PÓRTICO DE 2 PISOS (C.10.10)
+             =============================================================== -->
+        <div id="ej-5-4" style="margin-bottom: 1rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.4: Análisis de Esbeltez y Magnificación de Momentos ($\delta_{ns}, \delta_s$) en Columna de Pórtico de 2 Pisos (NSR-10 C.10.10)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Se estudia la columna central inferior AB de un pórtico de concreto reforzado de 2 pisos ($f'_c = 28\text{ MPa}$, $E_c = 4700\sqrt{28} = 24\,870\text{ MPa}$). Todas las columnas tienen sección $b = 40\text{ cm}$, $h = 50\text{ cm}$ ($I_{g,\text{col}} = 0.004167\text{ m}^4$, $I_{\text{ef,col}} = 0.70\,I_g = 0.002917\text{ m}^4$) y las vigas de entrepiso tienen sección $40 \times 65\text{ cm}$ ($I_{g,\text{viga}} = 0.009154\text{ m}^4$, $I_{\text{ef,viga}} = 0.35\,I_g = 0.003204\text{ m}^4$) con luces a izquierda y derecha de $L_1 = 7.0\text{ m}$ y $L_2 = 9.0\text{ m}$. La altura del primer piso es $l_{c1} = 4.00\text{ m}$ ($l_u = 4.00 - 0.65 = 3.35\text{ m}$) y la del segundo piso es $l_{c2} = 3.50\text{ m}$. La columna AB está sometida a $P_D = 500\text{ kN}$, $P_L = 450\text{ kN}$ ($P_u = 1.2(500) + 1.6(450) = 1320\text{ kN}$) y momentos de primer orden en curvatura doble $M_1 = -65.0\text{ kN}\cdot\text{m}$ y $M_2 = +110.0\text{ kN}\cdot\text{m}$. Determinar las rigideces relativas $\Psi_A, \Psi_B$, el factor $k$, la carga crítica $P_c$ y el momento amplificado $M_c$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-4', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-4', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Rigideces Relativas $\Psi_A, \Psi_B$, Factor de Longitud Efectiva $k$ y Verificación del Límite de Esbeltez</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Evaluación de Nudos con Inercias Fisuradas ($0.70\,I_g$ y $0.35\,I_g$)</span>
+                  <span class="norm-pill">NSR-10 C.10.10.4.1 y C.10.10.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\text{En el nudo entrepiso } B\text{ (concurren col. piso 1, col. piso 2 y vigas de }7\text{ m y }9\text{ m):}$$
+                  $$\sum\left(\frac{I_{\text{ef}}}{l_c}\right)_{\text{col}} = \frac{0.002917}{4.00} + \frac{0.002917}{3.50} = 0.000729 + 0.000833 = \mathbf{0.001563\text{ m}^3}$$
+                  $$\sum\left(\frac{I_{\text{ef}}}{L}\right)_{\text{vigas}} = \frac{0.003204}{7.00} + \frac{0.003204}{9.00} = 0.000458 + 0.000356 = \mathbf{0.000814\text{ m}^3} \implies \mathbf{\Psi_A = \frac{0.001563}{0.000814} = 1.92}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Con apoyo inferior }\Psi_B = 1.03\text{ (pórtico arriostrado):} \quad k = \min\big[0.70 + 0.05(1.92 + 1.03),\; 0.85 + 0.05(1.03),\; 1.0\big] = \mathbf{0.81\text{ a }0.85}$$
+                  $$r = 0.30(0.50\text{ m}) = \mathbf{0.15\text{ m}} \implies \frac{k\,l_u}{r} = \frac{0.81 \times 3.35}{0.15} = \mathbf{18.09}, \qquad \text{Límite C.10.10.1} = \min\left[40,\; 34 - 12\left(\frac{-65}{110}\right)\right] = \mathbf{40.0}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Cálculo de $\beta_{dns}$, Rigidez $EI$, Carga Crítica $P_c$, Factor $C_m$ y Magnificador $\delta_{ns}$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-amber">
+                <div class="math-card-header">
+                  <span class="math-card-title">Aplicación de las Ecuaciones C.10-13 a C.10-17 de la NSR-10</span>
+                  <span class="norm-pill">NSR-10 C.10.10.6</span>
+                </div>
+                <div class="math-formula">
+                  $$\beta_{dns} = \frac{1.2\,P_D}{P_u} = \frac{1.2(500)}{1320} = \mathbf{0.455}, \qquad E I = \frac{0.40\,E_c\,I_g}{1 + \beta_{dns}} = \frac{0.40(24\,870\,000\text{ kN/m}^2)(0.004167\text{ m}^4)}{1 + 0.455} = \mathbf{28\,489\text{ kN}\cdot\text{m}^2}$$
+                </div>
+                <div class="math-formula">
+                  $$P_c = \frac{\pi^2\,E I}{(k\,l_u)^2} = \frac{\pi^2(28\,489)}{(0.81 \times 3.35)^2} = \mathbf{38\,210\text{ kN}} \quad (\text{ó para }l_u = 3.81\text{ m}: P_c = \mathbf{29\,520\text{ kN}})$$
+                </div>
+                <div class="math-formula">
+                  $$C_m = 0.60 + 0.40\left(\frac{-65.0}{110.0}\right) = 0.364 < 0.40 \implies \mathbf{C_m = 0.40}, \qquad M_{2,\min} = 1320\big(0.015 + 0.03(0.50)\big) = \mathbf{39.6\text{ kN}\cdot\text{m}} \le M_2 = 110.0\text{ kN}\cdot\text{m}$$
+                  $$\delta_{ns} = \frac{C_m}{1 - \dfrac{P_u}{0.75\,P_c}} = \frac{0.40}{1 - \dfrac{1320}{0.75(29\,520)}} = \frac{0.40}{0.9404} = 0.425 < 1.0 \implies \mathbf{\delta_{ns} = 1.00} \implies \mathbf{M_c = 110.0\text{ kN}\cdot\text{m}}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Nota si el pórtico es desplazable ($k = 1.56$, $C_m = 1.0$):</strong> En un entrepiso desplazable con $Q = 0.12 > 0.05$, el magnificador de deriva lateral es $\delta_s = \frac{1}{1 - Q} = \frac{1}{1 - 0.12} = \mathbf{1.136} \le 1.40$, amplificando directamente los momentos sísmicos $M_{1s}$ y $M_{2s}$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+        <!-- ===============================================================
+             EJEMPLO 5.5: COLUMNA ZUNCHADA CIRCULAR DE GRAN CARGA (NSR-10 C.21.6.4 & MULET CAP. 1)
+             =============================================================== -->
+        <div id="ej-5-5" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.5: Columna Zunchada Circular con Espiral Continua y Alta Demanda Sísmica DES (NSR-10 C.21.6.4 & Mulet Cap. 1)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> En el vestíbulo de un edificio de 14 pisos en zona de amenaza sísmica alta (DES) se proyecta una columna circular arquitectónica de diámetro exterior $D = 650\text{ mm}$ ($65\text{ cm}$), con recubrimiento libre de $40\text{ mm}$, concreto de alta resistencia $f'_c = 35\text{ MPa}$ y acero $f_y = f_{yt} = 420\text{ MPa}$. La columna soporta una carga axial mayorada $P_u = 6\,800.0\text{ kN}$ y un momento flector concurrente $M_u = 280.0\text{ kN}\cdot\text{m}$. La armadura longitudinal consta de $12\#9$ ($A_{st} = 12 \times 645 = 7\,740\text{ mm}^2$). Se solicita: <strong>1)</strong> Verificar la cuantía geométrica longitudinal $\rho_g$ según NSR-10 C.21.6.3; <strong>2)</strong> Diseñar la espiral helicoidal continua con varilla $\#4$ ($d_s = 12.7\text{ mm}$, $a_s = 129\text{ mm}^2$), determinando la cuantía volumétrica mínima ($\rho_s$) y el paso máximo ($s$) por requisitos gravitacionales (C.10.9.3) y sísmicos DES (C.21.6.4.4); <strong>3)</strong> Evaluar la resistencia máxima a compresión axial centrada ($\phi P_{n,\max}$) con el factor de reducción para elementos en espiral ($\phi = 0.75$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-5', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-5', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 5.5 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Sección Transversal de la Columna Circular Zunchada (D = 65 cm) y Paso de la Espiral Helicoidal</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Sección Circular -->
+              <g transform="translate(150, 140)">
+                <!-- Círculo exterior D = 650 mm (R = 105 px) -->
+                <circle cx="0" cy="0" r="105" fill="rgba(56, 189, 248, 0.12)" stroke="#38BDF8" stroke-width="2.2"/>
+                <!-- Espiral continua Dc = 570 mm (R = 92 px) -->
+                <circle cx="0" cy="0" r="92" fill="rgba(249, 115, 22, 0.15)" stroke="#F97316" stroke-width="2" stroke-dasharray="4 2"/>
+                <!-- 12 Barras #9 distribuidas radialmente (R = 80 px) -->
+                <g fill="#34D399" stroke="#0F172A" stroke-width="1.2">
+                  <circle cx="80" cy="0" r="6"/><circle cx="69.3" cy="40" r="6"/><circle cx="40" cy="69.3" r="6"/>
+                  <circle cx="0" cy="80" r="6"/><circle cx="-40" cy="69.3" r="6"/><circle cx="-69.3" cy="40" r="6"/>
+                  <circle cx="-80" cy="0" r="6"/><circle cx="-69.3" cy="-40" r="6"/><circle cx="-40" cy="-69.3" r="6"/>
+                  <circle cx="0" cy="-80" r="6"/><circle cx="40" cy="-69.3" r="6"/><circle cx="69.3" cy="-40" r="6"/>
+                </g>
+                <!-- Centro y cotas -->
+                <line x1="-105" y1="0" x2="105" y2="0" stroke="#94A3B8" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <line x1="0" y1="-105" x2="0" y2="105" stroke="#94A3B8" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <text x="0" y="-115" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">D = 650 mm (65 cm)</text>
+                <text x="0" y="35" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Dc = 570 mm</text>
+                <text x="0" y="5" fill="#34D399" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">12 #9 (Ast = 77.4 cm²)</text>
+              </g>
+              <!-- Detalle 3D de la Espiral Helicoidal y Parámetros a la derecha -->
+              <g transform="translate(420, 20)">
+                <rect x="0" y="0" width="360" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="180" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">PARÁMETROS DE CONFINAMIENTO SÍSMICO DES</text>
+                <g transform="translate(20, 45)">
+                  <text x="0" y="15" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Área bruta Ag:</text>
+                  <text x="320" y="15" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">3,318.3 cm²</text>
+                  <text x="0" y="38" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Área del núcleo confinado Ach:</text>
+                  <text x="320" y="38" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">2,551.8 cm²</text>
+                  <text x="0" y="61" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Cuantía longitudinal ρg:</text>
+                  <text x="320" y="61" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">2.33% ∈ [1%, 4%] (✓)</text>
+                  <line x1="0" y1="72" x2="320" y2="72" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="90" fill="#F97316" font-family="Inter, sans-serif" font-size="9" font-weight="700">Cuantía volumétrica ρs,mín:</text>
+                  <text x="320" y="90" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">0.0135 (1.35%)</text>
+                  <text x="0" y="112" fill="#FBBF24" font-family="Inter, sans-serif" font-size="9" font-weight="700">Paso de la Espiral #4 adoptado:</text>
+                  <text x="320" y="112" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">s = 6.0 cm (60 mm)</text>
+                  <line x1="0" y1="124" x2="320" y2="124" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="142" fill="#38BDF8" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">Resistencia Máxima φ Pn,máx:</text>
+                  <text x="320" y="142" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">8,228.6 kN &gt; Pu (✓)</text>
+                </g>
+                <text x="180" y="215" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Factor de ductilidad φ = 0.75 (Espiral continua)</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: GEOMETRÍA Y CUANTÍA LONGITUDINAL -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Propiedades Geométricas del Núcleo y Cuantía Longitudinal ($\rho_g$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Propiedades de Sección Circular</span>
+                  <span class="norm-pill">NSR-10 C.10.9 & C.21.6.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_g & = \frac{\pi}{4}(650\text{ mm})^2 = \mathbf{331\,831\text{ mm}^2} = 3\,318.3\text{ cm}^2 \\[4pt]
+                  D_c & = D - 2 \cdot \text{rec} = 650 - 2(40) = \mathbf{570\text{ mm}} = 57.0\text{ cm} \\[4pt]
+                  A_{ch} & = \frac{\pi}{4}(570\text{ mm})^2 = \mathbf{255\,176\text{ mm}^2} = 2\,551.8\text{ cm}^2 \\[6pt]
+                  A_{st} & = 12 \text{ varillas } \#9 = 12 \times 645\text{ mm}^2 = \mathbf{7\,740\text{ mm}^2} = 77.4\text{ cm}^2 \\[4pt]
+                  \rho_g & = \frac{A_{st}}{A_g} = \frac{7\,740}{331\,831} = \mathbf{0.0233}\;(2.33\%) \implies \mathbf{1.0\% \le 2.33\% \le 4.0\%} \quad \checkmark \quad (\text{D.E.S. C.21.6.3.1})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: DISEÑO DE LA ESPIRAL CONTINUA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Cuantía Volumétrica Mínima ($\rho_s$) y Paso de Espiral ($s$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Requisitos de Confinamiento Sísmico DES</span>
+                  <span class="norm-pill">NSR-10 C.10.9.3 & C.21.6.4.4</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Criterio Gravitacional C.10-5:} \quad & \rho_{s,1} = 0.45\left(\frac{A_g}{A_{ch}} - 1\right)\frac{f'_c}{f_{yt}} = 0.45\left(\frac{331\,831}{255\,176} - 1\right)\frac{35}{420} = 0.45(0.3004)(0.08333) = \mathbf{0.01126} \\[6pt]
+                  \text{Criterio Sísmico DES C.21-5:} \quad & \rho_{s,2} = 0.12\frac{f'_c}{f_{yt}} = 0.12\left(\frac{35}{420}\right) = \mathbf{0.01000} \\[6pt]
+                  \text{Rige cuantía mayor: } \quad & \rho_{s,\min} = \max(0.01126, 0.01000) = \mathbf{0.01126} \\[6pt]
+                  \text{Paso requerido con varilla } \#4 \;(a_s = 129\text{ mm}^2): \quad & s \le \frac{4 a_s}{\rho_s D_c} = \frac{4(129\text{ mm}^2)}{0.01126 \times 570\text{ mm}} = \mathbf{80.4\text{ mm}}
+                  \end{aligned}$$
+                </div>
+                <div class="callout warning" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Límites Normativos Estrictos de Espaciamiento Sísmico DES (C.21.6.4.4):</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    En elementos DES, el paso libre de la espiral no puede exceder:
+                    $$s_{\max} \le \min\left(\frac{D_c}{6} = \frac{570}{6} = 95\text{ mm},\; 6 d_b = 6(28.7) = 172\text{ mm},\; 75\text{ mm}\right) = \mathbf{75\text{ mm}}$$
+                    Asimismo, para garantizar el paso del agregado grueso, el espaciamiento libre debe ser $\ge 25\text{ mm}$ y $\ge \frac{4}{3} d_{\text{agregado}}$.
+                    Se adopta un paso constructivo uniforme de:
+                    $$\mathbf{s = 60\text{ mm}}\;(6.0\text{ cm}) \implies \rho_{s,\text{prov}} = \frac{4(129)}{60 \times 570} = \mathbf{0.01509} \ge 0.01126 \quad \checkmark$$
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: CAPACIDAD AXIAL MÁXIMA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Capacidad Máxima a Compresión Axial ($\phi P_{n,\max}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Resistencia Axial con Factor $\phi = 0.75$</span>
+                  <span class="norm-pill">NSR-10 C.10.3.6.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  P_0 & = 0.85 f'_c (A_g - A_{st}) + f_y A_{st} \\
+                  & = 0.85(35\text{ MPa})(331\,831 - 7\,740)\text{ mm}^2 + 420\text{ MPa}(7\,740\text{ mm}^2) \\
+                  & = 0.85(35)(324\,091) + 420(7\,740) = 9\,641\,707 + 3\,250\,800 = \mathbf{12\,892.5\text{ kN}} \\[6pt]
+                  \phi P_{n,\max} & = 0.85 \cdot \phi \cdot P_0 = 0.85 \times 0.75 \times 12\,892.5\text{ kN} = \mathbf{8\,218.9\text{ kN}} \\[6pt]
+                  \mathbf{8\,218.9\text{ kN}} & \ge P_u = \mathbf{6\,800.0\text{ kN}} \quad \checkmark \quad (\text{Margen de seguridad del } +20.8\%)
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Diseño:</strong> La columna circular zunchada de $65\text{ cm}$ con espiral $\#4$ @ $6\text{ cm}$ y $12\#9$ garantiza una extraordinaria ductilidad y confinamiento bajo el sismo de diseño, superando ampliamente la demanda axial y de momento.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 5.6: ESBELTEZ EN PÓRTICO TRASLACIONAL (NSR-10 C.10.10.7)
+             =============================================================== -->
+        <div id="ej-5-6" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.6: Análisis de Esbeltez en Pórtico Traslacional (Sway) por el Magnificador $\delta_s$ (NSR-10 C.10.10.7)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Se evalúa una columna interior de primer piso ($450 \times 450\text{ mm}$, $l_u = 3.60\text{ m}$, $f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$) perteneciente a un edificio aporticado de 4 pisos no arriostrado contra deriva lateral (pórtico traslacional). La carga axial mayorada en la columna es $P_u = 1\,650.0\text{ kN}$, con momentos de primer orden $M_{1ns} = 35.0\text{ kN}\cdot\text{m}$, $M_{2ns} = 55.0\text{ kN}\cdot\text{m}$, y momentos por sismo lateral $M_{1s} = 90.0\text{ kN}\cdot\text{m}$, $M_{2s} = 110.0\text{ kN}\cdot\text{m}$. La sumatoria de cargas axiales de todas las columnas del primer piso es $\sum P_u = 9\,600.0\text{ kN}$, la fuerza cortante sísmica total del piso es $V_{us} = 520.0\text{ kN}$ y el desplazamiento lateral elástico relativo de primer orden es $\Delta_0 = 13.5\text{ mm}$. Calcule: <strong>1)</strong> El índice de estabilidad del entrepiso ($Q$); <strong>2)</strong> El factor de magnificación por desplazamiento lateral ($\delta_s$); <strong>3)</strong> El momento flector total mayorado de diseño ($M_c$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-6', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-6', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 5.6 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Deformada Lateral del Pórtico Traslacional (Efecto P-Delta) y Magnificación de Momentos</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Pórtico No Arriostrado Deformado -->
+              <g transform="translate(80, 20)">
+                <!-- Apoyo articulado base -->
+                <line x1="20" y1="210" x2="320" y2="210" stroke="#475569" stroke-width="1.5"/>
+                <!-- Columnas en posición original (gris punteado) -->
+                <line x1="60" y1="210" x2="60" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <line x1="260" y1="210" x2="260" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <line x1="60" y1="30" x2="260" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <!-- Columnas Deformadas por Cortante Vus (azul) -->
+                <path d="M 60 210 Q 75 120 100 30" fill="none" stroke="#38BDF8" stroke-width="2.5"/>
+                <path d="M 260 210 Q 275 120 300 30" fill="none" stroke="#38BDF8" stroke-width="2.5"/>
+                <line x1="100" y1="30" x2="300" y2="30" stroke="#38BDF8" stroke-width="3"/>
+                <!-- Flecha de Fuerza Sísmica Vus -->
+                <line x1="10" y1="30" x2="90" y2="30" stroke="#EF4444" stroke-width="2.5"/>
+                <polygon points="90,30 82,26 82,34" fill="#EF4444"/>
+                <text x="50" y="22" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">Vus = 520 kN</text>
+                <!-- Desplazamiento Delta 0 -->
+                <line x1="60" y1="15" x2="100" y2="15" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="60" y1="10" x2="60" y2="20" stroke="#FBBF24" stroke-width="1.5"/>
+                <line x1="100" y1="10" x2="100" y2="20" stroke="#FBBF24" stroke-width="1.5"/>
+                <text x="80" y="8" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Δ0 = 13.5 mm</text>
+                <!-- Carga Axial Sumatoria Pu -->
+                <line x1="100" y1="-5" x2="100" y2="25" stroke="#34D399" stroke-width="2.5"/>
+                <polygon points="100,25 96,17 104,17" fill="#34D399"/>
+                <line x1="300" y1="-5" x2="300" y2="25" stroke="#34D399" stroke-width="2.5"/>
+                <polygon points="300,25 296,17 304,17" fill="#34D399"/>
+                <text x="200" y="-1" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Σ Pu = 9,600 kN</text>
+                <!-- Altura lc = 3.60 m -->
+                <line x1="320" y1="30" x2="320" y2="210" stroke="#94A3B8" stroke-width="1"/>
+                <text x="330" y="125" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9">lc = 3.60 m</text>
+              </g>
+              <!-- Detalle de Magnificación a la derecha -->
+              <g transform="translate(470, 20)">
+                <rect x="0" y="0" width="310" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="155" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">MAGNIFICADOR DE SEGUNDO ORDEN δs</text>
+                <g transform="translate(15, 45)">
+                  <text x="0" y="15" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Índice de estabilidad Q:</text>
+                  <text x="280" y="15" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">Q = 0.069 &gt; 0.05 (Traslacional)</text>
+                  <text x="0" y="40" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Factor de magnificación δs:</text>
+                  <text x="280" y="40" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="end">δs = 1.074</text>
+                  <line x1="0" y1="52" x2="280" y2="52" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="72" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Momento gravitacional M2ns:</text>
+                  <text x="280" y="72" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">55.0 kN·m</text>
+                  <text x="0" y="94" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Momento lateral M2s:</text>
+                  <text x="280" y="94" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">110.0 kN·m</text>
+                  <text x="0" y="116" fill="#F97316" font-family="Inter, sans-serif" font-size="9">Momento amplificado δs · M2s:</text>
+                  <text x="280" y="116" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">118.1 kN·m</text>
+                  <line x1="0" y1="128" x2="280" y2="128" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="148" fill="#34D399" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">Momento de Diseño Mc:</text>
+                  <text x="280" y="148" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="end">173.1 kN·m</text>
+                </g>
+                <text x="155" y="215" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Incremento por esbeltez global: +8.1 kN·m</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: ÍNDICE DE ESTABILIDAD Q -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Cálculo del Índice de Estabilidad del Entrepiso ($Q$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Definición de Pórtico Arriostrado vs. No Arriostrado</span>
+                  <span class="norm-pill">NSR-10 C.10.10.5.2 (Ec. C.10-10)</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  Q & = \frac{\sum P_u \cdot \Delta_0}{V_{us} \cdot l_c} \\
+                  & = \frac{9\,600.0\text{ kN} \times 0.0135\text{ m}}{520.0\text{ kN} \times 3.60\text{ m}} = \frac{129.60\text{ kN}\cdot\text{m}}{1\,872.00\text{ kN}\cdot\text{m}} = \mathbf{0.0692}
+                  \end{aligned}$$
+                </div>
+                <div class="callout warning" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Clasificación del Entrepiso:</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    Como $Q = \mathbf{0.0692} > \mathbf{0.05}$, el entrepiso <strong>NO se considera arriostrado</strong> contra desplazamiento lateral. Por ende, los efectos de segundo orden deben considerarse obligatoriamente mediante el análisis de pórticos traslacionales (C.10.10.7).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: MAGNIFICADOR DELTA_S -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Cálculo del Factor Magnificador por Desplazamiento Lateral ($\delta_s$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Formulación por el Índice de Estabilidad $Q$</span>
+                  <span class="norm-pill">NSR-10 C.10.10.7.3 (Ec. C.10-17)</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \delta_s & = \frac{1}{1 - Q} = \frac{1}{1 - 0.0692} = \frac{1}{0.9308} = \mathbf{1.0743} \approx \mathbf{1.074}
+                  \end{aligned}$$
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                  Nótese que $\delta_s \le 1.50$, cumpliendo la restricción de estabilidad global de NSR-10 C.10.10.2.1.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: MOMENTO TOTAL DE DISEÑO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Superposición y Momento Mayorado Final de Diseño ($M_c$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Combinación de Momentos Gravitacionales y Sísmicos Amplificados</span>
+                  <span class="norm-pill">NSR-10 C.10.10.7</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  M_1 & = M_{1ns} + \delta_s M_{1s} = 35.0 + 1.074(90.0) = 35.0 + 96.66 = \mathbf{131.66\text{ kN}\cdot\text{m}} \\[6pt]
+                  M_2 & = M_{2ns} + \delta_s M_{2s} = 55.0 + 1.074(110.0) = 55.0 + 118.14 = \mathbf{173.14\text{ kN}\cdot\text{m}} \\[6pt]
+                  \text{Momento Crítico de Diseño: } & M_c = M_2 = \mathbf{173.14\text{ kN}\cdot\text{m}} \quad (\text{en el extremo superior})
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Esbeltez:</strong> El efecto $P\text{-}\Delta$ global incrementa el momento actuante de primer orden ($165.0\text{ kN}\cdot\text{m}$) a $\mathbf{173.1\text{ kN}\cdot\text{m}}$ ($+4.9\%$). La columna debe diseñarse para la pareja crítica $(P_u = 1\,650\text{ kN}, M_u = 173.1\text{ kN}\cdot\text{m})$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 5.7: FLEXOCOMPRESIÓN BIAXIAL POR CONTORNO DE PARME / PCA
+             =============================================================== -->
+        <div id="ej-5-7" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 5.7: Flexocompresión Biaxial por el Método del Contorno de Carga de Parme / PCA (NSR-10 C.10.16.5 & Mulet)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una columna esquinera de sección cuadrada $500 \times 500\text{ mm}$ ($f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, $d' = 60\text{ mm}$) está sometida a flexocompresión biaxial simultánea producida por la combinación de sismo en dos direcciones ortogonales: $P_u = 1\,850.0\text{ kN}$, $M_{ux} = 195.0\text{ kN}\cdot\text{m}$ y $M_{uy} = 145.0\text{ kN}\cdot\text{m}$. La sección está armada con $8\#8$ ($A_{st} = 4\,080\text{ mm}^2$, $\rho_g = 1.63\%$) distribuidas simétricamente (3 barras por cara). Las capacidades uniaxiales puras bajo $P_u = 1\,850\text{ kN}$ son $\phi M_{nx} = 280.0\text{ kN}\cdot\text{m}$ y $\phi M_{ny} = 280.0\text{ kN}\cdot\text{m}$. Se pide: <strong>1)</strong> Evaluar la seguridad estructural mediante el Método del Contorno de Cargas de Parme / PCA; <strong>2)</strong> Si no cumple, rediseñar el acero longitudinal y verificar con la Ecuación Recíproca de Bresler.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-7', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-5-7', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 5.7 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Superficie de Interacción 3D, Curva de Contorno Biaxial de Parme y Sección Esquinera</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Sección Cuadrada con 8 barras -->
+              <g transform="translate(60, 20)">
+                <rect x="0" y="0" width="180" height="180" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="2"/>
+                <rect x="15" y="15" width="150" height="150" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="2 1"/>
+                <!-- 8 Barras -->
+                <circle cx="25" cy="25" r="5.5" fill="#34D399"/><circle cx="90" cy="25" r="5.5" fill="#34D399"/><circle cx="155" cy="25" r="5.5" fill="#34D399"/>
+                <circle cx="25" cy="90" r="5.5" fill="#34D399"/><circle cx="155" cy="90" r="5.5" fill="#34D399"/>
+                <circle cx="25" cy="155" r="5.5" fill="#34D399"/><circle cx="90" cy="155" r="5.5" fill="#34D399"/><circle cx="155" cy="155" r="5.5" fill="#34D399"/>
+                <!-- Momentos Mux y Muy -->
+                <g stroke="#EF4444" stroke-width="2">
+                  <line x1="90" y1="195" x2="160" y2="195"/><polygon points="160,195 152,191 152,199" fill="#EF4444"/>
+                  <line x1="-15" y1="90" x2="-15" y2="20"/><polygon points="-15,20 -19,28 -11,28" fill="#EF4444"/>
+                </g>
+                <text x="125" y="212" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9">Mux = 195 kN·m</text>
+                <text x="-20" y="60" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end" transform="rotate(-90, -20, 60)">Muy = 145 kN·m</text>
+                <text x="90" y="235" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">500 × 500 mm</text>
+              </g>
+              <!-- Diagrama de Contorno de Parme (Curva de Interacción Biaxial a Pu constante) -->
+              <g transform="translate(320, 20)">
+                <rect x="0" y="0" width="220" height="235" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">CONTORNO DE PARME / PCA</text>
+                <!-- Ejes cartesianos Mux/Mny -->
+                <line x1="30" y1="180" x2="190" y2="180" stroke="#64748B" stroke-width="1.2"/>
+                <line x1="30" y1="180" x2="30" y2="40" stroke="#64748B" stroke-width="1.2"/>
+                <text x="190" y="195" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8.5">Mux/φMnx</text>
+                <text x="25" y="35" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8.5">Muy/φMny</text>
+                <!-- Curva elíptica de Parme: (x/a)^1.25 + (y/b)^1.25 = 1 -->
+                <path d="M 30 60 Q 110 80 170 180" fill="none" stroke="#34D399" stroke-width="2"/>
+                <!-- Punto con 8#8 (Falla: 1.074 > 1) -->
+                <circle cx="127" cy="107" r="4.5" fill="#EF4444"/>
+                <text x="135" y="103" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">8#8: 1.074 (Falla)</text>
+                <!-- Punto con 8#9 (Cumple: 0.876 < 1) -->
+                <circle cx="112" cy="120" r="4.5" fill="#34D399"/>
+                <text x="120" y="135" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">8#9: 0.876 (✓)</text>
+                <text x="110" y="215" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Exponente Parme α = 1.25</text>
+              </g>
+              <!-- Detalle de Comparación y Rediseño -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="235" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">COMPARATIVO DE ARMADO</text>
+                <g transform="translate(15, 45)">
+                  <text x="0" y="15" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Opción Inicial (8 #8):</text>
+                  <text x="0" y="32" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">φ Mnx = φ Mny = 280 kN·m</text>
+                  <text x="0" y="48" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5">Parme = 1.074 &gt; 1.0 (Inseguro)</text>
+                  <line x1="0" y1="60" x2="190" y2="60" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="78" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Opción Definitiva (8 #9):</text>
+                  <text x="0" y="95" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">φ Mnx = φ Mny = 330 kN·m</text>
+                  <text x="0" y="112" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5">Parme = 0.876 ≤ 1.0 (Seguro)</text>
+                  <text x="0" y="128" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5">ρg = 2.06% ∈ [1%, 4%]</text>
+                </g>
+                <text x="110" y="200" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Bresler 1/Pn: 0.89 ≤ 1.0 (✓)</text>
+                <text x="110" y="218" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8" text-anchor="middle">Satisface NSR-10 C.10.16.5</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: EVALUACIÓN CON 8#8 -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Evaluación de la Armadura Inicial ($8\#8$) con el Método de Parme / PCA</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Ecuación de Contorno Adimensional de Parme</span>
+                  <span class="norm-pill">NSR-10 C.10.16.5 & PCA Notes</span>
+                </div>
+                <div class="math-formula">
+                  $$\left(\frac{M_{ux}}{\phi M_{nx}}\right)^\alpha + \left(\frac{M_{uy}}{\phi M_{ny}}\right)^\alpha \le 1.0$$
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Relación de carga axial: } & \frac{P_u}{\phi P_0} \approx \frac{1\,850\text{ kN}}{0.65(5\,360\text{ kN})} = \mathbf{0.53} \implies \text{Para } \frac{P_u}{\phi P_0} \approx 0.50 \text{ corresponde } \mathbf{\alpha \approx 1.25} \\[6pt]
+                  \text{Sustituyendo con } 8\#8: \quad & \left(\frac{195.0}{280.0}\right)^{1.25} + \left(\frac{145.0}{280.0}\right)^{1.25} = (0.6964)^{1.25} + (0.5179)^{1.25} \\
+                  & = 0.635 + 0.439 = \mathbf{1.074} > \mathbf{1.000} \quad \text{❌ ¡NO CUMPLE!}
+                  \end{aligned}$$
+                </div>
+                <div class="callout danger" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">❌ Diagnóstico de Falla Biaxial:</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    Aunque la sección resiste holgadamente cada flexión de forma individual ($195 < 280$ y $145 < 280$), la <strong>acción simultánea en ambas direcciones agota la capacidad del concreto en la esquina comprimida</strong>, superando el límite en un $7.4\%$. Es indispensable incrementar la armadura longitudinal.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: REDISEÑO CON 8#9 -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Rediseño con $8\#9$ y Verificación del Contorno de Parme</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Incremento a Barras $\#9$ ($d_b = 28.7\text{ mm}$, $A_b = 645\text{ mm}^2$)</span>
+                  <span class="norm-pill">NSR-10 C.10.16.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_{st} & = 8 \times 645\text{ mm}^2 = \mathbf{5\,160\text{ mm}^2} = 51.6\text{ cm}^2 \\[4pt]
+                  \rho_g & = \frac{5\,160}{250\,000} = \mathbf{0.0206}\;(2.06\%) \in [1\%, 4\%] \quad \checkmark \\[6pt]
+                  \text{Nuevas capacidades uniaxiales: } & \phi M_{nx} = \phi M_{ny} = \mathbf{330.0\text{ kN}\cdot\text{m}} \\[6pt]
+                  \text{Verificación de Parme: } & \left(\frac{195.0}{330.0}\right)^{1.25} + \left(\frac{145.0}{330.0}\right)^{1.25} = (0.5909)^{1.25} + (0.4394)^{1.25} \\
+                  & = 0.518 + 0.358 = \mathbf{0.876} \le \mathbf{1.000} \quad \checkmark \quad (\text{Margen de reserva del } +12.4\%)
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: VERIFICACIÓN BRESLER -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Comprobación Cruzada con la Ecuación Recíproca de Bresler</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Método Recíproco de Bresler (NSR-10 C.10.16.5)</span>
+                  <span class="norm-pill">NSR-10 C.10.16.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\frac{1}{\phi P_n} = \frac{1}{\phi P_{nx}} + \frac{1}{\phi P_{ny}} - \frac{1}{\phi P_0}$$
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \phi P_0 & = 0.65 [0.85(28)(250\,000 - 5\,160) + 420(5\,160)] \times 10^{-3} = \mathbf{5\,196.2\text{ kN}} \\[4pt]
+                  \text{Para } e_x = \frac{145}{1850} = 0.078\text{ m} \implies & \phi P_{nx} = \mathbf{2\,950.0\text{ kN}} \\[4pt]
+                  \text{Para } e_y = \frac{195}{1850} = 0.105\text{ m} \implies & \phi P_{ny} = \mathbf{2\,620.0\text{ kN}} \\[6pt]
+                  \frac{1}{\phi P_n} & = \frac{1}{2\,950} + \frac{1}{2\,620} - \frac{1}{5\,196} = 0.0003390 + 0.0003817 - 0.0001924 = \mathbf{0.0005283\text{ kN}^{-1}} \\[6pt]
+                  \phi P_n & = \frac{1}{0.0005283} = \mathbf{1\,892.9\text{ kN}} \ge P_u = \mathbf{1\,850.0\text{ kN}} \quad \checkmark
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Diseño Biaxial:</strong> Tanto el método del contorno de Parme ($\text{Índice } = 0.876 \le 1.0$) como la fórmula recíproca de Bresler ($\phi P_n = 1\,893\text{ kN} \ge 1\,850\text{ kN}$) confirman la completa seguridad y estabilidad de la sección de $500\times 500\text{ mm}$ con $8\#9$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TARJETA DE NAVEGACIÓN INFERIOR -->
+      <div class="tech-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+            Continúa tu ruta de aprendizaje
+          </div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 0.2rem;">
+            Siguiente: Módulo 06 — Diseño de Losas de Entrepiso (Una y Dos Direcciones, Método Directo)
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="modulo-04-cortante-vigas.html" class="btn-control" style="background: var(--bg-subtle); color: var(--text-main); border-color: var(--border-strong);">← Volver al Módulo 04</a>
+          <a href="modulo-06-losas.html" class="btn-primary">Ir al Módulo 06 →</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Globales y Simulador del Módulo 05 -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-05.js"></script>
+</body>
+</html>

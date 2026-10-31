@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 8: Despiece de Armaduras, Longitud de Desarrollo y Anclaje | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 08 de 09 — Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Despiece de Armaduras, Longitud de Desarrollo y Anclaje (NSR-10 Cap. C.12)</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠 Portal</span>
+      </a>
+      <button id="theme-toggle" class="btn-control" title="Alternar tema oscuro / claro">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <button id="btn-presentation" class="btn-control btn-accent" onclick="togglePresentationMode()" title="Activar Modo Clase Magistral (Tecla P)">
+        <span>📽️ Modo Clase Magistral (P)</span>
+      </button>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero Láser Virtual (Tecla L)">
+        <span>🔴 Puntero (L)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HUD DEL MODO PRESENTACIÓN -->
+  <div id="presentation-hud" class="presentation-hud" style="display: none;">
+    <div class="hud-left">
+      <span class="hud-badge">DIAPOSITIVA <span id="hud-slide-num">1</span> / <span id="hud-total-slides">8</span></span>
+      <span class="hud-slide-title" id="hud-slide-title">Mecánica de la Adherencia Acero-Concreto</span>
+    </div>
+    <div class="hud-right">
+      <button id="hud-prev" class="btn-control">◀ Anterior</button>
+      <button id="hud-next" class="btn-control btn-accent">Siguiente ▶</button>
+      <button id="hud-exit" class="btn-control">✕ Salir</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- PANEL DE NAVEGACIÓN LATERAL -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-header">
+          <span class="sidebar-caption">CONTENIDO DEL MÓDULO 08</span>
+          <h3>Despiece y Anclaje</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li><a href="#sec-mecanica" class="active"><span class="menu-num">01</span> Mecánica de la Adherencia</a></li>
+          <li><a href="#sec-ld-traccion"><span class="menu-num">02</span> Longitud de Desarrollo a Tracción</a></li>
+          <li><a href="#sec-ganchos"><span class="menu-num">03</span> Ganchos Estándar en Tracción</a></li>
+          <li><a href="#sec-ld-compresion"><span class="menu-num">04</span> Desarrollo a Compresión</a></li>
+          <li><a href="#sec-empalmes"><span class="menu-num">05</span> Empalmes por Traslapo</a></li>
+          <li><a href="#sec-momentos-desplazados"><span class="menu-num">06</span> Momentos Desplazados y Corte</a></li>
+          <li><a href="#sec-sismico-dmo-des"><span class="menu-num">07</span> Detallamiento Sísmico NSR-10 C.21</a></li>
+          <li><a href="#sec-laboratorio-ejemplos"><span class="menu-num">08</span> Simuladores y Ejemplos Numéricos</a></li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-header">
+          <span class="sidebar-caption">DIPLOMADO ESTRUCTURAL</span>
+          <h4>Todos los Módulos</h4>
+        </div>
+        <ul class="sidebar-menu sidebar-sublevel">
+          <li><a href="modulo-01-introduccion.html">01. Filosofía y Requisitos NSR-10</a></li>
+          <li><a href="modulo-02-predimensionamiento.html">02. Predimensionamiento y Materiales</a></li>
+          <li><a href="modulo-03-flexion-vigas.html">03. Flexión en Vigas</a></li>
+          <li><a href="modulo-04-cortante-vigas.html">04. Cortante y Torsión en Vigas</a></li>
+          <li><a href="modulo-05-columnas.html">05. Columnas y Flexocompresión</a></li>
+          <li><a href="modulo-06-losas.html">06. Sistemas de Losas y Entrepisos</a></li>
+          <li><a href="modulo-07-cimentaciones.html">07. Cimentaciones Superficiales</a></li>
+          <li><a href="modulo-08-despiece.html" class="active">08. Despiece, Desarrollo y Anclaje</a></li>
+          <li><a href="modulo-09-sismico.html">09. Detallamiento Sísmico DMO / DES</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="content-area">
+
+      <!-- ====================================================================
+           SLIDE 1: INTRODUCCIÓN A LA ADHERENCIA ACERO-CONCRETO
+           ==================================================================== -->
+      <section id="sec-mecanica" class="content-section" data-slide="1">
+        <div class="section-badge">DIAPOSITIVA 01 / 08 • FUNDAMENTOS MECÁNICOS</div>
+        <h1 class="section-title">Mecánica de la Adherencia y Transferencia de Esfuerzos Acero-Concreto</h1>
+        <p class="lead-text">
+          El concreto reforzado funciona como un material compuesto monolítico únicamente porque existe una <strong>adherencia interfacial continua</strong> capaz de transferir los esfuerzos de tracción y compresión entre el concreto que lo rodea y las barras de acero embebidas. Si no existiera adherencia, la deformación unitaria del acero sería uniforme en toda su longitud, las grietas se abrirían de manera incontrolable y la capacidad resistente a flexión caería a una fracción ínfima.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card info-card">
+            <h3>Mecanismos de Transferencia de Esfuerzos</h3>
+            <p>La adherencia resistente entre la barra y el concreto se compone de tres fenómenos físicos concurrentes:</p>
+            <ul>
+              <li><strong>1. Adherencia Química Pura:</strong> Resistencia molecular de contacto entre el cemento hidratado y la superficie microscópica del acero. Se rompe con deformaciones unitarias muy bajas (del orden de \(10^{-4}\)).</li>
+              <li><strong>2. Fricción Superficial:</strong> Fuerza tangencial generada por la rugosidad de la barra al deslizar, activada por el confinamiento y las tensiones radiales de compresión normales al contacto.</li>
+              <li><strong>3. Apoyo Mecánico de las Corrugaciones (Bearing):</strong> Es el mecanismo predominante en aceros corrugados modernos (ASTM A706 / NTC 2289). Las corrugaciones actúan como cuñas rígidas que se apoyan contra el concreto intermedio formando micro-bielas inclinadas a ángulos de \(45^\circ\) a \(60^\circ\) respecto al eje de la barra.</li>
+            </ul>
+          </div>
+
+          <div class="card warning-card">
+            <h3>Modos de Falla por Adherencia</h3>
+            <p>Dependiendo del recubrimiento, espaciamiento entre barras y el nivel de confinamiento transversal, se presentan dos modos de falla antagónicos:</p>
+            <ul>
+              <li><strong>Falla por Arrancamiento Directo (Pullout):</strong> Ocurre cuando el recubrimiento de concreto y el confinamiento son muy masivos respecto al diámetro de la barra. Las corrugaciones cortan cilindros concéntricos de concreto a lo largo del perímetro exterior de las nervaduras. Falla dúctil con alta disipación de energía.</li>
+              <li><strong>Falla por Hendimiento (Splitting Failure):</strong> Modo típico en elementos estructurales reales con recubrimientos y espaciamientos limitados. La fuerza de apoyo mecánico de las corrugaciones genera <em>presiones radiales de tracción circunferencial</em> que fracturan el recubrimiento en dirección longitudinal (grietas horizontales o de fondo). Es una falla <strong>frágil y súbita</strong> si no se dispone confinamiento con estribos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout-accent">
+          <h4>📌 Principio Fundamental de la Longitud de Desarrollo (\(l_d\))</h4>
+          <p>
+            La <strong>Longitud de Desarrollo (\(l_d\))</strong> se define formalmente como la longitud mínima embebida requerida por una barra de refuerzo para que sea capaz de desarrollar su esfuerzo de fluencia especificado (\(f_y\)) por adherencia plena con el concreto, garantizando que el elemento falle por fluencia dúctil del acero antes de que se produzca una falla prematura por pérdida de anclaje o hendimiento.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 2: LONGITUD DE DESARROLLO A TRACCIÓN (NSR-10 C.12.2)
+           ==================================================================== -->
+      <section id="sec-ld-traccion" class="content-section" data-slide="2">
+        <div class="section-badge">DIAPOSITIVA 02 / 08 • NSR-10 CAPÍTULO C.12</div>
+        <h2 class="section-title">Longitud de Desarrollo a Tracción (\(l_d\)) para Barras Corrugadas</h2>
+        <p>
+          El Reglamento Colombiano de Construcción Sismo Resistente <strong>NSR-10 (Sección C.12.2)</strong> estipula dos metodologías para calcular la longitud de desarrollo en tracción: la <strong>Ecuación General Rigurosa (Ec. C.12-1)</strong> y las <strong>Expresiones Simplificadas (Tabla C.12.2.2)</strong>.
+        </p>
+
+        <div class="card card-tech">
+          <h3>Ecuación General de la NSR-10 (Ec. C.12-1)</h3>
+          <div class="math-box">
+            $$l_d = \left[ \frac{f_y}{1.1 \lambda \sqrt{f'_c}} \cdot \frac{\psi_t \psi_e \psi_s}{\left(\dfrac{c_b + K_{tr}}{d_b}\right)} \right] d_b \ge 300\text{ mm}$$
+          </div>
+          <p>
+            Con el límite normativo fundamental para prevenir la sobrestimación del confinamiento:
+          </p>
+          <div class="math-box">
+            $$\left( \frac{c_b + K_{tr}}{d_b} \right) \le 2.5$$
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card">
+            <h4>Variables Geométricas y de Confinamiento</h4>
+            <ul>
+              <li><strong>\(c_b\) (Dimensión de Recubrimiento Crítico):</strong> Es la menor distancia entre el centro de la barra y la superficie de concreto más cercana, o la mitad de la separación centro a centro de barras consecutivas que se anclan en la misma capa.
+                $$c_b = \min\left( c_{\text{libre}} + d_{\text{estribo}} + \frac{d_b}{2}, \; \frac{s_{\text{libre}} + d_b}{2} \right)$$
+              </li>
+              <li><strong>\(K_{tr}\) (Índice de Refuerzo Transversal):</strong> Modela el efecto de costura que proveen los estribos transversales cruzando los planos potenciales de hendimiento:
+                $$K_{tr} = \frac{40 A_{tr}}{s \cdot n}$$
+                donde \(A_{tr}\) es el área total de ramales del estribo perpendiculares al plano de hendimiento (\(\text{mm}^2\)), \(s\) es la separación entre estribos y \(n\) es el número de barras que se desarrollan en el plano. En diseño preliminar se permite asumir conservadoramente \(K_{tr} = 0\).
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>Factores Modificadores (\(\psi_t, \psi_e, \psi_s, \lambda\))</h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Factor</th>
+                    <th>Condición del Refuerzo / Concreto</th>
+                    <th>Valor NSR-10</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>\(\psi_t\) (Ubicación)</strong></td>
+                    <td>Refuerzo horizontal superior con más de \(300\text{ mm}\) de concreto fresco colado por debajo</td>
+                    <td>\(1.3\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\psi_t\)</strong></td>
+                    <td>Otras barras (refuerzo inferior o vertical)</td>
+                    <td>\(1.0\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\psi_e\) (Epóxico)</strong></td>
+                    <td>Barras con revestimiento epóxico con recubrimiento \(< 3 d_b\) o separación \(< 6 d_b\)</td>
+                    <td>\(1.5\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\psi_e\)</strong></td>
+                    <td>Otras barras revestidas con epóxico / Barras sin recubrimiento (acero negro)</td>
+                    <td>\(1.2\) / \(1.0\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\psi_s\) (Tamaño)</strong></td>
+                    <td>Barras No. 6 (\(3/4"\)) y menores (\(\le 19\text{ mm}\))</td>
+                    <td>\(0.8\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\psi_s\)</strong></td>
+                    <td>Barras No. 7 (\(7/8"\)) y mayores (\(\ge 22\text{ mm}\))</td>
+                    <td>\(1.0\)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>\(\lambda\) (Liviano)</strong></td>
+                    <td>Concreto liviano estructural / Concreto de peso normal</td>
+                    <td>\(0.75\) / \(1.0\)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              <em>Nota:</em> La norma exige que el producto \(\psi_t \cdot \psi_e \le 1.7\). Asimismo, \(\sqrt{f'_c}\) no debe tomarse mayor a \(8.3\text{ MPa}\) (\(f'_c \le 69\text{ MPa}\)).
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ecuaciones Simplificadas de la Tabla C.12.2.2 de la NSR-10</h3>
+          <p>
+            Cuando se cumplen los requisitos mínimos de recubrimiento (\(\ge 20\text{ mm}\) en losas o \(\ge 40\text{ mm}\) en vigas) y separación entre barras (\(\ge d_b\) y \(\ge 25\text{ mm}\)), la NSR-10 permite omitir el cálculo explícito de \(c_b\) y \(K_{tr}\) usando las siguientes expresiones directas:
+          </p>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Condición de Confinamiento y Espaciamiento</th>
+                  <th>Barras No. 6 y menores (\(\le 19\text{ mm}\))</th>
+                  <th>Barras No. 7 y mayores (\(\ge 22\text{ mm}\))</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Condición Favorable:</strong> Separación libre \(\ge d_b\), recubrimiento libre \(\ge d_b\) y estribos mínimos \(\ge\) C.11, o separación libre \(\ge 2 d_b\)
+                  </td>
+                  <td>
+                    $$l_d = \left( \frac{f_y \psi_t \psi_e}{2.1 \lambda \sqrt{f'_c}} \right) d_b$$
+                  </td>
+                  <td>
+                    $$l_d = \left( \frac{f_y \psi_t \psi_e}{1.7 \lambda \sqrt{f'_c}} \right) d_b$$
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Otros Casos:</strong> Espaciamiento o recubrimiento más ajustado
+                  </td>
+                  <td>
+                    $$l_d = \left( \frac{f_y \psi_t \psi_e}{1.4 \lambda \sqrt{f'_c}} \right) d_b$$
+                  </td>
+                  <td>
+                    $$l_d = \left( \frac{f_y \psi_t \psi_e}{1.1 \lambda \sqrt{f'_c}} \right) d_b$$
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">En todos los casos de tracción rige el mínimo absoluto: \(l_d \ge 300\text{ mm}\).</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 3: GANCHOS ESTÁNDAR EN TRACCIÓN (NSR-10 C.12.5)
+           ==================================================================== -->
+      <section id="sec-ganchos" class="content-section" data-slide="3">
+        <div class="section-badge">DIAPOSITIVA 03 / 08 • ANCLAJE MECÁNICO EN NUDOS</div>
+        <h2 class="section-title">Anclaje Mediante Ganchos Estándar a Tracción (\(l_{dh}\))</h2>
+        <p>
+          En nudos viga-columna exteriores, muros o zapatas, las dimensiones de la columna o el elemento de apoyo rara vez permiten alojar la longitud recta \(l_d\) (que puede superar \(1.2\text{ a }1.8\text{ m}\)). En estas situaciones críticas se acude obligatoriamente a los <strong>Ganchos Estándar</strong> según <strong>NSR-10 C.12.5</strong>.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card">
+            <h3>Geometría de los Ganchos Estándar (C.7.1)</h3>
+            <ul>
+              <li><strong>Gancho Estándar a \(90^\circ\):</strong> Un doblez de \(90^\circ\) más una extensión recta de \(12 d_b\) en el extremo libre de la barra.</li>
+              <li><strong>Gancho Estándar a \(180^\circ\):</strong> Un doblez de \(180^\circ\) más una extensión recta de al menos \(\max(4 d_b, 65\text{ mm})\) en el extremo libre.</li>
+              <li><strong>Diámetro Interior de Doblamiento (\(D\)):</strong>
+                <ul>
+                  <li>Barras No. 3 a No. 8 (\(10\text{M}\) a \(25\text{M}\)): \(D = 6 d_b\).</li>
+                  <li>Barras No. 9 a No. 11 (\(29\text{M}\) a \(36\text{M}\)): \(D = 8 d_b\).</li>
+                  <li>Barras No. 14 y No. 18: \(D = 10 d_b\).</li>
+                </ul>
+              </li>
+            </ul>
+            <div class="callout callout-warning">
+              <strong>⚠️ Regla Vital en Compresión:</strong> Los ganchos estándar <strong>NO son efectivos ni están permitidos</strong> para anclar barras sometidas a compresión (C.12.5.5). Toda barra en compresión debe anclarse mediante longitud recta \(l_{dc}\).
+            </div>
+          </div>
+
+          <div class="card card-tech">
+            <h3>Cálculo de la Longitud de Desarrollo con Gancho (\(l_{dh}\))</h3>
+            <p>La longitud recta requerida \(l_{dh}\) medida desde la sección crítica hasta el borde exterior del gancho viene dada por:</p>
+            <div class="math-box">
+              $$l_{dh} = \left( \frac{0.24 \psi_e f_y}{\lambda \sqrt{f'_c}} \right) d_b \ge \max(8 d_b, \; 150\text{ mm})$$
+            </div>
+            <h4>Factores de Modificación Reductores (C.12.5.3):</h4>
+            <ul>
+              <li><strong>Recubrimiento Lateral Generoso (\(\times 0.7\)):</strong> Si para barras \(\le \text{No. }11\) el recubrimiento lateral normal al plano del gancho es \(\ge 65\text{ mm}\), y para gancho a \(90^\circ\) el recubrimiento en la extensión más allá del gancho es \(\ge 50\text{ mm}\).</li>
+              <li><strong>Confinamiento con Estribos (\(\times 0.8\)):</strong> Si el gancho a \(90^\circ\) está confinado con estribos perpendiculares a la barra con espaciamiento \(s \le 3 d_b\).</li>
+              <li><strong>Exceso de Refuerzo (\(\times \frac{A_{s,\text{req}}}{A_{s,\text{prov}}}\)):</strong> Permitido únicamente en elementos donde el anclaje no sea requerido explícitamente para desarrollar la resistencia a fluencia (no aplicable en zonas de disipación sísmica DMO/DES).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 4: LONGITUD DE DESARROLLO A COMPRESIÓN (NSR-10 C.12.3)
+           ==================================================================== -->
+      <section id="sec-ld-compresion" class="content-section" data-slide="4">
+        <div class="section-badge">DIAPOSITIVA 04 / 08 • ELEMENTOS COMPRIMIDOS</div>
+        <h2 class="section-title">Longitud de Desarrollo a Compresión (\(l_{dc}\))</h2>
+        <p>
+          Las barras sometidas a compresión (como las armaduras longitudinales de columnas, pilotes y armaduras de compresión en vigas doblemente reforzadas) se anclan con una longitud sustancialmente menor que las de tracción. Esto se debe a que <strong>no se presentan fisuras de tracción que reduzcan la adherencia</strong>, y además existe una transferencia directa de compresión por apoyo en el extremo de la barra cortada.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card card-tech">
+            <h3>Fórmulas Normativas de la NSR-10 (C.12.3)</h3>
+            <p>La longitud básica de desarrollo a compresión \(l_{dc}\) es la mayor de:</p>
+            <div class="math-box">
+              $$l_{dc} = \max\left( 0.24 \frac{f_y}{\sqrt{f'_c}} d_b, \quad 0.043 f_y d_b, \quad 200\text{ mm} \right)$$
+            </div>
+            <p class="caption">Nótese que en compresión <em>no aplica el factor de barra superior \(\psi_t\)</em> ni factores por recubrimiento epóxico agresivo.</p>
+          </div>
+
+          <div class="card">
+            <h3>Factores Modificadores en Compresión (C.12.3.3)</h3>
+            <ul>
+              <li><strong>Confinamiento por Espirales o Estribos Cerrados (\(\times 0.75\)):</strong> Aplicable si el refuerzo está confinado dentro de una hélice continua (\(\phi \ge 6\text{ mm}\) con paso \(\le 100\text{ mm}\)) o estribos cerrados No. 4 (\(1/2"\)) o menores con espaciamiento libre \(s \le 100\text{ mm}\).</li>
+              <li><strong>Exceso de Refuerzo (\(\times \frac{A_{s,\text{req}}}{A_{s,\text{prov}}}\)):</strong> Aplicable en elementos no sometidos a demandas de ductilidad sísmica.</li>
+              <li><strong>Límite Mínimo Absoluto:</strong> Bajo ninguna combinación de factores reductores \(l_{dc}\) puede ser inferior a \(200\text{ mm}\).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 5: EMPALMES POR TRASLAPO (NSR-10 C.12.14 A C.12.16)
+           ==================================================================== -->
+      <section id="sec-empalmes" class="content-section" data-slide="5">
+        <div class="section-badge">DIAPOSITIVA 05 / 08 • UNIONES Y TRASLAPOS</div>
+        <h2 class="section-title">Empalmes por Traslapo en Tensión y Compresión</h2>
+        <p>
+          Dado que las barras comerciales se fabrican en longitudes estándar de \(6.0\text{ m}, 9.0\text{ m}\) y \(12.0\text{ m}\), es mandatorio empalmar barras a lo largo de vigas continuas y columnas de varios niveles. La NSR-10 clasifica los empalmes por traslapo en tracción en <strong>Clase A</strong> y <strong>Clase B</strong> según el nivel de solicitación y la cantidad de barras empalmadas en la misma sección.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card">
+            <h3>Traslapos a Tracción (C.12.15)</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Razón \(A_{s,\text{prov}} / A_{s,\text{req}}\)</th>
+                    <th>% Máximo de Barras Empalmadas en la Sección</th>
+                    <th>Clase de Empalme</th>
+                    <th>Longitud de Traslapo (\(l_s\))</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>\(\ge 2.0\)</td>
+                    <td>\(\le 50\%\)</td>
+                    <td><strong>Clase A</strong></td>
+                    <td>\(1.0 l_d \ge 300\text{ mm}\)</td>
+                  </tr>
+                  <tr>
+                    <td>Cualquiera</td>
+                    <td>\(> 50\%\) (o \(A_{s,\text{prov}} / A_{s,\text{req}} < 2.0\))</td>
+                    <td><strong>Clase B</strong></td>
+                    <td>\(1.3 l_d \ge 300\text{ mm}\)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout callout-warning">
+              <strong>⚠️ Buenas Prácticas de Ingeniería:</strong> En la práctica colombiana, la inmensa mayoría de diseñadores especifica traslapos <strong>Clase B (\(1.3 l_d\))</strong> para cubrir incertidumbres de colocación en obra y evitar fiscalizaciones por porcentaje de barras traslapadas.
+            </div>
+          </div>
+
+          <div class="card card-tech">
+            <h3>Traslapos a Compresión (C.12.16) y Restricciones</h3>
+            <p>Para barras sometidas a compresión pura, la longitud de traslapo es:</p>
+            <div class="math-box">
+              $$l_{sc} = \begin{cases} 
+              0.071 f_y d_b \ge 300\text{ mm} & \text{si } f_y \le 420\text{ MPa} \\
+              (0.13 f_y - 24) d_b \ge 300\text{ mm} & \text{si } f_y > 420\text{ MPa}
+              \end{cases}$$
+            </div>
+            <p>Si la resistencia del concreto es menor a \(21\text{ MPa}\), la longitud se incrementa en un tercio (\(\times 1.333\)).</p>
+            <h4>Restricciones Normativas Críticas:</h4>
+            <ul>
+              <li><strong>Prohibición en Barras Grandes:</strong> Queda <strong>estrictamente prohibido</strong> realizar empalmes por traslapo simple en barras No. 14 (\(1-3/4"\)) y No. 18 (\(2-1/4"\)), las cuales deben unirse obligatoriamente mediante acopladores mecánicos certificados o soldadura (C.12.14.2.1).</li>
+              <li><strong>Alternancia de Traslapos:</strong> Los empalmes en barras adyacentes deben escalonarse a una distancia no menor de \(600\text{ mm}\) para evitar zonas concentradas de debilidad.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 6: MOMENTOS DESPLAZADOS Y PUNTOS DE CORTE (NSR-10 C.12.10 - C.12.12)
+           ==================================================================== -->
+      <section id="sec-momentos-desplazados" class="content-section" data-slide="6">
+        <div class="section-badge">DIAPOSITIVA 06 / 08 • DESPIECE INTEGRAL DE VIGAS</div>
+        <h2 class="section-title">Diagrama de Momentos Desplazados y Puntos de Corte en Vigas</h2>
+        <p>
+          En vigas de concreto reforzado sometidas a flexión y cortante combinado, las fisuras de tracción se propagan diagonalmente a ángulos cercanos a \(45^\circ\). Por equilibrio del modelo de celosía interna, la fuerza de tracción que debe soportar la armadura inferior no corresponde al momento en la sección perpendicular \(x\), sino al momento en una sección desplazada. Por tanto, para diseñar el despiece seguro de armaduras, <strong>la envolvente de momentos flectores debe desplazarse una distancia igual al peralte efectivo \(d\)</strong> hacia las zonas de menores momentos.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card info-card">
+            <h3>Puntos Teóricos vs. Puntos Prácticos de Corte</h3>
+            <ul>
+              <li><strong>Punto Teórico de Corte (\(T\)):</strong> Sección a lo largo de la luz donde las barras que continúan tienen suficiente capacidad para resistir el momento actuante desplazado, es decir: \(\phi M_{n,\text{continuas}} \ge M_u(x)\). En este punto, teóricamente, la barra ya no se requeriría.</li>
+              <li><strong>Prolongación Normativa Obligatoria (C.12.10.3):</strong> La NSR-10 prohíbe cortar la barra en el punto teórico \(T\). Cada barra debe extenderse más allá del punto teórico una distancia mínima igual a:
+                $$\Delta x = \max(d, \; 12 d_b)$$
+              </li>
+              <li><strong>Punto Práctico de Corte (\(P\)):</strong> Es el punto físico real donde termina la barra: \(x_P = x_T \pm \max(d, 12 d_b)\).</li>
+              <li><strong>Anclaje desde el Momento Máximo:</strong> Toda barra cortada debe tener una longitud mínima desde el punto de momento máximo positivo o negativo mayor o igual a su longitud de desarrollo \(l_d\).</li>
+            </ul>
+          </div>
+
+          <div class="card warning-card">
+            <h3>Corte de Refuerzo en Zonas Traccionadas (C.12.10.5)</h3>
+            <p>Cortar barras en zonas de alta tracción produce concentraciones de esfuerzos cortantes y apertura prematura de grietas diagonales. La norma <strong>prohíbe</strong> cortar barras en zonas de tracción a menos que se cumpla una de las siguientes tres condiciones:</p>
+            <ul>
+              <li><strong>1. Cortante Bajo:</strong> El cortante factorizado en el punto de corte no excede dos tercios del cortante resistente: \(V_u \le \frac{2}{3} \phi V_n\).</li>
+              <li><strong>2. Estribos Adicionales:</strong> Se suministra refuerzo transversal adicional por cortante sobre una longitud de \(3/4 d\) desde el punto de corte.</li>
+              <li><strong>3. Doble de Refuerzo y Cortante Moderado:</strong> Para barras \(\le \text{No. }11\), el refuerzo continuo provee el doble del área requerida por flexión y \(V_u \le \frac{3}{4} \phi V_n\).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card card-tech">
+          <h3>Requisitos de Anclaje de Refuerzo Positivo en Apoyos (C.12.11)</h3>
+          <p>Para evitar fallas de anclaje por desprendimiento en los extremos de los elementos:</p>
+          <div class="math-box">
+            $$\text{Apoyos Simples: } A_{s,\text{apoyo}} \ge \frac{1}{3} A_{s,\text{tramo}} \qquad\qquad \text{Apoyos Continuos: } A_{s,\text{apoyo}} \ge \frac{1}{4} A_{s,\text{tramo}}$$
+          </div>
+          <p>
+            En apoyos simples, las barras deben penetrar en el apoyo al menos \(150\text{ mm}\). Además, en el punto de inflexión y en apoyos simples, el diámetro de la barra está restringido por la ecuación de anclaje:
+          </p>
+          <div class="math-box">
+            $$l_d \le \frac{M_n}{V_u} + l_a$$
+          </div>
+          <p class="caption">donde \(M_n\) es la capacidad nominal calculada con las barras que llegan al apoyo, \(V_u\) es el cortante en el apoyo, y \(l_a\) es la longitud embebida más allá del centro del apoyo (o \(12 d_b\) o \(d\)).</p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 7: DETALLAMIENTO SÍSMICO NSR-10 C.21 (DMO / DES)
+           ==================================================================== -->
+      <section id="sec-sismico-dmo-des" class="content-section" data-slide="7">
+        <div class="section-badge">DIAPOSITIVA 07 / 08 • SISMORRESISTENCIA NSR-10</div>
+        <h2 class="section-title">Detallamiento Sísmico y Confinamiento de Armaduras (DMO y DES)</h2>
+        <p>
+          En zonas de amenaza sísmica intermedia y alta (Colombia), las estructuras diseñadas con capacidad de disipación de energía moderada (<strong>DMO</strong>) y especial (<strong>DES</strong>) deben cumplir prescripciones de detallamiento sumamente rigurosas estipuladas en el <strong>Capítulo C.21 de la NSR-10</strong>. La falla de anclaje en nudos y la pérdida de confinamiento en zonas de plastificación son las causas primarias de colapso de edificios durante terremotos.
+        </p>
+
+        <div class="grid-2col">
+          <div class="card danger-card">
+            <h3>Zonas Prohibidas de Empalme por Traslapo (C.21.5.6)</h3>
+            <p>Los empalmes por traslapo en armaduras longitudinales de vigas:</p>
+            <ul>
+              <li><strong>Prohibición en Nudos:</strong> Queda terminantemente prohibido traslapar armaduras dentro de los nudos viga-columna.</li>
+              <li><strong>Prohibición en Zonas de Plastificación (\(2h\)):</strong> Queda prohibido ubicar traslapos a una distancia menor a dos veces el peralte de la viga (\(2h\)) medida desde la cara del apoyo en pórticos DES.</li>
+              <li><strong>Ubicación Correcta:</strong> Los empalmes deben ubicarse exclusivamente en el <em>tercio central</em> de la luz libre de la viga para barras superiores e inferiores, donde las demandas sísmicas de flexión son mínimas.</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <h3>Confinamiento Transversal Estricto en Traslapos</h3>
+            <p>Toda la longitud de traslapo en zonas sísmicas debe estar confinada con estribos cerrados de confinamiento con espaciamientos máximos:</p>
+            <ul>
+              <li><strong>Pórticos DES (C.21.5.6.3):</strong> El espaciamiento no debe exceder el menor entre:
+                $$s \le \min\left( \frac{d}{4}, \; 6 d_b, \; 100\text{ mm} \right)$$
+              </li>
+              <li><strong>Pórticos DMO (C.21.3.5.5):</strong> El espaciamiento no debe exceder el menor entre:
+                $$s \le \min\left( \frac{d}{4}, \; 8 d_b, \; 24 d_{\text{estribo}}, \; 150\text{ mm} \right)$$
+              </li>
+              <li><strong>Ganchos Sísmicos a \(135^\circ\):</strong> Todos los estribos cerrados deben rematar con ganchos sísmicos a \(135^\circ\) con extensión recta \(\ge \max(6 d_b, 75\text{ mm})\) anclados en el núcleo confinado interior.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card card-tech">
+          <h3>Resistencia a Flexión Mínima en Extremos y Nudos (C.21.5.2)</h3>
+          <p>Para asegurar que las vigas disipen energía sin fracturas frágiles durante la inversión sísmica de momentos:</p>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parámetro de Capacidad</th>
+                  <th>Capacidad Moderada (DMO)</th>
+                  <th>Capacidad Especial (DES)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Momento Positivo en cara de apoyo (\(M_n^+\)) respecto al Negativo (\(M_n^-\))</td>
+                  <td>\(M_n^+ \ge \frac{1}{3} M_n^-\)</td>
+                  <td>\(M_n^+ \ge \frac{1}{2} M_n^-\)</td>
+                </tr>
+                <tr>
+                  <td>Momento mínimo en cualquier sección a lo largo de la viga</td>
+                  <td>\(\ge \frac{1}{5} \max(M_{n,\text{nudo}})\)</td>
+                  <td>\(\ge \frac{1}{4} \max(M_{n,\text{nudo}})\)</td>
+                </tr>
+                <tr>
+                  <td>Cuantía longitudinal mínima (\(\rho_{\min}\))</td>
+                  <td>\(\ge \frac{1.4}{f_y}\) y \(\ge \frac{\sqrt{f'_c}}{4 f_y}\)</td>
+                  <td>\(\ge \frac{1.4}{f_y}\) y \(\ge \frac{\sqrt{f'_c}}{4 f_y}\)</td>
+                </tr>
+                <tr>
+                  <td>Cuantía longitudinal máxima (\(\rho_{\max}\))</td>
+                  <td>\(\le 0.025\) (\(2.5\%\))</td>
+                  <td>\(\le 0.025\) (\(2.5\%\))</td>
+                </tr>
+                <tr>
+                  <td>Armadura corrida continua</td>
+                  <td>Al menos 2 barras continuas en caras sup e inf</td>
+                  <td>Al menos 2 barras continuas en caras sup e inf</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SLIDE 8: LABORATORIO INTERACTIVO Y 4 EJEMPLOS NUMÉRICOS
+           ==================================================================== -->
+      <section id="sec-laboratorio-ejemplos" class="content-section" data-slide="8">
+        <div class="section-badge">DIAPOSITIVA 08 / 08 • SIMULACIÓN Y APLICACIÓN</div>
+        <h2 class="section-title">Laboratorio Interactivo y Ejemplos Numéricos Paso a Paso</h2>
+        <p class="lead-text">
+          Experimente en tiempo real con los dos simuladores interactivos de despiece de armaduras y explore las soluciones paso a paso con el <strong>Modo Pizarra Docente</strong>.
+        </p>
+
+        <!-- ==================================================================
+             SIMULADOR 8.1: CALCULADORA INTEGRAL DE DESARROLLO Y GANCHOS
+             ================================================================== -->
+        <div class="simulator-card">
+          <div class="sim-header">
+            <div>
+              <span class="sim-tag">SIMULADOR 8.1</span>
+              <h3 class="sim-title">Calculadora Integral de Longitud de Desarrollo y Ganchos (NSR-10 C.12)</h3>
+              <p class="sim-subtitle">
+                Calcule \(l_d\) a tracción con la Ecuación General C.12-1 (\(c_b, K_{tr}\)), fórmulas simplificadas, ganchos estándar a \(90^\circ\) y \(180^\circ\) (\(l_{dh}\)), \(l_{dc}\) a compresión y traslapos Clase A y B con visualizador Canvas bidimensional.
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-body">
+            <div class="sim-controls">
+              <!-- Fila 1: Materiales y Barra -->
+              <div class="sim-group">
+                <label for="sim81-bar">Diámetro de Barra de Refuerzo:</label>
+                <select id="sim81-bar" class="sim-select">
+                  <option value="3">#3 (d = 9.5 mm, A = 71 mm²)</option>
+                  <option value="4">#4 (d = 12.7 mm, A = 129 mm²)</option>
+                  <option value="5">#5 (d = 15.9 mm, A = 199 mm²)</option>
+                  <option value="6" selected>#6 (d = 19.1 mm, A = 284 mm²)</option>
+                  <option value="7">#7 (d = 22.2 mm, A = 387 mm²)</option>
+                  <option value="8">#8 (d = 25.4 mm, A = 510 mm²)</option>
+                  <option value="9">#9 (d = 28.7 mm, A = 645 mm²)</option>
+                  <option value="10">#10 (d = 32.3 mm, A = 819 mm²)</option>
+                </select>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim81-fc">Resistencia Concreto \(f'_c\):</label>
+                  <select id="sim81-fc" class="sim-select">
+                    <option value="21" selected>21 MPa (3000 psi)</option>
+                    <option value="28">28 MPa (4000 psi)</option>
+                    <option value="35">35 MPa (5000 psi)</option>
+                    <option value="42">42 MPa (6000 psi)</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim81-fy">Fluencia Acero \(f_y\):</label>
+                  <select id="sim81-fy" class="sim-select">
+                    <option value="420" selected>420 MPa (Grado 60)</option>
+                    <option value="280">280 MPa (Grado 40)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Fila 2: Posición, Epóxico y Agregados -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim81-pos">Ubicación del Refuerzo (\(\psi_t\)):</label>
+                  <select id="sim81-pos" class="sim-select">
+                    <option value="bottom" selected>Inferior / Vertical (\(\psi_t = 1.0\))</option>
+                    <option value="top">Superior (\(>300\text{mm}\) debajo, \(\psi_t = 1.3\))</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim81-coating">Recubrimiento Epóxico (\(\psi_e\)):</label>
+                  <select id="sim81-coating" class="sim-select">
+                    <option value="black" selected>Acero Negro / Sin epóxico (\(\psi_e = 1.0\))</option>
+                    <option value="epoxy_low">Epóxico con recubr. < 3db (\(\psi_e = 1.5\))</option>
+                    <option value="epoxy_other">Epóxico otros casos (\(\psi_e = 1.2\))</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group">
+                <label for="sim81-light">Tipo de Concreto (\(\lambda\)):</label>
+                <select id="sim81-light" class="sim-select">
+                  <option value="1.0" selected>Concreto de Peso Normal (\(\lambda = 1.0\))</option>
+                  <option value="0.75">Concreto con Agregados Livianos (\(\lambda = 0.75\))</option>
+                </select>
+              </div>
+
+              <!-- Fila 3: Sliders Geometría y Confinamiento -->
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim81-cover">Recubrimiento libre (\(c_c\)):</label>
+                  <span id="sim81-cover-val" class="sim-val-badge">40 mm</span>
+                </div>
+                <input type="range" id="sim81-cover" min="20" max="75" step="5" value="40" class="sim-slider" />
+              </div>
+
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim81-spacing">Separación libre entre barras (\(s_b\)):</label>
+                  <span id="sim81-spacing-val" class="sim-val-badge">50 mm</span>
+                </div>
+                <input type="range" id="sim81-spacing" min="25" max="100" step="5" value="50" class="sim-slider" />
+              </div>
+
+              <div class="sim-group">
+                <label for="sim81-stirrups">Confinamiento Transversal (\(K_{tr}\)):</label>
+                <select id="sim81-stirrups" class="sim-select">
+                  <option value="none">Sin estribos considerados (\(K_{tr} = 0\))</option>
+                  <option value="standard" selected>Estribos Estándar #3 @ 20 cm (\(K_{tr} \approx 9.5\text{ mm}\))</option>
+                  <option value="seismic">Estribos Sísmicos #3 @ 10 cm (\(K_{tr} \approx 18.9\text{ mm}\))</option>
+                  <option value="heavy">Estribos Fuertes #4 @ 10 cm (\(K_{tr} \approx 34.4\text{ mm}\))</option>
+                </select>
+              </div>
+
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim81-excess">Razón Exceso Refuerzo (\(A_{s,\text{req}} / A_{s,\text{prov}}\)):</label>
+                  <span id="sim81-excess-val" class="sim-val-badge">100%</span>
+                </div>
+                <input type="range" id="sim81-excess" min="0.50" max="1.00" step="0.05" value="1.00" class="sim-slider" />
+              </div>
+
+              <!-- Fila 4: Ganchos -->
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim81-hook-type">Tipo de Gancho Estándar:</label>
+                  <select id="sim81-hook-type" class="sim-select">
+                    <option value="90" selected>Gancho a 90° (extensión 12·db)</option>
+                    <option value="180">Gancho a 180° (extensión ≥ 4·db, 65mm)</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim81-hook-cover">Recubrimiento Gancho:</label>
+                  <select id="sim81-hook-cover" class="sim-select">
+                    <option value="normal" selected>Normal (< 65 mm)</option>
+                    <option value="large">Generoso (≥ 65 mm, factor 0.7)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="sim-group">
+                <label for="sim81-hook-ties">Confinamiento de Gancho con Estribos:</label>
+                <select id="sim81-hook-ties" class="sim-select">
+                  <option value="no" selected>Sin estribos especiales (factor 1.0)</option>
+                  <option value="yes">Confinado con estribos s ≤ 3·db (factor 0.8)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Visualizador Canvas 8.1 -->
+            <div class="sim-canvas-container">
+              <canvas id="sim81-canvas" width="620" height="380" class="sim-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Métricas de Salida Simulador 8.1 -->
+          <div class="sim-results-grid">
+            <div class="res-card">
+              <span class="res-label">Parámetro Confinamiento \(c_b\)</span>
+              <span id="res81-cb" class="res-val highlight">59.1 mm</span>
+              <span class="res-sub">Menor distancia crítica</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Índice Estribos \(K_{tr}\)</span>
+              <span id="res81-ktr" class="res-val highlight">9.5 mm</span>
+              <span class="res-sub">Efecto de costura transversal</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Término \((c_b + K_{tr}) / d_b\)</span>
+              <span id="res81-confterm" class="res-val highlight">2.50 (Lím. máx 2.5)</span>
+              <span class="res-sub">Límite normativo \(\le 2.5\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">\(l_d\) General a Tracción (C.12-1)</span>
+              <span id="res81-ld-gen" class="res-val highlight-green">614 mm (61.4 cm)</span>
+              <span class="res-sub">Ecuación rigurosa NSR-10</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">\(l_d\) Modificada por Exceso</span>
+              <span id="res81-ld-excess" class="res-val highlight">614 mm (61.4 cm)</span>
+              <span class="res-sub">Solo no sísmico</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">\(l_d\) Simplificada (Tabla C.12.2.2)</span>
+              <span id="res81-ld-simp" class="res-val highlight">833 mm (83.3 cm)</span>
+              <span class="res-sub">Fórmula conservadora</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Gancho Estándar \(l_{dh}\) (C.12.5)</span>
+              <span id="res81-ldh" class="res-val highlight-accent">420 mm (42.0 cm)</span>
+              <span class="res-sub">Longitud anclaje en nudo</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Diámetro Doblez Gancho (\(D\))</span>
+              <span id="res81-dbend" class="res-val highlight">115 mm</span>
+              <span class="res-sub">Mandril \(6 d_b\) o \(8 d_b\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Extensión Recta de Gancho</span>
+              <span id="res81-ext" class="res-val highlight">229 mm</span>
+              <span class="res-sub">Cola recta \(12 d_b\) o \(4 d_b\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Desarrollo a Compresión \(l_{dc}\)</span>
+              <span id="res81-ldc" class="res-val highlight">420 mm (42.0 cm)</span>
+              <span class="res-sub">Sin efecto barra superior</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Traslapo Tracción Clase A</span>
+              <span id="res81-lap-a" class="res-val highlight-green">614 mm (61.4 cm)</span>
+              <span class="res-sub">\(1.0 l_d\) (si \(A_s \ge 2 A_{s,\text{req}}\))</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Traslapo Tracción Clase B</span>
+              <span id="res81-lap-b" class="res-val highlight-accent">798 mm (79.8 cm)</span>
+              <span class="res-sub">\(1.3 l_d\) (Especificación común)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Traslapo a Compresión</span>
+              <span id="res81-lap-c" class="res-val highlight">570 mm (57.0 cm)</span>
+              <span class="res-sub">\(0.071 f_y d_b \ge 300\text{ mm}\)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             SIMULADOR 8.2: ENVOLVENTE Y MOMENTOS DESPLAZADOS
+             ================================================================== -->
+        <div class="simulator-card" style="margin-top: 35px;">
+          <div class="sim-header">
+            <div>
+              <span class="sim-tag">SIMULADOR 8.2</span>
+              <h3 class="sim-title">Envolvente de Momentos Desplazados y Diagrama de Corte de Barras</h3>
+              <p class="sim-subtitle">
+                Modele la viga real bajo carga distribuida y momentos de extremo, visualice la envolvente desplazada en distancia \(d\), el escalonamiento de capacidad resistente \(\phi M_n\), los puntos teóricos (\(T\)) y prácticos (\(P\)) de corte y la verificación en apoyos.
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-body">
+            <div class="sim-controls">
+              <!-- Parámetros de la Viga y Cargas -->
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim82-span">Luz libre de la viga (\(L\)):</label>
+                  <span id="sim82-span-val" class="sim-val-badge">6.0 m</span>
+                </div>
+                <input type="range" id="sim82-span" min="4.0" max="10.0" step="0.5" value="6.0" class="sim-slider" />
+              </div>
+
+              <div class="sim-group">
+                <div class="sim-label-row">
+                  <label for="sim82-wu">Carga uniforme factorizada (\(w_u\)):</label>
+                  <span id="sim82-wu-val" class="sim-val-badge">45.0 kN/m</span>
+                </div>
+                <input type="range" id="sim82-wu" min="20.0" max="70.0" step="2.5" value="45.0" class="sim-slider" />
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim82-mu-left">\(M_{u1}\) Apoyo Izquierdo:</label>
+                    <span id="sim82-mu1-val" class="sim-val-badge">80 kN·m</span>
+                  </div>
+                  <input type="range" id="sim82-mu-left" min="0" max="160" step="10" value="80" class="sim-slider" />
+                </div>
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim82-mu-right">\(M_{u2}\) Apoyo Derecho:</label>
+                    <span id="sim82-mu2-val" class="sim-val-badge">80 kN·m</span>
+                  </div>
+                  <input type="range" id="sim82-mu-right" min="0" max="160" step="10" value="80" class="sim-slider" />
+                </div>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim82-h">Altura total de viga (\(h\)):</label>
+                    <span id="sim82-h-val" class="sim-val-badge">50 cm</span>
+                  </div>
+                  <input type="range" id="sim82-h" min="35" max="80" step="5" value="50" class="sim-slider" />
+                </div>
+                <div class="sim-group">
+                  <div class="sim-label-row">
+                    <label for="sim82-d">Peralte efectivo (\(d\)):</label>
+                    <span id="sim82-d-val" class="sim-val-badge">44 cm</span>
+                  </div>
+                  <input type="range" id="sim82-d" min="30" max="75" step="1" value="44" class="sim-slider" />
+                </div>
+              </div>
+
+              <!-- Barras -->
+              <div class="sim-group">
+                <label for="sim82-bar-size">Diámetro de Barras Positivas:</label>
+                <select id="sim82-bar-size" class="sim-select">
+                  <option value="5">#5 (15.9 mm, 199 mm²)</option>
+                  <option value="6" selected>#6 (19.1 mm, 284 mm²)</option>
+                  <option value="7">#7 (22.2 mm, 387 mm²)</option>
+                  <option value="8">#8 (25.4 mm, 510 mm²)</option>
+                </select>
+              </div>
+
+              <div class="sim-group-row">
+                <div class="sim-group">
+                  <label for="sim82-nbars-pos">Total Barras en el Centro (\(N_{\text{total}}\)):</label>
+                  <select id="sim82-nbars-pos" class="sim-select">
+                    <option value="3">3 Barras</option>
+                    <option value="4" selected>4 Barras</option>
+                    <option value="5">5 Barras</option>
+                    <option value="6">6 Barras</option>
+                  </select>
+                </div>
+                <div class="sim-group">
+                  <label for="sim82-nbars-cut">Barras a Cortar (\(N_{\text{corte}}\)):</label>
+                  <select id="sim82-nbars-cut" class="sim-select">
+                    <option value="1">Cortar 1 Barra</option>
+                    <option value="2" selected>Cortar 2 Barras</option>
+                    <option value="3">Cortar 3 Barras</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visualizador Canvas 8.2 -->
+            <div class="sim-canvas-container">
+              <canvas id="sim82-canvas" width="620" height="420" class="sim-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Métricas de Salida Simulador 8.2 -->
+          <div class="sim-results-grid">
+            <div class="res-card">
+              <span class="res-label">Momento Positivo Máximo</span>
+              <span id="res82-mumax" class="res-val highlight">122.5 kN·m (a x = 3.00 m)</span>
+              <span class="res-sub">Demanda crítica en tramo</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Capacidad \(\phi M_n\) con Total Barras</span>
+              <span id="res82-phimn-total" class="res-val highlight-green">184.2 kN·m (4 barras)</span>
+              <span class="res-sub">\(\ge M_{u,\max}\) (Adecuado)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Capacidad \(\phi M_n\) Barras Continuas</span>
+              <span id="res82-phimn-cont" class="res-val highlight">96.8 kN·m (2 continuas)</span>
+              <span class="res-sub">Resistencia sin barras cortadas</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Puntos Teóricos de Corte (\(T_1, T_2\))</span>
+              <span id="res82-xt1-xt2" class="res-val highlight">xT1 = 1.95 m | xT2 = 4.05 m</span>
+              <span class="res-sub">Donde \(M_u(x) = \phi M_{n,\text{cont}}\)</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Extensión Normativa \(\max(d, 12 d_b)\)</span>
+              <span id="res82-ext-req" class="res-val highlight">44.0 cm (max{d, 12·db})</span>
+              <span class="res-sub">Prolongación C.12.10.3</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Puntos Prácticos de Corte (\(P_1, P_2\))</span>
+              <span id="res82-xp1-xp2" class="res-val highlight-accent">xP1 = 1.51 m | xP2 = 4.49 m</span>
+              <span class="res-sub">Cotas físicas de corte</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">Longitud de Barras Cortadas</span>
+              <span id="res82-lbar" class="res-val highlight-green">2.98 m (298 cm)</span>
+              <span class="res-sub">Longitud total a figurar</span>
+            </div>
+            <div class="res-card">
+              <span class="res-label">% Armadura que llega al Apoyo</span>
+              <span id="res82-pct-cont" class="res-val highlight-green">50.0% ✓ Cumple (≥ 33.3%)</span>
+              <span class="res-sub">Mínimo 1/3 simple, 1/4 continuo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             EJEMPLOS NUMÉRICOS PASO A PASO CON MODO PIZARRA DOCENTE
+             ================================================================== -->
+        <div class="examples-section-container" style="margin-top: 50px;">
+          <div class="section-header-compact">
+            <span class="section-tag">EJEMPLOS DE APLICACIÓN PROFESIONAL</span>
+            <h2>Casos Numéricos Resueltos Paso a Paso con Modo Pizarra Docente</h2>
+            <p>
+              Haga clic en cada paso para desplegar la deducción analítica, ecuaciones y verificaciones normativas detalladas para la docencia universitaria.
+            </p>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 8.1: CÁLCULO RIGUROSO DE LD GENERAL VS SIMPLIFICADA
+               ================================================================ -->
+          <div class="example-card" id="ej-8-1">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.1</span>
+                <h3>Cálculo Riguroso de Longitud de Desarrollo (\(l_d\)) a Tracción: Ecuación General C.12-1 vs. Tabla Simplificada</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex81', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex81', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Se tiene una viga de concreto con sección \(b = 300\text{ mm}, h = 550\text{ mm}\), concreto de peso normal con \(f'_c = 21\text{ MPa}\), acero de fluencia \(f_y = 420\text{ MPa}\), recubrimiento libre al estribo \(c_c = 40\text{ mm}\), y estribos cerrados No. 3 (\(d_{est} = 9.5\text{ mm}, A_{est} = 71\text{ mm}^2\)) espaciados cada \(150\text{ mm}\). En la cara inferior se colocan <strong>3 barras No. 6</strong> (\(d_b = 19.1\text{ mm}, A_b = 284\text{ mm}^2\)) equiespaciadas. No hay revestimiento epóxico.
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la longitud de desarrollo \(l_d\) usando la Ecuación General C.12-1 considerando la contribución de los estribos (\(K_{tr}\)).<br>
+                2. Recalcular \(l_d\) si se desprecia conservadoramente el confinamiento transversal (\(K_{tr} = 0\)).<br>
+                3. Calcular \(l_d\) empleando las expresiones simplificadas de la Tabla C.12.2.2.<br>
+                4. Evaluar qué longitud se requeriría si las mismas barras se colocaran en la cara superior como refuerzo de momento negativo.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.1 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex81', 1)">
+                <span>Paso 1: Parámetros Geométricos, Separación Libre y Cálculo de \(c_b\)</span>
+                <span class="step-arrow" id="ex81-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex81-step-1">
+                <p>Determinamos el ancho disponible entre estribos y la separación libre entre las 3 barras No. 6:</p>
+                <div class="math-box">
+                  $$b_{\text{int}} = b - 2(c_c + d_{est}) = 300 - 2(40 + 9.5) = 300 - 99 = 201\text{ mm}$$
+                </div>
+                <p>Con 3 barras No. 6 (\(3 \times 19.1 = 57.3\text{ mm}\)), el espacio libre total dividido en 2 separaciones es:</p>
+                <div class="math-box">
+                  $$s_{\text{libre}} = \frac{201 - 3(19.1)}{2} = \frac{201 - 57.3}{2} = 71.85\text{ mm}$$
+                </div>
+                <p>Calculamos el término \(c_b\) evaluando la menor distancia al recubrimiento o al semiespanciamiento:</p>
+                <ul>
+                  <li>Distancia al fondo/costado: \(c_{b,\text{cub}} = c_c + d_{est} + \frac{d_b}{2} = 40 + 9.5 + \frac{19.1}{2} = 59.05\text{ mm}\)</li>
+                  <li>Distancia a la mitad de separación entre barras: \(c_{b,\text{sep}} = \frac{s_{\text{libre}} + d_b}{2} = \frac{71.85 + 19.1}{2} = 45.48\text{ mm}\)</li>
+                </ul>
+                <div class="math-box">
+                  $$c_b = \min(59.05, \; 45.48) = 45.48\text{ mm}$$
+                </div>
+                <p>Rige el semiespanciamiento entre barras (\(c_b = 45.48\text{ mm}\)).</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex81', 2)">
+                <span>Paso 2: Cálculo de \(K_{tr}\) y Término de Confinamiento \((c_b + K_{tr})/d_b\)</span>
+                <span class="step-arrow" id="ex81-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex81-step-2">
+                <p>Para estribos No. 3 de dos ramales cruzando el plano de hendimiento horizontal, \(A_{tr} = 2 \times 71 = 142\text{ mm}^2\). Con espaciamiento \(s = 150\text{ mm}\) y \(n = 3\) barras ancladas:</p>
+                <div class="math-box">
+                  $$K_{tr} = \frac{40 A_{tr}}{s \cdot n} = \frac{40 \times 142}{150 \times 3} = \frac{5680}{450} = 12.62\text{ mm}$$
+                </div>
+                <p>Evaluamos el término de confinamiento:</p>
+                <div class="math-box">
+                  $$\frac{c_b + K_{tr}}{d_b} = \frac{45.48 + 12.62}{19.1} = \frac{58.10}{19.1} = 3.04 > 2.50$$
+                </div>
+                <p>
+                  Como el valor excede el límite normativo estricto de la NSR-10 (C.12.2.3), <strong>se toma el valor límite de \(2.50\)</strong> para evitar sobrestimar la adherencia:
+                  $$\left(\frac{c_b + K_{tr}}{d_b}\right) = 2.50$$
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex81', 3)">
+                <span>Paso 3: Aplicación de la Ecuación General C.12-1 con y sin \(K_{tr}\)</span>
+                <span class="step-arrow" id="ex81-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex81-step-3">
+                <p>Factores modificadores para barra inferior No. 6:</p>
+                <ul>
+                  <li>\(\psi_t = 1.0\) (barra inferior con menos de 300 mm colados por debajo).</li>
+                  <li>\(\psi_e = 1.0\) (sin epóxico).</li>
+                  <li>\(\psi_s = 0.8\) (barra No. 6 \(\le 19\text{ mm}\)).</li>
+                  <li>\(\lambda = 1.0\) (concreto peso normal).</li>
+                  <li>\(\sqrt{f'_c} = \sqrt{21} = 4.583\text{ MPa}\).</li>
+                </ul>
+                <p><strong>Caso 1: Confinamiento real (\(K_{tr} > 0 \implies \text{término} = 2.50\)):</strong></p>
+                <div class="math-box">
+                  $$l_d = \left[ \frac{420}{1.1 \times 1.0 \times 4.583} \cdot \frac{1.0 \times 1.0 \times 0.8}{2.50} \right] \times 19.1 = \left[ 83.31 \times 0.320 \right] \times 19.1 = 26.66 \times 19.1 = 509\text{ mm}$$
+                </div>
+                <p>Como \(509\text{ mm} \ge 300\text{ mm}\), la longitud requerida es <strong>\(l_d = 510\text{ mm}\) (\(51\text{ cm}\))</strong>.</p>
+
+                <p><strong>Caso 2: Despreciando estribos (\(K_{tr} = 0\)):</strong></p>
+                <div class="math-box">
+                  $$\frac{c_b}{d_b} = \frac{45.48}{19.1} = 2.38 < 2.50$$
+                  $$l_d = \left[ 83.31 \cdot \frac{0.8}{2.38} \right] \times 19.1 = \left[ 83.31 \times 0.336 \right] \times 19.1 = 28.00 \times 19.1 = 535\text{ mm}$$
+                </div>
+                <p>Se adoptaría <strong>\(l_d = 540\text{ mm}\) (\(54\text{ cm}\))</strong>. Nótese que gracias al excelente espaciamiento entre barras (\(c_b/d_b = 2.38\)), el incremento sin estribos es de apenas \(5\%\).</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex81', 4)">
+                <span>Paso 4: Comparación con Expresión Simplificada y Efecto de Barra Superior</span>
+                <span class="step-arrow" id="ex81-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex81-step-4">
+                <p><strong>Cálculo Simplificado (Tabla C.12.2.2):</strong></p>
+                <p>Dado que la separación libre \(s = 71.85\text{ mm} > d_b\) y el recubrimiento \(c = 40\text{ mm} > d_b\), y hay estribos mínimos No. 3 @ 150 mm, califica como <em>condición favorable</em> para barras \(\le \text{No. }6\):</p>
+                <div class="math-box">
+                  $$l_d = \left( \frac{f_y \psi_t \psi_e}{2.1 \lambda \sqrt{f'_c}} \right) d_b = \left( \frac{420 \times 1.0 \times 1.0}{2.1 \times 1.0 \times 4.583} \right) \times 19.1 = 43.64 \times 19.1 = 834\text{ mm}$$
+                </div>
+                <p>
+                  <strong>¡Observación Fundamental!</strong> La fórmula simplificada entrega \(834\text{ mm}\), es decir, un <strong>\(63\%\) más de longitud</strong> que la ecuación general (\(509\text{ mm}\)). Esto se debe a que la fórmula simplificada asume implícitamente \((c_b + K_{tr})/d_b \approx 1.5\) e ignora el factor de tamaño \(\psi_s = 0.8\). En proyectos con alto volumen de acero, el uso de la Ecuación General ahorra miles de metros lineales de acero.
+                </p>
+                <p><strong>Efecto de Barra Superior:</strong></p>
+                <p>Si la barra es superior (\(> 300\text{ mm}\) colados por debajo), \(\psi_t = 1.3\):</p>
+                <div class="math-box">
+                  $$l_{d,\text{sup}} = 1.3 \times 509\text{ mm} = 662\text{ mm} \implies \mathbf{670\text{ mm} \text{ (67 cm)}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 8.2: ANCLAJE CON GANCHO A 90° EN NUDO EXTERIOR
+               ================================================================ -->
+          <div class="example-card" id="ej-8-2">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.2</span>
+                <h3>Anclaje de Refuerzo Superior en Nudo Exterior con Gancho Estándar a \(90^\circ\) (\(l_{dh}\))</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex82', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex82', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En el nudo exterior de un pórtico resistente a momentos, una viga de \(300 \times 500\text{ mm}\) llega a una columna exterior de sección \(400 \times 400\text{ mm}\). El refuerzo superior de momento negativo en el nudo consta de <strong>3 barras No. 7</strong> (\(d_b = 22.2\text{ mm}, A_b = 387\text{ mm}^2\)). El concreto es de \(f'_c = 28\text{ MPa}\), acero \(f_y = 420\text{ MPa}\), y el recubrimiento lateral libre en la columna al gancho es de \(70\text{ mm}\). El gancho a \(90^\circ\) se remata hacia abajo confinado por los estribos del nudo con \(s \le 3 d_b\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la longitud de anclaje recta \(l_d\) que se requeriría y verificar si cabe en la columna sin gancho.<br>
+                2. Calcular la longitud de desarrollo con gancho estándar \(l_{dh}\) aplicando los factores de modificación de NSR-10 C.12.5.3.<br>
+                3. Determinar las dimensiones de doblado del gancho (diámetro interior de doblado \(D\) y cola recta de extensión).<br>
+                4. Verificar si el gancho cabe dentro de la columna de \(400\text{ mm}\) descontando el recubrimiento posterior.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.2 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex82', 1)">
+                <span>Paso 1: Demostración de Imposibilidad de Anclaje Recto en la Columna</span>
+                <span class="step-arrow" id="ex82-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex82-step-1">
+                <p>Calculamos la longitud de desarrollo recta \(l_d\) para barra superior No. 7 (\(\psi_t = 1.3, \psi_s = 1.0, \lambda = 1.0\)) con \(f'_c = 28\text{ MPa}\) (\(\sqrt{28} = 5.291\text{ MPa}\)):</p>
+                <div class="math-box">
+                  $$l_d \ge \left( \frac{420 \times 1.3 \times 1.0}{1.7 \times 1.0 \times 5.291} \right) \times 22.2 = 60.70 \times 22.2 = 1348\text{ mm} \approx 1.35\text{ m}$$
+                </div>
+                <p>
+                  El ancho de la columna de apoyo es de tan solo \(400\text{ mm}\) (\(0.40\text{ m}\)). Descontando el recubrimiento posterior (\(40\text{ mm}\)), la longitud horizontal máxima disponible es de \(360\text{ mm}\).
+                </p>
+                <div class="callout callout-warning">
+                  <strong>Conclusión Física:</strong> Es geométricamente imposible desarrollar la barra recta (\(1348\text{ mm} > 360\text{ mm}\)). El uso de gancho estándar a \(90^\circ\) es <strong>mandatorio e indispensable</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex82', 2)">
+                <span>Paso 2: Longitud Básica de Gancho \(l_{dh}\) y Factores Modificadores</span>
+                <span class="step-arrow" id="ex82-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex82-step-2">
+                <p>Calculamos la longitud de desarrollo básica para gancho estándar según NSR-10 C.12.5.2:</p>
+                <div class="math-box">
+                  $$l_{dh,\text{básica}} = \left( \frac{0.24 \psi_e f_y}{\lambda \sqrt{f'_c}} \right) d_b = \left( \frac{0.24 \times 1.0 \times 420}{1.0 \times 5.291} \right) \times 22.2 = 19.05 \times 22.2 = 423\text{ mm}$$
+                </div>
+                <p>Verificamos los mínimos normativos absolutos:</p>
+                <div class="math-box">
+                  $$\min = \max(8 d_b, \; 150\text{ mm}) = \max(8 \times 22.2, \; 150) = \max(177.6, \; 150) = 178\text{ mm}$$
+                  $$l_{dh,\text{básica}} = 423\text{ mm} \ge 178\text{ mm} \quad \text{(OK)}$$
+                </div>
+                <p>Evaluamos los factores de modificación de NSR-10 C.12.5.3:</p>
+                <ul>
+                  <li><strong>Factor de Recubrimiento Lateral Generoso:</strong> El recubrimiento lateral en la columna es \(70\text{ mm} \ge 65\text{ mm}\), y la extensión doblada hacia abajo dentro del nudo tiene recubrimiento \(\ge 50\text{ mm}\). Factor = <strong>\(0.70\)</strong>.</li>
+                  <li><strong>Factor de Confinamiento con Estribos:</strong> El nudo dispone estribos con \(s \le 3 d_b = 3 \times 22.2 = 66.6\text{ mm}\). Factor = <strong>\(0.80\)</strong>.</li>
+                </ul>
+                <div class="math-box">
+                  $$l_{dh} = 423\text{ mm} \times 0.70 \times 0.80 = 236.9\text{ mm}$$
+                </div>
+                <p>Verificando el mínimo de \(178\text{ mm}\), se adopta: <strong>\(l_{dh} = 240\text{ mm}\) (\(24\text{ cm}\))</strong>.</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex82', 3)">
+                <span>Paso 3: Dimensionamiento Físico del Doblez y Extensión del Gancho</span>
+                <span class="step-arrow" id="ex82-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex82-step-3">
+                <p>Conforme a NSR-10 C.7.1 y C.7.2:</p>
+                <ul>
+                  <li><strong>Diámetro Interior de Doblamiento (\(D\)):</strong> Para barra No. 7 (\(\le \text{No. }8\)), \(D = 6 d_b = 6 \times 22.2 = 133.2\text{ mm}\). Se utiliza un mandril estándar de <strong>\(135\text{ mm}\)</strong> (\(r_{\text{interior}} = 67.5\text{ mm}\)).</li>
+                  <li><strong>Extensión Recta de la Cola:</strong> Para gancho a \(90^\circ\), la extensión recta vertical debe ser al menos \(12 d_b\):
+                    $$L_{\text{ext}} = 12 d_b = 12 \times 22.2 = 266.4\text{ mm} \implies \mathbf{270\text{ mm} \text{ (27 cm)}}$$
+                  </li>
+                  <li><strong>Longitud Total de Figuramiento del Gancho:</strong> Incluyendo el cuadrante de arco (\(\frac{\pi}{2}(r_{\text{int}} + d_b/2) \approx 123\text{ mm}\)) más la extensión recta (\(270\text{ mm}\)), el desarrollo total del doblez es de aproximadamente \(395\text{ mm}\).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex82', 4)">
+                <span>Paso 4: Verificación Geométrica de Cabida en la Columna</span>
+                <span class="step-arrow" id="ex82-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex82-step-4">
+                <p>Verificamos si la dimensión de la columna es suficiente para alojar el gancho:</p>
+                <ul>
+                  <li>Ancho total de columna: \(h_{\text{col}} = 400\text{ mm}\).</li>
+                  <li>Recubrimiento libre posterior al estribo: \(c_{\text{libre}} = 40\text{ mm}\).</li>
+                  <li>Diámetro del estribo de columna (No. 4): \(d_{\text{est}} = 12.7\text{ mm}\).</li>
+                  <li>Longitud horizontal disponible para el gancho medida desde la cara interior de la columna:
+                    $$L_{\text{disp}} = h_{\text{col}} - c_{\text{libre}} - d_{\text{est}} = 400 - 40 - 12.7 = 347.3\text{ mm}$$
+                  </li>
+                </ul>
+                <div class="math-box">
+                  $$l_{dh} = 240\text{ mm} \le L_{\text{disp}} = 347.3\text{ mm} \quad \text{¡CUMPLE SATISFACTORIAMENTE!}$$
+                </div>
+                <p>
+                  El gancho penetra \(347\text{ mm}\) en la columna, lo que supera con creces los \(240\text{ mm}\) requeridos, anclando completamente la barra dentro del núcleo confinado de la columna.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 8.3: EMPALMES POR TRASLAPO CLASE A VS B
+               ================================================================ -->
+          <div class="example-card" id="ej-8-3">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.3</span>
+                <h3>Diseño de Empalmes por Traslapo en Vigas y Columnas Sísmicas (DMO / DES)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex83', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex83', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> En una viga continua de un edificio de oficinas con pórticos DMO (\(b = 350\text{ mm}, h = 600\text{ mm}, d = 540\text{ mm}\)), se requiere empalmar por traslapo el refuerzo superior negativo consistente en <strong>4 barras No. 8</strong> (\(d_b = 25.4\text{ mm}, A_b = 510\text{ mm}^2, A_{s,\text{prov}} = 2040\text{ mm}^2\)). El concreto es de \(f'_c = 28\text{ MPa}\) y el acero \(f_y = 420\text{ MPa}\). En la sección crítica del nudo se requería un área de cálculo \(A_{s,\text{req}} = 1680\text{ mm}^2\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Determinar la zona reglamentaria permitida para realizar el traslapo.<br>
+                2. Clasificar el empalme (Clase A o Clase B) si se traslapan el \(50\%\) de las barras alternadas vs el \(100\%\) de las barras.<br>
+                3. Calcular la longitud de traslapo requerida para cada caso.<br>
+                4. Especificar el refuerzo transversal de confinamiento a lo largo de la zona de traslapo según NSR-10 C.21.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.3 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex83', 1)">
+                <span>Paso 1: Localización Reglamentaria de la Zona de Traslapo</span>
+                <span class="step-arrow" id="ex83-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex83-step-1">
+                <p>Conforme a NSR-10 C.21.5.6.1:</p>
+                <ul>
+                  <li>Queda prohibido traslapar dentro del nudo viga-columna.</li>
+                  <li>Queda prohibido traslapar a una distancia menor a \(2h = 2 \times 600 = 1200\text{ mm} = 1.20\text{ m}\) desde la cara de la columna.</li>
+                  <li>Para barras superiores en vigas continuas, el momento flector cambia de signo (momento positivo o cercano a cero) en el tercio central de la luz. Por tanto, <strong>el traslapo de barras superiores se ubica en el tercio central</strong>, donde los esfuerzos por carga gravitacional y sismo son mínimos.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex83', 2)">
+                <span>Paso 2: Cálculo de la Longitud de Desarrollo Básica \(l_d\)</span>
+                <span class="step-arrow" id="ex83-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex83-step-2">
+                <p>Para barras No. 8 superiores (\(> 300\text{ mm}\) de concreto colado por debajo):</p>
+                <ul>
+                  <li>\(\psi_t = 1.3\) (barra superior).</li>
+                  <li>\(\psi_e = 1.0\) (sin epóxico).</li>
+                  <li>\(\psi_s = 1.0\) (barra No. 8 \(\ge \text{No. }7\)).</li>
+                  <li>\(\lambda = 1.0\).</li>
+                  <li>\(\sqrt{f'_c} = \sqrt{28} = 5.291\text{ MPa}\).</li>
+                </ul>
+                <p>Empleando la fórmula de la Tabla C.12.2.2 para barras \(\ge \text{No. }7\) confinado:</p>
+                <div class="math-box">
+                  $$l_d = \left( \frac{f_y \psi_t \psi_e}{1.7 \lambda \sqrt{f'_c}} \right) d_b = \left( \frac{420 \times 1.3 \times 1.0}{1.7 \times 1.0 \times 5.291} \right) \times 25.4 = 60.70 \times 25.4 = 1542\text{ mm} \approx 1.55\text{ m}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex83', 3)">
+                <span>Paso 3: Clasificación y Longitud del Empalme (Clase A vs Clase B)</span>
+                <span class="step-arrow" id="ex83-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex83-step-3">
+                <p>Evaluamos la razón de área suministrada sobre requerida en la sección:</p>
+                <p>En el tercio central, el momento negativo requerido es prácticamente nulo o muy bajo (\(A_{s,\text{req}} \approx A_{s,\min} \approx 650\text{ mm}^2\)).</p>
+                <p>Por tanto: \(\frac{A_{s,\text{prov}}}{A_{s,\text{req}}} = \frac{2040}{650} = 3.14 \ge 2.0\).</p>
+                <ul>
+                  <li><strong>Opción 1: Traslapo Clase A:</strong> Se traslapan 2 barras en una sección y las otras 2 barras se escalonan a una distancia mayor a \(l_s\) (traslapando \(\le 50\%\) en la misma sección).
+                    $$l_{s,A} = 1.0 l_d = 1542\text{ mm} \implies \mathbf{1.55\text{ m}}$$
+                  </li>
+                  <li><strong>Opción 2: Traslapo Clase B:</strong> Si el contratista decide traslapar las 4 barras en el mismo punto (\(100\%\) de traslapo):
+                    $$l_{s,B} = 1.3 l_d = 1.3 \times 1542 = 2005\text{ mm} \implies \mathbf{2.05\text{ m}}$$
+                  </li>
+                </ul>
+                <div class="callout callout-accent">
+                  <strong>Impacto Económico:</strong> Escalonar los empalmes para calificar a Clase A ahorra \(0.50\text{ m}\) por cada barra No. 8, totalizando \(2.0\text{ m}\) de barra No. 8 (\(\approx 8\text{ kg}\) de acero) por cada empalme de viga.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex83', 4)">
+                <span>Paso 4: Detallamiento del Confinamiento Transversal en el Traslapo</span>
+                <span class="step-arrow" id="ex83-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex83-step-4">
+                <p>En toda la longitud del traslapo (\(1.55\text{ m}\) o \(2.05\text{ m}\)), la NSR-10 exige estribos cerrados de confinamiento. Conforme a C.21.3.5.5 (DMO), el espaciamiento \(s\) debe ser menor o igual al menor de:</p>
+                <ul>
+                  <li>\(d/4 = 540 / 4 = 135\text{ mm}\)</li>
+                  <li>\(8 d_b = 8 \times 25.4 = 203.2\text{ mm}\)</li>
+                  <li>\(24 d_{\text{estribo}} = 24 \times 9.5 = 228\text{ mm}\)</li>
+                  <li>\(150\text{ mm}\)</li>
+                </ul>
+                <div class="math-box">
+                  $$s_{\max} = \min(135, \; 203, \; 228, \; 150) = 135\text{ mm} \implies \text{Adoptar: } \mathbf{s = 125\text{ mm} \text{ (12.5 cm)}}$$
+                </div>
+                <p>Se colocarán <strong>estribos cerrados No. 3 con gancho sísmico a \(135^\circ\) cada \(12.5\text{ cm}\)</strong> a lo largo de toda la longitud de traslapo.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               EJEMPLO 8.4: DESPIECE INTEGRAL DE VIGA CONTINUA
+               ================================================================ -->
+          <div class="example-card" id="ej-8-4">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.4</span>
+                <h3>Despiece Integral de Armaduras en Viga Continua: Envolvente Desplazada y Puntos de Corte</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex84', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex84', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Una viga de \(b = 300\text{ mm}, h = 550\text{ mm}\) (\(d = 490\text{ mm}\)) con luz libre \(L = 6.00\text{ m}\) soporta una carga uniforme factorizada \(w_u = 50\text{ kN/m}\) y momentos negativos en los apoyos \(M_{u1} = M_{u2} = 90\text{ kN}\cdot\text{m}\). Los materiales son \(f'_c = 28\text{ MPa}\) y \(f_y = 420\text{ MPa}\).
+              </p>
+              <p>
+                El diseño por flexión en el centro de luz requiere \(M_{u,\max} = 135\text{ kN}\cdot\text{m}\), para lo cual se disponen <strong>4 barras No. 7</strong> (\(A_s = 4 \times 387 = 1548\text{ mm}^2, \phi M_n = 268\text{ kN}\cdot\text{m}\)). Para optimizar el despiece, se decide <strong>cortar 2 barras No. 7</strong> en el tramo central y continuar <strong>2 barras No. 7</strong> continuas hasta los apoyos.
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la capacidad resistente \(\phi M_n\) de las 2 barras No. 7 continuas.<br>
+                2. Determinar los puntos teóricos de corte (\(x_{T1}, x_{T2}\)) donde \(M_u(x) = \phi M_{n,\text{continuas}}\).<br>
+                3. Calcular la prolongación reglamentaria \(\max(d, 12 d_b)\) y ubicar los puntos prácticos de corte (\(x_{P1}, x_{P2}\)).<br>
+                4. Verificar que desde el momento máximo la barra se extienda al menos \(l_d\), y comprobar el porcentaje de armadura que llega al apoyo.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.4 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex84', 1)">
+                <span>Paso 1: Capacidad Resistente de las Barras Continuas</span>
+                <span class="step-arrow" id="ex84-arrow-1">▼</span>
+              </button>
+              <div class="step-content" id="ex84-step-1">
+                <p>Las 2 barras No. 7 continuas que permanecen aportan \(A_{s,\text{cont}} = 2 \times 387 = 774\text{ mm}^2\). Calculamos el bloque equivalente de Whitney:</p>
+                <div class="math-box">
+                  $$a = \frac{A_{s,\text{cont}} f_y}{0.85 f'_c b} = \frac{774 \times 420}{0.85 \times 28 \times 300} = \frac{325080}{7140} = 45.53\text{ mm}$$
+                  $$d - \frac{a}{2} = 490 - \frac{45.53}{2} = 467.2\text{ mm}$$
+                </div>
+                <p>Momento resistente de diseño con \(\phi = 0.90\):</p>
+                <div class="math-box">
+                  $$\phi M_{n,\text{cont}} = 0.90 \times \left[ 774 \times 420 \times 467.2 \right] \times 10^{-6} = \mathbf{136.8\text{ kN}\cdot\text{m}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex84', 2)">
+                <span>Paso 2: Puntos Teóricos de Corte (\(T_1, T_2\))</span>
+                <span class="step-arrow" id="ex84-arrow-2">▼</span>
+              </button>
+              <div class="step-content" id="ex84-step-2">
+                <p>La ecuación del momento flector a lo largo de la viga simétrica con \(R_1 = R_2 = \frac{50 \times 6}{2} = 150\text{ kN}\) es:</p>
+                <div class="math-box">
+                  $$M_u(x) = 150 x - \frac{50}{2} x^2 - 90 = 150 x - 25 x^2 - 90$$
+                </div>
+                <p>El punto teórico de corte \(x_T\) ocurre donde la demanda es igual a la capacidad de las 2 barras continuas (\(M_u(x) = 136.8\text{ kN}\cdot\text{m}\)):</p>
+                <div class="math-box">
+                  $$25 x^2 - 150 x + (90 + 136.8) = 0 \implies 25 x^2 - 150 x + 226.8 = 0$$
+                </div>
+                <p>Resolviendo la ecuación cuadrática:</p>
+                <div class="math-box">
+                  $$x = \frac{150 \pm \sqrt{150^2 - 4(25)(226.8)}}{2(25)} = \frac{150 \pm \sqrt{22500 - 22680}}{50} \approx \frac{150 \pm 0}{50} = 3.00\text{ m}$$
+                </div>
+                <p>
+                  Nótese que el momento máximo \(M_{u,\max} = 150(3) - 25(9) - 90 = 135\text{ kN}\cdot\text{m}\), que es ligeramente menor que \(\phi M_{n,\text{cont}} = 136.8\text{ kN}\cdot\text{m}\). Esto significa que <strong>las 2 barras continuas ya resisten casi todo el momento positivo</strong>, por lo que teóricamente las otras 2 barras solo se necesitarían en una zona puntual.
+                </p>
+                <p>Considerando la incertidumbre de carga viva y momentos desplazados, fijamos los puntos teóricos de corte a \(x_{T1} = 2.00\text{ m}\) y \(x_{T2} = 4.00\text{ m}\).</p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex84', 3)">
+                <span>Paso 3: Extensión Normativa y Puntos Prácticos de Corte (\(P_1, P_2\))</span>
+                <span class="step-arrow" id="ex84-arrow-3">▼</span>
+              </button>
+              <div class="step-content" id="ex84-step-3">
+                <p>Conforme a NSR-10 C.12.10.3, las barras deben prolongarse una distancia:</p>
+                <div class="math-box">
+                  $$\Delta x = \max(d, \; 12 d_b) = \max(490\text{ mm}, \; 12 \times 22.2\text{ mm}) = \max(490, \; 266.4) = 490\text{ mm} = 0.49\text{ m}$$
+                </div>
+                <p>Puntos prácticos de corte:</p>
+                <div class="math-box">
+                  $$x_{P1} = x_{T1} - \Delta x = 2.00 - 0.49 = \mathbf{1.51\text{ m}} \implies \text{Adoptar: } \mathbf{1.50\text{ m}}$$
+                  $$x_{P2} = x_{T2} + \Delta x = 4.00 + 0.49 = \mathbf{4.49\text{ m}} \implies \text{Adoptar: } \mathbf{4.50\text{ m}}$$
+                </div>
+                <p>Longitud total de las 2 barras No. 7 cortadas:</p>
+                <div class="math-box">
+                  $$L_{\text{barra}} = 4.50 - 1.50 = \mathbf{3.00\text{ m}}$$
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex84', 4)">
+                <span>Paso 4: Verificaciones de Desarrollo \(l_d\) y Porcentaje en Apoyos</span>
+                <span class="step-arrow" id="ex84-arrow-4">▼</span>
+              </button>
+              <div class="step-content" id="ex84-step-4">
+                <p><strong>1. Verificación de \(l_d\) desde la sección de momento máximo (\(x = 3.00\text{ m}\)):</strong></p>
+                <p>La longitud recta desde \(x = 3.00\text{ m}\) hasta el extremo de corte \(x = 4.50\text{ m}\) es \(1.50\text{ m}\).</p>
+                <p>La longitud de desarrollo requerida para barra inferior No. 7 (\(f'_c = 28\text{ MPa}\)) con estribos normales es:</p>
+                <div class="math-box">
+                  $$l_d = \left( \frac{420 \times 1.0 \times 1.0}{1.7 \times 1.0 \times 5.291} \right) \times 22.2 = 46.70 \times 22.2 = 1037\text{ mm} \approx 1.05\text{ m}$$
+                  $$L_{\text{ext}} = 1.50\text{ m} \ge l_d = 1.05\text{ m} \quad \text{¡CUMPLE SATISFACTORIAMENTE!}$$
+                </div>
+                <p><strong>2. Porcentaje de armadura que llega al apoyo (C.12.11.1):</strong></p>
+                <div class="math-box">
+                  $$\%_{\text{continuas}} = \frac{2\text{ barras}}{4\text{ barras}} = 50\% \ge 25\% \text{ (Continuas) y } \ge 33.3\% \text{ (Simples)} \quad \text{¡CUMPLE!}$$
+                </div>
+                <p>
+                  Las 2 barras continuas penetran en cada columna de apoyo rematando con gancho estándar a \(90^\circ\) hacia arriba de \(240\text{ mm}\), garantizando un despiece estructural 100% sismorresistente.
+                </p>
+              </div>
+            </div>
+          </div>
+        
+          <!-- ================================================================
+               EJEMPLO 8.5: LONGITUD DE DESARROLLO A COMPRESIÓN (Ldc) CON CONFINAMIENTO
+               ================================================================ -->
+          <div class="example-card" id="ej-8-5">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.5</span>
+                <h3>Longitud de Desarrollo a Compresión (\(l_{dc}\)) con Confinamiento de Estribos: Barras de Columna en Zapata (NSR-10 C.12.3 y Mulet Cap. 5)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex85', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex85', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Una columna de pórtico de \(450 \times 450\text{ mm}\) fabricada con concreto \(f'_c = 28\text{ MPa}\) y acero \(f_y = 420\text{ MPa}\) transmite una carga axial última de compresión \(P_u = 2400\text{ kN}\) a una zapata aislada cuyo concreto tiene una resistencia especificada \(f'_{c,\text{zap}} = 21\text{ MPa}\). El refuerzo longitudinal de la columna está compuesto por <strong>4 barras No. 8</strong> (\(d_b = 25.4\text{ mm}, A_b = 510\text{ mm}^2, A_{st} = 2040\text{ mm}^2\)).
+              </p>
+              <p>
+                El área de acero teórica requerida por cálculo a compresión pura de la sección es \(A_{s,\text{req}} = 1850\text{ mm}^2\). En la zona de anclaje de los espigos (dowels) dentro del pedestal/zapata se instalan estribos cerrados No. 4 (\(d_b = 12.7\text{ mm}\)) con espaciamiento cerrado \(s = 80\text{ mm} \le 100\text{ mm}\).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la longitud básica de desarrollo a compresión \(l_{dcb}\) según NSR-10 C.12.3.2.<br>
+                2. Determinar los factores de modificación por confinamiento de estribos (\(\psi_c\)) y exceso de armadura (\(\psi_{ex}\)) conforme a C.12.3.3 y Mulet Rodríguez (2024, Cap. 5).<br>
+                3. Calcular la longitud de anclaje final requerida \(l_{dc}\) y verificar los límites mínimos del código.<br>
+                4. Comparar el resultado con la longitud requerida si la barra estuviese sometida a tracción (\(l_d\)), analizando la mecánica física de la adherencia en compresión vs. tracción.<br>
+                5. Elaborar el detalle técnico y gráfico acotado del despiece y remate inferior de los espigos.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.5 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex85', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Ecuaciones Reglamentarias y Longitud Básica de Desarrollo a Compresión (\(l_{dcb}\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex85-step-1">
+                <p>
+                  De acuerdo con el artículo <strong>NSR-10 C.12.3.2</strong>, la longitud de desarrollo básica para barras corrugadas sometidas a compresión (\(l_{dcb}\)) se toma como el mayor valor entre las dos siguientes expresiones:
+                </p>
+                $$\begin{aligned}
+                  l_{dcb,1} &= 0.24 \frac{f_y}{\sqrt{f'_c}} d_b \\
+                  l_{dcb,2} &= 0.043 f_y d_b
+                \end{aligned}$$
+                <p>
+                  <em>Aspecto crítico de diseño:</em> Dado que las barras se anclan <strong>dentro del concreto de la zapata</strong>, la resistencia a la compresión que gobierna la transferencia de tensiones por adherencia es la del concreto receptor: \(f'_c = f'_{c,\text{zap}} = 21\text{ MPa}\). Sustituyendo los valores de \(f_y = 420\text{ MPa}\) y barra No. 8 (\(d_b = 25.4\text{ mm}\)):
+                </p>
+                $$\begin{aligned}
+                  l_{dcb,1} &= 0.24 \times \frac{420}{\sqrt{21}} \times 25.4 = 0.24 \times 91.652 \times 25.4 = 558.7\text{ mm} \\
+                  l_{dcb,2} &= 0.043 \times 420 \times 25.4 = 458.7\text{ mm}
+                \end{aligned}$$
+                <div class="callout callout-info">
+                  <strong>Control de condición de borde:</strong> Rige el primer término:
+                  \[ l_{dcb} = \max(558.7, 458.7) = 558.7\text{ mm} \approx 559\text{ mm} \]
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex85', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Factores de Modificación: Confinamiento (\(\psi_c\)) y Exceso de Armadura (\(\psi_{ex}\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex85-step-2">
+                <p>
+                  El reglamento NSR-10 (C.12.3.3) y el texto guía de <em>Mulet Rodríguez (2024, Sección 5.4)</em> contemplan factores reductores para barras a compresión:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Factor por exceso de armadura (\(\psi_{ex}\), C.12.3.3.a):</strong> Cuando el refuerzo provisto excede el estrictamente requerido por el análisis estructural:
+                    $$\psi_{ex} = \frac{A_{s,\text{requerido}}}{A_{s,\text{provisto}}} = \frac{1850\text{ mm}^2}{2040\text{ mm}^2} = 0.9069$$
+                  </li>
+                  <li>
+                    <strong>Factor por confinamiento transversal (\(\psi_c\), C.12.3.3.b):</strong> Se permite aplicar un factor reductor de <strong>\(0.75\)</strong> cuando el refuerzo está encerrado por una espiral continua (\(\ge 6\text{ mm}\) y paso \(\le 100\text{ mm}\)) o por <strong>estribos cerrados de diámetro \(\ge \text{No. 4}\) (\(12.7\text{ mm}\)) espaciados a no más de \(100\text{ mm}\) entre centros</strong>.
+                    <br>Como disponemos de estribos cerrados No. 4 @ \(80\text{ mm} \le 100\text{ mm}\), se cumple rigurosamente la condición:
+                    $$\psi_c = 0.75$$
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex85', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Cálculo de la Longitud Final \(l_{dc}\) y Límites Mínimos del Código</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex85-step-3">
+                <p>
+                  Aplicando simultáneamente ambos factores sobre la longitud básica:
+                </p>
+                $$l_{dc} = l_{dcb} \times \psi_c \times \psi_{ex} = 558.7\text{ mm} \times 0.75 \times 0.9069 = 379.99\text{ mm} \approx 380\text{ mm}$$
+                <p>
+                  <strong>Verificación del límite mínimo absoluto (NSR-10 C.12.3.1):</strong>
+                </p>
+                $$l_{dc,\min} \ge 200\text{ mm}$$
+                $$\text{Como } 380\text{ mm} \ge 200\text{ mm} \implies \mathbf{l_{dc} = 380\text{ mm} \quad (38\text{ cm}) \quad \text{[CUMPLE]}}$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex85', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Contraste Didáctico: Adherencia a Compresión vs. Adherencia a Tracción</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex85-step-4">
+                <p>
+                  Si evaluamos la longitud de desarrollo a tracción (\(l_d\)) para esta misma barra No. 8 en el concreto de la zapata (\(f'_c = 21\text{ MPa}\)) con recubrimientos estándar (C.12.2.3):
+                </p>
+                $$l_d = \left(\frac{f_y \psi_t \psi_e \psi_s}{1.7 \lambda \sqrt{f'_c}}\right) d_b = \frac{420 \times 1.0 \times 1.0 \times 1.0}{1.7 \times 1.0 \times \sqrt{21}} \times 25.4 = \frac{420}{7.791} \times 25.4 = 1370\text{ mm}$$
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Estado de Esfuerzo</th>
+                      <th>Longitud Requerida</th>
+                      <th>Mecánica de Adherencia (Mulet Cap. 5)</th>
+                      <th>Eficacia de Ganchos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Compresión (\(l_{dc}\))</strong></td>
+                      <td><span class="badge badge-success">380 mm</span></td>
+                      <td>El concreto no sufre agrietamiento transversal por tracción; la presión lateral confina la pasta de cemento e incrementa la resistencia por fricción y acuñamiento.</td>
+                      <td><strong style="color:var(--danger)">Ineficaces (C.12.5.5)</strong>: El código prohíbe considerar ganchos a compresión pues empujan el recubrimiento hacia afuera.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Tracción (\(l_d\))</strong></td>
+                      <td><span class="badge badge-warning">1370 mm</span></td>
+                      <td>Se producen grietas de hendimiento (splitting) longitudinales y radiales, reduciendo notablemente la rigidez del contacto corrugación-concreto.</td>
+                      <td><strong style="color:var(--success)">Muy eficaces</strong>: El gancho a \(90^\circ\) o \(180^\circ\) reduce la longitud a \(l_{dh} \approx 350\text{ mm}\).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex85', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Detalle Técnico Acotado y Esquema Estructural SVG</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex85-step-5">
+                <p>
+                  Aunque a compresión el gancho no suma capacidad de anclaje, los espigos de columna siempre se rematan con una pata horizontal a \(90^\circ\) de al menos \(200\text{ mm}\) apoyada sobre la parrilla inferior de la zapata para estabilidad durante el vaciado y para resistir posibles tracciones accidentales por volcamiento sísmico.
+                </p>
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="280" viewBox="0 0 650 280" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Pedestal y zapata -->
+                    <rect x="200" y="20" width="250" height="90" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+                    <text x="325" y="40" fill="#94a3b8" font-size="12" text-anchor="middle" font-weight="bold">Columna 450x450 mm (f'c = 28 MPa)</text>
+                    <rect x="100" y="110" width="450" height="150" fill="#1e293b" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,2"/>
+                    <text x="325" y="130" fill="#38bdf8" font-size="13" text-anchor="middle" font-weight="bold">Zapata Aislada (f'c = 21 MPa)</text>
+
+                    <!-- Línea de junta de construcción -->
+                    <line x1="100" y1="110" x2="550" y2="110" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="560" y="114" fill="#f59e0b" font-size="10">Junta de fundición</text>
+
+                    <!-- Barras No. 8 dowels -->
+                    <path d="M 240,30 L 240,220 L 170,220" fill="none" stroke="#ef4444" stroke-width="4"/>
+                    <path d="M 410,30 L 410,220 L 480,220" fill="none" stroke="#ef4444" stroke-width="4"/>
+
+                    <!-- Estribos cerrados de confinamiento No. 4 @ 80 mm -->
+                    <line x1="225" y1="130" x2="425" y2="130" stroke="#10b981" stroke-width="2"/>
+                    <line x1="225" y1="155" x2="425" y2="155" stroke="#10b981" stroke-width="2"/>
+                    <line x1="225" y1="180" x2="425" y2="180" stroke="#10b981" stroke-width="2"/>
+                    <line x1="225" y1="205" x2="425" y2="205" stroke="#10b981" stroke-width="2"/>
+                    <text x="435" y="170" fill="#10b981" font-size="11">Estribos No. 4 @ 80 mm (Ψc = 0.75)</text>
+
+                    <!-- Acotado de Ldc -->
+                    <line x1="210" y1="110" x2="210" y2="220" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="205" y1="110" x2="215" y2="110" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="205" y1="220" x2="215" y2="220" stroke="#38bdf8" stroke-width="1.5"/>
+                    <text x="140" y="165" fill="#38bdf8" font-size="12" font-weight="bold">Ldc = 380 mm</text>
+
+                    <!-- Parrilla inferior zapata -->
+                    <line x1="120" y1="235" x2="530" y2="235" stroke="#e2e8f0" stroke-width="3"/>
+                    <circle cx="200" cy="235" r="4" fill="#f59e0b"/>
+                    <circle cx="260" cy="235" r="4" fill="#f59e0b"/>
+                    <circle cx="325" cy="235" r="4" fill="#f59e0b"/>
+                    <circle cx="390" cy="235" r="4" fill="#f59e0b"/>
+                    <circle cx="450" cy="235" r="4" fill="#f59e0b"/>
+                    <text x="540" y="240" fill="#e2e8f0" font-size="10">Parrilla zapata</text>
+                    <text x="140" y="215" fill="#ef4444" font-size="10">Pata 200 mm</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ================================================================
+               EJEMPLO 8.6: ANCLAJE DE REFUERZO POSITIVO EN APOYOS SIMPLES
+               ================================================================ -->
+          <div class="example-card" id="ej-8-6">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.6</span>
+                <h3>Anclaje de Refuerzo Positivo en Apoyos Simples: Comprobación de la Ecuación \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) (NSR-10 C.12.11.3 y Mulet Cap. 5)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex86', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex86', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Una viga simplemente apoyada de sección rectangular \(b = 300\text{ mm}, h = 500\text{ mm}\) (\(d = 440\text{ mm}\)) con luz libre \(L_n = 5.60\text{ m}\) descansa sobre muros de concreto de espesor \(b_s = 400\text{ mm}\). La viga soporta una carga uniforme factorizada \(w_u = 52\text{ kN/m}\), generando un cortante último en la cara interior del apoyo \(V_u = 145.6\text{ kN}\). Los materiales son \(f'_c = 21\text{ MPa}\) y \(f_y = 420\text{ MPa}\).
+              </p>
+              <p>
+                En el centro del tramo, el momento máximo \(M_u = 203.8\text{ kN}\cdot\text{m}\) se resiste mediante <strong>4 barras No. 6</strong> (\(d_b = 19.1\text{ mm}, A_s = 1136\text{ mm}^2\)). Por razones de optimización económica, el calculista proyecta cortar 2 barras No. 6 antes del apoyo y extender únicamente <strong>2 barras No. 6 rectas</strong> (\(A_s = 568\text{ mm}^2\)) hasta el extremo del elemento, penetrando \(350\text{ mm}\) en el muro de apoyo (con recubrimiento terminal libre de \(50\text{ mm}\)).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Verificar el porcentaje reglamentario de armadura positiva que debe ingresar al apoyo según NSR-10 C.12.11.1.<br>
+                2. Calcular la resistencia nominal a flexión \(M_n\) provista exclusivamente por las barras que penetran al apoyo (\(2\text{ No. 6}\)).<br>
+                3. Determinar la longitud de prolongación \(l_a\) más allá del eje central del apoyo.<br>
+                4. Evaluar el cumplimiento del límite reglamentario \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) estipulado en NSR-10 C.12.11.3 y Mulet Rodríguez (2024, Sección 5.5).<br>
+                5. Elaborar el esquema longitudinal SVG acotado con el diagrama de cortante, ubicación del eje de apoyo y envolvente resistente.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.6 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex86', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Requisito de Proporción de Refuerzo en Apoyos Simples (NSR-10 C.12.11.1)</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex86-step-1">
+                <p>
+                  El artículo <strong>NSR-10 C.12.11.1</strong> exige que en elementos simplemente apoyados, al menos <strong>un tercio (\(1/3\))</strong> del refuerzo para momento positivo total dispuesto en el centro de luz debe prolongarse a lo largo del mismo lecho inferior dentro del apoyo:
+                </p>
+                $$A_{s,\text{apoyo,mín}} = \frac{1}{3} A_{s,\text{centro}} = \frac{1}{3} (1136\text{ mm}^2) = 378.7\text{ mm}^2$$
+                <p>
+                  Como se prolongan <strong>2 barras No. 6</strong>:
+                </p>
+                $$A_{s,\text{provisto}} = 2 \times 284\text{ mm}^2 = 568\text{ mm}^2 > 378.7\text{ mm}^2 \quad \left(\frac{568}{1136} = 50\% \ge 33.3\%\right) \quad \mathbf{[CUMPLE]}$$
+                <p>
+                  Asimismo, C.12.11.1 exige una penetración mínima de la barra dentro del apoyo de al menos \(150\text{ mm}\). Como la barra penetra \(350\text{ mm}\), cumple holgadamente.
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex86', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Capacidad Resistente Nominal a Flexión (\(M_n\)) de las Barras Prolongadas</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex86-step-2">
+                <p>
+                  Para aplicar la ecuación de verificación C.12.11.3, el código especifica que \(M_n\) debe calcularse suponiendo que todo el refuerzo que llega al apoyo fluye a su resistencia de fluencia especificada (\(f_y = 420\text{ MPa}\)), con \(A_s = 568\text{ mm}^2\) (2 No. 6):
+                </p>
+                $$a = \frac{A_s f_y}{0.85 f'_c b} = \frac{568\text{ mm}^2 \times 420\text{ MPa}}{0.85 \times 21\text{ MPa} \times 300\text{ mm}} = \frac{238560}{5355} = 44.55\text{ mm}$$
+                <p>
+                  El brazo del par interno es \(j d = d - \frac{a}{2} = 440 - \frac{44.55}{2} = 417.7\text{ mm}\). Por consiguiente:
+                </p>
+                $$M_n = A_s f_y \left(d - \frac{a}{2}\right) = 238560\text{ N} \times 417.7\text{ mm} = 99.65 \times 10^6\text{ N}\cdot\text{mm} = \mathbf{99.65\text{ kN}\cdot\text{m}}$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex86', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Determinación de la Prolongación \(l_a\) y el Factor de Reacción Compresiva (\(1.30\))</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex86-step-3">
+                <p>
+                  Según <strong>NSR-10 C.12.11.3</strong>:
+                </p>
+                <ul>
+                  <li>
+                    El cortante actuante en la cara de apoyo es \(V_u = 145.6\text{ kN} = 145600\text{ N}\).
+                  </li>
+                  <li>
+                    \(l_a\) en un apoyo simple es la longitud embebida del refuerzo <strong>más allá del centro (eje) del apoyo</strong>. Con un ancho de soporte \(b_s = 400\text{ mm}\), el eje está ubicado a \(200\text{ mm}\). Si la barra ingresa \(350\text{ mm}\) en total:
+                    $$l_a = 350\text{ mm} - 200\text{ mm} = 150\text{ mm}$$
+                  </li>
+                  <li>
+                    <strong>Factor de incremento por compresión transversal (\(1.30\)):</strong> Cuando los extremos del refuerzo positivo están confinados por una reacción que produce compresión transversal en el concreto (como ocurre en los apoyos simples de vigas), el código permite amplificar el cociente \(M_n / V_u\) en un <strong>\(30\%\)</strong> (\(1.30 M_n / V_u\)).
+                  </li>
+                </ul>
+                <p>
+                  Por tanto, el límite admisible del lado derecho de la inecuación resulta:
+                </p>
+                $$\text{Límite Admisible} = 1.30 \left(\frac{M_n}{V_u}\right) + l_a = 1.30 \left(\frac{99.65 \times 10^6\text{ N}\cdot\text{mm}}{145600\text{ N}}\right) + 150\text{ mm}$$
+                $$\text{Límite Admisible} = 1.30 \times 684.4\text{ mm} + 150\text{ mm} = 889.7\text{ mm} + 150\text{ mm} = \mathbf{1039.7\text{ mm} \approx 1040\text{ mm}}$$
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex86', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Cálculo de la Longitud de Desarrollo (\(l_d\)) y Verificación de la Regla</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex86-step-4">
+                <p>
+                  Calculamos la longitud de desarrollo a tracción \(l_d\) para las barras No. 6 (\(d_b = 19.1\text{ mm} \le 19.1\text{ mm} \implies \psi_s = 0.8\)) ubicadas en el fondo (\(\psi_t = 1.0\)), concreto de peso normal (\(\lambda = 1.0\)), sin epóxico (\(\psi_e = 1.0\)) con estribos de separación estándar (NSR-10 Tabla C.12.2-1):
+                </p>
+                $$l_d = \left(\frac{f_y \psi_t \psi_e \psi_s}{2.1 \lambda \sqrt{f'_c}}\right) d_b = \frac{420 \times 1.0 \times 1.0 \times 0.8}{2.1 \times 1.0 \times \sqrt{21}} \times 19.1\text{ mm} = \frac{336}{9.624} \times 19.1 = 34.91 \times 19.1 = \mathbf{667\text{ mm}}$$
+                <div class="callout callout-success">
+                  <strong>Comprobación de la inecuación C.12-25 de NSR-10:</strong>
+                  \[ l_d \le 1.30 \frac{M_n}{V_u} + l_a \iff 667\text{ mm} \le 1040\text{ mm} \quad \mathbf{\checkmark \text{ [CUMPLE CON GRAN MARGEN DE SEGURIDAD]}} \]
+                  <em>Conclusión estructural (Mulet Rodríguez, 2024):</em> Las 2 barras No. 6 prolongadas no requieren ser ancladas con ganchos a \(90^\circ\) en el apoyo; el anclaje recto de \(350\text{ mm}\) en el muro garantiza plenamente la transmisión de tensiones sin riesgo de deslizamiento por la biela inclinada de cortante.
+                </div>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex86', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Esquema Técnico SVG Acotado del Apoyo y Despiece Longitudinal</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex86-step-5">
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="280" viewBox="0 0 650 280" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Apoyo / Muro -->
+                    <rect x="50" y="70" width="140" height="180" fill="#334155" stroke="#64748b" stroke-width="2"/>
+                    <text x="120" y="240" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="bold">Muro de Apoyo bs = 400 mm</text>
+
+                    <!-- Cuerpo de la Viga -->
+                    <path d="M 50,70 L 600,70 L 600,200 L 190,200 L 190,250" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                    <text x="380" y="95" fill="#94a3b8" font-size="12" font-weight="bold">Viga 300x500 mm (d = 440 mm)</text>
+
+                    <!-- Eje del apoyo -->
+                    <line x1="120" y1="50" x2="120" y2="220" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4"/>
+                    <text x="120" y="45" fill="#f59e0b" font-size="11" text-anchor="middle">Eje de Apoyo</text>
+
+                    <!-- Refuerzo 2 No. 6 prolongadas hasta el apoyo -->
+                    <line x1="70" y1="180" x2="590" y2="180" stroke="#ef4444" stroke-width="4"/>
+                    <text x="280" y="172" fill="#ef4444" font-size="11" font-weight="bold">2 No. 6 continuas al apoyo</text>
+
+                    <!-- Refuerzo 2 No. 6 cortadas antes del apoyo -->
+                    <line x1="320" y1="165" x2="590" y2="165" stroke="#f97316" stroke-width="3" stroke-dasharray="5,3"/>
+                    <circle cx="320" cy="165" r="4" fill="#f97316"/>
+                    <text x="330" y="155" fill="#f97316" font-size="10">Punto de corte 2 No. 6</text>
+
+                    <!-- Estribos verticales -->
+                    <line x1="205" y1="80" x2="205" y2="190" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="245" y1="80" x2="245" y2="190" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="285" y1="80" x2="285" y2="190" stroke="#10b981" stroke-width="1.5"/>
+                    <line x1="325" y1="80" x2="325" y2="190" stroke="#10b981" stroke-width="1.5"/>
+
+                    <!-- Acotados de la = 150 mm y penetración = 350 mm -->
+                    <line x1="70" y1="210" x2="190" y2="210" stroke="#38bdf8" stroke-width="1.5"/>
+                    <text x="130" y="205" fill="#38bdf8" font-size="10" text-anchor="middle">350 mm</text>
+                    
+                    <line x1="70" y1="225" x2="120" y2="225" stroke="#a855f7" stroke-width="1.5"/>
+                    <text x="95" y="222" fill="#a855f7" font-size="10" text-anchor="middle">la = 150 mm</text>
+
+                    <!-- Flecha de cortante Vu -->
+                    <path d="M 190,50 L 190,110" fill="none" stroke="#e11d48" stroke-width="3" marker-end="url(#arrow)"/>
+                    <polygon points="190,115 185,100 195,100" fill="#e11d48"/>
+                    <text x="200" y="65" fill="#e11d48" font-size="11" font-weight="bold">Vu = 145.6 kN</text>
+
+                    <!-- Cuadro de resumen -->
+                    <rect x="360" y="205" width="260" height="60" rx="6" fill="#111827" stroke="#334155"/>
+                    <text x="370" y="225" fill="#e2e8f0" font-size="11">Ld = 667 mm</text>
+                    <text x="370" y="242" fill="#10b981" font-size="11" font-weight="bold">1.30*(Mn/Vu) + la = 1040 mm</text>
+                    <text x="370" y="258" fill="#38bdf8" font-size="10">Cumple C.12.11.3 (ld ≤ 1040 mm)</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ================================================================
+               EJEMPLO 8.7: DESPIECE INTEGRAL Y ANCLAJE EN VOLADIZO (BALCÓN)
+               ================================================================ -->
+          <div class="example-card" id="ej-8-7">
+            <div class="example-header">
+              <div class="example-title-area">
+                <span class="example-number">EJEMPLO 8.7</span>
+                <h3>Despiece Integral y Anclaje de Armadura de Momento Negativo en Voladizo (Balcón) Hacia Viga y Losa Interior (NSR-10 C.12.12)</h3>
+              </div>
+              <div class="example-actions">
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex87', true)">Expandir Todo</button>
+                <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex87', false)">Colapsar</button>
+              </div>
+            </div>
+            <div class="example-statement">
+              <p>
+                <strong>Enunciado:</strong> Se proyecta el balcón de un edificio residencial estructurado mediante una losa maciza en voladizo de luz libre \(L_c = 1.60\text{ m}\) y espesor \(h = 150\text{ mm}\) (\(d = 120\text{ mm}\)), empotrado en una viga perimetral de \(b_w = 300\text{ mm} \times h_v = 550\text{ mm}\). El tramo interior adyacente corresponde a una losa maciza continua con luz \(L_{\text{int}} = 4.50\text{ m}\) y espesor \(h = 150\text{ mm}\). Los materiales estructurales son \(f'_c = 24\text{ MPa}\) y \(f_y = 420\text{ MPa}\).
+              </p>
+              <p>
+                El voladizo soporta su peso propio (\(3.6\text{ kN/m}^2\)), acabados (\(1.8\text{ kN/m}^2\)), una sobrecarga viva de uso residencial en balcones de \(5.0\text{ kN/m}^2\) (NSR-10 B.4.2.1) y una carga lineal factorizada en el borde exterior debida a la baranda de antepecho \(P_u = 3.2\text{ kN/m}\). El momento negativo factorizado actuante en la cara exterior de la viga es \(M_u = 23.65\text{ kN}\cdot\text{m/m}\), para el cual se diseñó una armadura superior de <strong>barras No. 4 @ 200 mm</strong> (\(d_b = 12.7\text{ mm}, A_b = 129\text{ mm}^2, A_s = 645\text{ mm}^2/\text{m}\)).
+              </p>
+              <p>
+                <em>Se pide:</em><br>
+                1. Calcular la longitud de desarrollo a tracción \(l_d\) de las barras No. 4 superiores según NSR-10 C.12.2.<br>
+                2. Determinar la longitud de anclaje y prolongación reglamentaria hacia el vano de la losa interior conforme a la regla estricta de voladizos de NSR-10 C.12.12.3.<br>
+                3. Diseñar el anclaje y remate en el extremo libre exterior del balcón (gancho, confinamiento transversal y gotero de protección contra humedad).<br>
+                4. Diseñar la armadura de retracción, temperatura y distribución transversal.<br>
+                5. Elaborar el plano de despiece longitudinal acotado SVG con cotas milimétricas completas.
+              </p>
+            </div>
+
+            <!-- Pasos Ejemplo 8.7 -->
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex87', 1)">
+                <span class="step-num">Paso 1</span>
+                <span class="step-title">Longitud de Desarrollo a Tracción (\(l_d\)) de la Armadura Superior</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex87-step-1">
+                <p>
+                  Evaluamos los factores de modificación de <strong>NSR-10 C.12.2.4</strong> para las barras No. 4 (\(d_b = 12.7\text{ mm}\)):
+                </p>
+                <ul>
+                  <li>
+                    <strong>Factor de posición de fundición (\(\psi_t\)):</strong> En una losa de \(150\text{ mm}\) de espesor total, el espesor de concreto fresco vaciado por debajo de las barras superiores no excede los \(300\text{ mm}\). Por tanto:
+                    $$\psi_t = 1.0$$
+                  </li>
+                  <li>
+                    <strong>Factor de recubrimiento epóxico (\(\psi_e\)):</strong> Barras negras sin recubrimiento: \(\psi_e = 1.0\).
+                  </li>
+                  <li>
+                    <strong>Factor por diámetro de barra (\(\psi_s\)):</strong> Para barras No. 6 y menores (\(d_b \le 19\text{ mm}\)):
+                    $$\psi_s = 0.8$$
+                  </li>
+                  <li>
+                    <strong>Factor de densidad del concreto (\(\lambda\)):</strong> Concreto de densidad normal: \(\lambda = 1.0\).
+                  </li>
+                </ul>
+                <p>
+                  Aplicando la fórmula simplificada de NSR-10 Tabla C.12.2-1 para losas macizas con espaciamiento libre \(s \ge 2 d_b\) y recubrimiento \(c_c \ge d_b\):
+                </p>
+                $$l_d = \left(\frac{f_y \psi_t \psi_e \psi_s}{2.1 \lambda \sqrt{f'_c}}\right) d_b = \frac{420 \times 1.0 \times 1.0 \times 0.8}{2.1 \times 1.0 \times \sqrt{24}} \times 12.7\text{ mm}$$
+                $$l_d = \frac{336}{10.288} \times 12.7\text{ mm} = 32.66 \times 12.7\text{ mm} = \mathbf{415\text{ mm} \approx 42\text{ cm}}$$
+                <p>
+                  Verificación del límite mínimo C.12.2.1: \(l_d \ge 300\text{ mm}\) (\(415\text{ mm} \ge 300\text{ mm}\), OK).
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex87', 2)">
+                <span class="step-num">Paso 2</span>
+                <span class="step-title">Regla Especial para Voladizos (NSR-10 C.12.12.3) y Prolongación Hacia el Vano Interior</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex87-step-2">
+                <p>
+                  El artículo <strong>NSR-10 C.12.12.3</strong> establece un requisito mandatorio de seguridad para elementos en voladizo (cuyo fallo es frágil e isostático):
+                </p>
+                <div class="callout callout-warning">
+                  <strong>NSR-10 C.12.12.3:</strong> <em>"El refuerzo para momento negativo en elementos en voladizo debe prolongarse más allá del apoyo interior una distancia que no sea menor que la luz libre del voladizo (\(L_c\)) ni menor que la longitud de desarrollo (\(l_d\)), y debe quedar adecuadamente anclado."</em>
+                </div>
+                <p>
+                  Por tanto, la distancia de anclaje \(L_{\text{anc}}\) medida <strong>desde la cara interior de la viga de apoyo</strong> hacia el tramo de la losa interior debe cumplir:
+                </p>
+                $$L_{\text{anc}} \ge \max(L_c, l_d) = \max(1600\text{ mm}, 415\text{ mm}) = 1600\text{ mm}$$
+                <p>
+                  Adicionalmente, por requisitos de extensión de armaduras más allá del punto donde teóricamente dejan de ser requeridas por momento (NSR-10 C.12.10.3), se debe prolongar una distancia no menor que \(d = 120\text{ mm}\) ni menor que \(12 d_b = 12 \times 12.7 = 152.4\text{ mm}\). Adoptando \(150\text{ mm}\) de extensión:
+                </p>
+                $$L_{\text{ext,interior}} = L_{\text{anc}} + \max(d, 12 d_b) = 1600\text{ mm} + 150\text{ mm} = \mathbf{1750\text{ mm} \quad (1.75\text{ m})}$$
+                <p>
+                  Por consiguiente, la barra superior debe penetrar <strong>al menos \(1.75\text{ m}\)</strong> en el lecho superior de la losa interior contigua contados a partir del paramento interno de la viga perimetral.
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex87', 3)">
+                <span class="step-num">Paso 3</span>
+                <span class="step-title">Detalle de Remate en el Borde Exterior Libre del Voladizo</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex87-step-3">
+                <p>
+                  En el borde libre del balcón, la barra No. 4 no puede dejarse recta ya que el recubrimiento frontal (\(25\text{ mm}\)) no proporciona anclaje y el empuje de la baranda puede fracturar la esquina. Según las buenas prácticas de despiece (Mulet Rodríguez, 2024, Cap. 5 y 6):
+                </p>
+                <ul>
+                  <li>
+                    La barra superior se remata con un doblez a \(90^\circ\) hacia abajo con pata de \(100\text{ mm}\), o alternativamente en horquilla tipo "U" que regresa \(300\text{ mm}\) por el lecho inferior.
+                  </li>
+                  <li>
+                    Se colocan <strong>2 barras longitudinales de borde No. 4</strong> (una superior y una inferior) atadas en el interior de la horquilla para confinar el extremo y servir de soporte a los anclajes de las barandas metálicas o de mampostería.
+                  </li>
+                  <li>
+                    En el intradós inferior del borde se deja previsto un gotero (ranura de \(20 \times 15\text{ mm}\)) separado \(50\text{ mm}\) del borde exterior para romper la tensión superficial del agua de lluvia.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex87', 4)">
+                <span class="step-num">Paso 4</span>
+                <span class="step-title">Armadura de Retracción, Temperatura y Distribución Transversal</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex87-step-4">
+                <p>
+                  En dirección perpendicular a la luz del voladizo (paralela a la viga), se requiere acero por retracción y temperatura según <strong>NSR-10 C.7.12.2.1</strong>:
+                </p>
+                $$A_{s,\text{temp}} = 0.0018 b h = 0.0018 \times 1000\text{ mm} \times 150\text{ mm} = 270\text{ mm}^2/\text{m}$$
+                <p>
+                  Utilizando barras No. 3 (\(d_b = 9.5\text{ mm}, A_b = 71\text{ mm}^2\)):
+                </p>
+                $$s = \frac{1000 \times 71}{270} = 263\text{ mm} \quad \implies \text{Adoptar } \mathbf{\text{No. 3 @ } 250\text{ mm}} \quad (A_s = 284\text{ mm}^2/\text{m})$$
+                <p>
+                  Separación máxima C.7.12.2.2: \(s_{\max} \le \min(5h, 450\text{ mm}) = \min(750, 450) = 450\text{ mm}\). Como \(250\text{ mm} \le 450\text{ mm}\), cumple satisfactoriamente.
+                </p>
+              </div>
+            </div>
+
+            <div class="example-step">
+              <button class="step-toggle-btn" onclick="toggleExampleStep('ex87', 5)">
+                <span class="step-num">Paso 5</span>
+                <span class="step-title">Plano de Despiece Longitudinal SVG con Cotas Milimétricas</span>
+                <span class="step-icon">▼</span>
+              </button>
+              <div class="step-content" id="ex87-step-5">
+                <div style="text-align:center; margin:18px 0;">
+                  <svg width="100%" height="300" viewBox="0 0 700 300" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+                    <!-- Losa interior, viga y balcón -->
+                    <path d="M 30,100 L 250,100 L 250,50 L 370,50 L 370,100 L 660,100 L 660,180 L 370,180 L 370,250 L 250,250 L 250,180 L 30,180 Z" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+
+                    <!-- Textos de elementos -->
+                    <text x="140" y="145" fill="#94a3b8" font-size="12" text-anchor="middle">Losa Interior (h = 150)</text>
+                    <text x="310" y="220" fill="#38bdf8" font-size="11" text-anchor="middle" font-weight="bold">Viga 300x550</text>
+                    <text x="515" y="145" fill="#f59e0b" font-size="12" text-anchor="middle" font-weight="bold">Voladizo Balcón Lc = 1600 mm</text>
+
+                    <!-- Refuerzo superior continuo No. 4 @ 200 mm -->
+                    <path d="M 645,160 L 645,115 L 80,115" fill="none" stroke="#ef4444" stroke-width="3.5"/>
+                    <text x="460" y="90" fill="#ef4444" font-size="11" font-weight="bold">No. 4 @ 200 mm</text>
+
+                    <!-- Gotero -->
+                    <rect x="620" y="175" width="15" height="10" fill="#0f172a"/>
+                    <text x="610" y="200" fill="#64748b" font-size="9">Gotero</text>
+
+                    <!-- Barras transversales No. 3 @ 250 mm (círculos) -->
+                    <circle cx="630" cy="125" r="4" fill="#10b981"/>
+                    <circle cx="570" cy="125" r="4" fill="#10b981"/>
+                    <circle cx="510" cy="125" r="4" fill="#10b981"/>
+                    <circle cx="450" cy="125" r="4" fill="#10b981"/>
+                    <circle cx="390" cy="125" r="4" fill="#10b981"/>
+                    <text x="520" y="70" fill="#10b981" font-size="10">Barras de temperatura No. 3 @ 250 mm</text>
+
+                    <!-- Barras de borde longitudinales No. 4 en la punta -->
+                    <circle cx="638" cy="120" r="5" fill="#f59e0b"/>
+                    <circle cx="638" cy="160" r="5" fill="#f59e0b"/>
+                    <text x="655" y="140" fill="#f59e0b" font-size="10">2 No. 4 borde</text>
+
+                    <!-- Acotados inferiores -->
+                    <!-- Cota Voladizo: 370 a 660 -> 290 px = 1600 mm -->
+                    <line x1="370" y1="265" x2="660" y2="265" stroke="#f59e0b" stroke-width="1.5"/>
+                    <line x1="370" y1="260" x2="370" y2="270" stroke="#f59e0b" stroke-width="1.5"/>
+                    <line x1="660" y1="260" x2="660" y2="270" stroke="#f59e0b" stroke-width="1.5"/>
+                    <text x="515" y="280" fill="#f59e0b" font-size="11" text-anchor="middle" font-weight="bold">Lc = 1600 mm</text>
+
+                    <!-- Cota Ancho Viga: 250 a 370 -> 120 px = 300 mm -->
+                    <line x1="250" y1="265" x2="370" y2="265" stroke="#38bdf8" stroke-width="1.5"/>
+                    <line x1="250" y1="260" x2="250" y2="270" stroke="#38bdf8" stroke-width="1.5"/>
+                    <text x="310" y="280" fill="#38bdf8" font-size="11" text-anchor="middle">300 mm</text>
+
+                    <!-- Cota Anclaje interior: 80 a 250 -> 170 px = 1750 mm -->
+                    <line x1="80" y1="265" x2="250" y2="265" stroke="#ef4444" stroke-width="1.5"/>
+                    <line x1="80" y1="260" x2="80" y2="270" stroke="#ef4444" stroke-width="1.5"/>
+                    <text x="165" y="280" fill="#ef4444" font-size="11" text-anchor="middle" font-weight="bold">Lext = 1750 mm (≥ Lc)</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- REFERENCIA BIBLIOGRÁFICA MULET RODRÍGUEZ -->
+        <div class="callout callout-info" style="margin-top:35px; border-left:4px solid var(--accent); background:rgba(30, 41, 59, 0.7);">
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="font-size:2rem; line-height:1;">📚</div>
+            <div>
+              <h4 style="margin:0 0 8px 0; color:var(--accent);">Texto Guía de Referencia y Verificación Normativa</h4>
+              <p style="margin:0 0 6px 0; font-size:0.95rem; color:var(--text-secondary);">
+                <strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>. Editorial Universidad de Sucre, Colombia. ISBN: 978-628-95009-7-4.
+              </p>
+              <p style="margin:0; font-size:0.88rem; color:var(--text-muted);">
+                Capítulo 5: <em>Longitud de desarrollo y anclaje de armaduras</em> (Secciones 5.1 a 5.6: Adherencia, desarrollo a tracción y compresión, ganchos estándar a 90° y 180°, empalmes por traslapo en zonas de rótula plástica y reglas de corte y prolongación de barras en vigas continuas y voladizos).
+              </p>
+            </div>
+          </div>
+        </div>
+
+          </div>
+      </section>
+
+      <!-- BOTONES DE NAVEGACIÓN INFERIOR ENTRE MÓDULOS -->
+      <div class="module-nav-footer">
+        <a href="modulo-07-cimentaciones.html" class="btn-control">
+          <span>← Módulo 07: Cimentaciones Superficiales</span>
+        </a>
+        <a href="modulo-09-sismico.html" class="btn-control btn-accent">
+          <span>Módulo 09: Detallamiento Sísmico DMO / DES →</span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">◀ Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente ▶</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Core y del Módulo -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-08.js"></script>
+</body>
+</html>

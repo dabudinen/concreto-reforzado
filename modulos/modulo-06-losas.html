@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 6: Diseño de Losas de Entrepiso | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 06 de 09 • Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Diseño de Losas de Entrepiso: Macizas, Aligeradas y en Dos Direcciones</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠</span> Portal Principal
+      </a>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero láser virtual para el docente (Tecla L)">
+        <span>🔴</span> Puntero (L)
+      </button>
+      <button id="btn-presentation" class="btn-control" onclick="togglePresentationMode()" title="Conmutar entre Modo Estudio y Modo Clase Magistral (Tecla P)">
+        <span>🖥️</span> Modo Clase Magistral (P)
+      </button>
+      <button id="btn-theme" class="btn-control" onclick="toggleTheme()">
+        <span>🌙</span> Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <div class="workspace-layout">
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-section-title">Contenido del Módulo 06</div>
+        <ul class="toc-list">
+          <li><a href="#portada-mod06" class="toc-link active"><span class="toc-num">00</span> Portada y Bibliografía</a></li>
+          <li><a href="#sec-clasificacion-losas" class="toc-link"><span class="toc-num">1.0</span> 1. Clasificación y Espesores Mínimos</a></li>
+          <li><a href="#sec-losa-maciza" class="toc-link"><span class="toc-num">2.0</span> 2. Losas Macizas en Una Dirección</a></li>
+          <li><a href="#sec-losa-aligerada" class="toc-link"><span class="toc-num">3.0</span> 3. Losas Aligeradas (Nervadas)</a></li>
+          <li><a href="#sec-escaleras" class="toc-link"><span class="toc-num">4.0</span> 4. Escaleras como Losas Inclinadas</a></li>
+          <li><a href="#sec-dos-direcciones" class="toc-link"><span class="toc-num">5.0</span> 5. Dos Direcciones y Punzonamiento</a></li>
+          <li><a href="#sec-lab-mod06" class="toc-link"><span class="toc-num">6.0</span> 6. Laboratorios Interactivos</a></li>
+          <li><a href="#sec-ejemplos-mod06" class="toc-link"><span class="toc-num">7.0</span> 7. Ejemplos Resueltos Paso a Paso</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-1" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.1</span> Losa Maciza Unidireccional</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.2</span> Escalera Tipo Losa</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.3</span> Losa Aligerada con Nervios</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.4</span> Placa Plana por MDD</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.5</span> Deflexiones Branson (Mulet)</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.6</span> Losa 2D por Coeficientes</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-7" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.7</span> Punzonamiento, Ábaco y Studs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">Ruta de Módulos</div>
+        <div class="module-switcher">
+          <a href="modulo-01-introduccion.html" class="module-pill">
+            <span>Mód. 01: Introducción y Filosofías</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-02-predimensionamiento.html" class="module-pill">
+            <span>Mód. 02: Predimensionamiento</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-03-flexion-vigas.html" class="module-pill">
+            <span>Mód. 03: Flexión en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-04-cortante-vigas.html" class="module-pill">
+            <span>Mód. 04: Cortante en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-05-columnas.html" class="module-pill">
+            <span>Mód. 05: Diseño de Columnas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-06-losas.html" class="module-pill current">
+            <span>Mód. 06: Losas de Entrepiso</span>
+            <span>●</span>
+          </a>
+          <a href="modulo-07-cimentaciones.html" class="module-pill">
+            <span>Mód. 07: Cimentaciones</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-08-despiece.html" class="module-pill">
+            <span>Mód. 08: Longitud de Desarrollo y Despiece</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-09-sismico.html" class="module-pill">
+            <span>Mód. 09: Diseño Sismorresistente</span>
+            <span>✓</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- ===================================================================
+           LÁMINA 00: PORTADA DEL MÓDULO 06 Y BIBLIOGRAFÍA
+           =================================================================== -->
+      <section id="portada-mod06" class="hero-banner content-section">
+        <div class="hero-kicker">
+          <span>MÓDULO TÉCNICO 06</span>
+          <span>•</span>
+          <span>SISTEMAS DE PISO EN UNA Y DOS DIRECCIONES, ESCALERAS Y PUNZONAMIENTO</span>
+        </div>
+        <h1 class="hero-title">Diseño de Losas de Entrepiso en Concreto Reforzado: Macizas, Aligeradas y en Dos Direcciones</h1>
+        <p class="hero-subtitle">
+          El sistema de entrepiso es el elemento que recibe directamente las cargas de ocupación y las transmite a vigas, muros y columnas; además actúa como <strong>diafragma rígido</strong> que reparte las fuerzas sísmicas entre los elementos verticales. Es también, típicamente, el componente que más concreto y acero consume en una edificación. En este módulo estudiaremos la clasificación de las losas según su forma de trabajo, los espesores mínimos para control de deflexiones, el diseño por franjas de las losas macizas y aligeradas en una dirección, las escaleras como losas inclinadas y la introducción a las placas en dos direcciones mediante el <strong>Método de Diseño Directo</strong> con verificación de <strong>punzonamiento</strong>.
+        </p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Autoría Académica</span>
+            <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Respaldo Normativo</span>
+            <span class="hero-meta-value">NSR-10 C.7.12, C.8.3, C.8.13, C.9.5, C.11.11 y C.13</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Simuladores Interactivos</span>
+            <span class="hero-meta-value">2 Laboratorios (Una Dirección + MDD)</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ejemplos con Pizarra Docente</span>
+            <span class="hero-meta-value">4 Problemas Completos Paso a Paso</span>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1.5rem;">
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #38BDF8;">🎯 Competencias Específicas del Módulo 06</h3>
+              <div class="tech-card-icon">🧭</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.6; color: #E2E8F0; margin: 0;">
+              <li>Clasificar un sistema de piso como losa en una o dos direcciones según la relación de luces y las condiciones de apoyo, y fijar su espesor mínimo con las Tablas <code>C.9.5(a)</code> y <code>C.9.5(c)</code>.</li>
+              <li>Diseñar losas macizas por franja unitaria ($b = 1.00\text{ m}$) con coeficientes de momento (<code>C.8.3.3</code>), acero mínimo de retracción y temperatura (<code>C.7.12</code>) y separaciones máximas.</li>
+              <li>Dimensionar losas aligeradas: geometría de nervios, loseta superior, riostras transversales, diseño a flexión como sección T y cortante con $1.10\,\phi V_c$ (<code>C.8.13</code>).</li>
+              <li>Analizar escaleras como losas inclinadas en proyección horizontal y aplicar el Método de Diseño Directo (<code>C.13.6</code>) con verificación de punzonamiento (<code>C.11.11.2</code>).</li>
+            </ul>
+          </div>
+
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #FBBF24;">📚 Bibliografía de Referencia Recomendada</h3>
+              <div class="tech-card-icon">📖</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.87rem; line-height: 1.58; color: #E2E8F0; margin: 0;">
+              <li><strong>AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente NSR-10</em> — Título B (Cargas) y Título C, Capítulos C.7, C.8, C.9, C.11 y C.13.</li>
+              <li><strong>ACI Committee 318.</strong> <em>Building Code Requirements for Structural Concrete (ACI 318) and Commentary</em>.</li>
+              <li><strong>Nilson, A. H., Darwin, D., &amp; Dolan, C. W.</strong> <em>Diseño de Estructuras de Concreto</em>. McGraw-Hill.</li>
+              <li><strong>Segura Franco, J.</strong> <em>Estructuras de Concreto I</em>. Universidad Nacional de Colombia.</li>
+              <li><strong>Wight, J. K., &amp; MacGregor, J. G.</strong> <em>Reinforced Concrete: Mechanics and Design</em>. Pearson.</li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- TARJETA BIBLIOGRÁFICA Y TEXTOS GUÍA -->
+        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <div class="tech-card-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Referencias Bibliográficas y Textos Guía del Módulo</span>
+            <span class="norm-pill">NSR-10 / ACI 318</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5;">
+            El análisis de entrepisos, diseño de losas macizas y aligeradas, punzonamiento y cálculo de deflexiones por Branson se fundamentan en:
+          </p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 6: Agrietamiento y deflexiones, inercia efectiva de Branson $I_e$ y deflexiones diferidas a largo plazo).</li>
+            <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.9: Requisitos de Serviciabilidad; y Capítulo C.13: Sistemas de Losas en Dos Direcciones).</li>
+            <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
+            <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
+          </ul>
+        </div>
+</section>
+
+      <!-- ===================================================================
+           SECCIÓN 1.0: CLASIFICACIÓN Y ESPESORES MÍNIMOS
+           =================================================================== -->
+      <section id="sec-clasificacion-losas" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">1.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.9.5.2, C.9.5.3 y C.13 • Forma de Trabajo y Control de Deflexiones</div>
+            <h2 class="chapter-title">Clasificación de los Sistemas de Losa y Espesores Mínimos Normativos</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          La forma en que una losa transmite la carga a sus apoyos depende de la <strong>disposición de los apoyos</strong> y de la <strong>relación entre sus luces</strong>. Si un panel rectangular está apoyado en sus cuatro bordes, la franja corta es más rígida (la deflexión crece con $l^4$), por lo que absorbe la mayor parte de la carga. Cuando la relación de luces es grande, prácticamente toda la carga viaja en la dirección corta:
+        </p>
+
+        <div class="cards-grid-3">
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">1. Losa en Una Dirección</h3>
+              <div class="tech-card-icon">➡️</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              Solo existen apoyos en dos bordes opuestos, o bien la relación entre la luz corta y la larga es $\mathbf{l_{\text{corta}} / l_{\text{larga}} \le 0.5}$ (equivalente a $l_{\text{larga}} / l_{\text{corta}} \ge 2.0$). Se diseña como una viga ancha por franjas paralelas a la luz corta, que es la luz de diseño.
+            </p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">2. Losa en Dos Direcciones</h3>
+              <div class="tech-card-icon">✳️</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              Panel apoyado en sus cuatro bordes (vigas, muros) o directamente sobre columnas, con $\mathbf{l_{\text{larga}} / l_{\text{corta}} < 2.0}$. La carga se reparte en ambas direcciones y el refuerzo se coloca en dos capas ortogonales (<code>NSR-10 C.13</code>).
+            </p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title">3. Tipologías Constructivas</h3>
+              <div class="tech-card-icon">🏗️</div>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body);">
+              <strong>Maciza</strong> (sección llena), <strong>aligerada o nervada</strong> (viguetas + loseta, con casetón o bloque perdido), <strong>placa plana</strong> (apoyada directamente en columnas), <strong>placa con ábacos/capiteles</strong> y <strong>losa reticular</strong> (nervada en dos direcciones).
+            </p>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.4rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          1.1 Espesores Mínimos en Una Dirección — Tabla C.9.5(a) y Recomendación CR.9.5
+        </h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Elemento ($f_y = 420\text{ MPa}$, concreto de peso normal)</th>
+                <th>Simplemente apoyado</th>
+                <th>Un extremo continuo</th>
+                <th>Ambos extremos continuos</th>
+                <th>Voladizo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Losas macizas</strong> — NO soportan muros frágiles (Tabla C.9.5(a))</td>
+                <td>$\ell / 20$</td><td>$\ell / 24$</td><td>$\ell / 28$</td><td>$\ell / 10$</td>
+              </tr>
+              <tr>
+                <td><strong>Vigas o losas nervadas</strong> — NO soportan muros frágiles (Tabla C.9.5(a))</td>
+                <td>$\ell / 16$</td><td>$\ell / 18.5$</td><td>$\ell / 21$</td><td>$\ell / 8$</td>
+              </tr>
+              <tr>
+                <td><strong>Losas macizas</strong> — SÍ soportan muros divisorios frágiles (Tabla CR.9.5)</td>
+                <td>$\ell / 14$</td><td>$\ell / 16$</td><td>$\ell / 19$</td><td>$\ell / 7$</td>
+              </tr>
+              <tr>
+                <td><strong>Vigas o losas nervadas</strong> — SÍ soportan muros divisorios frágiles (Tabla CR.9.5)</td>
+                <td>$\ell / 11$</td><td>$\ell / 12$</td><td>$\ell / 14$</td><td>$\ell / 5$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="math-card normative-amber" style="margin-top: 1rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Correcciones de la Tabla C.9.5(a) por Tipo de Acero y Concreto Liviano</span>
+            <span class="norm-pill">NSR-10 C.9.5.2.1 — Notas (a) y (b)</span>
+          </div>
+          <div class="math-formula">
+            $$\text{(b) Si } f_y \ne 420\text{ MPa:} \quad h_{\min} \times \left(0.4 + \frac{f_y}{700}\right), \qquad \text{(a) Concreto liviano } (1440 \le w_c \le 1840\text{ kg/m}^3)\text{:} \quad h_{\min} \times (1.65 - 0.0003\,w_c) \ge 1.09$$
+          </div>
+          <div class="math-vars">
+            <div><strong>Advertencia de práctica colombiana:</strong> En edificaciones residenciales y de oficinas, los entrepisos casi siempre soportan muros de mampostería frágiles. En ese caso los valores de la Tabla C.9.5(a) <strong>no garantizan</strong> el control de deflexiones y deben usarse los espesores de la Tabla CR.9.5 o calcularse explícitamente las deflexiones inmediatas y diferidas (<code>C.9.5.2.2</code> a <code>C.9.5.2.5</code>).</div>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.4rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          1.2 Espesores Mínimos de Losas en Dos Direcciones sin Vigas Interiores — Tabla C.9.5(c)
+        </h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>$f_y$ [MPa]</th>
+                <th>Sin ábacos — Panel exterior sin vigas de borde</th>
+                <th>Sin ábacos — Panel exterior con vigas de borde</th>
+                <th>Sin ábacos — Panel interior</th>
+                <th>Con ábacos — Exterior sin / con vigas de borde</th>
+                <th>Con ábacos — Interior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>280</strong></td><td>$l_n / 33$</td><td>$l_n / 36$</td><td>$l_n / 36$</td><td>$l_n/36$ / $l_n/40$</td><td>$l_n / 40$</td></tr>
+              <tr><td><strong>420</strong></td><td>$\mathbf{l_n / 30}$</td><td>$\mathbf{l_n / 33}$</td><td>$\mathbf{l_n / 33}$</td><td>$l_n/33$ / $l_n/36$</td><td>$l_n / 36$</td></tr>
+              <tr><td><strong>520</strong></td><td>$l_n / 28$</td><td>$l_n / 31$</td><td>$l_n / 31$</td><td>$l_n/31$ / $l_n/34$</td><td>$l_n / 34$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">
+          $l_n$ es la luz libre en la <strong>dirección larga</strong>, medida cara a cara de los apoyos. El espesor no puede ser menor que $125\text{ mm}$ en losas sin ábacos ni que $100\text{ mm}$ en losas con ábacos (<code>C.9.5.3.2</code>). Para losas con vigas en todos sus bordes se aplican las ecuaciones <code>C.9-12</code> y <code>C.9-13</code> en función de la rigidez relativa promedio $\alpha_{fm}$.
+        </p>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 2.0: LOSAS MACIZAS EN UNA DIRECCIÓN
+           =================================================================== -->
+      <section id="sec-losa-maciza" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">2.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.7.6.5, C.7.12, C.8.3.3, C.8.9 y C.11.2 • Diseño por Franja Unitaria</div>
+            <h2 class="chapter-title">Losas Macizas en Una Dirección: Coeficientes de Momento, Acero Mínimo y Cortante sin Estribos</h2>
+          </div>
+        </div>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Franja de Diseño, Luz de Cálculo y Cargas por Metro de Ancho</span>
+              <span class="norm-pill">NSR-10 C.8.9.1 y Título B</span>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.6rem;">
+              Se aísla una franja de $b = 1000\text{ mm}$ paralela a la luz corta y se analiza como una viga de ancho unitario. La carga por metro cuadrado ($\text{kN/m}^2$) se convierte numéricamente en carga lineal ($\text{kN/m}$). En elementos no construidos monolíticamente con sus apoyos, la luz de cálculo es:
+            </p>
+            <div class="math-formula">
+              $$\ell = \min\big(l_n + h,\;\; \ell_{\text{centro a centro}}\big), \qquad w_u = (1.2\,D + 1.6\,L)\times 1.00\text{ m}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Carga muerta típica:</strong> peso propio $\gamma_c\,h$ ($\gamma_c = 24\text{ kN/m}^3$), acabado de piso ($\approx 0.05 \times 22 = 1.10\text{ kN/m}^2$), pañete inferior ($0.02 \times 22 = 0.44\text{ kN/m}^2$) y muros divisorios (Tabla <code>B.3.4.2-4</code>, típicamente $3.0\text{ kN/m}^2$ en mampostería).</div>
+              <div><strong>Carga viva:</strong> según ocupación, Tabla <code>B.4.2.1-1</code> (residencial $1.80\text{ kN/m}^2$; oficinas $2.00\text{ kN/m}^2$; escaleras $3.00\text{ kN/m}^2$).</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Coeficientes Aproximados de Momento y Cortante</span>
+              <span class="norm-pill">NSR-10 C.8.3.3</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.5rem;">
+              Válidos para dos o más vanos, luces aproximadamente iguales (la mayor no excede en más del $20\%$ a la menor), cargas uniformes, $L \le 3D$ y elementos prismáticos. Se usa $l_n$ (y para momentos negativos en apoyos, el promedio de las luces adyacentes):
+            </p>
+            <div class="table-container">
+              <table class="data-table" style="font-size: 0.82rem;">
+                <thead><tr><th>Ubicación</th><th>Coeficiente</th></tr></thead>
+                <tbody>
+                  <tr><td>Positivo — vano extremo, extremo discontinuo no restringido</td><td>$w_u l_n^2 / 11$</td></tr>
+                  <tr><td>Positivo — vano extremo, extremo discontinuo monolítico con el apoyo</td><td>$w_u l_n^2 / 14$</td></tr>
+                  <tr><td>Positivo — vanos interiores</td><td>$w_u l_n^2 / 16$</td></tr>
+                  <tr><td>Negativo — cara exterior del primer apoyo interior (2 vanos)</td><td>$w_u l_n^2 / 9$</td></tr>
+                  <tr><td>Negativo — cara exterior del primer apoyo interior (más de 2 vanos)</td><td>$w_u l_n^2 / 10$</td></tr>
+                  <tr><td>Negativo — demás caras de apoyos interiores</td><td>$w_u l_n^2 / 11$</td></tr>
+                  <tr><td>Negativo — losas con luces $\le 3.0\text{ m}$, en todos los apoyos</td><td>$w_u l_n^2 / 12$</td></tr>
+                  <tr><td>Negativo — apoyo exterior monolítico (viga / columna)</td><td>$w_u l_n^2 / 24$ y $w_u l_n^2 / 16$</td></tr>
+                  <tr><td>Cortante — cara del primer apoyo interior / demás apoyos</td><td>$1.15\,w_u l_n / 2$ y $w_u l_n / 2$</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1rem;">
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">3. Acero Mínimo de Retracción y Temperatura y Separaciones Máximas</span>
+              <span class="norm-pill">NSR-10 C.7.12.2 y C.7.6.5</span>
+            </div>
+            <div class="math-formula">
+              $$\rho_{\text{temp}} = \frac{A_s}{b\,h} \ge \begin{cases} 0.0020 & f_y = 280\text{ ó }350\text{ MPa} \\ 0.0018 & f_y = 420\text{ MPa} \\ \dfrac{0.0018 \times 420}{f_y} \ge 0.0014 & f_y > 420\text{ MPa} \end{cases}$$
+            </div>
+            <div class="math-formula">
+              $$s_{\text{principal}} \le \min(3h,\;450\text{ mm}), \qquad s_{\text{temperatura}} \le \min(5h,\;450\text{ mm})$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Importante:</strong> En losas macizas en una dirección, el acero mínimo a flexión en la dirección principal es el mismo de retracción y temperatura ($0.0018\,b\,h$, referido a la altura total $h$, no a $d$ — <code>C.10.5.4</code>). En la dirección perpendicular se coloca obligatoriamente acero de repartición por retracción y temperatura.</div>
+            </div>
+          </div>
+
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">4. Cortante en Losas: Diseño sin Estribos</span>
+              <span class="norm-pill">NSR-10 C.11.2.1.1 y C.11.4.6.1</span>
+            </div>
+            <p style="font-size: 0.89rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Las losas macizas están exentas del refuerzo mínimo de cortante (<code>C.11.4.6.1(a)</code>), por lo que el espesor debe escogerse de modo que el concreto resista por sí solo el cortante a distancia $d$ del apoyo:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{V_u(d) \le \phi V_c = 0.75 \times 0.17\,\lambda\sqrt{f'_c}\;b\,d}, \qquad b = 1000\text{ mm}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Peralte efectivo:</strong> $d = h - \text{recubrimiento} - d_b/2$, con recubrimiento libre de $20\text{ mm}$ para losas no expuestas a la intemperie con barras $\le \text{No. }11$ (<code>C.7.7.1</code>).</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 3.0: LOSAS ALIGERADAS (NERVADAS)
+           =================================================================== -->
+      <section id="sec-losa-aligerada" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">3.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.8.13 • Viguetas, Loseta Superior, Riostras y Aumento del 10 % en $V_c$</div>
+            <h2 class="chapter-title">Losas Aligeradas en Una Dirección: Geometría Normativa y Diseño de Nervios como Sección T</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          La losa aligerada elimina el concreto de la zona traccionada que no contribuye a la resistencia a flexión (por debajo del eje neutro) y lo reemplaza por casetones recuperables, bloques de arcilla o poliestireno. Resultan secciones T repetidas — <strong>nervios o viguetas</strong> — unidas por una loseta superior delgada. Se obtiene gran inercia con poco peso propio, lo que las hace muy competitivas en luces de $4$ a $8\text{ m}$.
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">Requisitos Geométricos de la Losa Nervada</span>
+              <span class="norm-pill">NSR-10 C.8.13.2 a C.8.13.6</span>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.62; color: var(--text-body); margin: 0;">
+              <li><strong>Ancho de nervios:</strong> $b_w \ge 100\text{ mm}$ en la parte superior y ancho promedio $\ge 80\text{ mm}$; altura libre (bajo la loseta) $\le 5$ veces el ancho promedio del nervio.</li>
+              <li><strong>Separación máxima entre nervios</strong> (centro a centro): $s \le 2.5\,h$ y $s \le 1.20\text{ m}$. Si se excede, la losa no puede tratarse como nervada y la loseta y los nervios se diseñan como losa maciza y vigas independientes.</li>
+              <li><strong>Loseta superior:</strong> espesor $\ge 45\text{ mm}$ y $\ge 1/20$ de la distancia libre entre nervios; lleva refuerzo de retracción y temperatura en ambas direcciones ($0.0018\,b\,t_f$).</li>
+              <li><strong>Nervios transversales de repartición (riostras):</strong> se disponen perpendiculares a los nervios principales con separación libre no mayor de $10$ veces el espesor total de la losa ni de $4.0\text{ m}$, con refuerzo mínimo continuo arriba y abajo.</li>
+              <li><strong>Tuberías embebidas:</strong> no deben debilitar significativamente la loseta ni los nervios (<code>C.6.3</code>).</li>
+            </ul>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">Diseño a Flexión y Cortante del Nervio</span>
+              <span class="norm-pill">NSR-10 C.8.12, C.10.5.1 y C.8.13.8</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.5rem;">
+              Cada nervio recibe la carga de su ancho aferente $s$ (separación centro a centro): $w_u = q_u \times s$. En <strong>momento positivo</strong> la loseta comprimida actúa como aleta (sección T con $b = s$, casi siempre $a \le t_f$); en <strong>momento negativo</strong> la compresión está en el alma y la sección es rectangular de ancho $b_w$:
+            </p>
+            <div class="math-formula">
+              $$M_u^+ \;\rightarrow\; b = s\;(\text{aleta}), \qquad M_u^- \;\rightarrow\; b = b_w, \qquad A_{s,\min} = \max\left(\frac{0.25\sqrt{f'_c}}{f_y},\;\frac{1.4}{f_y}\right) b_w\,d$$
+            </div>
+            <div class="math-formula">
+              $$\mathbf{V_u(d) \le 1.10\,\phi V_c = 1.10 \times 0.75 \times 0.17\,\lambda\sqrt{f'_c}\;b_w\,d} \qquad (\text{C.8.13.8})$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Ensanche de nervios:</strong> Si el cortante excede $1.10\,\phi V_c$, la solución usual es <strong>macizar</strong> (retirar casetones) en una franja junto al apoyo, ampliando $b_w$ hasta que el concreto resista sin estribos. Se recomienda colocar al menos un estribo de amarre cerrado en el nervio para fijar las barras.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 4.0: ESCALERAS
+           =================================================================== -->
+      <section id="sec-escaleras" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">4.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Losa Inclinada Simplemente Apoyada • Cargas en Proyección Horizontal</div>
+            <h2 class="chapter-title">Escaleras de Tipo Losa: Geometría, Cargas por Proyección Horizontal y Diseño</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Las escaleras de tipo losa simplemente apoyada se calculan como una losa maciza en una dirección cuya <strong>luz de cálculo es la proyección horizontal entre apoyos</strong>. Todas las cargas se expresan por metro cuadrado de proyección horizontal, por lo que el peso propio del tramo inclinado, medido perpendicularmente al plano de la losa, debe dividirse por $\cos\alpha$:
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">Geometría del Tramo Inclinado</span>
+              <span class="norm-pill">Huella $p$, Contrahuella $c_h$ y Pendiente</span>
+            </div>
+            <div class="math-formula">
+              $$\tan\alpha = \frac{c_h}{p}, \qquad \text{Regla de comodidad: } 2\,c_h + p \approx 610\text{ a }640\text{ mm}, \qquad h \approx \frac{\ell_{\text{horizontal}}}{20}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Valores usuales:</strong> huella $p = 280$ a $300\text{ mm}$, contrahuella $c_h = 170$ a $180\text{ mm}$, ancho mínimo de escalera según el Título K de la NSR-10 en función de la ocupación.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">Cargas por m² en Proyección Horizontal</span>
+              <span class="norm-pill">Tramo Inclinado y Descanso</span>
+            </div>
+            <div class="math-formula">
+              $$\text{Losa inclinada: } \frac{\gamma_c\,h}{\cos\alpha}, \qquad \text{Peldaños: } \frac{\gamma_c\,c_h}{2}, \qquad \text{Acabado de granito: } \frac{t_a\,(c_h + p)}{p}\,\gamma_a, \qquad \text{Pañete: } \frac{t_p\,\gamma_p}{\cos\alpha}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Diseño:</strong> La viga equivalente tiene dos zonas de carga (tramo inclinado y descanso). Se obtienen las reacciones, se ubica el punto de cortante nulo y allí el momento máximo positivo. El refuerzo principal va en la cara inferior a lo largo de la escalera, con barras de retracción transversales y refuerzo negativo constructivo en los apoyos monolíticos.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 5.0: LOSAS EN DOS DIRECCIONES Y PUNZONAMIENTO
+           =================================================================== -->
+      <section id="sec-dos-direcciones" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">5.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.13.2, C.13.6 y C.11.11 • Momento Estático Total, Franjas y Cortante Bidireccional</div>
+            <h2 class="chapter-title">Losas en Dos Direcciones: Método de Diseño Directo y Verificación de Punzonamiento</h2>
+          </div>
+        </div>
+
+        <div class="cards-grid-2">
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Limitaciones del Método de Diseño Directo</span>
+              <span class="norm-pill">NSR-10 C.13.6.1</span>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.88rem; line-height: 1.62; color: var(--text-body); margin: 0;">
+              <li>Mínimo <strong>tres vanos continuos</strong> en cada dirección.</li>
+              <li>Paneles rectangulares con relación luz larga / luz corta $\le 2.0$.</li>
+              <li>Luces sucesivas en cada dirección no difieren en más de $1/3$ de la luz mayor.</li>
+              <li>Columnas desalineadas como máximo un $10\%$ de la luz en la dirección del desalineamiento.</li>
+              <li>Solo cargas gravitacionales uniformemente distribuidas, con $L \le 2D$ (cargas no mayoradas).</li>
+              <li>Si hay vigas en todos los lados: $0.2 \le \dfrac{\alpha_{f1}\,l_2^2}{\alpha_{f2}\,l_1^2} \le 5.0$.</li>
+            </ul>
+          </div>
+
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Momento Estático Total Mayorado $M_0$</span>
+              <span class="norm-pill">NSR-10 C.13.6.2 (Ec. C.13-4)</span>
+            </div>
+            <div class="math-formula">
+              $$\mathbf{M_0 = \frac{q_u\,l_2\,l_n^2}{8}}, \qquad l_n \ge 0.65\,l_1$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$l_1$:</strong> luz centro a centro en la dirección de análisis; <strong>$l_2$:</strong> luz centro a centro transversal (ancho del pórtico equivalente); <strong>$l_n$:</strong> luz libre cara a cara de columnas, capiteles o muros en la dirección $l_1$.</div>
+              <div><strong>Franja de columna (CS):</strong> ancho a cada lado del eje de columnas igual a $0.25\,l_2$ ó $0.25\,l_1$, el menor (ancho total $= \min(l_1, l_2)/2$). <strong>Franja central (MS):</strong> el resto del ancho $l_2$.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.35rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          5.1 Distribución Longitudinal de $M_0$ (C.13.6.3) y Reparto a Franjas en Placas sin Vigas ($\alpha_f = 0$, C.13.6.4)
+        </h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ubicación del momento</th>
+                <th>Vano interior</th>
+                <th>Vano extremo — borde sin viga</th>
+                <th>Vano extremo — borde con viga</th>
+                <th>% a la franja de columna (CS)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Negativo interior</strong></td><td>$0.65\,M_0$</td><td>$0.70\,M_0$</td><td>$0.70\,M_0$</td><td>$75\%$</td></tr>
+              <tr><td><strong>Positivo</strong></td><td>$0.35\,M_0$</td><td>$0.52\,M_0$</td><td>$0.50\,M_0$</td><td>$60\%$</td></tr>
+              <tr><td><strong>Negativo exterior</strong></td><td>—</td><td>$0.26\,M_0$</td><td>$0.30\,M_0$</td><td>$100\%$ sin viga ($\beta_t = 0$) / $75\%$ con viga rígida a torsión ($\beta_t \ge 2.5$)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="math-card normative-emerald" style="margin-top: 1rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">3. Punzonamiento (Cortante en Dos Direcciones) en Losas sin Refuerzo de Cortante</span>
+            <span class="norm-pill">NSR-10 C.11.11.1.2 y C.11.11.2.1</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+            Alrededor de cada columna se forma una superficie de falla tronco-piramidal. La sección crítica se ubica a $d/2$ de la cara de la columna, con perímetro $b_0$ (columna interior cuadrada: $b_0 = 4(c + d)$). La resistencia del concreto es la menor de:
+          </p>
+          <div class="math-formula">
+            $$v_c = \min\left\{0.17\left(1 + \frac{2}{\beta}\right)\lambda\sqrt{f'_c},\;\; 0.083\left(\frac{\alpha_s\,d}{b_0} + 2\right)\lambda\sqrt{f'_c},\;\; 0.33\,\lambda\sqrt{f'_c}\right\}, \qquad \mathbf{\phi V_c = 0.75\,v_c\,b_0\,d \ge V_u}$$
+          </div>
+          <div class="math-vars">
+            <div><strong>$\beta$:</strong> relación lado largo / lado corto de la columna; <strong>$\alpha_s$:</strong> $40$ columnas interiores, $30$ de borde, $20$ de esquina.</div>
+            <div><strong>Transferencia de momento desbalanceado (C.13.5.3 y C.11.11.7):</strong> En columnas de borde y esquina, y con cargas laterales, una fracción $\gamma_v\,M_{sc}$ del momento se transfiere por excentricidad del cortante y aumenta el esfuerzo en la sección crítica. Las verificaciones simplificadas de este módulo (simulador 6.2 y Ejemplo 6.4) <strong>no incluyen</strong> ese término; en el diseño definitivo debe adicionarse.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 6.0: LABORATORIOS INTERACTIVOS
+           =================================================================== -->
+      <section id="sec-lab-mod06" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">6.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Simuladores Interactivos en Tiempo Real • HTML5 Canvas</div>
+            <h2 class="chapter-title">Laboratorios de Losas en Una Dirección y de Placas Planas por el Método Directo</h2>
+          </div>
+        </div>
+
+        <!-- SIMULADOR 6.1 -->
+        <div class="sim-box" style="margin-bottom: 2.2rem;">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 6.1: Diseñador de Losas Macizas y Aligeradas en Una Dirección</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Calcula el espesor mínimo (Tabla C.9.5(a)), el peso propio, la carga mayorada por franja o por nervio, los momentos y cortantes por coeficientes (C.8.3.3), el acero requerido y mínimo, el armado y la verificación de cortante sin estribos ($1.10\,\phi V_c$ en nervios). Se asume $f_y = 420\text{ MPa}$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn-control" onclick="loadSim61Preset('ej61_maciza')">📌 Preset Ej. 6.1 (Maciza)</button>
+              <button class="btn-control" onclick="loadSim61Preset('ej63_aligerada')">📌 Preset Ej. 6.3 (Aligerada)</button>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label"><span>Tipo de losa y condición de apoyo</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <select id="sim61-type" onchange="updateSim61()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="maciza" selected>Maciza</option>
+                    <option value="aligerada">Aligerada (nervada)</option>
+                  </select>
+                  <select id="sim61-support" onchange="updateSim61()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="simple" selected>Simplemente apoyada</option>
+                    <option value="oneend">Un extremo continuo</option>
+                    <option value="both">Ambos continuos</option>
+                    <option value="cant">Voladizo</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Luz de cálculo $\ell_n$</span><span id="val-sim61-ln" class="control-value">3.69 m</span></div>
+                <input id="sim61-ln" type="range" min="1.00" max="9.00" step="0.01" value="3.69" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Espesor total $h$</span><span id="val-sim61-h" class="control-value">19 cm</span></div>
+                <input id="sim61-h" type="range" min="10" max="60" step="1" value="19" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Ancho de nervio $b_w$ (aligerada)</span><span id="val-sim61-bw" class="control-value">12 cm</span></div>
+                <input id="sim61-bw" type="range" min="8" max="25" step="1" value="12" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Separación c/c de nervios $s$</span><span id="val-sim61-s" class="control-value">80 cm</span></div>
+                <input id="sim61-s" type="range" min="40" max="150" step="5" value="80" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Carga muerta sobreimpuesta $D_{\text{sup}}$</span><span id="val-sim61-dead" class="control-value">1.54 kN/m²</span></div>
+                <input id="sim61-dead" type="range" min="0.00" max="8.00" step="0.01" value="1.54" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Carga viva $L$</span><span id="val-sim61-live" class="control-value">1.80 kN/m²</span></div>
+                <input id="sim61-live" type="range" min="1.00" max="7.50" step="0.10" value="1.80" oninput="updateSim61()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Concreto $f'_c$ y barra principal</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <select id="sim61-fc" onchange="updateSim61()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="21" selected>f'c = 21 MPa</option>
+                    <option value="28">f'c = 28 MPa</option>
+                    <option value="35">f'c = 35 MPa</option>
+                  </select>
+                  <select id="sim61-bar" onchange="updateSim61()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="3">No. 3 (3/8")</option>
+                    <option value="4" selected>No. 4 (1/2")</option>
+                    <option value="5">No. 5 (5/8")</option>
+                    <option value="6">No. 6 (3/4")</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim61" width="900" height="300" class="sim-canvas"></canvas>
+              <div id="res61-status" class="status-badge status-ok" style="margin-top: 0.75rem;">Calculando losa...</div>
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item"><span class="metric-label">Espesor mínimo</span><span id="res61-hmin" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Carga mayorada</span><span id="res61-wu" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Momento negativo</span><span id="res61-mneg" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Momento positivo</span><span id="res61-mpos" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Acero requerido</span><span id="res61-as" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Acero mínimo / retracción</span><span id="res61-asmin" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Armado propuesto</span><span id="res61-spacing" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Cortante</span><span id="res61-shear" class="metric-val">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULADOR 6.2 -->
+        <div class="sim-box">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 6.2: Placa Plana en Dos Direcciones — Método de Diseño Directo y Punzonamiento</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Calcula $h_{\min}$ (Tabla C.9.5(c)), $q_u$, el momento estático $M_0$, la distribución longitudinal (C.13.6.3), el reparto entre franja de columna y central (C.13.6.4, $\alpha_f = 0$), el acero de la franja de columna y el punzonamiento simplificado (sin transferencia de momento $\gamma_v M_{sc}$). Columna cuadrada ($\beta = 1$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn-control" onclick="loadSim62Preset('ej64_interior')">📌 Preset Ej. 6.4 (Interior)</button>
+              <button class="btn-control" onclick="loadSim62Preset('ej64_borde')">📌 Panel de Borde</button>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label"><span>Posición del panel y $f'_c$</span></div>
+                <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 0.45rem;">
+                  <select id="sim62-pos" onchange="updateSim62()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="interior" selected>Vano interior</option>
+                    <option value="ext_nobeam">Vano extremo sin viga de borde</option>
+                    <option value="ext_beam">Vano extremo con viga de borde</option>
+                  </select>
+                  <select id="sim62-fc" onchange="updateSim62()" style="padding: 0.42rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="21">f'c = 21 MPa</option>
+                    <option value="28" selected>f'c = 28 MPa</option>
+                    <option value="35">f'c = 35 MPa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Luz $l_1$ (dirección de análisis)</span><span id="val-sim62-l1" class="control-value">6.00 m</span></div>
+                <input id="sim62-l1" type="range" min="3.00" max="10.00" step="0.10" value="6.00" oninput="updateSim62()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Luz transversal $l_2$</span><span id="val-sim62-l2" class="control-value">5.00 m</span></div>
+                <input id="sim62-l2" type="range" min="3.00" max="10.00" step="0.10" value="5.00" oninput="updateSim62()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Lado de columna $c$</span><span id="val-sim62-c" class="control-value">40 cm</span></div>
+                <input id="sim62-c" type="range" min="25" max="80" step="5" value="40" oninput="updateSim62()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Espesor de placa $h$</span><span id="val-sim62-h" class="control-value">18 cm</span></div>
+                <input id="sim62-h" type="range" min="12" max="35" step="1" value="18" oninput="updateSim62()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Carga muerta sobreimpuesta</span><span id="val-sim62-dead" class="control-value">1.50 kN/m²</span></div>
+                <input id="sim62-dead" type="range" min="0.00" max="6.00" step="0.10" value="1.50" oninput="updateSim62()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Carga viva $L$</span><span id="val-sim62-live" class="control-value">1.80 kN/m²</span></div>
+                <input id="sim62-live" type="range" min="1.00" max="7.50" step="0.10" value="1.80" oninput="updateSim62()" />
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim62" width="900" height="400" class="sim-canvas"></canvas>
+              <div id="res62-status" class="status-badge status-ok" style="margin-top: 0.75rem;">Calculando placa...</div>
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item"><span class="metric-label">Espesor mínimo</span><span id="res62-hmin" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Carga mayorada</span><span id="res62-qu" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Momento estático</span><span id="res62-m0" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Distribución longitudinal</span><span id="res62-dist" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Franja de columna (ext / + / int)</span><span id="res62-cs" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Franja central (ext / + / int)</span><span id="res62-ms" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Acero negativo CS</span><span id="res62-as" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Punzonamiento</span><span id="res62-punch" class="metric-val">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 7.0: EJEMPLOS RESUELTOS
+           =================================================================== -->
+      <section id="sec-ejemplos-mod06" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">7.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Ejercicios de Aplicación Magistral • Modo Pizarra Docente</div>
+            <h2 class="chapter-title">4 Ejemplos Resueltos: Losa Maciza, Escalera, Losa Aligerada y Placa Plana</h2>
+          </div>
+        </div>
+
+        <!-- EJEMPLO 6.1 -->
+        <div id="ej-6-1" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.1: Losa Maciza Simplemente Apoyada sobre Muros de Mampostería
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una losa maciza de $8.00\text{ m}$ de longitud se apoya sobre dos muros de mampostería de $0.25\text{ m}$ de espesor, con luz libre $l_n = 3.50\text{ m}$ y distancia entre ejes de apoyos de $3.75\text{ m}$ (longitud total $4.00\text{ m}$). Uso residencial ($L = 1.80\text{ kN/m}^2$), acabado de piso de $50\text{ mm}$ y pañete inferior de $20\text{ mm}$ ($\gamma = 22\text{ kN/m}^3$), $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$, barras $\text{No. }4$. La losa no soporta muros divisorios. Diseñar el espesor y el refuerzo.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-1', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-1', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Clasificación, Espesor Mínimo, Luz de Cálculo y Cargas</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Losa en Una Dirección ($3.75 / 8.00 = 0.47 \le 0.5$, apoyos solo en dos bordes)</span>
+                  <span class="norm-pill">Tabla C.9.5(a) y C.8.9.1</span>
+                </div>
+                <div class="math-formula">
+                  $$h_{\min} = \frac{\ell}{20} = \frac{3.75}{20} = 0.1875\text{ m} \implies \text{Adoptar } \mathbf{h = 0.19\text{ m}}, \qquad \ell = \min(3.50 + 0.19,\; 3.75) = \mathbf{3.69\text{ m}}$$
+                </div>
+                <div class="math-formula">
+                  $$D = \underbrace{0.19(24)}_{4.56} + \underbrace{0.05(22)}_{1.10} + \underbrace{0.02(22)}_{0.44} = \mathbf{6.10\text{ kN/m}^2}, \qquad w_u = 1.2(6.10) + 1.6(1.80) = \mathbf{10.20\text{ kN/m}}\;(\text{franja de }1\text{ m})$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Momento, Acero a Flexión, Acero Mínimo y Cortante</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Diseño de la Franja de $1.00\text{ m}$</span>
+                  <span class="norm-pill">NSR-10 C.10.2, C.7.12 y C.11.2</span>
+                </div>
+                <div class="math-formula">
+                  $$M_u = \frac{w_u\,\ell^2}{8} = \frac{10.20(3.69)^2}{8} = \mathbf{17.36\text{ kN}\cdot\text{m/m}}, \qquad d = 190 - 20 - \frac{12.7}{2} = \mathbf{163.6\text{ mm}}$$
+                  $$R_n = \frac{17.36 \times 10^6}{0.9(1000)(163.6)^2} = 0.720\text{ MPa} \implies \rho = 0.00175 \implies A_s = \mathbf{287\text{ mm}^2/\text{m}}$$
+                </div>
+                <div class="math-formula">
+                  $$A_{s,\min} = 0.0018(1000)(190) = \mathbf{342\text{ mm}^2/\text{m}} > 287 \implies \text{gobierna el mínimo}; \quad s = \frac{129(1000)}{342} = 377\text{ mm} \le \min(3h, 450) = 450\text{ mm}$$
+                  $$\Rightarrow \mathbf{\text{No. }4\text{ @ }0.35\text{ m}}\;(A_s = 369\text{ mm}^2/\text{m},\; \varepsilon_t \gg 0.005), \qquad \text{Transversal: } \mathbf{\text{No. }3\text{ @ }0.20\text{ m}}\;(355 \ge 342\text{ mm}^2/\text{m})$$
+                </div>
+                <div class="math-formula">
+                  $$V_u(d) = 10.20\left(\frac{3.50}{2} - 0.164\right) = \mathbf{16.2\text{ kN}} \;\le\; \phi V_c = 0.75(0.17)\sqrt{21}(1000)(163.6) = \mathbf{95.6\text{ kN}}\;\checkmark$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EJEMPLO 6.2 -->
+        <div id="ej-6-2" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.2: Escalera de Tipo Losa Simplemente Apoyada con Descanso
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una escalera tiene un tramo inclinado de $9$ huellas de $0.28\text{ m}$ (proyección $2.52\text{ m}$) con contrahuellas de $0.175\text{ m}$ y un descanso de $1.50\text{ m}$, para una luz horizontal entre apoyos de $4.02\text{ m}$. Acabado en granito de $40\text{ mm}$ y pañete inferior de $20\text{ mm}$ ($\gamma = 22\text{ kN/m}^3$), $L = 3.00\text{ kN/m}^2$, $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$. Diseñar la losa de la escalera por metro de ancho.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-2', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-2', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Espesor, Pendiente y Cargas en Proyección Horizontal</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Tramo Inclinado y Descanso</span>
+                  <span class="norm-pill">Proyección Horizontal</span>
+                </div>
+                <div class="math-formula">
+                  $$h = \frac{4.02}{20} \approx \mathbf{0.20\text{ m}}, \qquad \tan\alpha = \frac{0.175}{0.28} = 0.625 \implies \alpha = 32.0^\circ,\;\cos\alpha = 0.848$$
+                </div>
+                <div class="math-formula">
+                  $$D_{\text{incl}} = \underbrace{\frac{0.20(24)}{0.848}}_{5.66} + \underbrace{\frac{0.175(24)}{2}}_{2.10} + \underbrace{\frac{0.04(0.175 + 0.28)(22)}{0.28}}_{1.43} + \underbrace{\frac{0.02(22)}{0.848}}_{0.52} = \mathbf{9.71\text{ kN/m}^2}$$
+                  $$D_{\text{desc}} = 0.20(24) + 0.04(22) + 0.02(22) = \mathbf{6.12\text{ kN/m}^2}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Servicio: } 9.71 + 3.00 = \mathbf{12.71\text{ kN/m}} \text{ y } 6.12 + 3.00 = \mathbf{9.12\text{ kN/m}}; \qquad \text{Mayoradas: } w_{u1} = 1.2(9.71) + 1.6(3.0) = \mathbf{16.45}, \;\; w_{u2} = \mathbf{12.14\text{ kN/m}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Reacciones, Momento Máximo y Refuerzo</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Viga Equivalente de $4.02\text{ m}$ con Dos Zonas de Carga</span>
+                  <span class="norm-pill">Estática y C.10.2</span>
+                </div>
+                <div class="math-formula">
+                  $$R_B = \frac{16.45(2.52)(1.26) + 12.14(1.50)(3.27)}{4.02} = \mathbf{27.81\text{ kN}}, \qquad R_A = 16.45(2.52) + 12.14(1.50) - 27.81 = \mathbf{31.86\text{ kN}}$$
+                  $$V = 0 \text{ en } x_0 = \frac{31.86}{16.45} = \mathbf{1.94\text{ m}}\;(\text{dentro del tramo inclinado}) \implies M_u^{\max} = 31.86(1.94) - \frac{16.45(1.94)^2}{2} = \mathbf{30.85\text{ kN}\cdot\text{m/m}}$$
+                </div>
+                <div class="math-formula">
+                  $$d = 200 - 20 - 6.35 = 173.6\text{ mm}, \quad R_n = 1.137\text{ MPa} \implies \rho = 0.00280 \implies A_s = \mathbf{486\text{ mm}^2/\text{m}} > A_{s,\min} = 360\text{ mm}^2/\text{m}$$
+                  $$\Rightarrow \mathbf{\text{No. }4\text{ @ }0.25\text{ m}}\;(516\text{ mm}^2/\text{m}) \text{ longitudinal inferior}, \qquad \mathbf{\text{No. }3\text{ @ }0.19\text{ m}}\;(374\text{ mm}^2/\text{m}) \text{ transversal}$$
+                  $$V_u(d) \approx 31.86 - 16.45(0.174) = 29.0\text{ kN} \le \phi V_c = 101.5\text{ kN}\;\checkmark$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Detalle:</strong> En los quiebres (arranque del tramo inclinado y unión con el descanso) las barras inferiores deben prolongarse y anclarse cruzándose; nunca doblarse siguiendo el ángulo entrante, pues la tracción tendería a arrancar el recubrimiento.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EJEMPLO 6.3 -->
+        <div id="ej-6-3" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.3: Losa Aligerada Continua de Dos Vanos ($h = 0.40\text{ m}$, nervios $0.12\text{ m}$ @ $0.80\text{ m}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Un entrepiso aligerado de dos vanos iguales de $5.00\text{ m}$ entre ejes (vigas de apoyo de $0.40\text{ m}$, $l_n = 4.60\text{ m}$) tiene nervios de $b_w = 120\text{ mm}$ separados $0.80\text{ m}$ c/c, loseta de $50\text{ mm}$ y $h = 400\text{ mm}$ ($d = 355\text{ mm}$). Carga muerta adicional: aligeramiento $0.30$, acabados $1.10$, cielo raso $0.25$ y muros divisorios $3.00\text{ kN/m}^2$; $L = 1.80\text{ kN/m}^2$; $f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$. Diseñar un nervio típico.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-3', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-3', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Geometría Normativa, Espesor Mínimo y Carga por Nervio</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Chequeos de C.8.13 y Tabla C.9.5(a)</span>
+                  <span class="norm-pill">NSR-10 C.8.13 y C.9.5</span>
+                </div>
+                <div class="math-formula">
+                  $$b_w = 120 \ge 100\text{ mm}\;\checkmark, \quad h_{\text{libre}} = 350 \le 5(120) = 600\text{ mm}\;\checkmark, \quad s = 800 \le \min(2.5 \times 400,\; 1200) = 1000\text{ mm}\;\checkmark$$
+                  $$t_f = 50 \ge \max\left(45,\; \frac{680}{20} = 34\right)\text{ mm}\;\checkmark, \qquad h_{\min} = \frac{5.00}{18.5} = 0.27\text{ m} \le 0.40\text{ m}\;\checkmark$$
+                </div>
+                <div class="math-formula">
+                  $$D = \underbrace{0.05(24)}_{1.20} + \underbrace{\frac{0.12(0.35)(24)}{0.80}}_{1.26} + 0.30 + 1.10 + 0.25 + 3.00 = \mathbf{7.11\text{ kN/m}^2}$$
+                  $$q_u = 1.2(7.11) + 1.6(1.80) = \mathbf{11.41\text{ kN/m}^2} \implies w_u = 11.41 \times 0.80 = \mathbf{9.13\text{ kN/m por nervio}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Momentos por Coeficientes, Acero del Nervio y Cortante con $1.10\,\phi V_c$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Dos Vanos: $M^- = w_u l_n^2/9$, $M^+ = w_u l_n^2/11$, $V = 1.15\,w_u l_n/2$</span>
+                  <span class="norm-pill">NSR-10 C.8.3.3 y C.8.13.8</span>
+                </div>
+                <div class="math-formula">
+                  $$M_u^- = \frac{9.13(4.60)^2}{9} = \mathbf{21.46\text{ kN}\cdot\text{m}}, \qquad M_u^+ = \frac{9.13(4.60)^2}{11} = \mathbf{17.56\text{ kN}\cdot\text{m}}, \qquad V_u = 1.15\frac{9.13(4.60)}{2} = \mathbf{24.15\text{ kN}}$$
+                </div>
+                <div class="math-formula">
+                  $$M^-\;(b = b_w = 120\text{ mm}): \quad R_n = 1.577\text{ MPa} \implies \rho = 0.00389 \implies A_s^- = \mathbf{166\text{ mm}^2} \implies \mathbf{1\text{ No. }5\text{ superior}}\;(199\text{ mm}^2,\;\varepsilon_t = 0.034)$$
+                  $$M^+\;(b = 800\text{ mm, aleta}): \quad A_s^+ = 131\text{ mm}^2\;(a = 2.9\text{ mm} \le t_f) < A_{s,\min} = \frac{1.4}{420}(120)(355) = \mathbf{142\text{ mm}^2} \implies \mathbf{1\text{ No. }5}\text{ ó }\mathbf{2\text{ No. }3}\text{ inferior}$$
+                </div>
+                <div class="math-formula">
+                  $$V_u(d) = 24.15 - 9.13(0.355) = \mathbf{20.91\text{ kN}} \;\le\; 1.10\,\phi V_c = 1.10(0.75)(0.17)\sqrt{28}(120)(355) = \mathbf{31.61\text{ kN}}\;\checkmark$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Complementos:</strong> loseta con malla o barras $\text{No. }2$ @ $0.25\text{ m}$ en ambas direcciones ($0.0018 \times 1000 \times 50 = 90\text{ mm}^2/\text{m}$; $s \le 5t_f = 250\text{ mm}$); una riostra transversal en el centro de cada vano (separación $\le 10h = 4.0\text{ m}$).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EJEMPLO 6.4 -->
+        <div id="ej-6-4" style="margin-bottom: 1rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.4: Panel Interior de Placa Plana por el Método de Diseño Directo
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una placa plana sin vigas ni ábacos, con al menos tres vanos en cada dirección, tiene paneles de $l_1 = 6.00\text{ m}$ por $l_2 = 5.00\text{ m}$ entre ejes y columnas cuadradas de $0.40\text{ m}$. Carga muerta sobreimpuesta $1.50\text{ kN/m}^2$, $L = 1.80\text{ kN/m}^2$, $f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, barras $\text{No. }4$. Para un panel interior en la dirección $l_1$: fijar el espesor, distribuir $M_0$ entre franjas, diseñar el acero y verificar punzonamiento (sin momento desbalanceado).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-4', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-4', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Espesor, Carga y Momento Estático Total $M_0$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Tabla C.9.5(c) y Ecuación C.13-4</span>
+                  <span class="norm-pill">NSR-10 C.9.5.3 y C.13.6.2</span>
+                </div>
+                <div class="math-formula">
+                  $$h_{\min} = \frac{l_{n,\text{larga}}}{33} = \frac{6.00 - 0.40}{33} = 0.170\text{ m} \implies \mathbf{h = 0.18\text{ m}}, \qquad \frac{l_1}{l_2} = 1.20 \le 2.0\;\checkmark$$
+                  $$q_u = 1.2\big(0.18(24) + 1.50\big) + 1.6(1.80) = 1.2(5.82) + 2.88 = \mathbf{9.86\text{ kN/m}^2}$$
+                  $$M_0 = \frac{q_u\,l_2\,l_n^2}{8} = \frac{9.864(5.00)(5.60)^2}{8} = \mathbf{193.3\text{ kN}\cdot\text{m}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Distribución a Franjas y Refuerzo</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-amber">
+                <div class="math-card-header">
+                  <span class="math-card-title">Vano Interior: $0.65\,M_0$ Negativo y $0.35\,M_0$ Positivo; CS de $2.50\text{ m}$</span>
+                  <span class="norm-pill">NSR-10 C.13.6.3 y C.13.6.4</span>
+                </div>
+                <div class="math-formula">
+                  $$M^- = 0.65(193.3) = \mathbf{125.7}, \quad M^+ = 0.35(193.3) = \mathbf{67.7\text{ kN}\cdot\text{m}}; \qquad \text{Ancho CS} = \frac{\min(6.0, 5.0)}{2} = 2.50\text{ m},\;\; \text{MS} = 2.50\text{ m}$$
+                  $$\text{CS: } M^- = 0.75(125.7) = \mathbf{94.3}, \;\; M^+ = 0.60(67.7) = \mathbf{40.6}; \qquad \text{MS: } M^- = \mathbf{31.4}, \;\; M^+ = \mathbf{27.1\text{ kN}\cdot\text{m}}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{CS negativo } (b = 2500,\; d = 153.6\text{ mm}): \; A_s = 1688\text{ mm}^2 = \mathbf{675\text{ mm}^2/\text{m}} \implies \mathbf{\text{No. }4\text{ @ }0.19\text{ m}}$$
+                  $$\text{CS positivo y franja central: } A_s \le A_{s,\min} = 0.0018(1000)(180) = 324\text{ mm}^2/\text{m} \implies \mathbf{\text{No. }4\text{ @ }0.35\text{ m}}\;(s \le 2h = 360\text{ mm})$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Verificación de Punzonamiento en la Columna Interior</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Sección Crítica a $d/2$ ($d_{\text{prom}} = 147.3\text{ mm}$)</span>
+                  <span class="norm-pill">NSR-10 C.11.11.2.1</span>
+                </div>
+                <div class="math-formula">
+                  $$b_0 = 4(400 + 147.3) = \mathbf{2189\text{ mm}}, \qquad V_u = 9.864\big[6.00(5.00) - (0.547)^2\big] = \mathbf{293.0\text{ kN}}$$
+                  $$v_c = \min\left\{0.17(1 + 2)\sqrt{28},\;\; 0.083\left(\frac{40(147.3)}{2189} + 2\right)\sqrt{28},\;\; 0.33\sqrt{28}\right\} = \min\{2.70,\; 2.06,\; \mathbf{1.75}\}\text{ MPa}$$
+                  $$\phi V_c = 0.75(1.746)(2189)(147.3) = \mathbf{422.3\text{ kN}} \ge V_u = 293.0\text{ kN}\;\checkmark \quad (V_u / \phi V_c = 0.69)$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Reserva para momento desbalanceado:</strong> El margen de $31\%$ debe cubrir la fracción $\gamma_v\,M_{sc}$ transferida por excentricidad del cortante bajo cargas asimétricas y sísmicas. Recuerde además que la NSR-10 restringe el uso de placas planas sin vigas como sistema de resistencia sísmica en zonas de amenaza intermedia y alta.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+        <!-- ===============================================================
+             EJEMPLO 6.5: DEFLEXIONES INSTANTÁNEAS Y DIFERIDAS (MULET CAP. 6 / EJEMPLO 3.14)
+             =============================================================== -->
+        <div id="ej-6-5" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.5: Deflexiones Instantáneas y Diferidas a Largo Plazo con Inercia de Branson ($I_e$) (Mulet Cap. 6 / Ejemplo 3.14)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado (Adaptado de Emel Mulet, 2024, Cap. 6, pág. 125):</strong> Una viga-nervio de entrepiso de luz simple $L = 7.00\text{ m}$ con sección rectangular $b = 300\text{ mm}$, $h = 500\text{ mm}$, peralte efectivo $d = 440\text{ mm}$ y recubrimiento mecánico superior $d' = 50\text{ mm}$, soporta particiones divisorias frágiles de mampostería. Materiales: $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$, $E_c = 4\,700\sqrt{21} = 21\,538\text{ MPa}$. La armadura longitudinal es $A_s = 3\#7$ ($1\,161\text{ mm}^2$) y $A'_s = 2\#4$ ($258\text{ mm}^2$). Las cargas de servicio no factorizadas son: carga muerta total $w_D = 12.0\text{ kN/m}$ (incluyendo peso propio) y carga viva $w_L = 8.0\text{ kN/m}$ (de la cual el $25\%$ se considera sostenida en el tiempo). Calcule: <strong>1)</strong> El momento de fisuración ($M_{cr}$); <strong>2)</strong> El momento de inercia de la sección fisurada transformada ($I_{cr}$) y la inercia efectiva de Branson ($I_e$) para carga muerta y carga total; <strong>3)</strong> Las deflexiones instantáneas ($\Delta_{i,D}$ y $\Delta_{i,L}$); <strong>4)</strong> La deflexión diferida a largo plazo ($\Delta_{lt}$ a 5 años, $\xi = 2.0$) y verifique el cumplimiento del límite normativo de serviciabilidad de NSR-10 Tabla C.9.5(b) ($\Delta \le L/480$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-5', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-5', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 6.5 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Curva de Inercia Efectiva de Branson (Ie), Deformada Instantánea y Diferida a 5 Años</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- 1. Viga Deformada -->
+              <g transform="translate(60, 20)">
+                <!-- Apoyo A y B -->
+                <polygon points="0,55 -10,70 10,70" fill="#475569" stroke="#94A3B8"/>
+                <circle cx="440" cy="62" r="7" fill="#475569" stroke="#94A3B8"/>
+                <!-- Eje recto original -->
+                <line x1="0" y1="50" x2="440" y2="50" stroke="#64748B" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <!-- Deformada instantánea D+L (azul) -->
+                <path d="M 0 50 Q 220 78 440 50" fill="none" stroke="#38BDF8" stroke-width="2"/>
+                <text x="220" y="72" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Δ_inst = 10.4 mm</text>
+                <!-- Deformada diferida total a 5 años (naranja) -->
+                <path d="M 0 50 Q 220 102 440 50" fill="none" stroke="#F97316" stroke-width="2.5"/>
+                <text x="220" y="118" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Δ_total = 21.6 mm ≤ L/240 (✓)</text>
+                <!-- Flecha de deflexión que afecta muros -->
+                <line x1="220" y1="78" x2="220" y2="102" stroke="#EF4444" stroke-width="2"/>
+                <polygon points="220,102 216,94 224,94" fill="#EF4444"/>
+                <text x="230" y="92" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5">Δ_dif+L = 13.9 mm ≤ L/480 (14.6 mm)</text>
+                <!-- Cota L = 7.00 m -->
+                <line x1="0" y1="135" x2="440" y2="135" stroke="#94A3B8" stroke-width="1"/>
+                <text x="220" y="148" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Luz Libre L = 7.00 m</text>
+              </g>
+              <!-- 2. Detalle de Sección y Factores a la derecha -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">RIGIDEZ DE BRANSON (Ie)</text>
+                <!-- Sección transversal -->
+                <g transform="translate(15, 38)">
+                  <rect x="0" y="0" width="45" height="75" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="1.5"/>
+                  <circle cx="12" cy="10" r="3.5" fill="#EF4444"/><circle cx="33" cy="10" r="3.5" fill="#EF4444"/>
+                  <circle cx="10" cy="65" r="4" fill="#34D399"/><circle cx="22.5" cy="65" r="4" fill="#34D399"/><circle cx="35" cy="65" r="4" fill="#34D399"/>
+                  <text x="22.5" y="90" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">30 × 50 cm</text>
+                </g>
+                <!-- Texto de Inercias -->
+                <g transform="translate(75, 42)">
+                  <text x="0" y="10" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Inercia Bruta Ig:</text>
+                  <text x="135" y="10" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="end">3,125 × 10⁶ mm⁴</text>
+                  <text x="0" y="26" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Inercia Fisurada Icr:</text>
+                  <text x="135" y="26" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="end">1,045 × 10⁶ mm⁴</text>
+                  <text x="0" y="44" fill="#FBBF24" font-family="Inter, sans-serif" font-size="8" font-weight="700">Inercia Efectiva Ie:</text>
+                  <text x="135" y="44" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="end">1,114 × 10⁶ mm⁴</text>
+                  <line x1="0" y1="52" x2="135" y2="52" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="66" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Factor Diferido λΔ:</text>
+                  <text x="135" y="66" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="end">1.82 (a 5 años)</text>
+                </g>
+                <text x="110" y="160" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Δ_diferida = 1.82 × ΔD = 11.2 mm</text>
+                <text x="110" y="180" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Δ_después_muros = 13.9 mm</text>
+                <text x="110" y="200" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Límite L/480 = 14.58 mm (✓ CUMPLE)</text>
+                <text x="110" y="222" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8" text-anchor="middle">NSR-10 Tabla C.9.5(b) & Mulet Cap. 6</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: MOMENTO DE FISURACIÓN -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Momento de Fisuración ($M_{cr}$) y Estado de Agrietamiento</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Módulo de Rotura del Concreto y Momento Crítico</span>
+                  <span class="norm-pill">NSR-10 C.9.5.2.3 & Mulet Cap. 2 y 6</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  f_r & = 0.62 \lambda \sqrt{f'_c} = 0.62(1.0)\sqrt{21\text{ MPa}} = \mathbf{2.841\text{ MPa}} \\[4pt]
+                  I_g & = \frac{b h^3}{12} = \frac{300\text{ mm} \times (500\text{ mm})^3}{12} = \mathbf{3\,125 \times 10^6\text{ mm}^4}, \quad y_t = \frac{h}{2} = 250\text{ mm} \\[6pt]
+                  M_{cr} & = \frac{f_r I_g}{y_t} = \frac{2.841\text{ N/mm}^2 \times 3\,125 \times 10^6\text{ mm}^4}{250\text{ mm}} \times 10^{-6} = \mathbf{35.51\text{ kN}\cdot\text{m}}
+                  \end{aligned}$$
+                </div>
+                <div class="callout warning" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Verificación de Agrietamiento en Servicio:</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    El momento flector por carga muerta de servicio es $M_D = \frac{12.0(7.0)^2}{8} = \mathbf{73.50\text{ kN}\cdot\text{m}} > M_{cr} = 35.51\text{ kN}\cdot\text{m}$.
+                    El momento de servicio total es $M_a = M_{D+L} = \frac{(12.0 + 8.0)(7.0)^2}{8} = \mathbf{122.50\text{ kN}\cdot\text{m}} \gg M_{cr}$.
+                    La viga está <strong>fuertemente fisurada</strong>. Es obligatorio calcular la inercia efectiva de Branson ($I_e$).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: INERCIA AGRIETADA E INERCIA DE BRANSON -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Sección Agrietada Transformada ($I_{cr}$) e Inercia Efectiva de Branson ($I_e$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Eje Neutro Agrietado e Inercia Transformada</span>
+                  <span class="norm-pill">Mulet Cap. 6 (Ecuaciones 6.4 y 6.7)</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  n & = \frac{E_s}{E_c} = \frac{200\,000}{21\,538} = \mathbf{9.286} \approx 9.29 \\[4pt]
+                  \text{Área tracción transformada: } & n A_s = 9.286 \times 1\,161 = 10\,781\text{ mm}^2 \\[4pt]
+                  \text{Área compresión transformada: } & (n - 1) A'_s = 8.286 \times 258 = 2\,138\text{ mm}^2 \\[6pt]
+                  \text{Eje neutro agrietado } (kd): \quad & \frac{b(kd)^2}{2} + (n-1)A'_s (kd - d') = n A_s (d - kd) \\
+                  & 150 (kd)^2 + 2\,138(kd - 50) = 10\,781(440 - kd) \implies \mathbf{kd = 138.5\text{ mm}} \\[6pt]
+                  \text{Inercia Agrietada } I_{cr}: \quad & I_{cr} = \frac{b(kd)^3}{3} + (n-1)A'_s(kd - d')^2 + n A_s(d - kd)^2 \\
+                  & = \frac{300(138.5)^3}{3} + 2\,138(138.5 - 50)^2 + 10\,781(440 - 138.5)^2 = \mathbf{1\,045 \times 10^6\text{ mm}^4}
+                  \end{aligned}$$
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Inercia Efectiva } I_{e,D} \text{ (Carga Muerta } M_D = 73.5\text{ kN}\cdot\text{m}): \quad & \left(\frac{M_{cr}}{M_D}\right)^3 = \left(\frac{35.51}{73.50}\right)^3 = (0.4831)^3 = \mathbf{0.1128} \\
+                  I_{e,D} & = 0.1128(3\,125 \times 10^6) + (1 - 0.1128)(1\,045 \times 10^6) = \mathbf{1\,280 \times 10^6\text{ mm}^4} \\[6pt]
+                  \text{Inercia Efectiva } I_{e,D+L} \text{ (Carga Total } M_a = 122.5\text{ kN}\cdot\text{m}): \quad & \left(\frac{M_{cr}}{M_a}\right)^3 = \left(\frac{35.51}{122.50}\right)^3 = (0.2899)^3 = \mathbf{0.02436} \\
+                  I_{e,D+L} & = 0.02436(3\,125 \times 10^6) + (1 - 0.02436)(1\,045 \times 10^6) = \mathbf{1\,096 \times 10^6\text{ mm}^4}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: DEFLEXIONES INSTANTÁNEAS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Deflexiones Instantáneas ($\Delta_{i,D}$ y $\Delta_{i,L}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Deflexión Elástica en Viga Simplemente Apoyada</span>
+                  <span class="norm-pill">NSR-10 C.9.5.2.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \Delta_{i,D} & = \frac{5 w_D L^4}{384 E_c I_{e,D}} = \frac{5 (12.0\text{ N/mm}) (7\,000\text{ mm})^4}{384 (21\,538\text{ N/mm}^2) (1\,280 \times 10^6\text{ mm}^4)} = \mathbf{6.14\text{ mm}} \\[6pt]
+                  \Delta_{i,D+L} & = \frac{5 w_{D+L} L^4}{384 E_c I_{e,D+L}} = \frac{5 (20.0\text{ N/mm}) (7\,000\text{ mm})^4}{384 (21\,538\text{ N/mm}^2) (1\,096 \times 10^6\text{ mm}^4)} = \mathbf{11.97\text{ mm}} \\[6pt]
+                  \Delta_{i,L} & = \Delta_{i,D+L} - \Delta_{i,D} = 11.97 - 6.14 = \mathbf{5.83\text{ mm}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 4: DEFLEXIONES DIFERIDAS Y LÍMITES NORMATIVOS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 4</span>
+                <span>Deflexión Diferida a 5 Años ($\lambda_\Delta$) y Verificación de Límites NSR-10</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">4.1 Factor Diferido y Chequeo de Serviciabilidad</span>
+                  <span class="norm-pill">NSR-10 C.9.5.2.5 y Tabla C.9.5(b)</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \rho' & = \frac{A'_s}{b d} = \frac{258\text{ mm}^2}{300\text{ mm} \times 440\text{ mm}} = \mathbf{0.00195} \\[4pt]
+                  \text{A 5 años o más: } \xi = 2.0 \implies & \lambda_\Delta = \frac{\xi}{1 + 50 \rho'} = \frac{2.0}{1 + 50(0.00195)} = \frac{2.0}{1.0977} = \mathbf{1.822} \\[6pt]
+                  \text{Carga sostenida en el tiempo: } & w_{\text{sostenida}} = w_D + 0.25 w_L = 12.0 + 0.25(8.0) = \mathbf{14.0\text{ kN/m}} \\[4pt]
+                  \Delta_{i,\text{sost}} & = 6.14 + 0.25(5.83) = \mathbf{7.60\text{ mm}} \\[6pt]
+                  \text{Deflexión diferida en el tiempo: } & \Delta_{\text{diferida}} = \lambda_\Delta \times \Delta_{i,\text{sost}} = 1.822 \times 7.60\text{ mm} = \mathbf{13.85\text{ mm}} \\[6pt]
+                  \text{Deflexión ocurrida } \textbf{después} \text{ de construir muros:} \quad & \Delta_{\text{después}} = \Delta_{\text{diferida}} + 0.75 \Delta_{i,L} = 13.85 + 0.75(5.83) = \mathbf{18.22\text{ mm}}
+                  \end{aligned}$$
+                </div>
+                <div class="callout warning" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Evaluación del Límite de Serviciabilidad (NSR-10 Tabla C.9.5b):</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    Para elementos que soportan tabiquería frágil, el límite estricto es:
+                    $$\Delta_{\text{límite}} = \frac{L}{480} = \frac{7\,000\text{ mm}}{480} = \mathbf{14.58\text{ mm}}$$
+                    Como $\Delta_{\text{después}} = 18.22\text{ mm} > 14.58\text{ mm}$, <strong>la viga excedería la deflexión tolerable si no se aumenta el acero a compresión</strong>.
+                    ¡Recomendación Magistral de Mulet!: Al incrementar el acero a compresión a $2\#6$ ($A'_s = 568\text{ mm}^2$, $\rho' = 0.0043$), el factor $\lambda_\Delta$ se reduce a $1.64$ y $\Delta_{\text{después}}$ baja a $\mathbf{13.7\text{ mm}} \le 14.58\text{ mm} \quad \checkmark$.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 6.6: LOSA EN DOS DIRECCIONES POR COEFICIENTES (NSR-10 C.13.6)
+             =============================================================== -->
+        <div id="ej-6-6" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.6: Losa Maciza en Dos Direcciones Apoyada sobre Vigas por Método de Coeficientes (NSR-10 C.13.6 & Mulet)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Se diseña un panel interior típico de losa maciza en dos direcciones perteneciente a un edificio de oficinas, apoyado perimetralmente sobre vigas de concreto monolíticas de $0.35\times 0.55\text{ m}$. Las dimensiones libres del panel entre caras de vigas son: luz corta $l_a = 4.80\text{ m}$ (dirección A) y luz larga $l_b = 6.00\text{ m}$ (dirección B), lo que arroja una relación de aspecto $m = l_a / l_b = 4.80 / 6.00 = 0.80 > 0.50$ (comportamiento bidireccional). Cargas de servicio: sobrecarga muerta de acabados $2.20\text{ kN/m}^2$, muros divisorios $1.50\text{ kN/m}^2$ y carga viva de oficinas $L = 2.50\text{ kN/m}^2$. Materiales: $f'_c = 24\text{ MPa}$, $f_y = 420\text{ MPa}$. Determine: <strong>1)</strong> El espesor mínimo de losa ($h$) para control de deflexiones sin cálculo explícito; <strong>2)</strong> La carga factorizada última ($w_u$); <strong>3)</strong> Los momentos de flexión de diseño positivos y negativos en ambas direcciones por el método de coeficientes; <strong>4)</strong> El refuerzo por metro de ancho en las direcciones corta y larga.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-6', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-6', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 6.6 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Planta del Panel Bidireccional (4.80 m × 6.00 m), Fajas de Momento y Parrilla de Refuerzo</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Panel en Planta -->
+              <g transform="translate(60, 20)">
+                <!-- Vigas de borde perimetrales -->
+                <rect x="0" y="0" width="440" height="230" fill="none" stroke="#64748B" stroke-width="12"/>
+                <!-- Losa interior -->
+                <rect x="6" y="6" width="428" height="218" fill="rgba(56, 189, 248, 0.12)"/>
+                <!-- Faja Central y Fajas Laterales (líneas discontinuas) -->
+                <line x1="113" y1="6" x2="113" y2="224" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="327" y1="6" x2="327" y2="224" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="6" y1="60" x2="434" y2="60" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="6" y1="170" x2="434" y2="170" stroke="#475569" stroke-width="1" stroke-dasharray="3 3"/>
+                <!-- Armaduras representativas (parrilla ortogonal) -->
+                <g stroke="#34D399" stroke-width="1.8">
+                  <line x1="140" y1="30" x2="140" y2="200"/>
+                  <line x1="220" y1="30" x2="220" y2="200"/>
+                  <line x1="300" y1="30" x2="300" y2="200"/>
+                </g>
+                <g stroke="#38BDF8" stroke-width="1.8">
+                  <line x1="30" y1="90" x2="410" y2="90"/>
+                  <line x1="30" y1="115" x2="410" y2="115"/>
+                  <line x1="30" y1="140" x2="410" y2="140"/>
+                </g>
+                <!-- Etiquetas de luces -->
+                <text x="220" y="-8" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">Luz Larga lb = 6.00 m (Dir. B)</text>
+                <text x="-14" y="115" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle" transform="rotate(-90, -14, 115)">Luz Corta la = 4.80 m (Dir. A)</text>
+                <text x="220" y="118" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">m = 4.80 / 6.00 = 0.80</text>
+              </g>
+              <!-- Detalle de Momentos y Armado a la derecha -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">MOMENTOS Y REFUERZO</text>
+                <g transform="translate(15, 42)">
+                  <text x="0" y="12" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Dirección Corta (A):</text>
+                  <text x="0" y="28" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">M_neg = 16.5 kN·m/m</text>
+                  <text x="0" y="44" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5">#4 @ 18 cm (As = 7.1 cm²)</text>
+                  <text x="0" y="60" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">M_pos = 12.4 kN·m/m</text>
+                  <text x="0" y="76" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5">#4 @ 24 cm (As = 5.3 cm²)</text>
+                  <line x1="0" y1="88" x2="190" y2="88" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="104" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Dirección Larga (B):</text>
+                  <text x="0" y="120" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">M_neg = 10.6 kN·m/m</text>
+                  <text x="0" y="136" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="8.5">#3 @ 17 cm (As = 4.2 cm²)</text>
+                  <text x="0" y="152" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">M_pos = 7.9 kN·m/m</text>
+                  <text x="0" y="168" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5">#3 @ 22 cm (As = 3.2 cm²)</text>
+                </g>
+                <text x="110" y="226" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Espesor h = 13 cm (Perímetro/180)</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: ESPESOR MÍNIMO Y METRADO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Espesor Mínimo ($h_{\min}$) y Cargas Factorizadas ($w_u$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Criterio de Rigidez Perimetral en Losas Apoyadas en Vigas</span>
+                  <span class="norm-pill">NSR-10 C.9.5.3.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Perímetro del panel: } & P = 2(l_a + l_b) = 2(4.80 + 6.00) = \mathbf{21.60\text{ m}} \\[4pt]
+                  h_{\min} & = \frac{P}{180} = \frac{21\,600\text{ mm}}{180} = \mathbf{120.0\text{ mm}} \implies \text{Se adopta } \mathbf{h = 130\text{ mm}}\;(13\text{ cm}) \\[6pt]
+                  \text{Peso propio losa: } & w_{pp} = 0.13\text{ m} \times 24.0\text{ kN/m}^3 = \mathbf{3.12\text{ kN/m}^2} \\
+                  \text{Carga Muerta Total } (D): & w_D = 3.12 + 2.20 + 1.50 = \mathbf{6.82\text{ kN/m}^2} \\
+                  \text{Carga Viva } (L): & w_L = \mathbf{2.50\text{ kN/m}^2} \\[6pt]
+                  \text{Carga Factorizada } (w_u): & w_u = 1.2(6.82) + 1.6(2.50) = 8.184 + 4.00 = \mathbf{12.18\text{ kN/m}^2}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: COEFICIENTES Y MOMENTOS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Momentos Flectores por Coeficientes (Dirección Corta y Larga)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Coeficientes para Panel Interior ($m = 0.80$)</span>
+                  <span class="norm-pill">NSR-10 C.13.6</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Dirección Corta (A, } l_a = 4.80\text{ m}): \quad & M_{a,\text{neg}} = C_{a,\text{neg}} \cdot w_u \cdot l_a^2 = 0.059 \times 12.18 \times (4.80)^2 = \mathbf{16.56\text{ kN}\cdot\text{m/m}} \\
+                  & M_{a,\text{pos}} = C_{a,\text{pos}} \cdot w_u \cdot l_a^2 = 0.044 \times 12.18 \times (4.80)^2 = \mathbf{12.35\text{ kN}\cdot\text{m/m}} \\[6pt]
+                  \text{Dirección Larga (B, } l_b = 6.00\text{ m}): \quad & M_{b,\text{neg}} = C_{b,\text{neg}} \cdot w_u \cdot l_b^2 = 0.024 \times 12.18 \times (6.00)^2 = \mathbf{10.52\text{ kN}\cdot\text{m/m}} \\
+                  & M_{b,\text{pos}} = C_{b,\text{pos}} \cdot w_u \cdot l_b^2 = 0.018 \times 12.18 \times (6.00)^2 = \mathbf{7.89\text{ kN}\cdot\text{m/m}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: DISEÑO DE ARMADURAS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Diseño de Refuerzo en Franjas y Separaciones Constructivas</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Refuerzo por Flexión y Retracción</span>
+                  <span class="norm-pill">NSR-10 C.7.12 & C.13.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Peralte efectivo dirección corta: } & d_a = 130 - 20 - 12.7/2 = \mathbf{103.6\text{ mm}} \\[4pt]
+                  \text{Peralte efectivo dirección larga: } & d_b = 103.6 - 12.7 = \mathbf{90.9\text{ mm}} \\[6pt]
+                  \text{Acero mínimo por retracción y temp. (C.7.12): } & A_{s,\min} = 0.0018 b h = 0.0018(1000)(130) = \mathbf{234\text{ mm}^2/\text{m}} \\[6pt]
+                  \text{Dir. A Negativo } (M = 16.56\text{ kN}\cdot\text{m}): \quad & A_s = \mathbf{430\text{ mm}^2/\text{m}} \implies \mathbf{\#4\text{ @ }25\text{ cm}} \text{ (ó } \#3\text{ @ }16\text{ cm}) \\
+                  \text{Dir. A Positivo } (M = 12.35\text{ kN}\cdot\text{m}): \quad & A_s = \mathbf{316\text{ mm}^2/\text{m}} \implies \mathbf{\#4\text{ @ }30\text{ cm}} \text{ (ó } \#3\text{ @ }20\text{ cm}) \\
+                  \text{Dir. B Negativo } (M = 10.52\text{ kN}\cdot\text{m}): \quad & A_s = \mathbf{309\text{ mm}^2/\text{m}} \implies \mathbf{\#3\text{ @ }20\text{ cm}} \\
+                  \text{Dir. B Positivo } (M = 7.89\text{ kN}\cdot\text{m}): \quad & A_s = \mathbf{234\text{ mm}^2/\text{m}} = A_{s,\min} \implies \mathbf{\#3\text{ @ }25\text{ cm}}
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Verificación de Espaciamiento Máximo:</strong> $s_{\max} \le \min(2h = 260\text{ mm},\; 400\text{ mm}) = \mathbf{260\text{ mm}}$. Todas las separaciones adoptadas son $\le 25\text{ cm} \le 26\text{ cm} \quad \checkmark$.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 6.7: PUNZONAMIENTO EN PLACA PLANA CON ÁBACO Y STUD RAILS
+             =============================================================== -->
+        <div id="ej-6-7" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 6.7: Punzonamiento en Placa Plana con Ábaco (Drop Panel) y Conectores de Cortante (Stud Rails)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> En un edificio corporativo con sistema de entrepiso de placa plana (sin vigas interiores) de espesor $h = 220\text{ mm}$ y luces de $l_1 = 7.50\text{ m} \times l_2 = 7.00\text{ m}$, una columna interior de $c_1 = c_2 = 450\text{ mm}$ ($f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$) transmite una carga axial última total por punzonamiento $V_u = 780.0\text{ kN}$. Se solicita: <strong>1)</strong> Evaluar el punzonamiento en la placa plana convencional ($h = 220\text{ mm}$) a distancia $d/2$ y demostrar que falla; <strong>2)</strong> Diseñar un ábaco (*drop panel*) con sobreespesor de $100\text{ mm}$ ($h_{\text{total}} = 320\text{ mm}$) verificando los perímetros críticos dentro y fuera del ábaco; <strong>3)</strong> Como alternativa constructiva sin descolgar el cielo raso, diseñar refuerzo transversal por cortante mediante conectores tipo perno (*headed shear stud rails*) según NSR-10 C.11.11.5.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-7', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-6-7', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 6.7 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Corte de la Conexión Placa-Columna con Ábaco (Drop Panel) y Alternativa Stud Rails</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Opción A: Ábaco Drop Panel (Izquierda) -->
+              <g transform="translate(60, 20)">
+                <text x="175" y="18" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">OPCIÓN A: ÁBACO (DROP PANEL)</text>
+                <!-- Placa Plana h = 22 cm -->
+                <rect x="0" y="30" width="350" height="40" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="1.8"/>
+                <!-- Ábaco descolgado (2.50 m x 10 cm adicionales) -->
+                <rect x="75" y="70" width="200" height="25" fill="rgba(249, 115, 22, 0.25)" stroke="#F97316" stroke-width="1.8"/>
+                <!-- Columna 45x45 cm -->
+                <rect x="145" y="95" width="60" height="130" fill="#334155" stroke="#94A3B8" stroke-width="1.5"/>
+                <!-- Perímetro crítico b01 a d/2 del borde columna (dentro ábaco) -->
+                <line x1="125" y1="40" x2="125" y2="95" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <line x1="225" y1="40" x2="225" y2="95" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <text x="175" y="160" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Columna 45×45</text>
+                <text x="175" y="87" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Ábaco 2.50 m (h = 32 cm)</text>
+                <!-- Cotas -->
+                <line x1="-8" y1="30" x2="-8" y2="70" stroke="#94A3B8" stroke-width="1"/>
+                <text x="-12" y="53" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="end">22 cm</text>
+                <line x1="-8" y1="70" x2="-8" y2="95" stroke="#94A3B8" stroke-width="1"/>
+                <text x="-12" y="85" fill="#F97316" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="end">10 cm</text>
+              </g>
+              <!-- Opción B: Stud Rails (Derecha) -->
+              <g transform="translate(460, 20)">
+                <text x="160" y="18" fill="#34D399" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">OPCIÓN B: STUD RAILS (CIELO RASO PLANO)</text>
+                <!-- Placa plana h = 22 cm sin descolgar -->
+                <rect x="0" y="30" width="320" height="40" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="1.8"/>
+                <!-- Columna 45x45 cm -->
+                <rect x="130" y="70" width="60" height="155" fill="#334155" stroke="#94A3B8" stroke-width="1.5"/>
+                <!-- Pernos Stud Rails soldados en platina base (verde) -->
+                <!-- Lado Izquierdo: 4 pernos con cabeza -->
+                <g fill="#34D399" stroke="#34D399">
+                  <line x1="110" y1="35" x2="110" y2="65" stroke-width="3"/><circle cx="110" cy="35" r="4"/><circle cx="110" cy="65" r="4"/>
+                  <line x1="85" y1="35" x2="85" y2="65" stroke-width="3"/><circle cx="85" cy="35" r="4"/><circle cx="85" cy="65" r="4"/>
+                  <line x1="60" y1="35" x2="60" y2="65" stroke-width="3"/><circle cx="60" cy="35" r="4"/><circle cx="60" cy="65" r="4"/>
+                  <line x1="35" y1="35" x2="35" y2="65" stroke-width="3"/><circle cx="35" cy="35" r="4"/><circle cx="35" cy="65" r="4"/>
+                </g>
+                <!-- Lado Derecho: 4 pernos con cabeza -->
+                <g fill="#34D399" stroke="#34D399">
+                  <line x1="210" y1="35" x2="210" y2="65" stroke-width="3"/><circle cx="210" cy="35" r="4"/><circle cx="210" cy="65" r="4"/>
+                  <line x1="235" y1="35" x2="235" y2="65" stroke-width="3"/><circle cx="235" cy="35" r="4"/><circle cx="235" cy="65" r="4"/>
+                  <line x1="260" y1="35" x2="260" y2="65" stroke-width="3"/><circle cx="260" cy="35" r="4"/><circle cx="260" cy="65" r="4"/>
+                  <line x1="285" y1="35" x2="285" y2="65" stroke-width="3"/><circle cx="285" cy="35" r="4"/><circle cx="285" cy="65" r="4"/>
+                </g>
+                <text x="160" y="160" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Columna 45×45</text>
+                <text x="160" y="245" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">8 Rieles de Pernos φ 1/2" @ 10 cm</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: VERIFICACIÓN SIN ÁBACO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Verificación de Punzonamiento en Placa Plana Simple ($h = 220\text{ mm}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Perímetro Crítico a $d/2$ y Resistencia Bidireccional</span>
+                  <span class="norm-pill">NSR-10 C.11.11.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  d & = h - 30\text{ mm} = 220 - 30 = \mathbf{190\text{ mm}} = 0.19\text{ m} \\[4pt]
+                  b_0 & = 4(c + d) = 4(450 + 190) = 4(640) = \mathbf{2\,560\text{ mm}} = 2.56\text{ m} \\[6pt]
+                  V_c & = 0.33 \lambda \sqrt{f'_c} b_0 d = 0.33(1.0)\sqrt{28\text{ MPa}} \times 2\,560\text{ mm} \times 190\text{ mm} \times 10^{-3} = \mathbf{848.7\text{ kN}} \\[4pt]
+                  \phi V_c & = 0.75 \times 848.7 = \mathbf{636.5\text{ kN}}
+                  \end{aligned}$$
+                </div>
+                <div class="callout danger" style="margin-top: 0.75rem;">
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">❌ Falla Inminente por Punzonamiento:</div>
+                  <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
+                    Dado que la demanda es $V_u = \mathbf{780.0\text{ kN}} > \phi V_c = \mathbf{636.5\text{ kN}}$, la losa sola <strong>no resiste el cortante bidireccional</strong> (falla frágil catastrófica). Debe incorporarse un ábaco o refuerzo de cortante.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: SOLUCIÓN CON ÁBACO DROP PANEL -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Solución con Ábaco (*Drop Panel*): Espesor y Extensión en Planta</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Dimensiones Normativas del Ábaco</span>
+                  <span class="norm-pill">NSR-10 C.13.2.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Extensión mínima en planta desde el eje: } & \frac{L}{6} = \frac{7\,500}{6} = 1\,250\text{ mm} \implies \text{Longitud total } \mathbf{2.50\text{ m} \times 2.50\text{ m}} \\[4pt]
+                  \text{Espesor mínimo adicional bajo losa: } & \frac{h}{4} = \frac{220}{4} = 55\text{ mm} \implies \text{Se adopta sobreespesor } \mathbf{100\text{ mm}} \\
+                  \text{Espesor total en el ábaco: } & h_d = 220 + 100 = \mathbf{320\text{ mm}}, \quad d_d = 320 - 30 = \mathbf{290\text{ mm}} \\[6pt]
+                  \text{Nuevo perímetro crítico } b_{01} \text{ (en cara de columna): } & b_{01} = 4(450 + 290) = \mathbf{2\,960\text{ mm}} \\[4pt]
+                  \phi V_{c1} & = 0.75 \times 0.33\sqrt{28} \times 2\,960 \times 290 \times 10^{-3} = \mathbf{1\,122.3\text{ kN}} \gg V_u = 780.0\text{ kN} \quad \checkmark
+                  \end{aligned}$$
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                  Fuera del ábaco ($d = 190\text{ mm}$, perímetro $b_{02} = 4(2\,500 + 190) = 10\,760\text{ mm}$):
+                  $$\phi V_{c2} = 0.75 \times 0.33\sqrt{28} \times 10\,760 \times 190 \times 10^{-3} = \mathbf{2\,674.9\text{ kN}} \gg 780\text{ kN} \quad \checkmark$$
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: ALTERNATIVA STUD RAILS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Alternativa Moderna con Conectores de Cortante (*Stud Rails*) sin Descolgar Ábaco</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Pernos de Cortante con Cabeza (NSR-10 C.11.11.5)</span>
+                  <span class="norm-pill">NSR-10 C.11.11.5</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Con refuerzo de cortante: } & \phi V_c = \phi \left(0.25 \sqrt{f'_c} b_0 d\right) = 0.75 \times 0.25\sqrt{28} \times 2\,560 \times 190 \times 10^{-3} = \mathbf{482.2\text{ kN}} \\[4pt]
+                  \phi V_s & = V_u - \phi V_c = 780.0 - 482.2 = \mathbf{297.8\text{ kN}} \implies V_s = \frac{297.8}{0.75} = \mathbf{397.1\text{ kN}} \\[6pt]
+                  \text{Espaciamiento de pernos } s \le 0.75 d = 0.75(190) = \mathbf{142.5\text{ mm}} \implies \text{Adopta } \mathbf{s = 100\text{ mm}} \\[4pt]
+                  A_v & = \frac{V_s \cdot s}{f_y \cdot d} = \frac{397\,100\text{ N} \times 100\text{ mm}}{420\text{ MPa} \times 190\text{ mm}} = \mathbf{497.6\text{ mm}^2 \text{ por periferia}}
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Especificación de Stud Rails:</strong> Se disponen <strong>8 rieles radiales</strong> con pernos de cortante de $\phi 1/2"$ ($a_b = 127\text{ mm}^2$). Cada periferia aporta $8 \times 127 = 1\,016\text{ mm}^2 \ge 497.6\text{ mm}^2 \quad \checkmark$. Cada riel consta de 6 pernos espaciados a $10\text{ cm}$. Esta solución mantiene el cielo raso perfectamente liso y ahorra sobrecostos de formaleta.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TARJETA DE NAVEGACIÓN INFERIOR -->
+      <div class="tech-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+            Continúa tu ruta de aprendizaje
+          </div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 0.2rem;">
+            Siguiente: Módulo 07 — Cimentaciones Superficiales (Zapatas, Vigas de Amarre y de Enlace)
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="modulo-05-columnas.html" class="btn-control" style="background: var(--bg-subtle); color: var(--text-main); border-color: var(--border-strong);">← Volver al Módulo 05</a>
+          <a href="modulo-07-cimentaciones.html" class="btn-primary">Ir al Módulo 07 →</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Globales y Simulador del Módulo 06 -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-06.js"></script>
+</body>
+</html>

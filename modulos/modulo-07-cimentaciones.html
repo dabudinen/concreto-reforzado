@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 7: Cimentaciones Superficiales en Concreto Reforzado | Diplomado Estructuras</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- KaTeX para renderizado tipográfico de ecuaciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Sistema de Diseño Unificado -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+
+  <!-- BARRA SUPERIOR GLOBAL -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <a href="../index.html" class="topbar-logo" title="Volver al Portal Principal — Sección de Viga">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="26" height="30" rx="2.5" fill="#1E293B" stroke="#E2E8F0" stroke-width="1.8"/>
+          <rect x="8.5" y="6.5" width="19" height="23" rx="1.5" stroke="#38BDF8" stroke-width="1.5"/>
+          <line x1="8.5" y1="6.5" x2="12.5" y2="10.5" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="11" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="25" cy="9" r="1.8" fill="#F8FAFC"/>
+          <circle cx="11" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="18" cy="26.5" r="2.2" fill="#FBBF24"/>
+          <circle cx="25" cy="26.5" r="2.2" fill="#FBBF24"/>
+        </svg>
+      </a>
+      <div class="topbar-title-group">
+        <span class="topbar-eyebrow">Módulo 07 de 09 • Prof. Daniel Abudinen, I.C., M.Sc.</span>
+        <span class="topbar-title">Cimentaciones Superficiales: Zapatas y Vigas de Amarre/Enlace</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="../index.html" class="btn-control">
+        <span>🏠</span> Portal Principal
+      </a>
+      <button id="btn-laser" class="btn-control" onclick="toggleLaser()" title="Puntero láser virtual para el docente (Tecla L)">
+        <span>🔴</span> Puntero (L)
+      </button>
+      <button id="btn-presentation" class="btn-control" onclick="togglePresentationMode()" title="Conmutar entre Modo Estudio y Modo Clase Magistral (Tecla P)">
+        <span>🖥️</span> Modo Clase Magistral (P)
+      </button>
+      <button id="btn-theme" class="btn-control" onclick="toggleTheme()">
+        <span>🌙</span> Modo Oscuro
+      </button>
+    </div>
+  </header>
+
+  <div class="workspace-layout">
+    <!-- BARRA LATERAL DE NAVEGACIÓN -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-section-title">Contenido del Módulo 07</div>
+        <ul class="toc-list">
+          <li><a href="#portada-mod07" class="toc-link active"><span class="toc-num">00</span> Portada y Bibliografía</a></li>
+          <li><a href="#sec-filosofia-geotecnica" class="toc-link"><span class="toc-num">1.0</span> 1. Diseño Geotécnico vs. Estructural</a></li>
+          <li><a href="#sec-modos-falla-zapatas" class="toc-link"><span class="toc-num">2.0</span> 2. Criterios de Falla en Zapatas</a></li>
+          <li><a href="#sec-zapatas-medianeras" class="toc-link"><span class="toc-num">3.0</span> 3. Medianeras y Vigas de Enlace</a></li>
+          <li><a href="#sec-zapatas-combinadas" class="toc-link"><span class="toc-num">4.0</span> 4. Zapatas Combinadas</a></li>
+          <li><a href="#sec-vigas-amarre" class="toc-link"><span class="toc-num">5.0</span> 5. Vigas de Amarre Sísmico</a></li>
+          <li><a href="#sec-lab-mod07" class="toc-link"><span class="toc-num">6.0</span> 6. Laboratorios Interactivos</a></li>
+          <li><a href="#sec-ejemplos-mod07" class="toc-link"><span class="toc-num">7.0</span> 7. Ejemplos Resueltos Paso a Paso</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-1" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.1</span> Zapata Cuadrada Concéntrica</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.2</span> Zapata Rectangular Excéntrica</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.3</span> Medianera con Viga de Enlace</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.4</span> Viga de Amarre Sísmico</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.5</span> Zapata Combinada Rectangular</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.6</span> Aplastamiento y Espigos Dowels</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-7-7" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.7</span> Cimiento Corrido Bajo Muro</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="sidebar-section-title">Ruta de Módulos</div>
+        <div class="module-switcher">
+          <a href="modulo-01-introduccion.html" class="module-pill">
+            <span>Mód. 01: Introducción y Filosofías</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-02-predimensionamiento.html" class="module-pill">
+            <span>Mód. 02: Predimensionamiento</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-03-flexion-vigas.html" class="module-pill">
+            <span>Mód. 03: Flexión en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-04-cortante-vigas.html" class="module-pill">
+            <span>Mód. 04: Cortante en Vigas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-05-columnas.html" class="module-pill">
+            <span>Mód. 05: Diseño de Columnas</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-06-losas.html" class="module-pill">
+            <span>Mód. 06: Losas de Entrepiso</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-07-cimentaciones.html" class="module-pill current">
+            <span>Mód. 07: Cimentaciones</span>
+            <span>●</span>
+          </a>
+          <a href="modulo-08-despiece.html" class="module-pill">
+            <span>Mód. 08: Longitud de Desarrollo y Despiece</span>
+            <span>✓</span>
+          </a>
+          <a href="modulo-09-sismico.html" class="module-pill">
+            <span>Mód. 09: Diseño Sismorresistente</span>
+            <span>✓</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- ===================================================================
+           LÁMINA 00: PORTADA DEL MÓDULO 07 Y BIBLIOGRAFÍA DE REFERENCIA
+           =================================================================== -->
+      <section id="portada-mod07" class="hero-banner content-section">
+        <div class="hero-kicker">
+          <span>MÓDULO TÉCNICO 07</span>
+          <span>•</span>
+          <span>MECÁNICA DE CONTACTO SUELO-ESTRUCTURA, ZAPATAS AISLADAS, MEDIANERAS, COMBINADAS Y VIGAS DE AMARRE</span>
+        </div>
+        <h1 class="hero-title">Diseño de Cimentaciones Superficiales en Concreto Reforzado: Zapatas, Vigas de Enlace y Amarre Sísmico</h1>
+        <p class="hero-subtitle">
+          La cimentación constituye el subsistema estructural encargado de transferir con total seguridad la totalidad de las cargas gravitacionales y las fuerzas sísmicas de la superestructura hacia los estratos resistentes del subsuelo. En este módulo estudiaremos la <strong>doble condición de diseño</strong> (dimensionamiento geotécnico en servicio vs. dimensionamiento estructural en estado límite último), los mecanismos de colapso por <strong>punzonamiento bidireccional</strong> a distancia $d/2$ y <strong>cortante unidireccional</strong> a distancia $d$, la flexión en voladizo con distribución de barras en banda central para secciones rectangulares, el aplastamiento en la base con espigos de traspaso (<em>dowels</em>), el control del volcamiento en zapatas medianeras mediante <strong>vigas de enlace (cantiléver)</strong>, las zapatas combinadas y las <strong>vigas de amarre sísmico</strong> normativas según NSR-10.
+        </p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Autoría Académica</span>
+            <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Respaldo Normativo</span>
+            <span class="hero-meta-value">NSR-10 Cap. C.15, C.10.14, C.11.11, C.12, C.21.12, A.3.6 y Título H</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Simuladores Interactivos</span>
+            <span class="hero-meta-value">2 Laboratorios (Zapata Aislada + Viga de Enlace)</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ejemplos con Pizarra Docente</span>
+            <span class="hero-meta-value">4 Problemas Completos Paso a Paso</span>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1.5rem;">
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #38BDF8;">🎯 Competencias Específicas del Módulo 07</h3>
+              <div class="tech-card-icon">🧭</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.89rem; line-height: 1.6; color: #E2E8F0; margin: 0;">
+              <li>Distinguir rigurosamente el uso de cargas de servicio ($D + L$) para el área en planta con la presión neta admisible ($q_e$), frente a las cargas mayoradas ($1.2D + 1.6L$) para el peralte y el refuerzo estructural.</li>
+              <li>Verificar el <strong>punzonamiento</strong> a $d/2$ (<code>NSR-10 C.11.11.2</code>) y el <strong>cortante como viga</strong> a distancia $d$ (<code>C.11.11.3</code>) garantizando que el concreto resista sin armadura de cortante.</li>
+              <li>Diseñar a flexión en ambas direcciones y concentrar la fracción $\gamma_s = \frac{2}{\beta + 1}$ en la banda central para zapatas rectangulares (<code>NSR-10 C.15.4.4</code>).</li>
+              <li>Evaluar el aplastamiento en el pedestal/columna (<code>NSR-10 C.15.8</code> y <code>C.10.14</code>), diseñar zapatas medianeras con <strong>viga de enlace</strong> y dimensionar <strong>vigas de amarre sísmico</strong> a tracción pura ($A_a P_u$).</li>
+            </ul>
+          </div>
+
+          <div class="tech-card" style="background: rgba(15, 23, 42, 0.55); border-color: rgba(148, 163, 184, 0.25); color: #F8FAFC;">
+            <div class="tech-card-header">
+              <h3 class="tech-card-title" style="color: #FBBF24;">📚 Bibliografía de Referencia Recomendada</h3>
+              <div class="tech-card-icon">📖</div>
+            </div>
+            <ul style="padding-left: 1.15rem; font-size: 0.87rem; line-height: 1.58; color: #E2E8F0; margin: 0;">
+              <li><strong>AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente NSR-10</em> — Títulos A (Requisitos sísmicos generales), B (Cargas), C (Concreto estructural: Cap. C.15, C.10, C.11, C.12 y C.21) y H (Geotecnia).</li>
+              <li><strong>ACI Committee 318.</strong> <em>Building Code Requirements for Structural Concrete (ACI 318) and Commentary</em> — Chapter 13: Foundations.</li>
+              <li><strong>Das, B. M.</strong> <em>Principios de Ingeniería de Cimentaciones</em>. Cengage Learning.</li>
+              <li><strong>Bowles, J. E.</strong> <em>Foundation Analysis and Design</em>. McGraw-Hill.</li>
+              <li><strong>Nilson, A. H., Darwin, D., &amp; Dolan, C. W.</strong> <em>Diseño de Estructuras de Concreto</em>. McGraw-Hill.</li>
+            </ul>
+          </div>
+        </div>
+      
+        <!-- TARJETA BIBLIOGRÁFICA Y TEXTOS GUÍA -->
+        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
+          <div class="tech-card-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Referencias Bibliográficas y Textos Guía del Módulo</span>
+            <span class="norm-pill">NSR-10 / ACI 318</span>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5;">
+            El diseño geotécnico-estructural de cimentaciones superficiales, zapatas combinadas, punzonamiento y transferencia de carga por espigos se fundamentan en:
+          </p>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 4 y 5: Cortante bidireccional y punzonamiento, anclaje de barras a compresión $l_{dc}$ y transferencia de esfuerzos).</li>
+            <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.15: Zapatas; y Capítulo C.21: Cimentaciones en DMO/DES).</li>
+            <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
+            <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
+          </ul>
+        </div>
+</section>
+
+      <!-- ===================================================================
+           SECCIÓN 1.0: FILOSOFÍA GEOTÉCNICA VS. ESTRUCTURAL
+           =================================================================== -->
+      <section id="sec-filosofia-geotecnica" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">1.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.15.2, B.2 y Título H • Presión Admisible, Cargas de Servicio y Esfuerzo Último</div>
+            <h2 class="chapter-title">Filosofía de Diseño Geotécnico vs. Estructural y Mecánica de Contacto del Suelo</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          En el diseño de cimentaciones se presenta una bifurcación metodológica fundamental que ningún ingeniero estructural debe confundir: la <strong>capacidad portante del terreno</strong> ($q_{\text{adm}}$) proviene de la mecánica de suelos y se basa en factores de seguridad globales (típicamente $FS \approx 3.0$) evaluados bajo <strong>cargas de servicio sin mayorar</strong> ($D + L$). En contraste, el <strong>diseño del concreto y del acero</strong> se rige por el método de los estados límites de resistencia última de la NSR-10 empleando <strong>cargas mayoradas</strong> ($1.2D + 1.6L$):
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Dimensionamiento en Planta ($B \times L$) bajo Cargas de Servicio</span>
+              <span class="norm-pill">NSR-10 C.15.2.2 y Título H</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Para que la presión total en el plano de apoyo no supere la capacidad admisible del suelo, se deduce la <strong>presión neta admisible ($q_e$)</strong> descontando el peso del estrato de suelo excavado y reemplazado por la zapata:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{q_e = q_{\text{adm}} - \gamma_s\,D_f} \qquad \implies \qquad \mathbf{A_{\text{req}} = \frac{P_{\text{servicio}}}{q_e} = \frac{P_D + P_L}{q_e}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$D_f$ y $\gamma_s$:</strong> Profundidad de desplante de la zapata y peso unitario del suelo de relleno (típicamente $17$ a $19\text{ kN/m}^3$). Al usar la presión neta $q_e$, se evita tener que estimar iterativamente el peso propio de la zapata.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Esfuerzo Neto de Contacto Mayorado ($q_u$) para Diseño Estructural</span>
+              <span class="norm-pill">NSR-10 C.15.2.1</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Una vez adoptadas las dimensiones comerciales en planta ($B \times L$), el espesor $h$, los cortantes y momentos flectores se calculan con la <strong>reacción neta ascendente del suelo debida únicamente a las cargas de la columna</strong>:
+            </p>
+            <div class="math-formula">
+              $$P_u = 1.2\,P_D + 1.6\,P_L \qquad \implies \qquad \mathbf{q_u = \frac{P_u}{B \times L}} \quad (\text{carga concéntrica})$$
+            </div>
+            <div class="math-vars">
+              <div><strong>¿Por qué se excluye el peso propio de la zapata en $q_u$?</strong> Porque el peso propio de la zapata y el peso del suelo sobre ella son cargas uniformes hacia abajo equilibradas exactamente por una reacción del suelo hacia arriba de igual magnitud en cada punto, sin generar flexión ni cortante en la losa de la zapata.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 1.4rem 0 0.7rem; font-size: 1.08rem; color: var(--brand-primary);">
+          1.1 Excentricidad, Núcleo Central y Distribución de Presiones del Suelo
+        </h3>
+        <div class="cards-grid-2">
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">Carga Excéntrica dentro del Núcleo Central ($e \le L/6$)</span>
+              <span class="norm-pill">Contacto Total del Suelo</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Cuando la columna transmite momento flector $M_u$ simultáneo con la carga axial $P_u$, la excentricidad es $\mathbf{e = M_u / P_u}$. Si la resultante cae dentro del tercio medio de la zapata ($e \le L/6$), no se produce tracción en ningún punto del suelo y la distribución es trapezoidal:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{q_{u,\max}^{\min} = \frac{P_u}{B\,L} \pm \frac{6\,M_u}{B\,L^2} = \frac{P_u}{B\,L}\left(1 \pm \frac{6\,e}{L}\right)}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Condición de contacto total:</strong> Toda el área de la base permanece en contacto a compresión contra el terreno ($q_{\min} \ge 0$). En servicio se debe verificar rigurosamente que $q_{\max} \le q_{\text{adm}}$.</div>
+            </div>
+          </div>
+
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">Carga Excéntrica fuera del Núcleo Central ($e > L/6$)</span>
+              <span class="norm-pill">Despegue Parcial del Terreno</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Dado que el suelo no resiste tracciones, si $e > L/6$ una porción de la zapata se despega del terreno y la reacción se concentra en una zona triangular de longitud efectiva $\mathbf{L' = 3\left(\frac{L}{2} - e\right)}$:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{q_{u,\max} = \frac{2\,P_u}{3\,B\left(\dfrac{L}{2} - e\right)}} \qquad (q_{\min} = 0)$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Recomendación práctica:</strong> Las cimentaciones deben proyectarse preferentemente con $e \le L/6$ bajo cargas de servicio permanentes para evitar asentamientos diferenciales angulares y concentración excesiva de esfuerzos en la arista de compresión.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 2.0: MODOS DE FALLA EN ZAPATAS AISLADAS
+           =================================================================== -->
+      <section id="sec-modos-falla-zapatas" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">2.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.11.11, C.15.4, C.15.5, C.15.8 y C.10.14 • Punzonamiento, Viga, Flexión y Aplastamiento</div>
+            <h2 class="chapter-title">Criterios de Resistencia y Modos de Falla en Zapatas Aisladas</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          A diferencia de las vigas, las zapatas son losas gruesas que trabajan en dos direcciones apoyadas sobre un lecho elástico continuo. Como casi nunca se colocan estribos verticales en zapatas aisladas convencionales, <strong>el peralte efectivo $d$ queda gobernado por el cortante</strong> (predominantemente por punzonamiento bidireccional):
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Cortante Bidireccional o Punzonamiento (a distancia $d/2$)</span>
+              <span class="norm-pill">NSR-10 C.11.11.2 (Ec. C.11-31 a C.11-33)</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La columna tiende a penetrar en la zapata formando una superficie piramidal inclinada a $45^\circ$. La sección crítica se sitúa en un perímetro cerrado $b_0$ ubicado a una distancia $\mathbf{d/2}$ de las caras de la columna:
+            </p>
+            <div class="math-formula">
+              $$b_0 = 2\,(c_x + d) + 2\,(c_y + d), \qquad \mathbf{V_{u1} = q_u\,\big[B\,L - (c_x + d)(c_y + d)\big]}$$
+            </div>
+            <div class="math-formula">
+              $$v_c = \min\left\{0.17\left(1 + \frac{2}{\beta}\right)\lambda\sqrt{f'_c},\;\; 0.083\left(\frac{\alpha_s\,d}{b_0} + 2\right)\lambda\sqrt{f'_c},\;\; 0.33\,\lambda\sqrt{f'_c}\right\}$$
+              $$\mathbf{\phi V_{c1} = 0.75\,v_c\,b_0\,d \ge V_{u1}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$\beta = c_{\text{largo}}/c_{\text{corto}}$:</strong> relación de lados de la columna; $\alpha_s = 40$ para columnas interiores, $30$ de borde y $20$ de esquina; $\lambda = 1.0$ para concreto de peso normal.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Cortante Unidireccional o Acción de Viga (a distancia $d$)</span>
+              <span class="norm-pill">NSR-10 C.11.11.3.1 y C.11.2</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Falla por tensión diagonal a lo largo de un plano vertical recto que se extiende a través de todo el ancho de la zapata, evaluado a una distancia $\mathbf{d}$ de la cara de la columna en cada sentido:
+            </p>
+            <div class="math-formula">
+              $$l_{vx} = \frac{L - c_x}{2}, \qquad \mathbf{V_{u2x} = q_u\,B\,\big(l_{vx} - d\big)}$$
+              $$\mathbf{\phi V_{c2x} = 0.75 \times 0.17\,\lambda\sqrt{f'_c}\;B\,d \ge V_{u2x}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>En la otra dirección:</strong> se evalúa idénticamente con el vuelo $l_{vy} = (B - c_y)/2$, reemplazando $B$ por $L$. Si $V_u > \phi V_c$ en cualquiera de los dos modos de cortante, debe <strong>aumentarse el espesor $h$</strong> de la zapata.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-grid-2" style="margin-top: 1rem;">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">3. Flexión y Distribución del Refuerzo en Zapatas Rectangulares</span>
+              <span class="norm-pill">NSR-10 C.15.4.1, C.15.4.4 y C.7.12</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La sección crítica de momento flector se ubica exactamente en la <strong>cara de la columna</strong> de concreto (o en el punto medio entre la cara y el eje de la columna en columnas metálicas con platina de base):
+            </p>
+            <div class="math-formula">
+              $$\mathbf{M_{ux} = q_u\,B\,\frac{l_{vx}^2}{2}}, \qquad \mathbf{M_{uy} = q_u\,L\,\frac{l_{vy}^2}{2}}, \qquad A_{s,\min} = 0.0018\,B\,h$$
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin: 0.5rem 0;">
+              En <strong>zapatas rectangulares</strong> ($L > B$, $\beta = L/B$), el refuerzo largo ($A_{sL}$) se reparte uniformemente en el ancho $B$. Pero en la <strong>dirección corta</strong>, los esfuerzos se concentran bajo la columna; por ello, la fracción $\mathbf{\gamma_s}$ debe colocarse en una <strong>banda central de ancho $B$</strong> centrada en la columna (<code>NSR-10 C.15.4.4.2</code>):
+            </p>
+            <div class="math-formula">
+              $$\mathbf{\gamma_s = \frac{2}{\beta + 1}} \implies A_{s1} = \gamma_s\,A_{sB}\;\;(\text{en banda central } B), \qquad A_{s2} = (1 - \gamma_s)\,A_{sB}\;\;(\text{en extremos})$$
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">4. Resistencia al Aplastamiento en la Interfaz y Espigos (Dowels)</span>
+              <span class="norm-pill">NSR-10 C.15.8 y C.10.14</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La carga axial de la columna se transmite a la zapata por contacto directo. La resistencia de diseño al aplastamiento del concreto es:
+            </p>
+            <div class="math-formula">
+              $$\text{En la base de la columna: } \mathbf{\phi P_n = 0.65 \times 0.85\,f'_c\,A_1}$$
+              $$\text{En la superficie de la zapata: } \mathbf{\phi P_n = 0.65 \times 0.85\,f'_c\,A_1\,\sqrt{\frac{A_2}{A_1}} \le 2.0 \times 0.65 \times 0.85\,f'_c\,A_1}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$A_1$:</strong> área cargada de la columna; <strong>$A_2$:</strong> área de la base del mayor tronco de pirámide contenido totalmente dentro de la zapata con pendientes laterales $1:2$.</div>
+              <div><strong>Refuerzo mínimo de espigos (C.15.8.2.1):</strong> A través de la junta zapata-columna debe colocarse un área mínima de espigos (<em>dowels</em>) de $\mathbf{A_{s,\min} \ge 0.005\,A_{\text{columna}}}$, con al menos <strong>4 barras</strong> ancladas a compresión en la zapata y traslapadas con las barras de la columna.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 3.0: ZAPATAS MEDIANERAS Y VIGAS DE ENLACE
+           =================================================================== -->
+      <section id="sec-zapatas-medianeras" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">3.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Zapatas de Lindero • Equilibrio de Volcamiento y Viga Cantiléver (Strap Footing)</div>
+            <h2 class="chapter-title">Zapatas Medianeras Excéntricas y Solución mediante Viga de Enlace (Cantiléver)</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Cuando una columna se sitúa en el límite de propiedad (lindero), no es posible extender el voladizo de la zapata hacia el predio vecino. Al colocar la zapata excéntrica con la columna en su borde exterior, se genera una excentricidad severa $\mathbf{e = L_1/2 - c_1/2}$ que provoca una fuerte concentración de presiones en el borde de lindero y una tendencia inevitable al <strong>volcamiento de la zapata</strong>. Para evitar el giro, se dispone una <strong>viga de enlace rígida (<em>strap beam</em>)</strong> que une la zapata exterior con la zapata de la columna interior contigua:
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Equilibrio Estático del Sistema y Amplificación de Reacción</span>
+              <span class="norm-pill">Momento respecto a la Columna 2</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La zapata exterior 1 no vuelca porque la viga de enlace está anclada a la columna interior 2, que actúa como contrapeso. Tomando momentos respecto al eje de la columna interior 2:
+            </p>
+            <div class="math-formula">
+              $$R_1\,(S - e) = P_1\,S \qquad \implies \qquad \mathbf{R_1 = P_1\,\frac{S}{S - e} > P_1}$$
+              $$\mathbf{R_2 = P_1 + P_2 - R_1 = P_2 - P_1\,\frac{e}{S - e} < P_2}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$S$:</strong> distancia entre ejes de columnas; <strong>$e$:</strong> excentricidad de la zapata exterior ($L_1/2 - c_1/2$).</div>
+              <div><strong>Efecto en el dimensionamiento:</strong> La zapata exterior debe dimensionarse para la reacción amplificada $\mathbf{R_1}$ ($A_1 = R_1 / q_e$), mientras que la zapata interior se beneficia de un alivio de carga ($R_2 < P_2$). Por seguridad, la zapata interior suele dimensionarse para el $100\%$ de $P_2$.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Solicitaciones y Diseño de la Viga de Enlace (Strap Beam)</span>
+              <span class="norm-pill">Viga Voladiza Invertida</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La viga de enlace se modela como un elemento que no apoya en el terreno (se deja un vaciado o material compresible bajo ella para que no reciba presión del suelo). El momento flector es <strong>negativo en toda su longitud</strong> (tracción en la cara superior):
+            </p>
+            <div class="math-formula">
+              $$\mathbf{M_{u,\text{viga}} = R_{u1}\,e}, \qquad \mathbf{V_{u,\text{viga}} = R_{u1} - P_{u1}}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Rigidez requerida:</strong> La viga debe ser muy rígida a flexión ($h_v \approx S / 7$ a $S / 9$) para garantizar que la zapata exterior no gire y la presión del suelo bajo ella permanezca verdaderamente uniforme.</div>
+              <div><strong>Refuerzo principal:</strong> Barras longitudinales colocadas en la <strong>cara superior</strong> de la viga, ancladas con ganchos estándar en la columna exterior y pasadas al vano interior.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 4.0: ZAPATAS COMBINADAS
+           =================================================================== -->
+      <section id="sec-zapatas-combinadas" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">4.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Columnas Adyacentes y Presión Uniforme • Geometría Rectangular y Trapezoidal</div>
+            <h2 class="chapter-title">Zapatas Combinadas: Criterio del Centroide de Cargas y Modelación Longitudinal</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Cuando dos o más columnas están tan próximas que sus zapatas aisladas se traslapan, o cuando una columna de lindero se resuelve uniendo su cimentación con la columna vecina en una sola losa continua, se recurre a una <strong>zapata combinada</strong>:
+        </p>
+
+        <div class="cards-grid-2">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Centroide de Cargas y Zapata Combinada Rectangular</span>
+              <span class="norm-pill">Condición de Presión Uniforme</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Para que la zapata no sufra cabeceo ni momentos de volcamiento, la resultante de las cargas de las dos columnas debe pasar exactamente por el <strong>centroide geométrico del área en planta</strong> ($L/2$):
+            </p>
+            <div class="math-formula">
+              $$R = P_1 + P_2, \qquad \mathbf{X_R = \frac{P_2 \times S}{P_1 + P_2}} \quad (\text{desde el eje de Columna 1})$$
+              $$\mathbf{L = 2\,\left(X_R + \frac{c_1}{2}\right)}, \qquad \mathbf{B = \frac{R}{q_e \times L}}$$
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Zapata Combinada Trapezoidal y Comportamiento Estructural</span>
+              <span class="norm-pill">Viga Ancha Invertida</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              Si la longitud $L$ calculada invade un lindero o si $P_1 > P_2$, la zapata rectangular no puede centrarse y se recurre a una forma <strong>trapezoidal</strong> (con anchos $b_1$ y $b_2$), cuyo centroide se ajusta para que coincida con $X_R$:
+            </p>
+            <div class="math-formula">
+              $$A = \frac{b_1 + b_2}{2}\,L, \qquad X_c = \frac{L}{3}\left(\frac{b_1 + 2\,b_2}{b_1 + b_2}\right) = X_R$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Comportamiento en flexión:</strong> En dirección longitudinal se analiza como una viga invertida continua que recibe la presión ascendente uniforme $q_u B$ y apoya en las columnas (momento negativo en la cara superior entre columnas y positivo bajo cada columna). En dirección transversal se diseñan franjas como voladizos bajo cada columna.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 5.0: VIGAS DE AMARRE SÍSMICO
+           =================================================================== -->
+      <section id="sec-vigas-amarre" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">5.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">NSR-10 C.15.13, C.21.12.3 y A.3.6.4 • Diafragma en la Base y Amarre Sísmico</div>
+            <h2 class="chapter-title">Vigas de Amarre de la Cimentación: Función Sísmica, Tracción Pura y Requisitos Normativos</h2>
+          </div>
+        </div>
+
+        <p style="font-size: 0.96rem; color: var(--text-body); margin-bottom: 1.15rem;">
+          Durante un sismo, el terreno experimenta ondas que pueden inducir desplazamientos horizontales relativos entre apoyos contiguos, abriendo las columnas o distorsionando la superestructura. Las <strong>vigas de amarre sobre el terreno</strong> enlazan todas las zapatas y pedestales en dos direcciones ortogonales para obligar al conjunto a desplazarse como un <strong>cuerpo rígido uniforme</strong>:
+        </p>
+
+        <div class="cards-grid-3">
+          <div class="math-card">
+            <div class="math-card-header">
+              <span class="math-card-title">1. Fuerza Axial Sísmica de Diseño ($T_u, C_u$)</span>
+              <span class="norm-pill">NSR-10 A.3.6.4.2 y C.15.13.1</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              En zonas de amenaza sísmica intermedia y alta, toda viga de amarre debe ser capaz de resistir a tracción pura y a compresión axial una fuerza de al menos:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{F_u = A_a \times P_u \ge 0.10\,P_u}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>$A_a$:</strong> coeficiente de aceleración pico efectiva de diseño; <strong>$P_u$:</strong> carga axial mayorada de la columna más cargada que conecta la viga de amarre.</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-amber">
+            <div class="math-card-header">
+              <span class="math-card-title">2. Dimensiones Mínimas de la Sección Transversal</span>
+              <span class="norm-pill">NSR-10 C.15.13.3.1 y C.21.12.3</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.55rem;">
+              La mayor dimensión transversal de la viga de amarre no puede ser inferior a una fracción de la luz libre $L$:
+            </p>
+            <div class="math-formula">
+              $$h_{\min} \ge \begin{cases} L / 20 & \text{Estructuras DES} \\ L / 30 & \text{Estructuras DMO} \\ L / 40 & \text{Estructuras DMI} \end{cases}$$
+            </div>
+            <div class="math-vars">
+              <div><strong>Límites mínimos constructivos:</strong> Sección mínima no menor de $250 \times 250\text{ mm}$ ($300 \times 300\text{ mm}$ en DES).</div>
+            </div>
+          </div>
+
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title">3. Detallamiento del Refuerzo Longitudinal y Estribos</span>
+              <span class="norm-pill">NSR-10 C.15.13.2 y C.15.13.4</span>
+            </div>
+            <div class="math-formula">
+              $$\phi T_n = \phi\,A_{st}\,f_y \ge F_u \implies \mathbf{A_{st} \ge \frac{F_u}{0.90\,f_y}}$$
+            </div>
+            <p style="font-size: 0.86rem; color: var(--text-body); margin: 0.4rem 0;">
+              El refuerzo debe ser continuo y anclarse plenamente con ganchos estándar en las columnas de los extremos. Debe colocarse estribos cerrados en toda la longitud con:
+            </p>
+            <div class="math-formula">
+              $$\mathbf{s \le \min\left(\frac{b_{\min}}{2},\; 300\text{ mm}\right)}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 6.0: LABORATORIOS INTERACTIVOS DEL MÓDULO 07
+           =================================================================== -->
+      <section id="sec-lab-mod07" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">6.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Simuladores Interactivos en Tiempo Real • HTML5 Canvas</div>
+            <h2 class="chapter-title">Laboratorios de Zapatas Aisladas y Zapatas Medianeras con Viga de Enlace</h2>
+          </div>
+        </div>
+
+        <!-- SIMULADOR 7.1 -->
+        <div class="sim-box" style="margin-bottom: 2.2rem;">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 7.1: Diseñador y Visualizador Integral de Zapatas Aisladas (Concéntricas y Excéntricas)</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Verifica el área de contacto en servicio ($q_e$), calcula las presiones en esquinas ($q_{u,\max}, q_{u,\min}$), comprueba el punzonamiento a $d/2$, el cortante como viga a distancia $d$ en ambas direcciones, diseña la parrilla inferior a flexión y chequea el aplastamiento en la base (NSR-10 C.15 y C.11.11).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn-control" onclick="loadSim71Preset('ej71_cuadrada')">📌 Preset Ej. 7.1 (Cuadrada Concéntrica)</button>
+              <button class="btn-control" onclick="loadSim71Preset('ej72_excentrica')">📌 Preset Ej. 7.2 (Excéntrica)</button>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label"><span>Carga Muerta $P_D$ y Viva $P_L$</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">PD</span>
+                    <input id="sim71-pd" type="range" min="200" max="3000" step="20" value="980" oninput="updateSim71()" />
+                    <span id="val-sim71-pd" class="control-value" style="display:block; text-align:right;">980 kN</span>
+                  </div>
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">PL</span>
+                    <input id="sim71-pl" type="range" min="100" max="2000" step="20" value="686" oninput="updateSim71()" />
+                    <span id="val-sim71-pl" class="control-value" style="display:block; text-align:right;">686 kN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Momentos Flectores Mayorados</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">Mux</span>
+                    <input id="sim71-mux" type="range" min="0" max="600" step="10" value="0" oninput="updateSim71()" />
+                    <span id="val-sim71-mux" class="control-value" style="display:block; text-align:right;">0 kN·m</span>
+                  </div>
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">Muy</span>
+                    <input id="sim71-muy" type="range" min="0" max="600" step="10" value="0" oninput="updateSim71()" />
+                    <span id="val-sim71-muy" class="control-value" style="display:block; text-align:right;">0 kN·m</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Capacidad admisible $q_{\text{adm}}$</span>
+                  <span id="val-sim71-qadm" class="control-value">245 kPa</span>
+                </div>
+                <input id="sim71-qadm" type="range" min="80" max="500" step="5" value="245" oninput="updateSim71()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Profundidad $D_f$ y Peso $\gamma_s$</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <input id="sim71-df" type="number" min="0.8" max="4.0" step="0.1" value="1.50" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                  <input id="sim71-gammas" type="number" min="14" max="22" step="0.5" value="17.0" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Largo $L$ (eje X) y Ancho $B$ (eje Y)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <input id="sim71-l" type="range" min="1.0" max="5.5" step="0.05" value="2.80" oninput="updateSim71()" />
+                    <span id="val-sim71-l" class="control-value" style="display:block; text-align:right;">2.80 m</span>
+                  </div>
+                  <div>
+                    <input id="sim71-b" type="range" min="1.0" max="5.5" step="0.05" value="2.80" oninput="updateSim71()" />
+                    <span id="val-sim71-b" class="control-value" style="display:block; text-align:right;">2.80 m</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Espesor total zapata $h$</span>
+                  <span id="val-sim71-h" class="control-value">60 cm</span>
+                </div>
+                <input id="sim71-h" type="range" min="25" max="130" step="5" value="60" oninput="updateSim71()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Columna $c_x \times c_y$, Concreto y Barra</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; margin-bottom: 0.45rem;">
+                  <input id="sim71-cx" type="number" min="20" max="90" step="5" value="45" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                  <input id="sim71-cy" type="number" min="20" max="90" step="5" value="45" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <select id="sim71-fc" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="21">f'c = 21 MPa</option>
+                    <option value="28" selected>f'c = 28 MPa</option>
+                    <option value="35">f'c = 35 MPa</option>
+                  </select>
+                  <select id="sim71-bar" onchange="updateSim71()" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                    <option value="4">No. 4 (1/2")</option>
+                    <option value="5">No. 5 (5/8")</option>
+                    <option value="6">No. 6 (3/4")</option>
+                    <option value="7">No. 7 (7/8")</option>
+                    <option value="8" selected>No. 8 (1")</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim71" width="900" height="370" class="sim-canvas"></canvas>
+              <div id="res71-status" class="status-badge status-ok" style="margin-top: 0.75rem;">Calculando zapata...</div>
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item"><span class="metric-label">Área y Presión Neta</span><span id="res71-area" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Presiones de Contacto</span><span id="res71-press" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Punzonamiento a $d/2$</span><span id="res71-punch" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Cortante como Viga X</span><span id="res71-shearx" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Cortante como Viga Y</span><span id="res71-sheary" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Flexión y Acero en X</span><span id="res71-mux" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Flexión y Acero en Y</span><span id="res71-muy" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Aplastamiento en Base</span><span id="res71-aplast" class="metric-val">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULADOR 7.2 -->
+        <div class="sim-box">
+          <div class="sim-box-header">
+            <div>
+              <h3 class="sim-box-title">🔬 Simulador 7.2: Diseñador de Zapata Medianera con Viga de Enlace (Strap Footing)</h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.84rem; color: var(--text-muted);">
+                Equilibra la excentricidad del lindero mediante una viga de enlace rígida conectada a una zapata interior. Calcula la amplificación de carga en la zapata exterior ($R_1$), las presiones del suelo, el momento flector máximo negativo y el refuerzo superior en la viga cantiléver.
+              </p>
+            </div>
+          </div>
+
+          <div class="sim-grid">
+            <div class="sim-controls">
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Luz entre ejes de columnas $S$</span>
+                  <span id="val-sim72-s" class="control-value">6.00 m</span>
+                </div>
+                <input id="sim72-s" type="range" min="3.50" max="9.00" step="0.10" value="6.00" oninput="updateSim72()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Cargas de Servicio de Columnas</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">Col 1 (Lindero)</span>
+                    <input id="sim72-p1" type="range" min="300" max="2500" step="25" value="800" oninput="updateSim72()" />
+                    <span id="val-sim72-p1" class="control-value" style="display:block; text-align:right;">800 kN</span>
+                  </div>
+                  <div>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">Col 2 (Interior)</span>
+                    <input id="sim72-p2" type="range" min="500" max="3500" step="25" value="1400" oninput="updateSim72()" />
+                    <span id="val-sim72-p2" class="control-value" style="display:block; text-align:right;">1400 kN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Lado Columnas $c_1, c_2$ y Presión Neta $q_e$</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.4rem;">
+                  <input id="sim72-c1" type="number" min="20" max="70" step="5" value="40" onchange="updateSim72()" style="padding: 0.38rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                  <input id="sim72-c2" type="number" min="20" max="70" step="5" value="40" onchange="updateSim72()" style="padding: 0.38rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                  <input id="sim72-qe" type="number" min="80" max="350" step="10" value="150" onchange="updateSim72()" style="padding: 0.38rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;" />
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Zapata 1 Exterior ($L_1 \times B_1$)</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <input id="sim72-l1" type="range" min="1.0" max="3.5" step="0.05" value="1.80" oninput="updateSim72()" />
+                    <span id="val-sim72-l1" class="control-value" style="display:block; text-align:right;">1.80 m</span>
+                  </div>
+                  <div>
+                    <input id="sim72-b1" type="range" min="1.5" max="5.0" step="0.10" value="3.50" oninput="updateSim72()" />
+                    <span id="val-sim72-b1" class="control-value" style="display:block; text-align:right;">3.50 m</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Zapata 2 Interior ($B_2 \times B_2$)</span>
+                  <span id="val-sim72-b2" class="control-value">3.00 m</span>
+                </div>
+                <input id="sim72-b2" type="range" min="1.5" max="5.0" step="0.10" value="3.00" oninput="updateSim72()" />
+              </div>
+
+              <div class="control-group">
+                <div class="control-label">
+                  <span>Viga de Enlace: Base $b_v$ y Altura $h_v$</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;">
+                  <div>
+                    <input id="sim72-bv" type="range" min="25" max="70" step="5" value="40" oninput="updateSim72()" />
+                    <span id="val-sim72-bv" class="control-value" style="display:block; text-align:right;">40 cm</span>
+                  </div>
+                  <div>
+                    <input id="sim72-hv" type="range" min="50" max="130" step="5" value="80" oninput="updateSim72()" />
+                    <span id="val-sim72-hv" class="control-value" style="display:block; text-align:right;">80 cm</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div class="control-label"><span>Resistencia Concreto $f'_c$</span></div>
+                <select id="sim72-fc" onchange="updateSim72()" style="width: 100%; padding: 0.4rem; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); font-weight: 600;">
+                  <option value="21">f'c = 21 MPa</option>
+                  <option value="28" selected>f'c = 28 MPa</option>
+                  <option value="35">f'c = 35 MPa</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="sim-StickCanvas">
+              <canvas id="canvas-sim72" width="900" height="380" class="sim-canvas"></canvas>
+              <div id="res72-status" class="status-badge status-ok" style="margin-top: 0.75rem;">Calculando viga de enlace...</div>
+              <div class="metrics-strip" style="margin-top: 0.75rem;">
+                <div class="metric-item"><span class="metric-label">Excentricidad $e$</span><span id="res72-e" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Reacción Zapata 1 ($R_1$)</span><span id="res72-r1" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Reacción Zapata 2 ($R_2$)</span><span id="res72-r2" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Presión $q_1$ en Zapata 1</span><span id="res72-q1" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Presión $q_2$ en Zapata 2</span><span id="res72-q2" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Momento Viga $M_{u,\text{viga}}$</span><span id="res72-muv" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Cortante Viga $V_{u,\text{viga}}$</span><span id="res72-vuv" class="metric-val">—</span></div>
+                <div class="metric-item"><span class="metric-label">Acero Superior Viga</span><span id="res72-asv" class="metric-val">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SECCIÓN 7.0: EJEMPLOS RESUELTOS PASO A PASO CON MODO PIZARRA DOCENTE
+           =================================================================== -->
+      <section id="sec-ejemplos-mod07" class="content-section">
+        <div class="chapter-divider">
+          <div class="chapter-num">7.0</div>
+          <div class="chapter-title-box">
+            <div class="chapter-kicker">Ejercicios de Aplicación Magistral • Modo Pizarra Docente</div>
+            <h2 class="chapter-title">4 Ejemplos Resueltos Paso a Paso: Zapata Cuadrada, Rectangular Excéntrica, Viga de Enlace y Viga de Amarre</h2>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 7.1: ZAPATA AISLADA CUADRADA CONCÉNTRICA
+             =============================================================== -->
+        <div id="ej-7-1" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.1: Diseño Completo de Zapata Aislada Cuadrada Concéntrica ($P_D = 100\text{ ton}, P_L = 70\text{ ton}$, Columna $450 \times 450\text{ mm}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una columna interior de $450 \times 450\text{ mm}$ reforzada con $8\phi 1"$ ($f'_c = 28\text{ MPa}, f_y = 420\text{ MPa}$) transmite a la cimentación $P_D = 100\text{ tonf}$ y $P_L = 70\text{ tonf}$. El suelo de desplante tiene $q_{\text{adm}} = 25\text{ ton/m}^2$ ($245\text{ kPa}$), $\gamma_s = 1.7\text{ ton/m}^3$ y profundidad de cimentación $D_f = 1.50\text{ m}$. El concreto de la zapata tendrá $f'_c = 28\text{ MPa}$ y el acero $f_y = 420\text{ MPa}$. Diseñar completamente la zapata: dimensiones en planta $B \times B$, espesor $h$, verificaciones a cortante bidireccional (punzonamiento) y unidireccional (viga), armadura de flexión y aplastamiento en la base.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-1', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-1', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Determinación del Área en Planta ($B \times B$) y Reacción Mayorada del Suelo ($q_u$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cargas de Servicio, Presión Neta $q_e$ y Cargas Mayoradas</span>
+                  <span class="norm-pill">NSR-10 C.15.2.2 y B.2</span>
+                </div>
+                <div class="math-formula">
+                  $$q_e = q_{\text{adm}} - \gamma_s\,D_f = 25.0 - 1.7(1.50) = \mathbf{22.45\text{ tonf/m}^2}\;\;(220.2\text{ kPa})$$
+                  $$A_{\text{req}} = \frac{P_D + P_L}{q_e} = \frac{100.0 + 70.0}{22.45} = \mathbf{7.57\text{ m}^2} \implies B = \sqrt{7.57} = 2.75\text{ m} \implies \text{Adoptar } \mathbf{B = 2.80\text{ m}}\;\;(A_{\text{prov}} = 7.84\text{ m}^2)$$
+                </div>
+                <div class="math-formula">
+                  $$P_u = 1.2\,(100.0) + 1.6\,(70.0) = \mathbf{232.0\text{ tonf}}\;\;(2275.1\text{ kN})$$
+                  $$q_u = \frac{P_u}{B^2} = \frac{232.0\text{ tonf}}{(2.80\text{ m})^2} = \mathbf{29.59\text{ tonf/m}^2}\;\;(290.2\text{ kPa})$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Espesor $h$, Chequeo de Punzonamiento ($d/2$) y Cortante como Viga ($d$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Peralte Efectivo $d = 499.6\text{ mm}$ y Doble Verificación a Cortante</span>
+                  <span class="norm-pill">NSR-10 C.11.11.2 y C.11.11.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\text{Asumiendo } h = 600\text{ mm},\; \text{rec} = 75\text{ mm},\; d_b = 25.4\text{ mm (No. 8)} \implies \mathbf{d = 600 - 75 - 25.4 = 499.6\text{ mm}}\;\;(0.50\text{ m})$$
+                  $$b_0 = 4\,(c + d) = 4\,(450 + 499.6) = \mathbf{3798.4\text{ mm}}\;\;(3.80\text{ m})$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{V_{u1}\;\text{(punzonamiento):}} \quad V_{u1} = 29.59\,\big[(2.80)^2 - (0.45 + 0.4996)^2\big] = \mathbf{205.30\text{ tonf}}\;\;(2013.3\text{ kN})$$
+                  $$v_c = \min\left\{0.17(1 + 2)\sqrt{28},\; 0.083\left(\frac{40 \times 499.6}{3798.4} + 2\right)\sqrt{28},\; 0.33\sqrt{28}\right\} = \min\{2.70,\; 3.19,\; \mathbf{1.746}\}\text{ MPa}$$
+                  $$\phi V_{c1} = 0.75 \times 1.746\text{ MPa} \times 3798.4\text{ mm} \times 499.6\text{ mm} = 2\,485\,324\text{ N} = \mathbf{248.53\text{ tonf}}\;\;(2485.3\text{ kN})$$
+                  $$\mathbf{V_{u1} = 205.30\text{ tonf} < \phi V_{c1} = 248.53\text{ tonf} \quad (\text{Cumple con margen de }+21.1\%)\;\checkmark}$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{V_{u2}\;\text{(cortante como viga a distancia }d\text{):}} \quad l_v = \frac{2.80 - 0.45}{2} = 1.175\text{ m}$$
+                  $$V_{u2} = q_u\,B\,(l_v - d) = 29.59 \times 2.80 \times (1.175 - 0.4996) = 29.59 \times 2.80 \times 0.6754 = \mathbf{55.96\text{ tonf}}\;\;(548.8\text{ kN})$$
+                  $$\phi V_{c2} = 0.75 \times 0.17\sqrt{28} \times (2800) \times (499.6) = 1\,280\,300\text{ N} = \mathbf{128.03\text{ tonf}}\;\;(1255.6\text{ kN})$$
+                  $$\mathbf{V_{u2} = 55.96\text{ tonf} \ll \phi V_{c2} = 128.03\text{ tonf} \quad (\text{Cumple holgadamente})\;\checkmark}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Diseño a Flexión, Parrilla de Acero y Verificación de Aplastamiento en la Base</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-amber">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cálculo de $M_u$, Área de Acero y Transferencia de Carga (C.15.8)</span>
+                  <span class="norm-pill">NSR-10 C.15.4 y C.15.8</span>
+                </div>
+                <div class="math-formula">
+                  $$M_u = q_u\,B\,\frac{l_v^2}{2} = 29.59 \times 2.80 \times \frac{(1.175)^2}{2} = \mathbf{57.19\text{ tonf}\cdot\text{m}}\;\;(560.8\text{ kN}\cdot\text{m})$$
+                  $$R_n = \frac{560.8 \times 10^6\text{ N}\cdot\text{mm}}{0.90 \times 2800\text{ mm} \times (499.6\text{ mm})^2} = 0.892\text{ MPa} \implies \rho = 0.00216$$
+                  $$A_s = 0.00216 \times 2800 \times 499.6 = \mathbf{3028\text{ mm}^2}, \qquad A_{s,\min} = 0.0018 \times 2800 \times 600 = \mathbf{3024\text{ mm}^2}$$
+                  $$\text{Con barras No. 8 }(A_b = 510\text{ mm}^2): \quad n = \frac{3028}{510} = 5.94 \implies \text{Adoptar } \mathbf{7\text{ barras No. 8 en cada sentido}}\;(A_{s,\text{prov}} = 3570\text{ mm}^2)$$
+                  $$s = \frac{2800 - 2(75) - 25.4}{7 - 1} = \frac{2624.6}{6} = \mathbf{437\text{ mm}} \implies \text{Adoptar } \mathbf{1\text{ No. }8\text{ cada }40\text{ cm en ambas direcciones}}$$
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{\text{Aplastamiento en la base:}} \quad A_1 = 450 \times 450 = 202\,500\text{ mm}^2, \quad A_2 = 2800 \times 2800 = 7\,840\,000\text{ mm}^2$$
+                  $$\sqrt{\frac{A_2}{A_1}} = \sqrt{\frac{7\,840\,000}{202\,500}} = 6.22 > 2.0 \implies \text{Usar factor } \mathbf{2.0}$$
+                  $$\phi P_n = 2.0 \times 0.65 \times 0.85 \times 28\text{ MPa} \times 202\,500\text{ mm}^2 = 6\,267\,375\text{ N} = \mathbf{639.1\text{ tonf}} \gg P_u = 232.0\text{ tonf}\;\checkmark$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Espigos constructivos mínimos (C.15.8.2.1):</strong> Aunque el concreto resiste por sí solo el aplastamiento, se deben colocar espigos con $A_{s,\min} = 0.005(450 \times 450) = 1012.5\text{ mm}^2 \implies \mathbf{4\text{ barras No. }6}$ ($4 \times 284 = 1136\text{ mm}^2$) ancladas en la zapata.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 7.2: ZAPATA AISLADA RECTANGULAR EXCÉNTRICA
+             =============================================================== -->
+        <div id="ej-7-2" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.2: Diseño de Zapata Rectangular con Carga Excéntrica y Concentración en Banda Central (NSR-10 C.15.4.4)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una columna de $400 \times 500\text{ mm}$ transmite $P_u = 1800\text{ kN}$ y un momento flector mayorado alrededor del eje débil de la zapata $M_{ux} = 220\text{ kN}\cdot\text{m}$. La zapata rectangular tiene dimensiones en planta $B = 2.60\text{ m}$ y $L = 3.20\text{ m}$ ($\beta = L/B = 1.231$), con espesor $h = 650\text{ mm}$ ($d = 550\text{ mm}$), $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Determinar: <strong>(a)</strong> La excentricidad y las presiones extremas del suelo verificando el núcleo central. <strong>(b)</strong> El refuerzo en la dirección larga. <strong>(c)</strong> El refuerzo en la dirección corta y la fracción $\gamma_s$ concentrada en la banda central de ancho $B$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-2', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-2', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Excentricidad, Núcleo Central y Distribución Trapezoidal de Presiones</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Verificación de $e \le L/6$ y Presiones en Extremos</span>
+                  <span class="norm-pill">Mecánica de Contacto</span>
+                </div>
+                <div class="math-formula">
+                  $$e = \frac{M_{ux}}{P_u} = \frac{220\text{ kN}\cdot\text{m}}{1800\text{ kN}} = \mathbf{0.122\text{ m}}, \qquad \frac{L}{6} = \frac{3.20}{6} = \mathbf{0.533\text{ m}} \implies \mathbf{e = 0.122\text{ m} < \frac{L}{6} = 0.533\text{ m}\;\checkmark}$$
+                </div>
+                <div class="math-formula">
+                  $$q_{u,\text{prom}} = \frac{1800}{2.60 \times 3.20} = \mathbf{216.35\text{ kPa}}, \qquad \Delta q = \frac{6\,M_{ux}}{B\,L^2} = \frac{6(220)}{2.60(3.20)^2} = \mathbf{49.57\text{ kPa}}$$
+                  $$\mathbf{q_{u,\max} = 216.35 + 49.57 = 265.92\text{ kPa}}, \qquad \mathbf{q_{u,\min} = 216.35 - 49.57 = 166.78\text{ kPa} > 0}\;\checkmark$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Refuerzo Longitudinal (Dirección L) y Refuerzo Transversal con Banda Central (Dirección B)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Cálculo de $A_{sL}$, $A_{sB}$ y Factor de Banda Central $\gamma_s = \frac{2}{\beta + 1}$</span>
+                  <span class="norm-pill">NSR-10 C.15.4.4</span>
+                </div>
+                <div class="math-formula">
+                  $$\text{Vuelo en dirección } L: \quad l_{vL} = \frac{3.20 - 0.40}{2} = \mathbf{1.40\text{ m}} \implies M_{uL} \approx 216.35 \times 2.60 \times \frac{(1.40)^2}{2} = \mathbf{551.3\text{ kN}\cdot\text{m}}$$
+                  $$R_n = \frac{551.3 \times 10^6}{0.90(2600)(550)^2} = 0.779\text{ MPa} \implies \rho = 0.00189 \implies A_{sL} = \mathbf{2702\text{ mm}^2}\;\;(A_{s,\min} = 3042\text{ mm}^2)$$
+                  $$\text{Adoptar en dirección } L: \quad \mathbf{11\text{ barras No. 6}}\;(11 \times 284 = 3124\text{ mm}^2)\text{ distribuidas uniformemente en el ancho } B = 2.60\text{ m}.$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Vuelo en dirección } B: \quad l_{vB} = \frac{2.60 - 0.50}{2} = \mathbf{1.05\text{ m}} \implies M_{uB} = 216.35 \times 3.20 \times \frac{(1.05)^2}{2} = \mathbf{381.6\text{ kN}\cdot\text{m}}$$
+                  $$A_{sB,\text{calc}} = 2210\text{ mm}^2 \implies \text{Gobierna } A_{s,\min} = 0.0018(3200)(650) = \mathbf{3744\text{ mm}^2} \implies \mathbf{14\text{ barras No. 6}}\;(3976\text{ mm}^2)$$
+                </div>
+                <div class="math-formula">
+                  $$\beta = \frac{L}{B} = \frac{3.20}{2.60} = 1.231 \implies \mathbf{\gamma_s = \frac{2}{1.231 + 1} = \frac{2}{2.231} = 0.896\;\;(89.6\%)}$$
+                  $$A_{s,\text{banda}} = 0.896(3976) = \mathbf{3562\text{ mm}^2} \implies \mathbf{13\text{ barras No. 6 en la banda central de ancho } B = 2.60\text{ m}}$$
+                  $$\text{Resto en franjas laterales exteriores: } \mathbf{1\text{ barra No. 6 a cada lado}}\;\checkmark$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 7.3: ZAPATA MEDIANERA CON VIGA DE ENLACE (STRAP FOOTING)
+             =============================================================== -->
+        <div id="ej-7-3" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.3: Zapata Medianera en Lindero con Viga de Enlace Cantiléver (Strap Footing)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una columna 1 de lindero ($c_1 = 400\text{ mm}$) transmite $P_1 = 800\text{ kN}$ de servicio y está separada $S = 6.00\text{ m}$ de una columna interior 2 ($c_2 = 400\text{ mm}$) que transmite $P_2 = 1400\text{ kN}$. La capacidad neta del suelo es $q_e = 150\text{ kPa}$. La zapata 1 exterior tiene ancho $L_1 = 1.80\text{ m}$ perpendicular al lindero. Diseñar el ancho $B_1$, la amplificación $R_1$, la zapata interior 2 y la viga de enlace ($b_v = 400\text{ mm}, h_v = 800\text{ mm}$, $f'_c = 28\text{ MPa}, f_y = 420\text{ MPa}$).
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-3', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-3', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Excentricidad de Lindero, Reacción Amplificada $R_1$ y Dimensionamiento de Zapatas</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Equilibrio del Sistema respecto a la Columna Interior 2</span>
+                  <span class="norm-pill">Mecánica de Enlace</span>
+                </div>
+                <div class="math-formula">
+                  $$e = \frac{L_1}{2} - \frac{c_1}{2} = \frac{1.80}{2} - \frac{0.40}{2} = 0.90 - 0.20 = \mathbf{0.70\text{ m}}$$
+                  $$R_1 = P_1\,\frac{S}{S - e} = 800\text{ kN} \times \frac{6.00}{6.00 - 0.70} = 800 \times 1.132 = \mathbf{905.7\text{ kN}}\;\;(+\,13.2\%)$$
+                  $$R_2 = P_1 + P_2 - R_1 = 800 + 1400 - 905.7 = \mathbf{1294.3\text{ kN}}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Zapata 1: } A_1 = \frac{R_1}{q_e} = \frac{905.7}{150} = 6.04\text{ m}^2 \implies B_1 = \frac{6.04}{1.80} = 3.36\text{ m} \implies \text{Adoptar } \mathbf{B_1 = 3.50\text{ m}}\;\;(L_1 = 1.80\text{ m})$$
+                  $$\text{Zapata 2 (interior, por seguridad con }P_2\text{): } A_2 = \frac{1400}{150} = 9.33\text{ m}^2 \implies B_2 = \sqrt{9.33} = 3.05\text{ m} \implies \text{Adoptar } \mathbf{B_2 = 3.10\text{ m}}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Solicitaciones y Refuerzo Superior de la Viga de Enlace ($400 \times 800\text{ mm}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Momento de Volcamiento $M_{u,\text{viga}}$ y Acero a Tracción Superior</span>
+                  <span class="norm-pill">Viga Cantiléver</span>
+                </div>
+                <div class="math-formula">
+                  $$\text{Factor promedio } 1.35: \quad P_{u1} = 1.35(800) = \mathbf{1080\text{ kN}}, \qquad R_{u1} = 1.35(905.7) = \mathbf{1222.7\text{ kN}}$$
+                  $$\mathbf{M_{u,\text{viga}} = R_{u1} \times e = 1222.7\text{ kN} \times 0.70\text{ m} = \mathbf{855.9\text{ kN}\cdot\text{m}}\;\;(\text{tracción en cara superior})}$$
+                  $$\mathbf{V_{u,\text{viga}} = R_{u1} - P_{u1} = 1222.7 - 1080.0 = \mathbf{142.7\text{ kN}}}$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Con } b_v = 400\text{ mm},\; h_v = 800\text{ mm},\; d_v = 740\text{ mm}:$$
+                  $$R_n = \frac{855.9 \times 10^6}{0.90(400)(740)^2} = 4.34\text{ MPa} \implies \rho = 0.0118 \implies A_s = \mathbf{3493\text{ mm}^2}$$
+                  $$\text{Adoptar en cara superior: } \mathbf{7\text{ barras No. 8}}\;(7 \times 510 = 3570\text{ mm}^2)\;\checkmark$$
+                  $$\phi V_c = 0.75 \times 0.17\sqrt{28} \times 400 \times 740 = \mathbf{199.6\text{ kN}} > V_{u,\text{viga}} = 142.7\text{ kN}\;\checkmark$$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             EJEMPLO 7.4: VIGA DE AMARRE SÍSMICO
+             =============================================================== -->
+        <div id="ej-7-4" style="margin-bottom: 1rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.4: Diseño de Viga de Amarre Sísmico de Cimentación en Pórtico DES (NSR-10 C.15.13 y A.3.6.4)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> En un edificio diseñado con capacidad especial de disipación de energía (DES) ubicado en zona de amenaza sísmica alta ($A_a = 0.25$), la columna más cargada de la cimentación soporta $P_u = 2400\text{ kN}$. Las zapatas adyacentes tienen una luz libre entre caras de $L = 6.00\text{ m}$. Determinar: <strong>(a)</strong> La fuerza axial de diseño a tracción y compresión. <strong>(b)</strong> La sección geométrica mínima. <strong>(c)</strong> El refuerzo longitudinal a tracción pura y el despiece de estribos cerrados de confinamiento.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-4', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-4', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Fuerza Axial de Diseño Sísmica y Dimensión Geométrica Mínima</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">Aplicación de NSR-10 A.3.6.4.2 y C.15.13.3</span>
+                  <span class="norm-pill">NSR-10 A.3.6 y C.15.13</span>
+                </div>
+                <div class="math-formula">
+                  $$\mathbf{F_u = A_a \times P_u = 0.25 \times 2400\text{ kN} = \mathbf{600\text{ kN}}} \ge 0.10\,P_u = 240\text{ kN}\;\checkmark$$
+                  $$h_{\min} = \frac{L}{20} = \frac{6000\text{ mm}}{20} = \mathbf{300\text{ mm}} \implies \text{Adoptar sección cuadrada } \mathbf{350 \times 350\text{ mm}}\;(A_g = 122\,500\text{ mm}^2)$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Diseño a Tracción Axial Pura y Estribos Cerrados de Confinamiento</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card normative-emerald">
+                <div class="math-card-header">
+                  <span class="math-card-title">Armadura Longitudinal a Tracción ($\phi = 0.90$) y Espaciamiento $s \le \min(b/2, 300\text{ mm})$</span>
+                  <span class="norm-pill">NSR-10 C.15.13.2 y C.15.13.4</span>
+                </div>
+                <div class="math-formula">
+                  $$\phi T_n = \phi\,A_{st}\,f_y \ge F_u \implies A_{st} \ge \frac{600 \times 10^3\text{ N}}{0.90 \times 420\text{ MPa}} = \mathbf{1587.3\text{ mm}^2}$$
+                  $$\text{Con barras No. 8 }(A_b = 510\text{ mm}^2): \quad \mathbf{4\text{ barras No. 8}}\;(A_{st} = 2040\text{ mm}^2 > 1587\text{ mm}^2,\; 1\text{ en cada esquina})\;\checkmark$$
+                </div>
+                <div class="math-formula">
+                  $$\text{Separación de estribos: } s \le \min\left(\frac{b}{2} = \frac{350}{2} = 175\text{ mm},\; 300\text{ mm}\right) \implies \text{Adoptar } \mathbf{\text{E No. 3 @ }15\text{ cm en toda la longitud}}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Anclaje en nudos:</strong> Las 4 barras No. 8 deben ser continuas de extremo a extremo y anclarse en las zapatas exteriores con ganchos estándar de $90^\circ$ orientados hacia el interior del núcleo de concreto.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+        <!-- ===============================================================
+             EJEMPLO 7.5: ZAPATA COMBINADA RECTANGULAR (CARGAS DESIGUALES)
+             =============================================================== -->
+        <div id="ej-7-5" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.5: Diseño de Zapata Combinada Rectangular para Dos Columnas con Cargas Desiguales (NSR-10 C.15 & Mulet)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Dos columnas de concreto reforzado tienen una separación centro a centro de $L_c = 4.50\text{ m}$. La columna exterior C1 ($400 \times 400\text{ mm}$, en lindero con vuelo restringido a $0.20\text{ m}$ desde su eje) transmite $P_{D1} = 550\text{ kN}, P_{L1} = 300\text{ kN}$ ($P_{s1} = 850\text{ kN}, P_{u1} = 1\,140\text{ kN}$). La columna interior C2 ($500 \times 500\text{ mm}$) transmite $P_{D2} = 950\text{ kN}, P_{L2} = 500\text{ kN}$ ($P_{s2} = 1\,450\text{ kN}, P_{u2} = 1\,940\text{ kN}$). El suelo tiene $q_{\text{adm}} = 180\text{ kPa}$, $D_f = 1.50\text{ m}$, $\gamma_s = 17.5\text{ kN/m}^3$. Concreto $f'_c = 28\text{ MPa}$, acero $f_y = 420\text{ MPa}$. Se solicita: <strong>1)</strong> Localizar la resultante de cargas de servicio y determinar la longitud total $L_z$ para garantizar presión uniforme del suelo; <strong>2)</strong> Calcular el ancho $B_z$ y la presión de contacto mayorada $q_u$; <strong>3)</strong> Elaborar los diagramas de cortante y momento longitudinal como viga continua invertida, determinando el peralte $d$ por cortante bidireccional (punzonamiento) y cortante unidireccional; <strong>4)</strong> Diseñar la armadura longitudinal superior en el vano central y la armadura transversal bajo cada columna.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-5', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-5', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 7.5 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Alzado, Diagramas de Cortante y Momento Longitudinal de la Zapata Combinada (Lz = 6.10 m)</div>
+            <svg viewBox="0 0 820 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Zapata en Alzado -->
+              <g transform="translate(60, 20)">
+                <!-- Columnas C1 y C2 -->
+                <rect x="25" y="0" width="30" height="50" fill="#334155" stroke="#94A3B8" stroke-width="1.2"/>
+                <rect x="360" y="0" width="38" height="50" fill="#334155" stroke="#94A3B8" stroke-width="1.2"/>
+                <text x="40" y="-6" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Pu1=1,140 kN</text>
+                <text x="379" y="-6" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Pu2=1,940 kN</text>
+                <!-- Zapata continua (Lz = 6.10 m, x: 10 a 470 px) -->
+                <rect x="10" y="50" width="460" height="45" fill="rgba(56, 189, 248, 0.2)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Flechas de reacción uniforme qu -->
+                <g stroke="#FBBF24" stroke-width="1.2">
+                  <line x1="40" y1="120" x2="40" y2="95"/><polygon points="40,95 37,103 43,103" fill="#FBBF24"/>
+                  <line x1="120" y1="120" x2="120" y2="95"/><polygon points="120,95 117,103 123,103" fill="#FBBF24"/>
+                  <line x1="200" y1="120" x2="200" y2="95"/><polygon points="200,95 197,103 203,103" fill="#FBBF24"/>
+                  <line x1="280" y1="120" x2="280" y2="95"/><polygon points="280,95 277,103 283,103" fill="#FBBF24"/>
+                  <line x1="360" y1="120" x2="360" y2="95"/><polygon points="360,95 357,103 363,103" fill="#FBBF24"/>
+                  <line x1="440" y1="120" x2="440" y2="95"/><polygon points="440,95 437,103 443,103" fill="#FBBF24"/>
+                </g>
+                <text x="240" y="132" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">qu = 240.4 kPa (Uniforme)</text>
+                <!-- Cotas -->
+                <line x1="40" y1="35" x2="379" y2="35" stroke="#94A3B8" stroke-width="1"/>
+                <text x="210" y="30" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Lc = 4.50 m</text>
+                <line x1="10" y1="145" x2="470" y2="145" stroke="#94A3B8" stroke-width="1"/>
+                <text x="240" y="158" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Longitud Total Lz = 6.10 m (Ancho Bz = 2.10 m)</text>
+              </g>
+              <!-- Diagramas de Momento y Detalle de Armadura a la derecha -->
+              <g transform="translate(560, 20)">
+                <rect x="0" y="0" width="220" height="255" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="110" y="22" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="middle">DISEÑO LONGITUDINAL</text>
+                <g transform="translate(15, 42)">
+                  <text x="0" y="12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Momento Negativo Máximo:</text>
+                  <text x="0" y="28" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Mu_neg = -1,028 kN·m (Vano)</text>
+                  <text x="0" y="44" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5">As_sup = 10 #8 (5,100 mm²)</text>
+                  <line x1="0" y1="56" x2="190" y2="56" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="72" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Espesor y Cortante:</text>
+                  <text x="0" y="88" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">h = 65 cm (d = 57 cm)</text>
+                  <text x="0" y="104" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Vu,1D = 582 kN ≤ φ Vc (✓)</text>
+                  <line x1="0" y1="116" x2="190" y2="116" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="132" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Armadura Transversal:</text>
+                  <text x="0" y="148" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Bajo C1: #5 @ 18 cm</text>
+                  <text x="0" y="164" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Bajo C2: #6 @ 16 cm</text>
+                </g>
+                <text x="110" y="240" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Presión Uniforme sin Asientos Diferenciales</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: CENTROIDE Y GEOMETRÍA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Localización de la Resultante y Dimensiones en Planta ($L_z \times B_z$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Centro de Gravedad de Cargas y Presión Neta</span>
+                  <span class="norm-pill">NSR-10 C.15.2.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  R_s & = P_{s1} + P_{s2} = 850.0 + 1\,450.0 = \mathbf{2\,300.0\text{ kN}} \\[4pt]
+                  \text{Distancia } \bar{x} \text{ desde eje C1: } & \bar{x} = \frac{P_{s2} \cdot L_c}{R_s} = \frac{1\,450.0 \times 4.50\text{ m}}{2\,300.0} = \mathbf{2.837\text{ m}} \\[6pt]
+                  \text{Con vuelo exterior en C1 de } 0.20\text{ m}: & \quad x_{\text{ext}} = 2.837 + 0.20 = \mathbf{3.037\text{ m}} \\[4pt]
+                  \text{Longitud total de zapata: } & L_z = 2 \times x_{\text{ext}} = 2(3.037) = 6.074\text{ m} \implies \text{Adoptar } \mathbf{L_z = 6.10\text{ m}} \\[6pt]
+                  q_e & = q_{\text{adm}} - \gamma_s D_f = 180.0 - 17.5(1.50) = \mathbf{153.75\text{ kPa}} \\[4pt]
+                  A_{\text{req}} & = \frac{R_s}{q_e} = \frac{2\,300.0\text{ kN}}{153.75\text{ kN/m}^2} = \mathbf{14.96\text{ m}^2} \implies B_z = \frac{14.96\text{ m}^2}{6.10\text{ m}} = 2.45\text{ m} \implies \text{Adopta } \mathbf{B_z = 2.50\text{ m}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: PRESIÓN FACTORIZADA Y SOLICITACIONES -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Presión Mayorada del Suelo ($q_u$) y Solicitaciones Longitudinales</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Cortantes y Momentos Máximos</span>
+                  <span class="norm-pill">NSR-10 B.2 & C.15</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  R_u & = P_{u1} + P_{u2} = 1\,140.0 + 1\,940.0 = \mathbf{3\,080.0\text{ kN}} \\[4pt]
+                  q_u & = \frac{R_u}{L_z \cdot B_z} = \frac{3\,080.0\text{ kN}}{6.10\text{ m} \times 2.50\text{ m}} = \mathbf{201.97\text{ kPa}\;(\text{kN/m}^2)} \\[4pt]
+                  w_{uz} & = q_u \cdot B_z = 201.97 \times 2.50 = \mathbf{504.92\text{ kN/m}} \\[6pt]
+                  \text{Punto de cortante nulo en vano: } & x_0 = \frac{P_{u1}}{w_{uz}} = \frac{1\,140.0}{504.92} = \mathbf{2.258\text{ m desde el extremo}} \\[4pt]
+                  M_{u,\text{neg,máx}} & = - P_{u1}(2.258 - 0.20) + \frac{w_{uz}(2.258)^2}{2} = - 1\,140(2.058) + 252.46(5.099) = \mathbf{-1\,058.9\text{ kN}\cdot\text{m}}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: ESPESOR Y REFUERZO -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Espesor $h$, Cortante 1D y Refuerzo Longitudinal y Transversal</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Verificaciones de Resistencia</span>
+                  <span class="norm-pill">NSR-10 C.11 & C.15</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Adoptando } \mathbf{h = 0.70\text{ m}}\;(70\text{ cm}), \quad & d = 700 - 75 - 12.7 = \mathbf{612\text{ mm}} = 0.612\text{ m} \\[4pt]
+                  \phi V_c & = 0.75 \times 0.17 \sqrt{28\text{ MPa}} \times 2\,500\text{ mm} \times 612\text{ mm} \times 10^{-3} = \mathbf{1\,031.9\text{ kN}} \ge V_{ud} = 650.4\text{ kN} \quad \checkmark \\[6pt]
+                  A_{s,\text{sup (vano)}} & = \frac{M_u}{\phi f_y (0.9 d)} = \frac{1\,058.9 \times 10^6}{0.90 \times 420 \times (0.9 \times 612)} = \mathbf{5\,095\text{ mm}^2} \implies \mathbf{10\#8} \;(5\,100\text{ mm}^2)
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Refuerzo Transversal bajo Columnas (vigas anchas de ancho $b_w = c + 2(0.75h) \approx 1.50\text{ m}$):</strong></div>
+                  <div>• Bajo Columna C1: $10\#5$ @ $15\text{ cm}$ en la zona del pedestal.</div>
+                  <div>• Bajo Columna C2: $12\#6$ @ $13\text{ cm}$ en la zona del pedestal.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 7.6: APLASTAMIENTO Y ESPIGOS DOWELS (NSR-10 C.15.8)
+             =============================================================== -->
+        <div id="ej-7-6" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.6: Aplastamiento del Concreto en la Base de la Columna y Diseño de Espigos (*Dowels*) (NSR-10 C.15.8 & Mulet)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Una columna fuertemente cargada de sección cuadrada $c = 450 \times 450\text{ mm}$ ($f'_{c,\text{col}} = 35\text{ MPa}$, $f_y = 420\text{ MPa}$) transmite una carga axial última mayorada $P_u = 3\,400.0\text{ kN}$ hacia una zapata superficial cuadrada de dimensiones $B \times B = 3.20\text{ m} \times 3.20\text{ m}$ con espesor $h = 600\text{ mm}$ ($f'_{c,\text{zap}} = 21\text{ MPa}$). Se solicita: <strong>1)</strong> Evaluar la resistencia al aplastamiento en la base de la columna ($\phi P_n$); <strong>2)</strong> Evaluar la resistencia al aplastamiento en la cara superior de la zapata considerando la dispersión piramidal de esfuerzos ($\sqrt{A_2/A_1} \le 2.0$); <strong>3)</strong> Determinar la necesidad de barras de transferencia (*dowels* o espigos), calculando el área mínima requerida ($A_{s,\min} \ge 0.005 A_1$) y la longitud de desarrollo a compresión en la zapata ($l_{dc}$) según NSR-10 C.12.3 y C.15.8.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-6', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-6', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 7.6 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Corte de la Unión Columna-Zapata, Pirámide de Dispersión de Esfuerzos (2:1) y Espigos (Dowels)</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Elevación Unión Columna-Zapata -->
+              <g transform="translate(80, 20)">
+                <!-- Zapata h = 60 cm (x: 0 a 380, y: 110 a 220) -->
+                <rect x="0" y="110" width="380" height="90" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Pirámide de dispersión de esfuerzos (trapecio amarillo con pendiente 2V:1H) -->
+                <polygon points="140,110 240,110 330,200 50,200" fill="rgba(251, 191, 36, 0.15)" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="4 2"/>
+                <text x="190" y="170" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Dispersión 2:1 (√(A2/A1) = 2.0)</text>
+                <!-- Columna 45x45 cm (x: 140 a 240, y: 10 a 110) -->
+                <rect x="140" y="10" width="100" height="100" fill="#334155" stroke="#94A3B8" stroke-width="2"/>
+                <!-- Flecha de carga Pu = 3,400 kN -->
+                <line x1="190" y1="-10" x2="190" y2="15" stroke="#EF4444" stroke-width="3"/>
+                <polygon points="190,15 185,5 195,5" fill="#EF4444"/>
+                <text x="190" y="-15" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Pu = 3,400 kN</text>
+                <!-- Espigos Dowels (rojos con gancho inferior) -->
+                <path d="M 155 40 L 155 170 L 120 170" fill="none" stroke="#EF4444" stroke-width="2.5"/>
+                <path d="M 225 40 L 225 170 L 260 170" fill="none" stroke="#EF4444" stroke-width="2.5"/>
+                <text x="190" y="70" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">4 Espigos #7 (Dowels)</text>
+                <!-- Cotas -->
+                <line x1="140" y1="115" x2="240" y2="115" stroke="#94A3B8" stroke-width="1"/>
+                <text x="190" y="127" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">c = 45 cm</text>
+              </g>
+              <!-- Detalle de Verificación a la derecha -->
+              <g transform="translate(500, 20)">
+                <rect x="0" y="0" width="280" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="140" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">CHEQUEOS DE APLASTAMIENTO</text>
+                <g transform="translate(20, 45)">
+                  <text x="0" y="15" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">Demanda axial:</text>
+                  <text x="240" y="15" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">Pu = 3,400 kN</text>
+                  <line x1="0" y1="24" x2="240" y2="24" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="42" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">1. Aplastamiento Columna:</text>
+                  <text x="240" y="42" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">3,918 kN (✓)</text>
+                  <text x="0" y="64" fill="#94A3B8" font-family="Inter, sans-serif" font-size="9">2. Aplastamiento Zapata:</text>
+                  <text x="240" y="64" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">4,701 kN (✓)</text>
+                  <line x1="0" y1="76" x2="240" y2="76" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="96" fill="#FBBF24" font-family="Inter, sans-serif" font-size="9" font-weight="700">Espigos mín. As,mín (0.5%):</text>
+                  <text x="240" y="96" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">1,013 mm²</text>
+                  <text x="0" y="118" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">Provisto: 4 #7 (As = 1,548 mm²)</text>
+                  <text x="0" y="136" fill="#38BDF8" font-family="Inter, sans-serif" font-size="8.5">Anclaje a compresión: ldc = 40 cm</text>
+                </g>
+                <text x="140" y="215" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Transferencia Plena sin Falla Frágil</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: APLASTAMIENTO EN COLUMNA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Resistencia al Aplastamiento en la Base de la Columna</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Límite de Esfuerzo de Contacto en la Columna ($f'_{c,\text{col}} = 35\text{ MPa}$)</span>
+                  <span class="norm-pill">NSR-10 C.10.14.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_1 & = 450\text{ mm} \times 450\text{ mm} = \mathbf{202\,500\text{ mm}^2} \\[4pt]
+                  \phi P_{n,\text{col}} & = \phi \left(0.85 f'_{c,\text{col}} A_1\right) = 0.65 \times (0.85 \times 35\text{ MPa}) \times 202\,500\text{ mm}^2 \times 10^{-3} = \mathbf{3\,917.9\text{ kN}} \\[6pt]
+                  \mathbf{3\,917.9\text{ kN}} & \ge P_u = \mathbf{3\,400.0\text{ kN}} \quad \checkmark \quad (\text{El concreto de la columna resiste por sí solo el aplastamiento})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: APLASTAMIENTO EN ZAPATA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Resistencia al Aplastamiento en la Cara Superior de la Zapata</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Factor de Confinamiento Piramidal $\sqrt{A_2/A_1}$</span>
+                  <span class="norm-pill">NSR-10 C.10.14.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Área de zapata concéntrica: } & A_2 = 3\,200\text{ mm} \times 3\,200\text{ mm} = 10\,240\,000\text{ mm}^2 \\[4pt]
+                  \sqrt{\frac{A_2}{A_1}} & = \sqrt{\frac{10\,240\,000}{202\,500}} = \sqrt{50.57} = 7.11 > \mathbf{2.00} \implies \text{Rige límite máximo } \mathbf{\sqrt{\frac{A_2}{A_1}} = 2.00} \\[6pt]
+                  \phi P_{n,\text{zap}} & = \phi \left(0.85 f'_{c,\text{zap}} A_1 \sqrt{\frac{A_2}{A_1}}\right) \\
+                  & = 0.65 \times (0.85 \times 21\text{ MPa}) \times 202\,500\text{ mm}^2 \times 2.00 \times 10^{-3} = \mathbf{4\,701.0\text{ kN}} \\[6pt]
+                  \mathbf{4\,701.0\text{ kN}} & \ge P_u = \mathbf{3\,400.0\text{ kN}} \quad \checkmark \quad (\text{La zapata no requiere espigos por resistencia directa})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: DISEÑO DE ESPIGOS DOWELS -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Refuerzo Mínimo de Espigos (*Dowels*) y Longitud de Desarrollo ($l_{dc}$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Área Mínima Normativa y Anclaje</span>
+                  <span class="norm-pill">NSR-10 C.15.8.2.1 y C.12.3</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  A_{s,\min} & = 0.005 A_1 = 0.005 \times (450 \times 450)\text{ mm}^2 = \mathbf{1\,012.5\text{ mm}^2} \\[6pt]
+                  \text{Selección: } & \text{Se disponen } \mathbf{4\#7} \;(4 \times 387 = \mathbf{1\,548\text{ mm}^2} \ge 1\,012.5\text{ mm}^2) \text{ ubicados en las 4 esquinas} \\[6pt]
+                  \text{Longitud de desarrollo a compresión en la zapata } (l_{dc}): \quad & l_{dc} = \max\left( \frac{0.24 f_y}{\lambda \sqrt{f'_c}} d_b, \quad 0.043 f_y d_b, \quad 200\text{ mm} \right) \\
+                  & = \max\left( \frac{0.24(420)}{1.0\sqrt{21}}(22.2) = 488\text{ mm},\; 0.043(420)(22.2) = 401\text{ mm},\; 200\text{ mm} \right) = \mathbf{488\text{ mm}}
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Detallamiento en Obra:</strong> Con un espesor de zapata $h = 600\text{ mm}$ y recubrimiento inferior de $75\text{ mm}$, la altura vertical disponible es $600 - 75 - 25 = 500\text{ mm} \ge l_{dc} = 488\text{ mm}$. Se rematan los espigos con pata horizontal de $200\text{ mm}$ apoyada sobre la parrilla inferior para estabilidad constructiva durante el vaciado.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ===============================================================
+             EJEMPLO 7.7: CIMIENTO CORRIDO BAJO MURO ESTRUCTURAL (NSR-10 C.15)
+             =============================================================== -->
+        <div id="ej-7-7" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 7.7: Diseño de Cimiento Corrido (Zapata Continua) Bajo Muro Estructural de Concreto (NSR-10 C.15 & Mulet)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Se proyecta la cimentación corrida continua bajo un muro estructural de concreto reforzado de espesor $b_w = 200\text{ mm}$ ($20\text{ cm}$) en un edificio de 6 niveles. La carga de servicio transmitida por metro lineal es $P_D = 180.0\text{ kN/m}$ y $P_L = 80.0\text{ kN/m}$ ($P_s = 260.0\text{ kN/m}$). Suelo de fundación: $q_{\text{adm}} = 150.0\text{ kPa}$, $D_f = 1.20\text{ m}$, $\gamma_s = 18.0\text{ kN/m}^3$. Concreto $f'_c = 21\text{ MPa}$, acero $f_y = 420\text{ MPa}$. Diseñar: <strong>1)</strong> El ancho requerido de cimiento $B_z$ y la presión de contacto mayorada $q_u$; <strong>2)</strong> El espesor total $h$ por cortante unidireccional a distancia $d$ de la cara del muro; <strong>3)</strong> El refuerzo transversal a flexión (perpendicular al muro) y el refuerzo longitudinal de distribución y temperatura.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-7', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('ej-7-7', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- Esquema Vectorial SVG del Ejemplo 7.7 -->
+          <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
+            <div class="tech-card-title">Corte Transversal del Cimiento Corrido Bajo Muro Estructural con Armaduras y Cotas</div>
+            <svg viewBox="0 0 820 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #0F172A; border-radius: 8px; padding: 10px;">
+              <!-- Sección Transversal del Cimiento y Muro -->
+              <g transform="translate(80, 20)">
+                <!-- Cimiento Corrido (Bz = 2.10 m, x: 0 a 380, y: 120 a 200) -->
+                <rect x="0" y="120" width="380" height="80" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" stroke-width="2"/>
+                <!-- Muro Estructural bw = 20 cm (x: 165 a 215, y: 10 a 120) -->
+                <rect x="165" y="10" width="50" height="110" fill="#334155" stroke="#94A3B8" stroke-width="2"/>
+                <text x="190" y="65" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">Muro bw=20 cm</text>
+                <!-- Carga mayorada Wu = 344 kN/m -->
+                <line x1="190" y1="-10" x2="190" y2="10" stroke="#EF4444" stroke-width="3"/>
+                <polygon points="190,10 185,0 195,0" fill="#EF4444"/>
+                <text x="190" y="-15" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">wu = 344 kN/m</text>
+                <!-- Sección Crítica a d = 32 cm de la cara del muro (x = 107 y x = 273) -->
+                <line x1="107" y1="120" x2="107" y2="200" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <text x="103" y="112" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="end">Sec. Crítica d</text>
+                <!-- Parrilla de refuerzo: Barras transversales principales (rojo) -->
+                <line x1="15" y1="180" x2="365" y2="180" stroke="#EF4444" stroke-width="2.5"/>
+                <!-- Barras longitudinales de distribución (puntos verdes) -->
+                <circle cx="45" cy="173" r="4" fill="#34D399"/><circle cx="95" cy="173" r="4" fill="#34D399"/>
+                <circle cx="145" cy="173" r="4" fill="#34D399"/><circle cx="190" cy="173" r="4" fill="#34D399"/>
+                <circle cx="235" cy="173" r="4" fill="#34D399"/><circle cx="285" cy="173" r="4" fill="#34D399"/>
+                <circle cx="335" cy="173" r="4" fill="#34D399"/>
+                <!-- Cotas -->
+                <line x1="0" y1="215" x2="380" y2="215" stroke="#94A3B8" stroke-width="1"/>
+                <text x="190" y="230" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Ancho Zapata Bz = 2.10 m (Voladizo Lv = 0.95 m)</text>
+                <line x1="-12" y1="120" x2="-12" y2="200" stroke="#94A3B8" stroke-width="1"/>
+                <text x="-16" y="165" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">h = 40 cm</text>
+              </g>
+              <!-- Detalle de Armado a la derecha -->
+              <g transform="translate(500, 20)">
+                <rect x="0" y="0" width="280" height="240" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1.2"/>
+                <text x="140" y="24" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">ARMADURAS ADOPTADAS</text>
+                <g transform="translate(20, 45)">
+                  <text x="0" y="15" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Refuerzo Transversal (Flexión):</text>
+                  <text x="0" y="32" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">#5 @ 20 cm continuo</text>
+                  <text x="0" y="48" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5">As = 9.95 cm²/m ≥ As,req = 6.4 cm²</text>
+                  <line x1="0" y1="60" x2="240" y2="60" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="78" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Refuerzo Longitudinal (Temp.):</text>
+                  <text x="0" y="95" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">7 #4 (As = 8.89 cm²)</text>
+                  <text x="0" y="110" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Espaciadas uniformemente @ 30 cm</text>
+                  <line x1="0" y1="122" x2="240" y2="122" stroke="#334155" stroke-width="1"/>
+                  <text x="0" y="140" fill="#FBBF24" font-family="Inter, sans-serif" font-size="9" font-weight="700">Cortante 1D a distancia d:</text>
+                  <text x="240" y="140" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="end">Vu = 103 kN ≤ φVc (✓)</text>
+                </g>
+                <text x="140" y="215" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Recubrimiento inferior r = 7.5 cm (C.7.7.1)</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- PASO 1: ANCHO Y PRESIÓN -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 1</span>
+                <span>Determinación del Ancho de Cimiento ($B_z$) y Presión Mayorada ($q_u$)</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">1.1 Presión Neta y Ancho Requerido</span>
+                  <span class="norm-pill">NSR-10 C.15.2.2</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  q_e & = q_{\text{adm}} - \gamma_s D_f = 150.0 - 18.0(1.20) = \mathbf{128.40\text{ kPa}} \\[4pt]
+                  B_{z,\text{req}} & = \frac{P_s}{q_e} = \frac{260.0\text{ kN/m}}{128.40\text{ kN/m}^2} = \mathbf{2.025\text{ m}} \implies \text{Adoptar } \mathbf{B_z = 2.10\text{ m}} \\[6pt]
+                  w_u & = 1.2 P_D + 1.6 P_L = 1.2(180.0) + 1.6(80.0) = 216.0 + 128.0 = \mathbf{344.0\text{ kN/m}} \\[4pt]
+                  q_u & = \frac{w_u}{B_z} = \frac{344.0\text{ kN/m}}{2.10\text{ m}} = \mathbf{163.81\text{ kPa}\;(\text{kN/m}^2)}
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 2: ESPESOR POR CORTANTE 1D -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 2</span>
+                <span>Espesor $h$ y Verificación de Cortante Unidireccional a Distancia $d$</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">2.1 Cortante como Viga en el Voladizo del Cimiento</span>
+                  <span class="norm-pill">NSR-10 C.11.11.1.1</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  \text{Voladizo desde la cara del muro: } & L_v = \frac{B_z - b_w}{2} = \frac{2.10 - 0.20}{2} = \mathbf{0.95\text{ m}} = 950\text{ mm} \\[4pt]
+                  \text{Adoptando espesor } \mathbf{h = 400\text{ mm}}\;(40\text{ cm}): \quad & d = 400 - 75 - \frac{15.9}{2} \approx \mathbf{317\text{ mm}} = 0.317\text{ m} \\[6pt]
+                  \text{Cortante a distancia } d: \quad & V_{ud} = q_u (L_v - d) = 163.81\text{ kN/m}^2 \times (0.95 - 0.317)\text{ m} = \mathbf{103.69\text{ kN/m}} \\[6pt]
+                  \phi V_c & = 0.75 \times 0.17 \sqrt{21\text{ MPa}} \times (1\,000\text{ mm}) \times 317\text{ mm} \times 10^{-3} = \mathbf{185.2\text{ kN/m}} \\[4pt]
+                  \mathbf{185.2\text{ kN/m}} & \ge V_{ud} = \mathbf{103.7\text{ kN/m}} \quad \checkmark \quad (\text{Espesor } h = 40\text{ cm ampliamente seguro})
+                  \end{aligned}$$
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PASO 3: REFUERZO A FLEXIÓN Y TEMPERATURA -->
+          <div class="calc-step-card">
+            <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+              <div class="calc-step-title">
+                <span class="calc-step-badge">PASO 3</span>
+                <span>Diseño de Refuerzo Transversal a Flexión y Longitudinal de Distribución</span>
+              </div>
+              <span class="calc-step-toggle">Mostrar / Ocultar</span>
+            </div>
+            <div class="calc-step-body">
+              <div class="math-card">
+                <div class="math-card-header">
+                  <span class="math-card-title">3.1 Momento en la Cara del Muro y Armaduras</span>
+                  <span class="norm-pill">NSR-10 C.15.4.2 y C.7.12</span>
+                </div>
+                <div class="math-formula">
+                  $$\begin{aligned}
+                  M_u & = \frac{q_u \cdot L_v^2}{2} = \frac{163.81 \times (0.95)^2}{2} = \mathbf{73.92\text{ kN}\cdot\text{m/m}} \\[6pt]
+                  R_n & = \frac{M_u}{\phi b d^2} = \frac{73.92 \times 10^6}{0.90 \times 1\,000 \times (317)^2} = \mathbf{0.817\text{ MPa}} \\[4pt]
+                  \rho & = \frac{0.85(21)}{420} \left[1 - \sqrt{1 - \frac{2(0.817)}{0.85(21)}}\right] = \mathbf{0.00200} \\[6pt]
+                  A_s & = \rho b d = 0.00200 \times 1\,000 \times 317 = \mathbf{634\text{ mm}^2/\text{m}} \\[4pt]
+                  \text{Acero mínimo flexión (C.10.5): } & A_{s,\min} = 0.0018 b h = 0.0018(1000)(400) = \mathbf{720\text{ mm}^2/\text{m}} \implies \text{Rige } A_{s,\min} \\[6pt]
+                  \text{Refuerzo Transversal Adoptado: } & \mathbf{\#5\text{ @ }25\text{ cm}} \;(A_s = 796\text{ mm}^2/\text{m} \ge 720\text{ mm}^2/\text{m} \quad \checkmark) \\[6pt]
+                  \text{Refuerzo Longitudinal de Temperatura: } & A_{s,\text{long}} = 0.0018 \times B_z \times h = 0.0018(2\,100)(400) = \mathbf{1\,512\text{ mm}^2} \\
+                  & \text{Se disponen } \mathbf{8\#4} \;(8 \times 127 = 1\,016\text{ mm}^2) \text{ o } \mathbf{8\#5} \;(8 \times 199 = 1\,592\text{ mm}^2 \ge 1\,512\text{ mm}^2)
+                  \end{aligned}$$
+                </div>
+                <div class="math-vars">
+                  <div><strong>Conclusión de Cimentación Corrida:</strong> Cimiento continuo de $B_z = 2.10\text{ m}$ con espesor $h = 40\text{ cm}$, armado transversalmente con varillas $\#5$ @ $25\text{ cm}$ y $8\#5$ longitudinales continuas, garantizando estabilidad total ante la carga lineal del muro estructural.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TARJETA DE NAVEGACIÓN INFERIOR -->
+      <div class="tech-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+            Continúa tu ruta de aprendizaje
+          </div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin-top: 0.2rem;">
+            Siguiente: Módulo 08 — Despiece de Armaduras, Longitud de Desarrollo y Anclaje
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="modulo-06-losas.html" class="btn-control" style="background: var(--bg-subtle); color: var(--text-main); border-color: var(--border-strong);">← Volver al Módulo 06</a>
+          <a href="modulo-08-despiece.html" class="btn-primary">Entrar al Módulo 08 →</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- HUD FLOTANTE PARA MODO CLASE MAGISTRAL -->
+  <div class="presentation-HUD">
+    <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
+    <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
+    <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
+    <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
+  </div>
+
+  <!-- Scripts Globales y Simulador del Módulo 07 -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/sim-modulo-07.js"></script>
+</body>
+</html>

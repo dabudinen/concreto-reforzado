@@ -976,7 +976,51 @@
             </div>
 
             <!-- Pasos Ejemplo 9.1 -->
-            <div class="example-step">
+            
+          <div 
+          <!-- ESQUEMA VECTORIAL SVG ACOTADO: EJEMPLO 9.1 -->
+          <div style="text-align:center; margin: 16px 0;">
+            <svg width="100%" height="280" viewBox="0 0 720 280" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+              <!-- Nudo Pórtico DES: Columna Fuerte - Viga Débil (C.21.6.2) -->
+              <!-- Columna 500x500 continua -->
+              <rect x="270" y="15" width="180" height="250" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+              <!-- Viga izquierda y derecha 350x550 -->
+              <rect x="50" y="65" width="220" height="150" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+              <rect x="450" y="65" width="220" height="150" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+
+              <!-- Momentos en Columnas Mnc (Superior e Inferior) -->
+              <path d="M 330,45 A 30,30 0 0,1 390,45" fill="none" stroke="#10b981" stroke-width="3"/>
+              <polygon points="390,45 382,38 386,52" fill="#10b981"/>
+              <text x="360" y="32" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle">Mnc,sup = 480 kN·m</text>
+
+              <path d="M 330,235 A 30,30 0 0,1 390,235" fill="none" stroke="#10b981" stroke-width="3"/>
+              <polygon points="390,235 382,228 386,242" fill="#10b981"/>
+              <text x="360" y="258" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle">Mnc,inf = 480 kN·m</text>
+
+              <!-- Momentos en Vigas Mnb (Izquierda y Derecha) -->
+              <path d="M 240,110 A 30,30 0 0,0 240,170" fill="none" stroke="#ef4444" stroke-width="3"/>
+              <polygon points="240,170 248,162 234,166" fill="#ef4444"/>
+              <text x="180" y="145" fill="#ef4444" font-size="10" font-weight="bold" text-anchor="middle">Mnb,izq = 340 kN·m</text>
+
+              <path d="M 480,110 A 30,30 0 0,1 480,170" fill="none" stroke="#ef4444" stroke-width="3"/>
+              <polygon points="480,170 472,162 486,166" fill="#ef4444"/>
+              <text x="540" y="145" fill="#ef4444" font-size="10" font-weight="bold" text-anchor="middle">Mnb,der = 340 kN·m</text>
+
+              <!-- Verificación Central -->
+              <rect x="285" y="115" width="150" height="50" rx="6" fill="rgba(15, 23, 42, 0.9)" stroke="#38bdf8" stroke-width="2"/>
+              <text x="360" y="133" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">ΣMnc / ΣMnb ≥ 1.20</text>
+              <text x="360" y="152" fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle">960 / 680 = 1.41 ✓ CUMPLE</text>
+            </svg>
+          </div>
+
+          class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex91', 1)">
                 <span>Paso 1: Capacidad a Flexión de las Vigas Concurrentes (\(\sum M_{nb}\))</span>
                 <span class="step-arrow" id="ex91-arrow-1">▼</span>
@@ -1041,6 +1085,8 @@
                 </div>
               </div>
             </div>
+            </div>
+          </div>
           </div>
 
           <!-- ================================================================
@@ -1075,7 +1121,79 @@
             </div>
 
             <!-- Pasos Ejemplo 9.2 -->
-            <div class="example-step">
+            
+          <div 
+          <!-- ESQUEMA VECTORIAL SVG ACOTADO: EJEMPLO 9.2 -->
+          <div style="text-align:center; margin: 16px 0;">
+            <svg width="100%" height="280" viewBox="0 0 720 280" style="background:#0f172a; border-radius:10px; border:1px solid #334155;">
+              <!-- Viga DES completa Ln = 5.80 m -->
+              <!-- Columnas de apoyo -->
+              <rect x="40" y="40" width="70" height="200" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+              <rect x="610" y="40" width="70" height="200" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+
+              <!-- Viga entre apoyos -->
+              <rect x="110" y="70" width="500" height="120" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+
+              <!-- Zona Confinada Izquierda 2h = 1.10 m -->
+              <rect x="110" y="70" width="110" height="120" fill="rgba(56, 189, 248, 0.12)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <g stroke="#38bdf8" stroke-width="2">
+                <line x1="125" y1="75" x2="125" y2="185"/>
+                <line x1="145" y1="75" x2="145" y2="185"/>
+                <line x1="165" y1="75" x2="165" y2="185"/>
+                <line x1="185" y1="75" x2="185" y2="185"/>
+                <line x1="205" y1="75" x2="205" y2="185"/>
+              </g>
+              <text x="165" y="60" fill="#38bdf8" font-size="9" font-weight="bold" text-anchor="middle">2h = 1.10 m (s ≤ 10 cm)</text>
+
+              <!-- Zona Central (s ≤ d/2 = 24 cm) -->
+              <g stroke="#64748b" stroke-width="1.5">
+                <line x1="260" y1="75" x2="260" y2="185"/>
+                <line x1="310" y1="75" x2="310" y2="185"/>
+                <line x1="360" y1="75" x2="360" y2="185"/>
+                <line x1="410" y1="75" x2="410" y2="185"/>
+                <line x1="460" y1="75" x2="460" y2="185"/>
+              </g>
+              <text x="360" y="60" fill="#64748b" font-size="9" text-anchor="middle">Zona Central (s ≤ d/2 = 24 cm)</text>
+
+              <!-- Zona Confinada Derecha 2h = 1.10 m -->
+              <rect x="500" y="70" width="110" height="120" fill="rgba(56, 189, 248, 0.12)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <g stroke="#38bdf8" stroke-width="2">
+                <line x1="515" y1="75" x2="515" y2="185"/>
+                <line x1="535" y1="75" x2="535" y2="185"/>
+                <line x1="555" y1="75" x2="555" y2="185"/>
+                <line x1="575" y1="75" x2="575" y2="185"/>
+                <line x1="595" y1="75" x2="595" y2="185"/>
+              </g>
+              <text x="555" y="60" fill="#38bdf8" font-size="9" font-weight="bold" text-anchor="middle">2h = 1.10 m (s ≤ 10 cm)</text>
+
+              <!-- Momentos Probables Mpr1 y Mpr2 -->
+              <path d="M 120,110 A 25,25 0 0,1 120,150" fill="none" stroke="#f59e0b" stroke-width="3"/>
+              <polygon points="120,150 113,142 127,144" fill="#f59e0b"/>
+              <text x="145" y="135" fill="#f59e0b" font-size="10" font-weight="bold">Mpr1</text>
+
+              <path d="M 600,110 A 25,25 0 0,0 600,150" fill="none" stroke="#f59e0b" stroke-width="3"/>
+              <polygon points="600,150 607,142 593,144" fill="#f59e0b"/>
+              <text x="570" y="135" fill="#f59e0b" font-size="10" font-weight="bold">Mpr2</text>
+
+              <!-- Cota Luz Libre Ln -->
+              <line x1="110" y1="215" x2="610" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="110" y1="208" x2="110" y2="222" stroke="#94a3b8" stroke-width="1.5"/>
+              <line x1="610" y1="208" x2="610" y2="222" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="360" y="230" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">Luz Libre Ln = 5.80 m</text>
+
+              <!-- Cortante de Diseño Ve -->
+              <text x="360" y="255" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">Ve = (Mpr1 + Mpr2) / Ln ± wu·Ln / 2 (Cortante por Capacidad C.21.5.4)</text>
+            </svg>
+          </div>
+
+          class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex92', 1)">
                 <span>Paso 1: Cálculo de los Momentos Probables a Flexión (\(M_{pr}\))</span>
                 <span class="step-arrow" id="ex92-arrow-1">▼</span>
@@ -1161,6 +1279,8 @@
                 </p>
               </div>
             </div>
+            </div>
+          </div>
           </div>
 
           <!-- ================================================================
@@ -1192,7 +1312,15 @@
             </div>
 
             <!-- Pasos Ejemplo 9.3 -->
-            <div class="example-step">
+            
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex93', 1)">
                 <span>Paso 1: Clasificación del Nudo y Factor de Confinamiento (\(\gamma\))</span>
                 <span class="step-arrow" id="ex93-arrow-1">▼</span>
@@ -1277,6 +1405,8 @@
                 </p>
               </div>
             </div>
+            </div>
+          </div>
           </div>
 
           <!-- ================================================================
@@ -1313,7 +1443,15 @@
             </div>
 
             <!-- Pasos Ejemplo 9.4 -->
-            <div class="example-step">
+            
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex94', 1)">
                 <span>Paso 1: Verificación del Criterio de Desplazamiento (C.21.9.6.2)</span>
                 <span class="step-arrow" id="ex94-arrow-1">▼</span>
@@ -1372,6 +1510,8 @@
                 </div>
               </div>
             </div>
+            </div>
+          </div>
           </div>
         
           <!-- ================================================================
@@ -1406,7 +1546,15 @@
             </div>
 
             <!-- Pasos Ejemplo 9.5 -->
-            <div class="example-step">
+            
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex95', 1)">
                 <span class="step-num">Paso 1</span>
                 <span class="step-title">Fuerza Cortante Sísmica de Diseño por Capacidad (\(V_e\))</span>
@@ -1596,6 +1744,8 @@
                 </div>
               </div>
             </div>
+            </div>
+          </div>
           </div>
 
 
@@ -1634,7 +1784,15 @@
             </div>
 
             <!-- Pasos Ejemplo 9.6 -->
-            <div class="example-step">
+            
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex96', 1)">
                 <span class="step-num">Paso 1</span>
                 <span class="step-title">Verificación de Confinamiento en las Cuatro Caras y Factor \(\gamma\) (NSR-10 C.21.7.4.1)</span>
@@ -1796,6 +1954,8 @@
                 </div>
               </div>
             </div>
+            </div>
+          </div>
           </div>
 
 
@@ -1831,7 +1991,15 @@
             </div>
 
             <!-- Pasos Ejemplo 9.7 -->
-            <div class="example-step">
+            
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+<div class="example-step">
               <button class="step-toggle-btn" onclick="toggleExampleStep('ex97', 1)">
                 <span class="step-num">Paso 1</span>
                 <span class="step-title">Relación de Aspecto y Criterios Mandatorios para Armadura Diagonal (NSR-10 C.21.9.7)</span>
@@ -2019,7 +2187,8 @@
             </div>
           </div>
         </div>
-
+            </div>
+          </div>
           </div>
       </section>
 

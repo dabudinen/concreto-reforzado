@@ -375,4 +375,33 @@
       });
     }
   };
+
+  /* --------------------------------------------------------------------------
+     8. CAJA MAESTRA DE SOLUCIÓN DE EJERCICIOS (MOSTRAR / OCULTAR SOLUCIÓN)
+     -------------------------------------------------------------------------- */
+  window.toggleSolutionBox = function (btn) {
+    if (!btn) return;
+    const box = btn.closest('.example-solution-box') || btn.parentElement;
+    if (!box) return;
+    const body = box.querySelector('.solution-body');
+    if (!body) return;
+    const isHidden = body.style.display === 'none' || window.getComputedStyle(body).display === 'none';
+    
+    if (isHidden) {
+      body.style.display = 'flex';
+      btn.classList.add('expanded');
+      const textSpan = btn.querySelector('.btn-text');
+      if (textSpan) textSpan.textContent = 'Ocultar Solución Completa';
+      const arrow = btn.querySelector('.arrow-icon');
+      if (arrow) arrow.textContent = '▲';
+    } else {
+      body.style.display = 'none';
+      btn.classList.remove('expanded');
+      const textSpan = btn.querySelector('.btn-text');
+      if (textSpan) textSpan.textContent = 'Mostrar Solución Detallada (Paso a Paso)';
+      const arrow = btn.querySelector('.arrow-icon');
+      if (arrow) arrow.textContent = '▼';
+    }
+  };
+
 })();

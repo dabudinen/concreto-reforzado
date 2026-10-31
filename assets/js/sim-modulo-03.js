@@ -648,10 +648,12 @@ function drawSim32Canvas(st) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
-  const cssW = canvas.clientWidth || 760;
-  const cssH = 380;
+  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : 760;
+  const cssW = Math.max(740, parentW);
+  const cssH = 430; // Altura generosa para evitar cualquier recorte inferior
   canvas.width = cssW * dpr;
   canvas.height = cssH * dpr;
+  canvas.style.height = `${cssH}px`;
   ctx.save();
   ctx.scale(dpr, dpr);
 
@@ -659,33 +661,37 @@ function drawSim32Canvas(st) {
   ctx.fillStyle = pal.bgCanvas;
   ctx.fillRect(0, 0, cssW, cssH);
 
-  const topY = 58;
-  const botY = cssH - 46;
+  const topY = 62;
+  const botY = cssH - 52;
   const drawH = botY - topY;
   const scaleY = drawH / st.h;
-  const maxFlangeDrawW = 290;
+  const maxFlangeDrawW = Math.min(320, cssW * 0.42);
   const scaleX = Math.min(scaleY * 0.95, maxFlangeDrawW / st.bef);
 
   const befPx = st.bef * scaleX;
-  const bwPx  = Math.max(36, st.bw * scaleX);
-  const hfPx  = st.hf * scaleY;
+  const bwPx  = Math.max(40, st.bw * scaleX);
+  const hfPx  = Math.max(16, st.hf * scaleY);
   const aPx   = Math.min(drawH, st.a_cm * scaleY);
 
-  const centerSecX = 210;
+  const centerSecX = Math.round(cssW * 0.27);
   const flangeLeftX = st.type === 'T' ? (centerSecX - befPx / 2) : (centerSecX - bwPx / 2);
   const webLeftX    = centerSecX - bwPx / 2;
+
+  // Panel derecho para cajas analíticas
+  const boxX = Math.round(cssW * 0.52);
+  const boxW = cssW - boxX - 20;
 
   // Títulos superiores
   ctx.fillStyle = pal.textMain;
   ctx.font = '700 12px Inter, sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText(`1. GEOMETRÍA SECCIÓN EN ${st.type} Y ZONA COMPRIMIDA`, centerSecX, 26);
-  ctx.fillText('2. DESCOMPOSICIÓN EN PAR DE LAS ALAS + PAR DEL ALMA', 555, 26);
+  ctx.fillText('2. DESCOMPOSICIÓN EN PAR DE LAS ALAS + PAR DEL ALMA', boxX + boxW / 2, 26);
 
   ctx.fillStyle = pal.textSub;
   ctx.font = '500 11px JetBrains Mono, monospace';
-  ctx.fillText(`bef = ${st.bef.toFixed(1)} cm | bw = ${st.bw.toFixed(0)} cm | hf = ${st.hf.toFixed(0)} cm`, centerSecX, 43);
-  ctx.fillText(st.isTrueTBeam ? `Caso 2: a (${st.a_cm.toFixed(1)} cm) > hf (${st.hf.toFixed(0)} cm)` : `Caso 1: a (${st.a_cm.toFixed(1)} cm) ≤ hf (${st.hf.toFixed(0)} cm)`, 555, 43);
+  ctx.fillText(`bef = ${st.bef.toFixed(1)} cm | bw = ${st.bw.toFixed(0)} cm | hf = ${st.hf.toFixed(0)} cm`, centerSecX, 44);
+  ctx.fillText(st.isTrueTBeam ? `Caso 2: a (${st.a_cm.toFixed(1)} cm) > hf (${st.hf.toFixed(0)} cm)` : `Caso 1: a (${st.a_cm.toFixed(1)} cm) ≤ hf (${st.hf.toFixed(0)} cm)`, boxX + boxW / 2, 44);
 
   // Dibujar contorno de la Viga T o L
   ctx.fillStyle = pal.concreteFill;
@@ -735,56 +741,52 @@ function drawSim32Canvas(st) {
   }
 
   // Barras de acero en tracción en el alma inferior
-  const ySteel = topY + st.d * scaleY;
+  const ySteel = topY + Math.min(drawH - 14, st.d * scaleY);
   ctx.fillStyle = pal.rebarTension;
   for (let i = 0; i < 4; i++) {
     const bx = (webLeftX + 10) + (i / 3) * (bwPx - 20);
     ctx.beginPath();
-    ctx.arc(bx, ySteel, 5, 0, Math.PI * 2);
+    ctx.arc(bx, ySteel, 5.5, 0, Math.PI * 2);
     ctx.fill();
   }
 
   // Cota de profundidad 'a' y 'hf'
   ctx.fillStyle = pal.whitneyStroke;
-  ctx.font = '700 10.5px JetBrains Mono, monospace';
+  ctx.font = '700 11px JetBrains Mono, monospace';
   ctx.textAlign = 'left';
   ctx.fillText(`a = ${st.a_cm.toFixed(2)} cm`, webLeftX + bwPx + 8, topY + Math.min(drawH - 20, aPx + 4));
-
-  // Panel derecho: Tarjetas gráficas de los Pares Internos
-  const boxX = 415;
-  const boxW = cssW - boxX - 24;
 
   // Caja 1: Par de las Alas (Patín)
   ctx.fillStyle = pal.panelBg;
   ctx.strokeStyle = pal.flangeStroke;
   ctx.lineWidth = 1.6;
-  ctx.fillRect(boxX, topY + 6, boxW, 118);
-  ctx.strokeRect(boxX, topY + 6, boxW, 118);
+  ctx.fillRect(boxX, topY + 4, boxW, 126);
+  ctx.strokeRect(boxX, topY + 4, boxW, 126);
 
   ctx.fillStyle = pal.flangeStroke;
   ctx.font = '700 11.5px Inter, sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('PAR 1: CONTRIBUCIÓN DE LAS ALAS SALIENTES (b_ef - b_w)', boxX + 14, topY + 28);
+  ctx.fillText('PAR 1: CONTRIBUCIÓN DE LAS ALAS SALIENTES (bef - bw)', boxX + 14, topY + 28);
 
   ctx.fillStyle = pal.textMain;
   ctx.font = '500 11px JetBrains Mono, monospace';
   if (st.isTrueTBeam) {
-    ctx.fillText(`• Área de acero para equilibrar alas: Asf = ${st.Asf_cm2.toFixed(2)} cm²`, boxX + 14, topY + 52);
-    ctx.fillText(`• Brazo de palanca del patín: z_f = d - hf/2 = ${(st.d - st.hf / 2).toFixed(1)} cm`, boxX + 14, topY + 74);
-    ctx.fillText(`• Momento resistente de las alas: Muf = ${st.Muf_kNm.toFixed(1)} kN·m`, boxX + 14, topY + 96);
+    ctx.fillText(`• Área de acero para equilibrar alas: Asf = ${st.Asf_cm2.toFixed(2)} cm²`, boxX + 14, topY + 54);
+    ctx.fillText(`• Brazo de palanca del patín: zf = d - hf/2 = ${(st.d - st.hf / 2).toFixed(1)} cm`, boxX + 14, topY + 78);
+    ctx.fillText(`• Momento resistente de las alas: Muf = ${st.Muf_kNm.toFixed(1)} kN·m`, boxX + 14, topY + 102);
   } else {
-    ctx.fillText(`• Como a ≤ hf, el bloque de compresión no sale de la loseta.`, boxX + 14, topY + 52);
-    ctx.fillText(`• Se diseña directamente como viga rectangular de ancho b = bef.`, boxX + 14, topY + 74);
-    ctx.fillText(`• Momento límite con el patín lleno: φMn(a=hf) = ${st.Muf_limit_kNm.toFixed(1)} kN·m`, boxX + 14, topY + 96);
+    ctx.fillText(`• Como a ≤ hf, el bloque de compresión no sale de la loseta.`, boxX + 14, topY + 54);
+    ctx.fillText(`• Se diseña directamente como viga rectangular de ancho b = bef.`, boxX + 14, topY + 78);
+    ctx.fillText(`• Momento límite con patín lleno: φMn(a=hf) = ${st.Muf_limit_kNm.toFixed(1)} kN·m`, boxX + 14, topY + 102);
   }
 
   // Caja 2: Par del Alma (Web)
-  const box2Y = topY + 142;
+  const box2Y = topY + 146;
   ctx.fillStyle = pal.panelBg;
   ctx.strokeStyle = pal.whitneyStroke;
   ctx.lineWidth = 1.6;
-  ctx.fillRect(boxX, box2Y, boxW, 130);
-  ctx.strokeRect(boxX, box2Y, boxW, 130);
+  ctx.fillRect(boxX, box2Y, boxW, 142);
+  ctx.strokeRect(boxX, box2Y, boxW, 142);
 
   ctx.fillStyle = pal.whitneyStroke;
   ctx.font = '700 11.5px Inter, sans-serif';
@@ -793,51 +795,15 @@ function drawSim32Canvas(st) {
   ctx.fillStyle = pal.textMain;
   ctx.font = '500 11px JetBrains Mono, monospace';
   ctx.fillText(`• Momento asignado al bloque principal: Muw = ${st.Muw_kNm.toFixed(1)} kN·m`, boxX + 14, box2Y + 48);
-  ctx.fillText(`• Acero equilibrante del bloque: Asw = ${st.Asw_cm2.toFixed(2)} cm² (a = ${st.a_cm.toFixed(2)} cm)`, boxX + 14, box2Y + 70);
+  ctx.fillText(`• Acero equilibrante del bloque: Asw = ${st.Asw_cm2.toFixed(2)} cm² (a = ${st.a_cm.toFixed(2)} cm)`, boxX + 14, box2Y + 72);
   ctx.fillStyle = pal.rebarTension;
   ctx.font = '700 11.5px JetBrains Mono, monospace';
-  ctx.fillText(`★ ACERO TOTAL REQUERIDO: As = Asf + Asw = ${st.As_req_cm2.toFixed(2)} cm²`, boxX + 14, box2Y + 96);
+  ctx.fillText(`★ ACERO TOTAL REQUERIDO: As = Asf + Asw = ${st.As_req_cm2.toFixed(2)} cm²`, boxX + 14, box2Y + 98);
   ctx.fillStyle = pal.textSub;
   ctx.font = '500 10.5px JetBrains Mono, monospace';
-  ctx.fillText(`Deformación neta de tracción: εt = ${st.et.toFixed(5)} (${st.et >= 0.005 ? 'Controlada por Tracción φ=0.90' : 'Zona de Transición'})`, boxX + 14, box2Y + 116);
+  ctx.fillText(`Deformación neta: εt = ${st.et.toFixed(5)} (${st.et >= 0.005 ? 'Controlada por Tracción φ=0.90' : 'Zona de Transición'})`, boxX + 14, box2Y + 122);
 
   ctx.restore();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Conectar eventos del Simulador 3.1
-  ['sim31-mu', 'sim31-bw', 'sim31-h', 'sim31-rec', 'sim31-dp', 'sim31-fc', 'sim31-fy', 'sim31-bar', 'sim31-bar-comp'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('input', updateSim31);
-      el.addEventListener('change', updateSim31);
-    }
-  });
 
-  // Conectar eventos del Simulador 3.2
-  ['sim32-mu', 'sim32-type', 'sim32-l', 'sim32-sw', 'sim32-hf', 'sim32-bw', 'sim32-h', 'sim32-fc', 'sim32-fy'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('input', updateSim32);
-      el.addEventListener('change', updateSim32);
-    }
-  });
-
-  updateSim31();
-  updateSim32();
-
-  window.addEventListener('resize', () => {
-    updateSim31();
-    updateSim32();
-  });
-
-  const themeBtn = document.getElementById('btn-theme');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      setTimeout(() => {
-        updateSim31();
-        updateSim32();
-      }, 60);
-    });
-  }
-});

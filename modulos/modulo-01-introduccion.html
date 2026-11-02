@@ -63,17 +63,19 @@
           <li><a href="#portada-mod01" class="toc-link active"><span class="toc-num">00</span> Portada y Bibliografía</a></li>
           <li><a href="#sec-concepto-diseno" class="toc-link"><span class="toc-num">1.1</span> ¿Qué es el Diseño Estructural?</a></li>
           <li><a href="#sec-consideraciones" class="toc-link"><span class="toc-num">1.2</span> Las 5 Consideraciones</a></li>
-          <li><a href="#sec-funcionalidad-economia" class="toc-link"><span class="toc-num">1.3</span> Funcionalidad y Economía</a></li>
-          <li><a href="#sec-adecuacion" class="toc-link"><span class="toc-num">1.4</span> Adecuación: $R$, $K$ y $\mu$</a></li>
-          <li><a href="#sec-durabilidad" class="toc-link"><span class="toc-num">1.5</span> Durabilidad y Protección</a></li>
-          <li><a href="#sec-estetica-congo" class="toc-link"><span class="toc-num">1.6</span> Estética: Caso Congo y Obras</a></li>
-          <li><a href="#sec-restricciones-milagros" class="toc-link"><span class="toc-num">1.7</span> Restricciones y los 2 Milagros</a></li>
+          <li><a href="#sec-funcionalidad" class="toc-link"><span class="toc-num">1.2.1</span> Funcionalidad del Sistema</a></li>
+          <li><a href="#sec-economia" class="toc-link"><span class="toc-num">1.2.2</span> Economía y Ciclo de Vida</a></li>
+          <li><a href="#sec-adecuacion" class="toc-link"><span class="toc-num">1.2.3</span> Adecuación: R, K, μ y Fatiga</a></li>
+          <li><a href="#sec-durabilidad" class="toc-link"><span class="toc-num">1.2.4</span> Durabilidad y Protección</a></li>
+          <li><a href="#sec-estetica-congo" class="toc-link"><span class="toc-num">1.2.5</span> Estética: Caso Congo y Obras</a></li>
+          <li><a href="#sec-restricciones" class="toc-link"><span class="toc-num">1.3</span> Las 4 Restricciones</a></li>
+          <li><a href="#sec-milagros" class="toc-link"><span class="toc-num">1.4</span> Unión Físico-Química (Milagros)</a></li>
           <li><a href="#sec-evolucion-normativa" class="toc-link"><span class="toc-num">2.1</span> Evolución Normativa</a></li>
           <li><a href="#sec-procedimiento-memorias" class="toc-link"><span class="toc-num">2.2</span> Procedimiento y Planos</a></li>
           <li><a href="#sec-probabilidad" class="toc-link"><span class="toc-num">3.1</span> Teoría Probabilística ($Q$ vs $S$)</a></li>
           <li><a href="#sec-asd-elastico" class="toc-link"><span class="toc-num">3.2</span> Filosofía ASD (Elástico)</a></li>
           <li><a href="#sec-lrfd-whitney" class="toc-link"><span class="toc-num">3.3</span> Filosofía LRFD y Whitney</a></li>
-          <li><a href="#sec-phi-ductilidad" class="toc-link"><span class="toc-num">3.4</span> Factor $\phi(\varepsilon_t)$ y Estados Límites</a></li>
+          <li><a href="#sec-estados-limites" class="toc-link"><span class="toc-num">3.4</span> Diseño por Estados Límites</a></li>
           <li><a href="#sec-desempeno-vision2000" class="toc-link"><span class="toc-num">3.5</span> Diseño por Desempeño (PBEE)</a></li>
           <li><a href="#sec-lab-interactivo" class="toc-link"><span class="toc-num">4.0</span> Laboratorio Matemático</a></li>
         </ul>
@@ -324,7 +326,7 @@
         </div>
       </section>
 
-      <!-- 1.2 SINOPSIS DE LAS 5 CONSIDERACIONES DEL DISEÑO ESTRUCTURAL -->
+      <!-- 1.2 LAS CINCO CONSIDERACIONES ESENCIALES DEL DISEÑO ESTRUCTURAL -->
       <section class="lesson-section" id="sec-consideraciones">
         <div class="section-header">
           <div>
@@ -339,7 +341,7 @@
           </div>
         </div>
 
-        <div class="grid-5">
+        <div class="grid-5" style="margin-bottom: 2rem;">
           <div class="tech-card accent-blue">
             <div class="tech-card-title"><span>01. Funcionalidad</span></div>
             <ul>
@@ -385,323 +387,400 @@
             </ul>
           </div>
         </div>
-      </section>
 
-      <!-- 1.3 FUNCIONALIDAD Y ECONOMÍA -->
-      <section class="lesson-section" id="sec-funcionalidad-economia">
-        <div class="section-header">
-          <div>
-            <div class="section-tag-row">
-              <span class="section-num-badge">1.3</span>
-              <span class="ref-badge">Servicio y Ciclo de Vida</span>
-            </div>
-            <h2 class="section-title">1. Funcionalidad del Sistema y 2. Economía (Ingenieros vs. Inversionistas)</h2>
+        <!-- 1.2.1 FUNCIONALIDAD -->
+        <div id="sec-funcionalidad" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-strong);">
+          <div class="section-tag-row" style="margin-bottom: 0.5rem;">
+            <span class="section-num-badge" style="background: var(--primary);">1.2.1</span>
+            <span class="ref-badge">Primera Consideración</span>
           </div>
-        </div>
-
-        <div class="grid-2" style="align-items: stretch;">
-          <!-- Funcionalidad -->
-          <div class="tech-card accent-blue" style="justify-content: space-between;">
-            <div>
-              <div class="tech-card-title">
-                <span>1. Funcionalidad: Forma Orientada a la Función</span>
-              </div>
-              <p style="margin-top: 0.5rem;">
+          <h3 style="font-size: 1.22rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.85rem;">
+            Funcionalidad del Sistema: Forma Orientada a la Función
+          </h3>
+          <div class="grid-2" style="align-items: start;">
+            <div class="tech-card accent-blue">
+              <div class="tech-card-title">Definición y Exigencias de Servicio</div>
+              <p>
                 Consiste en darle forma y dimensiones a un sistema estructural para que cumpla una función determinada con un grado de seguridad razonable y que, bajo <strong>condiciones normales de servicio</strong>, tenga un comportamiento adecuado libre de deflexiones o vibraciones excesivas.
               </p>
-              <div class="math-card">
+              <div class="math-card" style="margin-top: 0.75rem;">
                 <div class="math-card-header">
-                  <span class="math-card-title">Límite de Deflexión en Servicio</span>
+                  <span class="math-card-title">Límites de Deflexión en Servicio</span>
                   <span class="nsr-badge">NSR-10 Tabla C.9.5(b)</span>
                 </div>
                 <div class="math-formula">
                   $$\Delta_{L} \le \frac{l}{360} \quad ; \quad \Delta_{\text{total}} \le \frac{l}{480}$$
                 </div>
                 <div class="math-vars">
-                  <span>$l$: Luz del elemento ($\text{mm}$).</span>
-                  <span>$\lambda_\Delta = \dfrac{\xi}{1 + 50\rho'}$: Factor de deflexión diferida (`Ec. C.9-11`).</span>
+                  <span>$\Delta_L$: Deflexión inmediata bajo carga viva de servicio no mayorada.</span>
+                  <span>$\Delta_{\text{total}}$: Deflexión total admisible para entrepisos que soportan acabados o elementos no estructurales susceptibles de daño.</span>
+                  <span>$l$: Luz libre del elemento flexionado ($\text{mm}$).</span>
                 </div>
               </div>
             </div>
+
             <div class="figure-card">
               <div class="figure-img-wrap">
                 <img src="../assets/img/mod01/image14.jpg" alt="Torre de Comunicaciones de Montjuïc - Barcelona" />
               </div>
               <div class="figure-caption">
                 <strong>Torre de Comunicaciones de Montjuïc — Barcelona, España</strong>
-                La forma e inclinación del mástil responden simultáneamente a su función operativa y al flujo de cargas hacia la base.
+                La orientación e inclinación del fuste responden simultáneamente a su función técnica de transmisión y a la trayectoria de cargas gravitacionales hacia la base.
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Economía -->
-          <div class="tech-card accent-amber" style="justify-content: space-between;">
-            <div>
-              <div class="tech-card-title">
-                <span>2. Economía: Visión del Ingeniero vs. Visión del Inversionista</span>
-              </div>
-              <ul style="margin-top: 0.5rem;">
-                <li><strong>Visión del Ingeniero:</strong> Busca un adecuado o alto desempeño a lo largo de toda la vida útil de la edificación ($t \approx 50\text{ a }100\text{ años}$), minimizando los costos de reparación ante eventos sísmicos y el deterioro ambiental.</li>
-                <li><strong>Visión del Inversionista:</strong> Tiende a optar por desempeños mínimos normativos para disminuir costos iniciales ($C_0$) y maximizar el retorno financiero en menor tiempo.</li>
+        <!-- 1.2.2 ECONOMÍA -->
+        <div id="sec-economia" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-strong);">
+          <div class="section-tag-row" style="margin-bottom: 0.5rem;">
+            <span class="section-num-badge" style="background: var(--amber);">1.2.2</span>
+            <span class="ref-badge">Segunda Consideración</span>
+          </div>
+          <h3 style="font-size: 1.22rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.85rem;">
+            Economía: Visión del Ingeniero vs. Visión del Inversionista y Costo de Ciclo de Vida
+          </h3>
+          <div class="grid-2" style="align-items: start; margin-bottom: 1.25rem;">
+            <div class="tech-card accent-amber">
+              <div class="tech-card-title">Visión del Ingeniero vs. Visión del Inversionista</div>
+              <ul>
+                <li><strong>Visión del Inversionista (Corto Plazo):</strong> Tiende a priorizar la minimización del costo inicial de construcción ($C_0$), ajustándose a los requerimientos mínimos de la norma para acelerar el retorno financiero inmediato.</li>
+                <li><strong>Visión del Ingeniero (Largo Plazo):</strong> Concibe la estructura para un horizonte operativo de $50\text{ a }100\text{ años}$, incorporando resiliencia sísmica y durabilidad que prevengan costos recurrentes por reparaciones, deterioro ambiental y lucro cesante.</li>
               </ul>
-              <div class="math-card normative-orange">
-                <div class="math-card-header">
-                  <span class="math-card-title">Costo Esperado en el Ciclo de Vida</span>
-                  <span class="ref-badge">Ingeniería Basada en Desempeño</span>
-                </div>
-                <div class="math-formula">
-                  $$E[LCC] = C_0 + \sum_{k} P_{f,k} \, C_{\text{daño},k}$$
-                </div>
-                <div class="math-vars">
-                  <span>$C_0$: Costo inicial de construcción.</span>
-                  <span>$P_{f,k} \cdot C_{\text{daño},k}$: Pérdida esperada por daño y rehabilitación.</span>
-                </div>
-              </div>
+              <p style="margin-top: 0.4rem; font-size: 0.88rem; color: var(--text-secondary);">
+                La verdadera economía no se mide únicamente en el concreto o acero colocado al inicio, sino en la optimización del <strong>Costo Total en el Ciclo de Vida</strong>.
+              </p>
             </div>
+
             <div class="figure-card">
               <div class="figure-img-wrap">
                 <img src="../assets/img/mod01/image15.jpg" alt="Casa Batlló - Barcelona, España" />
               </div>
               <div class="figure-caption">
                 <strong>Casa Batlló — Barcelona, España (Antoni Gaudí)</strong>
-                Obra cuya inversión en calidad estructural y constructiva ha preservado su valor funcional y patrimonial por más de un siglo.
+                La inversión rigurosa en calidad material y concepción estructural ha preservado su valor funcional y patrimonial durante más de un siglo.
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- 1.4 ADECUACIÓN ESTRUCTURAL: RESISTENCIA, RIGIDEZ Y DUCTILIDAD -->
-      <section class="lesson-section" id="sec-adecuacion">
-        <div class="section-header">
-          <div>
-            <div class="section-tag-row">
-              <span class="section-num-badge">1.4</span>
-              <span class="ref-badge">Comportamiento Mecánico y Sísmico</span>
-            </div>
-            <h2 class="section-title">3. Adecuación Estructural: Resistencia, Rigidez, Ductilidad y Fatiga</h2>
-            <p class="section-lead">
-              Toda edificación debe cumplir requisitos que garanticen tres propiedades esenciales ante cualquier solicitación prevista, además de controlar la fatiga cuando existan cargas cíclicas repetitivas:
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-2" style="align-items: start;">
-          <div style="display: flex; flex-direction: column; gap: 0.9rem;">
-            <div class="math-card" style="margin: 0;">
-              <div class="math-card-header">
-                <span class="math-card-title">1. Resistencia ($R_d \ge R_u$)</span>
-                <span class="nsr-badge">NSR-10 C.9.1.1</span>
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
-                Capacidad de soportar las fuerzas internas ($M_u, V_u, P_u, T_u$) sin fallar ni fracturarse:
-              </p>
-              <div class="math-formula">
-                $$\phi M_n \ge M_u \quad ; \quad \phi V_n \ge V_u \quad ; \quad \phi P_n \ge P_u$$
-              </div>
-            </div>
-
-            <div class="math-card normative-orange" style="margin: 0;">
-              <div class="math-card-header">
-                <span class="math-card-title">2. Rigidez Lateral ($K$) y Control de Derivas</span>
-                <span class="nsr-badge">NSR-10 A.6.4.1</span>
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
-                Control de las deformaciones y desplazamientos horizontales relativos de entrepiso ($\Delta_i$) para proteger elementos no estructurales y limitar efectos $P-\Delta$:
-              </p>
-              <div class="math-formula">
-                $$\Delta_i = \sqrt{(\delta_{ix} - \delta_{i-1,x})^2 + (\delta_{iy} - \delta_{i-1,y})^2} \le 0.010 \, h_{pi}$$
-              </div>
-            </div>
-
-            <div class="math-card normative-emerald" style="margin: 0;">
-              <div class="math-card-header">
-                <span class="math-card-title">3. Ductilidad ($\mu$) y Disipación de Energía</span>
-                <span class="nsr-badge">NSR-10 A.3.3.3</span>
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
-                Capacidad de incursionar y disipar energía por histéresis en el rango inelástico antes del agotamiento:
-              </p>
-              <div class="math-formula">
-                $$\mu_{\Delta} = \frac{\Delta_u}{\Delta_y} \quad ; \quad E = \frac{F_s}{R} \quad \text{con } R = \phi_a \phi_p \phi_r R_0$$
-              </div>
-            </div>
-
-            <div class="tech-card accent-rose">
-              <div class="tech-card-title">
-                <span>4. Fatiga en Puentes y Estructuras Sometidas a Cargas Repetitivas</span>
-              </div>
-              <p>
-                Caso típico de los puentes vehiculares/ferroviarios y vigas carrileras sometidos a millones de ciclos de carga alta repetitiva, donde debe controlarse el rango de variación de esfuerzos $\Delta f_s$ para evitar fractura frágil por fatiga.
-              </p>
-            </div>
-          </div>
-
-          <div class="figure-card">
-            <div class="figure-img-wrap contain-img" style="height: 490px; background: #0F172A;">
-              <img src="../assets/img/mod01/image16.jpeg" alt="Templo Sagrada Familia - Barcelona, España" style="height: 465px; width: auto; object-fit: contain;" />
+          <!-- GRÁFICO ILUSTRATIVO DE COSTO EN EL CICLO DE VIDA (SVG) -->
+          <div class="figure-card" style="margin-top: 1.25rem;">
+            <div style="background: var(--bg-surface); padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); overflow-x: auto;">
+              <svg viewBox="0 0 740 330" width="100%" height="auto" style="display: block; font-family: Inter, sans-serif; min-width: 580px;" xmlns="http://www.w3.org/2000/svg">
+                <!-- Axes -->
+                <line x1="75" y1="260" x2="700" y2="260" stroke="#94A3B8" stroke-width="1.6"/>
+                <line x1="75" y1="30" x2="75" y2="260" stroke="#94A3B8" stroke-width="1.6"/>
+                
+                <!-- Y-Axis Ticks & Labels -->
+                <text x="65" y="264" fill="#64748B" font-size="11" font-weight="600" text-anchor="end">0%</text>
+                
+                <line x1="75" y1="205" x2="700" y2="205" stroke="rgba(148,163,184,0.2)" stroke-dasharray="4 4"/>
+                <text x="65" y="209" fill="#64748B" font-size="11" text-anchor="end">50%</text>
+                
+                <line x1="75" y1="150" x2="700" y2="150" stroke="rgba(148,163,184,0.3)" stroke-dasharray="4 4"/>
+                <text x="65" y="154" fill="#64748B" font-size="11" font-weight="700" text-anchor="end">100% (C₀)</text>
+                
+                <line x1="75" y1="95" x2="700" y2="95" stroke="rgba(148,163,184,0.2)" stroke-dasharray="4 4"/>
+                <text x="65" y="99" fill="#64748B" font-size="11" text-anchor="end">150%</text>
+                
+                <line x1="75" y1="40" x2="700" y2="40" stroke="rgba(148,163,184,0.2)" stroke-dasharray="4 4"/>
+                <text x="65" y="44" fill="#64748B" font-size="11" text-anchor="end">200%</text>
+                
+                <!-- X-Axis Ticks & Labels -->
+                <text x="75" y="282" fill="#64748B" font-size="11" font-weight="600" text-anchor="middle">Año 0</text>
+                <text x="200" y="282" fill="#64748B" font-size="11" text-anchor="middle">Año 10</text>
+                <text x="325" y="282" fill="#64748B" font-size="11" text-anchor="middle">Año 20</text>
+                <text x="450" y="282" fill="#64748B" font-size="11" text-anchor="middle">Año 30</text>
+                <text x="575" y="282" fill="#64748B" font-size="11" text-anchor="middle">Año 40</text>
+                <text x="700" y="282" fill="#64748B" font-size="11" font-weight="600" text-anchor="middle">Año 50</text>
+                
+                <!-- Event vertical dashed lines -->
+                <line x1="225" y1="45" x2="225" y2="260" stroke="#F59E0B" stroke-width="1.3" stroke-dasharray="3 3"/>
+                <text x="225" y="32" fill="#D97706" font-size="10" font-weight="700" text-anchor="middle">⚡ Sismo Frecuente (Año 12)</text>
+                
+                <line x1="425" y1="45" x2="425" y2="260" stroke="#F59E0B" stroke-width="1.3" stroke-dasharray="3 3"/>
+                <text x="425" y="32" fill="#D97706" font-size="10" font-weight="700" text-anchor="middle">⚡ Corrosión / Sismo Ocasional (Año 28)</text>
+                
+                <line x1="600" y1="45" x2="600" y2="260" stroke="#E11D48" stroke-width="1.3" stroke-dasharray="3 3"/>
+                <text x="600" y="32" fill="#E11D48" font-size="10" font-weight="700" text-anchor="middle">💥 Sismo Raro Tr=475a (Año 42)</text>
+                
+                <!-- Curve 1: Mínimo Costo Inicial (Inversionista) -->
+                <!-- Jumps: Year 12 (x=225, +25%), Year 28 (x=425, +35%), Year 42 (x=600, +45%) -->
+                <path d="M 75 150 L 225 150 L 225 122 L 425 122 L 425 86 L 600 86 L 600 48 L 700 48" fill="none" stroke="#E11D48" stroke-width="3.2"/>
+                <circle cx="225" cy="122" r="4.5" fill="#E11D48"/>
+                <circle cx="425" cy="86" r="4.5" fill="#E11D48"/>
+                <circle cx="600" cy="48" r="4.5" fill="#E11D48"/>
+                
+                <!-- Label Curve 1 -->
+                <rect x="495" y="54" width="195" height="24" rx="4" fill="#FFE4E6" stroke="#FDA4AF"/>
+                <text x="592" y="70" fill="#9F1239" font-size="10.5" font-weight="800" text-anchor="middle">Costo Total Acumulado: ~200%</text>
+                
+                <!-- Curve 2: Estrategia Resiliente y Duradera (Ingeniero) -->
+                <!-- Starts at 108% (y=141), slopes gently to 118% (y=130) -->
+                <path d="M 75 141 L 700 130" fill="none" stroke="#16A34A" stroke-width="3.2"/>
+                <circle cx="75" cy="141" r="4.5" fill="#16A34A"/>
+                <circle cx="700" cy="130" r="4.5" fill="#16A34A"/>
+                
+                <!-- Label Curve 2 -->
+                <rect x="495" y="138" width="195" height="24" rx="4" fill="#DCFCE7" stroke="#86EFAC"/>
+                <text x="592" y="154" fill="#14532D" font-size="10.5" font-weight="800" text-anchor="middle">Costo Total Acumulado: ~118%</text>
+                
+                <!-- Legend box -->
+                <rect x="85" y="48" width="265" height="52" rx="6" fill="rgba(255,255,255,0.92)" stroke="#CBD5E1"/>
+                <line x1="95" y1="63" x2="118" y2="63" stroke="#E11D48" stroke-width="3"/>
+                <text x="126" y="67" fill="#0F172A" font-size="11" font-weight="600">Mínimo Costo Inicial (Alta Vulnerabilidad)</text>
+                <line x1="95" y1="85" x2="118" y2="85" stroke="#16A34A" stroke-width="3"/>
+                <text x="126" y="89" fill="#0F172A" font-size="11" font-weight="600">Diseño Resiliente y Duradero (Ahorro Neto)</text>
+                
+                <!-- Axis Title -->
+                <text x="387" y="318" fill="#475569" font-size="12" font-weight="700" text-anchor="middle">Tiempo de Exposición Operativa (Años de Vida Útil)</text>
+              </svg>
             </div>
             <div class="figure-caption">
-              <strong>Templo Expiatorio de la Sagrada Familia — Barcelona, España</strong>
-              Adecuación geométrica y estructural para canalizar las fuerzas gravitacionales y laterales a través de columnas arborescentes e hiperboloides.
+              <strong>Figura 1.1: Costo Esperado en el Ciclo de Vida ($LCC$) — Comparación de Estrategias</strong>
+              Un leve incremento inicial ($+5\%$ a $+8\%$ en espesor de recubrimiento, concreto de baja relación agua/cemento y menor deriva admisible) elimina paradas operativas y costosas intervenciones estructurales tras sismos o corrosión ambiental, generando un ahorro neto superior al $40\%$ a lo largo de 50 años de vida útil.
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- 1.5 DURABILIDAD Y PROTECCIÓN AMBIENTAL -->
-      <section class="lesson-section" id="sec-durabilidad">
-        <div class="section-header">
-          <div>
-            <div class="section-tag-row">
-              <span class="section-num-badge">1.5</span>
-              <span class="ref-badge">Patologías y Vida Útil</span>
+        <!-- 1.2.3 ADECUACIÓN ESTRUCTURAL -->
+        <div id="sec-adecuacion" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-strong);">
+          <div class="section-tag-row" style="margin-bottom: 0.5rem;">
+            <span class="section-num-badge" style="background: var(--emerald);">1.2.3</span>
+            <span class="ref-badge">Tercera Consideración</span>
+          </div>
+          <h3 style="font-size: 1.22rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.85rem;">
+            Adecuación Estructural: Resistencia, Rigidez, Ductilidad y Fatiga
+          </h3>
+          <p class="section-lead" style="margin-bottom: 1.25rem;">
+            Toda edificación debe satisfacer cuatro requisitos mecánicos para garantizar seguridad frente al colapso, confort en servicio y estabilidad bajo solicitaciones dinámicas o repetitivas:
+          </p>
+
+          <div class="grid-2" style="align-items: start;">
+            <div style="display: flex; flex-direction: column; gap: 0.9rem;">
+              <div class="math-card" style="margin: 0;">
+                <div class="math-card-header">
+                  <span class="math-card-title">1. Resistencia ($R_n \ge R_u$)</span>
+                  <span class="nsr-badge">NSR-10 C.9.1.1</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                  Capacidad de las secciones de soportar las fuerzas internas mayoradas sin agotamiento resistente:
+                </p>
+                <div class="math-formula">
+                  $$\phi M_n \ge M_u \quad ; \quad \phi V_n \ge V_u \quad ; \quad \phi P_n \ge P_u$$
+                </div>
+              </div>
+
+              <div class="math-card normative-orange" style="margin: 0;">
+                <div class="math-card-header">
+                  <span class="math-card-title">2. Rigidez Lateral ($K$) y Control de Derivas</span>
+                  <span class="nsr-badge">NSR-10 A.6.4.1</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                  Control de desplazamientos laterales relativos de entrepiso para proteger acabados y limitar efectos $P-\Delta$:
+                </p>
+                <div class="math-formula">
+                  $$\Delta_i = \sqrt{(\delta_{ix} - \delta_{i-1,x})^2 + (\delta_{iy} - \delta_{i-1,y})^2} \le 0.010 \, h_{pi}$$
+                </div>
+              </div>
+
+              <div class="math-card normative-emerald" style="margin: 0;">
+                <div class="math-card-header">
+                  <span class="math-card-title">3. Ductilidad ($\mu$) y Disipación de Energía</span>
+                  <span class="nsr-badge">NSR-10 A.3.3.3</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                  Capacidad de incursionar y disipar energía por histéresis inelástica antes de alcanzar el colapso:
+                </p>
+                <div class="math-formula">
+                  $$\mu_{\Delta} = \frac{\Delta_u}{\Delta_y} \quad ; \quad E = \frac{F_s}{R} \quad \text{con } R = \phi_a \phi_p \phi_r R_0$$
+                </div>
+              </div>
+
+              <div class="math-card" style="margin: 0;">
+                <div class="math-card-header">
+                  <span class="math-card-title">4. Fatiga en Puentes y Cargas Repetitivas</span>
+                  <span class="nsr-badge">NSR-10 C.10.6 • CCP-14</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                  Control del rango de variación de esfuerzos para evitar la fractura frágil por fatiga ante ciclos repetitivos de carga viva:
+                </p>
+                <div class="math-formula">
+                  $$\Delta f_s \le f_{sr} = 161 - 0.33 f_{\min} \quad \text{[MPa]}$$
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                  Aplica a puentes vehiculares, ferroviarios y vigas carrileras sometidos a millones de ciclos de carga viva vehicular, donde la fatiga en el acero de refuerzo condiciona el diseño.
+                </p>
+              </div>
             </div>
-            <h2 class="section-title">4. Durabilidad y Protección Ambiental del Concreto Reforzado</h2>
-            <p class="section-lead">
-              Las estructuras deben protegerse frente a los mecanismos físicos y químicos de degradación ambiental para garantizar su desempeño a lo largo de toda su vida útil prevista.
-            </p>
+
+            <div class="figure-card">
+              <div class="figure-img-wrap contain-img" style="height: 520px; background: #0F172A;">
+                <img src="../assets/img/mod01/image16.jpeg" alt="Templo Sagrada Familia - Barcelona, España" style="height: 495px; width: auto; object-fit: contain;" />
+              </div>
+              <div class="figure-caption">
+                <strong>Templo Expiatorio de la Sagrada Familia — Barcelona, España</strong>
+                Adecuación geométrica y estructural para canalizar las fuerzas gravitacionales y laterales a través de columnas arborescentes e hiperboloides.
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="grid-3" style="margin-bottom: 1.5rem;">
-          <div class="tech-card accent-rose">
-            <div class="tech-card-title">
-              <span>Corrosión del Acero de Refuerzo</span>
+        <!-- 1.2.4 DURABILIDAD -->
+        <div id="sec-durabilidad" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-strong);">
+          <div class="section-tag-row" style="margin-bottom: 0.5rem;">
+            <span class="section-num-badge" style="background: var(--rose);">1.2.4</span>
+            <span class="ref-badge">Cuarta Consideración</span>
+          </div>
+          <h3 style="font-size: 1.22rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.85rem;">
+            Durabilidad y Protección Ambiental del Concreto Reforzado
+          </h3>
+          <p class="section-lead" style="margin-bottom: 1.25rem;">
+            Las estructuras deben protegerse frente a los mecanismos físicos y químicos de degradación ambiental para garantizar su desempeño a lo largo de toda su vida útil prevista:
+          </p>
+
+          <div class="grid-3" style="margin-bottom: 1.5rem;">
+            <div class="tech-card accent-rose">
+              <div class="tech-card-title">
+                <span>Corrosión del Acero de Refuerzo</span>
+              </div>
+              <p>
+                Cuando la carbonatación o los iones cloruro en ambientes costeros o industriales atraviesan el recubrimiento de concreto, se despasiva el acero. La oxidación genera productos férricos expansivos (de 2 a 6 veces su volumen original) que producen fisuración longitudinal, <strong>descascaramiento del recubrimiento</strong> (<em>spalling</em>) y pérdida crítica de la sección transversal efectiva $A_s$.
+              </p>
             </div>
-            <p>
-              Cuando la carbonatación o los iones cloruro en ambientes costeros o industriales atraviesan el recubrimiento de concreto, se despasiva el acero. La oxidación genera productos férricos expansivos (de 2 a 6 veces su volumen original) que producen fisuración longitudinal, <strong>descascaramiento del recubrimiento</strong> (<em>spalling</em>) y pérdida crítica de la sección transversal efectiva $A_s$.
-            </p>
+
+            <div class="tech-card accent-amber">
+              <div class="tech-card-title">
+                <span>Ataque Químico y Sulfatos</span>
+              </div>
+              <p>
+                La penetración de sulfatos presentes en suelos, aguas freáticas o ambientes industriales reacciona con la matriz cementante hidratada produciendo <strong>expansión interna, fisuración en patrón de malla y degradación progresiva de la pasta de cemento</strong>, lo que exige concretos densos de baja relación agua/material cementante ($a/mc$).
+              </p>
+            </div>
+
+            <div class="tech-card accent-emerald">
+              <div class="tech-card-title">
+                <span>Rehabilitación Estructural</span>
+              </div>
+              <p>
+                Frente a estructuras deterioradas por corrosión o ataque químico, la ingeniería de rehabilitación interviene mediante retiro del concreto contaminado, limpieza o restitución de barras, <strong>encamisado estructural de columnas y vigas</strong>, y aplicación de barreras de protección epóxica en pórticos industriales y edificaciones costeras.
+              </p>
+            </div>
           </div>
 
-          <div class="tech-card accent-amber">
-            <div class="tech-card-title">
-              <span>Ataque Químico y Sulfatos</span>
+          <!-- Galería de patologías y rehabilitación -->
+          <div class="grid-5">
+            <div class="figure-card">
+              <div class="figure-img-wrap"><img src="../assets/img/mod01/image17.jpg" alt="Descascaramiento y corrosión severa en armadura" /></div>
+              <div class="figure-caption"><strong>Pérdida de Recubrimiento</strong>Corrosión avanzada y exposición de estribos y barras longitudinales.</div>
             </div>
-            <p>
-              La penetración de sulfatos presentes en suelos, aguas freáticas o ambientes industriales reacciona con la matriz cementante hidratada produciendo <strong>expansión interna, fisuración en patrón de malla y degradación progresiva de la pasta de cemento</strong>, lo que exige concretos densos de baja relación agua/material cementante ($a/mc$).
-            </p>
-          </div>
-
-          <div class="tech-card accent-emerald">
-            <div class="tech-card-title">
-              <span>Rehabilitación Estructural</span>
+            <div class="figure-card">
+              <div class="figure-img-wrap"><img src="../assets/img/mod01/image18.jpg" alt="Deterioro por ataque químico y corrosión" /></div>
+              <div class="figure-caption"><strong>Degradación de Barras</strong>Deterioro superficial y pérdida de adherencia acero-concreto.</div>
             </div>
-            <p>
-              Frente a estructuras deterioradas por corrosión o ataque químico, la ingeniería de rehabilitación interviene mediante retiro del concreto contaminado, limpieza o restitución de barras, <strong>encamisado estructural de columnas y vigas</strong>, y aplicación de barreras de protección epóxica en pórticos industriales y edificaciones costeras.
-            </p>
+            <div class="figure-card">
+              <div class="figure-img-wrap"><img src="../assets/img/mod01/image20.jpg" alt="Pórtico industrial en proceso de rehabilitación" /></div>
+              <div class="figure-caption"><strong>Intervención de Pórticos</strong>Preparación de elementos deteriorados en estructura industrial.</div>
+            </div>
+            <div class="figure-card">
+              <div class="figure-img-wrap"><img src="../assets/img/mod01/image19.jpg" alt="Encamisado y protección epóxica de elementos" /></div>
+              <div class="figure-caption"><strong>Rehabilitación Estructural</strong>Encamisado de secciones y aplicación de recubrimiento epóxico.</div>
+            </div>
+            <div class="figure-card">
+              <div class="figure-img-wrap"><img src="../assets/img/mod01/image21.jpg" alt="Estructura rehabilitada con protección superficial" /></div>
+              <div class="figure-caption"><strong>Protección Final</strong>Restitución de la capacidad y aislamiento frente al ambiente agresivo.</div>
+            </div>
           </div>
         </div>
 
-        <!-- Galería de las 5 imágenes reales de patologías y rehabilitación del PPTX (Slides 11 y 12) -->
-        <div class="grid-5">
-          <div class="figure-card">
-            <div class="figure-img-wrap"><img src="../assets/img/mod01/image17.jpg" alt="Descascaramiento y corrosión severa en armadura" /></div>
-            <div class="figure-caption"><strong>Pérdida de Recubrimiento</strong>Corrosión avanzada y exposición de estribos y barras longitudinales.</div>
+        <!-- 1.2.5 ESTÉTICA -->
+        <div id="sec-estetica-congo" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-strong);">
+          <div class="section-tag-row" style="margin-bottom: 0.5rem;">
+            <span class="section-num-badge" style="background: var(--violet);">1.2.5</span>
+            <span class="ref-badge">Quinta Consideración &amp; Grandes Obras</span>
           </div>
-          <div class="figure-card">
-            <div class="figure-img-wrap"><img src="../assets/img/mod01/image18.jpg" alt="Deterioro por ataque químico y corrosión" /></div>
-            <div class="figure-caption"><strong>Degradación de Barras</strong>Deterioro superficial y pérdida de adherencia acero-concreto.</div>
-          </div>
-          <div class="figure-card">
-            <div class="figure-img-wrap"><img src="../assets/img/mod01/image20.jpg" alt="Pórtico industrial en proceso de rehabilitación" /></div>
-            <div class="figure-caption"><strong>Intervención de Pórticos</strong>Preparación de elementos deteriorados en estructura industrial.</div>
-          </div>
-          <div class="figure-card">
-            <div class="figure-img-wrap"><img src="../assets/img/mod01/image19.jpg" alt="Encamisado y protección epóxica de elementos" /></div>
-            <div class="figure-caption"><strong>Rehabilitación Estructural</strong>Encamisado de secciones y aplicación de recubrimiento epóxico.</div>
-          </div>
-          <div class="figure-card">
-            <div class="figure-img-wrap"><img src="../assets/img/mod01/image21.jpg" alt="Estructura rehabilitada con protección superficial" /></div>
-            <div class="figure-caption"><strong>Protección Final</strong>Restitución de la capacidad y aislamiento frente al ambiente agresivo.</div>
-          </div>
-        </div>
-      </section>
+          <h3 style="font-size: 1.22rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.85rem;">
+            Estética: Caso Escultura Homenaje al Congo y Grandes Obras Históricas
+          </h3>
+          <p class="section-lead" style="margin-bottom: 1.25rem;">
+            El ingeniero estructural y el artista o arquitecto actúan conjuntamente para materializar el impacto estético garantizando la estabilidad mecánica y la factibilidad constructiva:
+          </p>
 
-      <!-- 1.6 ESTÉTICA: CASO ESCULTURA HOMENAJE AL CONGO Y GRANDES OBRAS -->
-      <section class="lesson-section" id="sec-estetica-congo">
-        <div class="section-header">
-          <div>
-            <div class="section-tag-row">
-              <span class="section-num-badge">1.6</span>
-              <span class="ref-badge">Caso Real de Ingeniería &amp; Grandes Obras</span>
+          <div class="grid-2" style="margin-bottom: 1.5rem;">
+            <div class="tech-card accent-violet">
+              <div class="tech-card-title">
+                <span>Especificaciones del Proyecto: Escultura Homenaje al Congo (Escultor Gino Márquez)</span>
+              </div>
+              <p>
+                Análisis estructural integral para una escultura monumental de gran esbeltez y altura con fuerte restricción geométrica en su apoyo sobre el pedestal:
+              </p>
+              <ul>
+                <li><strong>Altura total del conjunto:</strong> $8.00\text{ m}$ (Cuerpo escultórico superior $4.00\text{ m}$ + Base/Pedestal $3.00\text{ m}$ + Cimentación $1.00\text{ m}$).</li>
+                <li><strong>Sección crítica de apoyo en el pedestal:</strong> Sección reducida de $0.60 \times 0.50\text{ m}$ ($A_g = 0.30\text{ m}^2$).</li>
+                <li><strong>Peso de la Estructura:</strong> El peso aproximado de la estructura es de <strong>$27\text{ Toneladas}$</strong>.</li>
+                <li><strong>Concreto Recomendado:</strong> Para garantizar la resistencia seccional y la protección frente a agentes agresivos se recomienda especificar un concreto de <strong>$f'_c = 35\text{ MPa}$</strong> ($5000\text{ psi}$).</li>
+                <li><strong>Cimentación en Concreto Reforzado:</strong> Bloque de cimentación de $1.00\text{ m}$ de peralte, indispensable para garantizar la estabilidad frente al volcamiento y deslizamiento inducido por el viento y el sismo.</li>
+                <li><strong>Cuerpo Escultórico en Aluminio + Estructura Interna de Hierro:</strong> Peso aproximado de <strong>$9\text{ Toneladas}$</strong>. Al concebir el cuerpo de la obra con láminas de aluminio fijadas a una estructura interna de hierro en lugar de vaciarla en concreto macizo, se reduce a la tercera parte ($1/3$) el peso elevado, disminuyendo drásticamente las fuerzas gravitacionales e inerciales sísmicas sobre el pedestal y la cimentación.</li>
+              </ul>
             </div>
-            <h2 class="section-title">5. Estética: Caso Escultura Homenaje al Congo y Grandes Obras Históricas</h2>
-            <p class="section-lead">
-              El ingeniero estructural y el artista o arquitecto actúan como intérpretes de las necesidades del proyecto para conjugar impacto estético y estabilidad mecánica.
-            </p>
-          </div>
-        </div>
 
-        <div class="grid-2" style="margin-bottom: 1.5rem;">
-          <div class="tech-card accent-violet">
-            <div class="tech-card-title">
-              <span>Especificaciones del Proyecto: Escultura Homenaje al Congo (Escultor Gino Márquez)</span>
+            <div class="grid-2">
+              <div class="figure-card">
+                <div class="figure-img-wrap contain-img" style="height: 290px;">
+                  <img src="../assets/img/mod01/image22.jpg" alt="Modelo y geometría Escultura Homenaje al Congo" style="height: 270px;" />
+                </div>
+                <div class="figure-caption">
+                  <strong>Concepción Escultórica — Homenaje al Congo</strong>
+                  Geometría de $8.00\text{ m}$ de altura total y transición hacia el pedestal.
+                </div>
+              </div>
+              <div class="figure-card">
+                <div class="figure-img-wrap contain-img" style="height: 290px;">
+                  <img src="../assets/img/mod01/image23.jpg" alt="Esquema estructural y cotas Homenaje al Congo" style="height: 270px;" />
+                </div>
+                <div class="figure-caption">
+                  <strong>Esquema Dimensional y Sección de Apoyo</strong>
+                  Cuerpo ($4.0\text{ m}$), pedestal ($3.0\text{ m}$) y sección crítica de apoyo ($0.60 \times 0.50\text{ m}$).
+                </div>
+              </div>
             </div>
-            <p>
-              Análisis comparativo de alternativas estructurales para una escultura monumental de gran altura con fuerte restricción geométrica en su apoyo basal:
-            </p>
-            <ul>
-              <li><strong>Altura total:</strong> $8.00\text{ m}$ (Cuerpo escultórico $4.00\text{ m}$ + Base/Pedestal $3.00\text{ m}$ + Cimentación $1.00\text{ m}$).</li>
-              <li><strong>Apoyo crítico en la base:</strong> Sección reducida de $0.60 \times 0.50\text{ m}$ ($A_g = 0.30\text{ m}^2$).</li>
-              <li><strong>Opción 1 — Concreto $5000\text{ psi}$ ($35\text{ MPa}$):</strong> Peso aproximado de <strong>$27\text{ Toneladas}$</strong>. Genera una elevada masa sísmica y altos momentos de vuelco sobre la garganta basal reducida.</li>
-              <li><strong>Opción 2 — Aluminio + Estructura interna de Hierro:</strong> Peso aproximado de <strong>$9\text{ Toneladas}$</strong>. Reduce a la tercera parte ($1/3$) las fuerzas gravitacionales e inerciales sísmicas sobre el pedestal y la cimentación.</li>
-            </ul>
           </div>
 
           <div class="grid-2">
             <div class="figure-card">
-              <div class="figure-img-wrap contain-img" style="height: 290px;">
-                <img src="../assets/img/mod01/image22.jpg" alt="Modelo y geometría Escultura Homenaje al Congo" style="height: 270px;" />
+              <div class="figure-img-wrap">
+                <img src="../assets/img/mod01/image24.jpeg" alt="Catedral Santa María del Fiore - Florencia, Italia" />
               </div>
               <div class="figure-caption">
-                <strong>Concepción Escultórica — Homenaje al Congo</strong>
-                Geometría de $8.00\text{ m}$ de altura total y transición hacia el pedestal.
+                <strong>Catedral de Santa María del Fiore — Florencia, Italia</strong>
+                Cúpula octogonal de mampostería autoportante diseñada por Filippo Brunelleschi.
               </div>
             </div>
             <div class="figure-card">
-              <div class="figure-img-wrap contain-img" style="height: 290px;">
-                <img src="../assets/img/mod01/image23.jpg" alt="Esquema estructural y cotas Homenaje al Congo" style="height: 270px;" />
+              <div class="figure-img-wrap">
+                <img src="../assets/img/mod01/image25.jpg" alt="Palacio de Cristal del Retiro - Madrid, España" />
               </div>
               <div class="figure-caption">
-                <strong>Esquema Dimensional y Sección Basal</strong>
-                Cuerpo ($4.0\text{ m}$), pedestal ($3.0\text{ m}$) y garganta crítica de apoyo ($0.60 \times 0.50\text{ m}$).
+                <strong>Palacio de Cristal del Retiro — Madrid, España</strong>
+                Esbeltez y ligereza estructural en hierro forjado y cristal.
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="figure-card">
-            <div class="figure-img-wrap">
-              <img src="../assets/img/mod01/image24.jpeg" alt="Catedral Santa María del Fiore - Florencia, Italia" />
-            </div>
-            <div class="figure-caption">
-              <strong>Catedral de Santa María del Fiore — Florencia, Italia</strong>
-              Cúpula octogonal de mampostería autoportante diseñada por Filippo Brunelleschi.
-            </div>
-          </div>
-          <div class="figure-card">
-            <div class="figure-img-wrap">
-              <img src="../assets/img/mod01/image25.jpg" alt="Palacio de Cristal del Retiro - Madrid, España" />
-            </div>
-            <div class="figure-caption">
-              <strong>Palacio de Cristal del Retiro — Madrid, España</strong>
-              Esbeltez y ligereza estructural en hierro forjado y cristal.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 1.7 RESTRICCIONES Y LOS DOS MILAGROS DEL CONCRETO REFORZADO -->
-      <section class="lesson-section" id="sec-restricciones-milagros">
+      <!-- 1.3 RESTRICCIONES DEL DISEÑO ESTRUCTURAL -->
+      <section class="lesson-section" id="sec-restricciones">
         <div class="section-header">
           <div>
             <div class="section-tag-row">
-              <span class="section-num-badge">1.7</span>
-              <span class="ref-badge">Física y Química del Material Compuesto</span>
+              <span class="section-num-badge">1.3</span>
+              <span class="ref-badge">Condicionantes de Proyecto</span>
             </div>
-            <h2 class="section-title">Restricciones del Diseño y la Unión Físico-Química del Concreto Reforzado</h2>
+            <h2 class="section-title">Las Cuatro Grandes Restricciones del Diseño Estructural</h2>
+            <p class="section-lead">
+              La labor del ingeniero estructural consiste en sintetizar soluciones seguras, funcionales y económicas superando cuatro restricciones universales del entorno constructivo:
+            </p>
           </div>
         </div>
 
@@ -714,15 +793,15 @@
             <div class="grid-2" style="margin-top: 0.4rem;">
               <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
                 <strong style="color: var(--primary);">1. Fondos</strong>
-                <p style="font-size: 0.84rem;">Presupuesto limitado del proyecto.</p>
+                <p style="font-size: 0.84rem;">Presupuesto y límites de inversión del proyecto.</p>
               </div>
               <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
                 <strong style="color: var(--amber);">2. Materiales</strong>
-                <p style="font-size: 0.84rem;">Limitaciones físicas y mecánicas.</p>
+                <p style="font-size: 0.84rem;">Capacidad y limitaciones físicas de los materiales.</p>
               </div>
               <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
                 <strong style="color: var(--rose);">3. Cargas</strong>
-                <p style="font-size: 0.84rem;">Solicitaciones gravitacionales y ambientales.</p>
+                <p style="font-size: 0.84rem;">Solicitaciones gravitacionales, eólicas y sísmicas.</p>
               </div>
               <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
                 <strong style="color: var(--emerald);">4. Sitio</strong>
@@ -742,15 +821,30 @@
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- LOS DOS MILAGROS DEL CONCRETO REFORZADO -->
+      <!-- 1.4 LA UNIÓN FÍSICO-QUÍMICA DEL CONCRETO REFORZADO -->
+      <section class="lesson-section" id="sec-milagros">
+        <div class="section-header">
+          <div>
+            <div class="section-tag-row">
+              <span class="section-num-badge">1.4</span>
+              <span class="ref-badge">Ciencia de los Materiales Compuestos</span>
+            </div>
+            <h2 class="section-title">La Unión Físico-Química del Concreto Reforzado: Los Dos “Milagros”</h2>
+            <p class="section-lead">
+              ¿Por qué unir concreto y acero? La complementariedad mecánica se potencia a través de dos compatibilidades físico-químicas extraordinarias que hacen viable al concreto reforzado como el material estructural por excelencia.
+            </p>
+          </div>
+        </div>
+
         <div style="background: var(--bg-subtle); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); padding: 1.75rem;">
           <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.65rem;">
-            ¿Por qué unir Concreto y Acero? — Los Dos “Milagros” Físico-Químicos de la Unión
+            Sinergia Mecánica: Compresión Económica y Tracción Dúctil
           </h3>
           <p style="color: var(--text-secondary); margin-bottom: 1.15rem;">
-            <strong>1. Debilidad intrínseca del concreto a tracción:</strong> El concreto es una roca artificial que resiste excelente compresión ($f'_c \approx 21\text{ a }56\text{ MPa}$), pero su resistencia a tracción es despreciable ($f_t \approx 0.10 f'_c \approx 2.0\text{ a }4.0\text{ MPa}$).<br/>
-            <strong>2. Papel estructural del acero y paradoja económica:</strong> El acero de refuerzo posee una alta resistencia a tracción y compresión ($f_y = 420\text{ MPa}$, unas 150 veces la tracción del concreto) y aporta <strong>ductilidad seccional</strong> (deformación plástica como advertencia visual antes del colapso). La unión aprovecha la compresión masiva económica del concreto y la tracción dúctil del acero.
+            <strong>1. Debilidad intrínseca del concreto a tracción:</strong> El concreto resiste excelente compresión ($f'_c \approx 21\text{ a }56\text{ MPa}$), pero su resistencia a tracción directa es muy reducida ($f_t \approx 0.10 f'_c \approx 2.0\text{ a }4.0\text{ MPa}$).<br/>
+            <strong>2. Aporte del acero y ductilidad:</strong> El acero de refuerzo resiste elevadas fuerzas de tracción ($f_y = 420\text{ MPa}$, unas 150 veces la tracción del concreto) y confiere <strong>ductilidad seccional</strong>, permitiendo deformaciones plásticas visibles que avisan antes del agotamiento.
           </p>
 
           <div class="math-card">
@@ -766,10 +860,10 @@
           <div class="grid-2" style="margin-top: 1.25rem;">
             <div class="tech-card accent-blue" style="background: var(--bg-surface);">
               <div class="tech-card-title">
-                <span>Milagro 1: Coeficientes de Dilatación Térmica Similares ($\alpha_c \approx \alpha_s$)</span>
+                <span>Milagro 1: Coeficientes de Dilatación Térmica Prácticamente Idénticos</span>
               </div>
               <p>
-                Ante cambios de temperatura día/noche, ambos materiales se dilatan y contraen prácticamente al unísono, evitando tensiones tangenciales parásitas que romperían la adherencia interfacial (<em>interlock</em> químico-mecánico):
+                Ante oscilaciones térmicas día/noche o estacionales, ambos materiales se dilatan y contraen a la misma tasa, evitando tensiones tangenciales parásitas que degradarían la adherencia interfacial (<em>interlock</em> mecánico y químico):
               </p>
               <div class="math-card" style="margin: 0.4rem 0;">
                 <div class="math-formula">
@@ -780,10 +874,10 @@
 
             <div class="tech-card accent-emerald" style="background: var(--bg-surface);">
               <div class="tech-card-title">
-                <span>Milagro 2: Protección Galvánica por Alta Alcalinidad ($\text{pH} \approx 13$)</span>
+                <span>Milagro 2: Pasivación Alcalina y Protección Galvánica ($	ext{pH} \approx 13$)</span>
               </div>
               <p>
-                La pasta de cemento hidratada libera hidróxido de calcio $\text{[Ca(OH)}_2\text{]}$, creando un entorno altamente alcalino. Este medio genera una micropelícula de óxido férrico gamma ($\gamma\text{-Fe}_2\text{O}_3$, <em>capa pasivante</em>) que <strong>blinda químicamente</strong> las barras contra la corrosión mientras no haya carbonatación:
+                La hidratación del cemento libera hidróxido de calcio $\text{[Ca(OH)}_2\text{]}$, creando un ambiente de alta alcalinidad ($\text{pH} \approx 12.5 - 13.5$). Este medio genera una película microscópica de óxido férrico gamma ($\gamma\text{-Fe}_2\text{O}_3$, <em>capa pasivante</em>) que <strong>blinda químicamente</strong> el acero contra la corrosión mientras el recubrimiento no se carbonate:
               </p>
               <div class="math-card normative-emerald" style="margin: 0.4rem 0;">
                 <div class="math-formula">
@@ -1034,26 +1128,15 @@
             </div>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <div class="figure-card">
-              <div class="figure-img-wrap contain-img" style="height: 235px;">
-                <img src="../assets/img/mod01/image34.png" alt="Curvas de frecuencia probabilística Q vs S" style="height: 220px;" />
+          <div class="figure-card" style="margin: 0;">
+              <div class="figure-img-wrap contain-img" style="height: 380px; background: #FFFFFF;">
+                <img src="../assets/img/mod01/image34_fused.png" alt="Curvas probabilísticas Qd y Sd, margen de seguridad M e índice beta" style="height: 360px; width: auto; object-fit: contain;" />
               </div>
               <div class="figure-caption">
-                <strong>Distribuciones de Frecuencia de Cargas ($Q$) y Resistencias ($S$)</strong>
-                El área bajo la curva representa la probabilidad; los factores separan $Q_d$ y $S_d$.
+                <strong>Figura 1.2: Distribución Probabilística de Solicitación ($Q$), Resistencia ($S$) y Margen de Seguridad ($M = S - Q$)</strong>
+                A la izquierda, las curvas de densidad muestran cómo los factores $\gamma > 1.0$ y $\phi < 1.0$ separan la solicitación de diseño $Q_d$ y la resistencia $S_d$ para minimizar la región de interferencia (falla). A la derecha, la distribución del margen de seguridad $M = S - Q$ define el índice de confiabilidad $\beta = \mu_M / \sigma_M$ y la probabilidad de falla $P_f = \Phi(-\beta)$.
               </div>
             </div>
-            <div class="figure-card">
-              <div class="figure-img-wrap contain-img" style="height: 210px;">
-                <img src="../assets/img/mod01/image33.png" alt="Distribución del margen de seguridad M = S - Q" style="height: 195px;" />
-              </div>
-              <div class="figure-caption">
-                <strong>Distribución del Margen de Seguridad $M = S - Q$</strong>
-                El área sombreada ($S - Q < 0$) representa la probabilidad de falla $P_f$.
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1143,7 +1226,7 @@
             </div>
             <h2 class="section-title">Diseño por Resistencia Última (LRFD) y Bloque de Whitney</h2>
             <p class="section-lead">
-              Basado en el equilibrio estático y la compatibilidad de deformaciones en el estado límite de agotamiento resistente ($\varepsilon_{cu} = 0.003$).
+              Fundamentado en el equilibrio estático seccional, la compatibilidad cinemática de deformaciones y la consideración de la resistencia última de los materiales bajo combinaciones de carga mayoradas.
             </p>
           </div>
         </div>
@@ -1160,92 +1243,126 @@
             <div class="math-formula" style="font-size: 0.98rem;">
               $$\begin{aligned}
               U &= 1.4 D \\
-              U &= 1.2 D + 1.6 L + 0.5 (L_r \text{ ó } G) \\
+              U &= 1.2 D + 1.6 L + 0.5 (L_r \text{ o } G) \\
               U &= 1.2 D + 1.0 L \pm 1.0 E \\
               U &= 0.9 D \pm 1.0 E
               \end{aligned}$$
             </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.35rem;">
+              Los factores $\gamma_i > 1.0$ reflejan la incertidumbre estadística en la magnitud de las cargas muertas ($D$), vivas ($L$) y sísmicas ($E$).
+            </p>
           </div>
 
-          <div class="figure-card">
-            <div class="figure-img-wrap contain-img" style="height: 295px;">
-              <img src="../assets/img/mod01/image38.png" alt="Parábola inelástica real vs Bloque Rectangular Equivalente de Whitney" style="height: 275px;" />
+          <!-- Factor de Reducción de Resistencia Phi integrado en LRFD -->
+          <div class="math-card normative-emerald">
+            <div class="math-card-header">
+              <span class="math-card-title" style="text-transform: none !important;">Factor de Reducción de Resistencia $\phi(\varepsilon_t)$ y Ductilidad</span>
+              <span class="nsr-badge">NSR-10 C.9.3.2 • C.10.3.3–C.10.3.5</span>
             </div>
-            <div class="figure-caption">
-              <strong>$\varepsilon_{cu} = 0.003$ • Parábola Real vs. Bloque Rectangular de Whitney ($0.85 f'_c$)</strong>
-              Sustitución de la curva parabólica real por un bloque rectangular estáticamente equivalente.
+            <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.4rem;">
+              En función de la deformación unitaria neta de tracción $\varepsilon_t = 0.003 \left(\dfrac{d_t - c}{c}\right)$ en la capa más alejada de acero:
+            </p>
+            <div class="math-formula" style="font-size: 0.88rem;">
+              $$\phi = \begin{cases} 
+              0.65 \text{ (estribos)} \;\big/\; 0.75 \text{ (espiral)} & \text{si } \varepsilon_t \le 0.0020 \quad \text{[Compresión (Frágil)]} \\[5pt] 
+              0.65 + (\varepsilon_t - 0.002)\dfrac{250}{3} & \text{si } 0.0020 < \varepsilon_t < 0.0050 \quad \text{[Zona Transición]} \\[5pt] 
+              0.90 & \text{si } \varepsilon_t \ge 0.0050 \quad \text{[Tracción (Dúctil)]} 
+              \end{cases}$$
             </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.35rem;">
+              Premia con $\phi = 0.90$ las fallas dúctiles gobernadas por fluencia del acero (que avisan con fisuración y deflexión previa), penalizando con $\phi = 0.65$ las fallas frágiles gobernadas por compresión explosiva del concreto.
+            </p>
           </div>
         </div>
 
-        <!-- Deducción Matemática del Bloque de Whitney -->
-        <div class="math-card normative-emerald">
-          <div class="math-card-header">
-            <span class="math-card-title">Hipótesis de Deformación Plana y Simplificación de Charles S. Whitney</span>
-            <span class="nsr-badge">NSR-10 C.10.2.2 • C.10.2.3 • C.10.2.7.3</span>
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <!-- Hipótesis de Whitney y Ecuaciones Clave -->
+          <div class="tech-card accent-blue">
+            <div class="tech-card-title">
+              <span>Hipótesis Fundamentales de la Teoría de Charles S. Whitney (1937)</span>
+            </div>
+            <ul style="font-size: 0.88rem;">
+              <li><strong>1. Secciones Planas (Bernoulli-Navier):</strong> Las deformaciones unitarias varían linealmente con la distancia al eje neutro $c$ (NSR-10 C.10.2.2).</li>
+              <li><strong>2. Deformación Máxima del Concreto:</strong> Se asume agotamiento por compresión cuando la fibra extrema alcanza $\varepsilon_{cu} = 0.003$ (C.10.2.3).</li>
+              <li><strong>3. Tracción del Concreto Despreciada:</strong> Se considera nula la resistencia a tracción del concreto en flexión (C.10.2.5).</li>
+              <li><strong>4. Relación Elasto-Plástica del Acero:</strong> Para $\varepsilon_s < \varepsilon_y$, $f_s = E_s \varepsilon_s$; para $\varepsilon_s \ge \varepsilon_y$, $f_s = f_y$ (C.10.2.4).</li>
+              <li><strong>5. Bloque Rectangular Equivalente:</strong> La distribución parabólica real se sustituye por un bloque rectangular de intensidad uniforme $0.85 f'_c$ que actúa hasta una profundidad $a = \beta_1 c$ (C.10.2.7).</li>
+            </ul>
+
+            <div class="math-card" style="margin-top: 0.65rem;">
+              <div class="math-card-header">
+                <span class="math-card-title">Ecuaciones del Bloque y Parámetro $\beta_1$</span>
+                <span class="nsr-badge">NSR-10 C.10.2.7.3</span>
+              </div>
+              <div class="math-formula">
+                $$a = \beta_1 c \quad \text{con} \quad \beta_1 = 0.85 - \frac{0.05\,(f'_c - 28)}{7} \quad (0.65 \le \beta_1 \le 0.85)$$
+              </div>
+              <div class="math-formula">
+                $$M_n = A_s f_y \left(d - \frac{a}{2}\right) \quad \implies \quad \phi M_n \ge M_u$$
+              </div>
+              <div class="math-vars">
+                <span>$c$: Profundidad del eje neutro real medido desde la fibra comprimida.</span>
+                <span>$a = \beta_1 c$: Altura del bloque rectangular equivalente de compresión.</span>
+                <span>$d - a/2$: Brazo de palanca interno del par de fuerzas resistentes.</span>
+              </div>
+            </div>
           </div>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-            Las deformaciones son proporcionales a la distancia al eje neutro $c$ con deformación máxima en el concreto $\varepsilon_{cu} = 0.003$. La simplificación de Whitney sustituye la parábola inelástica por un bloque rectangular de ancho $0.85 f'_c$ y altura $a = \beta_1 c$:
-          </p>
-          <div class="math-formula">
-            $$a = \beta_1 c \quad \text{con} \quad \beta_1 = \begin{cases} 0.85 & \text{para } 17\text{ MPa} \le f'_c \le 28\text{ MPa} \\[6pt] 0.85 - \dfrac{0.05\,(f'_c - 28)}{7} \ge 0.65 & \text{para } f'_c > 28\text{ MPa} \end{cases}$$
-          </div>
-          <div class="math-formula">
-            $$C_c = T \implies 0.85 f'_c a b = A_s f_y \implies a = \frac{A_s f_y}{0.85 f'_c b} \quad ; \quad M_n = A_s f_y \left(d - \frac{a}{2}\right)$$
-          </div>
-          <div class="math-vars">
-            <span>$c$: Profundidad del eje neutro verdadero ($\text{mm}$).</span>
-            <span>$a = \beta_1 c$: Profundidad del bloque de Whitney ($\text{mm}$).</span>
-            <span>$\varepsilon_s = 0.003\left(\dfrac{d-c}{c}\right)$: Compatibilidad de deformaciones (`C.10.2.2`).</span>
+
+          <div class="figure-card">
+            <div class="figure-img-wrap contain-img" style="height: 380px;">
+              <img src="../assets/img/mod01/image38.png" alt="Parábola inelástica real vs Bloque Rectangular Equivalente de Whitney" style="height: 360px;" />
+            </div>
+            <div class="figure-caption">
+              <strong>$\varepsilon_{cu} = 0.003$ • Parábola Real Inelástica vs. Bloque Rectangular de Whitney ($0.85 f'_c$)</strong>
+              Equivalencia estática exacta de la resultante de compresión $C_c = 0.85 f'_c a b$ y su centroide a $a/2$ de la fibra superior.
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 3.4 FACTOR PHI EN FUNCIÓN DE LA DUCTILIDAD Y DISEÑO POR ESTADOS LÍMITES -->
-      <section class="lesson-section" id="sec-phi-ductilidad">
+      <!-- 3.4 DISEÑO POR ESTADOS LÍMITES -->
+      <section class="lesson-section" id="sec-estados-limites">
         <div class="section-header">
           <div>
             <div class="section-tag-row">
               <span class="section-num-badge">3.4</span>
-              <span class="ref-badge">Ductilidad y Estados Límites</span>
+              <span class="ref-badge">Filosofía Global</span>
             </div>
-            <h2 class="section-title">Factor de Reducción de Resistencia $\phi(\varepsilon_t)$ y Diseño por Estados Límites</h2>
+            <h2 class="section-title">Diseño por Estados Límites: Resistencia vs. Servicio</h2>
+            <p class="section-lead">
+              Un estado límite define la frontera más allá de la cual una estructura deja de satisfacer los requisitos de seguridad estructural o de confort funcional para los cuales fue proyectada.
+            </p>
           </div>
         </div>
 
-        <div class="math-card" style="margin-bottom: 1.5rem;">
-          <div class="math-card-header">
-            <span class="math-card-title">Variación de $\phi$ según la Deformación Neta de Tracción $\varepsilon_t$</span>
-            <span class="nsr-badge">NSR-10 C.9.3.2 • C.10.3.3–C.10.3.5</span>
-          </div>
-          <div class="math-formula">
-            $$\varepsilon_t = 0.003 \left(\frac{d_t - c}{c}\right) \quad \implies \quad \phi(\varepsilon_t) = \begin{cases} 0.65 \text{ (estribos)} \;\big/\; 0.75 \text{ (espiral)} & \text{si } \varepsilon_t \le 0.0020 \quad \text{[Controlada por Compresión]} \\[6pt] 0.65 + (\varepsilon_t - 0.002)\dfrac{250}{3} \text{ (estribos)} & \text{si } 0.0020 < \varepsilon_t < 0.0050 \quad \text{[Transición]} \\[6pt] 0.90 & \text{si } \varepsilon_t \ge 0.0050 \quad \text{[Controlada por Tracción]} \end{cases}$$
-          </div>
-        </div>
-
-        <!-- Diseño por Estados Límites (Slide 29) -->
         <div class="grid-2">
           <div class="tech-card accent-rose">
             <div class="tech-card-title">
-              <span>1. Estado Límite de Resistencia (Capacidad Máxima y Estabilidad)</span>
+              <span>1. Estados Límites Últimos o de Resistencia (Seguridad Humana)</span>
             </div>
+            <p>
+              Garantizan la preservación de la vida humana evitando el colapso parcial o total de la edificación bajo las cargas extremas mayoradas de diseño:
+            </p>
             <ul>
-              <li><strong>Fuerzas:</strong> Resistencia menor que las cargas mayoradas.</li>
-              <li><strong>Equilibrio:</strong> Pérdida de equilibrio global o local.</li>
-              <li><strong>Mecanismo:</strong> Transformación plástica en mecanismo.</li>
-              <li><strong>Inestabilidad:</strong> Pandeo o cambios geométricos severos ($P-\Delta$).</li>
+              <li><strong>Capacidad Seccional:</strong> Resistencia interna suficiente en flexión, cortante, torsión y carga axial ($\phi R_n \ge R_u$).</li>
+              <li><strong>Pérdida de Equilibrio:</strong> Estabilidad global frente al volcamiento, deslizamiento o flotación de la cimentación.</li>
+              <li><strong>Mecanismo Plástico:</strong> Formación no controlada de rótulas plásticas que transformen la estructura en un mecanismo inestable.</li>
+              <li><strong>Inestabilidad y Segundo Orden:</strong> Pandeo local de barras, pandeo global de columnas y amplificación de momentos por efectos $P-\Delta$.</li>
             </ul>
           </div>
 
           <div class="tech-card accent-cyan">
             <div class="tech-card-title">
-              <span>2. Estado Límite de Servicio (Uso Normal y Durabilidad)</span>
+              <span>2. Estados Límites de Servicio (Funcionalidad y Confort Operativo)</span>
             </div>
+            <p>
+              Aseguran que la estructura permanezca confortable, estética y libre de deterioros bajo las cargas normales no mayoradas de uso cotidiano:
+            </p>
             <ul>
-              <li><strong>Deflexiones:</strong> Deformaciones excesivas en uso normal.</li>
-              <li><strong>Patologías:</strong> Corrosión y ataque por ambientes salinos o sulfatos.</li>
-              <li><strong>Vibraciones:</strong> Cargas móviles o cíclicas que causan inconformidad o fatiga.</li>
-              <li><strong>Control:</strong> Juntas, fisuración y protección contra fuego.</li>
+              <li><strong>Deflexiones Excesivas:</strong> Deformaciones verticales que puedan dañar muros divisorios, ventanales o producir empozamiento de agua.</li>
+              <li><strong>Fisuración Visible:</strong> Anchos de grieta que provoquen alarma en usuarios o aceleren el ingreso de agentes corrosivos.</li>
+              <li><strong>Vibraciones y Aceleraciones:</strong> Oscilaciones inducidas por viento, sismos leves o tránsito vehicular que afecten el confort humano.</li>
+              <li><strong>Durabilidad Química:</strong> Aislamiento e impermeabilidad para proteger el concreto y el acero frente a sulfatos, cloruros y carbonatación.</li>
             </ul>
           </div>
         </div>
@@ -1653,376 +1770,7 @@
         </div>
       </section>
 
-      
-      <!-- SECCIÓN DE EJEMPLOS NUMÉRICOS APLICADOS PASO A PASO -->
-      <section class="lesson-section" id="sec-ejemplos-mod01">
-        <div class="section-header">
-          <div>
-            <div class="section-tag-row">
-              <span class="section-num-badge">APLICACIÓN PRÁCTICA</span>
-              <span class="ref-badge">NSR-10 Títulos B y C • Ref: Emel Mulet (2024)</span>
-            </div>
-            <h2 class="section-title">Casos Numéricos Resueltos Paso a Paso con Modo Pizarra Docente</h2>
-            <p class="section-lead">
-              Ejemplos fundamentales sobre combinaciones de carga de diseño, propiedades mecánicas del concreto colombiano y determinación del momento crítico de fisuración con diagramas técnicos acotados.
-            </p>
-          </div>
-        </div>
-
-        <!-- ==============================================================
-             EJEMPLO 1.1: COMBINACIONES DE CARGA FACTORIZADA
-             ============================================================== -->
-        <div class="example-card" style="margin-bottom: 2.5rem;">
-          <div class="example-header">
-            <div class="example-title-area">
-              <span class="example-number">EJEMPLO 1.1</span>
-              <h3>Determinación de la Carga Crítica de Diseño por Combinaciones Mayoradas (NSR-10 B.2.4 y C.9.2)</h3>
-            </div>
-            <div class="example-actions">
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex11', true)">Expandir Todo</button>
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex11', false)">Colapsar</button>
-            </div>
-          </div>
-          <div class="example-statement">
-            <p>
-              <strong>Enunciado:</strong> Una viga continua de un edificio de oficinas en Barranquilla con luz libre de \(L = 6.50\text{ m}\) soporta las siguientes cargas gravitacionales y acciones ambientales por metro lineal:
-            </p>
-            <ul>
-              <li><strong>Carga Muerta (\(D\)):</strong> Peso propio de viga y acabados = \(24.0\text{ kN/m}\).</li>
-              <li><strong>Carga Viva de Ocupación (\(L\)):</strong> Uso de oficinas = \(16.0\text{ kN/m}\).</li>
-              <li><strong>Efecto de Viento Lateral (\(W\)):</strong> Acción transversal = \(\pm 11.5\text{ kN/m}\).</li>
-              <li><strong>Efecto Sísmico (\(E\)):</strong> Fuerza horizontal mayorada equivalente = \(\pm 18.0\text{ kN/m}\).</li>
-            </ul>
-            <p>
-              <em>Se pide:</em> Evaluar las combinaciones de carga básicas del Título B y Capítulo C.9 de la NSR-10, determinar la combinación gobernante para diseño a flexión positiva y evaluar la condición crítica de succión o levantamiento bajo viento/sismo.
-            </p>
-
-            <!-- SVG Diagrama Acotado Ejemplo 1.1 -->
-            <div style="text-align: center; margin: 1.5rem 0;">
-              <svg width="580" height="210" viewBox="0 0 580 210" style="background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%;">
-                <!-- Viga -->
-                <rect x="70" y="90" width="440" height="30" fill="var(--bg-subtle)" stroke="var(--primary)" stroke-width="2" rx="3"/>
-                <!-- Apoyos -->
-                <polygon points="70,120 55,145 85,145" fill="var(--text-muted)"/>
-                <line x1="50" y1="145" x2="90" y2="145" stroke="var(--text-muted)" stroke-width="2"/>
-                <polygon points="510,120 495,145 525,145" fill="var(--text-muted)"/>
-                <circle cx="502" cy="148" r="3" fill="var(--text-muted)"/>
-                <circle cx="518" cy="148" r="3" fill="var(--text-muted)"/>
-                <line x1="490" y1="152" x2="530" y2="152" stroke="var(--text-muted)" stroke-width="2"/>
-                <!-- Carga Distribuida Gravitacional D + L -->
-                <line x1="70" y1="50" x2="510" y2="50" stroke="#f59e0b" stroke-width="2"/>
-                <!-- Flechas de carga -->
-                <g stroke="#f59e0b" stroke-width="1.5" fill="#f59e0b">
-                  <path d="M 120 50 L 120 85 M 117 80 L 120 88 L 123 80 Z"/>
-                  <path d="M 180 50 L 180 85 M 177 80 L 180 88 L 183 80 Z"/>
-                  <path d="M 240 50 L 240 85 M 237 80 L 240 88 L 243 80 Z"/>
-                  <path d="M 300 50 L 300 85 M 297 80 L 300 88 L 303 80 Z"/>
-                  <path d="M 360 50 L 360 85 M 357 80 L 360 88 L 363 80 Z"/>
-                  <path d="M 420 50 L 420 85 M 417 80 L 420 88 L 423 80 Z"/>
-                  <path d="M 480 50 L 480 85 M 477 80 L 480 88 L 483 80 Z"/>
-                </g>
-                <text x="290" y="40" fill="#f59e0b" font-size="11" font-weight="700" text-anchor="middle">q_grav = D (24 kN/m) + L (16 kN/m)</text>
-                <!-- Cota Luz Libre -->
-                <line x1="70" y1="175" x2="510" y2="175" stroke="var(--text-main)" stroke-width="1.5"/>
-                <line x1="70" y1="168" x2="70" y2="182" stroke="var(--text-main)" stroke-width="1.5"/>
-                <line x1="510" y1="168" x2="510" y2="182" stroke="var(--text-main)" stroke-width="1.5"/>
-                <text x="290" y="193" fill="var(--text-main)" font-size="12" font-weight="700" text-anchor="middle">Luz Libre L = 6.50 m</text>
-                <!-- Fuerza lateral sismo -->
-                <path d="M 20 105 L 58 105" stroke="#ef4444" stroke-width="3" fill="none"/>
-                <polygon points="58,100 68,105 58,110" fill="#ef4444"/>
-                <text x="40" y="95" fill="#ef4444" font-size="10" font-weight="700">E = ±18 kN/m</text>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Pasos Ejemplo 1.1 -->
-          
-          <div class="example-solution-box">
-            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
-              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
-              <span class="btn-badge">Pizarra Docente</span>
-              <span class="arrow-icon">▼</span>
-            </button>
-            <div class="solution-body" style="display: none;">
-<div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex11', 1)">
-              <span>Paso 1: Evaluación de Combinaciones Gravitacionales Puras (C.9.2.1)</span>
-              <span class="step-arrow" id="ex11-arrow-1">▼</span>
-            </button>
-            <div class="step-content" id="ex11-step-1">
-              <p>Evaluamos la combinación solo con carga muerta y la combinación muerta más viva:</p>
-              <div class="math-box">
-                $$U_1 = 1.4 D = 1.4 \times 24.0 = \mathbf{33.6\text{ kN/m}}$$
-                $$U_2 = 1.2 D + 1.6 L = 1.2(24.0) + 1.6(16.0) = 28.8 + 25.6 = \mathbf{54.4\text{ kN/m}}$$
-              </div>
-              <p>Nótese que la combinación \(U_2\) incrementa la carga en un \(62\%\) respecto a la carga muerta aislada.</p>
-            </div>
-          </div>
-
-          <div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex11', 2)">
-              <span>Paso 2: Evaluación con Acción de Viento y Sismo (C.9.2.1)</span>
-              <span class="step-arrow" id="ex11-arrow-2">▼</span>
-            </button>
-            <div class="step-content" id="ex11-step-2">
-              <p>Combinaciones con viento (\(W\)) y sismo (\(E\)):</p>
-              <div class="math-box">
-                $$U_3 = 1.2 D + 1.0 L + 1.0 W = 1.2(24.0) + 1.0(16.0) + 1.0(11.5) = 28.8 + 16.0 + 11.5 = \mathbf{56.3\text{ kN/m}}$$
-                $$U_4 = 1.2 D + 1.0 L + 1.0 E = 1.2(24.0) + 1.0(16.0) + 1.0(18.0) = 28.8 + 16.0 + 18.0 = \mathbf{62.8\text{ kN/m}}$$
-              </div>
-              <p>La combinación que incorpora la acción sísmica directa (\(U_4\)) entrega la máxima carga vertical acumulada: <strong>\(w_u = 62.8\text{ kN/m}\)</strong>.</p>
-            </div>
-          </div>
-
-          <div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex11', 3)">
-              <span>Paso 3: Verificación de Inversión de Esfuerzos / Succión (C.9.2.1 Ec. C.9-6)</span>
-              <span class="step-arrow" id="ex11-arrow-3">▼</span>
-            </button>
-            <div class="step-content" id="ex11-step-3">
-              <p>Cuando el viento o el sismo inducen momentos de sentido opuesto (levantamiento o inversión de flexión en apoyos):</p>
-              <div class="math-box">
-                $$U_5 = 0.9 D - 1.0 E = 0.9(24.0) - 1.0(18.0) = 21.6 - 18.0 = \mathbf{+3.6\text{ kN/m}} > 0$$
-              </div>
-              <div class="callout callout-accent">
-                <strong>Conclusión Técnica:</strong> Como \(U_5 > 0\), la carga muerta mínima es suficiente para contrarrestar la fuerza sísmica ascendente neta, pero la proximidad a cero (\(3.6\text{ kN/m}\)) exige comprobar la inversión de momentos flectores en los nudos extremos conforme al Capítulo C.21.
-              </div>
-            </div>
-            </div>
-          </div>
-          
-          </div>
-        </div>
-
-        <!-- ==============================================================
-             EJEMPLO 1.2: PROPIEDADES MECÁNICAS CONCRETOS COLOMBIANOS
-             ============================================================== -->
-        <div class="example-card" style="margin-bottom: 2.5rem;">
-          <div class="example-header">
-            <div class="example-title-area">
-              <span class="example-number">EJEMPLO 1.2</span>
-              <h3>Módulo de Elasticidad (\(E_c\)) y Módulo de Rotura (\(f_r\)) en Concretos Colombianos (Ref: Emel Mulet Cap. 1)</h3>
-            </div>
-            <div class="example-actions">
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex12', true)">Expandir Todo</button>
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex12', false)">Colapsar</button>
-            </div>
-          </div>
-          <div class="example-statement">
-            <p>
-              <strong>Enunciado:</strong> En un proyecto en el Caribe colombiano (Sincelejo), el profesor <strong>Emel Mulet Rodríguez (2024, Cap. 1)</strong> documenta que los agregados calizos y aluviales de la región presentan una densidad promedio de concreto endurecido de \(w_c = 2300\text{ kg/m}^3\) y resistencia especificada \(f'_c = 21\text{ MPa}\).
-            </p>
-            <p>
-              <em>Se pide:</em><br>
-              1. Calcular el módulo de elasticidad empleando la expresión general con densidad \(w_c\) (NSR-10 C.8.5.1) y comparar con las ecuaciones simplificadas (\(4700\sqrt{f'_c}\) y \(3900\sqrt{f'_c}\)).<br>
-              2. Calcular el módulo de rotura por tracción en flexión (\(f_r\)) para concreto de peso normal (\(\lambda = 1.0\)).<br>
-              3. Determinar la deformación unitaria máxima en el pico (\(\epsilon_o\)) y la deformación última de diseño (\(\epsilon_{cu}\)).
-            </p>
-
-            <!-- SVG Curva Esfuerzo Deformación Acotada -->
-            <div style="text-align: center; margin: 1.5rem 0;">
-              <svg width="560" height="220" viewBox="0 0 560 220" style="background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%;">
-                <!-- Ejes -->
-                <line x1="60" y1="180" x2="520" y2="180" stroke="var(--text-muted)" stroke-width="1.5"/>
-                <line x1="60" y1="180" x2="60" y2="25" stroke="var(--text-muted)" stroke-width="1.5"/>
-                <text x="525" y="184" fill="var(--text-muted)" font-size="11" font-weight="700">ε_c</text>
-                <text x="35" y="25" fill="var(--text-muted)" font-size="11" font-weight="700">f_c (MPa)</text>
-                <!-- Curva Parábola Hognestad -->
-                <path d="M 60 180 Q 230 45, 300 45 T 460 75" fill="none" stroke="#38bdf8" stroke-width="3"/>
-                <!-- Línea Tangente Inicial Ec -->
-                <line x1="60" y1="180" x2="190" y2="60" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
-                <text x="140" y="85" fill="#f59e0b" font-size="11" font-weight="700">Pendiente = Ec</text>
-                <!-- Puntos notables -->
-                <circle cx="300" cy="45" r="4" fill="#38bdf8"/>
-                <line x1="300" y1="45" x2="300" y2="180" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,3"/>
-                <text x="300" y="195" fill="var(--text-main)" font-size="10" font-weight="700" text-anchor="middle">ε_o = 0.002</text>
-                <circle cx="460" cy="75" r="4" fill="#ef4444"/>
-                <line x1="460" y1="75" x2="460" y2="180" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3"/>
-                <text x="460" y="195" fill="#ef4444" font-size="10" font-weight="700" text-anchor="middle">ε_cu = 0.003</text>
-                <!-- Cota f'c -->
-                <line x1="60" y1="45" x2="300" y2="45" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,3"/>
-                <text x="25" y="49" fill="#38bdf8" font-size="11" font-weight="700">f'c = 21 MPa</text>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Pasos Ejemplo 1.2 -->
-          
-          <div class="example-solution-box">
-            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
-              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
-              <span class="btn-badge">Pizarra Docente</span>
-              <span class="arrow-icon">▼</span>
-            </button>
-            <div class="solution-body" style="display: none;">
-<div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex12', 1)">
-              <span>Paso 1: Cálculo del Módulo de Elasticidad (\(E_c\))</span>
-              <span class="step-arrow" id="ex12-arrow-1">▼</span>
-            </button>
-            <div class="step-content" id="ex12-step-1">
-              <p>Conforme a la ecuación general de NSR-10 C.8.5.1 para densidades entre \(1440\) y \(2460\text{ kg/m}^3\):</p>
-              <div class="math-box">
-                $$E_c = 0.043 w_c^{1.5} \sqrt{f'_c} = 0.043 \times (2300)^{1.5} \times \sqrt{21} = 0.043 \times 110308 \times 4.5826 = \mathbf{21735\text{ MPa}}$$
-              </div>
-              <p>Comparación con las fórmulas empíricas simplificadas:</p>
-              <ul>
-                <li>Fórmula general para concreto de densidad normal (\(w_c \approx 2300\text{ kg/m}^3\)):
-                  $$E_c = 4700 \sqrt{f'_c} = 4700 \times \sqrt{21} = \mathbf{21538\text{ MPa}} \quad (\text{diferencia } < 1\%)$$
-                </li>
-                <li>Fórmula alternativa colombiana para agregados de menor rigidez (NSR-10 C.8.5.1.1):
-                  $$E_c = 3900 \sqrt{f'_c} = 3900 \times \sqrt{21} = \mathbf{17872\text{ MPa}}$$
-                </li>
-              </ul>
-              <p>En el Caribe y zonas con agregados calizos sedimentarios, el valor de \(3900\sqrt{f'_c}\) reproduce con mayor exactitud las deflexiones reales observadas.</p>
-            </div>
-          </div>
-
-          <div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex12', 2)">
-              <span>Paso 2: Módulo de Rotura a Flexión (\(f_r\))</span>
-              <span class="step-arrow" id="ex12-arrow-2">▼</span>
-            </button>
-            <div class="step-content" id="ex12-step-2">
-              <p>El esfuerzo de agrietamiento por tracción según NSR-10 C.9.5.2.3 es:</p>
-              <div class="math-box">
-                $$f_r = 0.62 \lambda \sqrt{f'_c} = 0.62 \times 1.0 \times \sqrt{21} = 0.62 \times 4.5826 = \mathbf{2.84\text{ MPa}}$$
-              </div>
-              <p>El concreto resiste a tracción aproximadamente un \(13.5\%\) de su resistencia a compresión en flexión antes de fisurarse.</p>
-            </div>
-            </div>
-          </div>
-          
-          </div>
-        </div>
-
-        <!-- ==============================================================
-             EJEMPLO 1.3: MOMENTO DE FISURACIÓN Y SECCIÓN TRANSFORMADA
-             ============================================================== -->
-        <div class="example-card">
-          <div class="example-header">
-            <div class="example-title-area">
-              <span class="example-number">EJEMPLO 1.3</span>
-              <h3>Momento de Fisuración (\(M_{cr}\)) y Esfuerzos Elásticos en Sección No Fisurada (Ref: Emel Mulet Cap. 2)</h3>
-            </div>
-            <div class="example-actions">
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex13', true)">Expandir Todo</button>
-              <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex13', false)">Colapsar</button>
-            </div>
-          </div>
-          <div class="example-statement">
-            <p>
-              <strong>Enunciado:</strong> Se analiza la viga rectangular estudiada en el <strong>Ejemplo 2.1 de Emel Mulet (2024, pág. 63)</strong>, con base \(b = 250\text{ mm}\), altura total \(h = 400\text{ mm}\), peralte efectivo \(d = 350\text{ mm}\), concreto \(f'_c = 21\text{ MPa}\) (\(E_c = 21538\text{ MPa}\)), acero \(E_s = 200000\text{ MPa}\) y refuerzo a tracción de <strong>3 barras No. 5</strong> (\(A_s = 597\text{ mm}^2\)).
-            </p>
-            <p>
-              <em>Se pide:</em><br>
-              1. Calcular las propiedades de la sección no fisurada transformada (centroide \(\bar{y}\) e inercia bruta transformada \(I_{gt}\)).<br>
-              2. Determinar el Momento de Fisuración crítico (\(M_{cr}\)) que produce la primera grieta de tracción.<br>
-              3. Calcular el esfuerzo real en el acero inmediatamente antes del agrietamiento.
-            </p>
-
-            <!-- SVG Sección Transversal Acotada Ejemplo 1.3 -->
-            <div style="text-align: center; margin: 1.5rem 0;">
-              <svg width="540" height="240" viewBox="0 0 540 240" style="background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%;">
-                <!-- Sección Rectangular -->
-                <rect x="70" y="30" width="130" height="170" fill="var(--bg-subtle)" stroke="var(--primary)" stroke-width="2" rx="2"/>
-                <!-- Barras inferiores 3#5 -->
-                <circle cx="95" cy="175" r="7" fill="#f59e0b"/>
-                <circle cx="135" cy="175" r="7" fill="#f59e0b"/>
-                <circle cx="175" cy="175" r="7" fill="#f59e0b"/>
-                <!-- Cotas Sección -->
-                <line x1="70" y1="210" x2="200" y2="210" stroke="var(--text-main)" stroke-width="1.2"/>
-                <line x1="70" y1="205" x2="70" y2="215" stroke="var(--text-main)" stroke-width="1.2"/>
-                <line x1="200" y1="205" x2="200" y2="215" stroke="var(--text-main)" stroke-width="1.2"/>
-                <text x="135" y="225" fill="var(--text-main)" font-size="11" font-weight="700" text-anchor="middle">b = 250 mm</text>
-                <line x1="45" y1="30" x2="45" y2="200" stroke="var(--text-main)" stroke-width="1.2"/>
-                <line x1="40" y1="30" x2="50" y2="30" stroke="var(--text-main)" stroke-width="1.2"/>
-                <line x1="40" y1="200" x2="50" y2="200" stroke="var(--text-main)" stroke-width="1.2"/>
-                <text x="35" y="120" fill="var(--text-main)" font-size="11" font-weight="700" text-anchor="end">h = 400 mm</text>
-                <!-- Eje Neutro No Fisurado -->
-                <line x1="60" y1="117" x2="210" y2="117" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,3"/>
-                <text x="215" y="121" fill="#38bdf8" font-size="10" font-weight="700">E.N. y = 207.1 mm</text>
-                <!-- Diagrama de Esfuerzos Triangulares -->
-                <line x1="330" y1="30" x2="330" y2="200" stroke="var(--text-muted)" stroke-width="1.5"/>
-                <polygon points="330,30 280,30 330,117" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="1.5"/>
-                <polygon points="330,117 380,200 330,200" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="1.5"/>
-                <text x="270" y="25" fill="#38bdf8" font-size="10" font-weight="700">fc = 2.94 MPa (Comp)</text>
-                <text x="385" y="205" fill="#ef4444" font-size="10" font-weight="700">fr = 2.84 MPa (Tracc)</text>
-                <text x="430" y="115" fill="var(--text-main)" font-size="11" font-weight="700">Estado Elástico</text>
-                <text x="430" y="130" fill="var(--text-muted)" font-size="10">No Fisurado (M ≤ Mcr)</text>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Pasos Ejemplo 1.3 -->
-          
-          <div class="example-solution-box">
-            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
-              <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
-              <span class="btn-badge">Pizarra Docente</span>
-              <span class="arrow-icon">▼</span>
-            </button>
-            <div class="solution-body" style="display: none;">
-<div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex13', 1)">
-              <span>Paso 1: Relación Modular y Sección Transformada (Emel Mulet Tabla 2.1)</span>
-              <span class="step-arrow" id="ex13-arrow-1">▼</span>
-            </button>
-            <div class="step-content" id="ex13-step-1">
-              <p>Calculamos la relación modular \(n = E_s / E_c\):</p>
-              <div class="math-box">
-                $$n = \frac{200000}{21538} = 9.28 \approx 9.3$$
-              </div>
-              <p>El área de concreto equivalente del acero en estado no fisurado es \((n - 1) A_s = (9.3 - 1) \times 597 = 4955\text{ mm}^2\). Calculamos el centroide \(\bar{y}\) medido desde la fibra superior:</p>
-              <div class="math-box">
-                $$\bar{y} = \frac{(b \cdot h) \cdot \frac{h}{2} + (n-1)A_s \cdot d}{(b \cdot h) + (n-1)A_s} = \frac{(250 \times 400)(200) + 4955(350)}{(250 \times 400) + 4955} = \frac{20000000 + 1734250}{104955} = \mathbf{207.1\text{ mm}}$$
-              </div>
-              <p>La distancia desde el centroide a la fibra inferior de máxima tracción es \(y_t = h - \bar{y} = 400 - 207.1 = \mathbf{192.9\text{ mm}}\).</p>
-            </div>
-          </div>
-
-          <div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex13', 2)">
-              <span>Paso 2: Inercia Transformada y Momento de Fisuración (\(M_{cr}\))</span>
-              <span class="step-arrow" id="ex13-arrow-2">▼</span>
-            </button>
-            <div class="step-content" id="ex13-step-2">
-              <p>Calculamos el momento de inercia de la sección transformada respecto a su centroide:</p>
-              <div class="math-box">
-                $$I_{gt} = \frac{b h^3}{12} + (b h)(\bar{y} - h/2)^2 + (n-1)A_s(d - \bar{y})^2$$
-                $$I_{gt} = \frac{250(400)^3}{12} + (100000)(207.1 - 200)^2 + 4955(350 - 207.1)^2$$
-                $$I_{gt} = 1.333 \times 10^9 + 5.04 \times 10^6 + 1.01 \times 10^8 = \mathbf{1.439 \times 10^9\text{ mm}^4}$$
-              </div>
-              <p>El momento de fisuración crítico se alcanza cuando el esfuerzo en la fibra inferior llega al módulo de rotura \(f_r = 2.84\text{ MPa}\):</p>
-              <div class="math-box">
-                $$M_{cr} = \frac{f_r \cdot I_{gt}}{y_t} = \frac{2.84 \text{ N/mm}^2 \times 1.439 \times 10^9\text{ mm}^4}{192.9\text{ mm}} = 2.118 \times 10^7\text{ N}\cdot\text{mm} = \mathbf{21.18\text{ kN}\cdot\text{m}}$$
-              </div>
-            </div>
-          </div>
-
-          <div class="example-step">
-            <button class="step-toggle-btn" onclick="toggleExampleStep('ex13', 3)">
-              <span>Paso 3: Esfuerzo en el Acero Inmediatamente Antes y Después de la Fisuración</span>
-              <span class="step-arrow" id="ex13-arrow-3">▼</span>
-            </button>
-            <div class="step-content" id="ex13-step-3">
-              <p>Antes de fisurarse, con \(M = M_{cr}\), el esfuerzo en el acero es:</p>
-              <div class="math-box">
-                $$f_s = n \cdot \left[ \frac{M_{cr} (d - \bar{y})}{I_{gt}} \right] = 9.3 \times \left[ \frac{21.18 \times 10^6 \times (350 - 207.1)}{1.439 \times 10^9} \right] = 9.3 \times 2.10 = \mathbf{19.5\text{ MPa}}$$
-              </div>
-              <div class="callout callout-warning">
-                <strong>Salto Abrupto de Esfuerzos:</strong> Antes de la fisura, el acero trabaja a apenas \(19.5\text{ MPa}\) (un \(4.6\%\) de su fluencia). En el instante en que el concreto se agrieta a \(M = M_{cr}\), el concreto pierde súbitamente su resistencia a tracción y el esfuerzo en el acero salta instantáneamente a \(f_s \approx 135\text{ MPa}\). Este fenómeno explica por qué la norma exige una cuantía mínima para evitar la rotura frágil inmediata al fisurarse.
-              </div>
-            </div>
-            </div>
-          </div>
-          
-          </div>
-        </div>
-      </section>
-
-
-      <!-- PIE DE NAVEGACIÓN DEL MÓDULO -->
+<!-- PIE DE NAVEGACIÓN DEL MÓDULO -->
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1.5rem 2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
         <a href="../index.html" class="btn-control" style="background: var(--bg-subtle); color: var(--text-main); border-color: var(--border-strong);">
           ← Volver al Portal Principal del Diplomado
@@ -2043,6 +1791,8 @@
     <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 16</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

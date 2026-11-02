@@ -68,12 +68,13 @@
           <li><a href="#sec-vigas-t" class="toc-link"><span class="toc-num">5.0</span> 5. Vigas de Sección en T y en L</a></li>
           <li><a href="#sec-lab-mod03" class="toc-link"><span class="toc-num">6.0</span> 6. Laboratorio Interactivo</a></li>
           <li><a href="#sec-ejemplos-mod03" class="toc-link"><span class="toc-num">7.0</span> 7. Ejemplos Resueltos Paso a Paso</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-01" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.1</span> Viga Simple (Diseño y Revisión)</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-02" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.2</span> Viga Doble (Fluencia $f'_s = f_y$)</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-03" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.3</span> Viga T Monolítica</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-04" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.4</span> Acero en 2 Capas y $\epsilon_t$ (Mulet)</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-05" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.5</span> Viga Doble sin Fluencia ($f'_s < f_y$)</a></li>
-          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-06" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.6</span> Viga T con $a > h_f$ en Alma (Mulet)</a></li>
+                    <li style="padding-left: 1rem;"><a href="#sec-ejemplo-01" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.1</span> Viga Simple 1 Capa (Introductorio)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-02" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.2</span> Viga Simple ($400\times 650$, $L=10\text{ m}$)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-03" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.3</span> Viga Doble ($350\times 600$, $780\text{ kN}\cdot\text{m}$)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-04" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.4</span> Viga T (Caso 1 vs Caso 2)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-05" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.5</span> Armadura en 2 Capas ($d \ne d_t$)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-06" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.6</span> Viga Doble ($f'_s < f_y$)</a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-ejemplo-07" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">7.7</span> Viga T Verdadera ($a > h_f$)</a></li>
         </ul>
       </div>
 
@@ -134,7 +135,7 @@
         </div>
         <h1 class="hero-title">Diseño y Revisión a Flexión de Vigas de Concreto Reforzado</h1>
         <p class="hero-subtitle">
-          Formulación analítica y diseño normativo de elementos sometidos a flexión pura: compatibilidad de deformaciones de Bernoulli, bloque rectangular equivalente de Whitney, deducción de cuantías balanceada ($\rho_b$), mínima ($\rho_{\min}$) y máxima ($\rho_{\max}$), vigas rectangulares simplemente reforzadas, vigas doblemente reforzadas con verificación de fluencia del acero a compresión ($\varepsilon'_s \ge \varepsilon_y$) y vigas de sección en T y en L.
+          Formulación analítica y diseño normativo de elementos sometidos a flexión pura: compatibilidad de deformaciones de Bernoulli, bloque rectangular equivalente de Whitney, deducción de cuantías balanceada ($\rho_b$), mínima ($\rho_{\min}$) y máxima ($\rho_{\max}$), vigas rectangulares simplemente reforzadas, vigas doblemente reforzadas con verificación de fluencia del acero a compresión ($\varepsilon'_s \ge \varepsilon_y$) y vigas de sección en T monolíticas.
         </p>
         <div class="hero-meta-grid">
           <div class="hero-meta-item">
@@ -143,7 +144,7 @@
           </div>
           <div class="hero-meta-item">
             <span class="hero-meta-label">Alcance Estructural</span>
-            <span class="hero-meta-value">Secciones Simples, Dobles ($A'_s, A_s$), Vigas T y L</span>
+            <span class="hero-meta-value">Secciones Simples, Dobles ($A'_s, A_s$) y Vigas T Monolíticas</span>
           </div>
           <div class="hero-meta-item">
             <span class="hero-meta-label">Simuladores Interactivos</span>
@@ -165,10 +166,7 @@
             Los conceptos mecánicos, deducciones del bloque equivalente de Whitney y formulaciones de diseño y revisión a flexión se fundamentan en:
           </p>
           <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
-            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 2: Flexión simple, agrietamiento $M_{cr}$, sección transformada elástica, cuantías $
-ho_{\min}, 
-ho_b, 
-ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación rigurosa de fluencia y Vigas T con $a \le h_f$ vs. $a > h_f$).</li>
+            <li><strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño bajo NSR-10</em>, Edición Académica Nacional.</li>
             <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.10: Flexión y Cargas Axiales).</li>
             <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
             <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
@@ -213,6 +211,81 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
           </div>
 
           <div class="tech-card">
+            
+        <figure class="diagram-figure">
+          <svg class="diagram-svg" viewBox="0 0 680 310" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="beta1Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.03"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="680" height="310" rx="10" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="340" y="28" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+              VARIACIÓN DEL FACTOR β₁ EN FUNCIÓN DE LA RESISTENCIA f'c (NSR-10 C.10.2.7.3 / ACI 318)
+            </text>
+            <line x1="80" y1="217.5" x2="630" y2="217.5" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+            <line x1="80" y1="185" x2="630" y2="185" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+            <line x1="80" y1="152.5" x2="630" y2="152.5" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+            <line x1="80" y1="120" x2="630" y2="120" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+            <line x1="80" y1="87.5" x2="630" y2="87.5" stroke="#334155" stroke-dasharray="4,4" stroke-width="1"/>
+            <text x="70" y="254" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="end">0.60</text>
+            <text x="70" y="221" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="end">0.65</text>
+            <text x="70" y="189" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="end">0.70</text>
+            <text x="70" y="156" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="end">0.75</text>
+            <text x="70" y="124" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="end">0.80</text>
+            <text x="70" y="91" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="end">0.85</text>
+            <text x="70" y="59" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="end">0.90</text>
+            <text x="25" y="152" fill="#38BDF8" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-90, 25, 152)">
+              Parámetro β₁
+            </text>
+            <line x1="145" y1="55" x2="145" y2="250" stroke="#1E293B" stroke-dasharray="3,3" stroke-width="1"/>
+            <line x1="210" y1="55" x2="210" y2="250" stroke="#334155" stroke-dasharray="4,4" stroke-width="1.2"/>
+            <line x1="275" y1="55" x2="275" y2="250" stroke="#1E293B" stroke-dasharray="3,3" stroke-width="1"/>
+            <line x1="340" y1="55" x2="340" y2="250" stroke="#1E293B" stroke-dasharray="3,3" stroke-width="1"/>
+            <line x1="405" y1="55" x2="405" y2="250" stroke="#1E293B" stroke-dasharray="3,3" stroke-width="1"/>
+            <line x1="470" y1="55" x2="470" y2="250" stroke="#334155" stroke-dasharray="4,4" stroke-width="1.2"/>
+            <line x1="600" y1="55" x2="600" y2="250" stroke="#1E293B" stroke-dasharray="3,3" stroke-width="1"/>
+            <text x="80" y="268" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">14</text>
+            <text x="145" y="268" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">21</text>
+            <text x="210" y="268" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">28</text>
+            <text x="275" y="268" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">35</text>
+            <text x="340" y="268" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">42</text>
+            <text x="405" y="268" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">49</text>
+            <text x="470" y="268" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">56</text>
+            <text x="600" y="268" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">70</text>
+            <text x="355" y="295" fill="#38BDF8" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+              Resistencia a la Compresión f'c (MPa)
+            </text>
+            <line x1="80" y1="50" x2="80" y2="250" stroke="#64748B" stroke-width="2"/>
+            <line x1="80" y1="250" x2="630" y2="250" stroke="#64748B" stroke-width="2"/>
+            <polygon points="80,250 80,87.5 210,87.5 470,217.5 630,217.5 630,250" fill="url(#beta1Grad)"/>
+            <rect x="145" y="55" width="130" height="195" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(56, 189, 248, 0.25)" stroke-dasharray="2,2"/>
+            <text x="210" y="70" fill="#38BDF8" font-family="Inter, sans-serif" font-size="9.5" font-weight="600" text-anchor="middle">
+              Rango usual en edificación (21 - 35 MPa)
+            </text>
+            <polyline points="80,87.5 210,87.5 470,217.5 630,217.5" fill="none" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="145" cy="87.5" r="5" fill="#FBBF24" stroke="#0F172A" stroke-width="2"/>
+            <circle cx="210" cy="87.5" r="6" fill="#FBBF24" stroke="#FFFFFF" stroke-width="2"/>
+            <circle cx="275" cy="120" r="5" fill="#38BDF8" stroke="#0F172A" stroke-width="2"/>
+            <circle cx="340" cy="152.5" r="5" fill="#38BDF8" stroke="#0F172A" stroke-width="2"/>
+            <circle cx="470" cy="217.5" r="6" fill="#38BDF8" stroke="#FFFFFF" stroke-width="2"/>
+            <rect x="90" y="100" width="115" height="34" rx="5" fill="#1E293B" stroke="#FBBF24" stroke-width="1.2"/>
+            <text x="147" y="114" fill="#FBBF24" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">f'c ≤ 28 MPa</text>
+            <text x="147" y="127" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">β₁ = 0.85 (fijo)</text>
+            <rect x="260" y="165" width="180" height="34" rx="5" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
+            <text x="350" y="179" fill="#38BDF8" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" text-anchor="middle">28 &lt; f'c &lt; 56 MPa (Descenso)</text>
+            <text x="350" y="192" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">β₁ = 0.85 - 0.05·(f'c - 28)/7</text>
+            <rect x="490" y="175" width="130" height="34" rx="5" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
+            <text x="555" y="189" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">f'c ≥ 56 MPa</text>
+            <text x="555" y="202" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">β₁ = 0.65 (mínimo)</text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.1:</strong> Curva normativa del parámetro $\beta_1$ de profundidad del bloque de Whitney según NSR-10 C.10.2.7.3. Para concretos convencionales ($f'_c \le 28\text{ MPa}$), $\beta_1 = 0.85$. Por cada $7\text{ MPa}$ de incremento sobre $28\text{ MPa}$, $\beta_1$ se reduce en $0.05$ hasta alcanzar el valor mínimo reglamentario de $0.65$ para $f'_c \ge 56\text{ MPa}$.
+          </figcaption>
+        </figure>
+
+
             <div class="tech-card-header">
               <h3 class="tech-card-title">Diferencia entre Peralte Efectivo Centroidal ($d$) y Extremo ($d_t$)</h3>
               <div class="tech-card-icon">🎯</div>
@@ -359,6 +432,66 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
               Calculado con recubrimiento libre $r = 40\text{ mm}$, estribo $\text{No. }3$ ($9.5\text{ mm}$), agregado máximo de $19\text{ mm}$ ($3/4"$) y separación libre mínima $s_{\text{libre}} \ge \max(d_b,\; 25\text{ mm},\; 1.33 d_{\text{agregado}})$:
               $$b_{\min} = 2 r_{\text{libre}} + 2 d_{\text{estribo}} + n\, d_b + (n - 1)\, s_{\text{libre}}$$
             </p>
+            
+        <figure class="diagram-figure">
+          <svg class="diagram-svg" viewBox="0 0 680 340" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="680" height="340" rx="10" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="340" y="26" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+              DESGLOSE ANALÍTICO DEL ANCHO MÍNIMO DE VIGA b_mín (NSR-10 C.7.6.1 / C.7.7.1)
+            </text>
+            <rect x="130" y="75" width="420" height="190" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <rect x="130" y="75" width="45" height="190" fill="rgba(56, 189, 248, 0.12)"/>
+            <rect x="505" y="75" width="45" height="190" fill="rgba(56, 189, 248, 0.12)"/>
+            <rect x="175" y="95" width="330" height="150" rx="8" fill="none" stroke="#38BDF8" stroke-width="3.5"/>
+            <path d="M 183 95 L 205 118" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M 175 103 L 198 125" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="195" cy="113" r="8" fill="#64748B" stroke="#94A3B8" stroke-width="1.5"/>
+            <circle cx="485" cy="113" r="8" fill="#64748B" stroke="#94A3B8" stroke-width="1.5"/>
+            <text x="340" y="117" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2 No. 4 (Porta-estribos)</text>
+            <circle cx="200" cy="226" r="12" fill="#FBBF24" stroke="#D97706" stroke-width="2"/>
+            <circle cx="293.3" cy="226" r="12" fill="#FBBF24" stroke="#D97706" stroke-width="2"/>
+            <circle cx="386.7" cy="226" r="12" fill="#FBBF24" stroke="#D97706" stroke-width="2"/>
+            <circle cx="480" cy="226" r="12" fill="#FBBF24" stroke="#D97706" stroke-width="2"/>
+            <line x1="212" y1="226" x2="281.3" y2="226" stroke="#34D399" stroke-width="2"/>
+            <circle cx="212" cy="226" r="2" fill="#34D399"/>
+            <circle cx="281.3" cy="226" r="2" fill="#34D399"/>
+            <text x="246.6" y="221" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">s_libre</text>
+            <line x1="305.3" y1="226" x2="374.7" y2="226" stroke="#34D399" stroke-width="2"/>
+            <circle cx="305.3" cy="226" r="2" fill="#34D399"/>
+            <circle cx="374.7" cy="226" r="2" fill="#34D399"/>
+            <text x="340" y="221" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">s_libre</text>
+            <line x1="398.7" y1="226" x2="468" y2="226" stroke="#34D399" stroke-width="2"/>
+            <circle cx="398.7" cy="226" r="2" fill="#34D399"/>
+            <circle cx="468" cy="226" r="2" fill="#34D399"/>
+            <text x="433.3" y="221" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">s_libre</text>
+            <line x1="130" y1="180" x2="175" y2="180" stroke="#38BDF8" stroke-width="1.8"/>
+            <line x1="130" y1="174" x2="130" y2="186" stroke="#38BDF8" stroke-width="1.8"/>
+            <line x1="175" y1="174" x2="175" y2="186" stroke="#38BDF8" stroke-width="1.8"/>
+            <text x="152.5" y="173" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">r=40</text>
+            <line x1="505" y1="180" x2="550" y2="180" stroke="#38BDF8" stroke-width="1.8"/>
+            <line x1="505" y1="174" x2="505" y2="186" stroke="#38BDF8" stroke-width="1.8"/>
+            <line x1="550" y1="174" x2="550" y2="186" stroke="#38BDF8" stroke-width="1.8"/>
+            <text x="527.5" y="173" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">r=40</text>
+            <line x1="130" y1="48" x2="550" y2="48" stroke="#FBBF24" stroke-width="2"/>
+            <line x1="130" y1="42" x2="130" y2="54" stroke="#FBBF24" stroke-width="2"/>
+            <line x1="550" y1="42" x2="550" y2="54" stroke="#FBBF24" stroke-width="2"/>
+            <text x="340" y="44" fill="#FBBF24" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              Ancho Requerido b_mín = 2·r + 2·d_est + n·d_b + (n - 1)·s_libre
+            </text>
+            <rect x="70" y="280" width="540" height="46" rx="6" fill="#131C31" stroke="#38BDF8" stroke-width="1.2"/>
+            <text x="340" y="298" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">
+              Regla de separación libre: <tspan fill="#34D399" font-weight="700">s_libre ≥ máx(d_b, 25 mm, 1.33·d_agregado)</tspan>  (NSR-10 C.7.6.1)
+            </text>
+            <text x="340" y="315" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">
+              Ejemplo 4 barras No. 7: b_mín = 2(40) + 2(9.5) + 4(22.2) + 3(25) = 80 + 19 + 88.8 + 75 = 262.8 mm → 28 cm
+            </text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.2:</strong> Composición geométrica del ancho mínimo de viga ($b_{\min}$) para alojar $n$ barras longitudinales en una sola capa (C.7.6.1 y C.7.7.1). Se consideran los recubrimientos libres ($2 \times 40\text{ mm}$), los estribos ($2 \times 9.5\text{ mm}$), los diámetros de las $n$ barras y las $(n-1)$ separaciones libres entre ellas.
+          </figcaption>
+        </figure>
+
+
             <div class="table-container" style="margin: 0;">
               <table class="norm-table">
                 <thead>
@@ -636,6 +769,75 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
           </p>
         </div>
 
+
+        <figure class="diagram-figure">
+          <svg class="diagram-svg" viewBox="0 0 840 340" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="840" height="340" rx="10" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="420" y="26" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="13.5" font-weight="700" text-anchor="middle">
+              TRÍO MECÁNICO SECCIONAL EN ESTADO LÍMITE ÚLTIMO (DEDUCCIÓN DE LA CUANTÍA ρ)
+            </text>
+            <text x="105" y="52" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">1. SECCIÓN GEOMÉTRICA</text>
+            <text x="290" y="52" fill="#60A5FA" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">2. DEFORMACIONES (ε)</text>
+            <text x="495" y="52" fill="#F43F5E" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">3. BLOQUE WHITNEY</text>
+            <text x="715" y="52" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">4. PAR INTERNO (Cc, T)</text>
+            <rect x="50" y="65" width="110" height="210" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <rect x="51" y="66" width="108" height="62.75" fill="rgba(244, 63, 94, 0.25)"/>
+            <rect x="62" y="77" width="86" height="186" rx="4" fill="none" stroke="#38BDF8" stroke-width="1.8"/>
+            <circle cx="76" cy="91" r="5" fill="#64748B"/>
+            <circle cx="134" cy="91" r="5" fill="#64748B"/>
+            <circle cx="76" cy="245" r="8" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <circle cx="105" cy="245" r="8" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <circle cx="134" cy="245" r="8" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <text x="105" y="295" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">Ancho b</text>
+            <line x1="28" y1="65" x2="28" y2="245" stroke="#FBBF24" stroke-width="1.5"/>
+            <line x1="24" y1="65" x2="32" y2="65" stroke="#FBBF24" stroke-width="1.5"/>
+            <line x1="24" y1="245" x2="32" y2="245" stroke="#FBBF24" stroke-width="1.5"/>
+            <text x="22" y="158" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 22, 158)">Peralte d</text>
+            <line x1="270" y1="65" x2="270" y2="275" stroke="#475569" stroke-width="1.6"/>
+            <line x1="50" y1="140" x2="800" y2="140" stroke="#FBBF24" stroke-dasharray="4,4" stroke-width="1.2"/>
+            <text x="175" y="136" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9.5">E.N. (c)</text>
+            <polygon points="270,65 330,65 270,140" fill="rgba(96, 165, 250, 0.22)"/>
+            <polygon points="270,140 190,245 270,245" fill="rgba(245, 158, 11, 0.2)"/>
+            <line x1="330" y1="65" x2="190" y2="245" stroke="#60A5FA" stroke-width="2.5"/>
+            <text x="336" y="73" fill="#60A5FA" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">ε_cu = 0.003</text>
+            <text x="180" y="249" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="end">ε_t ≥ 0.005</text>
+            <text x="290" y="105" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5">c = β₁⁻¹·a</text>
+            <line x1="440" y1="65" x2="440" y2="275" stroke="#475569" stroke-width="1.6"/>
+            <path d="M 440 65 Q 535 90 440 140" fill="none" stroke="#64748B" stroke-dasharray="3,3" stroke-width="1.6"/>
+            <rect x="440" y="65" width="85" height="63.75" fill="rgba(244, 63, 94, 0.3)" stroke="#FB7185" stroke-width="2"/>
+            <text x="532" y="85" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Esfuerzo 0.85·f'c</text>
+            <text x="532" y="102" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5">Altura a = β₁·c</text>
+            <line x1="432" y1="65" x2="432" y2="128.75" stroke="#FB7185" stroke-width="1.5"/>
+            <line x1="428" y1="65" x2="436" y2="65" stroke="#FB7185" stroke-width="1.5"/>
+            <line x1="428" y1="128.75" x2="436" y2="128.75" stroke="#FB7185" stroke-width="1.5"/>
+            <text x="424" y="100" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">a</text>
+            <line x1="640" y1="65" x2="640" y2="275" stroke="#475569" stroke-width="1.6"/>
+            <line x1="740" y1="96.9" x2="640" y2="96.9" stroke="#FB7185" stroke-width="3"/>
+            <polygon points="640,96.9 655,91 655,102.8" fill="#FB7185"/>
+            <text x="748" y="94" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">C_c = 0.85·f'c·b·a</text>
+            <text x="748" y="108" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">(en centroide a/2)</text>
+            <line x1="640" y1="245" x2="740" y2="245" stroke="#FBBF24" stroke-width="3"/>
+            <polygon points="740,245 725,239 725,251" fill="#FBBF24"/>
+            <text x="748" y="248" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">T = A_s·f_y</text>
+            <text x="748" y="262" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">(en centroide d)</text>
+            <line x1="615" y1="96.9" x2="615" y2="245" stroke="#34D399" stroke-width="2"/>
+            <line x1="608" y1="96.9" x2="622" y2="96.9" stroke="#34D399" stroke-width="2"/>
+            <line x1="608" y1="245" x2="622" y2="245" stroke="#34D399" stroke-width="2"/>
+            <text x="608" y="175" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="end">z = d - a/2</text>
+            <rect x="50" y="290" width="750" height="38" rx="6" fill="#131C31" stroke="#38BDF8" stroke-width="1.2"/>
+            <text x="425" y="306" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" text-anchor="middle">
+              Equilibrio Horizontal: <tspan fill="#FB7185" font-weight="700">C_c = T</tspan> ⟹ 0.85·f'c·b·a = A_s·f_y ⟹ <tspan fill="#38BDF8" font-weight="700">a = (A_s·f_y) / (0.85·f'c·b) = (ρ·f_y·d) / (0.85·f'c)</tspan>
+            </text>
+            <text x="425" y="321" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">
+              Momento Resistente: M_n = T·(d - a/2) = ρ·b·d²·f_y·(1 - 0.59·ρ·f_y/f'c) ⟹ Ecuación Cuadrática en ρ
+            </text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.3:</strong> Trío mecánico de la flexión en estado límite último: (1) Sección transversal, (2) Perfil de deformaciones de Navier-Bernoulli con $\varepsilon_{cu} = 0.003$ y $\varepsilon_t \ge 0.005$, (3) Bloque de Whitney equivalente de intensidad $0.85 f'_c$ y profundidad $a = \beta_1 c$, y (4) Par interno de fuerzas ($C_c = T$) con brazo de palanca resistente $z = d - a/2$.
+          </figcaption>
+        </figure>
+
+
         <div class="math-card">
           <div class="math-card-header">
             <span class="math-card-title">Equilibrio Horizontal, Momento de Diseño ($\phi M_n$), Parámetro $R_n$ y Fórmula Cuadrática de la Cuantía ($\rho$)</span>
@@ -655,6 +857,35 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
             <div><strong>Consistencia dimensional en el cálculo de $R_n$ :</strong> Si $M_u$ se expresa en $\text{kN}\cdot\text{m}$ y $b, d$ en metros ($\text{m}$), entonces $R_n = \frac{M_u}{\phi b d^2}$ resulta en $\text{kN/m}^2$ ($\text{kPa}$); al dividir entre $1\,000$ se obtiene $R_n$ en $\text{MPa}$, unidad directamente compatible con $f'_c$ y $f_y$ en $\text{MPa}$.</div>
           </div>
         </div>
+
+
+        <!-- CAJA DESTACADA: FÓRMULA MAESTRA DE CUANTÍA -->
+        <div class="math-highlight-card">
+          <div class="math-highlight-header">
+            <span class="math-highlight-badge">⭐ FÓRMULA MAESTRA DE DISEÑO A FLEXIÓN (CUANTÍA EXACTA)</span>
+            <span class="norm-pill">NSR-10 C.10.2 / Deducción Analítica Cuadrática</span>
+          </div>
+          <div class="math-highlight-equation">
+            $$\mathbf{\rho = \frac{0.85\, f'_c}{f_y} \left( 1 - \sqrt{1 - \frac{2\, M_u}{0.85\, \phi\, f'_c\, b\, d^2}} \right)} \qquad\Longleftrightarrow\qquad \mathbf{A_{s,\text{req}} = \rho\, b\, d}$$
+          </div>
+          <div class="math-highlight-explanation">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem;">
+              <div>
+                <strong>Formulación con Coeficiente de Resistencia $R_n$:</strong>
+                $$R_n = \frac{M_u}{\phi\, b\, d^2} \quad \implies \quad \rho = \frac{0.85\, f'_c}{f_y} \left( 1 - \sqrt{1 - \frac{2\, R_n}{0.85\, f'_c}} \right)$$
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Donde $m = \dfrac{f_y}{0.85 f'_c}$, resultando la forma clásica $\rho = \dfrac{1}{m}\left(1 - \sqrt{1 - \dfrac{2 m R_n}{f_y}}\right)$.</span>
+              </div>
+              <div>
+                <strong>Sentido Físico de la Raíz Negativa ($-$) y Límites:</strong>
+                <ul style="margin: 0.25rem 0 0 1rem; padding: 0; font-size: 0.85rem;">
+                  <li>La solución con signo ($+$) produciría una profundidad $a > d$, lo que colocaría el bloque de concreto fuera de la sección física.</li>
+                  <li><strong>Radical real:</strong> Requiere que $\dfrac{2 R_n}{0.85 f'_c} \le 1.0 \iff R_n \le 0.425 f'_c$, límite más allá del cual la sección es incapaz de resistir el momento en flexión simple y exige refuerzo a compresión ($A'_s$).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div class="cards-grid-2">
           <div class="tech-card">
@@ -708,6 +939,66 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
             Cuando las dimensiones arquitectónicas ($b \times h$) están restringidas y el momento mayorado actuante $M_u$ supera el momento máximo que la sección puede resistir como simplemente reforzada controlada por tracción ($M_u > M_{u1,\max} = \phi M_{n,\max}$), es obligatorio incorporar refuerzo en la zona de compresión ($A'_s$ a una distancia $d'$ de la fibra extrema comprimida) acompañado de un área adicional de acero en tracción ($A_{s2}$) para mantener la profundidad del eje neutro dentro del límite dúctil ($\varepsilon_t \ge 0.005$ o $\varepsilon_t \ge 0.004$).
           </p>
         </div>
+
+
+        <figure class="diagram-figure">
+          <svg class="diagram-svg" viewBox="0 0 820 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="820" height="320" rx="10" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="410" y="26" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+              SUPERPOSICIÓN EN VIGAS DOBLEMENTE REFORZADAS: [SECCIÓN TOTAL] = [PAR 1 CONCRETO] + [PAR 2 ACERO A COMPRESIÓN]
+            </text>
+            <text x="105" y="50" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">SECCIÓN REAL (As, A's)</text>
+            <rect x="55" y="62" width="100" height="200" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <rect x="65" y="72" width="80" height="180" rx="3" fill="none" stroke="#38BDF8" stroke-width="1.6"/>
+            <circle cx="80" cy="92" r="7" fill="#34D399" stroke="#059669" stroke-width="1.6"/>
+            <circle cx="130" cy="92" r="7" fill="#34D399" stroke="#059669" stroke-width="1.6"/>
+            <text x="105" y="85" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">A's (d')</text>
+            <circle cx="75" cy="232" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.6"/>
+            <circle cx="105" cy="232" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.6"/>
+            <circle cx="135" cy="232" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.6"/>
+            <text x="105" y="222" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">As = As1 + As2</text>
+            <text x="105" y="278" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Ancho b × Altura h</text>
+            <text x="195" y="170" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="28" font-weight="700" text-anchor="middle">=</text>
+            <text x="355" y="50" fill="#FB7185" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">PAR 1: CONCRETO + As1 (Mn1)</text>
+            <rect x="250" y="62" width="75" height="200" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="1.5"/>
+            <rect x="251" y="63" width="73" height="52" fill="rgba(244, 63, 94, 0.35)"/>
+            <circle cx="270" cy="232" r="6.5" fill="#FBBF24"/>
+            <circle cx="305" cy="232" r="6.5" fill="#FBBF24"/>
+            <line x1="430" y1="88" x2="350" y2="88" stroke="#FB7185" stroke-width="2.6"/>
+            <polygon points="350,88 362,83 362,93" fill="#FB7185"/>
+            <text x="435" y="85" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Cc = 0.85·f'c·b·a</text>
+            <line x1="350" y1="232" x2="430" y2="232" stroke="#FBBF24" stroke-width="2.6"/>
+            <polygon points="430,232 418,227 418,237" fill="#FBBF24"/>
+            <text x="435" y="235" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">T1 = As1·fy</text>
+            <line x1="340" y1="88" x2="340" y2="232" stroke="#34D399" stroke-width="1.5"/>
+            <text x="333" y="165" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">d - a/2</text>
+            <text x="355" y="278" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">Mn1 = As1·fy·(d - a/2)</text>
+            <text x="505" y="170" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="28" font-weight="700" text-anchor="middle">+</text>
+            <text x="665" y="50" fill="#34D399" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">PAR 2: ACERO COMPRIMIDO + As2 (Mn2)</text>
+            <rect x="560" y="62" width="75" height="200" rx="3" fill="#1E293B" stroke="#64748B" stroke-dasharray="3,3" stroke-width="1.5"/>
+            <circle cx="580" cy="92" r="6.5" fill="#34D399" stroke="#059669" stroke-width="1.5"/>
+            <circle cx="615" cy="92" r="6.5" fill="#34D399" stroke="#059669" stroke-width="1.5"/>
+            <circle cx="580" cy="232" r="6.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <circle cx="615" cy="232" r="6.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <line x1="740" y1="92" x2="660" y2="92" stroke="#34D399" stroke-width="2.6"/>
+            <polygon points="660,92 672,87 672,97" fill="#34D399"/>
+            <text x="745" y="89" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Cs = A's·(f's - 0.85·f'c)</text>
+            <line x1="660" y1="232" x2="740" y2="232" stroke="#FBBF24" stroke-width="2.6"/>
+            <polygon points="740,232 728,227 728,237" fill="#FBBF24"/>
+            <text x="745" y="235" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">T2 = As2·fy</text>
+            <line x1="650" y1="92" x2="650" y2="232" stroke="#34D399" stroke-width="1.5"/>
+            <text x="643" y="165" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">d - d'</text>
+            <text x="665" y="278" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">Mn2 = As2·fy·(d - d')</text>
+            <rect x="50" y="292" width="730" height="22" rx="4" fill="#131C31" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1"/>
+            <text x="415" y="307" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10" font-weight="600" text-anchor="middle">
+              Chequeo de Fluencia de A's: ε's = 0.003·(c - d') / c. Si ε's ≥ ε_y ⟹ f's = fy. Capacidad Total: φMn = φ·(Mn1 + Mn2) ≥ Mu
+            </text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.4:</strong> Principio de superposición lineal para vigas doblemente reforzadas. El momento total $M_n$ se descompone en el par del concreto ($M_{n1}$ equilibrado por $A_{s1}$) más el par del refuerzo en compresión ($M_{n2}$ aportado por $A'_s$ y equilibrado por $A_{s2}$).
+          </figcaption>
+        </figure>
+
 
         <div class="callout callout-note" style="margin-bottom: 1.25rem;">
           <div class="callout-title">📌 Razones Estructurales Adicionales para Utilizar Acero a Compresión ($A'_s$)</div>
@@ -773,25 +1064,65 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
           <div class="section-tag-row">
             <span class="section-num-badge">5.0</span>
           </div>
-          <h2 class="section-title">5. Ancho Efectivo del Patín ($b_{\text{ef}}$) y Comportamiento de Vigas T y L</h2>
+          <h2 class="section-title">5. Ancho Efectivo del Patín ($b_{\text{ef}}$) y Comportamiento de Vigas T Monolíticas</h2>
           <p class="section-lead">
             En los sistemas de entrepiso de concreto reforzado fundidos monolíticamente, la losa superior (de espesor $h_f$) trabaja solidariamente con el nervio o alma de la viga (de ancho $b_w$) cuando el momento flector comprime las fibras superiores (momento positivo en el centro de la luz). Debido al fenómeno de <em>rezago por cortante (shear lag)</em> en el plano de la losa, los esfuerzos longitudinales de compresión disminuyen a medida que nos alejamos del alma, por lo que se define un <strong>ancho efectivo del ala ($b_{\text{ef}}$)</strong> sobre el cual se consideran uniformes los esfuerzos de compresión.
           </p>
         </div>
 
+
+        <figure class="diagram-figure">
+          <svg class="diagram-svg" viewBox="0 0 820 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="820" height="320" rx="10" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+            <text x="410" y="26" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+              MECÁNICA SECCIONAL DE VIGAS EN T MONOLÍTICAS (NSR-10 C.8.12.2)
+            </text>
+            <text x="210" y="50" fill="#34D399" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+              CASO 1: a ≤ hf (BLOQUE EN EL PATÍN)
+            </text>
+            <path d="M 90 65 L 330 65 L 330 97 L 245 97 L 245 245 L 175 245 L 175 97 L 90 97 Z" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <rect x="91" y="66" width="238" height="20" fill="rgba(56, 189, 248, 0.35)" stroke="#38BDF8" stroke-width="1.5"/>
+            <circle cx="195" cy="225" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <circle cx="225" cy="225" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <text x="210" y="80" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">a ≤ hf</text>
+            <text x="210" y="115" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">hf (losa)</text>
+            <text x="210" y="260" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Ancho de alma bw</text>
+            <rect x="80" y="272" width="260" height="38" rx="5" fill="#131C31" stroke="#34D399" stroke-width="1.2"/>
+            <text x="210" y="286" fill="#34D399" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Comportamiento: Viga Rectangular (b = bef)</text>
+            <text x="210" y="301" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">Cc = 0.85·f'c·bef·a  |  Mn = As·fy·(d - a/2)</text>
+            <line x1="410" y1="45" x2="410" y2="310" stroke="#334155" stroke-dasharray="4,4" stroke-width="1.5"/>
+            <text x="610" y="50" fill="#FB7185" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+              CASO 2: a &gt; hf (VIGA T VERDADERA)
+            </text>
+            <path d="M 490 65 L 730 65 L 730 97 L 645 97 L 645 245 L 575 245 L 575 97 L 490 97 Z" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+            <rect x="491" y="66" width="83" height="30" fill="rgba(56, 189, 248, 0.35)" stroke="#38BDF8" stroke-width="1.5"/>
+            <rect x="646" y="66" width="83" height="30" fill="rgba(56, 189, 248, 0.35)" stroke="#38BDF8" stroke-width="1.5"/>
+            <rect x="576" y="66" width="68" height="55" fill="rgba(244, 63, 94, 0.35)" stroke="#FB7185" stroke-width="1.5"/>
+            <circle cx="595" cy="225" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <circle cx="625" cy="225" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+            <text x="532" y="85" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Alas (Asf)</text>
+            <text x="687" y="85" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Alas (Asf)</text>
+            <text x="610" y="105" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Alma a</text>
+            <rect x="480" y="272" width="260" height="38" rx="5" fill="#131C31" stroke="#FB7185" stroke-width="1.2"/>
+            <text x="610" y="286" fill="#FB7185" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">Descomposición en Par Alas + Par Alma</text>
+            <text x="610" y="301" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">As = Asf + Asw  |  Mn = Mnf + Mnw</text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.5:</strong> Comportamiento resistente de Vigas en T monolíticas según NSR-10 C.8.12.2. Si $a \le h_f$ (Caso 1), toda la compresión está confinada dentro del patín y la viga trabaja como rectangular de ancho $b = b_{\text{ef}}$. Si $a > h_f$ (Caso 2), la sección se descompone en el par resistente de las alas salientes ($A_{sf}$) y el par resistente del alma central ($A_{sw}$).
+          </figcaption>
+        </figure>
+
+
         <div class="math-card">
           <div class="math-card-header">
-            <span class="math-card-title">Límites Normativos del Ancho Efectivo del Ala ($b_{\text{ef}}$) en Vigas T, Vigas L y Vigas T Aisladas</span>
+            <span class="math-card-title">Límites Normativos del Ancho Efectivo del Ala ($b_{\text{ef}}$) en Vigas T Monolíticas y Vigas T Aisladas</span>
             <span class="norm-pill">NSR-10 C.8.12.2, C.8.12.3 y C.8.12.4</span>
           </div>
           <div class="math-formula">
             $$\textbf{1. Vigas T Simétricas (con losa a ambos lados del alma, C.8.12.2):}$$
             $$b_{\text{ef}} \le \min\left(\frac{L}{4},\;\; b_w + 16\, h_f,\;\; b_w + s_{\text{libre}} = S_{\text{ejes}}\right)$$
           </div>
-          <div class="math-formula">
-            $$\textbf{2. Vigas L de Borde (con losa en un solo lado del alma, C.8.12.3):}$$
-            $$b_{\text{ef}} \le \min\left(b_w + \frac{L}{12},\;\; b_w + 6\, h_f,\;\; b_w + \frac{s_{\text{libre}}}{2}\right)$$
-          </div>
+          
           <div class="math-formula">
             $$\textbf{3. Vigas T Aisladas (usadas para proporcionar área adicional de compresión, C.8.12.4):}$$
             $$h_f \ge \frac{b_w}{2} \qquad \text{y} \qquad b_{\text{ef}} \le 4\, b_w$$
@@ -995,7 +1326,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
         <div class="sim-box" style="margin-top: 2rem;">
           <div class="sim-box-header">
             <div>
-              <h3 class="sim-box-title">🔬 Simulador 3.2: Analizador y Diseñador Interactivo de Vigas en T y en L</h3>
+              <h3 class="sim-box-title">🔬 Simulador 3.2: Analizador y Diseñador Interactivo de Vigas en T Monolíticas</h3>
               <p class="sim-box-subtitle">Evalúa el ancho efectivo del ala $b_{\text{ef}}$ y conmuta automáticamente entre el Caso 1 ($a \le h_f$: bloque en el patín) y el Caso 2 ($a > h_f$: descomposición en Par de las Alas $A_{sf}$ + Par del Alma $A_{sw}$)</p>
             </div>
             <span id="sim32-status-banner" class="status-pill status-ok">CASO 1 (a ≤ hf): Bloque dentro del Patín</span>
@@ -1007,10 +1338,10 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
                 <div class="control-label">
                   <span>Tipo de Sección Monolítica</span>
                 </div>
-                <select id="sim32-type" class="sim-select">
-                  <option value="T" selected>Viga T Interior (Alas en ambos lados — C.8.12.2)</option>
-                  <option value="L">Viga L de Borde (Ala en un solo lado — C.8.12.3)</option>
-                </select>
+                <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; color: #38BDF8; font-weight: 700; font-size: 0.88rem;">
+                  Viga T Interior Monolítica (Alas en ambos lados — NSR-10 C.8.12.2)
+                </div>
+                <input type="hidden" id="sim32-type" value="T" />
               </div>
 
               <div class="control-group">
@@ -1129,19 +1460,249 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
         <!-- ===============================================================
              EJEMPLO 3.1: DISEÑO Y REVISIÓN DE VIGA SIMPLEMENTE REFORZADA
              =============================================================== -->
+        
+        <!-- ===============================================================
+             EJEMPLO 3.1 (INTRODUCTORIO): VIGA SIMPLEMENTE REFORZADA CON 1 CAPA
+             =============================================================== -->
         <div id="sec-ejemplo-01" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.1: Diseño y Revisión de Viga Rectangular Simplemente Reforzada ($b = 400\text{ mm}, h = 650\text{ mm}, L = 10.0\text{ m}$)
+                📝 Ejemplo 3.1: Diseño y Verificación de Viga Rectangular Simplemente Reforzada con 1 Sola Capa de Refuerzo ($b = 300\text{ mm}, h = 500\text{ mm}, M_u = 150\text{ kN}\cdot\text{m}$)
+              </h3>
+              <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
+                <strong>Enunciado:</strong> Diseñar a flexión una viga rectangular simplemente apoyada con sección $b = 300\text{ mm}$ y $h = 500\text{ mm}$, sometida a un momento último mayorado $M_u = 150\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$ ($210\text{ kgf/cm}^2$), $f_y = 420\text{ MPa}$ (Grado 60), recubrimiento libre $r = 40\text{ mm}$ (NSR-10 C.7.7.1), estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$) y tamaño máximo de agregado de $19\text{ mm}$ ($3/4"$). Calcular analíticamente la cuantía requerida con la fórmula cuadrática exacta, seleccionar barras comerciales en una sola capa inferior, comprobar el ancho mínimo $b_{\min}$ y verificar que la sección sea controlada por tracción con $\phi = 0.90$ y $\phi M_n \ge M_u$.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', true)">👁️ Mostrar Todo</button>
+            </div>
+          </div>
+
+          <!-- ESQUEMA VECTORIAL SVG ACOTADO: EJEMPLO 3.1 -->
+
+        <figure class="diagram-figure" style="max-width: 520px; margin: 1.25rem auto;">
+          <svg class="diagram-svg" viewBox="0 0 500 320" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="500" height="320" rx="8" fill="#0B1120" stroke="#1E293B" stroke-width="1.5"/>
+
+            <text x="250" y="24" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="12" font-weight="700" text-anchor="middle">
+              EJEMPLO 3.1: SECCIÓN DE VIGA SIMPLEMENTE REFORZADA (1 CAPA)
+            </text>
+
+            <!-- Sección de concreto: b = 300 mm -> ancho 170 px (x: 165..335), h = 500 mm -> alto 220 px (y: 45..265) -->
+            <rect x="165" y="45" width="170" height="220" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+
+            <!-- Bloque de compresión a = 89 mm -> 39 px (y: 46..85) -->
+            <rect x="166" y="46" width="168" height="39" fill="rgba(244, 63, 94, 0.28)"/>
+            <text x="250" y="70" fill="#FB7185" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">
+              Bloque a = 8.91 cm (Cc = 477 kN)
+            </text>
+
+            <!-- Estribo No. 3 (d_e = 9.5 mm) con recubrimiento r = 40 mm (18 px) -->
+            <!-- x: 183..317 (ancho 134), y: 63..247 (alto 184) -->
+            <rect x="183" y="63" width="134" height="184" rx="6" fill="none" stroke="#38BDF8" stroke-width="2"/>
+
+            <!-- Barras superiores de montaje: 2 No. 4 -->
+            <circle cx="197" cy="77" r="5" fill="#64748B" stroke="#94A3B8" stroke-width="1"/>
+            <circle cx="303" cy="77" r="5" fill="#64748B" stroke="#94A3B8" stroke-width="1"/>
+            <text x="250" y="95" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">2 No. 4 (Montaje)</text>
+
+            <!-- 4 Barras No. 6 en 1 SOLA CAPA en tracción (y = 238 px) -->
+            <!-- Centros: 198, 233, 267, 302 -->
+            <circle cx="198" cy="238" r="7.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <circle cx="233" cy="238" r="7.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <circle cx="267" cy="238" r="7.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <circle cx="302" cy="238" r="7.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.8"/>
+            <text x="250" y="222" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">
+              4 No. 6 (As = 11.36 cm²)
+            </text>
+
+            <!-- Cotas de b = 300 mm -->
+            <line x1="165" y1="280" x2="335" y2="280" stroke="#F8FAFC" stroke-width="1.5"/>
+            <line x1="165" y1="275" x2="165" y2="285" stroke="#F8FAFC" stroke-width="1.5"/>
+            <line x1="335" y1="275" x2="335" y2="285" stroke="#F8FAFC" stroke-width="1.5"/>
+            <text x="250" y="295" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">b = 300 mm (30 cm)</text>
+
+            <!-- Cotas de h = 500 mm y d = 440 mm a la izquierda -->
+            <line x1="140" y1="45" x2="140" y2="265" stroke="#94A3B8" stroke-width="1.5"/>
+            <line x1="135" y1="45" x2="145" y2="45" stroke="#94A3B8" stroke-width="1.5"/>
+            <line x1="135" y1="265" x2="145" y2="265" stroke="#94A3B8" stroke-width="1.5"/>
+            <text x="130" y="155" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 130, 155)">h = 500 mm</text>
+
+            <line x1="152" y1="45" x2="152" y2="238" stroke="#FBBF24" stroke-width="1.5"/>
+            <line x1="148" y1="45" x2="156" y2="45" stroke="#FBBF24" stroke-width="1.5"/>
+            <line x1="148" y1="238" x2="156" y2="238" stroke="#FBBF24" stroke-width="1.5"/>
+            <text x="160" y="145" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle" transform="rotate(-90, 160, 145)">d = 440 mm</text>
+
+            <!-- Momento Flector Actuante Mu a la derecha -->
+            <path d="M 375 190 A 45 45 0 0 0 375 120" fill="none" stroke="#38BDF8" stroke-width="3"/>
+            <polygon points="375,115 365,128 382,125" fill="#38BDF8"/>
+            <text x="415" y="150" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700">Mu = 150 kN·m</text>
+            <text x="415" y="165" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5">f'c = 21 MPa</text>
+            <text x="415" y="179" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5">fy = 420 MPa</text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 3.6:</strong> Sección transversal de la viga del Ejemplo 3.1 ($300	ext{ mm} 	imes 500	ext{ mm}$, $M_u = 150	ext{ kN}\cdot	ext{m}$) reforzada con 4 barras No. 6 en una sola capa inferior.
+          </figcaption>
+        </figure>
+
+
+          <!-- CAJA MAESTRA DE SOLUCIÓN -->
+          <div class="example-solution-box">
+            <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+              <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+              <span class="btn-badge">Pizarra Docente</span>
+              <span class="arrow-icon">▼</span>
+            </button>
+            <div class="solution-body" style="display: none;">
+
+              <!-- PASO 1 -->
+              <div class="calc-step-card step-collapsed">
+                <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+                  <span class="calc-step-num">Paso 1</span>
+                  <span class="calc-step-title">Estimación del Peralte Efectivo ($d$) para 1 Capa de Refuerzo</span>
+                  <span class="step-toggle-icon">▼</span>
+                </div>
+                <div class="calc-step-content">
+                  <p>Asumiendo que la armadura longitudinal se alojará en <strong>una sola capa</strong> inferior con barras No. 6 ($d_b = 19.1\text{ mm}$):</p>
+                  <div class="step-math">
+                    $$d = h - r - d_{\text{estribo}} - \frac{d_b}{2} = 500\text{ mm} - 40\text{ mm} - 9.5\text{ mm} - \frac{19.1\text{ mm}}{2} = 440.95\text{ mm} \approx \mathbf{440\text{ mm}} \quad (0.440\text{ m})$$
+                  </div>
+                  <p>Al tener una sola fila de barras, el peralte extremo coincide con el peralte centroidal: $\mathbf{d_t = d = 440\text{ mm}}$.</p>
+                </div>
+              </div>
+
+              <!-- PASO 2 -->
+              <div class="calc-step-card step-collapsed">
+                <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+                  <span class="calc-step-num">Paso 2</span>
+                  <span class="calc-step-title">Límites Normativos de Cuantía ($\rho_{\min}$ y $\rho_{\text{trac}}$ para $\phi=0.90$)</span>
+                  <span class="step-toggle-icon">▼</span>
+                </div>
+                <div class="calc-step-content">
+                  <p><strong>1. Cuantía mínima a flexión (NSR-10 C.10.5.1):</strong></p>
+                  <div class="step-math">
+                    $$\rho_{\min} = \max\left(\frac{0.25\sqrt{f'_c}}{f_y},\; \frac{1.4}{f_y}\right) = \max\left(\frac{0.25\sqrt{21}}{420} = 0.00273,\; \frac{1.4}{420} = 0.00333\right) = \mathbf{0.00333}$$
+                    $$A_{s,\min} = \rho_{\min}\, b\, d = 0.00333 \times 300\text{ mm} \times 440\text{ mm} = 439.6\text{ mm}^2 \approx \mathbf{4.40\text{ cm}^2}$$
+                  </div>
+                  <p><strong>2. Cuantía balanceada ($\rho_b$) con $\beta_1 = 0.85$ ($f'_c = 21\text{ MPa} \le 28\text{ MPa}$):</strong></p>
+                  <div class="step-math">
+                    $$\rho_b = 0.85\,\beta_1\,\frac{f'_c}{f_y}\,\left(\frac{600}{600 + f_y}\right) = 0.85(0.85)\left(\frac{21}{420}\right)\left(\frac{600}{1020}\right) = \mathbf{0.02125}$$
+                  </div>
+                  <p><strong>3. Cuantía máxima para sección controlada por tracción ($\varepsilon_t \ge 0.005 \implies \phi = 0.90$, C.10.3.4):</strong></p>
+                  <div class="step-math">
+                    $$\rho_{\text{trac}} = 0.6375\,\rho_b = 0.6375 \times 0.02125 = \mathbf{0.01355}$$
+                    $$A_{s,\text{trac}} = \rho_{\text{trac}}\, b\, d = 0.01355 \times 300\text{ mm} \times 440\text{ mm} = 1788.6\text{ mm}^2 = \mathbf{17.89\text{ cm}^2}$$
+                  </div>
+                </div>
+              </div>
+
+              <!-- PASO 3 -->
+              <div class="calc-step-card step-collapsed">
+                <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+                  <span class="calc-step-num">Paso 3</span>
+                  <span class="calc-step-title">Cálculo Analítico de $\rho_{\text{req}}$ y $A_{s,\text{req}}$ por la Fórmula Cuadrática Resaltada</span>
+                  <span class="step-toggle-icon">▼</span>
+                </div>
+                <div class="calc-step-content">
+                  <p>Asumiendo inicialmente que la sección estará controlada por tracción ($\phi = 0.90$):</p>
+                  <div class="step-math">
+                    $$R_n = \frac{M_u}{\phi\, b\, d^2} = \frac{150 \times 10^6\text{ N}\cdot\text{mm}}{0.90 \times 300\text{ mm} \times (440\text{ mm})^2} = \frac{150 \times 10^6}{52\,272\,000} = \mathbf{2.8697\text{ MPa}}$$
+                  </div>
+                  <p>Aplicando la fórmula analítica exacta deducida a partir del equilibrio horizontal y el momento nominal:</p>
+                  <div class="step-math">
+                    $$\rho_{\text{req}} = \frac{0.85\, f'_c}{f_y} \left( 1 - \sqrt{1 - \frac{2\, R_n}{0.85\, f'_c}} \right) = \frac{0.85(21)}{420} \left( 1 - \sqrt{1 - \frac{2(2.8697)}{0.85(21)}} \right)$$
+                    $$\rho_{\text{req}} = 0.0425 \times \left( 1 - \sqrt{1 - \frac{5.7394}{17.85}} \right) = 0.0425 \times (1 - \sqrt{0.67846}) = 0.0425 \times (1 - 0.82369) = \mathbf{0.007493}$$
+                  </div>
+                  <p><strong>Verificación de cumplimiento de cuantías:</strong></p>
+                  <div class="step-math">
+                    $$\rho_{\min} = 0.00333 \le \rho_{\text{req}} = 0.007493 \le \rho_{\text{trac}} = 0.01355 \quad \checkmark \quad \text{(Viga Simplemente Reforzada Controlada por Tracción, } \phi = 0.90)$$
+                  </div>
+                  <p>Área de acero longitudinal requerida:</p>
+                  <div class="step-math">
+                    $$A_{s,\text{req}} = \rho_{\text{req}}\, b\, d = 0.007493 \times 300\text{ mm} \times 440\text{ mm} = 989.1\text{ mm}^2 = \mathbf{9.89\text{ cm}^2}$$
+                  </div>
+                </div>
+              </div>
+
+              <!-- PASO 4 -->
+              <div class="calc-step-card step-collapsed">
+                <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+                  <span class="calc-step-num">Paso 4</span>
+                  <span class="calc-step-title">Selección Comercial de Refuerzo en 1 Capa y Verificación de Ancho Mínimo ($b_{\min}$)</span>
+                  <span class="step-toggle-icon">▼</span>
+                </div>
+                <div class="calc-step-content">
+                  <p>Para suplir $A_{s,\text{req}} = 9.89\text{ cm}^2$ en una sola capa:</p>
+                  <ul>
+                    <li>Seleccionamos <strong>4 barras No. 6 ($d_b = 19.1\text{ mm}$, área unitaria $2.84\text{ cm}^2$)</strong>:</li>
+                  </ul>
+                  <div class="step-math">
+                    $$A_{s,\text{sum}} = 4 \times 2.84\text{ cm}^2 = \mathbf{11.36\text{ cm}^2} \quad (1136\text{ mm}^2) \ge 9.89\text{ cm}^2 \quad (+14.9\%)$$
+                  </div>
+                  <p><strong>Verificación del Ancho Mínimo de la Viga ($b_{\min}$) según NSR-10 C.7.6.1:</strong></p>
+                  <div class="step-math">
+                    $$s_{\text{libre}} \ge \max(d_b,\; 25\text{ mm},\; 1.33\, d_{\text{agg}}) = \max(19.1\text{ mm},\; 25\text{ mm},\; 1.33 \times 19\text{ mm} = 25.3\text{ mm}) = 25.4\text{ mm} \quad (1")$$
+                    $$b_{\min} = 2\, r + 2\, d_e + n\, d_b + (n - 1)\, s_{\text{libre}} = 2(40) + 2(9.5) + 4(19.1) + 3(25.4)$$
+                    $$b_{\min} = 80 + 19 + 76.4 + 76.2 = \mathbf{251.6\text{ mm}}$$
+                  </div>
+                  <div class="step-math">
+                    $$b = 300\text{ mm} > b_{\min} = 251.6\text{ mm} \quad \checkmark \quad \text{¡Las 4 barras No. 6 caben holgadamente en una sola capa!}$$
+                  </div>
+                  <p>Separación libre real entre barras:</p>
+                  <div class="step-math">
+                    $$s_{\text{libre, real}} = \frac{300 - 80 - 19 - 76.4}{3} = \frac{124.6}{3} = \mathbf{41.5\text{ mm}} > 25.4\text{ mm} \quad \checkmark$$
+                  </div>
+                </div>
+              </div>
+
+              <!-- PASO 5 -->
+              <div class="calc-step-card step-collapsed">
+                <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
+                  <span class="calc-step-num">Paso 5</span>
+                  <span class="calc-step-title">Equilibrio Seccional, Confirmación de $\varepsilon_t > 0.005$ ($\phi = 0.90$) y Capacidad $\phi M_n \ge M_u$</span>
+                  <span class="step-toggle-icon">▼</span>
+                </div>
+                <div class="calc-step-content">
+                  <p>Con $A_s = 1136\text{ mm}^2$ y $d_{\text{real}} = 440.95\text{ mm}$:</p>
+                  <div class="step-math">
+                    $$a = \frac{A_s\, f_y}{0.85\, f'_c\, b} = \frac{1136\text{ mm}^2 \times 420\text{ MPa}}{0.85 \times 21\text{ MPa} \times 300\text{ mm}} = \frac{477\,120}{5\,355} = \mathbf{89.10\text{ mm} \quad (8.91\text{ cm})}$$
+                    $$c = \frac{a}{\beta_1} = \frac{89.10\text{ mm}}{0.85} = \mathbf{104.82\text{ mm} \quad (10.48\text{ cm})}$$
+                  </div>
+                  <p>Deformación neta de tracción en la capa de acero ($d_t = 440.95\text{ mm}$):</p>
+                  <div class="step-math">
+                    $$\varepsilon_t = 0.003\,\left(\frac{d_t - c}{c}\right) = 0.003\,\left(\frac{440.95 - 104.82}{104.82}\right) = \mathbf{0.00962} > 0.005 \quad \implies \quad \mathbf{\phi = 0.90} \quad \text{(Falla Dúctil con Aviso)}$$
+                  </div>
+                  <p>Momento nominal resistente ($M_n$) y resistencia de diseño ($\phi M_n$):</p>
+                  <div class="step-math">
+                    $$M_n = A_s\, f_y\,\left(d - \frac{a}{2}\right) = 1136\text{ mm}^2 \times 420\text{ MPa} \times \left(440.95 - \frac{89.10}{2}\right) \times 10^{-6} = 477.12\text{ kN} \times 0.3964\text{ m} = \mathbf{189.13\text{ kN}\cdot\text{m}}$$
+                    $$\phi M_n = 0.90 \times 189.13\text{ kN}\cdot\text{m} = \mathbf{170.22\text{ kN}\cdot\text{m}}$$
+                  </div>
+                  <div class="step-math" style="background: rgba(34, 197, 94, 0.1); border: 1.5px solid #22C55E; padding: 0.85rem; border-radius: 6px;">
+                    $$\mathbf{\phi M_n = 170.22\text{ kN}\cdot\text{m} \ge M_u = 150.0\text{ kN}\cdot\text{m}} \qquad \left(\frac{M_u}{\phi M_n} = 0.881 \le 1.00 \quad \text{― Margen de sobre-resistencia: } +13.5\%\right) \quad \checkmark \; \textbf{CUMPLE SATISFACTORIAMENTE}$$
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div id="sec-ejemplo-02" style="margin-bottom: 2.5rem;">
+          <div class="example-toolbar">
+            <div>
+              <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                📝 Ejemplo 3.2: Diseño y Revisión de Viga Rectangular Simplemente Reforzada ($b = 400\text{ mm}, h = 650\text{ mm}, L = 10.0\text{ m}$)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Diseñar el refuerzo longitudinal a flexión y realizar la revisión final por compatibilidad de deformaciones para una viga simplemente apoyada de luz $L = 10.0\text{ m}$, sección transversal $b = 400\text{ mm}$ ($0.40\text{ m}$) y altura total $h = 650\text{ mm}$ ($0.65\text{ m}$), altura efectiva supuesta $d = 550\text{ mm}$ ($0.55\text{ m}$). La viga soporta una carga muerta sobreimpuesta $w_{D,\text{sob}} = 20.0\text{ kN/m}$ (adicional a su peso propio) y una carga viva de servicio $w_L = 18.0\text{ kN/m}$. Materiales: $f'_c = 28\text{ MPa}$, acero Grado 420 ($f_y = 420\text{ MPa}$), $\gamma_c = 24.0\text{ kN/m}^3$, recubrimiento libre $40\text{ mm}$ y estribos $\text{No. }3$.
               </p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', false)">🙈 Ocultar Pasos</button>
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', true)">👁️ Mostrar Todo</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', true)">👁️ Mostrar Todo</button>
             </div>
           </div>
 
@@ -1312,19 +1873,19 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
         <!-- ===============================================================
              EJEMPLO 3.2: DISEÑO Y REVISIÓN DE VIGA DOBLEMENTE REFORZADA
              =============================================================== -->
-        <div id="sec-ejemplo-02" style="margin-bottom: 2.5rem;">
+        <div id="sec-ejemplo-03" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.2: Diseño y Revisión de Viga Rectangular Doblemente Reforzada ($b = 350\text{ mm}, h = 600\text{ mm}, M_u = 780\text{ kN}\cdot\text{m}$)
+                📝 Ejemplo 3.3: Diseño y Revisión de Viga Rectangular Doblemente Reforzada ($b = 350\text{ mm}, h = 600\text{ mm}, M_u = 780\text{ kN}\cdot\text{m}$)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Por restricciones arquitectónicas de altura libre, una viga de entrepiso está limitada a una sección de $b = 350\text{ mm}$ y $h = 600\text{ mm}$ ($d = 515\text{ mm}$ para dos capas en tracción, $d_t = 540\text{ mm}$ a la fila extrema, y $d' = 60\text{ mm}$ al centroide del refuerzo a compresión). La sección debe resistir un momento mayorado $M_u = 780.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Diseñar el refuerzo a tracción ($A_s$) y a compresión ($A'_s$) garantizando que la sección sea controlada por tracción ($\varepsilon_t \ge 0.005, \phi = 0.90$).
               </p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', false)">🙈 Ocultar Pasos</button>
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', true)">👁️ Mostrar Todo</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-03', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-03', true)">👁️ Mostrar Todo</button>
             </div>
           </div>
 
@@ -1476,19 +2037,19 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
         <!-- ===============================================================
              EJEMPLO 3.3: DISEÑO Y REVISIÓN DE VIGA DE SECCIÓN EN T
              =============================================================== -->
-        <div id="sec-ejemplo-03" style="margin-bottom: 1.5rem;">
+        <div id="sec-ejemplo-04" style="margin-bottom: 1.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.3: Diseño de Viga T Interior Monolítica — Comparación Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$)
+                📝 Ejemplo 3.4: Diseño de Viga T Interior Monolítica — Comparación Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Una viga T interior forma parte de un entrepiso monolítico con luz simple $L = 6.00\text{ m}$, separación libre entre almas de vigas adyacentes $s_{\text{libre}} = 1.20\text{ m}$ ($120\text{ cm}$), espesor de loseta superior $h_f = 75\text{ mm}$ ($7.5\text{ cm}$), ancho del alma $b_w = 300\text{ mm}$ ($30\text{ cm}$), altura total $h = 550\text{ mm}$ y altura efectiva $d = 470\text{ mm}$ ($47.0\text{ cm}$). Concreto $f'_c = 21\text{ MPa}$ y acero $f_y = 420\text{ MPa}$. Determinar el ancho efectivo $b_{\text{ef}}$ y diseñar el acero a tracción para: <strong>(a)</strong> un momento moderado $M_u = 380\text{ kN}\cdot\text{m}$, y <strong>(b)</strong> un momento elevado $M_u = 720\text{ kN}\cdot\text{m}$.
               </p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-03', false)">🙈 Ocultar Pasos</button>
-              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-03', true)">👁️ Mostrar Todo</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-04', false)">🙈 Ocultar Pasos</button>
+              <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-04', true)">👁️ Mostrar Todo</button>
             </div>
           </div>
 
@@ -1618,16 +2179,16 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
       
 
         <!-- ===============================================================
-             EJEMPLO 3.4: VIGA CON ACERO EN DOS CAPAS Y DEFORMACIÓN \epsilon_t (MULET EJEMPLO 2.3)
+             EJEMPLO 3.4: VIGA CON ACERO EN DOS CAPAS Y DEFORMACIÓN \epsilon_t (EJEMPLO TÉCNICO APLICADO)
              =============================================================== -->
-        <div id="sec-ejemplo-04" style="margin-bottom: 2.5rem;">
+        <div id="sec-ejemplo-05" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.4: Revisión de Viga con Armadura en Dos Capas y Cálculo Riguroso de $\epsilon_t$ (Mulet Ejemplo 2.3)
+                📝 Ejemplo 3.5: Revisión de Viga con Armadura en Dos Capas y Cálculo Riguroso de $\varepsilon_t$ (Análisis de Deformación Unitaria)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
-                <strong>Enunciado (Adaptado de Emel Mulet, 2024, pág. 72):</strong> Para la viga rectangular mostrada en el esquema ($b = 300\text{ mm}, h = 600\text{ mm}$, $f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$), reforzada a tracción con $6\#8$ ($A_s = 3\,060\text{ mm}^2$) dispuestas en dos capas: $4\#8$ en la capa inferior extrema y $2\#8$ en la segunda capa superior separadas por una distancia libre de $25\text{ mm}$, con estribos $\#3$ y recubrimiento libre de $40\text{ mm}$. Calcule: <strong>1)</strong> El peralte efectivo al centroide del acero ($d$) y la distancia a la capa extrema ($d_t$); <strong>2)</strong> La profundidad del bloque de Whitney ($a$) y del eje neutro ($c$); <strong>3)</strong> Las deformaciones unitarias en el centroide ($\varepsilon_s$) y en la fibra más traccionada ($\varepsilon_t$), determinando con precisión el factor de reducción $\phi$ según NSR-10 C.9.3.2; <strong>4)</strong> El momento nominal resistente ($M_n$) y el momento de diseño final ($\phi M_n$).
+                <strong>Enunciado:</strong> Para la viga rectangular mostrada en el esquema ($b = 300\text{ mm}, h = 600\text{ mm}$, $f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$), reforzada a tracción con $6\#8$ ($A_s = 3\,060\text{ mm}^2$) dispuestas en dos capas: $4\#8$ en la capa inferior extrema y $2\#8$ en la segunda capa superior separadas por una distancia libre de $25\text{ mm}$, con estribos $\#3$ y recubrimiento libre de $40\text{ mm}$. Calcule: <strong>1)</strong> El peralte efectivo al centroide del acero ($d$) y la distancia a la capa extrema ($d_t$); <strong>2)</strong> La profundidad del bloque de Whitney ($a$) y del eje neutro ($c$); <strong>3)</strong> Las deformaciones unitarias en el centroide ($\varepsilon_s$) y en la fibra más traccionada ($\varepsilon_t$), determinando con precisión el factor de reducción $\phi$ según NSR-10 C.9.3.2; <strong>4)</strong> El momento nominal resistente ($M_n$) y el momento de diseño final ($\phi M_n$).
               </p>
             </div>
             <div class="example-toolbar-actions">
@@ -1792,7 +2353,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
                   \end{aligned}$$
                 </div>
                 <div class="callout warning" style="margin-top: 0.75rem;">
-                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Interpretación Teórica Crucial de Emel Mulet (2024, Cap. 2):</div>
+                  <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Interpretación Teórica Crucial de Deformación y Ductilidad:</div>
                   <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
                     Dado que $\varepsilon_y = 0.0021 \le \varepsilon_t = 0.00462 < 0.0050$, la sección se encuentra en la <strong>zona de transición</strong> (tracción no completamente controlada). Por consiguiente, el factor $\phi$ no es $0.90$, sino que se interpola linealmente:
                     $$\phi = 0.65 + (\varepsilon_t - 0.002) \left(\frac{0.25}{0.003}\right) = 0.65 + (0.00462 - 0.002) \times 83.33 = \mathbf{0.868}$$
@@ -1836,16 +2397,16 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
 
 
         <!-- ===============================================================
-             EJEMPLO 3.5: VIGA DOBLEMENTE REFORZADA CON f's < fy (MULET CAP. 3, CASO C / EJEMPLO 3.3)
+             EJEMPLO 3.5: VIGA DOBLEMENTE REFORZADA CON f's < fy (CASO C: ACERO A COMPRESIÓN EN RANGO ELÁSTICO)
              =============================================================== -->
-        <div id="sec-ejemplo-05" style="margin-bottom: 2.5rem;">
+        <div id="sec-ejemplo-06" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.5: Viga Doblemente Reforzada cuando el Acero a Compresión NO Fluye ($f'_s < f_y$) (Mulet Ejemplo 3.3)
+                📝 Ejemplo 3.6: Viga Doblemente Reforzada cuando el Acero a Compresión NO Fluye ($f'_s < f_y$) (Verificación de Fluencia en Acero a Compresión)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
-                <strong>Enunciado (Emel Mulet, 2024, Cap. 3, pág. 98):</strong> Una viga rectangular de sección $b = 300\text{ mm}$, peralte efectivo $d = 520\text{ mm}$, recubrimiento mecánico superior $d' = 60\text{ mm}$, fabricada con concreto $f'_c = 21\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$), tiene una armadura de tracción de $5\#8$ ($A_s = 2\,550\text{ mm}^2$) y una armadura de compresión de $3\#6$ ($A'_s = 852\text{ mm}^2$). Se pide: <strong>1)</strong> Comprobar si la armadura de compresión fluye ($f'_s = f_y$); <strong>2)</strong> Formular la ecuación de equilibrio cuadrática para determinar el eje neutro real ($c$) considerando que $f'_s < f_y$; <strong>3)</strong> Determinar el esfuerzo real en el acero a compresión ($f'_s$) y las fuerzas internas ($C_c, C'_s, T_s$); <strong>4)</strong> Evaluar $\varepsilon_t$, $\phi$ y la capacidad de diseño $\phi M_n$.
+                <strong>Enunciado:</strong> Una viga rectangular de sección $b = 300\text{ mm}$, peralte efectivo $d = 520\text{ mm}$, recubrimiento mecánico superior $d' = 60\text{ mm}$, fabricada con concreto $f'_c = 21\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$), tiene una armadura de tracción de $5\#8$ ($A_s = 2\,550\text{ mm}^2$) y una armadura de compresión de $3\#6$ ($A'_s = 852\text{ mm}^2$). Se pide: <strong>1)</strong> Comprobar si la armadura de compresión fluye ($f'_s = f_y$); <strong>2)</strong> Formular la ecuación de equilibrio cuadrática para determinar el eje neutro real ($c$) considerando que $f'_s < f_y$; <strong>3)</strong> Determinar el esfuerzo real en el acero a compresión ($f'_s$) y las fuerzas internas ($C_c, C'_s, T_s$); <strong>4)</strong> Evaluar $\varepsilon_t$, $\phi$ y la capacidad de diseño $\phi M_n$.
               </p>
             </div>
             <div class="example-toolbar-actions">
@@ -1949,7 +2510,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
               <div class="math-card normative-blue">
                 <div class="math-card-header">
                   <span class="math-card-title">1.1 Límite de Cuantía para Fluencia del Refuerzo a Compresión</span>
-                  <span class="norm-pill">Mulet Cap. 3 (Ecuación 3.10)</span>
+                  <span class="norm-pill">Compatibilidad de Deformaciones</span>
                 </div>
                 <div class="math-formula">
                   $$\begin{aligned}
@@ -1982,7 +2543,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
               <div class="math-card normative-amber">
                 <div class="math-card-header">
                   <span class="math-card-title">2.1 Deducción de la Ecuación de Segundo Grado en $c$</span>
-                  <span class="norm-pill">Mulet Cap. 3 (Caso c)</span>
+                  <span class="norm-pill">NSR-10 C.10.2 (Rango Elástico)</span>
                 </div>
                 <div class="math-formula">
                   $$\begin{aligned}
@@ -2065,16 +2626,16 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
 
 
         <!-- ===============================================================
-             EJEMPLO 3.6: VIGA T CON a > hf EN EL ALMA (MULET SECCIÓN 3.3 / EJEMPLO 3.5)
+             EJEMPLO 3.6: VIGA T CON a > hf EN EL ALMA (MÉTODO DE DESCOMPOSICIÓN EN DOS PARES)
              =============================================================== -->
-        <div id="sec-ejemplo-06" style="margin-bottom: 2.5rem;">
+        <div id="sec-ejemplo-07" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 3.6: Diseño de Viga T cuando el Eje Neutro Penetra en el Alma ($a > h_f$) (Mulet Ejemplo 3.5)
+                📝 Ejemplo 3.7: Diseño de Viga T cuando el Eje Neutro Penetra en el Alma ($a > h_f$) (Descomposición en Par de Alas y Par del Alma)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
-                <strong>Enunciado (Emel Mulet, 2024, Sección 3.3, pág. 106):</strong> Se proyecta una viga T aislada con ancho de aleta efectivo $b = 900\text{ mm}$, espesor de aleta $h_f = 100\text{ mm}$, ancho de alma $b_w = 300\text{ mm}$, peralte efectivo $d = 600\text{ mm}$ y altura total $h = 670\text{ mm}$. La sección está sometida a un momento último factorizado positivo $M_u = 980.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$. Se requiere: <strong>1)</strong> Verificar analíticamente si el bloque de compresión de Whitney queda confinado en la losa ($a \le h_f$) o si penetra en el alma ($a > h_f$); <strong>2)</strong> Descomponer la sección en el aporte de las aletas sobresalientes ($M_{nf}, A_{sf}$) y del alma ($M_{nw}, A_{sw}$); <strong>3)</strong> Determinar la armadura longitudinal total a tracción ($A_s$) y la profundidad exacta del bloque de compresión en el alma ($a$); <strong>4)</strong> Verificar las cuantías límites normativas ($\rho_w \ge \rho_{w,\min}$ y $\rho_w \le \rho_{w,\max}$) y la deformación unitaria $\varepsilon_t$.
+                <strong>Enunciado:</strong> Se proyecta una viga T aislada con ancho de aleta efectivo $b = 900\text{ mm}$, espesor de aleta $h_f = 100\text{ mm}$, ancho de alma $b_w = 300\text{ mm}$, peralte efectivo $d = 600\text{ mm}$ y altura total $h = 670\text{ mm}$. La sección está sometida a un momento último factorizado positivo $M_u = 980.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$. Se requiere: <strong>1)</strong> Verificar analíticamente si el bloque de compresión de Whitney queda confinado en la losa ($a \le h_f$) o si penetra en el alma ($a > h_f$); <strong>2)</strong> Descomponer la sección en el aporte de las aletas sobresalientes ($M_{nf}, A_{sf}$) y del alma ($M_{nw}, A_{sw}$); <strong>3)</strong> Determinar la armadura longitudinal total a tracción ($A_s$) y la profundidad exacta del bloque de compresión en el alma ($a$); <strong>4)</strong> Verificar las cuantías límites normativas ($\rho_w \ge \rho_{w,\min}$ y $\rho_w \le \rho_{w,\max}$) y la deformación unitaria $\varepsilon_t$.
               </p>
             </div>
             <div class="example-toolbar-actions">
@@ -2173,7 +2734,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
               <div class="math-card normative-blue">
                 <div class="math-card-header">
                   <span class="math-card-title">1.1 Capacidad Resistente Límite con Bloque Confinado en el Patín ($a = h_f$)</span>
-                  <span class="norm-pill">Mulet Cap. 3 & NSR-10 C.10.3</span>
+                  <span class="norm-pill">NSR-10 C.10.3 (Vigas T)</span>
                 </div>
                 <div class="math-formula">
                   $$\begin{aligned}
@@ -2184,7 +2745,7 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
                 <div class="callout warning" style="margin-top: 0.75rem;">
                   <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Diagnóstico Seccional Ineludible:</div>
                   <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
-                    Dado que el momento flector actuante $M_u = \mathbf{980.0\text{ kN}\cdot\text{m}} > M_{uf} = 715.4\text{ kN}\cdot\text{m}$, la zona de compresión requiere una profundidad $a > 100\text{ mm}$, por lo que el bloque de Whitney <strong>penetra profundamente en el alma</strong>. Es obligatorio aplicar el método de dos componentes de la NSR-10 y Mulet (2024).
+                    Dado que el momento flector actuante $M_u = \mathbf{980.0\text{ kN}\cdot\text{m}} > M_{uf} = 715.4\text{ kN}\cdot\text{m}$, la zona de compresión requiere una profundidad $a > 100\text{ mm}$, por lo que el bloque de Whitney <strong>penetra profundamente en el alma</strong>. Es obligatorio aplicar el método de dos componentes de la NSR-10 (C.10.3.3).
                   </div>
                 </div>
               </div>
@@ -2273,10 +2834,10 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
                   \end{aligned}$$
                 </div>
                 <div class="math-vars">
-                  <div><strong>Verificaciones Normativas Finales (Mulet Cap. 3):</strong></div>
+                  <div><strong>Verificaciones Normativas Finales (NSR-10 C.10):</strong></div>
                   <div>• Cuantía mínima en el alma: $\rho_{w,\min} = \frac{1.4}{420} = 0.0033 \le \rho_w = 0.01395 \quad \checkmark$</div>
                   <div>• Cuantía máxima para tracción controlada en el alma: $\rho_{w,\max} = 0.0181 \ge \rho_w = 0.01395 \quad \checkmark$</div>
-                  <div>• <strong>Conclusión Técnica:</strong> La descomposición analítica de la viga T reproduce con exactitud los postulados teóricos del Prof. Emel Mulet (2024), asegurando que las alas absorban el $54\%$ del momento total y el alma el $46\%$ restante con comportamiento perfectamente dúctil.</div>
+                  <div>• <strong>Conclusión Técnica:</strong> La descomposición analítica de la viga T reproduce con exactitud los postulados analíticos de diseño seccional, asegurando que las alas absorban el $54\%$ del momento total y el alma el $46\%$ restante con comportamiento perfectamente dúctil.</div>
                 </div>
               </div>
             </div>
@@ -2310,6 +2871,8 @@ ho_{\max}$; y Capítulo 3: Vigas con armadura de compresión con verificación r
     <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 7</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

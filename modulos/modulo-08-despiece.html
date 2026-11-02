@@ -54,19 +54,6 @@
     </div>
   </header>
 
-  <!-- HUD DEL MODO PRESENTACIÓN -->
-  <div id="presentation-hud" class="presentation-hud" style="display: none;">
-    <div class="hud-left">
-      <span class="hud-badge">DIAPOSITIVA <span id="hud-slide-num">1</span> / <span id="hud-total-slides">8</span></span>
-      <span class="hud-slide-title" id="hud-slide-title">Mecánica de la Adherencia Acero-Concreto</span>
-    </div>
-    <div class="hud-right">
-      <button id="hud-prev" class="btn-control">◀ Anterior</button>
-      <button id="hud-next" class="btn-control btn-accent">Siguiente ▶</button>
-      <button id="hud-exit" class="btn-control">✕ Salir</button>
-    </div>
-  </div>
-
   <div class="main-layout">
     <!-- PANEL DE NAVEGACIÓN LATERAL -->
     <aside class="sidebar">
@@ -1543,7 +1530,7 @@
             <div class="example-header">
               <div class="example-title-area">
                 <span class="example-number">EJEMPLO 8.5</span>
-                <h3>Longitud de Desarrollo a Compresión (\(l_{dc}\)) con Confinamiento de Estribos: Barras de Columna en Zapata (NSR-10 C.12.3 y Mulet Cap. 5)</h3>
+                <h3>Longitud de Desarrollo a Compresión (\(l_{dc}\)) con Confinamiento de Estribos: Barras de Columna en Zapata (NSR-10 C.12.3 y Mecánica de Adherencia)</h3>
               </div>
               <div class="example-actions">
                 <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex85', true)">Expandir Todo</button>
@@ -1560,7 +1547,7 @@
               <p>
                 <em>Se pide:</em><br>
                 1. Calcular la longitud básica de desarrollo a compresión \(l_{dcb}\) según NSR-10 C.12.3.2.<br>
-                2. Determinar los factores de modificación por confinamiento de estribos (\(\psi_c\)) y exceso de armadura (\(\psi_{ex}\)) conforme a C.12.3.3 y Mulet Rodríguez (2024, Cap. 5).<br>
+                2. Determinar los factores de modificación por confinamiento de estribos (\(\psi_c\)) y exceso de armadura (\(\psi_{ex}\)) conforme a C.12.3.3 y la teoría de adherencia acero-concreto.<br>
                 3. Calcular la longitud de anclaje final requerida \(l_{dc}\) y verificar los límites mínimos del código.<br>
                 4. Comparar el resultado con la longitud requerida si la barra estuviese sometida a tracción (\(l_d\)), analizando la mecánica física de la adherencia en compresión vs. tracción.<br>
                 5. Elaborar el detalle técnico y gráfico acotado del despiece y remate inferior de los espigos.
@@ -1612,7 +1599,7 @@
               </button>
               <div class="step-content" id="ex85-step-2">
                 <p>
-                  El reglamento NSR-10 (C.12.3.3) y el texto guía de <em>Mulet Rodríguez (2024, Sección 5.4)</em> contemplan factores reductores para barras a compresión:
+                  El reglamento NSR-10 (C.12.3.3) y la literatura técnica especializada de detallamiento estructural contemplan factores reductores para barras a compresión:
                 </p>
                 <ul>
                   <li>
@@ -1663,7 +1650,7 @@
                     <tr>
                       <th>Estado de Esfuerzo</th>
                       <th>Longitud Requerida</th>
-                      <th>Mecánica de Adherencia (Mulet Cap. 5)</th>
+                      <th>Mecánica de Adherencia (Mecánica de Anclaje)</th>
                       <th>Eficacia de Ganchos</th>
                     </tr>
                   </thead>
@@ -1749,7 +1736,7 @@
             <div class="example-header">
               <div class="example-title-area">
                 <span class="example-number">EJEMPLO 8.6</span>
-                <h3>Anclaje de Refuerzo Positivo en Apoyos Simples: Comprobación de la Ecuación \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) (NSR-10 C.12.11.3 y Mulet Cap. 5)</h3>
+                <h3>Anclaje de Refuerzo Positivo en Apoyos Simples: Comprobación de la Ecuación \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) (NSR-10 C.12.11.3 y Mecánica de Adherencia)</h3>
               </div>
               <div class="example-actions">
                 <button class="btn-control btn-sm" onclick="toggleAllExampleSteps('ex86', true)">Expandir Todo</button>
@@ -1768,7 +1755,7 @@
                 1. Verificar el porcentaje reglamentario de armadura positiva que debe ingresar al apoyo según NSR-10 C.12.11.1.<br>
                 2. Calcular la resistencia nominal a flexión \(M_n\) provista exclusivamente por las barras que penetran al apoyo (\(2\text{ No. 6}\)).<br>
                 3. Determinar la longitud de prolongación \(l_a\) más allá del eje central del apoyo.<br>
-                4. Evaluar el cumplimiento del límite reglamentario \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) estipulado en NSR-10 C.12.11.3 y Mulet Rodríguez (2024, Sección 5.5).<br>
+                4. Evaluar el cumplimiento del límite reglamentario \(l_d \le 1.30 \frac{M_n}{V_u} + l_a\) estipulado en NSR-10 C.12.11.3 y recomendaciones de diseño seccional.<br>
                 5. Elaborar el esquema longitudinal SVG acotado con el diagrama de cortante, ubicación del eje de apoyo y envolvente resistente.
               </p>
             </div>
@@ -1865,7 +1852,7 @@
                 <div class="callout callout-success">
                   <strong>Comprobación de la inecuación C.12-25 de NSR-10:</strong>
                   \[ l_d \le 1.30 \frac{M_n}{V_u} + l_a \iff 667\text{ mm} \le 1040\text{ mm} \quad \mathbf{\checkmark \text{ [CUMPLE CON GRAN MARGEN DE SEGURIDAD]}} \]
-                  <em>Conclusión estructural (Mulet Rodríguez, 2024):</em> Las 2 barras No. 6 prolongadas no requieren ser ancladas con ganchos a \(90^\circ\) en el apoyo; el anclaje recto de \(350\text{ mm}\) en el muro garantiza plenamente la transmisión de tensiones sin riesgo de deslizamiento por la biela inclinada de cortante.
+                  <em>Conclusión estructural (Criterio de Detallamiento):</em> Las 2 barras No. 6 prolongadas no requieren ser ancladas con ganchos a \(90^\circ\) en el apoyo; el anclaje recto de \(350\text{ mm}\) en el muro garantiza plenamente la transmisión de tensiones sin riesgo de deslizamiento por la biela inclinada de cortante.
                 </div>
               </div>
             </div>
@@ -2044,7 +2031,7 @@
               </button>
               <div class="step-content" id="ex87-step-3">
                 <p>
-                  En el borde libre del balcón, la barra No. 4 no puede dejarse recta ya que el recubrimiento frontal (\(25\text{ mm}\)) no proporciona anclaje y el empuje de la baranda puede fracturar la esquina. Según las buenas prácticas de despiece (Mulet Rodríguez, 2024, Cap. 5 y 6):
+                  En el borde libre del balcón, la barra No. 4 no puede dejarse recta ya que el recubrimiento frontal (\(25\text{ mm}\)) no proporciona anclaje y el empuje de la baranda puede fracturar la esquina. Según las buenas prácticas de despiece (Buenas Prácticas de Detallamiento):
                 </p>
                 <ul>
                   <li>
@@ -2142,15 +2129,14 @@
           </div>
 
 
-        <!-- REFERENCIA BIBLIOGRÁFICA MULET RODRÍGUEZ -->
+        <!-- REFERENCIA BIBLIOGRÁFICA DE TEXTO GUÍA NACIONAL -->
         <div class="callout callout-info" style="margin-top:35px; border-left:4px solid var(--accent); background:rgba(30, 41, 59, 0.7);">
           <div style="display:flex; align-items:flex-start; gap:16px;">
             <div style="font-size:2rem; line-height:1;">📚</div>
             <div>
               <h4 style="margin:0 0 8px 0; color:var(--accent);">Texto Guía de Referencia y Verificación Normativa</h4>
               <p style="margin:0 0 6px 0; font-size:0.95rem; color:var(--text-secondary);">
-                <strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>. Editorial Universidad de Sucre, Colombia. ISBN: 978-628-95009-7-4.
-              </p>
+                <strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>, Edición Académica Nacional.</p>
               <p style="margin:0; font-size:0.88rem; color:var(--text-muted);">
                 Capítulo 5: <em>Longitud de desarrollo y anclaje de armaduras</em> (Secciones 5.1 a 5.6: Adherencia, desarrollo a tracción y compresión, ganchos estándar a 90° y 180°, empalmes por traslapo en zonas de rótula plástica y reglas de corte y prolongación de barras en vigas continuas y voladizos).
               </p>
@@ -2180,6 +2166,8 @@
     <button class="hud-btn" onclick="prevSlide()">◀ Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente ▶</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

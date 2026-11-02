@@ -54,19 +54,6 @@
     </div>
   </header>
 
-  <!-- HUD DEL MODO PRESENTACIÓN -->
-  <div id="presentation-hud" class="presentation-hud" style="display: none;">
-    <div class="hud-left">
-      <span class="hud-badge">DIAPOSITIVA <span id="hud-slide-num">1</span> / <span id="hud-total-slides">8</span></span>
-      <span class="hud-slide-title" id="hud-slide-title">Filosofía Sismorresistente y Niveles de Amenaza</span>
-    </div>
-    <div class="hud-right">
-      <button id="hud-prev" class="btn-control">◀ Anterior</button>
-      <button id="hud-next" class="btn-control btn-accent">Siguiente ▶</button>
-      <button id="hud-exit" class="btn-control">✕ Salir</button>
-    </div>
-  </div>
-
   <div class="main-layout">
     <!-- PANEL DE NAVEGACIÓN LATERAL -->
     <aside class="sidebar">
@@ -2172,15 +2159,14 @@
           </div>
 
 
-        <!-- REFERENCIA BIBLIOGRÁFICA MULET RODRÍGUEZ -->
+        <!-- REFERENCIA BIBLIOGRÁFICA DE TEXTO GUÍA NACIONAL -->
         <div class="callout callout-info" style="margin-top:35px; border-left:4px solid var(--accent); background:rgba(30, 41, 59, 0.7);">
           <div style="display:flex; align-items:flex-start; gap:16px;">
             <div style="font-size:2rem; line-height:1;">📚</div>
             <div>
               <h4 style="margin:0 0 8px 0; color:var(--accent);">Texto Guía de Referencia y Verificación Normativa</h4>
               <p style="margin:0 0 6px 0; font-size:0.95rem; color:var(--text-secondary);">
-                <strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>. Editorial Universidad de Sucre, Colombia. ISBN: 978-628-95009-7-4.
-              </p>
+                <strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño según NSR-10</em>, Edición Académica Nacional.</p>
               <p style="margin:0; font-size:0.88rem; color:var(--text-muted);">
                 Capítulos 3, 4 y Fundamentos de Ductilidad Sísmica: <em>Diseño sismorresistente, mecanismos de disipación de energía, confinamiento en zonas de rótula plástica, cortante por capacidad, nudos rígidos y vigas de acoplamiento conforme a NSR-10 Título C (Capítulo C.21).</em>
               </p>
@@ -2210,6 +2196,8 @@
     <button class="hud-btn" onclick="prevSlide()">◀ Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente ▶</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

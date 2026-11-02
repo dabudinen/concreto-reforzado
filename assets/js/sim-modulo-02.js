@@ -749,17 +749,18 @@
 
       // 3. Predimensionamiento de la Columna (NSR-10 C.10.3.6.2 y C.21)
       const phiCol = 0.65;
-      const fEffMPa = 0.80 * phiCol * (0.85 * fc * (1.0 - rho) + fy * rho);
+      // Factor 0.75 por excentricidad accidental en columnas con estribos (NSR-10 Ec. C.10-2)
+      const fEffMPa = 0.75 * phiCol * (0.85 * fc * (1.0 - rho) + fy * rho);
       const AgReqStrengthCm2 = ((PuDesign * 1000.0) / fEffMPa) / 100.0;
 
       let bMinSeismicCm = 20;
-      let AgMinSeismicCm2 = 400;
+      let AgMinSeismicCm2 = 600; // DMI: Ag >= 60 000 mm2 (600 cm2), rec. CR10.8 lado min 200 mm
       if (diss === 'DMO') {
         bMinSeismicCm = 25;
-        AgMinSeismicCm2 = 625;
+        AgMinSeismicCm2 = 625; // DMO: Ag >= 62 500 mm2 (625 cm2), C.21.3.5.1
       } else if (diss === 'DES') {
         bMinSeismicCm = 30;
-        AgMinSeismicCm2 = 900;
+        AgMinSeismicCm2 = 900; // DES: Ag >= 90 000 mm2 (900 cm2), C.21.6.1
       }
 
       const AgGovCm2 = Math.max(AgReqStrengthCm2, AgMinSeismicCm2);

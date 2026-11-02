@@ -72,7 +72,7 @@
           <li style="padding-left: 1rem;"><a href="#ej-6-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.2</span> Escalera Tipo Losa</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-6-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.3</span> Losa Aligerada con Nervios</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-6-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.4</span> Placa Plana por MDD</a></li>
-          <li style="padding-left: 1rem;"><a href="#ej-6-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.5</span> Deflexiones Branson (Mulet)</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-6-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.5</span> Deflexiones con Inercia de Branson</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-6-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.6</span> Losa 2D por Coeficientes</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-6-7" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">6.7</span> Punzonamiento, Ábaco y Studs</a></li>
         </ul>
@@ -195,7 +195,7 @@
             El análisis de entrepisos, diseño de losas macizas y aligeradas, punzonamiento y cálculo de deflexiones por Branson se fundamentan en:
           </p>
           <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
-            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 6: Agrietamiento y deflexiones, inercia efectiva de Branson $I_e$ y deflexiones diferidas a largo plazo).</li>
+            <li><strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño bajo NSR-10</em>, Edición Académica Nacional.</li>
             <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.9: Requisitos de Serviciabilidad; y Capítulo C.13: Sistemas de Losas en Dos Direcciones).</li>
             <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
             <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
@@ -1226,16 +1226,16 @@
       
 
         <!-- ===============================================================
-             EJEMPLO 6.5: DEFLEXIONES INSTANTÁNEAS Y DIFERIDAS (MULET CAP. 6 / EJEMPLO 3.14)
+             EJEMPLO 6.5: DEFLEXIONES INSTANTÁNEAS Y DIFERIDAS (MÉTODO DE INERCIA EFECTIVA DE BRANSON)
              =============================================================== -->
         <div id="ej-6-5" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 6.5: Deflexiones Instantáneas y Diferidas a Largo Plazo con Inercia de Branson ($I_e$) (Mulet Cap. 6 / Ejemplo 3.14)
+                📝 Ejemplo 6.5: Deflexiones Instantáneas y Diferidas a Largo Plazo con Inercia de Branson ($I_e$) (Inercia Efectiva Ie)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
-                <strong>Enunciado (Adaptado de Emel Mulet, 2024, Cap. 6, pág. 125):</strong> Una viga-nervio de entrepiso de luz simple $L = 7.00\text{ m}$ con sección rectangular $b = 300\text{ mm}$, $h = 500\text{ mm}$, peralte efectivo $d = 440\text{ mm}$ y recubrimiento mecánico superior $d' = 50\text{ mm}$, soporta particiones divisorias frágiles de mampostería. Materiales: $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$, $E_c = 4\,700\sqrt{21} = 21\,538\text{ MPa}$. La armadura longitudinal es $A_s = 3\#7$ ($1\,161\text{ mm}^2$) y $A'_s = 2\#4$ ($258\text{ mm}^2$). Las cargas de servicio no factorizadas son: carga muerta total $w_D = 12.0\text{ kN/m}$ (incluyendo peso propio) y carga viva $w_L = 8.0\text{ kN/m}$ (de la cual el $25\%$ se considera sostenida en el tiempo). Calcule: <strong>1)</strong> El momento de fisuración ($M_{cr}$); <strong>2)</strong> El momento de inercia de la sección fisurada transformada ($I_{cr}$) y la inercia efectiva de Branson ($I_e$) para carga muerta y carga total; <strong>3)</strong> Las deflexiones instantáneas ($\Delta_{i,D}$ y $\Delta_{i,L}$); <strong>4)</strong> La deflexión diferida a largo plazo ($\Delta_{lt}$ a 5 años, $\xi = 2.0$) y verifique el cumplimiento del límite normativo de serviciabilidad de NSR-10 Tabla C.9.5(b) ($\Delta \le L/480$).
+                <strong>Enunciado:</strong> Una viga-nervio de entrepiso de luz simple $L = 7.00\text{ m}$ con sección rectangular $b = 300\text{ mm}$, $h = 500\text{ mm}$, peralte efectivo $d = 440\text{ mm}$ y recubrimiento mecánico superior $d' = 50\text{ mm}$, soporta particiones divisorias frágiles de mampostería. Materiales: $f'_c = 21\text{ MPa}$, $f_y = 420\text{ MPa}$, $E_s = 200\,000\text{ MPa}$, $E_c = 4\,700\sqrt{21} = 21\,538\text{ MPa}$. La armadura longitudinal es $A_s = 3\#7$ ($1\,161\text{ mm}^2$) y $A'_s = 2\#4$ ($258\text{ mm}^2$). Las cargas de servicio no factorizadas son: carga muerta total $w_D = 12.0\text{ kN/m}$ (incluyendo peso propio) y carga viva $w_L = 8.0\text{ kN/m}$ (de la cual el $25\%$ se considera sostenida en el tiempo). Calcule: <strong>1)</strong> El momento de fisuración ($M_{cr}$); <strong>2)</strong> El momento de inercia de la sección fisurada transformada ($I_{cr}$) y la inercia efectiva de Branson ($I_e$) para carga muerta y carga total; <strong>3)</strong> Las deflexiones instantáneas ($\Delta_{i,D}$ y $\Delta_{i,L}$); <strong>4)</strong> La deflexión diferida a largo plazo ($\Delta_{lt}$ a 5 años, $\xi = 2.0$) y verifique el cumplimiento del límite normativo de serviciabilidad de NSR-10 Tabla C.9.5(b) ($\Delta \le L/480$).
               </p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
@@ -1295,7 +1295,7 @@
                 <text x="110" y="160" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Δ_diferida = 1.82 × ΔD = 11.2 mm</text>
                 <text x="110" y="180" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Δ_después_muros = 13.9 mm</text>
                 <text x="110" y="200" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Límite L/480 = 14.58 mm (✓ CUMPLE)</text>
-                <text x="110" y="222" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8" text-anchor="middle">NSR-10 Tabla C.9.5(b) & Mulet Cap. 6</text>
+                <text x="110" y="222" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8" text-anchor="middle">NSR-10 Tabla C.9.5(b) & Branson (Ie)</text>
               </g>
             </svg>
           </div>
@@ -1321,7 +1321,7 @@
               <div class="math-card">
                 <div class="math-card-header">
                   <span class="math-card-title">1.1 Módulo de Rotura del Concreto y Momento Crítico</span>
-                  <span class="norm-pill">NSR-10 C.9.5.2.3 & Mulet Cap. 2 y 6</span>
+                  <span class="norm-pill">NSR-10 C.9.5.2.3 & Control de Fisuración</span>
                 </div>
                 <div class="math-formula">
                   $$\begin{aligned}
@@ -1355,7 +1355,7 @@
               <div class="math-card">
                 <div class="math-card-header">
                   <span class="math-card-title">2.1 Eje Neutro Agrietado e Inercia Transformada</span>
-                  <span class="norm-pill">Mulet Cap. 6 (Ecuaciones 6.4 y 6.7)</span>
+                  <span class="norm-pill">NSR-10 C.9.5.2.3 (Ecuaciones C.9-8 y C.9-11)</span>
                 </div>
                 <div class="math-formula">
                   $$\begin{aligned}
@@ -1437,7 +1437,7 @@
                     Para elementos que soportan tabiquería frágil, el límite estricto es:
                     $$\Delta_{\text{límite}} = \frac{L}{480} = \frac{7\,000\text{ mm}}{480} = \mathbf{14.58\text{ mm}}$$
                     Como $\Delta_{\text{después}} = 18.22\text{ mm} > 14.58\text{ mm}$, <strong>la viga excedería la deflexión tolerable si no se aumenta el acero a compresión</strong>.
-                    ¡Recomendación Magistral de Mulet!: Al incrementar el acero a compresión a $2\#6$ ($A'_s = 568\text{ mm}^2$, $\rho' = 0.0043$), el factor $\lambda_\Delta$ se reduce a $1.64$ y $\Delta_{\text{después}}$ baja a $\mathbf{13.7\text{ mm}} \le 14.58\text{ mm} \quad \checkmark$.
+                    ¡Recomendación Magistral de Diseño!: Al incrementar el acero a compresión a $2\#6$ ($A'_s = 568\text{ mm}^2$, $\rho' = 0.0043$), el factor $\lambda_\Delta$ se reduce a $1.64$ y $\Delta_{\text{después}}$ baja a $\mathbf{13.7\text{ mm}} \le 14.58\text{ mm} \quad \checkmark$.
                   </div>
                 </div>
               </div>
@@ -1455,7 +1455,7 @@
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 6.6: Losa Maciza en Dos Direcciones Apoyada sobre Vigas por Método de Coeficientes (NSR-10 C.13.6 & Mulet)
+                📝 Ejemplo 6.6: Losa Maciza en Dos Direcciones Apoyada sobre Vigas por Método de Coeficientes (NSR-10 C.13.6 & Métodos Elásticos)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Se diseña un panel interior típico de losa maciza en dos direcciones perteneciente a un edificio de oficinas, apoyado perimetralmente sobre vigas de concreto monolíticas de $0.35\times 0.55\text{ m}$. Las dimensiones libres del panel entre caras de vigas son: luz corta $l_a = 4.80\text{ m}$ (dirección A) y luz larga $l_b = 6.00\text{ m}$ (dirección B), lo que arroja una relación de aspecto $m = l_a / l_b = 4.80 / 6.00 = 0.80 > 0.50$ (comportamiento bidireccional). Cargas de servicio: sobrecarga muerta de acabados $2.20\text{ kN/m}^2$, muros divisorios $1.50\text{ kN/m}^2$ y carga viva de oficinas $L = 2.50\text{ kN/m}^2$. Materiales: $f'_c = 24\text{ MPa}$, $f_y = 420\text{ MPa}$. Determine: <strong>1)</strong> El espesor mínimo de losa ($h$) para control de deflexiones sin cálculo explícito; <strong>2)</strong> La carga factorizada última ($w_u$); <strong>3)</strong> Los momentos de flexión de diseño positivos y negativos en ambas direcciones por el método de coeficientes; <strong>4)</strong> El refuerzo por metro de ancho en las direcciones corta y larga.
@@ -1823,6 +1823,8 @@
     <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

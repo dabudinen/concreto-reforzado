@@ -1,407 +1,1057 @@
 /* ==========================================================================
+
    CORE JS — DIPLOMADO EN DISEÑO ESTRUCTURAL DE CONCRETO REFORZADO (NSR-10)
+
    Control de Modo Dual (Estudio / Clase Magistral), Puntero Láser, Tema,
+
    Lightbox de Imágenes, Scroll-Spy y Renderizado KaTeX
+
    ========================================================================== */
 
+
+
 (function () {
+
   'use strict';
 
+
+
   let isPresentationMode = false;
+
   let isLaserMode = false;
+
   let currentSlideIndex = 0;
+
   let slides = [];
 
+
+
   document.addEventListener('DOMContentLoaded', () => {
+
     initTheme();
+
+    initCollapsibleSidebar();
+
     initSlidesList();
+
     initScrollSpy();
+
     initLightbox();
+
     initLaserPointer();
+
     initKeyboardShortcuts();
+
     initMathRendering();
+
     initModuleFilter();
+
   });
 
+
+
   /* --------------------------------------------------------------------------
+
      1. TEMA CLARO / OSCURO
+
      -------------------------------------------------------------------------- */
+
   function initTheme() {
+
     const saved = localStorage.getItem('diplomado_theme') || 'light';
+
     if (saved === 'dark') {
+
       document.documentElement.setAttribute('data-theme', 'dark');
+
     }
+
     updateThemeButton();
+
   }
+
+
 
   window.toggleTheme = function () {
+
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
     if (isDark) {
+
       document.documentElement.removeAttribute('data-theme');
+
       localStorage.setItem('diplomado_theme', 'light');
+
     } else {
+
       document.documentElement.setAttribute('data-theme', 'dark');
+
       localStorage.setItem('diplomado_theme', 'dark');
+
     }
+
     updateThemeButton();
+
     if (typeof window.redrawAllSimulators === 'function') {
+
       window.redrawAllSimulators();
+
     }
+
   };
+
+
 
   function updateThemeButton() {
+
     const btn = document.getElementById('btn-theme');
+
     if (!btn) return;
+
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
     btn.innerHTML = isDark
+
       ? '<span>☀️</span> Modo Claro'
+
       : '<span>🌙</span> Modo Oscuro';
+
   }
 
   /* --------------------------------------------------------------------------
-     2. MODO DUAL: ESTUDIO AUTÓNOMO VS. CLASE MAGISTRAL (16:9)
+     1.1. MENÚ LATERAL COLAPSABLE
      -------------------------------------------------------------------------- */
-  function initSlidesList() {
-    slides = Array.from(
-      document.querySelectorAll('.hero-banner, .chapter-divider, .lesson-section')
-    );
+  function initCollapsibleSidebar() {
+    const saved = localStorage.getItem('diplomado_sidebar_collapsed');
+    if (saved === 'true') {
+      document.body.classList.add('sidebar-collapsed');
+    }
+
+    // Asegurar existencia del botón flotante para expandir
+    if (!document.getElementById('btn-sidebar-float')) {
+      const floatBtn = document.createElement('button');
+      floatBtn.id = 'btn-sidebar-float';
+      floatBtn.className = 'btn-sidebar-float';
+      floatBtn.title = 'Mostrar Menú de Contenidos (Ctrl+B)';
+      floatBtn.innerHTML = `
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        <span>Menú</span>
+      `;
+      floatBtn.addEventListener('click', window.toggleSidebar);
+      document.body.appendChild(floatBtn);
+    }
+
+    // Insertar encabezado con botón de colapsar en el sidebar si no existe
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar && !sidebar.querySelector('.sidebar-top-header')) {
+      const topHeader = document.createElement('div');
+      topHeader.className = 'sidebar-top-header';
+      topHeader.innerHTML = `
+        <span class="sidebar-collapse-badge">Navegación</span>
+        <button class="btn-sidebar-collapse" onclick="toggleSidebar()" title="Ocultar menú lateral (Ctrl+B)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Ocultar</span>
+        </button>
+      `;
+      sidebar.insertBefore(topHeader, sidebar.firstChild);
+    }
   }
+
+  window.toggleSidebar = function () {
+    const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+    localStorage.setItem('diplomado_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+    if (typeof window.redrawAllSimulators === 'function') {
+      setTimeout(window.redrawAllSimulators, 150);
+    }
+  };
+
+
+
+
+
+  /* --------------------------------------------------------------------------
+
+     2. MODO DUAL: ESTUDIO AUTÓNOMO VS. CLASE MAGISTRAL (16:9)
+
+     -------------------------------------------------------------------------- */
+
+  function initSlidesList() {
+
+    // Recopilar de forma unificada las láminas principales de clase (compatibilidad módulos 01 a 09)
+
+    const candidates = Array.from(
+
+      document.querySelectorAll('.lesson-section, .content-section, .hero-banner')
+
+    );
+
+    // Filtrar candidatos para evitar secciones ocultas o duplicadas
+
+    const seen = new Set();
+
+    slides = candidates.filter((el) => {
+
+      if (seen.has(el)) return false;
+
+      seen.add(el);
+
+      return true;
+
+    });
+
+
+
+    // Fallback de seguridad si el documento utiliza otra jerarquía
+
+    if (slides.length === 0) {
+
+      slides = Array.from(document.querySelectorAll('.chapter-divider, section'));
+
+    }
+
+  }
+
+
 
   window.togglePresentationMode = function () {
+
     initSlidesList();
+
     if (slides.length === 0) return;
+
+
 
     isPresentationMode = !isPresentationMode;
+
     document.body.classList.toggle('presentation-mode', isPresentationMode);
 
+
+
     const btn = document.getElementById('btn-presentation');
+
     if (btn) {
+
       btn.classList.toggle('active-mode', isPresentationMode);
+
       btn.innerHTML = isPresentationMode
+
         ? '<span>📖</span> Salir a Modo Estudio (P)'
+
         : '<span>🖥️</span> Modo Clase Magistral (P)';
+
     }
+
+
 
     if (isPresentationMode) {
-      // Detectar cuál sección estaba visible en pantalla antes de activar
-      const scrollY = window.scrollY + 180;
+
+      // DETECCIÓN EXACTA DE LA LÁMINA EN PANTALLA:
+
+      // Iniciar en la lámina que el profesor o estudiante está viendo actualmente
+
       let bestIdx = 0;
+
+      let minDistance = Infinity;
+
+      const viewportMid = window.innerHeight * 0.45;
+
+
+
       slides.forEach((el, idx) => {
-        if (el.offsetTop <= scrollY) bestIdx = idx;
+
+        const rect = el.getBoundingClientRect();
+
+        // Si la lámina abarca el centro de la pantalla
+
+        if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
+
+          bestIdx = idx;
+
+          minDistance = 0;
+
+        } else {
+
+          // Si no, medir cercanía al tercio superior del viewport
+
+          const dist = Math.abs(rect.top - 80);
+
+          if (dist < minDistance) {
+
+            minDistance = dist;
+
+            bestIdx = idx;
+
+          }
+
+        }
+
       });
+
       showSlide(bestIdx);
+
     } else {
+
       slides.forEach((el) => el.classList.remove('slide-active'));
+
       if (slides[currentSlideIndex]) {
+
         slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
       }
+
     }
 
+
+
     if (typeof window.redrawAllSimulators === 'function') {
+
       setTimeout(window.redrawAllSimulators, 80);
+
     }
+
   };
+
+
+
+  /* --------------------------------------------------------------------------
+
+     SALTO RÁPIDO A SIMULADORES Y EJERCICIOS (BARRA INFERIOR CLASE MAGISTRAL)
+
+     -------------------------------------------------------------------------- */
+
+  window.jumpToSimulators = function () {
+
+    initSlidesList();
+
+    let targetIdx = -1;
+
+    for (let i = 0; i < slides.length; i++) {
+
+      if (slides[i].querySelector('.sim-grid, .sim-body, .simulator-card, .simulator-box, canvas, [id*="sim"]')) {
+
+        targetIdx = i;
+
+        break;
+
+      }
+
+    }
+
+    if (isPresentationMode && targetIdx !== -1) {
+
+      showSlide(targetIdx);
+
+    } else {
+
+      const el = document.querySelector('.sim-grid, .sim-body, .simulator-card, .simulator-box, canvas, [id*="sim"]');
+
+      if (el) {
+
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      }
+
+    }
+
+  };
+
+
+
+  window.jumpToExercises = function () {
+
+    initSlidesList();
+
+    let targetIdx = -1;
+
+    for (let i = 0; i < slides.length; i++) {
+
+      if (slides[i].querySelector('.example-card, .example-solution-box, .calc-step-card, [id*="ej-"]')) {
+
+        targetIdx = i;
+
+        break;
+
+      }
+
+    }
+
+    if (isPresentationMode && targetIdx !== -1) {
+
+      showSlide(targetIdx);
+
+    } else {
+
+      const el = document.querySelector('.example-card, .example-solution-box, .calc-step-card, [id*="ej-"]');
+
+      if (el) {
+
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      }
+
+    }
+
+  };
+
+
 
   window.showSlide = function (index) {
+
     if (slides.length === 0) return;
+
     currentSlideIndex = Math.max(0, Math.min(index, slides.length - 1));
+
     slides.forEach((el, idx) => {
+
       el.classList.toggle('slide-active', idx === currentSlideIndex);
+
     });
+
     const counter = document.getElementById('hud-slide-counter');
+
     if (counter) {
+
       counter.textContent = `Lámina ${currentSlideIndex + 1} / ${slides.length}`;
+
     }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+
+
     // Actualizar TOC activo si tiene ID
+
     const activeId = slides[currentSlideIndex].id;
+
     if (activeId) {
+
       document.querySelectorAll('.toc-link').forEach((link) => {
+
         link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`);
+
       });
+
     }
+
+
 
     if (typeof window.redrawAllSimulators === 'function') {
+
       setTimeout(window.redrawAllSimulators, 60);
+
     }
+
   };
+
+
 
   window.nextSlide = function () {
+
     if (isPresentationMode) {
+
       showSlide(currentSlideIndex + 1);
+
     }
+
   };
+
+
 
   window.prevSlide = function () {
+
     if (isPresentationMode) {
+
       showSlide(currentSlideIndex - 1);
+
     }
+
   };
 
+
+
   /* --------------------------------------------------------------------------
+
      3. PUNTERO LÁSER VIRTUAL PARA EL DOCENTE
+
      -------------------------------------------------------------------------- */
+
   function initLaserPointer() {
+
     const dot = document.createElement('div');
+
     dot.className = 'laser-dot';
+
     dot.id = 'laser-dot';
+
     document.body.appendChild(dot);
 
+
+
     document.addEventListener('mousemove', (e) => {
+
       if (!isLaserMode) return;
+
       dot.style.left = `${e.clientX}px`;
+
       dot.style.top = `${e.clientY}px`;
+
     });
+
   }
+
+
 
   window.toggleLaser = function () {
+
     isLaserMode = !isLaserMode;
+
     document.body.classList.toggle('laser-mode', isLaserMode);
+
     const btn = document.getElementById('btn-laser');
+
     if (btn) {
+
       btn.classList.toggle('laser-active', isLaserMode);
+
     }
+
   };
 
+
+
   /* --------------------------------------------------------------------------
+
      4. ATAJOS DE TECLADO (P = Presentación, L = Láser, Flechas = Navegar)
+
      -------------------------------------------------------------------------- */
+
   function initKeyboardShortcuts() {
+
     document.addEventListener('keydown', (e) => {
+
       const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+
       if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
 
-      if (e.key === 'p' || e.key === 'P') {
+
+
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'b' || e.key === 'B')) {
+        e.preventDefault();
+        window.toggleSidebar();
+      } else if (e.altKey && (e.key === 'm' || e.key === 'M')) {
+        e.preventDefault();
+        window.toggleSidebar();
+      } else if (e.key === 'p' || e.key === 'P') {
+
         if (document.getElementById('btn-presentation')) {
+
           e.preventDefault();
+
           window.togglePresentationMode();
+
         }
+
       } else if (e.key === 'l' || e.key === 'L') {
+
         if (document.getElementById('btn-laser')) {
+
           e.preventDefault();
+
           window.toggleLaser();
+
         }
+
       } else if (isPresentationMode && (e.key === 'ArrowRight' || e.key === 'PageDown')) {
+
         e.preventDefault();
+
         window.nextSlide();
+
       } else if (isPresentationMode && (e.key === 'ArrowLeft' || e.key === 'PageUp')) {
+
         e.preventDefault();
+
         window.prevSlide();
+
       } else if (e.key === 'Escape') {
+
         const lb = document.getElementById('lightbox-overlay');
+
         if (lb && lb.classList.contains('open')) {
+
           lb.classList.remove('open');
+
         } else if (isPresentationMode) {
+
           window.togglePresentationMode();
+
         }
+
       }
+
     });
+
   }
 
+
+
   /* --------------------------------------------------------------------------
+
      5. SCROLL-SPY Y BARRA DE PROGRESO DE LECTURA
+
      -------------------------------------------------------------------------- */
+
   function initScrollSpy() {
+
     const progressBar = document.getElementById('reading-progress');
+
     const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+
     const sections = tocLinks
+
       .map((link) => {
+
         const href = link.getAttribute('href');
+
         return href && href.startsWith('#') ? document.querySelector(href) : null;
+
       })
+
       .filter(Boolean);
 
-    // Al hacer clic en un link del TOC estando en Modo Presentación, saltar a esa lámina
+
+
+    // Navegación precisa al hacer clic en cualquier link del TOC
+
     tocLinks.forEach((link) => {
+
       link.addEventListener('click', (e) => {
+
+        const href = link.getAttribute('href');
+
+        if (!href || !href.startsWith('#')) return;
+
+        const targetId = href.substring(1);
+
+
+
         if (isPresentationMode) {
+
           e.preventDefault();
-          const targetId = link.getAttribute('href').replace('#', '');
+
           const idx = slides.findIndex((s) => s.id === targetId);
+
           if (idx !== -1) showSlide(idx);
+
+          return;
+
         }
+
+
+
+        const targetEl = document.getElementById(targetId);
+
+        if (targetEl) {
+
+          e.preventDefault();
+
+          const topbar = document.querySelector('.topbar');
+
+          const topbarHeight = topbar ? topbar.offsetHeight : 70;
+
+          const targetY = targetEl.getBoundingClientRect().top + window.scrollY - topbarHeight - 20;
+
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+
+          if (history.pushState) {
+
+            history.pushState(null, null, href);
+
+          }
+
+          // Marcar de inmediato como activo el link pulsado
+
+          tocLinks.forEach((l) => l.classList.toggle('active', l === link));
+
+        }
+
       });
+
     });
+
+
+
+    // Detección en tiempo real de la sección/subsección visible usando coordenadas absolutas reales
 
     window.addEventListener('scroll', () => {
+
       if (progressBar) {
+
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
         const pct = docHeight > 0 ? Math.min(100, (window.scrollY / docHeight) * 100) : 0;
+
         progressBar.style.width = `${pct}%`;
+
       }
+
+
 
       if (isPresentationMode || sections.length === 0) return;
-      const scrollPos = window.scrollY + 140;
+
+      const scrollPos = window.scrollY + 160;
+
       let currentSection = sections[0];
+
+
+
       for (const sec of sections) {
-        if (sec.offsetTop <= scrollPos) {
+
+        const absoluteTop = sec.getBoundingClientRect().top + window.scrollY;
+
+        if (absoluteTop <= scrollPos) {
+
           currentSection = sec;
+
         }
+
       }
+
+
+
       if (currentSection) {
+
         tocLinks.forEach((link) => {
+
           link.classList.toggle(
+
             'active',
+
             link.getAttribute('href') === `#${currentSection.id}`
+
           );
+
         });
+
       }
-    });
+
+    }, { passive: true });
+
   }
 
+
+
   /* --------------------------------------------------------------------------
+
      6. LIGHTBOX DE IMÁGENES PARA ZOOM EN CLASE
+
      -------------------------------------------------------------------------- */
+
   function initLightbox() {
+
     const overlay = document.createElement('div');
+
     overlay.className = 'lightbox-overlay';
+
     overlay.id = 'lightbox-overlay';
+
     overlay.innerHTML = `
+
       <div class="lightbox-content">
+
         <img id="lightbox-img" src="" alt="Vista ampliada" />
+
         <div id="lightbox-caption" class="lightbox-caption"></div>
+
       </div>
+
     `;
+
     overlay.addEventListener('click', () => overlay.classList.remove('open'));
+
     document.body.appendChild(overlay);
 
+
+
     document.querySelectorAll('.figure-img-wrap, .book-cover-wrap').forEach((wrap) => {
+
       wrap.addEventListener('click', () => {
+
         const img = wrap.querySelector('img');
+
         if (!img) return;
+
         const card = wrap.closest('.figure-card, .book-card');
+
         const cap = card
+
           ? card.querySelector('.figure-caption, .book-title')?.innerText || img.alt
+
           : img.alt;
+
         document.getElementById('lightbox-img').src = img.src;
+
         document.getElementById('lightbox-caption').textContent = cap;
+
         overlay.classList.add('open');
+
       });
+
     });
+
   }
 
+
+
   /* --------------------------------------------------------------------------
+
      7. RENDERIZADO DE ECUACIONES MATEMÁTICAS CON KATEX
+
      -------------------------------------------------------------------------- */
+
   function initMathRendering() {
+
     const tryRender = () => {
+
       if (typeof window.renderMathInElement === 'function') {
+
         window.renderMathInElement(document.body, {
+
           delimiters: [
+
             { left: '$$', right: '$$', display: true },
+
             { left: '\\[', right: '\\]', display: true },
+
             { left: '$', right: '$', display: false },
+
             { left: '\\(', right: '\\)', display: false }
+
           ],
+
           throwOnError: false
+
         });
+
       } else {
+
         setTimeout(tryRender, 150);
+
       }
+
     };
+
     tryRender();
+
   }
 
+
+
   /* --------------------------------------------------------------------------
+
      8. BUSCADOR / FILTRO EN EL PORTAL PRINCIPAL (index.html)
+
      -------------------------------------------------------------------------- */
+
   function initModuleFilter() {
+
     const input = document.getElementById('module-search');
+
     if (!input) return;
+
     input.addEventListener('input', () => {
+
       const q = input.value.toLowerCase().trim();
+
       document.querySelectorAll('.module-card').forEach((card) => {
+
         const text = card.innerText.toLowerCase();
+
         card.style.display = text.includes(q) ? 'flex' : 'none';
+
       });
+
     });
+
   }
 
+
+
   /* --------------------------------------------------------------------------
+
      9. MODO PIZARRA DOCENTE PARA EJEMPLOS NUMÉRICOS (UNIVERSAL EN TODOS LOS MÓDULOS)
+
      -------------------------------------------------------------------------- */
+
   window.toggleExampleStep = function (arg1, arg2) {
+
     if (typeof arg1 === 'string' && (typeof arg2 === 'number' || typeof arg2 === 'string')) {
+
       const content = document.getElementById(`${arg1}-step-${arg2}`);
+
       const arrow = document.getElementById(`${arg1}-arrow-${arg2}`);
+
       if (content) {
+
         const isCollapsed = content.classList.contains('step-collapsed') || content.style.display === 'none';
+
         if (isCollapsed) {
+
           content.classList.remove('step-collapsed');
+
           content.style.display = 'block';
+
           if (arrow) arrow.textContent = '▼';
+
         } else {
+
           content.classList.add('step-collapsed');
+
           content.style.display = 'none';
+
           if (arrow) arrow.textContent = '▶';
+
         }
+
       }
+
     } else if (arg1 && arg1.nodeType) {
+
       arg1.classList.toggle('step-collapsed');
+
     }
+
   };
+
+
 
   window.toggleAllExampleSteps = function (containerId, reveal) {
+
     // 1. Manejo por prefijo de IDs (ej. ex81, ej-7-1)
+
     for (let s = 1; s <= 10; s++) {
+
       const content = document.getElementById(`${containerId}-step-${s}`);
+
       const arrow = document.getElementById(`${containerId}-arrow-${s}`);
+
       if (content) {
+
         if (reveal) {
+
           content.classList.remove('step-collapsed');
+
           content.style.display = 'block';
+
           if (arrow) arrow.textContent = '▼';
+
         } else {
+
           content.classList.add('step-collapsed');
+
           content.style.display = 'none';
+
           if (arrow) arrow.textContent = '▶';
+
         }
+
       }
+
     }
+
     // 2. Manejo por contenedor DOM
+
     const container = document.getElementById(containerId);
+
     if (container) {
+
       container.querySelectorAll('.calc-step-card, .example-step').forEach((card) => {
+
         if (reveal) {
+
           card.classList.remove('step-collapsed');
+
           const sc = card.querySelector('.step-content');
+
           if (sc) sc.style.display = 'block';
+
         } else {
+
           card.classList.add('step-collapsed');
+
           const sc = card.querySelector('.step-content');
+
           if (sc) sc.style.display = 'none';
+
         }
+
       });
+
     }
+
   };
+
+
 
   /* --------------------------------------------------------------------------
+
      8. CAJA MAESTRA DE SOLUCIÓN DE EJERCICIOS (MOSTRAR / OCULTAR SOLUCIÓN)
+
      -------------------------------------------------------------------------- */
+
   window.toggleSolutionBox = function (btn) {
+
     if (!btn) return;
+
     const box = btn.closest('.example-solution-box') || btn.parentElement;
+
     if (!box) return;
+
     const body = box.querySelector('.solution-body');
+
     if (!body) return;
+
     const isHidden = body.style.display === 'none' || window.getComputedStyle(body).display === 'none';
+
     
+
     if (isHidden) {
+
       body.style.display = 'flex';
+
       btn.classList.add('expanded');
+
       const textSpan = btn.querySelector('.btn-text');
+
       if (textSpan) textSpan.textContent = 'Ocultar Solución Completa';
+
       const arrow = btn.querySelector('.arrow-icon');
+
       if (arrow) arrow.textContent = '▲';
+
     } else {
+
       body.style.display = 'none';
+
       btn.classList.remove('expanded');
+
       const textSpan = btn.querySelector('.btn-text');
+
       if (textSpan) textSpan.textContent = 'Mostrar Solución Detallada (Paso a Paso)';
+
       const arrow = btn.querySelector('.arrow-icon');
+
       if (arrow) arrow.textContent = '▼';
+
     }
+
   };
 
+
+
 })();
+

@@ -5,8 +5,8 @@
  * Simulador 3.1: Diseñador y Analizador Seccional de Vigas Rectangulares
  *                Simplemente y Doblemente Reforzadas (NSR-10 C.10.2, C.10.3,
  *                C.10.5, C.9.3.2 y C.7.6.1).
- * Simulador 3.2: Analizador y Diseñador de Vigas de Sección en T y en L
- *                (NSR-10 C.8.12: Caso 1 a <= hf vs. Caso 2 a > hf).
+ * Simulador 3.2: Analizador y Diseñador de Vigas de Sección en T
+ *                (NSR-10 C.8.12.2: Caso 1 a <= hf vs. Caso 2 a > hf).
  * ============================================================================
  */
 
@@ -284,10 +284,13 @@ function drawSim31Canvas(state) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
-  const cssW = canvas.clientWidth || 760;
-  const cssH = 400;
-  canvas.width = cssW * dpr;
-  canvas.height = cssH * dpr;
+  const rect = canvas.getBoundingClientRect();
+  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : 720;
+  const cssW = Math.max(500, rect.width > 200 ? rect.width : (parentW > 40 ? parentW - 32 : 720));
+  const cssH = 410;
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
+  canvas.style.height = `${cssH}px`;
   ctx.save();
   ctx.scale(dpr, dpr);
 
@@ -295,31 +298,36 @@ function drawSim31Canvas(state) {
   ctx.fillStyle = pal.bgCanvas;
   ctx.fillRect(0, 0, cssW, cssH);
 
-  // Tres zonas en el canvas:
-  // 1) Sección Transversal (x: 20..250)
-  // 2) Diagrama de Deformaciones de Bernoulli (x: 270..510)
-  // 3) Bloque de Whitney y Fuerzas Internas (x: 530..cssW-20)
-  const topY = 58;
+  // Tres zonas dinámicamente distribuidas según el ancho del canvas:
+  // 1) Sección Transversal (centro en col1X)
+  // 2) Diagrama de Deformaciones de Bernoulli (eje en col2X)
+  // 3) Bloque de Whitney y Fuerzas Internas (eje en col3X)
+  const col1X = Math.round(cssW * 0.18);
+  const col2X = Math.round(cssW * 0.50);
+  const col3X = Math.round(cssW * 0.79);
+
+  const topY = 60;
   const botY = cssH - 48;
   const drawH = botY - topY;
   const scaleY = drawH / state.h; // px por cm en vertical
-  const scaleX = Math.min(scaleY, 150 / state.bw);
+  const maxSecW = Math.min(140, cssW * 0.22);
+  const scaleX = Math.min(scaleY, maxSecW / state.bw);
   const secW = state.bw * scaleX;
-  const secX = 135 - secW / 2;
+  const secX = col1X - secW / 2;
 
   // Títulos de columnas
   ctx.fillStyle = pal.textMain;
   ctx.font = '700 12px Inter, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('1. SECCIÓN TRANSVERSAL', 135, 26);
-  ctx.fillText('2. COMPATIBILIDAD (ε)', 390, 26);
-  ctx.fillText('3. BLOQUE WHITNEY Y PAR INTERNO', 630, 26);
+  ctx.fillText('1. SECCIÓN TRANSVERSAL', col1X, 26);
+  ctx.fillText('2. COMPATIBILIDAD (ε)', col2X, 26);
+  ctx.fillText('3. BLOQUE WHITNEY Y PAR INTERNO', col3X, 26);
 
   ctx.fillStyle = pal.textSub;
   ctx.font = '500 11px JetBrains Mono, monospace';
-  ctx.fillText(`b=${state.bw} cm × h=${state.h} cm`, 135, 43);
-  ctx.fillText(`εcu=0.003 | εt=${state.et.toFixed(4)}`, 390, 43);
-  ctx.fillText(`φMn = ${state.phiMn_kNm.toFixed(1)} kN·m`, 630, 43);
+  ctx.fillText(`b=${state.bw} cm × h=${state.h} cm`, col1X, 43);
+  ctx.fillText(`εcu=0.003 | εt=${state.et.toFixed(4)}`, col2X, 43);
+  ctx.fillText(`φMn = ${state.phiMn_kNm.toFixed(1)} kN·m`, col3X, 43);
 
   // --- 1. DIBUJO DE LA SECCIÓN TRANSVERSAL ---
   ctx.fillStyle = pal.concreteFill;
@@ -446,8 +454,8 @@ function drawSim31Canvas(state) {
   ctx.fillText(`εt=${state.et.toFixed(4)}`, axisStrainX - etPx - 4, yLayer1 + 3);
 
   // --- 3. BLOQUE RECTANGULAR DE WHITNEY Y PAR DE FUERZAS ---
-  const axisStressX = 565;
-  const blockW = 68;
+  const axisStressX = col3X - 45;
+  const blockW = Math.min(65, cssW * 0.09);
   ctx.strokeStyle = pal.concreteStroke;
   ctx.lineWidth = 1.6;
   ctx.beginPath();
@@ -519,7 +527,7 @@ function updateSim32() {
   if (!muInput) return;
 
   const Mu   = parseFloat(muInput.value); // kN·m
-  const type = document.getElementById('sim32-type').value; // 'T' o 'L'
+  const type = 'T'; // Secciones exclusivas en T (NSR-10 C.8.12.2)
   const L    = parseFloat(document.getElementById('sim32-l').value); // m
   const sw   = parseFloat(document.getElementById('sim32-sw').value); // cm (separación libre entre almas)
   const hf   = parseFloat(document.getElementById('sim32-hf').value); // cm
@@ -539,22 +547,12 @@ function updateSim32() {
   const beta1 = calcBeta1(fc);
   const L_cm = L * 100.0;
 
-  // Cálculo del ancho efectivo del patín b_ef según NSR-10 C.8.12.2 (Viga T) o C.8.12.3 (Viga L)
-  let b1 = 0, b2 = 0, b3 = 0, bef = 0;
-  let normRef = '';
-  if (type === 'T') {
-    b1 = L_cm / 4.0;
-    b2 = bw + 16.0 * hf;
-    b3 = bw + sw; // distancia centro a centro entre almas
-    bef = Math.min(b1, b2, b3);
-    normRef = 'NSR-10 C.8.12.2 (Viga T simétrica)';
-  } else {
-    b1 = bw + L_cm / 12.0;
-    b2 = bw + 6.0 * hf;
-    b3 = bw + sw / 2.0;
-    bef = Math.min(b1, b2, b3);
-    normRef = 'NSR-10 C.8.12.3 (Viga L con ala en un solo lado)';
-  }
+  // Cálculo del ancho efectivo del patín b_ef según NSR-10 C.8.12.2 (Viga T Monolítica)
+  const b1 = L_cm / 4.0;
+  const b2 = bw + 16.0 * hf;
+  const b3 = bw + sw; // distancia centro a centro entre almas
+  const bef = Math.min(b1, b2, b3);
+  const normRef = 'NSR-10 C.8.12.2 (Viga T simétrica monolítica)';
 
   // Momento límite resistido cuando el bloque de compresión llena exactamente la loseta (a = hf)
   const Cf_full_kN = (0.85 * fc * (bef * 10.0) * (hf * 10.0)) / 1000.0; // kN
@@ -648,11 +646,12 @@ function drawSim32Canvas(st) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
-  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : 760;
-  const cssW = Math.max(740, parentW);
-  const cssH = 430; // Altura generosa para evitar cualquier recorte inferior
-  canvas.width = cssW * dpr;
-  canvas.height = cssH * dpr;
+  const rect = canvas.getBoundingClientRect();
+  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : 720;
+  const cssW = Math.max(500, rect.width > 200 ? rect.width : (parentW > 40 ? parentW - 32 : 720));
+  const cssH = 430;
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
   canvas.style.height = `${cssH}px`;
   ctx.save();
   ctx.scale(dpr, dpr);
@@ -665,27 +664,27 @@ function drawSim32Canvas(st) {
   const botY = cssH - 52;
   const drawH = botY - topY;
   const scaleY = drawH / st.h;
-  const maxFlangeDrawW = Math.min(320, cssW * 0.42);
+  const maxFlangeDrawW = Math.min(280, cssW * 0.40);
   const scaleX = Math.min(scaleY * 0.95, maxFlangeDrawW / st.bef);
 
   const befPx = st.bef * scaleX;
-  const bwPx  = Math.max(40, st.bw * scaleX);
+  const bwPx  = Math.max(38, st.bw * scaleX);
   const hfPx  = Math.max(16, st.hf * scaleY);
   const aPx   = Math.min(drawH, st.a_cm * scaleY);
 
-  const centerSecX = Math.round(cssW * 0.27);
-  const flangeLeftX = st.type === 'T' ? (centerSecX - befPx / 2) : (centerSecX - bwPx / 2);
+  const centerSecX = Math.round(cssW * 0.25);
+  const flangeLeftX = centerSecX - befPx / 2;
   const webLeftX    = centerSecX - bwPx / 2;
 
   // Panel derecho para cajas analíticas
-  const boxX = Math.round(cssW * 0.52);
-  const boxW = cssW - boxX - 20;
+  const boxX = Math.round(cssW * 0.49);
+  const boxW = Math.max(210, cssW - boxX - 16);
 
   // Títulos superiores
   ctx.fillStyle = pal.textMain;
   ctx.font = '700 12px Inter, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(`1. GEOMETRÍA SECCIÓN EN ${st.type} Y ZONA COMPRIMIDA`, centerSecX, 26);
+  ctx.fillText('1. GEOMETRÍA SECCIÓN EN T Y ZONA COMPRIMIDA', centerSecX, 26);
   ctx.fillText('2. DESCOMPOSICIÓN EN PAR DE LAS ALAS + PAR DEL ALMA', boxX + boxW / 2, 26);
 
   ctx.fillStyle = pal.textSub;
@@ -693,7 +692,7 @@ function drawSim32Canvas(st) {
   ctx.fillText(`bef = ${st.bef.toFixed(1)} cm | bw = ${st.bw.toFixed(0)} cm | hf = ${st.hf.toFixed(0)} cm`, centerSecX, 44);
   ctx.fillText(st.isTrueTBeam ? `Caso 2: a (${st.a_cm.toFixed(1)} cm) > hf (${st.hf.toFixed(0)} cm)` : `Caso 1: a (${st.a_cm.toFixed(1)} cm) ≤ hf (${st.hf.toFixed(0)} cm)`, boxX + boxW / 2, 44);
 
-  // Dibujar contorno de la Viga T o L
+  // Dibujar contorno simétrico de la Viga T Monolítica
   ctx.fillStyle = pal.concreteFill;
   ctx.strokeStyle = pal.concreteStroke;
   ctx.lineWidth = 2;
@@ -713,27 +712,22 @@ function drawSim32Canvas(st) {
 
   // Sombreado de la zona en compresión
   if (!st.isTrueTBeam) {
-    // Bloque de compresión íntegro dentro de la loseta (ancho bef, altura a)
+    // Caso 1: Bloque de compresión íntegro dentro de la loseta (ancho bef, altura a)
     ctx.fillStyle = pal.flangeFill;
     ctx.strokeStyle = pal.flangeStroke;
     ctx.fillRect(flangeLeftX + 1, topY + 1, befPx - 2, Math.max(2, aPx));
     ctx.strokeRect(flangeLeftX + 1, topY + 1, befPx - 2, Math.max(2, aPx));
   } else {
-    // Alas salientes comprimidas hasta hf (azul)
+    // Caso 2: Alas salientes comprimidas simétricamente hasta hf (azul)
     ctx.fillStyle = pal.flangeFill;
     ctx.strokeStyle = pal.flangeStroke;
-    if (st.type === 'T') {
-      const wingW = (befPx - bwPx) / 2;
-      ctx.fillRect(flangeLeftX + 1, topY + 1, wingW - 1, hfPx - 1);
-      ctx.strokeRect(flangeLeftX + 1, topY + 1, wingW - 1, hfPx - 1);
-      ctx.fillRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
-      ctx.strokeRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
-    } else {
-      const wingW = befPx - bwPx;
-      ctx.fillRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
-      ctx.strokeRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
-    }
-    // Alma comprimida hasta profundidad a (rojo/rosa)
+    const wingW = (befPx - bwPx) / 2;
+    ctx.fillRect(flangeLeftX + 1, topY + 1, wingW - 1, hfPx - 1);
+    ctx.strokeRect(flangeLeftX + 1, topY + 1, wingW - 1, hfPx - 1);
+    ctx.fillRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
+    ctx.strokeRect(webLeftX + bwPx, topY + 1, wingW - 1, hfPx - 1);
+
+    // Alma central comprimida hasta profundidad a (rojo/rosa)
     ctx.fillStyle = pal.whitneyFill;
     ctx.strokeStyle = pal.whitneyStroke;
     ctx.fillRect(webLeftX + 1, topY + 1, bwPx - 2, Math.max(2, aPx));
@@ -807,3 +801,81 @@ function drawSim32Canvas(st) {
 }
 
 
+
+/* ==========================================================================
+   INICIALIZACIÓN Y VINCULACIÓN REACTIVA DE EVENTOS PARA EL MÓDULO 03
+   ========================================================================== */
+window.toggleExampleStep = function (stepEl) {
+  stepEl.classList.toggle('step-collapsed');
+};
+
+window.toggleAllSteps = function (containerId, reveal) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.querySelectorAll('.calc-step-card').forEach((card) => {
+    if (reveal) {
+      card.classList.remove('step-collapsed');
+    } else {
+      card.classList.add('step-collapsed');
+    }
+  });
+};
+
+window.toggleSolutionMaster = function (btn) {
+  const content = btn.nextElementSibling;
+  if (!content) return;
+  const isHidden = content.style.display === 'none' || getComputedStyle(content).display === 'none';
+  if (isHidden) {
+    content.style.display = 'block';
+    btn.classList.add('active');
+    const icon = btn.querySelector('.solution-toggle-icon');
+    if (icon) icon.textContent = '▲';
+  } else {
+    content.style.display = 'none';
+    btn.classList.remove('active');
+    const icon = btn.querySelector('.solution-toggle-icon');
+    if (icon) icon.textContent = '▼';
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Vincular eventos para Simulador 3.1
+  const sim31Inputs = [
+    'sim31-mu', 'sim31-bw', 'sim31-h', 'sim31-rec', 'sim31-dp',
+    'sim31-fc', 'sim31-fy', 'sim31-bar', 'sim31-bar-comp'
+  ];
+  sim31Inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', updateSim31);
+      el.addEventListener('change', updateSim31);
+    }
+  });
+
+  // 2. Vincular eventos para Simulador 3.2
+  const sim32Inputs = [
+    'sim32-mu', 'sim32-l', 'sim32-sw', 'sim32-hf',
+    'sim32-bw', 'sim32-h', 'sim32-fc', 'sim32-fy'
+  ];
+  sim32Inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', updateSim32);
+      el.addEventListener('change', updateSim32);
+    }
+  });
+
+  // 3. Renderizado inicial de ambos simuladores
+  updateSim31();
+  updateSim32();
+
+  // 4. Redibujar al redimensionar la ventana o alternar modo claro/oscuro
+  window.addEventListener('resize', () => {
+    updateSim31();
+    updateSim32();
+  });
+  window.addEventListener('themeChanged', () => {
+    updateSim31();
+    updateSim32();
+  });
+});

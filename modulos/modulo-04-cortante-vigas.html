@@ -71,7 +71,7 @@
           <li style="padding-left: 1rem;"><a href="#ej-4-1" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.1</span> Viga 30×50 y Zonificación</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-4-2" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.2</span> Vigueta y Viga Principal B</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-4-3" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.3</span> Carga Axial y $V_e$ en DES</a></li>
-          <li style="padding-left: 1rem;"><a href="#ej-4-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.4</span> Carga Puntual y Zonificación (Mulet)</a></li>
+          <li style="padding-left: 1rem;"><a href="#ej-4-4" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.4</span> Carga Puntual y Zonificación de Estribos</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-4-5" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.5</span> Estribos y Barras Dobladas a 45°</a></li>
           <li style="padding-left: 1rem;"><a href="#ej-4-6" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">4.6</span> Cortante y Torsión Combinados</a></li>
         </ul>
@@ -194,7 +194,7 @@
             Los modelos mecánicos de tensión diagonal, analogía de la cercha de Ritter-Mörsch, zonificación de cortante y torsión combinada se fundamentan en:
           </p>
           <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
-            <li><strong>Mulet Rodríguez, Emel Eduardo (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño NSR-10</em>. Editorial Unisucre, Sincelejo, Colombia. ISBN: 978-628-95009-7-4. (Capítulo 4: Tensión diagonal y cortante en vigas, sección crítica a $d$, espaciamientos máximos normativos y torsión).</li>
+            <li><strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño bajo NSR-10</em>, Edición Académica Nacional.</li>
             <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.11: Cortante y Torsión; y Capítulo C.21: Requisitos de Diseño Sismorresistente).</li>
             <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
             <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
@@ -1549,16 +1549,16 @@
       
 
         <!-- ===============================================================
-             EJEMPLO 4.4: ENVOLVENTE DE CORTANTE CON CARGA PUNTUAL Y DISTRIBUIDA (MULET EJEMPLO 4.1)
+             EJEMPLO 4.4: ENVOLVENTE DE CORTANTE CON CARGA PUNTUAL Y DISTRIBUIDA (CASO INTEGRAL DE CORTANTE)
              =============================================================== -->
         <div id="ej-4-4" style="margin-bottom: 2.5rem;">
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 4.4: Envolvente de Cortante con Cargas Puntuales y Distribuidas, Sección Crítica a $d$ y Zonificación (Mulet Ejemplo 4.1)
+                📝 Ejemplo 4.4: Envolvente de Cortante con Cargas Puntuales y Distribuidas, Sección Crítica a $d$ y Zonificación (Sección Crítica a distancia d)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
-                <strong>Enunciado (Adaptado de Emel Mulet, 2024, Cap. 4, pág. 115):</strong> Una viga simplemente apoyada de luz libre $L_n = 6.00\text{ m}$ con apoyos en columnas de $0.40\times 0.40\text{ m}$ soporta una carga uniforme mayorada $w_u = 45.0\text{ kN/m}$ y una carga concentrada mayorada $P_u = 80.0\text{ kN}$ transmitida por una viga secundaria a $x = 2.00\text{ m}$ de la cara del apoyo izquierdo. Sección rectangular: $b_w = 300\text{ mm}$, $h = 600\text{ mm}$, $d = 530\text{ mm}$. Materiales: $f'_c = 21\text{ MPa}$, $f_{yt} = 420\text{ MPa}$. Determine: <strong>1)</strong> Las reacciones y el cortante crítico a la distancia $d = 0.53\text{ m}$ de la cara del apoyo; <strong>2)</strong> La resistencia nominal del concreto ($\phi V_c$); <strong>3)</strong> El espaciamiento requerido de estribos $\#3$ ($A_v = 142\text{ mm}^2$); <strong>4)</strong> La zonificación técnica longitudinal completa en 3 tramos de colocación.
+                <strong>Enunciado:</strong> Una viga simplemente apoyada de luz libre $L_n = 6.00\text{ m}$ con apoyos en columnas de $0.40\times 0.40\text{ m}$ soporta una carga uniforme mayorada $w_u = 45.0\text{ kN/m}$ y una carga concentrada mayorada $P_u = 80.0\text{ kN}$ transmitida por una viga secundaria a $x = 2.00\text{ m}$ de la cara del apoyo izquierdo. Sección rectangular: $b_w = 300\text{ mm}$, $h = 600\text{ mm}$, $d = 530\text{ mm}$. Materiales: $f'_c = 21\text{ MPa}$, $f_{yt} = 420\text{ MPa}$. Determine: <strong>1)</strong> Las reacciones y el cortante crítico a la distancia $d = 0.53\text{ m}$ de la cara del apoyo; <strong>2)</strong> La resistencia nominal del concreto ($\phi V_c$); <strong>3)</strong> El espaciamiento requerido de estribos $\#3$ ($A_v = 142\text{ mm}^2$); <strong>4)</strong> La zonificación técnica longitudinal completa en 3 tramos de colocación.
               </p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
@@ -1629,7 +1629,7 @@
                   <text x="0" y="98" fill="#F8FAFC" font-family="Inter, sans-serif" font-size="8.5">1 @ 5 cm + 11 @ 20 cm</text>
                 </g>
                 <text x="110" y="215" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">s_máx = d/2 = 26.5 cm</text>
-                <text x="110" y="232" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11 y Mulet Cap. 4</text>
+                <text x="110" y="232" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11 y ACI 318</text>
               </g>
             </svg>
           </div>
@@ -1733,7 +1733,7 @@
               <div class="math-card">
                 <div class="math-card-header">
                   <span class="math-card-title">4.1 Plan de Distribución Constructiva en Obra</span>
-                  <span class="norm-pill">Mulet Cap. 4</span>
+                  <span class="norm-pill">NSR-10 C.11</span>
                 </div>
                 <div class="math-vars">
                   <div><strong>Distribución Definitiva de Estribos $\#3$ (2 ramas, $f_{yt} = 420\text{ MPa}$):</strong></div>
@@ -1756,7 +1756,7 @@
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 4.5: Diseño a Cortante con Estribos Verticales y Barras Dobladas a $45^\circ$ (NSR-10 C.11.4.7 & Mulet Cap. 4)
+                📝 Ejemplo 4.5: Diseño a Cortante con Estribos Verticales y Barras Dobladas a $45^\circ$ (NSR-10 C.11.4.7 & Métodos Analíticos)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Una viga de gran capacidad en un puente canal está sometida a una fuerza cortante factorizada en la sección crítica de $V_u = 380.0\text{ kN}$. La sección rectangular es $b_w = 350\text{ mm}$, peralte efectivo $d = 620\text{ mm}$ y altura total $h = 700\text{ mm}$. Materiales: $f'_c = 28\text{ MPa}$, $f_y = f_{yt} = 420\text{ MPa}$. Del refuerzo longitudinal de tracción por flexión, se doblan hacia el apoyo $2\#8$ ($A_v = 1\,020\text{ mm}^2$) a un ángulo $\alpha = 45^\circ$ en la zona donde ya no son requeridas por momento flector. Determine: <strong>1)</strong> La resistencia al cortante aportada por el concreto ($\phi V_c$); <strong>2)</strong> El aporte resistente de las barras dobladas a $45^\circ$ ($V_{s,\text{dobladas}}$) y la verificación del límite normativo de NSR-10 C.11.4.7.2 ($0.25\sqrt{f'_c}b_w d$); <strong>3)</strong> El cortante remanente que deben absorber los estribos verticales y su espaciamiento definitivo.
@@ -1925,7 +1925,7 @@
           <div class="example-toolbar">
             <div>
               <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
-                📝 Ejemplo 4.6: Diseño Combinado a Cortante y Torsión en Viga de Borde Perimetral (NSR-10 C.11.5 & Mulet Cap. 4)
+                📝 Ejemplo 4.6: Diseño Combinado a Cortante y Torsión en Viga de Borde Perimetral (NSR-10 C.11.5 & Métodos Analíticos)
               </h3>
               <p style="margin: 0.25rem 0 0 0; font-size: 0.86rem; color: var(--text-muted);">
                 <strong>Enunciado:</strong> Una viga perimetral de fachada ($b = 300\text{ mm}, h = 550\text{ mm}, d = 490\text{ mm}$) recibe una losa en voladizo de balcón que induce simultáneamente una fuerza cortante última $V_u = 115.0\text{ kN}$ y un momento torsor último mayorado $T_u = 26.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$, $f_y = f_{yt} = 420\text{ MPa}$, recubrimiento libre $r = 40\text{ mm}$. Se pide: <strong>1)</strong> Calcular el umbral de torsión ($\phi T_{th}$) para verificar si es obligatorio diseñar por torsión; <strong>2)</strong> Verificar la sección transversal frente al esfuerzo límite de aplastamiento del alma según NSR-10 C.11.5.3.1; <strong>3)</strong> Diseñar los estribos cerrados con ganchos a $135^\circ$ para cortante y torsión combinados ($A_{v+t}/s$); <strong>4)</strong> Diseñar el refuerzo longitudinal adicional por torsión ($A_l$) y detallar su distribución en el perímetro de la sección.
@@ -2000,7 +2000,7 @@
                   <text x="0" y="110" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8">Al,req = 672 mm² ≤ 1,194 mm² (✓)</text>
                 </g>
                 <text x="110" y="195" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Separación longitudinal ≤ 30 cm</text>
-                <text x="110" y="215" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11.5 y Mulet</text>
+                <text x="110" y="215" fill="#94A3B8" font-family="Inter, sans-serif" font-size="8.5" text-anchor="middle">Cumple NSR-10 C.11.5 y ACI 318</text>
               </g>
             </svg>
           </div>
@@ -2160,6 +2160,8 @@
     <button class="hud-btn" onclick="prevSlide()">← Anterior</button>
     <span id="hud-slide-counter" class="hud-counter">Lámina 1 / 8</span>
     <button class="hud-btn" onclick="nextSlide()">Siguiente →</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToSimulators()" title="Ir a Simuladores Interactivos">⚡ Simuladores</button>
+    <button class="hud-btn hud-btn-jump" onclick="jumpToExercises()" title="Ir a Ejercicios Resueltos">📝 Ejercicios</button>
     <button class="hud-btn" onclick="toggleLaser()" style="background: rgba(225,29,72,0.35);">🔴 Láser (L)</button>
     <button class="hud-btn" onclick="togglePresentationMode()">Salir (Esc)</button>
   </div>

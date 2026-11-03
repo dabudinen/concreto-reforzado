@@ -753,6 +753,17 @@
       const fEffMPa = 0.75 * phiCol * (0.85 * fc * (1.0 - rho) + fy * rho);
       const AgReqStrengthCm2 = ((PuDesign * 1000.0) / fEffMPa) / 100.0;
 
+      // Método alternativo práctico: Esfuerzo axial medio admisible (n * f'c)
+      let nCoeff = 0.28;
+      if (colType === 'interior') {
+        nCoeff = diss === 'DES' ? 0.28 : 0.30;
+      } else if (colType === 'edgeX' || colType === 'edgeY') {
+        nCoeff = diss === 'DES' ? 0.22 : 0.25;
+      } else {
+        nCoeff = diss === 'DES' ? 0.16 : 0.20;
+      }
+      const AgAltCm2 = (PuGrav * 10.0) / (nCoeff * fc);
+
       let bMinSeismicCm = 20;
       let AgMinSeismicCm2 = 600; // DMI: Ag >= 60 000 mm2 (600 cm2), rec. CR10.8 lado min 200 mm
       if (diss === 'DMO') {
@@ -806,7 +817,7 @@
       document.getElementById('res-sim2-wu').textContent =
         `w_s = ${ws.toFixed(2)} kN/m² | w_u = 1.2D+1.6L = ${wu.toFixed(2)} kN/m²`;
       document.getElementById('res-sim2-sec').textContent =
-        `A_g,req = ${AgReqStrengthCm2.toFixed(0)} cm² → Columna (${diss}): ${sideAdoptedCm}×${sideAdoptedCm} cm (${AgAdoptedCm2} cm²)`;
+        `Ag,req: Mét. 1 = ${AgReqStrengthCm2.toFixed(0)} cm² | Mét. 2 (n=${nCoeff}) = ${AgAltCm2.toFixed(0)} cm² → Columna (${diss}): ${sideAdoptedCm}×${sideAdoptedCm} cm (${AgAdoptedCm2} cm²)`;
       document.getElementById('res-sim2-zap').textContent =
         `A_zap,req = ${AzapReqM2.toFixed(2)} m² → Zapata: ${BzapAdoptedM.toFixed(2)}×${BzapAdoptedM.toFixed(2)} m, hz = ${(hzAdoptedM * 100).toFixed(0)} cm (d = ${(dRealM * 100).toFixed(0)} cm, q_u = ${quKPa.toFixed(1)} kPa)`;
 

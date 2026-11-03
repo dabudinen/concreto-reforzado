@@ -989,9 +989,9 @@
         </div>
 
         <!-- ECUACIONES DE BAJADA DE CARGAS Y PREDIMENSIONAMIENTO DE COLUMNAS -->
-        <div class="math-card">
+                <div class="math-card">
           <div class="math-card-header">
-            <span class="math-card-title">Bajada de Cargas por Áreas Aferentes y Área Bruta Requerida de Columna ($A_{g,\text{req}}$)</span>
+            <span class="math-card-title">Método 1: Bajada de Cargas por Áreas Aferentes y Capacidad Axial Teórica ($A_{g,\text{req}}$)</span>
             <span class="norm-pill">NSR-10 B.2.4-2, C.10.3.6.2 (Ec. C.10-2) y C.10.9.1</span>
           </div>
           <div class="math-formula">
@@ -1000,6 +1000,23 @@
           <div class="math-formula">
             $$\phi P_{n,\max} = 0.75\,\phi \left[0.85\, f'_c \left(A_g - A_{st}\right) + f_y\, A_{st}\right] \implies A_{g,\text{req}} = \frac{\alpha_{\text{sismo}} \cdot P_{u,\text{grav}}}{0.75\,\phi \left[0.85\, f'_c \left(1 - \rho_g\right) + f_y\, \rho_g\right]}$$
           </div>
+
+          <!-- HOMOGENEIZACIÓN DE UNIDADES PRÁCTICAS -->
+          <div style="background: #EFF6FF; border: 1.5px solid #93C5FD; border-left: 4.5px solid #2563EB; border-radius: 6px; padding: 0.75rem 1rem; margin: 0.65rem 0;">
+            <div style="font-weight: 700; color: #1E3A8A; font-size: 0.9rem; margin-bottom: 0.35rem;">
+              📏 Homogeneización de Unidades para Obtener $A_{g,\text{req}}$ Directamente en $\text{cm}^2$ o $\text{mm}^2$:
+            </div>
+            <div class="math-formula" style="margin: 0.25rem 0;">
+              $$\begin{aligned}
+              \mathbf{Para\ obtener\ A_{g,\text{req}}\ en\ cm^2:} \quad & A_{g,\text{req}}\;[\text{cm}^2] = \frac{\alpha_{\text{sismo}} \cdot P_{u,\text{grav}}\;[\text{kN}] \times 10}{0.75\,\phi \left[0.85\, f'_c\;[\text{MPa}] \left(1 - \rho_g\right) + f_y\;[\text{MPa}] \cdot \rho_g\right]} \\[8pt]
+              \mathbf{Para\ obtener\ A_{g,\text{req}}\ en\ mm^2:} \quad & A_{g,\text{req}}\;[\text{mm}^2] = \frac{\alpha_{\text{sismo}} \cdot P_{u,\text{grav}}\;[\text{kN}] \times 10^3}{0.75\,\phi \left[0.85\, f'_c\;[\text{MPa}] \left(1 - \rho_g\right) + f_y\;[\text{MPa}] \cdot \rho_g\right]}
+              \end{aligned}$$
+            </div>
+            <p style="font-size: 0.82rem; color: #334155; margin: 0.35rem 0 0 0; line-height: 1.45;">
+              <em>Justificación dimensional:</em> Como $1\text{ kN} = 1\,000\text{ N}$ y $1\text{ MPa} = 1\text{ N/mm}^2 = 0.1\text{ kN/cm}^2$, al dividir una carga en $\text{kN}$ entre un esfuerzo en $\text{MPa}$ se requiere multiplicar por $\mathbf{10}$ para obtener el área en $\mathbf{cm^2}$ (o por $\mathbf{10^3}$ para $\mathbf{mm^2}$), evitando errores de escala comunes al mezclar kilonewtons con megapascales.
+            </p>
+          </div>
+
           <div class="math-vars">
             <div><strong>$A_{\text{af}}$ (Área Aferente):</strong> Delimitada por las mediatrices (mitad de luz) de los vanos concurrentes a la columna:
               <br>• Columna Interior: $\left(\frac{L_{x1}+L_{x2}}{2}\right)\left(\frac{L_{y1}+L_{y2}}{2}\right)$
@@ -1012,6 +1029,64 @@
               <br>• <strong>Columna Esquinera:</strong> $\alpha_{\text{sismo}} \approx 1.45\text{ – }1.50$
             </div>
             <div><strong>Parámetros de diseño:</strong> $\phi = 0.65$ para columnas con estribos cerrados (`C.9.3.2.2`), factor de excentricidad accidental obligatoria $\mathbf{0.75}$ para elementos con estribos (NSR-10 C.10.3.6.2, Ec. C.10-2; o $\mathbf{0.80}$ con espiral continua, Ec. C.10-1), cuantía longitudinal reglamentaria $0.01 \le \rho_g \le 0.04$ (`C.10.9.1`), recomendándose asumir $\rho_g = 0.010\text{ a }0.015$ en predimensionamiento.</div>
+          </div>
+        </div>
+
+        <!-- MÉTODO 2: CRITERIO DE ESFUERZO AXIAL MEDIO ADMISIBLE (n * f'c) -->
+        <div class="math-card normative-teal" style="margin-top: 1.25rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">Método 2 (Alternativa Práctica): Criterio de Esfuerzo Axial Medio Admisible Normalizado ($n \cdot f'_c$)</span>
+            <span class="norm-pill">Práctica Profesional Sismorresistente • ACI / NSR-10</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            En anteproyectos estructurales y predimensionamiento rápido, es ampliamente utilizado el método de <strong>esfuerzo axial medio admisible</strong> (o índice de carga axial reducida $\nu = \frac{P_u}{f'_c A_g}$). En este enfoque, se limita la carga axial mayorada $P_u$ a una fracción de la capacidad neta a compresión del concreto ($n \cdot f'_c$). El coeficiente adimensional $n$ cuantifica la severidad de los momentos flectores sísmicos y la posición del elemento en planta:
+          </p>
+          <div class="math-formula">
+            $$A_g \ge \frac{P_u}{n \cdot f'_c}$$
+          </div>
+
+          <!-- HOMOGENEIZACIÓN DE UNIDADES MÉTODO 2 -->
+          <div style="background: #F0FDFA; border: 1.5px solid #5EEAD4; border-left: 4.5px solid #0D9488; border-radius: 6px; padding: 0.75rem 1rem; margin: 0.65rem 0;">
+            <div style="font-weight: 700; color: #0F766E; font-size: 0.9rem; margin-bottom: 0.35rem;">
+              📏 Homogeneización de Unidades para $A_g$ en $\text{cm}^2$ o $\text{mm}^2$:
+            </div>
+            <div class="math-formula" style="margin: 0.25rem 0;">
+              $$\mathbf{Para\ obtener\ A_g\ en\ cm^2:} \quad A_g\;[\text{cm}^2] = \frac{P_u\;[\text{kN}] \times 10}{n \cdot f'_c\;[\text{MPa}]} \qquad \Big| \qquad \mathbf{Para\ obtener\ A_g\ en\ mm^2:} \quad A_g\;[\text{mm}^2] = \frac{P_u\;[\text{kN}] \times 10^3}{n \cdot f'_c\;[\text{MPa}]}$$
+            </div>
+          </div>
+
+          <!-- TARJETAS COMPARATIVAS DE COEFICIENTES n SEGÚN POSICIÓN -->
+          <div class="grid-3" style="gap: 0.85rem; margin-top: 0.75rem;">
+            <!-- C1 Interior -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-top: 4px solid #2563EB; border-radius: 6px; padding: 0.75rem 0.85rem;">
+              <div style="font-weight: 700; color: #1E3A8A; font-size: 0.88rem;">Columna Central / Interior (C1)</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #2563EB; margin: 0.25rem 0;">$\mathbf{n = 0.28}$ <span style="font-size: 0.75rem; color: #64748B; font-weight: normal;">(rango $0.25 - 0.28$)</span></div>
+              <div style="font-size: 0.8rem; color: #475569; line-height: 1.4;">
+                Dominada esencialmente por carga axial de gravedad. Los momentos flectores por sismo en ambos sentidos se equilibran en gran medida por la simetría de los vanos adyacentes.
+              </div>
+            </div>
+
+            <!-- C2 Medianera -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-top: 4px solid #D97706; border-radius: 6px; padding: 0.75rem 0.85rem;">
+              <div style="font-weight: 700; color: #92400E; font-size: 0.88rem;">Columna Medianera / Borde (C2)</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #D97706; margin: 0.25rem 0;">$\mathbf{n = 0.22}$ <span style="font-size: 0.75rem; color: #64748B; font-weight: normal;">(rango $0.20 - 0.22$)</span></div>
+              <div style="font-size: 0.8rem; color: #475569; line-height: 1.4;">
+                Sujeta a flexocompresión uniaxil/biaxil significativa debido a la discontinuidad geométrica de pórticos en la fachada. Requiere mayor sección por unidad de carga axial.
+              </div>
+            </div>
+
+            <!-- C3 Esquinera -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-top: 4px solid #DC2626; border-radius: 6px; padding: 0.75rem 0.85rem;">
+              <div style="font-weight: 700; color: #991B1B; font-size: 0.88rem;">Columna Esquinera (C3)</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #DC2626; margin: 0.25rem 0;">$\mathbf{n = 0.16}$ <span style="font-size: 0.75rem; color: #64748B; font-weight: normal;">(rango $0.15 - 0.18$)</span></div>
+              <div style="font-size: 0.8rem; color: #475569; line-height: 1.4;">
+                Sometida a severa flexocompresión biaxial simultánea en dos ejes ortogonales y efectos de torsión general. Demanda el mayor sobredimensionamiento relativo ($n$ más bajo).
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 0.65rem; font-size: 0.82rem; color: #64748B; line-height: 1.45;">
+            <em>Calibración por Disipación de Energía:</em> Los coeficientes $n = 0.28, 0.22, 0.16$ están calibrados para pórticos con disipación especial de energía (<strong>DES</strong>). Para estructuras con disipación moderada (<strong>DMO</strong>), las demandas de ductilidad y curvatura son menores, pudiéndose adoptar valores ligeramente superiores: $n \approx 0.30$ en interiores, $0.25$ en bordes y $0.20$ en esquinas.
           </div>
         </div>
 
@@ -1141,7 +1216,7 @@
         </div>
 
         <!-- ECUACIONES DE PREDIMENSIONAMIENTO DE ZAPATAS -->
-        <div class="math-card">
+                <div class="math-card">
           <div class="math-card-header">
             <span class="math-card-title">Ecuaciones de Predimensionamiento en Planta ($B \times L$) y en Altura ($d, h_z$) de Zapatas Aisladas</span>
             <span class="norm-pill">NSR-10 C.15.2.2, C.15.7, C.11.11.1.1 y C.11.11.2.1 (Ec. C.11-33)</span>
@@ -1153,6 +1228,19 @@
           </div>
           <div class="math-formula">
             $$A_{\text{zap,req}} = \frac{P_s}{q_{\text{adm,neta}}} = \frac{D + L}{q_{\text{adm,neta}}} \implies B = L = \sqrt{A_{\text{zap,req}}} \quad \text{(adoptar múltiplos de } 10\text{ cm)}$$
+          </div>
+
+          <!-- RANGO TÍPICO BARRANQUILLA -->
+          <div style="background: #FEF3C7; border: 1.5px solid #FCD34D; border-left: 4.5px solid #D97706; border-radius: 6px; padding: 0.65rem 0.95rem; font-size: 0.84rem; color: #78350F; margin: 0.5rem 0 0.85rem 0; line-height: 1.5;">
+            <strong>📍 Rango Típico de Capacidad Portante Admisible Neta ($q_{\text{adm,neta}}$) en Barranquilla y su Área Metropolitana:</strong>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.5rem; margin-top: 0.35rem;">
+              <div>• <strong>Suelos aluviales / caños / Río Magdalena:</strong><br>$q_{\text{adm}} \approx 80\text{ a }140\text{ kPa}$ ($0.8\text{ a }1.4\text{ kg/cm}^2 = 8\text{ a }14\text{ ton/m}^2$)</div>
+              <div>• <strong>Arcillas limosas firmes y meseta urbana (Centro / Norte):</strong><br>$q_{\text{adm}} \approx 150\text{ a }250\text{ kPa}$ ($1.5\text{ a }2.5\text{ kg/cm}^2 = 15\text{ a }25\text{ ton/m}^2$)</div>
+              <div>• <strong>Calcarenitas y areniscas compactas (Riomar / Puerto Colombia):</strong><br>$q_{\text{adm}} \approx 250\text{ a }400+\text{ kPa}$ ($2.5\text{ a }4.0+\text{ kg/cm}^2$)</div>
+            </div>
+            <div style="margin-top: 0.4rem; font-weight: 700; color: #92400E;">
+              🎯 <em>Valor geotécnico de referencia habitual en proyectos urbanos estándar:</em> <strong>$q_{\text{adm,neta}} \approx 180\text{ a }200\text{ kPa}$</strong> ($1.8\text{ a }2.0\text{ kg/cm}^2 = 18\text{ a }20\text{ ton/m}^2$).
+            </div>
           </div>
 
           <!-- PASO 2: PRESIÓN ÚLTIMA -->
@@ -1171,26 +1259,36 @@
             Paso 3 y 4. Fórmulas Directas de Peralte Efectivo ($d$) por Cortante y Punzonamiento:
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem; margin: 0.5rem 0 0.85rem 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0.85rem; margin: 0.5rem 0 0.85rem 0;">
             <!-- Cortante Unidireccional 1D -->
-            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 0.65rem 0.85rem;">
-              <div style="font-weight: 700; color: #047857; font-size: 0.88rem;">• Por Cortante 1D (a distancia $d$ de la cara):</div>
-              <div class="math-formula" style="margin: 0.35rem 0; font-size: 0.98rem; text-align: center;">
-                $$d_{\text{1D}} \ge \frac{q_u \cdot \left(\dfrac{B - c}{2}\right)}{\phi \cdot 0.17\,\lambda\sqrt{f'_c} + q_u}$$
+            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 0.75rem 0.95rem;">
+              <div style="font-weight: 700; color: #047857; font-size: 0.9rem;">• Por Cortante 1D (a distancia $d$ de la cara):</div>
+              <div class="math-formula" style="margin: 0.45rem 0; font-size: 1rem; text-align: center;">
+                $$d_{\text{1D}}\;[\text{m}] \ge \frac{q_u\;[\text{kPa}] \cdot \left(\dfrac{B\;[\text{m}] - c\;[\text{m}]}{2}\right)}{\phi \cdot 0.17\,\lambda\sqrt{f'_c\;[\text{MPa}]} \times 10^3 + q_u\;[\text{kPa}]}$$
               </div>
-              <div style="font-size: 0.79rem; color: #64748B; line-height: 1.4;">
-                Donde $\frac{B-c}{2}$ es el voladizo de la zapata y $\phi = 0.75$. La capacidad resistente es $\phi V_{c1} = \phi 0.17 \lambda \sqrt{f'_c} B d$.
+              <div style="font-size: 0.82rem; color: #334155; line-height: 1.45;">
+                <strong>Unidades prácticas (para obtener $d_{\text{1D}}$ en metros y luego $\text{cm}$):</strong>
+                <br>• $q_u$: Presión última de contacto en $\text{kPa}$ ($\text{kN/m}^2$).
+                <br>• $B$: Lado de la zapata en metros ($\text{m}$); $c$: Lado de columna/pedestal en metros ($\text{m}$).
+                <br>• $\frac{B-c}{2}$: Longitud del voladizo libre en metros ($\text{m}$).
+                <br>• $f'_c$: Resistencia en $\text{MPa}$ (con $\phi = 0.75$ y $\lambda = 1.0$). El factor $\mathbf{\times 10^3}$ convierte $\text{MPa}$ a $\text{kPa}$ en el denominador.
+                <br>• $\mathbf{d_{\text{1D}}\;[\text{cm}] = d_{\text{1D}}\;[\text{m}] \times 100}$.
               </div>
             </div>
 
             <!-- Punzonamiento Bidireccional -->
-            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 0.65rem 0.85rem;">
-              <div style="font-weight: 700; color: #B91C1C; font-size: 0.88rem;">• Por Punzonamiento (a $d/2$ del pedestal):</div>
-              <div class="math-formula" style="margin: 0.35rem 0; font-size: 0.98rem; text-align: center;">
-                $$d_{\text{punz}} \ge \frac{-c + \sqrt{c^2 + \dfrac{P_u}{\phi \cdot 0.33\,\lambda\sqrt{f'_c}}}}{2}$$
+            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 0.75rem 0.95rem;">
+              <div style="font-weight: 700; color: #B91C1C; font-size: 0.9rem;">• Por Punzonamiento (a $d/2$ del pedestal):</div>
+              <div class="math-formula" style="margin: 0.45rem 0; font-size: 1rem; text-align: center;">
+                $$d_{\text{punz}}\;[\text{m}] \ge \frac{-c\;[\text{m}] + \sqrt{\left(c\;[\text{m}]\right)^2 + \dfrac{P_u\;[\text{kN}]}{\phi \cdot 0.33\,\lambda\sqrt{f'_c\;[\text{MPa}]} \times 10^3}}}{2}$$
               </div>
-              <div style="font-size: 0.79rem; color: #64748B; line-height: 1.4;">
-                Despeje de $V_{u2} \approx P_u \le \phi 0.33 \lambda \sqrt{f'_c} [4(c+d)] d$ con $\phi = 0.75$. Usualmente este modo gobierna sobre el cortante 1D.
+              <div style="font-size: 0.82rem; color: #334155; line-height: 1.45;">
+                <strong>Unidades prácticas (para obtener $d_{\text{punz}}$ en metros y luego $\text{cm}$):</strong>
+                <br>• $P_u$: Carga axial mayorada en la base en kilonewtons ($\text{kN}$).
+                <br>• $c$: Dimensión de la columna en metros ($\text{m}$).
+                <br>• $f'_c$: En $\text{MPa}$ (con $\phi = 0.75$ y $\lambda = 1.0$). El factor $\mathbf{\times 10^3}$ convierte $\text{MPa}$ a $\text{kN/m}^2$, resultando el término bajo la raíz en $\text{m}^2$.
+                <br>• $\mathbf{d_{\text{punz}}\;[\text{cm}] = d_{\text{punz}}\;[\text{m}] \times 100}$.
+                <br><em>(Alternativa en $\text{mm}$: Usar $P_u \times 10^3\;[\text{N}]$, $c\;[\text{mm}]$ y dividir directamente entre $\phi 0.33 \sqrt{f'_c}\;[\text{MPa}]$).</em>
               </div>
             </div>
           </div>
@@ -1210,7 +1308,8 @@
             <div><strong>$c$:</strong> Dimensión de la columna o pedestal cuadrado ($c = b = h$). Si es rectangular, $b_0 = 2(c_1 + c_2 + 2d)$.</div>
             <div><strong>Recubrimiento ($r = 75\text{ mm}$):</strong> Obligatorio según NSR-10 `C.7.7.1` para concreto vaciado directamente sobre el terreno sin formaleta. Sumando el radio/diámetro de la barra $\#5$ ($d_b \approx 16\text{ mm}$) se tiene $r + d_b \approx 90\text{ a }100\text{ mm}$.</div>
             <div><strong>Espesor mínimo constructivo:</strong> NSR-10 `C.15.7` exige un peralte sobre el refuerzo $\ge 150\text{ mm}$, por lo que en zapatas sobre suelo se adopta como mínimo estricto $\mathbf{h_z \ge 250\text{ mm}}$ ($25\text{ cm}$), redondeando siempre hacia arriba a múltiplos de $50\text{ mm}$ ($5\text{ cm}$).</div>
-          </div></div>
+          </div>
+        </div>
         
       </section>
 
@@ -3176,7 +3275,7 @@
                 <ol style="margin: 0.4rem 0 0 1.2rem; padding: 0; color: #1E293B;">
                   <li style="margin-bottom: 0.35rem;"><strong>Viguetas y Losa Nervada en 1D:</strong> Determinar primero la altura total mínima ($h_t$) por control de deflexiones (CR.9.5), y a partir de ella evaluar la separación máxima permisible entre nervios según NSR-10 C.8.13.3 ($S \le \min(2.5 h_t, 1.20	ext{ m})$), dimensionando el ancho del nervio ($b_w$), el casetón aligerante ($A$), la loseta superior ($t$) y las riostras intermedias (C.8.13.3.1).</li>
                   <li style="margin-bottom: 0.35rem;"><strong>Vigas de Pórtico:</strong> Peralte $h$ y ancho $b_w$ para vigas de carga ($L_x = 6.00	ext{ m}$) y vigas de amarre transversal ($L_y = 4.50	ext{ m}$) cumpliendo los requisitos geométricos DES de NSR-10 C.21.5.1.</li>
-                  <li style="margin-bottom: 0.35rem;"><strong>Columna Central Crítica C-2B:</strong> Bajada de cargas tributarias por área aferente, amplificación por sismo ($lpha_{	ext{sismo}}$) y dimensionamiento del área bruta requerida ($A_{g,	ext{req}}$) en el primer piso.</li>
+                  <li style="margin-bottom: 0.35rem;"><strong>Columna Central Crítica C-2B:</strong> Bajada de cargas tributarias por área aferente, amplificación por sismo ($lpha_{	ext{sismo}}$) y dimensionamiento del área bruta requerida ($A_{g,	ext{req}}$) en el primer piso.</li>
                   <li style="margin-bottom: 0;"><strong>Zapata Aislada Concéntrica:</strong> Dimensiones en planta ($B 	imes L$) por esfuerzos admisibles de servicio en el suelo y espesor total ($h_z$, peralte efectivo $d$) por cortante en una dirección y punzonamiento bidireccional.</li>
                 </ol>
               </div>

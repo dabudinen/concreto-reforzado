@@ -565,6 +565,16 @@
 
         }
 
+      } else if (e.key === 'v' || e.key === 'V') {
+
+        if (document.getElementById('modal-variables')) {
+
+          e.preventDefault();
+
+          window.toggleVariablesModal();
+
+        }
+
       } else if (isPresentationMode && (e.key === 'ArrowRight' || e.key === 'PageDown')) {
 
         e.preventDefault();
@@ -578,6 +588,18 @@
         window.prevSlide();
 
       } else if (e.key === 'Escape') {
+
+        const vm = document.getElementById('modal-variables');
+
+        if (vm && vm.classList.contains('open')) {
+
+          e.preventDefault();
+
+          window.toggleVariablesModal();
+
+          return;
+
+        }
 
         const lb = document.getElementById('lightbox-overlay');
 
@@ -1052,6 +1074,107 @@
   };
 
 
+
+
+
+  /* --------------------------------------------------------------------------
+     10. VENTANA EMERGENTE DE NOMENCLATURA Y VARIABLES
+     -------------------------------------------------------------------------- */
+  window.toggleVariablesModal = function () {
+    const modal = document.getElementById('modal-variables');
+    if (!modal) return;
+
+    const isOpen = modal.classList.contains('open');
+    if (!isOpen) {
+      modal.style.display = 'flex';
+      void modal.offsetWidth;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      if (typeof window.renderMathInElement === 'function') {
+        window.renderMathInElement(modal, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+
+      const input = document.getElementById('vars-search-input');
+      if (input) {
+        input.value = '';
+        if (typeof window.filterVariablesModal === 'function') {
+          window.filterVariablesModal();
+        }
+        setTimeout(() => input.focus(), 80);
+      }
+    } else {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (!modal.classList.contains('open')) {
+          modal.style.display = 'none';
+        }
+      }, 200);
+    }
+  };
+
+  window.filterVariablesModal = function () {
+    const input = document.getElementById('vars-search-input');
+    const query = input ? input.value.toLowerCase().trim() : '';
+    const rows = document.querySelectorAll('.var-item-row');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const searchData = (row.getAttribute('data-search') || row.textContent).toLowerCase();
+      const match = !query || searchData.includes(query);
+      row.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    document.querySelectorAll('.var-category-block').forEach(cat => {
+      const visibleChildren = cat.querySelectorAll('.var-item-row:not([style*="display: none"])');
+      cat.style.display = visibleChildren.length > 0 ? '' : 'none';
+    });
+
+    const countEl = document.getElementById('vars-search-count');
+    if (countEl) {
+      countEl.textContent = query ? `${visibleCount} coincidencias` : '';
+    }
+  };
+
+  window.filterVariablesCategory = function (category, btn) {
+    document.querySelectorAll('.var-filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const searchInput = document.getElementById('vars-search-input');
+    if (searchInput) searchInput.value = '';
+
+    const categories = document.querySelectorAll('.var-category-block');
+    let visibleCount = 0;
+
+    categories.forEach(cat => {
+      const catId = cat.getAttribute('data-category');
+      if (category === 'all' || catId === category) {
+        cat.style.display = '';
+        const rows = cat.querySelectorAll('.var-item-row');
+        rows.forEach(r => {
+          r.style.display = '';
+          visibleCount++;
+        });
+      } else {
+        cat.style.display = 'none';
+      }
+    });
+
+    const countEl = document.getElementById('vars-search-count');
+    if (countEl) {
+      countEl.textContent = category !== 'all' ? `${visibleCount} variables` : '';
+    }
+  };
 
 })();
 

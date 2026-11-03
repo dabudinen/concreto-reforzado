@@ -675,11 +675,16 @@
 
 
 
-        const targetEl = document.getElementById(targetId);
+        let targetEl = document.getElementById(targetId);
 
         if (targetEl) {
 
           e.preventDefault();
+
+          if (targetEl.classList.contains('example-macro-body') && typeof window.toggleExampleMacro === 'function') {
+            window.toggleExampleMacro(targetId, true);
+            targetEl = document.getElementById(`macro-${targetId}`) || targetEl;
+          }
 
           const topbar = document.querySelector('.topbar');
 
@@ -1173,6 +1178,49 @@
     const countEl = document.getElementById('vars-search-count');
     if (countEl) {
       countEl.textContent = category !== 'all' ? `${visibleCount} variables` : '';
+    }
+  };
+
+
+  /* --------------------------------------------------------------------------
+     11. CONTROL GLOBAL DE MACRO-CARDS DE EJERCICIOS Y BARRA QUICK JUMP
+     -------------------------------------------------------------------------- */
+  window.toggleExampleMacro = function (exampleId, forceState) {
+    const body = document.getElementById(exampleId);
+    const btn = document.getElementById(`macro-btn-${exampleId}`);
+    const card = document.getElementById(`macro-${exampleId}`);
+    if (!body) return;
+
+    const isCurrentlyOpen = body.style.display !== 'none' && window.getComputedStyle(body).display !== 'none';
+    const shouldOpen = forceState !== undefined ? forceState : !isCurrentlyOpen;
+
+    if (shouldOpen) {
+      body.style.display = 'block';
+      if (btn) btn.innerHTML = '<span>Ocultar Ejercicio</span> <span class="macro-arrow">▲</span>';
+      if (card) card.style.borderColor = 'var(--brand-primary)';
+    } else {
+      body.style.display = 'none';
+      if (btn) btn.innerHTML = '<span>Ver Ejercicio Completo</span> <span class="macro-arrow">▼</span>';
+      if (card) card.style.borderColor = 'var(--border-color)';
+    }
+  };
+
+  window.toggleAllExamples = function (reveal) {
+    document.querySelectorAll('.example-macro-body').forEach((body) => {
+      if (body.id) {
+        window.toggleExampleMacro(body.id, reveal);
+      }
+    });
+  };
+
+  window.openAndJumpToExample = function (exampleId) {
+    window.toggleExampleMacro(exampleId, true);
+    const card = document.getElementById(`macro-${exampleId}`) || document.getElementById(exampleId);
+    if (card) {
+      const topbar = document.querySelector('.topbar');
+      const topbarHeight = topbar ? topbar.offsetHeight : 70;
+      const targetY = card.getBoundingClientRect().top + window.scrollY - topbarHeight - 20;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
     }
   };
 

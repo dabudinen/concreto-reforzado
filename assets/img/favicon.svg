@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="beamBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="stirrupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="goldSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Seccional de Concreto (Viga b x h) con borde iluminado -->
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="url(#beamBg)" stroke="#38BDF8" stroke-width="2.5"/>
+
+  <!-- Estribo Cerrado Sísmico (Confinamiento) -->
+  <rect x="11" y="11" width="42" height="42" rx="7" fill="none" stroke="url(#stirrupGrad)" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Gancho a 135° -->
+  <path d="M 12 18 L 22 28" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Acero a Compresión (2 barras superiores plateadas) -->
+  <circle cx="20" cy="19" r="4.2" fill="#F8FAFC" stroke="#334155" stroke-width="1.2"/>
+  <circle cx="44" cy="19" r="4.2" fill="#F8FAFC" stroke="#334155" stroke-width="1.2"/>
+
+  <!-- Acero Principal a Tracción por Flexión (3 barras inferiores doradas de gran tenacidad) -->
+  <circle cx="19" cy="45" r="5.2" fill="url(#goldSteel)" stroke="#78350F" stroke-width="1.2"/>
+  <circle cx="32" cy="45" r="5.2" fill="url(#goldSteel)" stroke="#78350F" stroke-width="1.2"/>
+  <circle cx="45" cy="45" r="5.2" fill="url(#goldSteel)" stroke="#78350F" stroke-width="1.2"/>
+
+  <!-- Destello de brillo en el acero -->
+  <circle cx="18" cy="43.5" r="1.5" fill="#FEF9C3"/>
+  <circle cx="31" cy="43.5" r="1.5" fill="#FEF9C3"/>
+  <circle cx="44" cy="43.5" r="1.5" fill="#FEF9C3"/>
+</svg>

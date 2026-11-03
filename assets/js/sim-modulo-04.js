@@ -212,6 +212,47 @@ function updateSim41() {
     statusEl.innerHTML = `✅ ZONA 3 DE DISEÑO ESTÁNDAR (Vs ≤ 0.33√f'c bw d = ${VsLim1.toFixed(1)} kN): Estribos @ ${sCritDesignCm.toFixed(1)} cm en S = ${S_zone3.toFixed(2)} m (φVn = ${phiVnProv.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN).`;
   }
 
+  // Actualizar Tacómetro Dinámico de Zonas de Cortante (#sim41-tachometer-card)
+  const tachoNeedle = document.getElementById('sim41-tacho-needle');
+  const tachoBadge  = document.getElementById('sim41-tacho-badge');
+  const tachoRatio  = document.getElementById('sim41-tacho-val-ratio');
+  const tachoVs     = document.getElementById('sim41-tacho-val-vs');
+  const tachoZone   = document.getElementById('sim41-tacho-val-zone');
+
+  if (tachoNeedle && tachoBadge && tachoRatio && tachoVs && tachoZone) {
+    const phiVnLim1 = phiVc + phi * VsLim1;
+    let needlePct = 5.0;
+
+    if (VuCrit <= halfPhiVc && halfPhiVc > 0) {
+      needlePct = (VuCrit / halfPhiVc) * 18.0;
+      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
+      tachoBadge.textContent = 'ZONA 1 • Vu ≤ 0.5φVc (ESTRIBOS CONSTRUCTIVOS)';
+    } else if (VuCrit <= phiVc && phiVc > halfPhiVc) {
+      needlePct = 18.0 + ((VuCrit - halfPhiVc) / (phiVc - halfPhiVc)) * 20.0;
+      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
+      tachoBadge.textContent = 'ZONA 2 • 0.5φVc < Vu ≤ φVc (RIGE Av,mín)';
+    } else if (VuCrit <= phiVnLim1 && phiVnLim1 > phiVc) {
+      needlePct = 38.0 + ((VuCrit - phiVc) / (phiVnLim1 - phiVc)) * 27.0;
+      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
+      tachoBadge.textContent = 'ZONA 3A • DISEÑO ESTÁNDAR (s ≤ d/2)';
+    } else if (VuCrit <= phiVnMax && phiVnMax > phiVnLim1) {
+      needlePct = 65.0 + ((VuCrit - phiVnLim1) / (phiVnMax - phiVnLim1)) * 20.0;
+      tachoBadge.className = 'sim-tacho-zone-badge zone-trans';
+      tachoBadge.textContent = 'ZONA 3B • CORTANTE ALTO (s ≤ d/4)';
+    } else {
+      const overRatio = phiVnMax > 0 ? (VuCrit - phiVnMax) / (0.35 * phiVnMax) : 1.0;
+      needlePct = Math.min(98.0, 85.0 + Math.max(0.0, overRatio) * 13.0);
+      tachoBadge.className = 'sim-tacho-zone-badge zone-comp';
+      tachoBadge.textContent = 'ZONA 4 • SECCIÓN INSUFICIENTE (Vs > Vs,máx)';
+    }
+
+    tachoNeedle.style.left = `${Math.max(2.0, Math.min(98.0, needlePct)).toFixed(1)}%`;
+    const ratioDemMax = phiVnMax > 0 ? (VuCrit / phiVnMax) : 0.0;
+    tachoRatio.textContent = `Vu,crit / φVn,máx = ${ratioDemMax.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnMax.toFixed(1)} kN)`;
+    tachoVs.textContent    = `Vs = ${VsReq.toFixed(1)} kN ${VsReq <= VsMax ? '≤' : '>'} Vs,máx (${VsMax.toFixed(1)} kN)`;
+    tachoZone.textContent  = `s_máx = ${sMaxNormCm.toFixed(1)} cm (Geom: ${sMaxGeomCm.toFixed(1)} cm | Adoptado: ${sCritDesignCm.toFixed(1)} cm)`;
+  }
+
   drawSim41Canvas({
     L, cApoyo, wu, bw, h, dCm, dM, Ltotal,
     VuEje, VuCara, VuCrit, xCritFromFace,

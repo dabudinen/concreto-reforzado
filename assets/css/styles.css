@@ -11686,3 +11686,141 @@ html[data-theme="dark"] .variables-modal-footer {
   border-color: #334155;
   color: #94A3B8;
 }
+
+/* ==========================================================================
+   ESTILOS PARA NAVEGACIÓN RÁPIDA (QUICK JUMP) Y MACRO-EJERCICIOS COLAPSABLES
+   ========================================================================== */
+.quick-jump-container {
+  background: var(--bg-surface);
+  border: 1.2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 12px;
+  z-index: 40;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.quick-jump-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.quick-jump-btn:hover {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-color: var(--brand-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+.example-macro-card {
+  margin-bottom: 1.5rem;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.example-macro-card:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.example-macro-header {
+  padding: 1.1rem 1.35rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid transparent;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.example-macro-header:hover {
+  background: rgba(37, 99, 235, 0.05);
+}
+
+html[data-theme="dark"] .example-macro-header:hover {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.macro-toggle-btn {
+  font-size: 0.80rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.example-macro-header:hover .macro-toggle-btn {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  border-color: var(--brand-primary);
+}
+
+.example-macro-body {
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Tacómetro Dinámico en Simuladores */
+.sim-tachometer-card {
+  background: var(--bg-surface);
+  border: 1.2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin: 1.15rem 0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.sim-tacho-track {
+  position: relative;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  background: #E2E8F0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.sim-tacho-needle {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 7px;
+  background: #0F172A;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 3.5px;
+  transform: translateX(-50%);
+  transition: left 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .sim-tacho-needle {
+  background: #F8FAFC;
+  border-color: #0F172A;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+}

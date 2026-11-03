@@ -269,6 +269,51 @@ function updateSim31() {
   document.getElementById('out-sim31-strains').textContent = `c = ${(c_rev / 10).toFixed(2)} cm | a = ${(a_rev / 10).toFixed(2)} cm | εt = ${et_rev.toFixed(5)} | φ = ${phi_rev.toFixed(3)}`;
   document.getElementById('out-sim31-phimn').textContent = `φMn = ${phiMn_kNm.toFixed(1)} kN·m ≥ Mu = ${Mu.toFixed(0)} kN·m (D/C = ${(Mu / phiMn_kNm).toFixed(2)})`;
 
+  // Actualizar Tacómetro Dinámico de Ductilidad y Estado Límite (NSR-10 C.9.3.2 / C.10.3.5)
+  const tachoNeedle = document.getElementById('sim31-tacho-needle');
+  const tachoValEt = document.getElementById('sim31-tacho-val-et');
+  const tachoValPhi = document.getElementById('sim31-tacho-val-phi');
+  const tachoValState = document.getElementById('sim31-tacho-val-state');
+  const tachoBadge = document.getElementById('sim31-tacho-badge');
+
+  if (tachoNeedle) {
+    const tachoPct = Math.min(98, Math.max(2, (et_rev / 0.010) * 100));
+    tachoNeedle.style.left = `${tachoPct.toFixed(1)}%`;
+
+    if (tachoValEt) tachoValEt.textContent = et_rev.toFixed(4);
+    if (tachoValPhi) tachoValPhi.textContent = `ϕ = ${phi_rev.toFixed(3)}`;
+
+    if (et_rev >= 0.005) {
+      if (tachoValState) {
+        tachoValState.textContent = 'Dúctil / Controlada por Tracción';
+        tachoValState.style.color = '#059669';
+      }
+      if (tachoBadge) {
+        tachoBadge.className = 'status-pill status-ok';
+        tachoBadge.textContent = 'Dúctil — Tracción Controlada (ϕ = 0.90)';
+      }
+    } else if (et_rev >= 0.004) {
+      if (tachoValState) {
+        tachoValState.textContent = 'Transición (Factor ϕ castigado)';
+        tachoValState.style.color = '#D97706';
+      }
+      if (tachoBadge) {
+        tachoBadge.className = 'status-pill status-warn';
+        tachoBadge.textContent = `Transición (0.004 ≤ εt < 0.005, ϕ = ${phi_rev.toFixed(3)})`;
+      }
+    } else {
+      if (tachoValState) {
+        tachoValState.textContent = '¡PROHIBIDA EN FLEXIÓN! (εt < 0.004)';
+        tachoValState.style.color = '#DC2626';
+      }
+      if (tachoBadge) {
+        tachoBadge.className = 'status-pill status-danger';
+        tachoBadge.textContent = '¡PROHIBIDA! εt < 0.004 (NSR-10 C.10.3.5)';
+      }
+    }
+  }
+
+
   drawSim31Canvas({
     bw, h, d, dp, dt: dt_mm / 10.0,
     c: c_rev / 10.0, a: a_rev / 10.0,
@@ -879,3 +924,47 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSim32();
   });
 });
+
+
+/**
+ * ============================================================================
+ * CONTROL DE NAVEGACIÓN Y DESPLIEGUE DE EJERCICIOS COLAPSABLES (SECCIÓN 7.0)
+ * ============================================================================
+ */
+window.toggleExampleMacro = function(exampleId, forceState) {
+  const body = document.getElementById(exampleId);
+  const btn = document.getElementById(`macro-btn-${exampleId}`);
+  const arrow = document.getElementById(`macro-arrow-${exampleId}`);
+  const card = document.getElementById(`macro-${exampleId}`);
+  if (!body) return;
+
+  const isCurrentlyOpen = body.style.display !== 'none';
+  const shouldOpen = forceState !== undefined ? forceState : !isCurrentlyOpen;
+
+  if (shouldOpen) {
+    body.style.display = 'block';
+    if (arrow) arrow.textContent = '▲';
+    if (btn) btn.innerHTML = '<span>Ocultar Ejercicio</span> <span class="macro-arrow">▲</span>';
+    if (card) card.style.borderColor = 'var(--brand-primary)';
+  } else {
+    body.style.display = 'none';
+    if (arrow) arrow.textContent = '▼';
+    if (btn) btn.innerHTML = '<span>Ver Ejercicio Completo</span> <span class="macro-arrow">▼</span>';
+    if (card) card.style.borderColor = 'var(--border-color)';
+  }
+};
+
+window.toggleAllExamples = function(reveal) {
+  for (let i = 1; i <= 7; i++) {
+    const id = `sec-ejemplo-0${i}`;
+    window.toggleExampleMacro(id, reveal);
+  }
+};
+
+window.openAndJumpToExample = function(exampleId) {
+  window.toggleExampleMacro(exampleId, true);
+  const card = document.getElementById(`macro-${exampleId}`);
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};

@@ -745,6 +745,24 @@ body.sidebar-collapsed:not(.presentation-mode) .btn-sidebar-float {
 
 }
 
+.module-pill.disabled {
+
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  pointer-events: none;
+
+  background: var(--bg-subtle);
+
+  color: var(--text-muted);
+
+  border-color: var(--border-color);
+
+  filter: grayscale(0.9);
+
+}
+
 /* ==========================================================================
 
    CONTENEDOR PRINCIPAL Y HERO INSTITUCIONAL
@@ -2265,6 +2283,38 @@ input[type="range"] {
 
 }
 
+.status-in-progress {
+
+  background: var(--bg-subtle);
+
+  color: var(--text-muted);
+
+  border: 1px solid var(--border-color);
+
+}
+
+.module-card.module-in-progress {
+
+  opacity: 0.72;
+
+  filter: grayscale(0.85);
+
+  border: 1px dashed var(--border-color);
+
+  background: var(--bg-subtle);
+
+}
+
+.module-card.module-in-progress:hover {
+
+  transform: none !important;
+
+  box-shadow: none !important;
+
+  border-color: var(--border-color) !important;
+
+}
+
 .module-card-title {
 
   font-size: 1.22rem;
@@ -2360,6 +2410,38 @@ input[type="range"] {
   color: #FFFFFF;
 
   transform: translateX(2px);
+
+}
+
+.btn-disabled {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  background: var(--bg-subtle);
+
+  color: var(--text-muted);
+
+  font-weight: 600;
+
+  font-size: 0.86rem;
+
+  padding: 0.6rem 1.1rem;
+
+  border-radius: var(--radius-sm);
+
+  border: 1px solid var(--border-color);
+
+  cursor: not-allowed;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  text-decoration: none;
 
 }
 

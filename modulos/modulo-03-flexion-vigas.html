@@ -2931,21 +2931,41 @@
           <div class="sim-box-header">
             <div>
               <h3 class="sim-box-title">🔬 Simulador 3.1: Diseñador y Analizador Seccional de Vigas Rectangulares (Simples y Doblemente Reforzadas)</h3>
-              <p class="sim-box-subtitle">Incrementa $M_u$ por encima de $M_{u1,\max}$ para activar automáticamente la superposición de Viga Doblemente Reforzada ($A'_s$ y $A_s$) y verificar si $\varepsilon'_s \ge \varepsilon_y$</p>
+              <p class="sim-box-subtitle" id="sim31-box-subtitle">Incrementa $M_u$ por encima de $M_{u1,\max}$ para activar automáticamente la superposición de Viga Doblemente Reforzada ($A'_s$ y $A_s$) y verificar si $\varepsilon'_s \ge \varepsilon_y$</p>
             </div>
             <span id="sim31-status-banner" class="status-pill status-ok">Viga Simplemente Reforzada — Controlada por Tracción</span>
           </div>
 
           <div class="sim-grid">
             <div class="sim-controls">
+              <!-- SELECTOR DE MODO: DISEÑO vs REVISIÓN -->
+              <div class="control-group" style="background: var(--bg-accent-soft); padding: 0.75rem; border-radius: 8px; border: 1.5px solid var(--primary-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+                  <span style="font-weight: 800; font-size: 0.85rem; color: var(--text-main);">
+                    ⚙️ Modo de Cálculo
+                  </span>
+                  <span id="sim31-mode-badge" class="norm-pill" style="font-size: 0.72rem; font-weight: 700; background: #2563EB; color: #FFFFFF;">📐 Modo Diseño</span>
+                </div>
+                <div class="sim-mode-toggle">
+                  <button type="button" id="sim31-btn-mode-design" class="sim-mode-btn active" onclick="setSim31Mode('design')">
+                    📐 Modo Diseño (Auto)
+                  </button>
+                  <button type="button" id="sim31-btn-mode-review" class="sim-mode-btn" onclick="setSim31Mode('review')">
+                    🔍 Modo Revisión (Fijo)
+                  </button>
+                </div>
+              </div>
+
+              <!-- SOLICITACIÓN: MOMENTO MAYORADO (Activo en ambos modos) -->
               <div class="control-group">
                 <div class="control-label">
-                  <span>Momento Mayorado $M_u$</span>
+                  <span id="lbl-sim31-mu">Momento Mayorado $M_u$</span>
                   <span id="val-sim31-mu" class="control-value">420 kN·m</span>
                 </div>
                 <input type="range" id="sim31-mu" min="40" max="1400" step="10" value="420" />
               </div>
 
+              <!-- GEOMETRÍA -->
               <div class="control-group">
                 <div class="control-label">
                   <span>Ancho de la Viga $b_w$</span>
@@ -2978,6 +2998,7 @@
                 <input type="range" id="sim31-dp" min="4.5" max="9.0" step="0.5" value="6.0" />
               </div>
 
+              <!-- MATERIALES -->
               <div class="control-group">
                 <div class="control-label">
                   <span>Resistencia del Concreto $f'_c$ y Fluencia $f_y$</span>
@@ -2997,12 +3018,14 @@
                 </div>
               </div>
 
-              <div class="control-group">
+              <!-- PANEL MODO DISEÑO: CALIBRES PREFERIDOS -->
+              <div id="sim31-panel-design" class="control-group">
                 <div class="control-label">
                   <span>Calibre de Barras: Tracción ($A_s$) / Compresión ($A'_s$)</span>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
                   <select id="sim31-bar" class="sim-select">
+                    <option value="4">Tracción: No. 4 (1.29 cm²)</option>
                     <option value="5">Tracción: No. 5 (1.99 cm²)</option>
                     <option value="6">Tracción: No. 6 (2.84 cm²)</option>
                     <option value="7">Tracción: No. 7 (3.87 cm²)</option>
@@ -3011,12 +3034,95 @@
                     <option value="10">Tracción: No. 10 (8.19 cm²)</option>
                   </select>
                   <select id="sim31-bar-comp" class="sim-select">
+                    <option value="3">Comp.: No. 3 (0.71 cm²)</option>
                     <option value="4">Comp.: No. 4 (1.29 cm²)</option>
                     <option value="5" selected>Comp.: No. 5 (1.99 cm²)</option>
                     <option value="6">Comp.: No. 6 (2.84 cm²)</option>
                     <option value="7">Comp.: No. 7 (3.87 cm²)</option>
                     <option value="8">Comp.: No. 8 (5.10 cm²)</option>
                   </select>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                  ℹ️ El simulador calcula automáticamente la cantidad de barras necesarias para suplir $M_u$.
+                </div>
+              </div>
+
+              <!-- PANEL MODO REVISIÓN: ACEROS FIJOS DEFINIDOS POR EL USUARIO -->
+              <div id="sim31-panel-review" style="display: none; flex-direction: column; gap: 0.85rem;">
+                <!-- Armadura a Tracción Fija -->
+                <div class="control-group" style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1.2px solid #F59E0B;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                    <span style="font-weight: 700; font-size: 0.84rem; color: #B45309;">
+                      🔻 Armadura a Tracción ($A_s$ inferior)
+                    </span>
+                    <span id="val-sim31-rev-as" class="sim-section-badge" style="color: #B45309; border-color: #FCD34D;">
+                      5 No. 8 = 25.50 cm²
+                    </span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center;">
+                    <div>
+                      <div class="control-label" style="font-size: 0.78rem; margin-bottom: 0.2rem;">
+                        <span>N° Barras:</span>
+                        <span id="val-sim31-rev-nbars" style="font-weight: 700; color: #B45309;">5</span>
+                      </div>
+                      <input type="range" id="sim31-rev-nbars" min="2" max="12" step="1" value="5" />
+                    </div>
+                    <div>
+                      <div class="control-label" style="font-size: 0.78rem; margin-bottom: 0.2rem;">
+                        <span>Calibre:</span>
+                      </div>
+                      <select id="sim31-rev-bar" class="sim-select" style="font-size: 0.80rem;">
+                        <option value="4">No. 4 (1/2" - 1.29 cm²)</option>
+                        <option value="5">No. 5 (5/8" - 1.99 cm²)</option>
+                        <option value="6">No. 6 (3/4" - 2.84 cm²)</option>
+                        <option value="7">No. 7 (7/8" - 3.87 cm²)</option>
+                        <option value="8" selected>No. 8 (1" - 5.10 cm²)</option>
+                        <option value="9">No. 9 (1-1/8" - 6.45 cm²)</option>
+                        <option value="10">No. 10 (1-1/4" - 8.19 cm²)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Armadura a Compresión Fija -->
+                <div class="control-group" style="background: var(--bg-surface); padding: 0.75rem; border-radius: 8px; border: 1.2px solid #10B981;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                    <span style="font-weight: 700; font-size: 0.84rem; color: #047857;">
+                      🔺 Armadura a Compresión ($A'_s$ superior)
+                    </span>
+                    <span id="val-sim31-rev-ascomp" class="sim-section-badge" style="color: #047857; border-color: #6EE7B7;">
+                      Sin armadura resistente
+                    </span>
+                  </div>
+                  <label style="display: flex; align-items: center; gap: 0.45rem; font-size: 0.80rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.4rem; cursor: pointer;">
+                    <input type="checkbox" id="sim31-rev-has-comp" style="width: 16px; height: 16px; cursor: pointer;" />
+                    <span>Activar acero a compresión en cálculo ($A'_s$)</span>
+                  </label>
+                  <div id="sim31-rev-comp-details" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.5rem; align-items: center;">
+                    <div>
+                      <div class="control-label" style="font-size: 0.78rem; margin-bottom: 0.2rem;">
+                        <span>N° Barras:</span>
+                        <span id="val-sim31-rev-nbars-comp" style="font-weight: 700; color: #047857;">2</span>
+                      </div>
+                      <input type="range" id="sim31-rev-nbars-comp" min="2" max="8" step="1" value="2" />
+                    </div>
+                    <div>
+                      <div class="control-label" style="font-size: 0.78rem; margin-bottom: 0.2rem;">
+                        <span>Calibre:</span>
+                      </div>
+                      <select id="sim31-rev-bar-comp" class="sim-select" style="font-size: 0.80rem;">
+                        <option value="3">No. 3 (3/8" - 0.71 cm²)</option>
+                        <option value="4">No. 4 (1/2" - 1.29 cm²)</option>
+                        <option value="5" selected>No. 5 (5/8" - 1.99 cm²)</option>
+                        <option value="6">No. 6 (3/4" - 2.84 cm²)</option>
+                        <option value="7">No. 7 (7/8" - 3.87 cm²)</option>
+                        <option value="8">No. 8 (1" - 5.10 cm²)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="sim31-rev-comp-inactive-note" style="font-size: 0.74rem; color: var(--text-muted);">
+                    ℹ️ Viga tratada como simplemente reforzada (2 barras constructivas porta-estribos sin aporte a flexión).
+                  </div>
                 </div>
               </div>
             </div>
@@ -3066,43 +3172,43 @@
 
               <div class="sim-metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Parámetro $R_n = M_u / (\phi b d^2)$</span>
+                  <span class="sim-metric-label" id="lbl-sim31-rn">Parámetro $R_n = M_u / (\phi b d^2)$</span>
                   <span id="out-sim31-rn" class="sim-metric-value">4.57 MPa</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Límite Simple $M_{u1,\max}$ ($\varepsilon_t=0.005$)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-mu1max">Límite Simple $M_{u1,\max}$ ($\varepsilon_t=0.005$)</span>
                   <span id="out-sim31-mu1max" class="sim-metric-value">583.4 kN·m</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Cuantía Mínima $\rho_{\min}$ (C.10.5.1)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-rhomin">Cuantía Mínima $\rho_{\min}$ (C.10.5.1)</span>
                   <span id="out-sim31-rhomin" class="sim-metric-value">0.333 % (6.30 cm²)</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Cuantías Máximas ($\rho_{\text{trac}}$ | $\rho_{\max}$)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-rhomax">Cuantías Máximas ($\rho_{\text{trac}}$ | $\rho_{\max}$)</span>
                   <span id="out-sim31-rhomax" class="sim-metric-value">1.806 % | 2.064 %</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Acero en Tracción Requerido $A_{s,\text{req}}$</span>
+                  <span class="sim-metric-label" id="lbl-sim31-asreq">Acero en Tracción Requerido $A_{s,\text{req}}$</span>
                   <span id="out-sim31-asreq" class="sim-metric-value">23.12 cm²</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Acero a Compresión Requerido $A'_s$</span>
+                  <span class="sim-metric-label" id="lbl-sim31-ascomp">Acero a Compresión Requerido $A'_s$</span>
                   <span id="out-sim31-ascomp" class="sim-metric-value">No requerido</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Despiece Comercial en Tracción</span>
+                  <span class="sim-metric-label" id="lbl-sim31-bars">Despiece Comercial en Tracción</span>
                   <span id="out-sim31-bars" class="sim-metric-value">5 No. 8 → 25.50 cm²</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Chequeo Ancho Mínimo $b_{\min}$ (C.7.6.1)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-bmin">Chequeo Ancho Mínimo $b_{\min}$ (C.7.6.1)</span>
                   <span id="out-sim31-bmin" class="sim-metric-value">b_mín = 36.0 cm</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Compatibilidad ($c, a, \varepsilon_t, \phi$)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-strains">Compatibilidad ($c, a, \varepsilon_t, \phi$)</span>
                   <span id="out-sim31-strains" class="sim-metric-value">c=15.1 cm | εt=0.0077</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Verificación de Resistencia ($\phi M_n \ge M_u$)</span>
+                  <span class="sim-metric-label" id="lbl-sim31-phimn">Verificación de Resistencia ($\phi M_n \ge M_u$)</span>
                   <span id="out-sim31-phimn" class="sim-metric-value">φMn = 458.2 kN·m ≥ 420 kN·m</span>
                 </div>
               </div>

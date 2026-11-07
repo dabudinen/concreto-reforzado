@@ -11,13 +11,15 @@
  */
 
 const BAR_CATALOG = {
+  3:  { label: 'No. 3 (3/8")',   db: 9.5,  areaCm2: 0.71, mass: 0.559 },
   4:  { label: 'No. 4 (1/2")',   db: 12.7, areaCm2: 1.29, mass: 0.994 },
   5:  { label: 'No. 5 (5/8")',   db: 15.9, areaCm2: 1.99, mass: 1.552 },
   6:  { label: 'No. 6 (3/4")',   db: 19.1, areaCm2: 2.84, mass: 2.235 },
   7:  { label: 'No. 7 (7/8")',   db: 22.2, areaCm2: 3.87, mass: 3.042 },
   8:  { label: 'No. 8 (1")',     db: 25.4, areaCm2: 5.10, mass: 3.973 },
   9:  { label: 'No. 9 (1-1/8")', db: 28.7, areaCm2: 6.45, mass: 5.060 },
-  10: { label: 'No. 10 (1-1/4")',db: 32.3, areaCm2: 8.19, mass: 6.404 }
+  10: { label: 'No. 10 (1-1/4")',db: 32.3, areaCm2: 8.19, mass: 6.404 },
+  11: { label: 'No. 11 (1-3/8")',db: 35.8, areaCm2: 10.07, mass: 7.907 }
 };
 
 function calcBeta1(fc) {
@@ -55,6 +57,53 @@ function getThemePalette() {
   };
 }
 
+let sim31Mode = 'design'; // 'design' | 'review'
+
+function setSim31Mode(mode) {
+  sim31Mode = mode;
+  const btnDesign = document.getElementById('sim31-btn-mode-design');
+  const btnReview = document.getElementById('sim31-btn-mode-review');
+  const panelDesign = document.getElementById('sim31-panel-design');
+  const panelReview = document.getElementById('sim31-panel-review');
+  const modeBadge = document.getElementById('sim31-mode-badge');
+  const subtitle = document.getElementById('sim31-box-subtitle');
+  const lblMu = document.getElementById('lbl-sim31-mu');
+
+  if (mode === 'review') {
+    if (btnDesign) btnDesign.classList.remove('active');
+    if (btnReview) btnReview.classList.add('active');
+    if (panelDesign) panelDesign.style.display = 'none';
+    if (panelReview) panelReview.style.display = 'flex';
+    if (modeBadge) {
+      modeBadge.textContent = '🔍 Modo Revisión';
+      modeBadge.style.background = '#059669';
+    }
+    if (subtitle) {
+      subtitle.textContent = 'Fija el refuerzo superior e inferior y varía Mu para comprobar la capacidad resistente φMn, el ratio D/C y el tacómetro de ductilidad εt.';
+    }
+    if (lblMu) {
+      lblMu.textContent = 'Momento Solicitante Mu (Demanda)';
+    }
+  } else {
+    if (btnDesign) btnDesign.classList.add('active');
+    if (btnReview) btnReview.classList.remove('active');
+    if (panelDesign) panelDesign.style.display = 'flex';
+    if (panelReview) panelReview.style.display = 'none';
+    if (modeBadge) {
+      modeBadge.textContent = '📐 Modo Diseño';
+      modeBadge.style.background = '#2563EB';
+    }
+    if (subtitle) {
+      subtitle.textContent = 'Incrementa Mu por encima de Mu1,máx para activar automáticamente la superposición de Viga Doblemente Reforzada (A\'s y As) y verificar si ε\'s ≥ εy.';
+    }
+    if (lblMu) {
+      lblMu.textContent = 'Momento Mayorado Mu (Diseño)';
+    }
+  }
+  updateSim31();
+}
+window.setSim31Mode = setSim31Mode;
+
 /**
  * ============================================================================
  * SIMULADOR 3.1: DISEÑADOR Y ANALIZADOR SECCIONAL DE VIGAS RECTANGULARES
@@ -72,8 +121,6 @@ function updateSim31() {
   const dp  = parseFloat(document.getElementById('sim31-dp').value);  // cm (d')
   const fc  = parseFloat(document.getElementById('sim31-fc').value);  // MPa
   const fy  = parseFloat(document.getElementById('sim31-fy').value);  // MPa
-  const barNo = parseInt(document.getElementById('sim31-bar').value, 10);
-  const barCompNo = parseInt(document.getElementById('sim31-bar-comp').value, 10);
 
   // Actualizar etiquetas de controles
   document.getElementById('val-sim31-mu').textContent = `${Mu.toFixed(0)} kN·m`;
@@ -86,138 +133,215 @@ function updateSim31() {
   const ecu = 0.003;
   const ey = fy / Es;
   const beta1 = calcBeta1(fc);
-  const d = Math.max(h - rec, 12.0); // cm
-  const dt = d; // inicialmente igual a d (si se arma en 2 capas, ajustamos dt para la fila extrema)
+  const d_nominal = Math.max(h - rec, 12.0); // cm
 
   // Cuantías características NSR-10
   const rhoMin1 = (0.25 * Math.sqrt(fc)) / fy;
   const rhoMin2 = 1.4 / fy;
   const rhoMin = Math.max(rhoMin1, rhoMin2);
-  const AsMin = rhoMin * bw * d; // cm2
+  const AsMin = rhoMin * bw * d_nominal; // cm2
 
   const rhoB = 0.85 * beta1 * (fc / fy) * (600.0 / (600.0 + fy));
   const rhoMax005 = rhoB * ((0.003 + ey) / 0.008); // Controlada por tracción (et = 0.005, phi = 0.90)
   const rhoMax004 = rhoB * ((0.003 + ey) / 0.007); // Límite absoluto flexión (et = 0.004, phi = 0.817)
 
   // Capacidad máxima como sección simplemente reforzada controlada por tracción (et = 0.005, phi = 0.90)
-  const As1_max = rhoMax005 * bw * d; // cm2
+  const As1_max = rhoMax005 * bw * d_nominal; // cm2
   const a1_max  = (As1_max * fy) / (0.85 * fc * bw); // cm
   const c1_max  = a1_max / beta1; // cm
-  const Mn1_max = (As1_max * 100.0 * fy * (d * 10.0 - (a1_max * 10.0) / 2.0)) / 1e6; // kN·m
+  const Mn1_max = (As1_max * 100.0 * fy * (d_nominal * 10.0 - (a1_max * 10.0) / 2.0)) / 1e6; // kN·m
   const Mu1_max = 0.90 * Mn1_max; // kN·m
 
-  // Parámetro de resistencia requerida Rn (asumiendo inicialmente phi = 0.90)
-  const phiDesign = 0.90;
-  const bw_m = bw / 100.0;
-  const d_m  = d / 100.0;
-  const Rn_MPa = (Mu / 1000.0) / (phiDesign * bw_m * d_m * d_m); // MPa
+  const rLibreMm = 40.0; // Recubrimiento libre C.7.7.1
+  const dbEstriboMm = 9.5; // No. 3
+  const bwMm = bw * 10.0;
+  const dp_mm = dp * 10.0;
+  const b_mm = bwMm;
 
   let isDoubly = false;
   let regimeTitle = '';
   let regimeClass = 'status-ok';
-  let rhoReq = 0;
+  let barInfo = null;
+  let barCompInfo = null;
+  let nBarsTension = 0;
+  let As_prov = 0; // cm2
+  let nBarsComp = 0;
+  let AsComp_prov = 0; // cm2
+  let Rn_MPa = 0;
+  let As_req = 0;
   let As1_req = 0;
   let As2_req = 0;
-  let As_req = 0;
   let AsComp_req = 0;
-  let compSteelYieldsDesign = true;
-  let fsCompDesign = fy;
-  let epsCompDesign = 0;
+  let rhoReq = 0;
+  let d = d_nominal;
+  let dt = d_nominal;
 
-  const radicand = 1.0 - (2.0 * Rn_MPa) / (0.85 * fc);
+  if (sim31Mode === 'design') {
+    // =========================================================================
+    // MODO DISEÑO (CÁLCULO AUTOMÁTICO DE ACERO PARA SUPLIR Mu)
+    // =========================================================================
+    const barNo = parseInt(document.getElementById('sim31-bar').value, 10);
+    const barCompNo = parseInt(document.getElementById('sim31-bar-comp').value, 10);
+    barInfo = BAR_CATALOG[barNo] || BAR_CATALOG[8];
+    barCompInfo = BAR_CATALOG[barCompNo] || BAR_CATALOG[5];
 
-  if (Mu <= Mu1_max && radicand > 0) {
-    // SECCIÓN SIMPLEMENTE REFORZADA (Mu <= Mu1_max)
-    isDoubly = false;
-    const rhoCalc = ((0.85 * fc) / fy) * (1.0 - Math.sqrt(radicand));
-    if (rhoCalc < rhoMin) {
-      rhoReq = rhoMin;
-      regimeTitle = 'Viga Simplemente Reforzada — Gobernada por Cuantía Mínima (C.10.5.1)';
-      regimeClass = 'status-ok';
+    const phiDesign = 0.90;
+    const bw_m = bw / 100.0;
+    const d_m  = d_nominal / 100.0;
+    Rn_MPa = (Mu / 1000.0) / (phiDesign * bw_m * d_m * d_m); // MPa
+
+    const radicand = 1.0 - (2.0 * Rn_MPa) / (0.85 * fc);
+
+    if (Mu <= Mu1_max && radicand > 0) {
+      // SECCIÓN SIMPLEMENTE REFORZADA
+      isDoubly = false;
+      const rhoCalc = ((0.85 * fc) / fy) * (1.0 - Math.sqrt(radicand));
+      if (rhoCalc < rhoMin) {
+        rhoReq = rhoMin;
+        regimeTitle = 'Viga Simplemente Reforzada — Gobernada por Cuantía Mínima (C.10.5.1)';
+        regimeClass = 'status-ok';
+      } else {
+        rhoReq = rhoCalc;
+        regimeTitle = 'Viga Simplemente Reforzada — Controlada por Tracción (εt ≥ 0.005, φ = 0.90)';
+        regimeClass = 'status-ok';
+      }
+      As1_req = rhoReq * bw * d_nominal;
+      As2_req = 0.0;
+      As_req = As1_req;
+      AsComp_req = 0.0;
     } else {
-      rhoReq = rhoCalc;
-      regimeTitle = 'Viga Simplemente Reforzada — Controlada por Tracción (εt ≥ 0.005, φ = 0.90)';
-      regimeClass = 'status-ok';
+      // SECCIÓN DOBLEMENTE REFORZADA: Superposición
+      isDoubly = true;
+      As1_req = As1_max;
+      const Mu2 = Math.max(0, Mu - Mu1_max);
+      As2_req = (Mu2 * 1e6) / (phiDesign * fy * ((d_nominal - dp) * 10.0) * 100.0);
+      As_req = As1_req + As2_req;
+      rhoReq = As_req / (bw * d_nominal);
+
+      const epsCompDesign = ecu * (1.0 - dp / c1_max);
+      if (epsCompDesign >= ey) {
+        AsComp_req = As2_req;
+        regimeTitle = 'Viga Doblemente Reforzada — Acero a Compresión FLUYE (ε\'s ≥ εy, f\'s = fy)';
+        regimeClass = 'status-warn';
+      } else {
+        const fsCompDesign = Math.max(50.0, Es * epsCompDesign);
+        AsComp_req = As2_req * (fy / fsCompDesign);
+        regimeTitle = 'Viga Doblemente Reforzada — Acero a Compresión NO Fluye (ε\'s < εy, f\'s < fy)';
+        regimeClass = 'status-warn';
+      }
     }
-    As1_req = rhoReq * bw * d;
-    As2_req = 0.0;
-    As_req = As1_req;
-    AsComp_req = 0.0;
+
+    nBarsTension = Math.max(2, Math.ceil(As_req / barInfo.areaCm2));
+    As_prov = nBarsTension * barInfo.areaCm2;
+
+    nBarsComp = isDoubly
+      ? Math.max(2, Math.ceil(AsComp_req / barCompInfo.areaCm2))
+      : 2;
+    AsComp_prov = isDoubly ? (nBarsComp * barCompInfo.areaCm2) : 0.0;
+
   } else {
-    // SECCIÓN DOBLEMENTE REFORZADA (Mu > Mu1_max): Superposición Parte 1 + Parte 2
-    isDoubly = true;
-    As1_req = As1_max; // Parte 1 en el límite controlado por tracción (et = 0.005)
-    const Mu2 = Math.max(0, Mu - Mu1_max); // Exceso de momento kN·m
-    // Brazo del par acero-acero (d - d') en metros:
-    const arm_m = Math.max((d - dp) / 100.0, 0.05);
-    // As2 requerido en cm2: Mu2 (kN·m) * 1e6 (N·mm) / (phi * fy (MPa) * (d-d') (mm)) / 100
-    As2_req = (Mu2 * 1e6) / (phiDesign * fy * ((d - dp) * 10.0) * 100.0);
-    As_req = As1_req + As2_req;
-    rhoReq = As_req / (bw * d);
+    // =========================================================================
+    // MODO REVISIÓN (ANÁLISIS CON ARMADURA FIJA DEFINIDA POR EL USUARIO)
+    // =========================================================================
+    const revNbarsEl = document.getElementById('sim31-rev-nbars');
+    const revBarEl = document.getElementById('sim31-rev-bar');
+    const revHasCompEl = document.getElementById('sim31-rev-has-comp');
+    const revNbarsCompEl = document.getElementById('sim31-rev-nbars-comp');
+    const revBarCompEl = document.getElementById('sim31-rev-bar-comp');
 
-    // Verificación de fluencia del acero a compresión en el estado límite c1_max = 0.375 d
-    epsCompDesign = ecu * (1.0 - dp / c1_max);
-    if (epsCompDesign >= ey) {
-      compSteelYieldsDesign = true;
-      fsCompDesign = fy;
-      AsComp_req = As2_req;
-      regimeTitle = 'Viga Doblemente Reforzada — Acero a Compresión FLUYE (ε\'s ≥ εy, f\'s = fy)';
-      regimeClass = 'status-warn';
-    } else {
-      compSteelYieldsDesign = false;
-      fsCompDesign = Math.max(50.0, Es * epsCompDesign);
-      AsComp_req = As2_req * (fy / fsCompDesign);
-      regimeTitle = 'Viga Doblemente Reforzada — Acero a Compresión NO Fluye (ε\'s < εy, f\'s < fy)';
-      regimeClass = 'status-warn';
+    nBarsTension = revNbarsEl ? parseInt(revNbarsEl.value, 10) : 5;
+    const barNo = revBarEl ? parseInt(revBarEl.value, 10) : 8;
+    barInfo = BAR_CATALOG[barNo] || BAR_CATALOG[8];
+    As_prov = nBarsTension * barInfo.areaCm2;
+
+    const hasComp = revHasCompEl ? revHasCompEl.checked : false;
+    const nBarsCompUser = revNbarsCompEl ? parseInt(revNbarsCompEl.value, 10) : 2;
+    const barCompNo = revBarCompEl ? parseInt(revBarCompEl.value, 10) : 5;
+    barCompInfo = BAR_CATALOG[barCompNo] || BAR_CATALOG[5];
+
+    isDoubly = hasComp;
+    nBarsComp = hasComp ? nBarsCompUser : 2;
+    AsComp_prov = hasComp ? (nBarsCompUser * barCompInfo.areaCm2) : 0.0;
+
+    // Actualizar etiquetas de valores en el panel de revisión
+    const lblNbars = document.getElementById('val-sim31-rev-nbars');
+    if (lblNbars) lblNbars.textContent = nBarsTension;
+    const badgeAs = document.getElementById('val-sim31-rev-as');
+    if (badgeAs) badgeAs.textContent = `${nBarsTension} ${barInfo.label} = ${As_prov.toFixed(2)} cm²`;
+
+    const compDetails = document.getElementById('sim31-rev-comp-details');
+    const compNote = document.getElementById('sim31-rev-comp-inactive-note');
+    if (compDetails) compDetails.style.display = hasComp ? 'grid' : 'none';
+    if (compNote) compNote.style.display = hasComp ? 'none' : 'block';
+
+    const lblNbarsComp = document.getElementById('val-sim31-rev-nbars-comp');
+    if (lblNbarsComp) lblNbarsComp.textContent = nBarsCompUser;
+    const badgeAsComp = document.getElementById('val-sim31-rev-ascomp');
+    if (badgeAsComp) {
+      badgeAsComp.textContent = hasComp
+        ? `${nBarsCompUser} ${barCompInfo.label} = ${AsComp_prov.toFixed(2)} cm²`
+        : 'Sin armadura resistente';
     }
+
+    As_req = As_prov;
+    AsComp_req = AsComp_prov;
   }
 
-  // Selección comercial de barras a tracción y verificación de espaciamiento C.7.6.1
-  const barInfo = BAR_CATALOG[barNo];
-  const barCompInfo = BAR_CATALOG[barCompNo];
-  const nBarsTension = Math.max(2, Math.ceil(As_req / barInfo.areaCm2));
-  const As_prov = nBarsTension * barInfo.areaCm2;
-
-  // Ancho libre para alojar barras en una sola capa (C.7.6.1: s_libre >= max(db, 25 mm, 1.33*19 mm = 25.3 mm))
-  const rLibreMm = 40.0; // C.7.7.1 vigas
-  const dbEstriboMm = 9.5; // No. 3
+  // Organización de barras a tracción en capas (C.7.6.1)
   const sMinMm = Math.max(barInfo.db, 25.4);
-  const bwMm = bw * 10.0;
   const maxBarsPerLayer = Math.max(2, Math.floor((bwMm - 2 * rLibreMm - 2 * dbEstriboMm + sMinMm) / (barInfo.db + sMinMm)));
   const nLayers = Math.ceil(nBarsTension / maxBarsPerLayer);
   const barsLayer1 = Math.min(nBarsTension, maxBarsPerLayer);
   const barsLayer2 = Math.max(0, nBarsTension - barsLayer1);
-
-  // Ancho mínimo requerido para alojar todas las barras en 1 sola fila
   const bMin1FilaCm = (2 * rLibreMm + 2 * dbEstriboMm + nBarsTension * barInfo.db + (nBarsTension - 1) * sMinMm) / 10.0;
 
-  // Barras comerciales en compresión (mínimo 2 barras constructivas porta-estribos si es simple, o las requeridas por cálculo si es doble)
-  const nBarsComp = isDoubly
-    ? Math.max(2, Math.ceil(AsComp_req / barCompInfo.areaCm2))
-    : 2;
-  const AsComp_prov = isDoubly ? (nBarsComp * barCompInfo.areaCm2) : 0.0;
+  // Distancias al centroide d y fibra extrema dt si hay múltiples capas
+  const d1_mm = (h - rec) * 10.0;
+  const sepCapasMm = Math.max(25.4, barInfo.db);
+  const d2_mm = d1_mm - sepCapasMm;
+  const d_mm = nLayers > 1
+    ? (barsLayer1 * d1_mm + barsLayer2 * d2_mm) / nBarsTension
+    : d1_mm;
+  const dt_mm = d1_mm;
+  d = d_mm / 10.0;
+  dt = dt_mm / 10.0;
 
-  // REVISIÓN EXACTA POR COMPATIBILIDAD DE DEFORMACIONES CON EL ACERO SUMINISTRADO
+  const rhoReal = As_prov / (bw * d);
+
+  // =========================================================================
+  // RESOLUCIÓN EXACTA POR EQUILIBRIO Y COMPATIBILIDAD DE DEFORMACIONES
+  // =========================================================================
   const As_mm2 = As_prov * 100.0;
   const AsComp_mm2 = AsComp_prov * 100.0;
-  const b_mm = bw * 10.0;
-  const d_mm = d * 10.0;
-  const dp_mm = dp * 10.0;
-  // Si hay 2 capas en tracción, dt está más abajo que el centroide d
-  const dt_mm = nLayers > 1 ? (d_mm + (barsLayer2 / nBarsTension) * (25.0 + barInfo.db)) : d_mm;
 
   let c_rev = 0; // mm
   let a_rev = 0; // mm
   let epsComp_rev = 0;
   let fsComp_rev = 0;
+  let fsTen_rev = fy;
 
   if (!isDoubly || AsComp_mm2 <= 0) {
+    // Viga Simplemente Reforzada
     a_rev = (As_mm2 * fy) / (0.85 * fc * b_mm);
     c_rev = a_rev / beta1;
+    let et_tent = ecu * ((dt_mm - c_rev) / c_rev);
+
+    if (et_tent < ey) {
+      // Sección sobre-reforzada: El acero a tracción no alcanza la fluencia
+      const A_q = 0.85 * fc * b_mm * beta1;
+      const B_q = ecu * Es * As_mm2;
+      const C_q = -ecu * Es * As_mm2 * d_mm;
+      c_rev = (-B_q + Math.sqrt(B_q * B_q - 4.0 * A_q * C_q)) / (2.0 * A_q);
+      a_rev = beta1 * c_rev;
+      const epsTen_rev = ecu * ((d_mm - c_rev) / c_rev);
+      fsTen_rev = Math.min(fy, Math.max(0, epsTen_rev * Es));
+    } else {
+      fsTen_rev = fy;
+    }
     epsComp_rev = c_rev > dp_mm ? ecu * ((c_rev - dp_mm) / c_rev) : 0;
     fsComp_rev = 0;
   } else {
-    // 1. Asumir inicialmente que el acero a compresión NO fluye (ecuación cuadrática exacta)
+    // Viga Doblemente Reforzada
     const A_quad = 0.85 * fc * b_mm * beta1;
     const B_quad = AsComp_mm2 * (ecu * Es - 0.85 * fc) - As_mm2 * fy;
     const C_quad = -AsComp_mm2 * ecu * Es * dp_mm;
@@ -225,7 +349,6 @@ function updateSim31() {
     epsComp_rev = ecu * ((c_rev - dp_mm) / c_rev);
 
     if (epsComp_rev >= ey) {
-      // El acero a compresión SÍ fluye (f's = fy)
       fsComp_rev = fy;
       a_rev = (As_mm2 * fy - AsComp_mm2 * (fy - 0.85 * fc)) / (0.85 * fc * b_mm);
       c_rev = a_rev / beta1;
@@ -233,6 +356,14 @@ function updateSim31() {
     } else {
       a_rev = beta1 * c_rev;
       fsComp_rev = Math.max(0, epsComp_rev * Es);
+    }
+
+    let et_tent = ecu * ((dt_mm - c_rev) / c_rev);
+    if (et_tent < ey) {
+      const epsTen_rev = ecu * ((d_mm - c_rev) / c_rev);
+      fsTen_rev = Math.min(fy, Math.max(0, epsTen_rev * Es));
+    } else {
+      fsTen_rev = fy;
     }
   }
 
@@ -242,32 +373,119 @@ function updateSim31() {
   // Fuerzas internas y Momento Nominal Mn (kN·m)
   const Cc_kN = (0.85 * fc * b_mm * a_rev) / 1000.0;
   const Cs_kN = isDoubly ? (AsComp_mm2 * (fsComp_rev - 0.85 * fc)) / 1000.0 : 0.0;
-  const T_kN  = (As_mm2 * fy) / 1000.0;
+  const T_kN  = (As_mm2 * fsTen_rev) / 1000.0;
 
   const Mn_kNm = isDoubly
     ? (Cc_kN * (d_mm - a_rev / 2.0) + Cs_kN * (d_mm - dp_mm)) / 1000.0
     : (T_kN * (d_mm - a_rev / 2.0)) / 1000.0;
   const phiMn_kNm = phi_rev * Mn_kNm;
+  const dcRatio = Mu / phiMn_kNm;
 
-  // Actualizar tarjetas de resultados
+  // Actualizar banner de estado
   const statusBanner = document.getElementById('sim31-status-banner');
-  statusBanner.className = `status-pill ${regimeClass}`;
-  statusBanner.textContent = regimeTitle;
+  if (sim31Mode === 'review') {
+    if (dcRatio <= 1.0) {
+      if (et_rev >= 0.005) {
+        regimeClass = 'status-ok';
+        regimeTitle = `✓ SECCIÓN SEGURA (D/C = ${dcRatio.toFixed(2)}) — DÚCTIL / TRACCIÓN CONTROLADA (ϕ = 0.90)`;
+      } else if (et_rev >= 0.004) {
+        regimeClass = 'status-warn';
+        regimeTitle = `⚠️ SECCIÓN EN TRANSICIÓN (D/C = ${dcRatio.toFixed(2)}) — FACTOR φ = ${phi_rev.toFixed(3)}`;
+      } else {
+        regimeClass = 'status-danger';
+        regimeTitle = `🚫 ¡SECCIÓN FRÁGIL! (εt = ${et_rev.toFixed(4)} < 0.004) — PROHIBIDA EN FLEXIÓN (NSR-10 C.10.3.5)`;
+      }
+    } else {
+      regimeClass = 'status-danger';
+      regimeTitle = `❌ FALLA POR CAPACIDAD: Mu (${Mu.toFixed(0)} kN·m) > φMn (${phiMn_kNm.toFixed(1)} kN·m) — SOBRECARGA ${((dcRatio - 1) * 100).toFixed(0)}% (D/C = ${dcRatio.toFixed(2)})`;
+    }
+  }
 
-  document.getElementById('out-sim31-rn').textContent = `${Rn_MPa.toFixed(2)} MPa`;
-  document.getElementById('out-sim31-mu1max').textContent = `${Mu1_max.toFixed(1)} kN·m`;
-  document.getElementById('out-sim31-rhomin').textContent = `${(rhoMin * 100).toFixed(3)} % (${AsMin.toFixed(2)} cm²)`;
-  document.getElementById('out-sim31-rhomax').textContent = `${(rhoMax005 * 100).toFixed(3)} % (εt=0.005) | ${(rhoMax004 * 100).toFixed(3)} % (εt=0.004)`;
-  document.getElementById('out-sim31-asreq').textContent = isDoubly
-    ? `${As_req.toFixed(2)} cm² (As1=${As1_req.toFixed(2)} + As2=${As2_req.toFixed(2)})`
-    : `${As_req.toFixed(2)} cm² (ρ=${(rhoReq * 100).toFixed(3)} %)`;
-  document.getElementById('out-sim31-ascomp').textContent = isDoubly
-    ? `${AsComp_req.toFixed(2)} cm² → ${nBarsComp} ${barCompInfo.label} (${AsComp_prov.toFixed(2)} cm², f's=${fsComp_rev.toFixed(0)} MPa)`
-    : `No requerido por cálculo (2 ${barCompInfo.label} porta-estribos)`;
-  document.getElementById('out-sim31-bars').textContent = `${nBarsTension} ${barInfo.label} → As,sum = ${As_prov.toFixed(2)} cm² (${nLayers === 1 ? '1 capa' : `2 capas: ${barsLayer1}+${barsLayer2}`})`;
-  document.getElementById('out-sim31-bmin').textContent = `b_mín(1 fila) = ${bMin1FilaCm.toFixed(1)} cm ${bw >= bMin1FilaCm ? '✓ Cabe en 1 fila' : `→ Se arma en ${nLayers} capas (C.7.6.2)`}`;
-  document.getElementById('out-sim31-strains').textContent = `c = ${(c_rev / 10).toFixed(2)} cm | a = ${(a_rev / 10).toFixed(2)} cm | εt = ${et_rev.toFixed(5)} | φ = ${phi_rev.toFixed(3)}`;
-  document.getElementById('out-sim31-phimn').textContent = `φMn = ${phiMn_kNm.toFixed(1)} kN·m ≥ Mu = ${Mu.toFixed(0)} kN·m (D/C = ${(Mu / phiMn_kNm).toFixed(2)})`;
+  if (statusBanner) {
+    statusBanner.className = `status-pill ${regimeClass}`;
+    statusBanner.textContent = regimeTitle;
+  }
+
+  // Actualizar títulos y valores de tarjetas de resultados
+  const lblRn = document.getElementById('lbl-sim31-rn');
+  const lblMu1max = document.getElementById('lbl-sim31-mu1max');
+  const lblRhomin = document.getElementById('lbl-sim31-rhomin');
+  const lblRhomax = document.getElementById('lbl-sim31-rhomax');
+  const lblAsreq = document.getElementById('lbl-sim31-asreq');
+  const lblAscomp = document.getElementById('lbl-sim31-ascomp');
+  const lblBars = document.getElementById('lbl-sim31-bars');
+  const lblBmin = document.getElementById('lbl-sim31-bmin');
+  const lblStrains = document.getElementById('lbl-sim31-strains');
+  const lblPhimn = document.getElementById('lbl-sim31-phimn');
+
+  if (sim31Mode === 'review') {
+    if (lblRn) lblRn.textContent = 'Demanda vs Capacidad (D/C)';
+    document.getElementById('out-sim31-rn').textContent = `D/C = ${dcRatio.toFixed(2)} (${(dcRatio * 100).toFixed(0)}% solicitada)`;
+
+    if (lblMu1max) lblMu1max.textContent = 'Momento Nominal Mn y Reducción φ';
+    document.getElementById('out-sim31-mu1max').textContent = `Mn = ${Mn_kNm.toFixed(1)} kN·m (φ = ${phi_rev.toFixed(3)})`;
+
+    if (lblRhomin) lblRhomin.textContent = 'Cuantía Real a Tracción vs ρ_mín';
+    document.getElementById('out-sim31-rhomin').textContent = `${(rhoReal * 100).toFixed(3)} % ${rhoReal >= rhoMin ? '✓ ≥ ρ_mín' : '⚠️ < ρ_mín (C.10.5.1)'}`;
+
+    if (lblRhomax) lblRhomax.textContent = 'Cuantía vs Límites de Ductilidad';
+    document.getElementById('out-sim31-rhomax').textContent = `${(rhoReal * 100).toFixed(3)}% | ${(rhoMax005 * 100).toFixed(3)}% (0.005) | ${(rhoMax004 * 100).toFixed(3)}% (0.004)`;
+
+    if (lblAsreq) lblAsreq.textContent = 'Acero a Tracción Provisto As';
+    document.getElementById('out-sim31-asreq').textContent = `${As_prov.toFixed(2)} cm² (${nBarsTension} ${barInfo.label})`;
+
+    if (lblAscomp) lblAscomp.textContent = 'Acero a Compresión Provisto A\'s';
+    document.getElementById('out-sim31-ascomp').textContent = isDoubly
+      ? `${AsComp_prov.toFixed(2)} cm² (${nBarsComp} ${barCompInfo.label}, f's=${fsComp_rev.toFixed(0)} MPa)`
+      : 'Sin armadura a compresión resistente';
+
+    if (lblBars) lblBars.textContent = 'Disposición de Barras en Tracción';
+    document.getElementById('out-sim31-bars').textContent = `${nBarsTension} ${barInfo.label} (${nLayers === 1 ? '1 capa' : `2 capas: ${barsLayer1}+${barsLayer2}`})`;
+
+    if (lblBmin) lblBmin.textContent = 'Chequeo Ancho Mínimo b_mín (C.7.6.1)';
+    document.getElementById('out-sim31-bmin').textContent = `b_mín(1 fila) = ${bMin1FilaCm.toFixed(1)} cm ${bw >= bMin1FilaCm ? '✓ Cabe en 1 fila' : `→ Requiere ${nLayers} capas`}`;
+
+    if (lblStrains) lblStrains.textContent = 'Compatibilidad (c, a, εt, φ)';
+    document.getElementById('out-sim31-strains').textContent = `c = ${(c_rev / 10).toFixed(2)} cm | a = ${(a_rev / 10).toFixed(2)} cm | εt = ${et_rev.toFixed(5)} | φ = ${phi_rev.toFixed(3)}`;
+
+    if (lblPhimn) lblPhimn.textContent = 'Verificación de Resistencia (φMn ≥ Mu)';
+    document.getElementById('out-sim31-phimn').textContent = `φMn = ${phiMn_kNm.toFixed(1)} kN·m ${phiMn_kNm >= Mu ? '≥' : '<'} Mu = ${Mu.toFixed(0)} kN·m (D/C = ${dcRatio.toFixed(2)})`;
+  } else {
+    // Restaurar títulos de diseño
+    if (lblRn) lblRn.textContent = 'Parámetro Rn = Mu / (φ·b·d²)';
+    document.getElementById('out-sim31-rn').textContent = `${Rn_MPa.toFixed(2)} MPa`;
+
+    if (lblMu1max) lblMu1max.textContent = 'Límite Simple Mu1,máx (εt = 0.005)';
+    document.getElementById('out-sim31-mu1max').textContent = `${Mu1_max.toFixed(1)} kN·m`;
+
+    if (lblRhomin) lblRhomin.textContent = 'Cuantía Mínima ρ_mín (C.10.5.1)';
+    document.getElementById('out-sim31-rhomin').textContent = `${(rhoMin * 100).toFixed(3)} % (${AsMin.toFixed(2)} cm²)`;
+
+    if (lblRhomax) lblRhomax.textContent = 'Cuantías Máximas (ρ_trac | ρ_max)';
+    document.getElementById('out-sim31-rhomax').textContent = `${(rhoMax005 * 100).toFixed(3)} % (εt=0.005) | ${(rhoMax004 * 100).toFixed(3)} % (εt=0.004)`;
+
+    if (lblAsreq) lblAsreq.textContent = 'Acero en Tracción Requerido As,req';
+    document.getElementById('out-sim31-asreq').textContent = isDoubly
+      ? `${As_req.toFixed(2)} cm² (As1=${As1_req.toFixed(2)} + As2=${As2_req.toFixed(2)})`
+      : `${As_req.toFixed(2)} cm² (ρ=${(rhoReq * 100).toFixed(3)} %)`;
+
+    if (lblAscomp) lblAscomp.textContent = 'Acero a Compresión Requerido A\'s';
+    document.getElementById('out-sim31-ascomp').textContent = isDoubly
+      ? `${AsComp_req.toFixed(2)} cm² → ${nBarsComp} ${barCompInfo.label} (${AsComp_prov.toFixed(2)} cm², f's=${fsComp_rev.toFixed(0)} MPa)`
+      : `No requerido por cálculo (2 ${barCompInfo.label} porta-estribos)`;
+
+    if (lblBars) lblBars.textContent = 'Despiece Comercial en Tracción';
+    document.getElementById('out-sim31-bars').textContent = `${nBarsTension} ${barInfo.label} → As,sum = ${As_prov.toFixed(2)} cm² (${nLayers === 1 ? '1 capa' : `2 capas: ${barsLayer1}+${barsLayer2}`})`;
+
+    if (lblBmin) lblBmin.textContent = 'Chequeo Ancho Mínimo b_mín (C.7.6.1)';
+    document.getElementById('out-sim31-bmin').textContent = `b_mín(1 fila) = ${bMin1FilaCm.toFixed(1)} cm ${bw >= bMin1FilaCm ? '✓ Cabe en 1 fila' : `→ Se arma en ${nLayers} capas (C.7.6.2)`}`;
+
+    if (lblStrains) lblStrains.textContent = 'Compatibilidad (c, a, εt, φ)';
+    document.getElementById('out-sim31-strains').textContent = `c = ${(c_rev / 10).toFixed(2)} cm | a = ${(a_rev / 10).toFixed(2)} cm | εt = ${et_rev.toFixed(5)} | φ = ${phi_rev.toFixed(3)}`;
+
+    if (lblPhimn) lblPhimn.textContent = 'Verificación de Resistencia (φMn ≥ Mu)';
+    document.getElementById('out-sim31-phimn').textContent = `φMn = ${phiMn_kNm.toFixed(1)} kN·m ≥ Mu = ${Mu.toFixed(0)} kN·m (D/C = ${dcRatio.toFixed(2)})`;
+  }
 
   // Actualizar Tacómetro Dinámico de Ductilidad y Estado Límite (NSR-10 C.9.3.2 / C.10.3.5)
   const tachoNeedle = document.getElementById('sim31-tacho-needle');
@@ -313,9 +531,8 @@ function updateSim31() {
     }
   }
 
-
   drawSim31Canvas({
-    bw, h, d, dp, dt: dt_mm / 10.0,
+    bw, h, d, dp, dt,
     c: c_rev / 10.0, a: a_rev / 10.0,
     et: et_rev, epsComp: epsComp_rev, ey,
     nBarsTension, barsLayer1, barsLayer2, barInfo,
@@ -887,7 +1104,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Vincular eventos para Simulador 3.1
   const sim31Inputs = [
     'sim31-mu', 'sim31-bw', 'sim31-h', 'sim31-rec', 'sim31-dp',
-    'sim31-fc', 'sim31-fy', 'sim31-bar', 'sim31-bar-comp'
+    'sim31-fc', 'sim31-fy', 'sim31-bar', 'sim31-bar-comp',
+    'sim31-rev-nbars', 'sim31-rev-bar', 'sim31-rev-has-comp',
+    'sim31-rev-nbars-comp', 'sim31-rev-bar-comp'
   ];
   sim31Inputs.forEach(id => {
     const el = document.getElementById(id);

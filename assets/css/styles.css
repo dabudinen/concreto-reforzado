@@ -1804,23 +1804,67 @@ body.sidebar-collapsed:not(.presentation-mode) .btn-sidebar-float {
 }
 
 .sim-controls {
-
   background: var(--bg-subtle);
-
   border: 1px solid var(--border-color);
-
   border-radius: var(--radius-md);
-
   padding: 1.2rem;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 1rem;
-
   min-width: 0;
+}
 
+.sim-mode-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  background: var(--bg-surface);
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.sim-mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sim-mode-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-subtle);
+}
+
+.sim-mode-btn.active {
+  background: #2563EB;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.sim-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .control-group {

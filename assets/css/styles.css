@@ -498,7 +498,8 @@ body.sidebar-mobile-open .sidebar-backdrop {
 
 
 /* Estado Colapsado del Menú Lateral */
-body.sidebar-collapsed .workspace-layout {
+body.sidebar-collapsed .workspace-layout,
+body.sidebar-collapsed .main-layout {
   grid-template-columns: 0px 1fr !important;
 }
 
@@ -2457,7 +2458,8 @@ body.presentation-mode .sidebar {
 
 }
 
-body.presentation-mode .workspace-layout {
+body.presentation-mode .workspace-layout,
+body.presentation-mode .main-layout {
 
   grid-template-columns: 1fr;
 
@@ -3771,6 +3773,8 @@ html:not([data-theme="dark"]) .sim-metric-value {
   min-height: calc(100vh - var(--topbar-height));
 
   background: var(--bg-body);
+
+  transition: grid-template-columns 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
 }
 

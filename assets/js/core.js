@@ -13,6 +13,7 @@
   let currentSlideIndex = 0;
   let slides = [];
   let isScrollTicking = false;
+  let currentActiveSectionId = null;
 
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -434,7 +435,7 @@
      -------------------------------------------------------------------------- */
   function initScrollSpy() {
     const progressBar = document.getElementById('reading-progress');
-    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link, .sidebar-menu a'));
     const sections = tocLinks
       .map((link) => {
         const href = link.getAttribute('href');
@@ -471,6 +472,7 @@
           if (history.pushState) {
             history.pushState(null, null, href);
           }
+          currentActiveSectionId = targetId;
           tocLinks.forEach((l) => l.classList.toggle('active', l === link));
         }
       });
@@ -509,7 +511,8 @@
       }
     }
 
-    if (currentSection) {
+    if (currentSection && currentSection.id !== currentActiveSectionId) {
+      currentActiveSectionId = currentSection.id;
       let activeLink = null;
       tocLinks.forEach((link) => {
         const isMatch = link.getAttribute('href') === `#${currentSection.id}`;
@@ -517,9 +520,33 @@
         if (isMatch) activeLink = link;
       });
 
-      // Auto-desplazar suavemente el sidebar para mantener visible el enlace activo
-      if (activeLink && activeLink.scrollIntoViewIfNeeded) {
-        activeLink.scrollIntoViewIfNeeded(false);
+      // Auto-desplazar de forma segura ÚNICAMENTE el contenedor interno del sidebar,
+      // y SÓLO si la barra lateral está visible y abierta en pantalla.
+      // IMPORTANTE: Nunca usar scrollIntoView o scrollIntoViewIfNeeded aquí porque en navegadores
+      // basados en Chromium (Chrome, Edge), llamar ese método en un elemento que está oculto u
+      // off-screen (sidebar-collapsed) fuerza al motor a intentar desplazar la ventana principal
+      // para traer el enlace oculto a la vista, bloqueando y trabando el scroll del usuario.
+      // En Zen (basado en Firefox Gecko), scrollIntoViewIfNeeded no existe nativamente, por eso no fallaba.
+      const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+      const isMobile = window.innerWidth <= 1120;
+      const isMobileOpen = document.body.classList.contains('sidebar-mobile-open');
+      const isSidebarVisible = !isCollapsed && (!isMobile || isMobileOpen);
+
+      if (isSidebarVisible && activeLink) {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.contains(activeLink)) {
+          const sidebarRect = sidebar.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+
+          // Solo desplazar el contenedor lateral si el enlace activo queda fuera del área visible del sidebar
+          if (linkRect.top < sidebarRect.top + 24 || linkRect.bottom > sidebarRect.bottom - 24) {
+            const targetTop = activeLink.offsetTop - (sidebar.clientHeight / 2) + (activeLink.clientHeight / 2);
+            sidebar.scrollTo({
+              top: Math.max(0, targetTop),
+              behavior: 'smooth'
+            });
+          }
+        }
       }
     }
   }

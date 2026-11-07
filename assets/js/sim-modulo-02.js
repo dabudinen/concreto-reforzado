@@ -12,21 +12,42 @@
   /* ==========================================================================
      UTILIDADES DE CANVAS HiDPI (SIN DESBORDAMIENTO DE GRID)
      ========================================================================== */
-  function setupHiDPICanvas(canvas) {
+  function setupHiDPICanvas(canvas, preferredBaseW = 880, preferredBaseH = 430, stackedBaseW = 520, stackedBaseH = 740) {
     const dpr = window.devicePixelRatio || 1;
     const parent = canvas.parentElement;
-    const rectWidth = parent ? parent.clientWidth - 28 : canvas.clientWidth;
-    const width = Math.max(300, rectWidth || 640);
-    const height = parseInt(canvas.getAttribute('height') || '370', 10);
-
-    if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
+    let parentW = preferredBaseW;
+    if (parent) {
+      const computed = window.getComputedStyle(parent);
+      const padLeft = parseFloat(computed.paddingLeft) || 0;
+      const padRight = parseFloat(computed.paddingRight) || 0;
+      const innerW = parent.clientWidth - padLeft - padRight;
+      if (innerW > 50) {
+        parentW = innerW;
+      }
     }
+    const displayW = Math.max(280, Math.round(parentW));
+
+    const isStacked = displayW < 740;
+    const baseW = isStacked ? stackedBaseW : preferredBaseW;
+    const baseH = isStacked ? stackedBaseH : preferredBaseH;
+    const scale = displayW / baseW;
+    const displayH = Math.round(baseH * scale);
+
+    const targetW = Math.round(displayW * dpr);
+    const targetH = Math.round(displayH * dpr);
+
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+      canvas.width = targetW;
+      canvas.height = targetH;
+    }
+    canvas.style.setProperty('width', '100%', 'important');
+    canvas.style.setProperty('height', displayH + 'px', 'important');
+    canvas.style.setProperty('min-height', displayH + 'px', 'important');
+    canvas.style.setProperty('max-height', displayH + 'px', 'important');
 
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    return { ctx, width, height };
+    ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
+    return { ctx, width: baseW, height: baseH, isStacked, scale };
   }
 
   function getThemeColors() {
@@ -141,7 +162,7 @@
     };
 
     function render() {
-      const { ctx, width, height } = setupHiDPICanvas(canvas);
+      const { ctx, width, height, isStacked } = setupHiDPICanvas(canvas, 860, 410, 520, 700);
       const colors = getThemeColors();
 
       const Lx = parseFloat(elLx.value);
@@ -173,16 +194,19 @@
       const betaRatio = lLong / lShort;
 
       // 2. Altura mínima de vigueta / losa (salva la luz corta lShort)
-      const divSlabSpan = DIVISORS[criteriaKey][slabType][supportKey];
-      const divSlabCant = DIVISORS[criteriaKey][slabType].cant;
+      const critObj = DIVISORS[criteriaKey] || DIVISORS.cr95;
+      const slabObj = critObj[slabType] || critObj.ribbed;
+      const divSlabSpan = slabObj[supportKey] || slabObj.oneCont || 16;
+      const divSlabCant = slabObj.cant || 8;
       const hSlabSpanRaw = (lShort / divSlabSpan) * factorFy;
       const hSlabCantRaw = Lv > 0.05 ? (Lv / divSlabCant) * factorFy : 0;
       const hSlabReq = Math.max(hSlabSpanRaw, hSlabCantRaw);
       const hSlabConstructive = roundUpToStep(hSlabReq, 0.05); // múltiplo de 5 cm
 
       // 3. Altura mínima de Vigas Principales (luz larga lLong + voladizo Lv) y Secundarias (luz corta lShort)
-      const divBeamSpan = DIVISORS[criteriaKey].ribbed[supportKey];
-      const divBeamCant = DIVISORS[criteriaKey].ribbed.cant;
+      const beamObj = critObj.ribbed || DIVISORS.c95a.ribbed;
+      const divBeamSpan = beamObj[supportKey] || beamObj.oneCont || 18.5;
+      const divBeamCant = beamObj.cant || 8;
       const hBeamMainSpanRaw = (lLong / divBeamSpan) * factorFy;
       const hBeamMainCantRaw = Lv > 0.05 ? (Lv / divBeamCant) * factorFy : 0;
       const hBeamMainReq = Math.max(hBeamMainSpanRaw, hBeamMainCantRaw);
@@ -313,37 +337,48 @@
 
       // =====================================================================
       // DIBUJO EN CANVAS: IZQUIERDA (PLANTA ESTRUCTURAL) | DERECHA (SECCIÓN)
+      // (O SUPERIOR/INFERIOR EN DISPOSITIVOS MÓVILES / CONTENEDOR ESTRECHO)
       // =====================================================================
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, width, height);
 
-      const midX = Math.floor(width * 0.46);
+      // Línea divisoria adaptativa
       ctx.strokeStyle = colors.grid;
       ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(midX, 14);
-      ctx.lineTo(midX, height - 14);
-      ctx.stroke();
+      if (!isStacked) {
+        const midX = 430;
+        ctx.beginPath();
+        ctx.moveTo(midX, 14);
+        ctx.lineTo(midX, height - 14);
+        ctx.stroke();
+      } else {
+        const midY = 350;
+        ctx.beginPath();
+        ctx.moveTo(14, midY);
+        ctx.lineTo(width - 14, midY);
+        ctx.stroke();
+      }
 
-      // --- PANEL IZQUIERDO: PLANTA DEL PANEL, VIGUETAS Y RIOSTRAS ---
+      // --- PANEL 1: PLANTA DEL PANEL, VIGUETAS Y RIOSTRAS ---
       ctx.fillStyle = colors.text;
-      ctx.font = '700 12px "Inter", sans-serif';
+      ctx.font = '700 12.5px "Inter", sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText('1. Planta: Vigas, Viguetas y Riostras (C.8.13.3.1)', 16, 22);
+      ctx.fillText('1. Planta: Vigas, Viguetas y Riostras (C.8.13.3.1)', 18, 24);
 
-      const planPad = 46;
-      const availW = midX - planPad * 2 - 20;
-      const availH = height - 105;
+      const p1X = 18;
+      const p1Y = 40;
+      const p1W = isStacked ? (width - 36) : 410;
+      const p1H = isStacked ? 255 : 290;
 
       const totalPlanX = Lx + Lv;
-      const scalePlan = Math.min(availW / Math.max(totalPlanX, 1), availH / Math.max(Ly, 1));
+      const scalePlan = Math.min((p1W - 85) / Math.max(totalPlanX, 1), (p1H - 65) / Math.max(Ly, 1));
       const drawLx = Lx * scalePlan;
       const drawLv = Lv * scalePlan;
       const drawLy = Ly * scalePlan;
 
-      const startX = Math.round(planPad + (availW - (drawLx + drawLv)) / 2);
-      const startY = Math.round(52 + (availH - drawLy) / 2);
+      const startX = Math.round(p1X + 42 + (p1W - 85 - (drawLx + drawLv)) / 2);
+      const startY = Math.round(p1Y + 12 + (p1H - 65 - drawLy) / 2);
 
       ctx.fillStyle = colors.cardBg;
       ctx.strokeStyle = colors.primary;
@@ -363,7 +398,7 @@
         ctx.restore();
       }
 
-      // Dibujar viguetas paralelas a la luz corta lShort y riostras solo cuando numRiostras > 0
+      // Dibujar viguetas paralelas a la luz corta lShort y riostras
       const ribsHorizontal = Lx <= Ly;
       ctx.save();
       ctx.strokeStyle = colors.isDark ? 'rgba(56, 189, 248, 0.45)' : 'rgba(37, 99, 235, 0.35)';
@@ -421,60 +456,64 @@
         ctx.fillRect(cx - colSize / 2, cy - colSize / 2, colSize, colSize);
       });
 
-      drawDimensionLine(ctx, startX, startY + drawLy, startX + drawLx, startY + drawLy, `Lx=${Lx.toFixed(1)}m`, colors.primary, 20);
+      drawDimensionLine(ctx, startX, startY + drawLy, startX + drawLx, startY + drawLy, `Lx=${Lx.toFixed(1)}m`, colors.primary, 18);
       if (Lv > 0.05) {
-        drawDimensionLine(ctx, startX + drawLx, startY + drawLy, startX + drawLx + drawLv, startY + drawLy, `Lv=${Lv.toFixed(1)}m`, colors.secondary, 20);
+        drawDimensionLine(ctx, startX + drawLx, startY + drawLy, startX + drawLx + drawLv, startY + drawLy, `Lv=${Lv.toFixed(1)}m`, colors.secondary, 18);
       }
-      drawDimensionLine(ctx, startX, startY, startX, startY + drawLy, `Ly=${Ly.toFixed(1)}m`, colors.purple, -24);
+      drawDimensionLine(ctx, startX, startY, startX, startY + drawLy, `Ly=${Ly.toFixed(1)}m`, colors.purple, 22);
 
+      const p1FootY1 = isStacked ? 320 : 368;
+      const p1FootY2 = isStacked ? 336 : 386;
       ctx.fillStyle = colors.muted;
       ctx.font = '600 11px "Inter", sans-serif';
       ctx.textAlign = 'left';
       const dirText = ribsHorizontal
         ? `Viguetas paralelas a Lx = ${Lx.toFixed(2)} m (Luz corta)`
         : `Viguetas paralelas a Ly = ${Ly.toFixed(2)} m (Luz corta)`;
-      ctx.fillText(dirText, 16, height - 30);
+      ctx.fillText(dirText, 18, p1FootY1);
       if (slabType === 'ribbed') {
         ctx.fillStyle = numRiostras === 0 ? colors.success : colors.secondary;
         ctx.fillText(
           numRiostras === 0
             ? `C.8.13.3.1: Sin riostra (L=${lShort.toFixed(2)}m ≤ ${riostraMaxDist.toFixed(2)}m)`
             : `C.8.13.3.1: ${numRiostras} riostra(s) c/${distBetweenRiostras.toFixed(2)}m (máx ${riostraMaxDist.toFixed(2)}m)`,
-          16,
-          height - 14
+          18,
+          p1FootY2
         );
       }
 
-      // --- PANEL DERECHO: SECCIÓN TRANSVERSAL ---
-      const rightX = midX + 18;
-      const rightW = width - rightX - 16;
+      // --- PANEL 2: SECCIÓN TRANSVERSAL ---
+      const p2X = isStacked ? 18 : 448;
+      const p2Y = isStacked ? 388 : 40;
+      const p2W = isStacked ? (width - 36) : (width - p2X - 18);
+      const p2H = isStacked ? 260 : 310;
 
       ctx.fillStyle = colors.text;
-      ctx.font = '700 12px "Inter", sans-serif';
+      ctx.font = '700 12.5px "Inter", sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(
         slabType === 'ribbed'
           ? '2. Sección Transversal de Viguetas y Loseta (C.8.13)'
           : '2. Sección Transversal de Losa Maciza y Viga (C.9.5)',
-        rightX,
-        22
+        p2X,
+        isStacked ? 370 : 24
       );
 
-      const secTopY = 78;
-      const secAvailH = height - 155;
+      const secTopY = p2Y + 44;
+      const secAvailH = p2H - 90;
 
       if (slabType === 'ribbed') {
         const totalWidthM = 2 * sMeters + bwMeters;
-        const scaleX = (rightW - 40) / totalWidthM;
+        const scaleX = Math.min(180, (p2W - 100) / totalWidthM);
         const scaleY = Math.min(secAvailH / Math.max(hSlabConstructive, 0.25), scaleX * 1.35);
 
-        const drawHt = Math.max(55, hSlabConstructive * scaleY);
-        const drawT = Math.max(14, (tMeters / hSlabConstructive) * drawHt);
-        const drawHw = Math.max(20, drawHt - drawT);
+        const drawHt = Math.max(48, Math.min(130, hSlabConstructive * scaleY));
+        const drawT = Math.max(14, Math.min(35, (tMeters / hSlabConstructive) * drawHt));
+        const drawHw = Math.max(18, drawHt - drawT);
         const drawBw = bwMeters * scaleX;
         const drawA = aMeters * scaleX;
         const drawTotalW = 3 * drawBw + 2 * drawA;
-        const secStartX = rightX + (rightW - drawTotalW) / 2;
+        const secStartX = Math.round(p2X + 50 + (p2W - 100 - drawTotalW) / 2);
 
         ctx.fillStyle = colors.voidFill;
         ctx.strokeStyle = colors.grid;
@@ -530,7 +569,7 @@
           secTopY + drawHt,
           `ht=${(hSlabConstructive * 100).toFixed(0)}cm`,
           colors.primary,
-          -26
+          24
         );
         drawDimensionLine(
           ctx,
@@ -540,7 +579,7 @@
           secTopY + drawT,
           `t=${tUserCm.toFixed(1)}cm`,
           checkC813_6 ? colors.success : colors.danger,
-          24
+          -24
         );
         drawDimensionLine(
           ctx,
@@ -550,8 +589,10 @@
           secTopY + drawHt,
           `hw=${(hwMeters * 100).toFixed(1)}cm`,
           checkC813_2_hw ? colors.purple : colors.danger,
-          24
+          -24
         );
+        const offsetBw = 18;
+        const offsetA = drawBw < 48 ? 38 : 18;
         drawDimensionLine(
           ctx,
           secStartX,
@@ -560,7 +601,7 @@
           secTopY + drawHt,
           `bw=${bwRibCm}cm`,
           checkC813_2_bw ? colors.primary : colors.danger,
-          22
+          offsetBw
         );
         drawDimensionLine(
           ctx,
@@ -570,7 +611,7 @@
           secTopY + drawHt,
           `A=${aRibCm}cm`,
           colors.secondary,
-          22
+          offsetA
         );
         drawDimensionLine(
           ctx,
@@ -583,8 +624,8 @@
           -18
         );
       } else {
-        const drawW = rightW - 70;
-        const secStartX = rightX + 35;
+        const drawW = p2W - 100;
+        const secStartX = p2X + 50;
         const drawSlabH = Math.max(26, Math.min(55, hSlabConstructive * 220));
         const drawBeamH = Math.max(drawSlabH + 28, Math.min(135, hBeamMainConst * 220));
         const drawBeamB = Math.max(46, Math.min(95, bBeamMainConst * 220));
@@ -615,7 +656,7 @@
           secTopY + drawSlabH,
           `e_losa=${(hSlabConstructive * 100).toFixed(0)}cm`,
           colors.primary,
-          -26
+          24
         );
         drawDimensionLine(
           ctx,
@@ -625,7 +666,7 @@
           secTopY + drawBeamH,
           `h_viga=${(hBeamMainConst * 100).toFixed(0)}cm`,
           colors.secondary,
-          30
+          -26
         );
         drawDimensionLine(
           ctx,
@@ -635,7 +676,7 @@
           secTopY + drawBeamH,
           `bw=${(bBeamMainConst * 100).toFixed(0)}cm`,
           colors.purple,
-          22
+          20
         );
       }
 
@@ -644,10 +685,12 @@
       ctx.textAlign = 'left';
       const critLabel =
         criteriaKey === 'cr95'
-          ? 'Criterio activo: Tabla CR.9.5 (Soporta muros/particiones frágiles)'
-          : 'Criterio activo: Tabla C.9.5(a) (Sin elementos frágiles susceptibles)';
-      ctx.fillText(critLabel, rightX, height - 14);
+          ? 'Criterio activo: Tabla CR.9.5 (Soporta muros frágiles)'
+          : 'Criterio activo: Tabla C.9.5(a) (Sin elementos frágiles)';
+      ctx.fillText(critLabel, p2X, isStacked ? 686 : 396);
     }
+
+    window.renderSim21 = render;
 
     [elLx, elLy, elLv, elSupport, elCriteria, elSlabType, elFy, elBwRib, elARib, elTRib].forEach((el) => {
       if (el) el.addEventListener('input', render);
@@ -680,7 +723,7 @@
     const elQadm = document.getElementById('sim2-qadm');
 
     function render() {
-      const { ctx, width, height } = setupHiDPICanvas(canvas);
+      const { ctx, width, height, isStacked } = setupHiDPICanvas(canvas, 880, 430, 520, 740);
       const colors = getThemeColors();
 
       const colType = elColType.value;
@@ -823,38 +866,51 @@
 
       // =====================================================================
       // DIBUJO EN CANVAS: IZQUIERDA (MALLA Y A_AF) | DERECHA (COLUMNA + ZAPATA)
+      // (O SUPERIOR/INFERIOR EN DISPOSITIVOS MÓVILES / CONTENEDOR ESTRECHO)
       // =====================================================================
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = colors.bg;
       ctx.fillRect(0, 0, width, height);
 
-      const midX = Math.floor(width * 0.53);
+      // Línea divisoria adaptativa
       ctx.strokeStyle = colors.grid;
-      ctx.beginPath();
-      ctx.moveTo(midX, 14);
-      ctx.lineTo(midX, height - 14);
-      ctx.stroke();
+      ctx.lineWidth = 1;
+      if (!isStacked) {
+        const midX = 450;
+        ctx.beginPath();
+        ctx.moveTo(midX, 14);
+        ctx.lineTo(midX, height - 14);
+        ctx.stroke();
+      } else {
+        const midY = 370;
+        ctx.beginPath();
+        ctx.moveTo(14, midY);
+        ctx.lineTo(width - 14, midY);
+        ctx.stroke();
+      }
 
-      // --- PANEL IZQUIERDO: PLANTA ESTRUCTURAL Y ÁREA AFERENTE ---
+      // --- PANEL 1: PLANTA ESTRUCTURAL Y ÁREA AFERENTE ---
+      const p1X = 18;
+      const p1Y = 40;
+      const p1W = isStacked ? (width - 36) : 410;
+      const p1H = isStacked ? 270 : 320;
+
       ctx.fillStyle = colors.text;
-      ctx.font = '700 12px "Inter", sans-serif';
+      ctx.font = '700 12.5px "Inter", sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText(`1. Área Aferente: ${colLabel}`, 16, 22);
+      ctx.fillText(`1. Área Aferente: ${colLabel}`, 18, 24);
 
-      const pad = 46;
-      const availW = midX - pad * 2 - 10;
-      const availH = height - 105;
       const totalX = Lx1 + Lx2;
       const totalY = Ly1 + Ly2;
-      const scale = Math.min(availW / totalX, availH / totalY);
+      const scale = Math.min((p1W - 85) / totalX, (p1H - 70) / totalY);
 
       const w1 = Lx1 * scale;
       const w2 = Lx2 * scale;
       const h1 = Ly1 * scale;
       const h2 = Ly2 * scale;
 
-      const x0 = Math.round(pad + (availW - (w1 + w2)) / 2);
-      const y0 = Math.round(50 + (availH - (h1 + h2)) / 2);
+      const x0 = Math.round(p1X + 28 + (p1W - 85 - (w1 + w2)) / 2);
+      const y0 = Math.round(p1Y + 20 + (p1H - 70 - (h1 + h2)) / 2);
       const xCols = [x0, x0 + w1, x0 + w1 + w2];
       const yRows = [y0, y0 + h1, y0 + h1 + h2];
 
@@ -869,24 +925,24 @@
       ctx.setLineDash([4, 4]);
       xCols.forEach((xc, idx) => {
         ctx.beginPath();
-        ctx.moveTo(xc, y0 - 16);
+        ctx.moveTo(xc, y0 - 14);
         ctx.lineTo(xc, yRows[2] + 10);
         ctx.stroke();
         ctx.fillStyle = colors.muted;
         ctx.font = '700 10px "JetBrains Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(`Eje ${idx + 1}`, xc, y0 - 20);
+        ctx.fillText(`Eje ${idx + 1}`, xc, y0 - 18);
       });
       const rowNames = ['C', 'B', 'A'];
       yRows.forEach((yr, idx) => {
         ctx.beginPath();
-        ctx.moveTo(x0 - 16, yr);
+        ctx.moveTo(x0 - 14, yr);
         ctx.lineTo(xCols[2] + 10, yr);
         ctx.stroke();
         ctx.fillStyle = colors.muted;
         ctx.font = '700 10px "JetBrains Mono", monospace';
         ctx.textAlign = 'right';
-        ctx.fillText(rowNames[idx], x0 - 20, yr + 3);
+        ctx.fillText(rowNames[idx], x0 - 18, yr + 3);
       });
       ctx.restore();
 
@@ -956,24 +1012,30 @@
         });
       });
 
-      drawDimensionLine(ctx, xCols[0], yRows[2], xCols[1], yRows[2], `Lx1=${Lx1.toFixed(1)}m`, colors.primary, 20);
-      drawDimensionLine(ctx, xCols[1], yRows[2], xCols[2], yRows[2], `Lx2=${Lx2.toFixed(1)}m`, colors.primary, 20);
-      drawDimensionLine(ctx, xCols[2], yRows[0], xCols[2], yRows[1], `Ly1=${Ly1.toFixed(1)}m`, colors.purple, 26);
-      drawDimensionLine(ctx, xCols[2], yRows[1], xCols[2], yRows[2], `Ly2=${Ly2.toFixed(1)}m`, colors.purple, 26);
+      drawDimensionLine(ctx, xCols[0], yRows[2], xCols[1], yRows[2], `Lx1=${Lx1.toFixed(1)}m`, colors.primary, 18);
+      drawDimensionLine(ctx, xCols[1], yRows[2], xCols[2], yRows[2], `Lx2=${Lx2.toFixed(1)}m`, colors.primary, 18);
+      drawDimensionLine(ctx, xCols[2], yRows[0], xCols[2], yRows[1], `Ly1=${Ly1.toFixed(1)}m`, colors.purple, -22);
+      drawDimensionLine(ctx, xCols[2], yRows[1], xCols[2], yRows[2], `Ly2=${Ly2.toFixed(1)}m`, colors.purple, -22);
 
-      // --- PANEL DERECHO: COLUMNA + ZAPATA AISLADA (PLANTA Y PERFIL) ---
-      const rightX = midX + 18;
-      const rightW = width - rightX - 16;
+      const p1FootY = isStacked ? 345 : 405;
+      ctx.fillStyle = colors.muted;
+      ctx.font = '600 11px "Inter", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`Área Aferente Efectiva = ${Aaf.toFixed(2)} m² | Carga Ps = ${PsGrav.toFixed(0)} kN`, 18, p1FootY);
+
+      // --- PANEL 2: COLUMNA + ZAPATA AISLADA ---
+      const p2X = isStacked ? 18 : 468;
+      const p2Y = isStacked ? 400 : 40;
+      const p2W = isStacked ? (width - 36) : (width - p2X - 18);
 
       ctx.fillStyle = colors.text;
-      ctx.font = '700 12px "Inter", sans-serif';
+      ctx.font = '700 12.5px "Inter", sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText(`2. Columna (${diss}) y Zapata Aislada (B×B×hz)`, rightX, 22);
+      ctx.fillText(`2. Columna (${diss}) y Zapata Aislada (B×B×hz)`, p2X, isStacked ? 388 : 24);
 
-      // Dibujar Planta de Zapata + Pedestal/Columna + Perímetro crítico b0 (a d/2)
-      const planZapSize = Math.min(rightW * 0.56, 138);
-      const zapCenterX = Math.round(rightX + rightW / 2);
-      const zapPlanTopY = 44;
+      const planZapSize = Math.min(130, Math.round(p2W * 0.42));
+      const zapCenterX = Math.round(p2X + p2W / 2);
+      const zapPlanTopY = p2Y + 14;
       const zapX = Math.round(zapCenterX - planZapSize / 2);
 
       // Contorno de la zapata B x B
@@ -1029,17 +1091,16 @@
         -14
       );
 
-      // Etiqueta perímetro punzonamiento
       ctx.fillStyle = colors.danger;
       ctx.font = '700 10px "JetBrains Mono", monospace';
       ctx.textAlign = 'left';
-      ctx.fillText(`b0 (d/2)`, zapCenterX + critSize / 2 + 5, zapPlanTopY + planZapSize / 2);
+      ctx.fillText(`b0 (d/2)`, zapCenterX + critSize / 2 + 5, zapPlanTopY + planZapSize / 2 + 3);
 
-      // --- PERFIL / ALZADO DE LA ZAPATA Y COLUMNA (PARTE INFERIOR DERECHA) ---
-      const elevBaseY = height - 42;
-      const elevZapH = Math.max(28, Math.min(48, hzAdoptedM * 65));
+      // Alzado / perfil de la zapata y columna
+      const elevBaseY = isStacked ? 675 : 385;
+      const elevZapH = Math.max(26, Math.min(46, hzAdoptedM * 65));
       const elevZapTopY = elevBaseY - elevZapH;
-      const elevColTopY = elevZapTopY - 38;
+      const elevColTopY = elevZapTopY - 36;
 
       ctx.fillStyle = colors.concrete;
       ctx.strokeStyle = colors.concreteStroke;
@@ -1072,14 +1133,14 @@
       for (let i = 0; i <= 5; i++) {
         const ax = zapX + (planZapSize * i) / 5;
         ctx.beginPath();
-        ctx.moveTo(ax, elevBaseY + 14);
+        ctx.moveTo(ax, elevBaseY + 12);
         ctx.lineTo(ax, elevBaseY + 2);
         ctx.stroke();
       }
       ctx.fillStyle = colors.success;
       ctx.font = '700 10.5px "JetBrains Mono", monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(`q_u = ${quKPa.toFixed(1)} kPa (q_adm = ${qadm.toFixed(0)} kPa)`, zapCenterX, elevBaseY + 26);
+      ctx.fillText(`q_u = ${quKPa.toFixed(1)} kPa (q_adm = ${qadm.toFixed(0)} kPa)`, zapCenterX, elevBaseY + 24);
 
       drawDimensionLine(
         ctx,
@@ -1089,7 +1150,7 @@
         elevBaseY,
         `hz=${(hzAdoptedM * 100).toFixed(0)}cm`,
         colors.purple,
-        28
+        -24
       );
       drawDimensionLine(
         ctx,
@@ -1099,9 +1160,11 @@
         elevColTopY,
         `c=${sideAdoptedCm}cm`,
         colors.primary,
-        -12
+        -14
       );
     }
+
+    window.renderSim22 = render;
 
     [elColType, elLx1, elLx2, elLy1, elLy2, elFloors, elDead, elLive, elFc, elRho, elDissipation, elQadm].forEach(
       (el) => {
@@ -1132,6 +1195,11 @@
         card.classList.add('step-collapsed');
       }
     });
+  };
+
+  window.redrawAllSimulators = function () {
+    if (typeof window.renderSim21 === 'function') window.renderSim21();
+    if (typeof window.renderSim22 === 'function') window.renderSim22();
   };
 
   document.addEventListener('DOMContentLoaded', () => {

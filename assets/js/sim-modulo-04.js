@@ -267,8 +267,23 @@ function drawSim41Canvas(state) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const pal = getThemePaletteMod04();
-  const W = canvas.width;
-  const H = canvas.height;
+
+  const baseW = 920;
+  const baseH = 430;
+  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : baseW;
+  const displayW = Math.max(280, Math.min(baseW, parentW - 24));
+  const scale = displayW / baseW;
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = Math.round(displayW * dpr);
+  canvas.height = Math.round(baseH * scale * dpr);
+  canvas.style.width = displayW + "px";
+  canvas.style.height = Math.round(baseH * scale) + "px";
+
+  ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
+
+  const W = baseW;
+  const H = baseH;
 
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = pal.bgCanvas;
@@ -841,8 +856,23 @@ function drawSim42Canvas(state) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const pal = getThemePaletteMod04();
-  const W = canvas.width;
-  const H = canvas.height;
+
+  const baseW = 920;
+  const baseH = 390;
+  const parentW = canvas.parentElement ? canvas.parentElement.clientWidth : baseW;
+  const displayW = Math.max(280, Math.min(baseW, parentW - 24));
+  const scale = displayW / baseW;
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = Math.round(displayW * dpr);
+  canvas.height = Math.round(baseH * scale * dpr);
+  canvas.style.width = displayW + "px";
+  canvas.style.height = Math.round(baseH * scale) + "px";
+
+  ctx.setTransform(scale * dpr, 0, 0, scale * dpr, 0, 0);
+
+  const W = baseW;
+  const H = baseH;
 
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = pal.bgCanvas;
@@ -981,15 +1011,24 @@ function drawSim42Canvas(state) {
   ctx.fillText(`Ve,mín = Vsway - Vg = ${state.VeMin.toFixed(1)} kN`, rightX - 8, yVeRight - 8);
 }
 
+window.redrawAllSimulators = function () {
+  updateSim41();
+  updateSim42();
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   updateSim41();
   updateSim42();
+  window.addEventListener('resize', () => {
+    if (typeof window.redrawAllSimulators === 'function') {
+      window.redrawAllSimulators();
+    }
+  });
   const themeBtn = document.getElementById('btn-theme');
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       setTimeout(() => {
-        updateSim41();
-        updateSim42();
+        window.redrawAllSimulators();
       }, 30);
     });
   }

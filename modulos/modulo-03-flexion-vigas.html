@@ -2919,7 +2919,7 @@
           </div>
           <div class="math-vars">
             <div><strong>Justificación física del signo negativo en la raíz cuadrática:</strong> La ecuación cuadrática $-\frac{1}{2(0.85 f'_c)}(\rho f_y)^2 + (\rho f_y) - R_n = 0$ admite dos raíces matemáticas ($1 \pm \sqrt{\dots}$). La raíz con signo positivo ($+$) implicaría una profundidad del bloque de compresión $a > d$, físicamente imposible porque el bloque de compresión saldría de la viga. Por tanto, la única solución físicamente coherente es la raíz con signo negativo ($-$).</div>
-            <div><strong>Consistencia dimensional en el cálculo de $R_n$ :</strong> Si $M_u$ se expresa en $\text{kN}\cdot\text{m}$ y $b, d$ en metros ($\text{m}$), entonces $R_n = \frac{M_u}{\phi b d^2}$ resulta en $\text{kN/m}^2$ ($\text{kPa}$); al dividir entre $1\,000$ se obtiene $R_n$ en $\text{MPa}$, unidad directamente compatible con $f'_c$ y $f_y$ en $\text{MPa}$.</div>
+            <div><strong>Consistencia dimensional en el cálculo de $R_n$ y $\rho$:</strong> En la práctica de ingeniería estructural, $M_u$ se obtiene en $\text{kN}\cdot\text{m}$, mientras que $b$ y $d$ se ingresan en $\text{mm}$ y $f'_c, f_y$ en $\text{MPa}$ ($\text{N/mm}^2$). Aplicando el factor de conversión $10^6$ ($1\text{ kN}\cdot\text{m} = 10^6\text{ N}\cdot\text{mm}$), se tiene $R_n = \frac{M_u \times 10^6}{\phi\, b\, d^2}$ directamente en $\text{MPa}$, garantizando que el término $\frac{2 R_n}{0.85 f'_c}$ y la cuantía $\rho$ sean <em>estrictamente adimensionales</em>. Alternativamente, si $b$ y $d$ se ingresan en metros ($\text{m}$), $R_n = \frac{M_u}{\phi b d^2}$ resulta en $\text{kPa}$, debiendo dividirse entre $1\,000$ para obtener $\text{MPa}$.</div>
           </div>
         </div>
 
@@ -2946,6 +2946,63 @@
                   <li>La solución con signo ($+$) produciría una profundidad $a > d$, lo que colocaría el bloque de concreto fuera de la sección física.</li>
                   <li><strong>Radical real:</strong> Requiere que $\dfrac{2 R_n}{0.85 f'_c} \le 1.0 \iff R_n \le 0.425 f'_c$, límite más allá del cual la sección es incapaz de resistir el momento en flexión simple y exige refuerzo a compresión ($A'_s$).</li>
                 </ul>
+              </div>
+            </div>
+
+            <!-- GUÍA DE UNIDADES Y CONSISTENCIA DIMENSIONAL PRÁCTICA -->
+            <div style="margin-top: 1rem; padding: 0.95rem 1.15rem; background: var(--bg-surface); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: var(--radius-sm); border-left: 4.5px solid #D97706; box-shadow: var(--shadow-sm);">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; border-bottom: 1px dashed rgba(245, 158, 11, 0.3); padding-bottom: 0.45rem;">
+                <span style="font-weight: 800; font-size: 0.92rem; color: #B45309; display: flex; align-items: center; gap: 0.45rem;">
+                  📐 Regla de Consistencia Dimensional y Unidades de Entrada Prácticas (SI)
+                </span>
+                <span style="font-size: 0.72rem; font-weight: 700; background: #FEF3C7; color: #92400E; padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid #FDE68A;">
+                  Garantía: Cuantía $\rho$ Adimensional
+                </span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem; margin-bottom: 0.85rem; font-size: 0.85rem;">
+                <div style="background: var(--bg-subtle); padding: 0.65rem 0.85rem; border-radius: var(--radius-xs); border: 1px solid var(--border-color);">
+                  <strong style="color: #1D4ED8; display: block; margin-bottom: 0.25rem;">1. Solicitación y Materiales:</strong>
+                  <ul style="margin: 0 0 0 1rem; padding: 0; line-height: 1.5;">
+                    <li><strong>$M_u$</strong> en <strong>$\text{kN}\cdot\text{m}$</strong> (del análisis estructural).</li>
+                    <li><strong>$f'_c$</strong> y <strong>$f_y$</strong> en <strong>$\text{MPa}$</strong> ($1\text{ MPa} = 1\text{ N/mm}^2$).</li>
+                    <li><strong>$\phi$</strong> adimensional ($\phi = 0.90$ para sección dúctil).</li>
+                  </ul>
+                </div>
+                <div style="background: var(--bg-subtle); padding: 0.65rem 0.85rem; border-radius: var(--radius-xs); border: 1px solid var(--border-color);">
+                  <strong style="color: #059669; display: block; margin-bottom: 0.25rem;">2. Geometría Seccional ($b$ y $d$ en mm):</strong>
+                  <ul style="margin: 0 0 0 1rem; padding: 0; line-height: 1.5;">
+                    <li><strong>$b$</strong> en <strong>$\text{mm}$</strong> (ancho de la viga o alma).</li>
+                    <li><strong>$d$</strong> en <strong>$\text{mm}$</strong> (peralte efectivo útil).</li>
+                    <li>Factor: <strong>$\times 10^6$</strong> ($1\text{ kN}\cdot\text{m} = 10^6\text{ N}\cdot\text{mm}$).</li>
+                  </ul>
+                </div>
+                <div style="background: var(--bg-subtle); padding: 0.65rem 0.85rem; border-radius: var(--radius-xs); border: 1px solid var(--border-color);">
+                  <strong style="color: #7C3AED; display: block; margin-bottom: 0.25rem;">3. Cuantía $\rho$ y Acero Requerido $A_s$:</strong>
+                  <ul style="margin: 0 0 0 1rem; padding: 0; line-height: 1.5;">
+                    <li><strong>$\rho$</strong> resulta <strong>estrictamente adimensional</strong> ($[-]$).</li>
+                    <li>$A_{s,\text{req}} = \rho \cdot b \cdot d$ en <strong>$\text{mm}^2$</strong>.</li>
+                    <li>$A_{s,\text{req}} = \dfrac{\rho \cdot b \cdot d}{100}$ en <strong>$\text{cm}^2$</strong> (despiece).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- FÓRMULA MAESTRA PRÁCTICA CON FACTOR 10^6 -->
+              <div style="background: var(--bg-body); border: 1px solid var(--border-color); border-radius: var(--radius-xs); padding: 0.8rem 1rem; margin-bottom: 0.65rem;">
+                <div style="text-align: center; margin-bottom: 0.4rem;">
+                  $$R_n = \frac{M_u \times 10^6}{\phi\, b\, d^2} \quad [\text{MPa}] \qquad \Longrightarrow \qquad \rho = \frac{0.85\, f'_c}{f_y} \left( 1 - \sqrt{1 - \frac{2\, (M_u \times 10^6)}{0.85\, \phi\, f'_c\, b\, d^2}} \right) \quad [\text{adimensional}]$$
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-secondary); text-align: center; line-height: 1.45;">
+                  <strong>Cancelación dimensional:</strong> Al entrar $M_u \times 10^6$ en $\text{N}\cdot\text{mm}$ y $b, d$ en $\text{mm}$, el coeficiente $R_n$ resulta en $\dfrac{\text{N}\cdot\text{mm}}{\text{mm}\cdot\text{mm}^2} = \dfrac{\text{N}}{\text{mm}^2} = \text{MPa}$. Al ser $R_n$ y $f'_c$ ambos en $\text{MPa}$, la relación $\dfrac{2 R_n}{0.85 f'_c}$ es $\dfrac{[\text{MPa}]}{[\text{MPa}]} = [-]$ y el prefacio $\dfrac{0.85 f'_c}{f_y}$ es $\dfrac{[\text{MPa}]}{[\text{MPa}]} = [-]$, garantizando una cuantía $\rho$ rigurosamente <strong>adimensional</strong>.
+                </div>
+              </div>
+
+              <!-- NOTA COMPARATIVA METROS VS MILÍMETROS -->
+              <div style="font-size: 0.81rem; color: var(--text-muted); line-height: 1.45; display: flex; align-items: flex-start; gap: 0.45rem;">
+                <span style="color: #D97706; font-size: 0.95rem;">💡</span>
+                <div>
+                  <strong>¿Qué ocurre si se ingresa $b$ y $d$ en metros ($\text{m}$)?</strong> Si $b$ y $d$ se ingresan en metros con $M_u$ en $\text{kN}\cdot\text{m}$, el cociente $\frac{M_u}{\phi b d^2}$ produce $\text{kN/m}^2$ ($\text{kPa}$). Para hacerlo dimensionalmente compatible con $f'_c$ en $\text{MPa}$, se debe dividir entre $1\,000$: $R_n = \frac{M_u}{1\,000 \cdot \phi b d^2} \; [\text{MPa}]$, y luego $A_{s,\text{req}} = \rho \cdot b \cdot d \times 10\,000 \; [\text{cm}^2]$. En el diseño estructural práctico se recomienda siempre ingresar $b$ y $d$ en $\text{mm}$ con el factor $10^6$ para eliminar equivocaciones decimales.
+                </div>
               </div>
             </div>
           </div>
@@ -2986,7 +3043,8 @@
                   <div style="background: var(--bg-subtle); border-left: 3px solid #2563EB; border-radius: 4px; padding: 0.55rem 0.75rem;">
                     <strong>3. Parámetro de Resistencia Requerida ($R_n$):</strong>
                     <div>Asumir preliminarmente comportamiento dúctil controlada por tracción ($\phi = 0.90$):
-                      $$R_n = \frac{M_u}{\phi\,b\,d^2}$$
+                      $$R_n = \frac{M_u \times 10^6}{\phi\,b\,d^2} \quad [\text{MPa}]$$
+                      <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">(Con $M_u$ en $\text{kN}\cdot\text{m}$ y $b, d$ en $\text{mm}$, obteniendo $R_n$ directamente en $\text{MPa}$)</div>
                     </div>
                   </div>
                   <div style="background: var(--bg-subtle); border-left: 3px solid #D97706; border-radius: 4px; padding: 0.55rem 0.75rem;">
@@ -3000,7 +3058,7 @@
                   </div>
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
                     <strong>5. Selección de Barras y Chequeo $b_{\min}$:</strong>
-                    <div>Calcular $A_{s,\text{req}} = \rho b d$, seleccionar combinación comercial de barras y verificar que el ancho de la viga cumpla $b \ge b_{\min}$ (NSR-10 C.7.6.1). Recalcular $d_{\text{real}}$ y verificar $\phi M_n \ge M_u$.</div>
+                    <div>Calcular $A_{s,\text{req}} = \rho b d$ en $\text{mm}^2$ ($A_{s,\text{req}} = \frac{\rho b d}{100}$ en $\text{cm}^2$), seleccionar combinación comercial de barras y verificar que el ancho de la viga cumpla $b \ge b_{\min}$ (NSR-10 C.7.6.1). Recalcular $d_{\text{real}}$ y verificar $\phi M_n \ge M_u$.</div>
                   </div>
                 </div>
               </div>

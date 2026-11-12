@@ -497,60 +497,80 @@
             <h3 class="tech-card-title">Figura 4.1 — Trayectorias de Esfuerzos Principales, Cortante Puro a 45° y Tipología de Grietas</h3>
             <div class="tech-card-icon">📐</div>
           </div>
-          <svg viewBox="0 0 880 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #FFFFFF; border: 1px solid #CBD5E1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <!-- Fondo de la viga -->
-            <rect x="45" y="45" width="540" height="150" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
-            <!-- Apoyos -->
-            <polygon points="65,195 45,230 85,230" fill="#475569" stroke="#94A3B8" stroke-width="1.5"/>
-            <polygon points="565,195 545,230 585,230" fill="#475569" stroke="#94A3B8" stroke-width="1.5"/>
+          <svg viewBox="0 0 880 285" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #FFFFFF; border: 1px solid #CBD5E1; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <defs>
+              <marker id="arr-trac-41" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#DC2626"/>
+              </marker>
+              <marker id="arr-comp-41" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0284C7"/>
+              </marker>
+            </defs>
+
+            <!-- Cuerpo de la viga en estilo técnico claro -->
+            <rect x="42" y="42" width="546" height="152" rx="4" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+
+            <!-- Apoyos articulado y rodillo -->
+            <polygon points="65,194 46,228 84,228" fill="#CBD5E1" stroke="#475569" stroke-width="1.6"/>
+            <line x1="40" y1="228" x2="90" y2="228" stroke="#334155" stroke-width="2"/>
+            <polygon points="565,194 546,224 584,224" fill="#CBD5E1" stroke="#475569" stroke-width="1.6"/>
+            <circle cx="556" cy="229" r="3.5" fill="#475569"/>
+            <circle cx="574" cy="229" r="3.5" fill="#475569"/>
+            <line x1="540" y1="234" x2="590" y2="234" stroke="#334155" stroke-width="2"/>
+
             <!-- Eje Neutro -->
-            <line x1="45" y1="120" x2="585" y2="120" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="6,4"/>
-            <text x="54" y="114" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="10">Eje Neutro (σx = 0, θp = 45°)</text>
+            <line x1="42" y1="118" x2="588" y2="118" stroke="#64748B" stroke-width="1.4" stroke-dasharray="6,4"/>
+            <rect x="50" y="100" width="176" height="15" rx="3" fill="#F1F5F9"/>
+            <text x="54" y="111" fill="#475569" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9.5">Eje Neutro (σx = 0, θp = 45°)</text>
 
             <!-- Armadura longitudinal inferior -->
-            <line x1="55" y1="180" x2="575" y2="180" stroke="#FBBF24" stroke-width="3.5"/>
+            <line x1="52" y1="180" x2="578" y2="180" stroke="#1E40AF" stroke-width="3.5"/>
+            <text x="505" y="174" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9">Acero As</text>
 
             <!-- Trayectorias de compresión principal (arcos azules punteados) -->
-            <path d="M 70,180 Q 315,35 560,180" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-dasharray="5,4"/>
-            <path d="M 110,180 Q 315,65 520,180" fill="none" stroke="#38BDF8" stroke-width="1.4" stroke-dasharray="5,4"/>
+            <path d="M 70,180 Q 315,32 560,180" fill="none" stroke="#0284C7" stroke-width="1.7" stroke-dasharray="5,4"/>
+            <path d="M 112,180 Q 315,64 518,180" fill="none" stroke="#0284C7" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <text x="395" y="62" fill="#0369A1" font-family="Inter, sans-serif" font-weight="700" font-size="9.5">Arco de compresión principal (σ₂)</text>
 
-            <!-- 1. Grietas de Cortante en el Alma (Web-shear cracks) cerca de los apoyos -->
-            <path d="M 88,155 L 118,120 L 148,82" fill="none" stroke="#FB7185" stroke-width="2.6" stroke-linecap="round"/>
-            <text x="72" y="70" fill="#FB7185" font-family="Inter, sans-serif" font-weight="700" font-size="11">(3) Cortante en el alma</text>
-            <text x="72" y="83" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="9.5">(Web-shear: V alto, M bajo)</text>
+            <!-- (3) Grietas de Cortante en el Alma (Web-shear cracks) cerca de los apoyos -->
+            <path d="M 88,156 L 118,118 L 148,80" fill="none" stroke="#DC2626" stroke-width="2.8" stroke-linecap="round"/>
+            <rect x="56" y="50" width="182" height="33" rx="4" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+            <text x="64" y="64" fill="#B91C1C" font-family="Inter, sans-serif" font-weight="800" font-size="10.5">(3) Cortante en el alma</text>
+            <text x="64" y="77" fill="#7F1D1D" font-family="JetBrains Mono, monospace" font-size="9">(Web-shear: V alto, M bajo)</text>
 
-            <!-- 2. Grietas de Flexo-Cortante (Flexure-shear cracks) en zona intermedia -->
-            <path d="M 185,195 L 188,158 L 215,122 L 248,88" fill="none" stroke="#F97316" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M 445,195 L 442,158 L 415,122 L 382,88" fill="none" stroke="#F97316" stroke-width="2.6" stroke-linecap="round"/>
-            <text x="160" y="216" fill="#F97316" font-family="Inter, sans-serif" font-weight="700" font-size="11">(2) Grieta de Flexo-Cortante</text>
-            <text x="160" y="229" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="9.5">(Inicia vertical por M y se inclina por V)</text>
+            <!-- (2) Grietas de Flexo-Cortante (Flexure-shear cracks) en zona intermedia -->
+            <path d="M 185,194 L 188,158 L 215,120 L 248,86" fill="none" stroke="#D97706" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M 445,194 L 442,158 L 415,120 L 382,86" fill="none" stroke="#D97706" stroke-width="2.8" stroke-linecap="round"/>
+            <text x="148" y="216" fill="#B45309" font-family="Inter, sans-serif" font-weight="800" font-size="10.5">(2) Grieta de Flexo-Cortante</text>
+            <text x="148" y="230" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9">(Inicia vertical por M y se inclina por V)</text>
 
-            <!-- 3. Grietas verticales de Flexión pura en el centro de la luz -->
-            <path d="M 290,195 L 290,130" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M 315,195 L 315,125" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M 340,195 L 340,130" fill="none" stroke="#FBBF24" stroke-width="2.4" stroke-linecap="round"/>
-            <text x="270" y="248" fill="#FBBF24" font-family="Inter, sans-serif" font-weight="700" font-size="11">(1) Grietas de Flexión Pura (V ≈ 0, M máx)</text>
+            <!-- (1) Grietas verticales de Flexión pura en el centro de la luz -->
+            <path d="M 290,194 L 290,128" fill="none" stroke="#059669" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 315,194 L 315,122" fill="none" stroke="#059669" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 340,194 L 340,128" fill="none" stroke="#059669" stroke-width="2.6" stroke-linecap="round"/>
+            <text x="268" y="254" fill="#065F46" font-family="Inter, sans-serif" font-weight="800" font-size="10.5">(1) Grietas de Flexión Pura (V ≈ 0, M máx)</text>
 
-            <!-- Panel Derecho: Elemento diferencial en el Eje Neutro rotado a 45° -->
-            <rect x="615" y="25" width="245" height="225" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
-            <text x="737" y="47" text-anchor="middle" fill="#F8FAFC" font-family="Inter, sans-serif" font-weight="700" font-size="11.5">ELEMENTO EN EL EJE NEUTRO (45°)</text>
+            <!-- Panel Derecho: Elemento diferencial en el Eje Neutro rotado a 45° (Estilo Técnico Claro) -->
+            <rect x="612" y="22" width="252" height="240" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.6"/>
+            <rect x="612" y="22" width="252" height="30" rx="8" fill="#EFF6FF"/>
+            <text x="738" y="41" text-anchor="middle" fill="#1E40AF" font-family="Inter, sans-serif" font-weight="800" font-size="11">ELEMENTO EN EL EJE NEUTRO (45°)</text>
+
             <!-- Rombo rotado a 45 grados -->
-            <polygon points="737,82 787,132 737,182 687,132" fill="#1E293B" stroke="#94A3B8" stroke-width="1.8"/>
+            <polygon points="738,84 788,134 738,184 688,134" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
             <!-- Fisura diagonal a 45 grados dentro del elemento -->
-            <line x1="705" y1="164" x2="769" y2="100" stroke="#FB7185" stroke-width="2.8" stroke-dasharray="4,3"/>
-            <!-- Flechas de tracción principal sigma_1 = tau -->
-            <line x1="708" y1="103" x2="682" y2="77" stroke="#FB7185" stroke-width="2.2"/>
-            <polygon points="678,73 688,76 681,83" fill="#FB7185"/>
-            <line x1="766" y1="161" x2="792" y2="187" stroke="#FB7185" stroke-width="2.2"/>
-            <polygon points="796,191 786,188 793,181" fill="#FB7185"/>
-            <!-- Flechas de compresión principal sigma_2 = -tau -->
-            <line x1="788" y1="81" x2="766" y2="103" stroke="#38BDF8" stroke-width="2.2"/>
-            <polygon points="762,107 772,104 765,97" fill="#38BDF8"/>
-            <line x1="686" y1="183" x2="708" y2="161" stroke="#38BDF8" stroke-width="2.2"/>
-            <polygon points="712,157 702,160 709,167" fill="#38BDF8"/>
+            <line x1="704" y1="168" x2="772" y2="100" stroke="#DC2626" stroke-width="2.8" stroke-dasharray="4,3"/>
 
-            <text x="737" y="212" text-anchor="middle" fill="#FB7185" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">σ₁ = +τ_máx (Tracción Diagonal)</text>
-            <text x="737" y="230" text-anchor="middle" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">σ₂ = -τ_máx (Biela Comprimida)</text>
+            <!-- Flechas de tracción principal sigma_1 = +tau_max -->
+            <line x1="710" y1="106" x2="682" y2="78" stroke="#DC2626" stroke-width="2.2" marker-end="url(#arr-trac-41)"/>
+            <line x1="766" y1="162" x2="794" y2="190" stroke="#DC2626" stroke-width="2.2" marker-end="url(#arr-trac-41)"/>
+
+            <!-- Flechas de compresión principal sigma_2 = -tau_max -->
+            <line x1="792" y1="80" x2="766" y2="106" stroke="#0284C7" stroke-width="2.2" marker-end="url(#arr-comp-41)"/>
+            <line x1="684" y1="188" x2="710" y2="162" stroke="#0284C7" stroke-width="2.2" marker-end="url(#arr-comp-41)"/>
+
+            <rect x="624" y="204" width="228" height="46" rx="5" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+            <text x="738" y="222" text-anchor="middle" fill="#DC2626" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10">σ₁ = +τ_máx (Tracción Diagonal)</text>
+            <text x="738" y="240" text-anchor="middle" fill="#0284C7" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10">σ₂ = −τ_máx (Biela Comprimida)</text>
           </svg>
         </div>
 
@@ -1069,8 +1089,8 @@
         </div>
 
         <!-- FIGURA VECTORIAL: ZONIFICACIÓN DEL DIAGRAMA DE CORTANTE Vu(x) Y REQUISITOS DE ESTRIBOS -->
-        <figure class="diagram-figure" style="max-width: 960px; margin: 1.5rem auto 1.25rem;">
-          <svg class="diagram-svg" viewBox="0 0 960 545" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zonificación del Diagrama de Cortante Vu(x) y Requisitos de Estribos según NSR-10 C.11.4">
+        <figure class="diagram-figure" style="max-width: 980px; margin: 1.5rem auto 1.25rem;">
+          <svg class="diagram-svg" viewBox="0 0 980 610" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zonificación del Diagrama de Cortante Vu(x), Requisitos de Estribos y Cálculo de Longitudes de Zona 1, 2 y 3 según NSR-10 C.11.4">
             <defs>
               <marker id="arr-dim-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0F172A"/>
@@ -1084,226 +1104,259 @@
             </defs>
 
             <!-- Fondo de la lámina -->
-            <rect x="0" y="0" width="960" height="545" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="0" y="0" width="980" height="610" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
 
             <!-- TÍTULO PRINCIPAL -->
-            <text x="480" y="29" fill="#0F172A" font-family="Inter, sans-serif" font-size="14.5" font-weight="800" text-anchor="middle" letter-spacing="0.02em">
-              ZONIFICACIÓN DEL DIAGRAMA DE CORTANTE V<tspan dy="3" font-size="10.5">u</tspan><tspan dy="-3">(x) Y REQUISITOS DE ESTRIBOS (NSR-10 C.11.4)</tspan>
+            <text x="490" y="29" fill="#0F172A" font-family="Inter, sans-serif" font-size="14" font-weight="800" text-anchor="middle" letter-spacing="0.02em">
+              ZONIFICACIÓN DEL DIAGRAMA DE CORTANTE V<tspan dy="3" font-size="10.5">u</tspan><tspan dy="-3">(x), REQUISITOS Y LONGITUDES DE ZONAS 1, 2 Y 3 (NSR-10 C.11.4)</tspan>
             </text>
 
             <!-- =========================================================================
                  1. ALZADO DE LA VIGA Y DISTRIBUCIÓN DE ESTRIBOS (PARTE SUPERIOR)
                  Coordenadas X clave:
                  x = 120: Cara del apoyo (x = 0)
-                 x = 215: Sección crítica a distancia d (V_ud)
-                 x = 420: Fin de Zona 3 (donde Vu(x) = φVc, longitud S = 300 px)
-                 x = 640: Fin de Zona 2 (donde Vu(x) = 0.5·φVc)
-                 x = 860: Centro de la luz (x = Ln/2, donde Vu = 0)
+                 x = 205: Sección crítica a distancia d (V_ud)
+                 x = 400: Fin de Zona 3 (donde Vu(x) = φVc, longitud S = L3)
+                 x = 610: Fin de Zona 2 (donde Vu(x) = 0.5·φVc, longitud L2)
+                 x = 820: Centro de la luz (x = Ln/2, donde Vu = 0, longitud L1)
                  ========================================================================= -->
             <!-- Columna de apoyo izquierda -->
             <path d="M 76 48 L 120 48 L 120 184 L 76 184 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.8"/>
-            <!-- Símbolo de corte superior e inferior de la columna -->
             <path d="M 70 48 L 90 48 L 95 41 L 101 55 L 106 48 L 126 48" fill="none" stroke="#334155" stroke-width="1.6"/>
             <path d="M 70 184 L 90 184 L 95 177 L 101 191 L 106 184 L 126 184" fill="none" stroke="#334155" stroke-width="1.6"/>
 
             <!-- Cuerpo de la viga de concreto -->
-            <rect x="120" y="68" width="755" height="72" fill="#F1F5F9" stroke="#334155" stroke-width="1.8"/>
+            <rect x="120" y="68" width="715" height="72" fill="#F1F5F9" stroke="#334155" stroke-width="1.8"/>
 
-            <!-- Línea de simetría / corte en el centro de la luz (x = 860) -->
-            <path d="M 875 60 L 875 97 L 868 102 L 882 108 L 875 113 L 875 148" fill="none" stroke="#334155" stroke-width="1.6"/>
-            <line x1="860" y1="56" x2="860" y2="152" stroke="#64748B" stroke-width="1.3" stroke-dasharray="5,3"/>
-            <text x="860" y="51" fill="#475569" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">℄ Centro de luz</text>
+            <!-- Línea de simetría / corte en el centro de la luz (x = 820) -->
+            <path d="M 835 60 L 835 97 L 828 102 L 842 108 L 835 113 L 835 148" fill="none" stroke="#334155" stroke-width="1.6"/>
+            <line x1="820" y1="56" x2="820" y2="152" stroke="#64748B" stroke-width="1.3" stroke-dasharray="5,3"/>
+            <text x="820" y="51" fill="#475569" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">℄ Centro de luz</text>
 
-            <!-- Armadura longitudinal superior e inferior (con gancho estándar dentro del apoyo) -->
-            <path d="M 868 76 L 94 76 Q 86 76 86 84 L 86 124 Q 86 132 94 132 L 868 132" fill="none" stroke="#475569" stroke-width="3.2"/>
+            <!-- Armadura longitudinal superior e inferior -->
+            <path d="M 828 76 L 94 76 Q 86 76 86 84 L 86 124 Q 86 132 94 132 L 828 132" fill="none" stroke="#475569" stroke-width="3.2"/>
 
-            <!-- Estribos en Zona 3 (x = 120 a 420): espaciamiento denso por resistencia -->
+            <!-- Estribos en Zona 3 (x = 120 a 400): espaciamiento denso por resistencia -->
             <g stroke="#B45309" stroke-width="2.2">
               <line x1="128" y1="76" x2="128" y2="132"/>
               <line x1="142" y1="76" x2="142" y2="132"/>
               <line x1="156" y1="76" x2="156" y2="132"/>
               <line x1="170" y1="76" x2="170" y2="132"/>
-              <line x1="184" y1="76" x2="184" y2="132"/>
-              <line x1="198" y1="76" x2="198" y2="132"/>
-              <line x1="215" y1="76" x2="215" y2="132"/>
-              <line x1="235" y1="76" x2="235" y2="132"/>
-              <line x1="255" y1="76" x2="255" y2="132"/>
-              <line x1="275" y1="76" x2="275" y2="132"/>
-              <line x1="295" y1="76" x2="295" y2="132"/>
-              <line x1="315" y1="76" x2="315" y2="132"/>
-              <line x1="335" y1="76" x2="335" y2="132"/>
-              <line x1="356" y1="76" x2="356" y2="132"/>
-              <line x1="377" y1="76" x2="377" y2="132"/>
-              <line x1="398" y1="76" x2="398" y2="132"/>
-              <line x1="420" y1="76" x2="420" y2="132"/>
+              <line x1="186" y1="76" x2="186" y2="132"/>
+              <line x1="205" y1="76" x2="205" y2="132"/>
+              <line x1="224" y1="76" x2="224" y2="132"/>
+              <line x1="243" y1="76" x2="243" y2="132"/>
+              <line x1="262" y1="76" x2="262" y2="132"/>
+              <line x1="281" y1="76" x2="281" y2="132"/>
+              <line x1="300" y1="76" x2="300" y2="132"/>
+              <line x1="320" y1="76" x2="320" y2="132"/>
+              <line x1="340" y1="76" x2="340" y2="132"/>
+              <line x1="360" y1="76" x2="360" y2="132"/>
+              <line x1="380" y1="76" x2="380" y2="132"/>
+              <line x1="400" y1="76" x2="400" y2="132"/>
             </g>
 
-            <!-- Estribos en Zona 2 (x = 420 a 640): espaciamiento máximo smáx por Av,mín -->
+            <!-- Estribos en Zona 2 (x = 400 a 610): espaciamiento máximo smáx por Av,mín -->
             <g stroke="#1D4ED8" stroke-width="2.2">
-              <line x1="464" y1="76" x2="464" y2="132"/>
-              <line x1="508" y1="76" x2="508" y2="132"/>
-              <line x1="552" y1="76" x2="552" y2="132"/>
-              <line x1="596" y1="76" x2="596" y2="132"/>
-              <line x1="640" y1="76" x2="640" y2="132"/>
+              <line x1="442" y1="76" x2="442" y2="132"/>
+              <line x1="484" y1="76" x2="484" y2="132"/>
+              <line x1="526" y1="76" x2="526" y2="132"/>
+              <line x1="568" y1="76" x2="568" y2="132"/>
+              <line x1="610" y1="76" x2="610" y2="132"/>
             </g>
             <!-- Cota interna s = smáx entre estribos de Zona 2 -->
-            <line x1="510" y1="118" x2="550" y2="118" stroke="#1E3A8A" stroke-width="1.2" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="530" y="113" fill="#1E3A8A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">s<tspan dy="2" font-size="7.5">máx</tspan></text>
+            <line x1="486" y1="118" x2="524" y2="118" stroke="#1E3A8A" stroke-width="1.2" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="505" y="113" fill="#1E3A8A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">s<tspan dy="2" font-size="7.5">máx</tspan></text>
 
-            <!-- Estribos en Zona 1 (x = 640 a 860): constructivos (punteados) -->
+            <!-- Estribos en Zona 1 (x = 610 a 820): constructivos (punteados) -->
             <g stroke="#15803D" stroke-width="1.8" stroke-dasharray="4,3" opacity="0.65">
-              <line x1="713" y1="76" x2="713" y2="132"/>
-              <line x1="786" y1="76" x2="786" y2="132"/>
+              <line x1="680" y1="76" x2="680" y2="132"/>
+              <line x1="750" y1="76" x2="750" y2="132"/>
             </g>
 
-            <!-- Sección crítica a distancia d (x = 215) -->
-            <line x1="215" y1="62" x2="215" y2="174" stroke="#0F172A" stroke-width="1.5" stroke-dasharray="4,2"/>
-            <path d="M 235 50 L 222 50 L 216 64" fill="none" stroke="#0F172A" stroke-width="1.4" marker-end="url(#arr-ptr)"/>
-            <text x="239" y="54" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700">Sección crítica (a distancia <tspan font-style="italic" font-family="Georgia, serif">d</tspan>)</text>
+            <!-- Sección crítica a distancia d (x = 205) -->
+            <line x1="205" y1="62" x2="205" y2="174" stroke="#0F172A" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <path d="M 225 50 L 212 50 L 206 64" fill="none" stroke="#0F172A" stroke-width="1.4" marker-end="url(#arr-ptr)"/>
+            <text x="229" y="54" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700">Sección crítica (a distancia <tspan font-style="italic" font-family="Georgia, serif">d</tspan>)</text>
 
             <!-- Cota de distancia d (y = 162) -->
-            <line x1="122" y1="162" x2="213" y2="162" stroke="#0F172A" stroke-width="1.3" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="167.5" y="156" fill="#0F172A" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="700" text-anchor="middle">d</text>
+            <line x1="122" y1="162" x2="203" y2="162" stroke="#0F172A" stroke-width="1.3" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="162.5" y="156" fill="#0F172A" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="700" text-anchor="middle">d</text>
 
             <!-- Guías verticales continuas de frontera entre Zona 3, Zona 2 y Zona 1 -->
-            <line x1="420" y1="140" x2="420" y2="495" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
-            <line x1="640" y1="140" x2="640" y2="455" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
-            <line x1="860" y1="140" x2="860" y2="528" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+            <line x1="400" y1="140" x2="400" y2="555" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+            <line x1="610" y1="140" x2="610" y2="555" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+            <line x1="820" y1="140" x2="820" y2="590" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
 
-            <!-- COTAS DE ZONA 3, ZONA 2 Y ZONA 1 ALINEADAS EXACTAMENTE A LA MISMA ALTURA (y = 190) -->
-            <!-- Zona 3 (x = 120 a 420) -->
-            <line x1="122" y1="190" x2="418" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="270" y="208" fill="#9A3412" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 3 (Diseño por Resistencia)</text>
+            <!-- COTAS SUPERIORES DE ZONA 3, ZONA 2 Y ZONA 1 ALINEADAS A LA MISMA ALTURA (y = 190) -->
+            <line x1="122" y1="190" x2="398" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="260" y="208" fill="#9A3412" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Zona 3 (Diseño por Resistencia)</text>
 
-            <!-- Zona 2 (x = 420 a 640) -->
-            <line x1="422" y1="190" x2="638" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="530" y="208" fill="#1E40AF" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 2 (Armadura Mínima)</text>
+            <line x1="402" y1="190" x2="608" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="505" y="208" fill="#1E40AF" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Zona 2 (Armadura Mínima)</text>
 
-            <!-- Zona 1 (x = 640 a 860) -->
-            <line x1="642" y1="190" x2="858" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="750" y="208" fill="#166534" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 1 (Sin Estribos por Cálculo)</text>
+            <line x1="612" y1="190" x2="818" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="715" y="208" fill="#166534" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">Zona 1 (Sin Estribos por Cálculo)</text>
 
             <!-- =========================================================================
                  2. DIAGRAMA DE FUERZA CORTANTE Vu(x) Y UMBRALES NORMATIVOS (PARTE CENTRAL)
-                 Geometría lineal exacta del triángulo Vu(x):
-                 x = 120 (apoyo)       -> y = 266
-                 x = 185 (límite Z4)   -> y = 282  (Umbral φVc + φVs,máx)
-                 x = 215 (sección d)   -> y = 289.4 (Cortante último de diseño V_ud)
-                 x = 420 (fin Zona 3)  -> y = 340  (Umbral φVc)
-                 x = 640 (fin Zona 2)  -> y = 394  (Umbral 0.5·φVc)
-                 x = 860 (centro luz)  -> y = 448  (Eje base Vu = 0)
+                 Ecuación exacta de la recta diagonal desde (x=120, y=266) hasta (x=820, y=448):
+                 Pendiente dy/dx = (448 - 266) / (820 - 120) = 182 / 700 = 0.26
+                 • x = 120 (cara apoyo) -> y = 266.0 (Vu,cara)
+                 • x = 181.5 (límite Z4)-> y = 282.0 (Umbral φVc + φVs,máx)
+                 • x = 205 (sección d)  -> y = 288.1 (Cortante último V_ud)
+                 • x = 400 (fin Zona 3) -> y = 338.8 (Umbral φVc)
+                 • x = 610 (fin Zona 2) -> y = 393.4 (Umbral 0.5·φVc)
+                 • x = 820 (centro luz) -> y = 448.0 (Eje base Vu = 0)
                  ========================================================================= -->
 
             <!-- Franjas horizontales de fondo para lectura limpia de cada Zona -->
-            <!-- Banda Zona 4 (y = 240 a 282) -->
-            <rect x="120" y="240" width="785" height="42" fill="#FEE2E2" opacity="0.82"/>
-            <!-- Banda Zona 3 (y = 282 a 340) -->
-            <rect x="120" y="282" width="785" height="58" fill="#FEF3C7" opacity="0.78"/>
-            <!-- Banda Zona 2 (y = 340 a 394) -->
-            <rect x="120" y="340" width="785" height="54" fill="#DBEAFE" opacity="0.72"/>
-            <!-- Banda Zona 1 (y = 394 a 448) -->
-            <rect x="120" y="394" width="785" height="54" fill="#DCFCE7" opacity="0.75"/>
+            <rect x="120" y="238" width="840" height="44" fill="#FEE2E2" opacity="0.82"/>
+            <rect x="120" y="282" width="840" height="56.8" fill="#FEF3C7" opacity="0.78"/>
+            <rect x="120" y="338.8" width="840" height="54.6" fill="#DBEAFE" opacity="0.72"/>
+            <rect x="120" y="393.4" width="840" height="54.6" fill="#DCFCE7" opacity="0.75"/>
 
             <!-- Polígonos rellenos bajo la recta Vu(x) por cada zona -->
-            <!-- Pico en Zona 4 (si Vu superara φVc + φVs,máx) -->
-            <polygon points="120,266 185,282 120,282" fill="#EF4444" opacity="0.88"/>
-            <!-- Región bajo la curva de Zona 3 (x = 120 a 420) -->
-            <polygon points="120,282 185,282 420,340 420,448 120,448" fill="#F59E0B" opacity="0.85"/>
-            <!-- Región bajo la curva de Zona 2 (x = 420 a 640) -->
-            <polygon points="420,340 640,394 640,448 420,448" fill="#3B82F6" opacity="0.82"/>
-            <!-- Región bajo la curva de Zona 1 (x = 640 a 860) -->
-            <polygon points="640,394 860,448 640,448" fill="#22C55E" opacity="0.82"/>
+            <!-- Pico en Zona 4 -->
+            <polygon points="120,266 181.5,282 120,282" fill="#EF4444" opacity="0.88"/>
+            <!-- Región bajo la curva de Zona 3 (x = 120 a 400) -->
+            <polygon points="120,282 181.5,282 400,338.8 400,448 120,448" fill="#F59E0B" opacity="0.85"/>
+            <!-- Región bajo la curva de Zona 2 (x = 400 a 610) -->
+            <polygon points="400,338.8 610,393.4 610,448 400,448" fill="#3B82F6" opacity="0.82"/>
+            <!-- Región bajo la curva de Zona 1 (x = 610 a 820) -->
+            <polygon points="610,393.4 820,448 610,448" fill="#22C55E" opacity="0.82"/>
 
             <!-- Líneas horizontales punteadas de los umbrales de resistencia -->
-            <line x1="120" y1="282" x2="905" y2="282" stroke="#991B1B" stroke-width="1.4" stroke-dasharray="6,4"/>
-            <line x1="120" y1="340" x2="905" y2="340" stroke="#92400E" stroke-width="1.5" stroke-dasharray="6,4"/>
-            <line x1="120" y1="394" x2="905" y2="394" stroke="#1E40AF" stroke-width="1.4" stroke-dasharray="6,4"/>
+            <line x1="120" y1="282" x2="960" y2="282" stroke="#991B1B" stroke-width="1.4" stroke-dasharray="6,4"/>
+            <line x1="120" y1="338.8" x2="960" y2="338.8" stroke="#92400E" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="120" y1="393.4" x2="960" y2="393.4" stroke="#1E40AF" stroke-width="1.4" stroke-dasharray="6,4"/>
 
             <!-- Fronteras verticales internas del diagrama Vu(x) -->
-            <line x1="420" y1="340" x2="420" y2="448" stroke="#0F172A" stroke-width="1.8"/>
-            <line x1="640" y1="394" x2="640" y2="448" stroke="#0F172A" stroke-width="1.8"/>
+            <line x1="400" y1="338.8" x2="400" y2="448" stroke="#0F172A" stroke-width="1.8"/>
+            <line x1="610" y1="393.4" x2="610" y2="448" stroke="#0F172A" stroke-width="1.8"/>
 
             <!-- Ejes principales y recta diagonal del diagrama de cortante Vu(x) -->
-            <line x1="120" y1="240" x2="120" y2="448" stroke="#0F172A" stroke-width="2.4"/>
-            <line x1="120" y1="448" x2="905" y2="448" stroke="#0F172A" stroke-width="2.4"/>
-            <line x1="120" y1="266" x2="860" y2="448" stroke="#0F172A" stroke-width="2.8"/>
+            <line x1="120" y1="238" x2="120" y2="448" stroke="#0F172A" stroke-width="2.4"/>
+            <line x1="120" y1="448" x2="960" y2="448" stroke="#0F172A" stroke-width="2.4"/>
+            <line x1="120" y1="266" x2="820" y2="448" stroke="#0F172A" stroke-width="2.8"/>
 
             <!-- Etiquetas de umbrales en el eje vertical izquierdo -->
-            <text x="112" y="286" fill="#991B1B" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="end">
-              ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">s,máx</tspan>
+            <text x="112" y="270" fill="#0F172A" font-family="Georgia, serif" font-size="11.5" font-weight="700" text-anchor="end">
+              V<tspan dy="2" font-size="8.5" font-family="Inter, sans-serif">u,cara</tspan>
             </text>
-            <text x="112" y="344" fill="#92400E" font-family="Georgia, serif" font-size="13" font-weight="700" text-anchor="end">
-              ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan>
+            <text x="112" y="287" fill="#991B1B" font-family="Georgia, serif" font-size="12" font-weight="700" text-anchor="end">
+              ϕV<tspan dy="3" font-size="9" font-family="Inter, sans-serif">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">s,máx</tspan>
             </text>
-            <text x="112" y="398" fill="#1E40AF" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="end">
-              0.5·ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan>
+            <text x="112" y="343" fill="#92400E" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="end">
+              ϕV<tspan dy="3" font-size="9" font-family="Inter, sans-serif">c</tspan>
+            </text>
+            <text x="112" y="397" fill="#1E40AF" font-family="Georgia, serif" font-size="12" font-weight="700" text-anchor="end">
+              0.5·ϕV<tspan dy="3" font-size="9" font-family="Inter, sans-serif">c</tspan>
             </text>
             <text x="112" y="452" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" text-anchor="end">0</text>
 
-            <!-- Etiquetas descriptivas dentro de cada una de las 4 franjas -->
-            <!-- Texto Zona 4 -->
-            <text x="515" y="266" fill="#7F1D1D" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
-              ZONA 4: V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> &gt; ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9">s,máx</tspan><tspan dy="-3"> — Sección Insuficiente (Aumentar b</tspan><tspan dy="3" font-size="9">w</tspan><tspan dy="-3"> × h o f'</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            <!-- Etiquetas descriptivas de cada franja ubicadas 100% a la derecha de la línea diagonal (SIN SOLAPAMIENTO) -->
+            <!-- Texto Zona 4 (la diagonal corta y=282 en x=181.5, texto desde x=210) -->
+            <text x="210" y="265" fill="#7F1D1D" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" text-anchor="start">
+              ZONA 4: V<tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> &gt; ϕV</tspan><tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2"> + ϕV</tspan><tspan dy="2" font-size="8.5">s,máx</tspan><tspan dy="-2"> — Sección Insuficiente (Aumentar b</tspan><tspan dy="2" font-size="8.5">w</tspan><tspan dy="-2"> × h o f'</tspan><tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2">)</tspan>
             </text>
 
-            <!-- Texto Zona 3 -->
-            <text x="615" y="315" fill="#78350F" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
-              ZONA 3: ϕV<tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> &lt; V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9">s,máx</tspan><tspan dy="-3"> — Diseño por Resistencia: s = ϕ·A</tspan><tspan dy="3" font-size="9">v</tspan><tspan dy="-3">·f</tspan><tspan dy="3" font-size="9">yt</tspan><tspan dy="-3">·d / (V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> − ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            <!-- Texto Zona 3 (la diagonal corta y=338.8 en x=400, texto desde x=335 en y=314 donde diagonal está en x=304) -->
+            <text x="335" y="314" fill="#78350F" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" text-anchor="start">
+              ZONA 3: ϕV<tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2"> &lt; V</tspan><tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> ≤ ϕV</tspan><tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2"> + ϕV</tspan><tspan dy="2" font-size="8.5">s,máx</tspan><tspan dy="-2"> — Diseño por Resistencia: s = ϕ·A</tspan><tspan dy="2" font-size="8.5">v</tspan><tspan dy="-2">·f</tspan><tspan dy="2" font-size="8.5">yt</tspan><tspan dy="-2">·d / (V</tspan><tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> − ϕV</tspan><tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2">)</tspan>
             </text>
 
-            <!-- Texto Zona 2 -->
-            <text x="675" y="371" fill="#1E3A8A" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
-              ZONA 2: 0.5·ϕV<tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> &lt; V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> — Armadura Mínima Obligatoria (A</tspan><tspan dy="3" font-size="9">v,mín</tspan><tspan dy="-3"> con s = s</tspan><tspan dy="3" font-size="9">máx</tspan><tspan dy="-3">)</tspan>
+            <!-- Texto Zona 2 (en y=366 la diagonal está en x=505; colocamos pastilla limpia desde x=535 hasta x=952, completamente fuera de la gráfica) -->
+            <rect x="532" y="349" width="420" height="28" rx="5" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+            <text x="742" y="367" fill="#1E3A8A" font-family="Inter, sans-serif" font-size="11" font-weight="800" text-anchor="middle">
+              ZONA 2: 0.5·ϕV<tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2"> &lt; V</tspan><tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> ≤ ϕV</tspan><tspan dy="2" font-size="8.5">c</tspan><tspan dy="-2"> — Armadura Mínima Obligatoria (A</tspan><tspan dy="2" font-size="8.5">v,mín</tspan><tspan dy="-2"> @ s</tspan><tspan dy="2" font-size="8.5">máx</tspan><tspan dy="-2">)</tspan>
             </text>
 
-            <!-- Texto Zona 1 -->
-            <text x="780" y="425" fill="#14532D" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
-              ZONA 1: V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ 0.5·ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> — No Requiere Estribos por Cálculo</tspan>
+            <!-- Texto Zona 1 (en y=418 la diagonal está en x=704; colocamos pastilla limpia desde x=730 hasta x=952, con flecha al área verde) -->
+            <rect x="726" y="401" width="226" height="36" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+            <text x="839" y="416" fill="#14532D" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">
+              ZONA 1: V<tspan dy="2" font-size="8">u</tspan><tspan dy="-2"> ≤ 0.5·ϕV</tspan><tspan dy="2" font-size="8">c</tspan>
+            </text>
+            <text x="839" y="430" fill="#166534" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" text-anchor="middle">
+              No Requiere Estribos por Cálculo
             </text>
 
-            <!-- Etiquetas dentro de los polígonos coloreados -->
-            <text x="265" y="405" fill="#78350F" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">ZONA 3</text>
-            <text x="530" y="422" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="13" font-weight="800" text-anchor="middle">ZONA 2</text>
+            <!-- Etiquetas claras dentro de los polígonos coloreados -->
+            <text x="260" y="405" fill="#78350F" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">ZONA 3</text>
+            <text x="505" y="422" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="13" font-weight="800" text-anchor="middle">ZONA 2</text>
+            <text x="672" y="438" fill="#14532D" font-family="Inter, sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">ZONA 1</text>
 
             <!-- =========================================================================
-                 3. COTAS HORIZONTALES INFERIORES: S (HASTA FIN DE ZONA 3) Y L_total
+                 3. CÁLCULO DE LAS LONGITUDES DE ZONA 3 (S), ZONA 2 (L2) Y ZONA 1 (L1)
                  ========================================================================= -->
             <!-- Líneas de extensión inferiores -->
-            <line x1="120" y1="448" x2="120" y2="528" stroke="#0F172A" stroke-width="1.4"/>
-            <line x1="420" y1="448" x2="420" y2="495" stroke="#0F172A" stroke-width="1.4"/>
+            <line x1="120" y1="448" x2="120" y2="590" stroke="#0F172A" stroke-width="1.4"/>
+            <line x1="400" y1="448" x2="400" y2="555" stroke="#0F172A" stroke-width="1.4"/>
+            <line x1="610" y1="448" x2="610" y2="555" stroke="#0F172A" stroke-width="1.4"/>
+            <line x1="820" y1="448" x2="820" y2="590" stroke="#0F172A" stroke-width="1.4"/>
 
-            <!-- Etiquetas de abscisas x = 0 y x = Ln/2 -->
-            <text x="112" y="470" fill="#0F172A" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="end">Cara del apoyo</text>
-            <text x="112" y="485" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="end">x = 0</text>
+            <!-- Etiquetas de abscisas x = 0 y x = Ln/2 (sin recorte a la derecha) -->
+            <text x="112" y="468" fill="#0F172A" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="end">Cara del apoyo</text>
+            <text x="112" y="482" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="end">x = 0</text>
 
-            <text x="868" y="470" fill="#0F172A" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="start">Centro de la luz</text>
-            <text x="868" y="485" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="start">x = L<tspan dy="2" font-size="8.5">n</tspan><tspan dy="-2">/2 (V</tspan><tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> = 0)</tspan></text>
+            <text x="828" y="468" fill="#0F172A" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" text-anchor="start">Centro de la luz</text>
+            <text x="828" y="482" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="start">x = L<tspan dy="2" font-size="8">n</tspan><tspan dy="-2">/2 (V</tspan><tspan dy="2" font-size="8">u</tspan><tspan dy="-2"> = 0)</tspan></text>
 
-            <!-- Cota S: Exactamente desde x = 120 hasta x = 420 (fin de la Zona 3 amarilla/naranja donde Vu = φVc) -->
-            <line x1="122" y1="485" x2="418" y2="485" stroke="#0F172A" stroke-width="1.6" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <text x="270" y="477" fill="#0F172A" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
-              <tspan font-style="italic" font-family="Georgia, serif">S</tspan> (Longitud de Zona 3 donde V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> &gt; ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            <!-- FILA 1 DE COTAS INFERIORES (y = 500): LONGITUDES DE CADA ZONA A LA MISMA ALTURA -->
+            <!-- Cota Longitud Zona 3: S = L3 (x = 120 a 400) -->
+            <line x1="122" y1="500" x2="398" y2="500" stroke="#B45309" stroke-width="1.7" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <rect x="132" y="508" width="256" height="40" rx="5" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+            <text x="260" y="523" fill="#92400E" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">
+              Longitud Zona 3: <tspan font-style="italic" font-family="Georgia, serif">S = L</tspan><tspan dy="2" font-size="8">3</tspan>
+            </text>
+            <text x="260" y="540" fill="#78350F" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">
+              S = (V<tspan dy="2" font-size="8">u,cara</tspan><tspan dy="-2"> − ϕV</tspan><tspan dy="2" font-size="8">c</tspan><tspan dy="-2">) / w</tspan><tspan dy="2" font-size="8">u</tspan>
             </text>
 
-            <!-- Cota L_total = Ln/2: Desde x = 120 hasta x = 860 -->
-            <line x1="122" y1="520" x2="858" y2="520" stroke="#0F172A" stroke-width="1.6" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
-            <rect x="425" y="507" width="130" height="24" fill="#FFFFFF"/>
-            <text x="490" y="524" fill="#0F172A" font-family="Georgia, serif" font-size="13" font-weight="700" text-anchor="middle">
-              L<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">total</tspan><tspan dy="-3"> = L</tspan><tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">n</tspan><tspan dy="-3"> / 2</tspan>
+            <!-- Cota Longitud Zona 2: L2 (x = 400 a 610) -->
+            <line x1="402" y1="500" x2="608" y2="500" stroke="#1D4ED8" stroke-width="1.7" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <rect x="410" y="508" width="190" height="40" rx="5" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.2"/>
+            <text x="505" y="523" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">
+              Longitud Zona 2: <tspan font-style="italic" font-family="Georgia, serif">L</tspan><tspan dy="2" font-size="8">2</tspan>
+            </text>
+            <text x="505" y="540" fill="#1E3A8A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">
+              L<tspan dy="2" font-size="8">2</tspan><tspan dy="-2"> = (0.5·ϕV</tspan><tspan dy="2" font-size="8">c</tspan><tspan dy="-2">) / w</tspan><tspan dy="2" font-size="8">u</tspan>
+            </text>
+
+            <!-- Cota Longitud Zona 1: L1 (x = 610 a 820) -->
+            <line x1="612" y1="500" x2="818" y2="500" stroke="#15803D" stroke-width="1.7" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <rect x="620" y="508" width="190" height="40" rx="5" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2"/>
+            <text x="715" y="523" fill="#166534" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">
+              Longitud Zona 1: <tspan font-style="italic" font-family="Georgia, serif">L</tspan><tspan dy="2" font-size="8">1</tspan>
+            </text>
+            <text x="715" y="540" fill="#14532D" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">
+              L<tspan dy="2" font-size="8">1</tspan><tspan dy="-2"> = (0.5·ϕV</tspan><tspan dy="2" font-size="8">c</tspan><tspan dy="-2">) / w</tspan><tspan dy="2" font-size="8">u</tspan>
+            </text>
+
+            <!-- FILA 2 DE COTA INFERIOR GLOBAL (y = 578): L_total = S + L2 + L1 = Ln / 2 -->
+            <line x1="122" y1="578" x2="818" y2="578" stroke="#0F172A" stroke-width="1.6" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <rect x="330" y="564" width="280" height="24" fill="#FFFFFF"/>
+            <text x="470" y="582" fill="#0F172A" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="middle">
+              L<tspan dy="3" font-size="9" font-family="Inter, sans-serif">total</tspan><tspan dy="-3"> = S + L</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">2</tspan><tspan dy="-3"> + L</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">1</tspan><tspan dy="-3"> = L</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">n</tspan><tspan dy="-3"> / 2 = V</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">u,cara</tspan><tspan dy="-3"> / w</tspan><tspan dy="3" font-size="9" font-family="Inter, sans-serif">u</tspan>
             </text>
           </svg>
           <figcaption class="diagram-caption">
-            <strong>Figura 4.1:</strong> Zonificación normativa del diagrama de fuerza cortante $V_u(x)$ entre la cara del apoyo ($x = 0$) y el centro de la luz ($x = L_n/2$): <strong>Zona 3</strong> ($V_u > \phi V_c$, longitud $S$ de diseño por resistencia), <strong>Zona 2</strong> ($0.5\phi V_c < V_u \le \phi V_c$, armadura mínima obligatoria $A_{v,\min}$ con $s = s_{\max}$), <strong>Zona 1</strong> ($V_u \le 0.5\phi V_c$) y umbral superior de <strong>Zona 4</strong> ($V_u > \phi V_c + \phi V_{s,\max}$).
+            <strong>Figura 4.3:</strong> Zonificación normativa del diagrama de fuerza cortante $V_u(x)$ y deducción geométrica de las longitudes de cada tramo para carga uniforme $w_u$: <strong>Zona 3</strong> ($S = L_3 = \frac{V_{u,\text{cara}} - \phi V_c}{w_u}$), <strong>Zona 2</strong> ($L_2 = \frac{0.5\phi V_c}{w_u}$) y <strong>Zona 1</strong> ($L_1 = \frac{0.5\phi V_c}{w_u}$), cumpliendo $S + L_2 + L_1 = \frac{L_n}{2}$.
           </figcaption>
         </figure>
 
         <div class="math-card normative-emerald" style="margin-top: 1.25rem;">
           <div class="math-card-header">
-            <span class="math-card-title">Deducción por Triángulos Semejantes de la Longitud de Zonificación ($S$) para Carga Uniforme</span>
-            <span class="norm-pill">Geometría del Diagrama de Cortante</span>
+            <span class="math-card-title">Cálculo de las Longitudes de las Zonas 3 ($S$), 2 ($L_2$) y 1 ($L_1$) por Triángulos Semejantes</span>
+            <span class="norm-pill">Geometría del Diagrama $V_u(x) = V_{u,\text{cara}} - w_u x$</span>
           </div>
           <div class="math-formula">
-            $$\frac{L_{\text{total}}}{V_{u,\text{cara}}} = \frac{S}{V_{u,\text{cara}} - \phi V_c} \implies \mathbf{S = L_{\text{total}}\left(\frac{V_{u,\text{cara}} - \phi V_c}{V_{u,\text{cara}}}\right) = \frac{V_{u,\text{cara}} - \phi V_c}{w_u}}$$
+            $$\begin{aligned}
+            \bullet\;\textbf{Longitud de Zona 3 (Diseño por Resistencia, } V_u > \phi V_c\textbf{):} \quad &\frac{S}{V_{u,\text{cara}} - \phi V_c} = \frac{L_{\text{total}}}{V_{u,\text{cara}}} \implies \mathbf{S = L_3 = L_{\text{total}}\left(\frac{V_{u,\text{cara}} - \phi V_c}{V_{u,\text{cara}}}\right) = \frac{V_{u,\text{cara}} - \phi V_c}{w_u}} \\[6pt]
+            \bullet\;\textbf{Abscisa hasta el fin de Zona 2 (donde } V_u(x) = 0.5\,\phi V_c\textbf{):} \quad &\mathbf{x_{0.5\phi V_c} = L_{\text{total}}\left(\frac{V_{u,\text{cara}} - 0.5\,\phi V_c}{V_{u,\text{cara}}}\right) = \frac{V_{u,\text{cara}} - 0.5\,\phi V_c}{w_u}} \\[6pt]
+            \bullet\;\textbf{Longitud de Zona 2 (Armadura Mínima, } 0.5\,\phi V_c < V_u \le \phi V_c\textbf{):} \quad &\mathbf{L_2 = x_{0.5\phi V_c} - S = L_{\text{total}}\left(\frac{0.5\,\phi V_c}{V_{u,\text{cara}}}\right) = \frac{0.5\,\phi V_c}{w_u}} \\[6pt]
+            \bullet\;\textbf{Longitud de Zona 1 (Cortante Bajo, } V_u \le 0.5\,\phi V_c\textbf{):} \quad &\mathbf{L_1 = L_{\text{total}} - x_{0.5\phi V_c} = L_{\text{total}}\left(\frac{0.5\,\phi V_c}{V_{u,\text{cara}}}\right) = \frac{0.5\,\phi V_c}{w_u}} \qquad \left(\text{Verificación: } S + L_2 + L_1 = L_{\text{total}} = \frac{L_n}{2}\right)
+            \end{aligned}$$
           </div>
         </div>
 
@@ -1314,11 +1367,11 @@
           <div class="section-header" style="margin-bottom: 1rem;">
             <div class="section-tag-row">
               <span class="section-num-badge">4.1</span>
-              <span class="norm-pill">Metodología Paso a Paso NSR-10 C.11 y C.21</span>
+              <span class="norm-pill">Metodología Paso a Paso NSR-10 C.11</span>
             </div>
             <h3 class="section-title" style="font-size: 1.28rem;">4.1 Algoritmos Didácticos de Decisión y Rutas Metodológicas de Cálculo</h3>
             <p class="section-lead" style="font-size: 0.92rem;">
-              En la práctica profesional existen dos problemas fundamentales frente a fuerza cortante: <strong>Ruta A (Diseño y Zonificación de Estribos)</strong> cuando se conoce el diagrama $V_u(x)$ y se requiere determinar el calibre, número de ramas y espaciamientos por zonas; y <strong>Ruta B (Revisión de Capacidad a Cortante)</strong> cuando la viga y su despiece de estribos ya existen y se desea verificar su resistencia $\phi V_n \ge V_u$.
+              En la práctica profesional existen dos problemas fundamentales frente a fuerza cortante: <strong>Ruta A (Diseño y Zonificación de Estribos)</strong> cuando se conoce el diagrama $V_u(x)$ y se requiere determinar el calibre, número de ramas, espaciamientos y longitudes de las 3 zonas ($S, L_2, L_1$); y <strong>Ruta B (Revisión de Capacidad a Cortante)</strong> cuando la viga y su despiece de estribos ya existen y se desea verificar su resistencia de diseño $\phi V_n \ge V_u$.
             </p>
           </div>
 
@@ -1329,25 +1382,25 @@
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 1px solid #E2E8F0;">
                   <span style="font-size: 1.02rem; font-weight: 800; color: #1E40AF;">🛠️ RUTA A: Algoritmo de Diseño y Zonificación ($V_u(x)$ Conocido)</span>
-                  <span style="background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; font-size: 0.72rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 999px;">Hallar $A_v, s$ y Zonas</span>
+                  <span style="background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; font-size: 0.72rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 999px;">Hallar $A_v, s, S, L_2, L_1$</span>
                 </div>
                 <p style="font-size: 0.83rem; color: #475569; margin: 0 0 0.85rem 0;">
-                  <strong>Datos de entrada:</strong> Geometría ($b_w, h, d, L_n$), materiales ($f'_c, f_{yt}, \lambda$), diagrama envolvente $V_u(x)$ (o cortante por capacidad $V_e$) y factor $\phi = 0.75$.
+                  <strong>Datos de entrada:</strong> Geometría ($b_w, h, d, L_n$), materiales ($f'_c, f_{yt}, \lambda$), carga mayorada $w_u$ (o diagrama $V_u(x)$) y factor de reducción $\phi = 0.75$.
                 </p>
 
                 <!-- Paso 1 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #2563EB; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
-                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 1: Cortante en Sección Crítica ($V_{u,d}$) y Aporte del Concreto ($\phi V_c$)</div>
+                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 1: Sección Crítica ($V_{u,d}$ vs. $V_u(0)$) y Resistencia del Concreto ($\phi V_c$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Si el apoyo comprime la viga y no hay cargas concentradas a menos de $d$, evalúe $V_{u,d} = V_{u,\text{cara}} - w_u d$. Calcule $\phi V_c = \phi(0.17\lambda\sqrt{f'_c}b_w d)$ (o $\phi V_c = 0$ si rige <code>C.21.5.4.2</code> en pórticos DES).
+                    Verifique las 3 condiciones de <code>NSR-10 C.11.1.3.1</code>: si se cumplen, evalúe $V_{u,d} = V_{u,\text{cara}} - w_u d$; de lo contrario diseñe con $V_u(0) = V_{u,\text{cara}}$. Calcule $\phi V_c = \phi\left(0.17\lambda\sqrt{f'_c}\,b_w d\right)$ con $\phi = 0.75$ (aplicando factor axial si existe $N_u$).
                   </div>
                 </div>
 
                 <!-- Paso 2 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #2563EB; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
-                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 2: Demanda en Estribos ($V_s$) y Chequeo de Aplastamiento del Alma</div>
+                  <div style="font-size: 0.83rem; font-weight: 800; color: #0F172A;">Paso 2: Demanda en Estribos ($V_s$) y Chequeo de Sección Suficiente (Zona 4)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Si $V_{u,d} > \phi V_c$, calcule $V_s = (V_{u,d} - \phi V_c)/\phi$. Verifique que $V_s \le V_{s,\max} = 0.66\sqrt{f'_c}b_w d$. Si $V_s > V_{s,\max}$ (<strong>Zona 4</strong>), ¡la sección es insuficiente! Debe aumentar $b_w$, $d$ o $f'_c$.
+                    Si $V_u > \phi V_c$ (<strong>Zona 3</strong>), calcule $\phi V_s = V_u - \phi V_c \implies V_s = (V_u - \phi V_c)/\phi$. Verifique que $V_s \le V_{s,\max} = 0.66\sqrt{f'_c}\,b_w d$. Si $V_s > V_{s,\max}$ (<strong>Zona 4</strong>), ¡la sección es insuficiente por aplastamiento del alma! Debe aumentar $b_w$, $d$ o $f'_c$.
                   </div>
                 </div>
 
@@ -1355,8 +1408,8 @@
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #2563EB; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
                   <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 3: Elección de Ramas ($A_v$) y Separación por Resistencia ($s_{\text{req}}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Elija el calibre ($\#3$ o $\#4$) y el número de ramas verticales $n_r$ ($A_v = n_r A_b$). Calcule la separación teórica por resistencia:
-                    $$s_{\text{req}} = \frac{A_v \, f_{yt} \, d}{V_s} = \frac{\phi \, A_v \, f_{yt} \, d}{V_{u,d} - \phi V_c}$$
+                    Elija el calibre del estribo ($\#2, \#3$ o $\#4$) y el número de ramas verticales $n_r$ ($A_v = n_r A_b$). Calcule la separación teórica por resistencia en Zona 3:
+                    $$s_{\text{req}} = \frac{A_v \, f_{yt} \, d}{V_s} = \frac{\phi \, A_v \, f_{yt} \, d}{V_u - \phi V_c}$$
                   </div>
                 </div>
 
@@ -1364,15 +1417,15 @@
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #2563EB; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
                   <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 4: Límites Normativos de Espaciamiento ($s_{\max,\text{geom}}$ y $s_{\max,A_{v,\min}}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Si $V_s \le 0.33\sqrt{f'_c}b_w d \implies s_{\max,\text{geom}} = \min(d/2, 600\text{ mm})$; si $V_s > 0.33\sqrt{f'_c}b_w d \implies s_{\max,\text{geom}} = \min(d/4, 300\text{ mm})$. En zona de confinamiento sísmico $2h$, aplique $s_{\text{conf}} \le \min(d/4, 8d_{b,\text{long}}, 24d_{b,\text{est}}, 300\text{ mm})$.
+                    Por cuantía mínima (<code>C.11.4.6.3</code>): $s_{\max,A_{v,\min}} = \min\!\left(\frac{A_v f_{yt}}{0.062\sqrt{f'_c}b_w},\; \frac{A_v f_{yt}}{0.35 b_w}\right)$. Por geometría (<code>C.11.4.5</code>): si $V_s \le 0.33\sqrt{f'_c}b_w d \implies s_{\max,\text{geom}} = \min(d/2, 600\text{ mm})$; si $V_s > 0.33\sqrt{f'_c}b_w d \implies s_{\max,\text{geom}} = \min(d/4, 300\text{ mm})$. Así, $s_{\max} = \min(s_{\max,\text{geom}}, s_{\max,A_{v,\min}})$.
                   </div>
                 </div>
 
                 <!-- Paso 5 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #2563EB; border-radius: 6px; padding: 0.65rem 0.85rem;">
-                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 5: Zonificación Longitudinal ($S$) y Despiece de Obra</div>
+                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 5: Cálculo de Longitudes de Zonas ($S, L_2, L_1$) y Despiece de Obra</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Adopte $s \le \min(s_{\text{req}}, s_{\max})$ redondeado a múltiplos prácticos ($0.5$ o $1.0\text{ cm}$ hacia abajo). Ubique el $1^{\text{er}}$ estribo a $5\text{ cm}$ de la cara del apoyo, cubra la longitud $S = (V_{u,\text{cara}} - \phi V_c)/w_u$ y disponga $s_{\max}$ en el tramo central.
+                    Calcule las longitudes desde la cara del apoyo: <strong>Zona 3</strong> $S = L_3 = \frac{V_{u,\text{cara}} - \phi V_c}{w_u}$ (con $s_3 \le \min(s_{\text{req}}, s_{\max})$); <strong>Zona 2</strong> $L_2 = \frac{0.5\phi V_c}{w_u}$ (con $s_2 \le s_{\max}$); y <strong>Zona 1</strong> $L_1 = \frac{0.5\phi V_c}{w_u}$, verificando $S + L_2 + L_1 = L_n/2$. Ubique el $1^{\text{er}}$ estribo a $5\text{ cm}$ de la cara del apoyo.
                   </div>
                 </div>
               </div>
@@ -1386,22 +1439,22 @@
                   <span style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 0.72rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 999px;">Hallar $\phi V_n$ y $\text{D/C}$</span>
                 </div>
                 <p style="font-size: 0.83rem; color: #475569; margin: 0 0 0.85rem 0;">
-                  <strong>Datos de entrada:</strong> Dimensiones de la sección ($b_w, h, d$), materiales ($f'_c, f_{yt}$), calibre y número de ramas existentes ($A_v$) y separación medida en planos u obra ($s$).
+                  <strong>Datos de entrada:</strong> Dimensiones de la sección ($b_w, h, d$), materiales ($f'_c, f_{yt}, \lambda$), calibre y número de ramas existentes ($A_v = n_r A_b$) y separación existente en planos u obra ($s_{\text{col}}$).
                 </p>
 
                 <!-- Paso 1 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #059669; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
                   <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 1: Inventario del Acero Transversal ($A_v$) y Cuantía Mínima ($A_{v,\min}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Contabilice todas las ramas verticales efectivas que cosen el alma: $A_v = n_{\text{ramas}} A_{b,\text{estribo}}$. Verifique que para la separación $s$ existente se cumpla $A_v \ge A_{v,\min} = \max(0.062\sqrt{f'_c}, 0.35) b_w s / f_{yt}$.
+                    Contabilice todas las ramas verticales efectivas que cosen el alma: $A_v = n_{\text{ramas}} A_{b,\text{estribo}}$. Si $V_u > 0.5\,\phi V_c$, verifique que para la separación existente $s_{\text{col}}$ se cumpla $A_v \ge A_{v,\min} = \max\!\left(0.062\sqrt{f'_c},\; 0.35\right)\frac{b_w \, s_{\text{col}}}{f_{yt}}$.
                   </div>
                 </div>
 
                 <!-- Paso 2 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #059669; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
-                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 2: Evaluación de la Contribución del Concreto ($V_c$)</div>
+                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 2: Evaluación de la Contribución del Concreto ($V_c$ y $\phi V_c$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Calcule $V_c = 0.17\lambda\sqrt{f'_c}b_w d$ (modificando por $(1 + N_u/14A_g)$ si actúa compresión axial o tomando $V_c = 0$ si existe tracción axial significativa o rige articulación plástica sísmica DES).
+                    Calcule $V_c = 0.17\lambda\sqrt{f'_c}\,b_w d$ (modificando por $\left(1 + \frac{N_u}{14 A_g}\right)$ si actúa compresión axial o por $\left(1 + \frac{0.29 N_u}{A_g}\right) \ge 0$ si existe tracción axial) y obtenga $\phi V_c = 0.75\,V_c$.
                   </div>
                 </div>
 
@@ -1409,16 +1462,16 @@
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #059669; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
                   <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 3: Contribución de los Estribos ($V_s$) y Tope de Aplastamiento ($V_{s,\max}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Evalúe el aporte mecánico de la cercha a $45^\circ$ limitado por el aplastamiento diagonal del alma:
-                    $$V_s = \min\left(\frac{A_v \, f_{yt} \, d}{s},\;\; 0.66\sqrt{f'_c}\,b_w d\right)$$
+                    Evalúe el aporte mecánico de la cercha a $45^\circ$ con el espaciamiento existente $s_{\text{col}}$, limitado por el aplastamiento diagonal del alma:
+                    $$V_s = \min\left(\frac{A_v \, f_{yt} \, d}{s_{\text{col}}},\;\; 0.66\sqrt{f'_c}\,b_w d\right)$$
                   </div>
                 </div>
 
                 <!-- Paso 4 -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #059669; border-radius: 6px; padding: 0.65rem 0.85rem; margin-bottom: 0.65rem;">
-                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 4: Auditoría de Espaciamiento Máximo ($s \le s_{\max}$) y Detallamiento</div>
+                  <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 4: Auditoría de Espaciamiento Máximo ($s_{\text{col}} \le s_{\max}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Compruebe que el espaciamiento existente $s$ no supere $d/2$ (o $d/4$ si $V_s > 0.33\sqrt{f'_c}b_w d$), de modo que toda grieta diagonal a $45^\circ$ sea interceptada al menos por un estribo. Verifique ganchos sísmicos a $135^\circ$.
+                    Compruebe que el espaciamiento existente $s_{\text{col}}$ no supere $s_{\max,\text{geom}} = \min(d/2, 600\text{ mm})$ (o $\min(d/4, 300\text{ mm})$ si $V_s > 0.33\sqrt{f'_c}b_w d$), garantizando que toda fisura diagonal a $45^\circ$ sea cosida al menos por un estribo.
                   </div>
                 </div>
 
@@ -1426,8 +1479,8 @@
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 3.5px solid #059669; border-radius: 6px; padding: 0.65rem 0.85rem;">
                   <div style="font-size: 0.83rem; font-weight: 700; color: #0F172A;">Paso 5: Resistencia de Diseño ($\phi V_n$) e Índice Demanda / Capacidad ($\text{D/C}$)</div>
                   <div style="font-size: 0.81rem; color: #334155; margin-top: 0.2rem;">
-                    Calcule $\phi V_n = 0.75 (V_c + V_s)$ y dictamine la seguridad estructural:
-                    $$\text{Índice D/C} = \frac{V_u}{\phi V_n} \le 1.00 \implies \text{Sección Cumple Normativa}$$
+                    Calcule $\phi V_n = 0.75 (V_c + V_s)$ y dictamine la seguridad estructural frente a la demanda $V_u$ en la sección crítica:
+                    $$\text{Índice D/C} = \frac{V_u}{\phi V_n} \le 1.00 \quad (\text{y } s_{\text{col}} \le s_{\max}) \implies \text{Sección Cumple Normativa}$$
                   </div>
                 </div>
               </div>
@@ -1438,11 +1491,11 @@
       </section>
 
       <!-- ===================================================================
-           SECCIÓN 5.0: DETALLES CONSTRUCTIVOS, CORTANTE SÍSMICO Ve Y CFRP
+           SECCIÓN 5.0: DETALLES CONSTRUCTIVOS, GANCHOS Y REHABILITACIÓN CFRP
            =================================================================== -->
       <div class="chapter-divider">
-        <span class="chapter-divider-num">DISEÑO SÍSMICO Y DETALLAMIENTO 05</span>
-        <span class="chapter-divider-title">Ganchos Sísmicos de 135°, Cortante por Capacidad ($V_e$) y Rehabilitación con CFRP</span>
+        <span class="chapter-divider-num">DETALLAMIENTO Y REHABILITACIÓN 05</span>
+        <span class="chapter-divider-title">Ganchos Estándar y de 135°, Diámetros de Mandril y Rehabilitación con CFRP</span>
         <span class="chapter-divider-line"></span>
       </div>
 
@@ -1451,9 +1504,9 @@
           <div class="section-tag-row">
             <span class="section-num-badge">5.0</span>
           </div>
-          <h2 class="section-title">5. Ganchos a 135°, Cortante Sísmico por Capacidad ($V_e$) y Rehabilitación con CFRP</h2>
+          <h2 class="section-title">5. Ganchos de Estribos (90° y 135°), Diámetros de Mandril y Rehabilitación con CFRP</h2>
           <p class="section-lead">
-            En pórticos sismorresistentes con capacidad Moderada (<strong>DMO</strong>, <code>NSR-10 C.21.3.4</code>) o Especial (<strong>DES</strong>, <code>NSR-10 C.21.5.4</code>) de disipación de energía, los estribos deben diseñarse por <strong>capacidad</strong> para resistir el cortante $V_e$ asociado a la formación simultánea de rótulas plásticas de flexión en ambos extremos de la viga.
+            Para que los estribos puedan desarrollar su esfuerzo de fluencia $f_{yt}$ cuando la fisura diagonal alcanza el borde comprimido de la viga, deben anclarse eficazmente alrededor de las barras longitudinales de esquina cumpliendo los diámetros mínimos de doblado y extensiones de gancho de <code>NSR-10 C.7.1</code> y <code>C.7.2</code>.
           </p>
         </div>
 
@@ -1482,25 +1535,6 @@
               <li><strong>Envoltura completa (360°):</strong> Máxima eficiencia en vigas aisladas.</li>
               <li><strong>Camisa en U (3 caras) con anclajes mecánicos:</strong> Solución estándar cuando existe losa monolítica superior, dispuesta en franjas verticales o inclinadas a $45^\circ$ perpendiculares a la fisura.</li>
             </ul>
-          </div>
-        </div>
-
-        <div class="math-card normative-amber" style="margin-top: 1.25rem;">
-          <div class="math-card-header">
-            <span class="math-card-title">Cortante Sísmico por Capacidad ($V_e$), Criterio de $V_c = 0$ en DES y Zona de Confinamiento $2h$</span>
-            <span class="norm-pill">NSR-10 C.21.3.4 (DMO) y C.21.5.4 (DES)</span>
-          </div>
-          <div class="math-formula">
-            $$V_e = \underbrace{\frac{M_{pr1} + M_{pr2}}{l_n}}_{V_{\text{sway}}\text{ (Cortante hiperestático sísmico)}} \pm \underbrace{\frac{w_g \, l_n}{2}}_{V_g\text{ (Gravitacional aferente, } 1.2D + 1.0L\text{)}}$$
-          </div>
-          <div class="math-formula">
-            $$\begin{cases} \textbf{Pórticos DES (C.21.5.4.1):} & M_{pr} \text{ se calcula con } \mathbf{\phi = 1.0} \text{ y esfuerzo en el acero } \mathbf{1.25\,f_y} \\ \textbf{Pórticos DMO (C.21.3.4.1):} & \text{Se usa el momento nominal } M_n \text{ con } \mathbf{\phi = 1.0} \text{ y esfuerzo } \mathbf{1.00\,f_y} \end{cases}$$
-          </div>
-          <div class="math-formula">
-            $$\textbf{Espaciamiento en Zona de Confinamiento } 2h\textbf{:} \qquad s_{\text{conf}} \le \min\left(\frac{d}{4},\;\; 8\,d_{b,\text{long mín}},\;\; 24\,d_{b,\text{estribo}},\;\; 300\text{ mm}\right)$$
-          </div>
-          <div class="math-vars">
-            <div><strong>Regla obligatoria de $V_c = 0$ en vigas DES (<code>NSR-10 C.21.5.4.2</code>):</strong> En la zona de plastificación de vigas DES debe asumirse $\mathbf{V_c = 0}$ cuando simultáneamente: (1) el cortante sísmico inducido por los momentos probables representa la mitad o más de la demanda ($V_{\text{sway}} \ge 0.5\,V_e$), y (2) la fuerza axial de compresión mayorada es baja ($N_u < \frac{A_g f'_c}{20}$).</div>
           </div>
         </div>
       </section>
@@ -1542,6 +1576,33 @@
 
           <div class="sim-grid">
             <div class="sim-controls">
+              <!-- SELECTOR DE MODO: DISEÑO vs REVISIÓN -->
+              <div class="control-group" style="background: var(--bg-accent-soft); padding: 0.75rem; border-radius: 8px; border: 1.5px solid var(--primary-border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+                  <span style="font-weight: 800; font-size: 0.85rem; color: var(--text-main);">
+                    ⚙️ Modo de Cálculo
+                  </span>
+                  <span id="sim41-mode-badge" class="norm-pill" style="font-size: 0.72rem; font-weight: 700; background: #2563EB; color: #FFFFFF;">📐 Modo Diseño</span>
+                </div>
+                <div class="sim-mode-toggle">
+                  <button type="button" id="sim41-btn-mode-design" class="sim-mode-btn active" onclick="setSim41Mode('design')">
+                    📐 Modo Diseño (Auto)
+                  </button>
+                  <button type="button" id="sim41-btn-mode-review" class="sim-mode-btn" onclick="setSim41Mode('review')">
+                    🔍 Modo Revisión (Fijo)
+                  </button>
+                </div>
+              </div>
+
+              <!-- CONTROL EXCLUSIVO DE MODO REVISIÓN: SEPARACIÓN EXISTENTE s_col -->
+              <div id="sim41-review-controls" class="control-group" style="display: none; background: #ECFDF5; border: 1.5px solid #10B981; border-radius: 8px; padding: 0.65rem 0.75rem;">
+                <div class="control-label">
+                  <span style="font-weight: 700; color: #065F46;">Separación Existente $s_{\text{col}}$ (Obra/Planos)</span>
+                  <span id="val-sim41-scol" class="control-value" style="color: #047857; font-weight: 800;">12.0 cm</span>
+                </div>
+                <input id="sim41-scol" type="range" min="5.0" max="40.0" step="0.5" value="12.0" oninput="updateSim41()" />
+              </div>
+
               <div class="control-group">
                 <div class="control-label">
                   <span>Luz entre ejes $L$</span>
@@ -1695,7 +1756,7 @@
                   <span id="res41-phivc" class="sim-metric-value" style="font-size:0.88rem;">-</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Demanda Estribos $\phi V_s$</span>
+                  <span id="lbl-res41-phivs" class="sim-metric-label">Demanda Estribos $\phi V_s$</span>
                   <span id="res41-phivs" class="sim-metric-value" style="font-size:0.88rem;">-</span>
                 </div>
                 <div class="sim-metric-card">
@@ -1703,7 +1764,7 @@
                   <span id="res41-av" class="sim-metric-value" style="font-size:0.86rem;">-</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">$s_{\text{req}}$ por Resistencia</span>
+                  <span id="lbl-res41-sreq" class="sim-metric-label">$s_{\text{req}}$ por Resistencia</span>
                   <span id="res41-sreq" class="sim-metric-value">-</span>
                 </div>
                 <div class="sim-metric-card">
@@ -1711,7 +1772,7 @@
                   <span id="res41-smax" class="sim-metric-value" style="font-size:0.84rem;">-</span>
                 </div>
                 <div class="sim-metric-card">
-                  <span class="sim-metric-label">Despiece Adoptado</span>
+                  <span id="lbl-res41-sadopt" class="sim-metric-label">Despiece Adoptado</span>
                   <span id="res41-sadopt" class="sim-metric-value" style="font-size:0.83rem;">-</span>
                 </div>
               </div>
@@ -3123,7 +3184,7 @@
 
   <!-- Scripts Globales y Simulador del Módulo 04 -->
   <script src="../assets/js/core.js?v=20261112"></script>
-  <script src="../assets/js/sim-modulo-04.js?v=20261107"></script>
+  <script src="../assets/js/sim-modulo-04.js?v=20261112"></script>
 
   <!-- =====================================================================
        VENTANA MODAL FLOTANTE: DICCIONARIO DE VARIABLES Y UNIDADES (MÓDULO 04)

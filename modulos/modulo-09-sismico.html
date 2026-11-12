@@ -239,6 +239,25 @@
             </p>
           </div>
         </div>
+
+        <div class="card card-tech" style="margin-top: 1.25rem; border-top: 4px solid #D97706;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <h3 style="margin: 0;">Síntesis Normativa: Cortante Sísmico por Capacidad (\(V_e\)), Criterio de \(V_c = 0\) en DES y Zona de Confinamiento \(2h\)</h3>
+            <span class="section-badge" style="margin: 0;">NSR-10 C.21.3.4 (DMO) y C.21.5.4 (DES)</span>
+          </div>
+          <div class="math-box">
+            $$V_e = \underbrace{\frac{M_{pr1} + M_{pr2}}{l_n}}_{V_{\text{sway}}\text{ (Cortante hiperestático sísmico)}} \pm \underbrace{\frac{w_g \, l_n}{2}}_{V_g\text{ (Gravitacional aferente, } 1.2D + 1.0L\text{)}}$$
+          </div>
+          <div class="math-box">
+            $$\begin{cases} \textbf{Pórticos DES (C.21.5.4.1):} & M_{pr} \text{ se calcula con } \mathbf{\phi = 1.0} \text{ y esfuerzo en el acero } \mathbf{1.25\,f_y} \\ \textbf{Pórticos DMO (C.21.3.4.1):} & \text{Se usa el momento nominal } M_n \text{ con } \mathbf{\phi = 1.0} \text{ y esfuerzo } \mathbf{1.00\,f_y} \end{cases}$$
+          </div>
+          <div class="math-box">
+            $$\textbf{Espaciamiento en Zona de Confinamiento } 2h\textbf{:} \qquad s_{\text{conf}} \le \min\left(\frac{d}{4},\;\; 8\,d_{b,\text{long mín}},\;\; 24\,d_{b,\text{estribo}},\;\; 300\text{ mm}\right)$$
+          </div>
+          <div class="callout callout-warning" style="margin-top: 0.75rem;">
+            <strong>Regla obligatoria de \(V_c = 0\) en vigas DES (<code>NSR-10 C.21.5.4.2</code>):</strong> En la zona de plastificación de vigas DES debe asumirse \(\mathbf{V_c = 0}\) cuando simultáneamente: (1) el cortante sísmico inducido por los momentos probables representa la mitad o más de la demanda (\(V_{\text{sway}} \ge 0.5\,V_e\)), y (2) la fuerza axial de compresión mayorada es baja (\(N_u < \frac{A_g f'_c}{20}\)).
+          </div>
+        </div>
       </section>
 
       <!-- ====================================================================

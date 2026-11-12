@@ -45,10 +45,64 @@ function getThemePaletteMod04() {
  * SIMULADOR 4.1: DISEÑADOR Y ZONIFICADOR DEL DIAGRAMA DE CORTANTE Y ESTRIBOS
  * ============================================================================
  */
+window.sim41Mode = 'design'; // 'design' o 'review'
+
+function setSim41Mode(mode) {
+  window.sim41Mode = mode === 'review' ? 'review' : 'design';
+
+  const btnDesign  = document.getElementById('sim41-btn-mode-design');
+  const btnReview  = document.getElementById('sim41-btn-mode-review');
+  const modeBadge  = document.getElementById('sim41-mode-badge');
+  const revControls = document.getElementById('sim41-review-controls');
+
+  const lblPhivs   = document.getElementById('lbl-res41-phivs');
+  const lblSreq    = document.getElementById('lbl-res41-sreq');
+  const lblSadopt  = document.getElementById('lbl-res41-sadopt');
+
+  if (window.sim41Mode === 'review') {
+    if (btnDesign) btnDesign.classList.remove('active');
+    if (btnReview) btnReview.classList.add('active');
+    if (modeBadge) {
+      modeBadge.textContent = '🔍 Modo Revisión';
+      modeBadge.style.background = '#059669';
+    }
+    if (revControls) revControls.style.display = 'block';
+    if (lblPhivs)  lblPhivs.innerHTML  = 'Aporte Estribos $\\phi V_s$ (Prov.)';
+    if (lblSreq)   lblSreq.innerHTML   = 'Capacidad Total $\\phi V_n$';
+    if (lblSadopt) lblSadopt.innerHTML = 'Índice D/C ($V_u / \\phi V_n$)';
+  } else {
+    if (btnDesign) btnDesign.classList.add('active');
+    if (btnReview) btnReview.classList.remove('active');
+    if (modeBadge) {
+      modeBadge.textContent = '📐 Modo Diseño';
+      modeBadge.style.background = '#2563EB';
+    }
+    if (revControls) revControls.style.display = 'none';
+    if (lblPhivs)  lblPhivs.innerHTML  = 'Demanda Estribos $\\phi V_s$';
+    if (lblSreq)   lblSreq.innerHTML   = '$s_{\\text{req}}$ por Resistencia';
+    if (lblSadopt) lblSadopt.innerHTML = 'Despiece Adoptado';
+  }
+
+  if (window.renderMathInElement) {
+    const metricsGrid = document.querySelector('#sec-lab-mod04 .sim-metrics-grid');
+    if (metricsGrid) {
+      window.renderMathInElement(metricsGrid, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ]
+      });
+    }
+  }
+
+  updateSim41();
+}
+
 function updateSim41() {
   const lInput = document.getElementById('sim41-L');
   if (!lInput) return;
 
+  const isReview = window.sim41Mode === 'review';
   const L      = parseFloat(lInput.value);                                      // m (luz entre ejes)
   const cApoyo = parseFloat(document.getElementById('sim41-c').value);          // m (ancho apoyo)
   const wu     = parseFloat(document.getElementById('sim41-wu').value);         // kN/m (carga mayorada)
@@ -62,6 +116,8 @@ function updateSim41() {
   const barNo  = parseInt(document.getElementById('sim41-bar').value, 10);      // 2, 3, 4
   const legs   = parseInt(document.getElementById('sim41-legs').value, 10);     // 2, 3, 4
   const critAtD = document.getElementById('sim41-crit').value === 'd';          // true: a 'd' de cara; false: en cara
+  const sColInput = document.getElementById('sim41-scol');
+  const sColCm = sColInput ? parseFloat(sColInput.value) : 12.0;
 
   // Actualizar etiquetas de controles
   document.getElementById('val-sim41-L').textContent   = `${L.toFixed(2)} m`;
@@ -71,6 +127,8 @@ function updateSim41() {
   document.getElementById('val-sim41-bw').textContent  = `${bw.toFixed(0)} cm`;
   document.getElementById('val-sim41-h').textContent   = `${h.toFixed(0)} cm`;
   document.getElementById('val-sim41-rec').textContent = `${rec.toFixed(1)} cm`;
+  const valScolEl = document.getElementById('val-sim41-scol');
+  if (valScolEl) valScolEl.textContent = `${sColCm.toFixed(1)} cm`;
 
   const phi = 0.75; // NSR-10 C.9.3.2.3
   const dCm = Math.max(h - rec, 10.0);
@@ -123,8 +181,16 @@ function updateSim41() {
   const sMaxAvMin2Mm = (AvMm2 * fyt) / (0.35 * bwMm);
   const sMaxAvMinCm  = Math.min(sMaxAvMin1Mm, sMaxAvMin2Mm) / 10.0;
 
+  // En modo Revisión, evaluamos Vs provisto con sColCm
+  const VsColRaw = (AvMm2 * fyt * dMm) / (sColCm * 10.0) / 1000.0; // kN
+  const VsColCapped = Math.min(VsColRaw, VsMax);
+  const phiVsCol = phi * VsColCapped;
+  const phiVnCol = phiVc + phiVsCol;
+  const dcRatio  = phiVnCol > 0 ? (VuCrit / phiVnCol) : 99.9;
+
   // 2) Por geometría según nivel de Vs (NSR-10 C.11.4.5.1 y C.11.4.5.3)
-  const isHighShear = VsReq > VsLim1;
+  const vsForGeomCheck = isReview ? Math.max(VsReq, VsColCapped) : VsReq;
+  const isHighShear = vsForGeomCheck > VsLim1;
   const sMaxGeomCm  = isHighShear
     ? Math.min(dCm / 4.0, 30.0)
     : Math.min(dCm / 2.0, 60.0);
@@ -138,11 +204,15 @@ function updateSim41() {
   }
 
   // Espaciamiento de diseño en zona crítica y en zona mínima (redondeado hacia abajo a cada 1 cm o 0.5 cm)
-  const sCritDesignCm = Math.max(5.0, Math.floor(Math.min(sStrengthCm, sMaxNormCm) * 2.0) / 2.0);
-  const sMinZoneCm    = Math.max(5.0, Math.floor(sMaxNormCm * 2.0) / 2.0);
+  const sCritDesignCm = isReview
+    ? sColCm
+    : Math.max(5.0, Math.floor(Math.min(sStrengthCm, sMaxNormCm) * 2.0) / 2.0);
+  const sMinZoneCm    = isReview
+    ? sColCm
+    : Math.max(5.0, Math.floor(sMaxNormCm * 2.0) / 2.0);
 
   // Capacidad real con sCritDesignCm
-  const VsProv = (AvMm2 * fyt * dMm) / (sCritDesignCm * 10.0) / 1000.0; // kN
+  const VsProv = Math.min(VsMax, (AvMm2 * fyt * dMm) / (sCritDesignCm * 10.0) / 1000.0); // kN
   const phiVnProv = phi * (Vc + VsProv);
 
   // Zonificación longitudinal desde la cara del apoyo (m)
@@ -167,16 +237,19 @@ function updateSim41() {
   const sMinM  = sMinZoneCm / 100.0;
 
   const stirrupPositionsM = [];
-  if (VuCrit > halfPhiVc) {
+  if (isReview || VuCrit > halfPhiVc) {
     stirrupPositionsM.push(posM);
-    while (posM + sCritM <= S_zone3 + 0.001 && stirrupPositionsM.length < 120) {
+    const limitZoneM = isReview ? Ltotal : S_zone3;
+    while (posM + sCritM <= limitZoneM + 0.001 && stirrupPositionsM.length < 120) {
       posM += sCritM;
       stirrupPositionsM.push(posM);
       nStirrupsZone3++;
     }
-    while (posM + sMinM <= X_zone2 + 0.001 && stirrupPositionsM.length < 150) {
-      posM += sMinM;
-      stirrupPositionsM.push(posM);
+    if (!isReview) {
+      while (posM + sMinM <= X_zone2 + 0.001 && stirrupPositionsM.length < 150) {
+        posM += sMinM;
+        stirrupPositionsM.push(posM);
+      }
     }
   }
 
@@ -185,31 +258,57 @@ function updateSim41() {
   document.getElementById('res41-vu-cara').textContent = `${VuCara.toFixed(2)} kN`;
   document.getElementById('res41-vu-crit').textContent = `${VuCrit.toFixed(2)} kN`;
   document.getElementById('res41-phivc').textContent   = `${phiVc.toFixed(2)} kN (Vc = ${Vc.toFixed(1)} kN)`;
-  document.getElementById('res41-phivs').textContent   = `${phiVsReq.toFixed(2)} kN (Vs = ${VsReq.toFixed(1)} kN)`;
   document.getElementById('res41-av').textContent      = `${AvCm2.toFixed(2)} cm² (${legs} ramas ${stirrup.label.split(' ')[0]} ${stirrup.label.split(' ')[1]})`;
-  document.getElementById('res41-sreq').textContent    = phiVsReq > 0.001 ? `${sStrengthCm.toFixed(1)} cm` : 'No req. por cálculo (rige Av,mín)';
   document.getElementById('res41-smax').textContent    = `${sMaxNormCm.toFixed(1)} cm (Geom: ${sMaxGeomCm.toFixed(1)} | Av,mín: ${sMaxAvMinCm.toFixed(1)})`;
-  document.getElementById('res41-sadopt').textContent  = VuCrit <= halfPhiVc
-    ? 'Zona 1: No requiere por resistencia'
-    : `1 E @ 5 cm + E @ ${sCritDesignCm.toFixed(1)} cm (Zona 3) y @ ${sMinZoneCm.toFixed(1)} cm (Zona 2)`;
-  document.getElementById('res41-zonas').textContent   = `S (Zona 3) = ${S_zone3.toFixed(2)} m | Zona 2 = ${lenZone2.toFixed(2)} m | Zona 1 = ${lenZone1.toFixed(2)} m (Ltotal = ${Ltotal.toFixed(2)} m)`;
+  document.getElementById('res41-zonas').textContent   = `S (Zona 3) = ${S_zone3.toFixed(2)} m | L2 (Zona 2) = ${lenZone2.toFixed(2)} m | L1 (Zona 1) = ${lenZone1.toFixed(2)} m (Ltotal = ${Ltotal.toFixed(2)} m)`;
 
   const statusEl = document.getElementById('res41-status');
-  if (VsReq > VsMax) {
-    statusEl.className = 'status-badge status-danger';
-    statusEl.innerHTML = `❌ SECCIÓN INSUFICIENTE (ZONA 4): Vs = ${VsReq.toFixed(1)} kN > Vs,máx = ${VsMax.toFixed(1)} kN (0.66√f'c bw d). Aumente bw, d o f'c.`;
-  } else if (VuCrit <= halfPhiVc) {
-    statusEl.className = 'status-badge status-ok';
-    statusEl.innerHTML = `✅ ZONA 1 (Vu ≤ 0.5 φVc = ${halfPhiVc.toFixed(1)} kN): El concreto resiste holgadamente. Se colocan estribos constructivos @ d/2 = ${(dCm / 2).toFixed(0)} cm.`;
-  } else if (VuCrit <= phiVc) {
-    statusEl.className = 'status-badge status-ok';
-    statusEl.innerHTML = `✅ ZONA 2 (0.5 φVc < Vu ≤ φVc): Requiere armadura mínima Av,mín @ s_máx = ${sMinZoneCm.toFixed(1)} cm hasta x = ${X_zone2.toFixed(2)} m de la cara.`;
-  } else if (isHighShear) {
-    statusEl.className = 'status-badge status-warn';
-    statusEl.innerHTML = `⚠️ ZONA 3 DE CORTANTE ALTO (0.33√f'c bw d < Vs ≤ 0.66√f'c bw d): s_máx se reduce a mín(d/4, 30 cm) = ${sMaxGeomCm.toFixed(1)} cm. Estribos @ ${sCritDesignCm.toFixed(1)} cm (φVn = ${phiVnProv.toFixed(1)} kN).`;
+
+  if (isReview) {
+    document.getElementById('res41-phivs').textContent  = `${phiVsCol.toFixed(2)} kN (Vs = ${VsColCapped.toFixed(1)} kN @ s=${sColCm.toFixed(1)} cm)`;
+    document.getElementById('res41-sreq').textContent   = `φVn = ${phiVnCol.toFixed(2)} kN`;
+    document.getElementById('res41-sadopt').textContent = `D/C = ${dcRatio.toFixed(2)} (${dcRatio <= 1.0 && sColCm <= sMaxNormCm + 0.05 ? 'CUMPLE ✓' : 'NO CUMPLE ✗'})`;
+
+    const spacingOk  = (VuCrit <= halfPhiVc) || (sColCm <= sMaxNormCm + 0.05);
+    const strengthOk = phiVnCol >= VuCrit - 0.05;
+    const webOk      = VsReq <= VsMax;
+
+    if (!webOk) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE (APLASTAMIENTO DEL ALMA): La demanda Vs,req = ${VsReq.toFixed(1)} kN supera Vs,máx = ${VsMax.toFixed(1)} kN (0.66√f'c bw d). Debe ampliarse la sección.`;
+    } else if (!strengthOk) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE POR RESISTENCIA (D/C = ${dcRatio.toFixed(2)} > 1.00): Con estribos @ ${sColCm.toFixed(1)} cm, φVn = ${phiVnCol.toFixed(1)} kN < Vu,crit = ${VuCrit.toFixed(1)} kN (se requiere s ≤ ${Math.min(sStrengthCm, sMaxNormCm).toFixed(1)} cm).`;
+    } else if (!spacingOk) {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ REVISIÓN NO CUMPLE ESPACIAMIENTO MÁXIMO: Aunque φVn = ${phiVnCol.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN (D/C = ${dcRatio.toFixed(2)}), la separación existente s_col = ${sColCm.toFixed(1)} cm excede s_máx = ${sMaxNormCm.toFixed(1)} cm.`;
+    } else {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ REVISIÓN SATISFACTORIA (D/C = ${dcRatio.toFixed(2)} ≤ 1.00): Con estribos @ s_col = ${sColCm.toFixed(1)} cm ≤ s_máx (${sMaxNormCm.toFixed(1)} cm), la capacidad φVn = ${phiVnCol.toFixed(1)} kN supera la demanda Vu,crit = ${VuCrit.toFixed(1)} kN.`;
+    }
   } else {
-    statusEl.className = 'status-badge status-ok';
-    statusEl.innerHTML = `✅ ZONA 3 DE DISEÑO ESTÁNDAR (Vs ≤ 0.33√f'c bw d = ${VsLim1.toFixed(1)} kN): Estribos @ ${sCritDesignCm.toFixed(1)} cm en S = ${S_zone3.toFixed(2)} m (φVn = ${phiVnProv.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN).`;
+    document.getElementById('res41-phivs').textContent  = `${phiVsReq.toFixed(2)} kN (Vs = ${VsReq.toFixed(1)} kN)`;
+    document.getElementById('res41-sreq').textContent   = phiVsReq > 0.001 ? `${sStrengthCm.toFixed(1)} cm` : 'No req. por cálculo (rige Av,mín)';
+    document.getElementById('res41-sadopt').textContent = VuCrit <= halfPhiVc
+      ? 'Zona 1: No requiere por resistencia'
+      : `1 E @ 5 cm + E @ ${sCritDesignCm.toFixed(1)} cm (Zona 3) y @ ${sMinZoneCm.toFixed(1)} cm (Zona 2)`;
+
+    if (VsReq > VsMax) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ SECCIÓN INSUFICIENTE (ZONA 4): Vs = ${VsReq.toFixed(1)} kN > Vs,máx = ${VsMax.toFixed(1)} kN (0.66√f'c bw d). Aumente bw, d o f'c.`;
+    } else if (VuCrit <= halfPhiVc) {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ ZONA 1 (Vu ≤ 0.5 φVc = ${halfPhiVc.toFixed(1)} kN): El concreto resiste holgadamente. Se colocan estribos constructivos @ d/2 = ${(dCm / 2).toFixed(0)} cm.`;
+    } else if (VuCrit <= phiVc) {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ ZONA 2 (0.5 φVc < Vu ≤ φVc): Requiere armadura mínima Av,mín @ s_máx = ${sMinZoneCm.toFixed(1)} cm hasta x = ${X_zone2.toFixed(2)} m de la cara.`;
+    } else if (isHighShear) {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ ZONA 3 DE CORTANTE ALTO (0.33√f'c bw d < Vs ≤ 0.66√f'c bw d): s_máx se reduce a mín(d/4, 30 cm) = ${sMaxGeomCm.toFixed(1)} cm. Estribos @ ${sCritDesignCm.toFixed(1)} cm (φVn = ${phiVnProv.toFixed(1)} kN).`;
+    } else {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ ZONA 3 DE DISEÑO ESTÁNDAR (Vs ≤ 0.33√f'c bw d = ${VsLim1.toFixed(1)} kN): Estribos @ ${sCritDesignCm.toFixed(1)} cm en S = ${S_zone3.toFixed(2)} m (φVn = ${phiVnProv.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN).`;
+    }
   }
 
   // Actualizar Tacómetro Dinámico de Zonas de Cortante (#sim41-tachometer-card)
@@ -248,12 +347,19 @@ function updateSim41() {
 
     tachoNeedle.style.left = `${Math.max(2.0, Math.min(98.0, needlePct)).toFixed(1)}%`;
     const ratioDemMax = phiVnMax > 0 ? (VuCrit / phiVnMax) : 0.0;
-    tachoRatio.textContent = `Vu,crit / φVn,máx = ${ratioDemMax.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnMax.toFixed(1)} kN)`;
-    tachoVs.textContent    = `Vs = ${VsReq.toFixed(1)} kN ${VsReq <= VsMax ? '≤' : '>'} Vs,máx (${VsMax.toFixed(1)} kN)`;
-    tachoZone.textContent  = `s_máx = ${sMaxNormCm.toFixed(1)} cm (Geom: ${sMaxGeomCm.toFixed(1)} cm | Adoptado: ${sCritDesignCm.toFixed(1)} cm)`;
+    if (isReview) {
+      tachoRatio.textContent = `Índice D/C = Vu,crit / φVn = ${dcRatio.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnCol.toFixed(1)} kN)`;
+      tachoVs.textContent    = `Vs,prov = ${VsColCapped.toFixed(1)} kN vs. Vs,req = ${VsReq.toFixed(1)} kN (Vs,máx = ${VsMax.toFixed(1)} kN)`;
+      tachoZone.textContent  = `s_col = ${sColCm.toFixed(1)} cm ${sColCm <= sMaxNormCm + 0.05 ? '≤' : '>'} s_máx = ${sMaxNormCm.toFixed(1)} cm`;
+    } else {
+      tachoRatio.textContent = `Vu,crit / φVn,máx = ${ratioDemMax.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnMax.toFixed(1)} kN)`;
+      tachoVs.textContent    = `Vs = ${VsReq.toFixed(1)} kN ${VsReq <= VsMax ? '≤' : '>'} Vs,máx (${VsMax.toFixed(1)} kN)`;
+      tachoZone.textContent  = `s_máx = ${sMaxNormCm.toFixed(1)} cm (Geom: ${sMaxGeomCm.toFixed(1)} cm | Adoptado: ${sCritDesignCm.toFixed(1)} cm)`;
+    }
   }
 
   drawSim41Canvas({
+    isReview, sColCm, phiVnCol, dcRatio,
     L, cApoyo, wu, bw, h, dCm, dM, Ltotal,
     VuEje, VuCara, VuCrit, xCritFromFace,
     phiVc, halfPhiVc, phiVsReq, phiVnMax,
@@ -572,9 +678,11 @@ function drawSim41Canvas(state) {
   ctx.fillStyle = pal.textMain;
   ctx.font = 'bold 11px Inter, sans-serif';
   ctx.textAlign = 'left';
-  const despieceText = state.VuCrit <= state.halfPhiVc
-    ? `Despiece constructivo: E @ ${(state.dCm / 2).toFixed(0)} cm`
-    : `Despiece: 1 E @ 5 cm + Zona 3 @ ${state.sCritDesignCm.toFixed(1)} cm + Zona 2 @ ${state.sMinZoneCm.toFixed(1)} cm`;
+  const despieceText = state.isReview
+    ? `Modo Revisión: Estribos @ s_col = ${state.sColCm.toFixed(1)} cm | φVn = ${state.phiVnCol.toFixed(1)} kN (D/C = ${state.dcRatio.toFixed(2)})`
+    : (state.VuCrit <= state.halfPhiVc
+      ? `Despiece constructivo: E @ ${(state.dCm / 2).toFixed(0)} cm`
+      : `Despiece: 1 E @ 5 cm + Zona 3 @ ${state.sCritDesignCm.toFixed(1)} cm + Zona 2 @ ${state.sMinZoneCm.toFixed(1)} cm`);
   ctx.fillText(despieceText, xFacePx + 4, beamBot + 22);
 
   // =========================================================================
@@ -659,6 +767,7 @@ function drawSim41Canvas(state) {
 }
 
 function loadSim41Preset(presetKey) {
+  const sColEl = document.getElementById('sim41-scol');
   if (presetKey === 'ej41_clasico') {
     // Ejemplo 4.1: Viga de 0.30 x 0.50 m, d = 0.41 m, L = 6.13 m (Ltotal = 2.94 m, apoyo = 0.25 m), wu = 52.85 kN/m -> Vu(d) = 133.72 kN, fc = 21.1 MPa, fyt = 240 MPa
     document.getElementById('sim41-L').value = 6.13;
@@ -674,6 +783,7 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
+    if (sColEl) sColEl.value = 12.0;
   } else if (presetKey === 'ej42_vigueta') {
     // Ejemplo 4.2A: Vigueta 0.12 x 0.40 m, d = 35.5 cm, L = 6.50 m, c = 0.40 m, wu = 10.6 kN/m, fc = 28 MPa, fyt = 420 MPa, Estribo No. 2
     document.getElementById('sim41-L').value = 6.50;
@@ -689,6 +799,7 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '2';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
+    if (sColEl) sColEl.value = 17.5;
   } else if (presetKey === 'ej42_vigaB') {
     // Ejemplo 4.2B: Viga Principal B 0.40 x 0.40 m, d = 34 cm, L = 5.78 m, c = 0.35 m, wu = 94.7 kN/m, fc = 28 MPa, fyt = 420 MPa, Estribo No. 3
     document.getElementById('sim41-L').value = 5.78;
@@ -704,6 +815,7 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
+    if (sColEl) sColEl.value = 11.5;
   } else if (presetKey === 'alta_demanda') {
     // Viga con cortante muy elevado (0.33 sqrt(fc) bw d < Vs <= 0.66 sqrt(fc) bw d) y 4 ramas
     document.getElementById('sim41-L').value = 7.20;
@@ -719,6 +831,7 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '4';
     document.getElementById('sim41-crit').value = 'd';
+    if (sColEl) sColEl.value = 11.0;
   }
   updateSim41();
 }

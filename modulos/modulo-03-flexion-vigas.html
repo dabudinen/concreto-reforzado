@@ -2462,10 +2462,10 @@
               <!-- 1. Miembros con Estribos -->
               <div style="background: #F8FAFC; border: 1.2px solid #CBD5E1; border-top: 3px solid #2563EB; border-radius: 6px; padding: 0.85rem 1rem;">
                 <div style="font-size: 0.78rem; font-weight: 800; color: #1E293B; margin-bottom: 0.4rem;">
-                  1. Miembros con Estribos («Otros» — Vigas y Columnas):
+                  1. Miembros con Estribos:
                 </div>
                 <div class="math-formula" style="margin: 0.3rem 0; font-size: 0.88rem;">
-                  $$\phi = \begin{cases} 0.90 & \text{si } \varepsilon_t \ge 0.005 \quad (\text{Tracción, } c/d_t \le 0.375) \\[4pt] 0.65 + (\varepsilon_t - 0.002)\left(\frac{250}{3}\right) & \text{si } 0.002 < \varepsilon_t < 0.005 \quad (\text{Transición}) \\[4pt] 0.65 & \text{si } \varepsilon_t \le 0.002 \quad (\text{Compresión, } c/d_t \ge 0.60) \end{cases}$$
+                  $$\phi = \begin{cases} 0.90 & \text{si } \varepsilon_t \ge 0.005 \quad (\text{Tracción, } c/d_t \le 0.375) \\[4pt] 0.65 + (\varepsilon_t - 0.002)\left(\frac{250}{3}\right) & \text{si } 0.002 \lt \varepsilon_t \lt 0.005 \quad (\text{Transición}) \\[4pt] 0.65 & \text{si } \varepsilon_t \le 0.002 \quad (\text{Compresión, } c/d_t \ge 0.60) \end{cases}$$
                 </div>
               </div>
 
@@ -2475,7 +2475,7 @@
                   2. Miembros con Refuerzo en Espiral (Columnas Circulares):
                 </div>
                 <div class="math-formula" style="margin: 0.3rem 0; font-size: 0.88rem;">
-                  $$\phi = \begin{cases} 0.90 & \text{si } \varepsilon_t \ge 0.005 \\[4pt] 0.75 + (\varepsilon_t - 0.002)(50) & \text{si } 0.002 < \varepsilon_t < 0.005 \\[4pt] 0.75 & \text{si } \varepsilon_t \le 0.002 \end{cases}$$
+                  $$\phi = \begin{cases} 0.90 & \text{si } \varepsilon_t \ge 0.005 \\[4pt] 0.75 + (\varepsilon_t - 0.002)(50) & \text{si } 0.002 \lt \varepsilon_t \lt 0.005 \\[4pt] 0.75 & \text{si } \varepsilon_t \le 0.002 \end{cases}$$
                 </div>
               </div>
             </div>

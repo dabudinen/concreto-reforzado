@@ -424,6 +424,12 @@
           window.closeFlexureModal();
           return;
         }
+        const ds = document.getElementById('modal-diagrama-cortante');
+        if (ds && ds.classList.contains('open')) {
+          e.preventDefault();
+          window.closeShearModal();
+          return;
+        }
         const vm = document.getElementById('modal-variables');
         if (vm && vm.classList.contains('open')) {
           e.preventDefault();
@@ -977,6 +983,8 @@
       if (dm && dm.classList.contains('open')) window.closeLoadPathModal();
       const df = document.getElementById('modal-diagrama-flexion');
       if (df && df.classList.contains('open')) window.closeFlexureModal();
+      const ds = document.getElementById('modal-diagrama-cortante');
+      if (ds && ds.classList.contains('open')) window.closeShearModal();
     }
   };
 
@@ -1006,6 +1014,42 @@
 
   window.closeFlexureModal = function () {
     const modal = document.getElementById('modal-diagrama-flexion');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: CERCHA DE RITTER-MÖRSCH Y CORTANTE (MÓDULO 04)
+     -------------------------------------------------------------------------- */
+  window.openShearModal = function () {
+    const modal = document.getElementById('modal-diagrama-cortante');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeShearModal = function () {
+    const modal = document.getElementById('modal-diagrama-cortante');
     if (!modal) return;
     modal.classList.remove('open');
     document.body.style.overflow = '';

@@ -144,81 +144,316 @@
       <!-- ===================================================================
            LÁMINA 00: PORTADA DEL MÓDULO 04 Y BIBLIOGRAFÍA DE REFERENCIA
            =================================================================== -->
-      <section id="portada-mod04" class="hero-banner content-section">
-        <div class="hero-kicker">
-          <span>MÓDULO TÉCNICO 04</span>
-          <span>•</span>
-          <span>ESFUERZOS PRINCIPALES, CERCHA DE RITTER-MÖRSCH Y CORTANTE SÍSMICO</span>
-        </div>
-        <h1 class="hero-title">Diseño a Cortante y Tensión Diagonal en Vigas de Concreto Reforzado</h1>
-        <p class="hero-subtitle">
-          A diferencia de la falla por flexión en secciones controladas por tracción —que es gradual, dúctil y precedida por amplias deflexiones—, la <strong>falla por fuerza cortante (tensión diagonal)</strong> es repentina, frágil y catastrófica. En este módulo estudiaremos el estado biaxial de esfuerzos principales en una viga, los modos de fisuración inclinada, la analogía de la cercha reticulada de Ritter-Mörsch a $45^\circ$, la formulación normativa de resistencia del concreto ($V_c$) y de los estribos ($V_s$), la zonificación rigurosa del diagrama de cortante y el diseño por capacidad sísmica ($V_e$).
-        </p>
-        <div class="hero-meta-grid">
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Autoría Académica</span>
-            <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Respaldo Normativo</span>
-            <span class="hero-meta-value">NSR-10 Cap. C.11, C.7.1, C.8.6 y C.21</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Simuladores Interactivos</span>
-            <span class="hero-meta-value">2 Laboratorios (Zonificador y Capacidad $V_e$)</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Ejemplos Resueltos Paso a Paso</span>
-            <span class="hero-meta-value">6 Problemas Completos Paso a Paso</span>
-          </div>
-        </div>
-
-        <div class="cards-grid-2" style="margin-top: 1.5rem;">
-          <div class="tech-card" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.35); color: #F8FAFC; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-            <div class="tech-card-header">
-              <h3 class="tech-card-title" style="color: #38BDF8;">🎯 Competencias Específicas del Módulo 04</h3>
-              <div class="tech-card-icon">🧭</div>
+      <!-- 00. PORTADA DEL MÓDULO -->
+      <section class="hero-banner content-section" id="portada-mod04">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge-row">
+              <span class="hero-badge">Módulo 04 • Concreto Reforzado NSR-10</span>
             </div>
-            <ul style="padding-left: 1.25rem; font-size: 0.94rem; line-height: 1.65; color: #F1F5F9; margin: 0;">
-              <li>Transformar el estado combinado de esfuerzos normales por flexión ($\sigma_x$) y cortantes ($\tau_{xy}$) en esfuerzos principales ($\sigma_1, \sigma_2$) e identificar la génesis de las grietas de <strong>flexo-cortante</strong> y <strong>cortante en el alma</strong>.</li>
-              <li>Ubicar correctamente la sección crítica de diseño a una distancia $d$ de la cara del apoyo (<code>NSR-10 C.11.1.3.1</code>) y distinguir los casos donde es obligatorio diseñar en la cara del apoyo ($x = 0$).</li>
-              <li>Calcular la resistencia aportada por el concreto $V_c$ mediante las ecuaciones simplificadas (<code>C.11.2.1</code>) y detalladas (<code>C.11.2.2</code>) con o sin carga axial ($N_u$).</li>
-              <li>Diseñar y zonificar el refuerzo transversal ($V_s$) con estribos de 2, 3 o 4 ramas, verificando $V_{s,\max} = 0.66\sqrt{f'_c}\,b_w d$, $A_{v,\min}$, $s_{\max}$ y el cortante sísmico por capacidad $V_e$.</li>
-            </ul>
-          </div>
-
-          <div class="tech-card" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.35); color: #F8FAFC; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-            <div class="tech-card-header">
-              <h3 class="tech-card-title" style="color: #FBBF24;">📚 Bibliografía Fundamental del Módulo</h3>
-              <div class="tech-card-icon">📖</div>
+            <h1 class="hero-title">
+              Diseño a Cortante y <span>Tensión Diagonal en Vigas</span>
+            </h1>
+            <p class="hero-subtitle">
+              A diferencia de la falla por flexión en secciones controladas por tracción —que es gradual, dúctil y precedida por amplias deflexiones—, la <strong>falla por fuerza cortante (tensión diagonal)</strong> es repentina, frágil y catastrófica. En este módulo analizamos el estado biaxial de esfuerzos principales, la analogía de la cercha reticulada de Ritter-Mörsch a $45^\circ$, la resistencia nominal del concreto ($V_c$) y de los estribos transversales ($V_s$), la zonificación del diagrama envolvente y el diseño por capacidad sísmica ($V_e$).
+            </p>
+            <div class="professor-card">
+              <div class="professor-avatar">DA</div>
+              <div class="professor-info">
+                <span class="professor-label">Profesor</span>
+                <span class="professor-name">Daniel Abudinen, I.C., M.Sc.</span>
+                <span class="professor-inst">Prof. Daniel Abudinen • <a href="mailto:dabudinen@gmail.com" style="color: inherit; text-decoration: none;">dabudinen@gmail.com</a></span>
+              </div>
             </div>
-            <ul style="padding-left: 1.25rem; font-size: 0.94rem; line-height: 1.65; color: #F1F5F9; margin: 0;">
-              <li><strong>AIS (Asociación Colombiana de Ingeniería Sísmica).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente NSR-10</em> — Título C, Capítulos C.7, C.8, C.9, C.11 y C.21.</li>
-              <li><strong>Wight, J. K., &amp; MacGregor, J. G.</strong> <em>Reinforced Concrete: Mechanics and Design</em>, 7th Ed., Pearson. (Cap. 6: Shear in Beams).</li>
-              <li><strong>Darwin, D., Dolan, C. W., &amp; Nilson, A. H.</strong> <em>Design of Concrete Structures</em>, 15th Ed., McGraw-Hill. (Cap. 4: Shear and Diagonal Tension in Beams).</li>
-              <li><strong>Rochel Awad, R.</strong> <em>Hormigón Reforzado (Primera Parte)</em>, Universidad EAFIT.</li>
-              <li><strong>ACI Committee 318.</strong> <em>Building Code Requirements for Structural Concrete (ACI 318) and Commentary</em>.</li>
-            </ul>
+            <div class="hero-meta-grid">
+              <div class="hero-meta-item">
+                <span class="hero-meta-label">Autoría Académica</span>
+                <span class="hero-meta-value">Prof. Daniel Abudinen, I.C., M.Sc.</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="hero-meta-label">Respaldo Normativo</span>
+                <span class="hero-meta-value">NSR-10 Cap. C.11, C.7.1, C.8.6 y C.21</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="hero-meta-label">Simuladores Interactivos</span>
+                <span class="hero-meta-value">2 Laboratorios (Zonificador y Capacidad $V_e$)</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="hero-meta-label">Ejemplos Resueltos Paso a Paso</span>
+                <span class="hero-meta-value">6 Problemas Completos de Diseño y Verificación</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual-box hero-diagram-box">
+            <!-- Contenedor Interactivo con Indicador de Pizarra Docente -->
+            <div class="diagram-interactive-wrap" onclick="openShearModal()" title="Haz clic sobre el esquema para ampliarlo en pantalla completa (Modo Pizarra Docente)">
+              <div class="zoom-badge-hint">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                <span>Pizarra Docente (Clic para Ampliar)</span>
+              </div>
+              <svg viewBox="0 0 920 520" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, -apple-system, sans-serif; display: block;" role="img" aria-label="Diseño a Cortante: Cercha de Ritter-Mörsch, Tensión Diagonal y Resistencia Nominal">
+  <defs>
+    <filter id="m4-shadow" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+
+    <marker id="m4-arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="m4-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="m4-arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16A34A"/>
+    </marker>
+    <marker id="m4-arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="920" height="42" rx="10" fill="#F8FAFC"/>
+  <line x1="0" y1="42" x2="920" y2="42" stroke="#E2E8F0" stroke-width="1.2"/>
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    DISEÑO A CORTANTE: CERCHA DE RITTER-MÖRSCH Y TENSIÓN DIAGONAL
+  </text>
+  <rect x="705" y="10" width="195" height="22" rx="11" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="802" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    NSR-10 CAP. C.11 / ACI 318
+  </text>
+
+  <!-- ==================== PANEL SUPERIOR: ELEVACIÓN DE VIGA Y CERCHA A 45° ==================== -->
+  <g transform="translate(24, 56)">
+    <!-- Marco de fondo -->
+    <rect x="0" y="0" width="872" height="236" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    
+    <!-- Etiqueta del panel -->
+    <rect x="14" y="12" width="280" height="20" rx="4" fill="#DBEAFE"/>
+    <text x="22" y="26" fill="#1E40AF" font-size="10" font-weight="700">MECANISMO RESISTENTE: CERCHA RETICULADA A 45°</text>
+
+    <!-- Apoyo columna izquierda -->
+    <rect x="50" y="170" width="60" height="50" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#475569" stroke-width="2"/>
+    <!-- Patrón de achurado suelo/apoyo -->
+    <line x1="45" y1="225" x2="55" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="60" y1="225" x2="70" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="75" y1="225" x2="85" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="90" y1="225" x2="100" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="105" y1="225" x2="115" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="80" y="198" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">APOYO</text>
+
+    <!-- Reacción de apoyo V_u -->
+    <line x1="80" y1="250" x2="80" y2="224" stroke="#DC2626" stroke-width="2.5" marker-end="url(#m4-arrow-red)"/>
+    <text x="80" y="262" fill="#DC2626" font-size="11" font-weight="800" text-anchor="middle">R = V_u</text>
+
+    <!-- Cuerpo de la viga de concreto -->
+    <rect x="50" y="55" width="770" height="115" rx="3" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+
+    <!-- Cordón superior de compresión (concreto comprimido) -->
+    <rect x="50" y="55" width="770" height="16" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+    <text x="440" y="67" fill="#1E40AF" font-size="10" font-weight="700" text-anchor="middle">Cordón Superior Comprimido: Concreto C = 0.85 f'c a bw</text>
+
+    <!-- Refuerzo longitudinal inferior (Cordón traccionado T) -->
+    <line x1="60" y1="156" x2="810" y2="156" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="65" cy="156" r="3.5" fill="#1D4ED8"/>
+    <circle cx="805" cy="156" r="3.5" fill="#1D4ED8"/>
+    <text x="440" y="152" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">Cordón Inferior Traccionado: Acero Longitudinal As (T = As·fy + ΔT)</text>
+
+    <!-- Cara del apoyo (x = 0) -->
+    <line x1="110" y1="42" x2="110" y2="180" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <text x="110" y="40" fill="#64748B" font-size="9" font-weight="600" text-anchor="middle">Cara Apoyo</text>
+
+    <!-- Distancia d a sección crítica -->
+    <line x1="110" y1="184" x2="225" y2="184" stroke="#64748B" stroke-width="1.2" marker-start="url(#m4-arrow-slate)" marker-end="url(#m4-arrow-slate)"/>
+    <text x="167" y="196" fill="#475569" font-size="10" font-weight="800" text-anchor="middle">d (Peralte)</text>
+
+    <!-- Sección crítica de diseño (x = d, NSR-10 C.11.1.3.1) -->
+    <line x1="225" y1="42" x2="225" y2="180" stroke="#DC2626" stroke-width="2" stroke-dasharray="4 3"/>
+    <rect x="180" y="32" width="90" height="16" rx="3" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="225" y="44" fill="#B91C1C" font-size="8.5" font-weight="800" text-anchor="middle">SECCIÓN CRÍTICA</text>
+
+    <!-- Fisura diagonal principal a 45° -->
+    <path d="M 120 156 Q 165 110 230 71" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 230 71 L 236 67" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+    <rect x="238" y="74" width="125" height="16" rx="3" fill="#FEF2F2" stroke="#FECACA" stroke-width="0.8"/>
+    <text x="300" y="86" fill="#DC2626" font-size="9" font-weight="700" text-anchor="middle">Grieta de Tensión Diagonal (θ ≈ 45°)</text>
+
+    <!-- Bielas diagonales de compresión de concreto (Cercha Ritter-Mörsch) -->
+    <line x1="225" y1="71" x2="120" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="330" y1="71" x2="225" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="435" y1="71" x2="330" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="540" y1="71" x2="435" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="645" y1="71" x2="540" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="750" y1="71" x2="645" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+
+    <!-- Montantes verticales de tracción (Estribos cerrados Av) -->
+    <!-- Zona 1: Confinamiento sísmico s1 = d/4 -->
+    <line x1="140" y1="71" x2="140" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="175" y1="71" x2="175" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="210" y1="71" x2="210" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="245" y1="71" x2="245" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="280" y1="71" x2="280" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="315" y1="71" x2="315" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+
+    <!-- Zona 2: Centro de luz s2 = d/2 -->
+    <line x1="380" y1="71" x2="380" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="445" y1="71" x2="445" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="510" y1="71" x2="510" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="575" y1="71" x2="575" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="640" y1="71" x2="640" y2="156" stroke="#3B82F6" stroke-width="2"/>
+
+    <!-- Zona de confinamiento derecha -->
+    <line x1="705" y1="71" x2="705" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="740" y1="71" x2="740" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="775" y1="71" x2="775" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+
+    <!-- Acotado de zona confinada vs central -->
+    <line x1="110" y1="205" x2="330" y2="205" stroke="#2563EB" stroke-width="1.2" marker-start="url(#m4-arrow-blue)" marker-end="url(#m4-arrow-blue)"/>
+    <text x="220" y="218" fill="#1D4ED8" font-size="9.5" font-weight="700" text-anchor="middle">Zona Confinada: 2h (Estribos cada s ≤ d/4)</text>
+
+    <line x1="330" y1="205" x2="690" y2="205" stroke="#64748B" stroke-width="1.2" marker-start="url(#m4-arrow-slate)" marker-end="url(#m4-arrow-slate)"/>
+    <text x="510" y="218" fill="#475569" font-size="9.5" font-weight="700" text-anchor="middle">Zona No Confinada: s ≤ d/2</text>
+
+    <!-- Leyenda de la cercha -->
+    <rect x="580" y="90" width="225" height="42" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#m4-shadow)"/>
+    <line x1="590" y1="102" x2="615" y2="102" stroke="#059669" stroke-width="2.5" stroke-dasharray="4 2"/>
+    <text x="622" y="106" fill="#065F46" font-size="9" font-weight="700">Bielas compresión: D_c (Concreto)</text>
+    <line x1="590" y1="120" x2="615" y2="120" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="622" y="124" fill="#1E40AF" font-size="9" font-weight="700">Tirantes tracción: T_v = Av·fyt (Estribos)</text>
+  </g>
+
+  <!-- ==================== PANEL INFERIOR: TRÍPTICO DE FORMULACIÓN ==================== -->
+  
+  <!-- Tarjeta 1: Estado Biaxial y Círculo de Mohr -->
+  <g transform="translate(24, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#2563EB"/>
+    <text x="14" y="22" fill="#1E40AF" font-size="11" font-weight="800">1. TENSIÓN DIAGONAL (BIAXIAL)</text>
+    
+    <!-- Elemento diferencial de esfuerzo en el alma -->
+    <rect x="25" y="38" width="56" height="56" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+    <!-- Flechas normales sigma_x -->
+    <line x1="12" y1="66" x2="25" y2="66" stroke="#2563EB" stroke-width="1.5" marker-end="url(#m4-arrow-blue)"/>
+    <line x1="94" y1="66" x2="81" y2="66" stroke="#2563EB" stroke-width="1.5" marker-end="url(#m4-arrow-blue)"/>
+    <!-- Flechas cortante tau_xy -->
+    <line x1="30" y1="30" x2="76" y2="30" stroke="#DC2626" stroke-width="1.5" marker-end="url(#m4-arrow-red)"/>
+    <line x1="89" y1="43" x2="89" y2="89" stroke="#DC2626" stroke-width="1.5" marker-end="url(#m4-arrow-red)"/>
+    
+    <!-- Esfuerzo de tracción principal sigma_1 -->
+    <text x="110" y="52" fill="#0F172A" font-size="9.5" font-weight="700">Esfuerzo Principal σ_1:</text>
+    <text x="110" y="68" fill="#DC2626" font-size="10" font-weight="800">σ_1 = σ_x/2 + √[(σ_x/2)² + τ²]</text>
+    <text x="110" y="84" fill="#64748B" font-size="9" font-weight="600">Cuando σ_1 ≥ f_r (Mód. Rotura)</text>
+    <text x="110" y="96" fill="#B91C1C" font-size="9" font-weight="700">⇒ Falla frágil por tensión diagonal</text>
+
+    <!-- Regla de control -->
+    <rect x="14" y="112" width="252" height="74" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="22" y="128" fill="#0F172A" font-size="9.5" font-weight="700">Mecanismos de Transferencia V_c:</text>
+    <text x="22" y="144" fill="#475569" font-size="9">• Zona de concreto comprimido no fisurado (20-40%)</text>
+    <text x="22" y="158" fill="#475569" font-size="9">• Trabazón mecánica de agregados en la grieta (35-50%)</text>
+    <text x="22" y="172" fill="#475569" font-size="9">• Acción de dovela del acero longitudinal (15-25%)</text>
+  </g>
+
+  <!-- Tarjeta 2: Formulación Normativa Vc y Vs -->
+  <g transform="translate(320, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#16A34A"/>
+    <text x="14" y="22" fill="#15803D" font-size="11" font-weight="800">2. RESISTENCIA NOMINAL V_n</text>
+
+    <!-- Fórmula LRFD fundamental -->
+    <rect x="14" y="34" width="252" height="30" rx="4" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+    <text x="140" y="53" fill="#166534" font-size="12" font-weight="800" text-anchor="middle">φ·V_n = φ·(V_c + V_s) ≥ V_u   (φ = 0.75)</text>
+
+    <text x="14" y="82" fill="#0F172A" font-size="10" font-weight="700">Aporte del Concreto (NSR-10 C.11.2):</text>
+    <rect x="14" y="88" width="252" height="24" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="140" y="104" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">V_c = 0.17·λ·√(f'c)·b_w·d   [N]</text>
+
+    <text x="14" y="128" fill="#0F172A" font-size="10" font-weight="700">Aporte de Estribos (NSR-10 C.11.4):</text>
+    <rect x="14" y="134" width="252" height="24" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="140" y="150" fill="#1D4ED8" font-size="10.5" font-weight="800" text-anchor="middle">V_s = (A_v · f_yt · d) / s   [N]</text>
+
+    <!-- Límite máximo para evitar falla por compresión diagonal del alma -->
+    <rect x="14" y="166" width="252" height="22" rx="4" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1"/>
+    <text x="140" y="181" fill="#92400E" font-size="9" font-weight="800" text-anchor="middle">Límite: V_s ≤ 0.66·√(f'c)·b_w·d (Si no, ampliar sección)</text>
+  </g>
+
+  <!-- Tarjeta 3: Detallamiento Sísmico y Espaciamientos -->
+  <g transform="translate(616, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#D97706"/>
+    <text x="14" y="22" fill="#B45309" font-size="11" font-weight="800">3. DETALLAMIENTO SÍSMICO</text>
+
+    <!-- Gancho sísmico y ramas -->
+    <rect x="14" y="34" width="252" height="40" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+    <text x="22" y="49" fill="#92400E" font-size="9.5" font-weight="800">Ganchos Sísmicos a 135° (C.7.1.4):</text>
+    <text x="22" y="65" fill="#78350F" font-size="9">Extensión recta de remate: ≥ max(6·d_b, 75 mm)</text>
+
+    <!-- Espaciamiento en zona confinada (C.21.5.3.2) -->
+    <rect x="14" y="82" width="252" height="54" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="22" y="97" fill="#0F172A" font-size="9.5" font-weight="700">Espaciamiento Sísmico s_max (DES):</text>
+    <text x="22" y="112" fill="#1D4ED8" font-size="9.5" font-weight="800">s ≤ min( d/4,  8·d_b_long,  24·d_b_estribo,  300 mm )</text>
+    <text x="22" y="127" fill="#64748B" font-size="8.5">Primer estribo a máx. 50 mm de la cara del apoyo.</text>
+
+    <!-- Cortante por capacidad Ve -->
+    <rect x="14" y="144" width="252" height="44" rx="4" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+    <text x="22" y="159" fill="#1E40AF" font-size="9.5" font-weight="800">Diseño por Capacidad V_e (C.21.5.4):</text>
+    <text x="22" y="176" fill="#1D4ED8" font-size="9.5" font-weight="800">V_e = (M_pr1 + M_pr2) / l_n ± (w_u · l_n) / 2</text>
+  </g>
+
+</svg>
+            </div>
+            <div class="diagram-toolbar-strip">
+              <button type="button" class="btn-diagram-zoom" onclick="openShearModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                <span>🔍 Ampliar Esquema de Cortante (Modo Pizarra Docente)</span>
+              </button>
+            </div>
           </div>
         </div>
-      
-        <!-- TARJETA BIBLIOGRÁFICA Y TEXTOS GUÍA -->
-        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
-          <div class="tech-card-title" style="display:flex; justify-content:space-between; align-items:center;">
-            <span>📚 Referencias Bibliográficas y Textos Guía del Módulo</span>
-            <span class="norm-pill">NSR-10 / ACI 318</span>
+      </section>
+
+      <!-- ===================================================================
+           00. RESPALDO ACADÉMICO Y TEXTOS DE REFERENCIA DEL MÓDULO 04
+           =================================================================== -->
+      <section class="lesson-section" id="sec-bibliografia-mod4">
+        <div class="section-header">
+          <div class="section-tag-row">
+            <span class="section-num">00 • Respaldo Académico y Normativo</span>
           </div>
-          <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.6rem; line-height: 1.5;">
-            Los modelos mecánicos de tensión diagonal, analogía de la cercha de Ritter-Mörsch, zonificación de cortante y torsión combinada se fundamentan en:
+          <h2 class="section-title">Textos de Referencia del Módulo 4</h2>
+          <p class="section-lead">
+            A diferencia de la flexión dúctil, la falla por cortante y tensión diagonal es frágil y repentina. La modelación mediante la cercha reticulada de Ritter-Mörsch, la resistencia nominal ($V_n = V_c + V_s$) y el detallamiento sismorresistente están respaldados en:
           </p>
-          <ul style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
-            <li><strong>Texto Guía Académico Nacional (2024).</strong> <em>Concreto Reforzado: Fundamentos y Diseño bajo NSR-10</em>, Edición Académica Nacional.</li>
-            <li><strong>Asociación Colombiana de Ingeniería Sísmica - AIS (2010).</strong> <em>Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)</em>. Título C: Concreto Estructural (Capítulo C.11: Cortante y Torsión; y Capítulo C.21: Requisitos de Diseño Sismorresistente).</li>
-            <li><strong>American Concrete Institute - ACI (2019).</strong> <em>Building Code Requirements for Structural Concrete (ACI 318-19)</em>. ACI Committee 318.</li>
-            <li><strong>Rochel Awad, Roberto (2012).</strong> <em>Hormigón Armado</em>. Fondo Editorial Universidad EAFIT, Medellín.</li>
-          </ul>
         </div>
-</section>
+
+        <div class="grid-4">
+          <div class="tech-card accent-blue">
+            <div class="tech-card-title">NSR-10 (Título C) y ACI 318-19</div>
+            <p>
+              Cap. <strong>C.11</strong> (Cortante y torsión: $V_c$ simplificado y detallado, aporte de estribos $V_s$, límites $V_{s,\max}$ y espaciamientos $s_{\max}$), Cap. <strong>C.21.5</strong> (Cortante sísmico por capacidad $V_e$ en pórticos DMO/DES).
+            </p>
+          </div>
+          <div class="tech-card accent-emerald">
+            <div class="tech-card-title">James K. Wight &amp; James G. MacGregor</div>
+            <p>
+              <em>Reinforced Concrete: Mechanics and Design</em> (Pearson). Estado biaxial de esfuerzos principales ($\sigma_1, \sigma_2$), ángulo de fisuración diagonal, trabazón de agregados y acción de dovela del refuerzo longitudinal.
+            </p>
+          </div>
+          <div class="tech-card accent-amber">
+            <div class="tech-card-title">Thomas Paulay &amp; M. J. N. Priestley</div>
+            <p>
+              <em>Seismic Design of Reinforced Concrete and Masonry Buildings</em> (Wiley). Degradación del aporte del concreto ($V_c$) bajo ciclos sísmicos inelásticos y diseño por capacidad para evitar fallas frágiles en zonas de rótula plástica.
+            </p>
+          </div>
+          <div class="tech-card accent-violet">
+            <div class="tech-card-title">Roberto Rochel Awad</div>
+            <p>
+              <em>Hormigón Reforzado: Cortante y Torsión</em> (Universidad EAFIT). Zonificación práctica de diagramas envolventes de cortante, distribución de ramas de estribos y detallamiento de ganchos sísmicos a $135^\circ$.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- ===================================================================
            SECCIÓN 1.0: ESFUERZOS PRINCIPALES, TENSIÓN DIAGONAL Y CERCHA 45°
@@ -2546,7 +2781,312 @@
   <!-- =====================================================================
        VENTANA MODAL FLOTANTE: DICCIONARIO DE VARIABLES Y UNIDADES (MÓDULO 04)
        ===================================================================== -->
-  <div id="modal-variables" class="variables-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-vars-title" style="display: none;">
+  
+  <!-- ==========================================================================
+       MODAL DE PIZARRA DOCENTE: CERCHA DE RITTER-MÖRSCH Y CORTANTE (MÓDULO 04)
+       ========================================================================== -->
+  <div id="modal-diagrama-cortante" class="diagram-modal-overlay" onclick="handleDiagramModalClick(event)" role="dialog" aria-modal="true" aria-labelledby="diagram-modal-title-mod04">
+    <div class="diagram-modal-backdrop"></div>
+    <div class="diagram-modal-content">
+      <div class="diagram-modal-header">
+        <div>
+          <div class="diagram-modal-eyebrow">PIZARRA DOCENTE • ESTADO BIAXIAL Y CERCHA DE RITTER-MÖRSCH</div>
+          <h2 id="diagram-modal-title-mod04" class="diagram-modal-title">Diseño a Cortante: Tensión Diagonal, Mecanismo Reticulado y Resistencia Nominal ($V_c + V_s$)</h2>
+        </div>
+        <button type="button" class="diagram-modal-close" onclick="closeShearModal()" aria-label="Cerrar modal (Esc)">
+          ✕
+        </button>
+      </div>
+      <div class="diagram-modal-body">
+        <!-- SVG EN ALTA DEFINICIÓN -->
+        <div class="diagram-modal-svg-wrap">
+          <svg viewBox="0 0 920 520" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, -apple-system, sans-serif; display: block;" role="img" aria-label="Diseño a Cortante: Cercha de Ritter-Mörsch, Tensión Diagonal y Resistencia Nominal">
+  <defs>
+    <filter id="m4-shadow" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+
+    <marker id="m4-arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="m4-arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="m4-arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16A34A"/>
+    </marker>
+    <marker id="m4-arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748B"/>
+    </marker>
+  </defs>
+
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="920" height="42" rx="10" fill="#F8FAFC"/>
+  <line x1="0" y1="42" x2="920" y2="42" stroke="#E2E8F0" stroke-width="1.2"/>
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    DISEÑO A CORTANTE: CERCHA DE RITTER-MÖRSCH Y TENSIÓN DIAGONAL
+  </text>
+  <rect x="705" y="10" width="195" height="22" rx="11" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="802" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    NSR-10 CAP. C.11 / ACI 318
+  </text>
+
+  <!-- ==================== PANEL SUPERIOR: ELEVACIÓN DE VIGA Y CERCHA A 45° ==================== -->
+  <g transform="translate(24, 56)">
+    <!-- Marco de fondo -->
+    <rect x="0" y="0" width="872" height="236" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    
+    <!-- Etiqueta del panel -->
+    <rect x="14" y="12" width="280" height="20" rx="4" fill="#DBEAFE"/>
+    <text x="22" y="26" fill="#1E40AF" font-size="10" font-weight="700">MECANISMO RESISTENTE: CERCHA RETICULADA A 45°</text>
+
+    <!-- Apoyo columna izquierda -->
+    <rect x="50" y="170" width="60" height="50" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="40" y1="220" x2="120" y2="220" stroke="#475569" stroke-width="2"/>
+    <!-- Patrón de achurado suelo/apoyo -->
+    <line x1="45" y1="225" x2="55" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="60" y1="225" x2="70" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="75" y1="225" x2="85" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="90" y1="225" x2="100" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="105" y1="225" x2="115" y2="220" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="80" y="198" fill="#475569" font-size="10" font-weight="700" text-anchor="middle">APOYO</text>
+
+    <!-- Reacción de apoyo V_u -->
+    <line x1="80" y1="250" x2="80" y2="224" stroke="#DC2626" stroke-width="2.5" marker-end="url(#m4-arrow-red)"/>
+    <text x="80" y="262" fill="#DC2626" font-size="11" font-weight="800" text-anchor="middle">R = V_u</text>
+
+    <!-- Cuerpo de la viga de concreto -->
+    <rect x="50" y="55" width="770" height="115" rx="3" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+
+    <!-- Cordón superior de compresión (concreto comprimido) -->
+    <rect x="50" y="55" width="770" height="16" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+    <text x="440" y="67" fill="#1E40AF" font-size="10" font-weight="700" text-anchor="middle">Cordón Superior Comprimido: Concreto C = 0.85 f'c a bw</text>
+
+    <!-- Refuerzo longitudinal inferior (Cordón traccionado T) -->
+    <line x1="60" y1="156" x2="810" y2="156" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="65" cy="156" r="3.5" fill="#1D4ED8"/>
+    <circle cx="805" cy="156" r="3.5" fill="#1D4ED8"/>
+    <text x="440" y="152" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">Cordón Inferior Traccionado: Acero Longitudinal As (T = As·fy + ΔT)</text>
+
+    <!-- Cara del apoyo (x = 0) -->
+    <line x1="110" y1="42" x2="110" y2="180" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <text x="110" y="40" fill="#64748B" font-size="9" font-weight="600" text-anchor="middle">Cara Apoyo</text>
+
+    <!-- Distancia d a sección crítica -->
+    <line x1="110" y1="184" x2="225" y2="184" stroke="#64748B" stroke-width="1.2" marker-start="url(#m4-arrow-slate)" marker-end="url(#m4-arrow-slate)"/>
+    <text x="167" y="196" fill="#475569" font-size="10" font-weight="800" text-anchor="middle">d (Peralte)</text>
+
+    <!-- Sección crítica de diseño (x = d, NSR-10 C.11.1.3.1) -->
+    <line x1="225" y1="42" x2="225" y2="180" stroke="#DC2626" stroke-width="2" stroke-dasharray="4 3"/>
+    <rect x="180" y="32" width="90" height="16" rx="3" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+    <text x="225" y="44" fill="#B91C1C" font-size="8.5" font-weight="800" text-anchor="middle">SECCIÓN CRÍTICA</text>
+
+    <!-- Fisura diagonal principal a 45° -->
+    <path d="M 120 156 Q 165 110 230 71" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 230 71 L 236 67" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+    <rect x="238" y="74" width="125" height="16" rx="3" fill="#FEF2F2" stroke="#FECACA" stroke-width="0.8"/>
+    <text x="300" y="86" fill="#DC2626" font-size="9" font-weight="700" text-anchor="middle">Grieta de Tensión Diagonal (θ ≈ 45°)</text>
+
+    <!-- Bielas diagonales de compresión de concreto (Cercha Ritter-Mörsch) -->
+    <line x1="225" y1="71" x2="120" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="330" y1="71" x2="225" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="435" y1="71" x2="330" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="540" y1="71" x2="435" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="645" y1="71" x2="540" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+    <line x1="750" y1="71" x2="645" y2="156" stroke="#059669" stroke-width="3" stroke-dasharray="5 3"/>
+
+    <!-- Montantes verticales de tracción (Estribos cerrados Av) -->
+    <!-- Zona 1: Confinamiento sísmico s1 = d/4 -->
+    <line x1="140" y1="71" x2="140" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="175" y1="71" x2="175" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="210" y1="71" x2="210" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="245" y1="71" x2="245" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="280" y1="71" x2="280" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="315" y1="71" x2="315" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+
+    <!-- Zona 2: Centro de luz s2 = d/2 -->
+    <line x1="380" y1="71" x2="380" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="445" y1="71" x2="445" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="510" y1="71" x2="510" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="575" y1="71" x2="575" y2="156" stroke="#3B82F6" stroke-width="2"/>
+    <line x1="640" y1="71" x2="640" y2="156" stroke="#3B82F6" stroke-width="2"/>
+
+    <!-- Zona de confinamiento derecha -->
+    <line x1="705" y1="71" x2="705" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="740" y1="71" x2="740" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+    <line x1="775" y1="71" x2="775" y2="156" stroke="#2563EB" stroke-width="2.5"/>
+
+    <!-- Acotado de zona confinada vs central -->
+    <line x1="110" y1="205" x2="330" y2="205" stroke="#2563EB" stroke-width="1.2" marker-start="url(#m4-arrow-blue)" marker-end="url(#m4-arrow-blue)"/>
+    <text x="220" y="218" fill="#1D4ED8" font-size="9.5" font-weight="700" text-anchor="middle">Zona Confinada: 2h (Estribos cada s ≤ d/4)</text>
+
+    <line x1="330" y1="205" x2="690" y2="205" stroke="#64748B" stroke-width="1.2" marker-start="url(#m4-arrow-slate)" marker-end="url(#m4-arrow-slate)"/>
+    <text x="510" y="218" fill="#475569" font-size="9.5" font-weight="700" text-anchor="middle">Zona No Confinada: s ≤ d/2</text>
+
+    <!-- Leyenda de la cercha -->
+    <rect x="580" y="90" width="225" height="42" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#m4-shadow)"/>
+    <line x1="590" y1="102" x2="615" y2="102" stroke="#059669" stroke-width="2.5" stroke-dasharray="4 2"/>
+    <text x="622" y="106" fill="#065F46" font-size="9" font-weight="700">Bielas compresión: D_c (Concreto)</text>
+    <line x1="590" y1="120" x2="615" y2="120" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="622" y="124" fill="#1E40AF" font-size="9" font-weight="700">Tirantes tracción: T_v = Av·fyt (Estribos)</text>
+  </g>
+
+  <!-- ==================== PANEL INFERIOR: TRÍPTICO DE FORMULACIÓN ==================== -->
+  
+  <!-- Tarjeta 1: Estado Biaxial y Círculo de Mohr -->
+  <g transform="translate(24, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#2563EB"/>
+    <text x="14" y="22" fill="#1E40AF" font-size="11" font-weight="800">1. TENSIÓN DIAGONAL (BIAXIAL)</text>
+    
+    <!-- Elemento diferencial de esfuerzo en el alma -->
+    <rect x="25" y="38" width="56" height="56" rx="2" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+    <!-- Flechas normales sigma_x -->
+    <line x1="12" y1="66" x2="25" y2="66" stroke="#2563EB" stroke-width="1.5" marker-end="url(#m4-arrow-blue)"/>
+    <line x1="94" y1="66" x2="81" y2="66" stroke="#2563EB" stroke-width="1.5" marker-end="url(#m4-arrow-blue)"/>
+    <!-- Flechas cortante tau_xy -->
+    <line x1="30" y1="30" x2="76" y2="30" stroke="#DC2626" stroke-width="1.5" marker-end="url(#m4-arrow-red)"/>
+    <line x1="89" y1="43" x2="89" y2="89" stroke="#DC2626" stroke-width="1.5" marker-end="url(#m4-arrow-red)"/>
+    
+    <!-- Esfuerzo de tracción principal sigma_1 -->
+    <text x="110" y="52" fill="#0F172A" font-size="9.5" font-weight="700">Esfuerzo Principal σ_1:</text>
+    <text x="110" y="68" fill="#DC2626" font-size="10" font-weight="800">σ_1 = σ_x/2 + √[(σ_x/2)² + τ²]</text>
+    <text x="110" y="84" fill="#64748B" font-size="9" font-weight="600">Cuando σ_1 ≥ f_r (Mód. Rotura)</text>
+    <text x="110" y="96" fill="#B91C1C" font-size="9" font-weight="700">⇒ Falla frágil por tensión diagonal</text>
+
+    <!-- Regla de control -->
+    <rect x="14" y="112" width="252" height="74" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="22" y="128" fill="#0F172A" font-size="9.5" font-weight="700">Mecanismos de Transferencia V_c:</text>
+    <text x="22" y="144" fill="#475569" font-size="9">• Zona de concreto comprimido no fisurado (20-40%)</text>
+    <text x="22" y="158" fill="#475569" font-size="9">• Trabazón mecánica de agregados en la grieta (35-50%)</text>
+    <text x="22" y="172" fill="#475569" font-size="9">• Acción de dovela del acero longitudinal (15-25%)</text>
+  </g>
+
+  <!-- Tarjeta 2: Formulación Normativa Vc y Vs -->
+  <g transform="translate(320, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#16A34A"/>
+    <text x="14" y="22" fill="#15803D" font-size="11" font-weight="800">2. RESISTENCIA NOMINAL V_n</text>
+
+    <!-- Fórmula LRFD fundamental -->
+    <rect x="14" y="34" width="252" height="30" rx="4" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+    <text x="140" y="53" fill="#166534" font-size="12" font-weight="800" text-anchor="middle">φ·V_n = φ·(V_c + V_s) ≥ V_u   (φ = 0.75)</text>
+
+    <text x="14" y="82" fill="#0F172A" font-size="10" font-weight="700">Aporte del Concreto (NSR-10 C.11.2):</text>
+    <rect x="14" y="88" width="252" height="24" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="140" y="104" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">V_c = 0.17·λ·√(f'c)·b_w·d   [N]</text>
+
+    <text x="14" y="128" fill="#0F172A" font-size="10" font-weight="700">Aporte de Estribos (NSR-10 C.11.4):</text>
+    <rect x="14" y="134" width="252" height="24" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="140" y="150" fill="#1D4ED8" font-size="10.5" font-weight="800" text-anchor="middle">V_s = (A_v · f_yt · d) / s   [N]</text>
+
+    <!-- Límite máximo para evitar falla por compresión diagonal del alma -->
+    <rect x="14" y="166" width="252" height="22" rx="4" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1"/>
+    <text x="140" y="181" fill="#92400E" font-size="9" font-weight="800" text-anchor="middle">Límite: V_s ≤ 0.66·√(f'c)·b_w·d (Si no, ampliar sección)</text>
+  </g>
+
+  <!-- Tarjeta 3: Detallamiento Sísmico y Espaciamientos -->
+  <g transform="translate(616, 304)">
+    <rect x="0" y="0" width="280" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2" filter="url(#m4-shadow)"/>
+    <rect x="0" y="0" width="280" height="4" rx="2" fill="#D97706"/>
+    <text x="14" y="22" fill="#B45309" font-size="11" font-weight="800">3. DETALLAMIENTO SÍSMICO</text>
+
+    <!-- Gancho sísmico y ramas -->
+    <rect x="14" y="34" width="252" height="40" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+    <text x="22" y="49" fill="#92400E" font-size="9.5" font-weight="800">Ganchos Sísmicos a 135° (C.7.1.4):</text>
+    <text x="22" y="65" fill="#78350F" font-size="9">Extensión recta de remate: ≥ max(6·d_b, 75 mm)</text>
+
+    <!-- Espaciamiento en zona confinada (C.21.5.3.2) -->
+    <rect x="14" y="82" width="252" height="54" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="22" y="97" fill="#0F172A" font-size="9.5" font-weight="700">Espaciamiento Sísmico s_max (DES):</text>
+    <text x="22" y="112" fill="#1D4ED8" font-size="9.5" font-weight="800">s ≤ min( d/4,  8·d_b_long,  24·d_b_estribo,  300 mm )</text>
+    <text x="22" y="127" fill="#64748B" font-size="8.5">Primer estribo a máx. 50 mm de la cara del apoyo.</text>
+
+    <!-- Cortante por capacidad Ve -->
+    <rect x="14" y="144" width="252" height="44" rx="4" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+    <text x="22" y="159" fill="#1E40AF" font-size="9.5" font-weight="800">Diseño por Capacidad V_e (C.21.5.4):</text>
+    <text x="22" y="176" fill="#1D4ED8" font-size="9.5" font-weight="800">V_e = (M_pr1 + M_pr2) / l_n ± (w_u · l_n) / 2</text>
+  </g>
+
+</svg>
+        </div>
+
+        <!-- GUÍA DE CÁTEDRA DOCENTE: FICHAS TÉCNICAS DE LOS 4 PILARES A CORTANTE -->
+        <div class="diagram-pedagogical-guide">
+          <div class="guide-header">
+            <span class="guide-tag">GUÍA DE CÁTEDRA DOCENTE</span>
+            <h3 class="guide-title">Fundamentos Analíticos del Diseño a Cortante y Tensión Diagonal (NSR-10 / ACI 318)</h3>
+          </div>
+          <div class="guide-cards-grid">
+            <!-- Pilar 1: Biaxial y Mohr -->
+            <div class="guide-card accent-blue">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 1</span>
+                <span class="guide-card-norma">NSR-10 C.11.1</span>
+              </div>
+              <h4 class="guide-card-heading">1. Estado Biaxial y Tensión Diagonal</h4>
+              <p class="guide-card-desc">
+                En el alma de la viga, la combinación del esfuerzo normal de flexión ($\sigma_x$) y el cortante tangencial ($\tau_{xy}$) genera un esfuerzo principal de tracción $\sigma_1$. Al superar el módulo de rotura del concreto ($f_r \approx 0.62\sqrt{f'_c}$), se forman grietas inclinadas a $\approx 45^\circ$ que provocan fallas frágiles sin aviso previo.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Esfuerzo Principal de Tracción:</strong>
+                $$\sigma_1 = \frac{\sigma_x}{2} + \sqrt{\left(\frac{\sigma_x}{2}\right)^2 + \tau_{xy}^2}$$
+              </div>
+            </div>
+
+            <!-- Pilar 2: Cercha Ritter-Mörsch -->
+            <div class="guide-card accent-emerald">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 2</span>
+                <span class="guide-card-norma">NSR-10 C.11.4</span>
+              </div>
+              <h4 class="guide-card-heading">2. Cercha de Ritter-Mörsch a $45^\circ$</h4>
+              <p class="guide-card-desc">
+                Modela la viga fisurada como una estructura reticulada: cordón superior de concreto comprimido ($C$), bielas diagonales de concreto a $45^\circ$ ($D_c$), montantes verticales de acero traccionado (estribos $T_v = A_v f_{yt}$) y cordón inferior de acero longitudinal ($T_L$).
+              </p>
+              <div class="guide-card-rule">
+                <strong>Tirante Vertical de la Cercha:</strong>
+                $$V_s = \frac{A_v \cdot f_{yt} \cdot d}{s}$$
+              </div>
+            </div>
+
+            <!-- Pilar 3: Resistencia Nominal LRFD -->
+            <div class="guide-card accent-amber">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 3</span>
+                <span class="guide-card-norma">NSR-10 C.11.1 / C.11.2</span>
+              </div>
+              <h4 class="guide-card-heading">3. Resistencia Nominal y Criterio LRFD</h4>
+              <p class="guide-card-desc">
+                La capacidad nominal total combina el aporte del concreto no fisurado, trabazón de agregados y acción de dovela ($V_c$) con el refuerzo transversal ($V_s$). El factor de reducción por cortante es $\phi = 0.75$, reflejando la menor tolerancia a la falla frágil.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Ecuación Fundamental de Diseño:</strong>
+                $$\phi V_n = \phi (V_c + V_s) \ge V_u \quad (\phi = 0.75)$$
+              </div>
+            </div>
+
+            <!-- Pilar 4: Detallamiento Sísmico -->
+            <div class="guide-card accent-cyan">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 4</span>
+                <span class="guide-card-norma">NSR-10 C.21.5 / C.7.1</span>
+              </div>
+              <h4 class="guide-card-heading">4. Confinamiento Sísmico y Capacidad</h4>
+              <p class="guide-card-desc">
+                En zonas de disipación de energía (DES/DMO), en una longitud $2h$ desde los apoyos se exigen estribos cerrados con ganchos a $135^\circ$, espaciamiento $s \le \min(d/4, 8d_b, 300\text{ mm})$ y diseño por cortante hiperresistente $V_e$ derivado de momentos probables $M_{pr}$.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Cortante por Capacidad Sísmica:</strong>
+                $$V_e = \frac{M_{pr1} + M_{pr2}}{l_n} \pm \frac{w_u \cdot l_n}{2}$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="modal-variables" class="variables-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-vars-title" style="display: none;">
     <div class="variables-modal-backdrop" onclick="toggleVariablesModal()"></div>
     <div class="variables-modal-content">
       

@@ -5769,16 +5769,25 @@ html[data-theme="dark"] .sim-tacho-needle {
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
+  align-items: stretch !important;
+  justify-self: stretch !important;
   gap: 0.5rem !important;
 }
 
 .diagram-interactive-wrap {
   position: relative;
+  width: 100% !important;
   border-radius: var(--radius-sm);
   overflow: hidden;
   cursor: pointer;
   border: 1px solid var(--border-color);
   transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.diagram-interactive-wrap svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
 }
 
 .diagram-interactive-wrap:hover {

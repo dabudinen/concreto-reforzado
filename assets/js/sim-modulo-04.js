@@ -25,12 +25,24 @@ function getThemePaletteMod04() {
     gridLine: isDark ? 'rgba(148, 163, 184, 0.14)' : 'rgba(148, 163, 184, 0.22)',
     concreteFill: isDark ? '#1E293B' : '#E2E8F0',
     concreteStroke: isDark ? '#94A3B8' : '#334155',
-    vcFill: isDark ? 'rgba(16, 185, 129, 0.22)' : 'rgba(16, 185, 129, 0.16)',
-    vcStroke: isDark ? '#34D399' : '#059669',
-    vsFill: isDark ? 'rgba(244, 63, 94, 0.28)' : 'rgba(225, 29, 72, 0.18)',
-    vsStroke: isDark ? '#FB7185' : '#E11D48',
-    zone2Fill: isDark ? 'rgba(245, 158, 11, 0.22)' : 'rgba(245, 158, 11, 0.16)',
-    zone2Stroke: isDark ? '#FBBF24' : '#D97706',
+    // Colores normativos consistentes con Figura 4.3:
+    // Zona 1 (Vu <= 0.5 phiVc): Verde (#16A34A)
+    zone1Fill: isDark ? 'rgba(34, 197, 94, 0.24)' : 'rgba(22, 163, 74, 0.18)',
+    zone1Stroke: isDark ? '#4ADE80' : '#15803D',
+    // Zona 2 (0.5 phiVc < Vu <= phiVc): Azul (#2563EB)
+    zone2Fill: isDark ? 'rgba(59, 130, 246, 0.24)' : 'rgba(37, 99, 235, 0.18)',
+    zone2Stroke: isDark ? '#60A5FA' : '#1D4ED8',
+    // Zona 3 (phiVc < Vu <= phiVn,max): Amarillo Ocre (#D97706)
+    zone3Fill: isDark ? 'rgba(245, 158, 11, 0.26)' : 'rgba(245, 158, 11, 0.22)',
+    zone3Stroke: isDark ? '#FBBF24' : '#B45309',
+    // Zona 4 (Vu > phiVn,max, Vs > Vs,max): Rojo (#DC2626)
+    zone4Fill: isDark ? 'rgba(239, 68, 68, 0.30)' : 'rgba(220, 38, 38, 0.22)',
+    zone4Stroke: isDark ? '#F87171' : '#B91C1C',
+    // Alias para Simulador 4.2
+    vcFill: isDark ? 'rgba(34, 197, 94, 0.22)' : 'rgba(22, 163, 74, 0.16)',
+    vcStroke: isDark ? '#4ADE80' : '#15803D',
+    vsFill: isDark ? 'rgba(245, 158, 11, 0.26)' : 'rgba(245, 158, 11, 0.22)',
+    vsStroke: isDark ? '#FBBF24' : '#B45309',
     stirrupColor: isDark ? '#38BDF8' : '#0284C7',
     rebarColor: isDark ? '#FBBF24' : '#D97706',
     crackColor: isDark ? '#F87171' : '#DC2626',
@@ -45,19 +57,20 @@ function getThemePaletteMod04() {
  * SIMULADOR 4.1: DISEÑADOR Y ZONIFICADOR DEL DIAGRAMA DE CORTANTE Y ESTRIBOS
  * ============================================================================
  */
-window.sim41Mode = 'design'; // 'design' o 'review'
+window.sim41Mode = 'design';       // 'design' o 'review'
+window.sim41ReviewDist = 'uniform'; // 'uniform' o 'zoned'
 
 function setSim41Mode(mode) {
   window.sim41Mode = mode === 'review' ? 'review' : 'design';
 
-  const btnDesign  = document.getElementById('sim41-btn-mode-design');
-  const btnReview  = document.getElementById('sim41-btn-mode-review');
-  const modeBadge  = document.getElementById('sim41-mode-badge');
+  const btnDesign   = document.getElementById('sim41-btn-mode-design');
+  const btnReview   = document.getElementById('sim41-btn-mode-review');
+  const modeBadge   = document.getElementById('sim41-mode-badge');
   const revControls = document.getElementById('sim41-review-controls');
 
-  const lblPhivs   = document.getElementById('lbl-res41-phivs');
-  const lblSreq    = document.getElementById('lbl-res41-sreq');
-  const lblSadopt  = document.getElementById('lbl-res41-sadopt');
+  const lblPhivs    = document.getElementById('lbl-res41-phivs');
+  const lblSreq     = document.getElementById('lbl-res41-sreq');
+  const lblSadopt   = document.getElementById('lbl-res41-sadopt');
 
   if (window.sim41Mode === 'review') {
     if (btnDesign) btnDesign.classList.remove('active');
@@ -98,11 +111,33 @@ function setSim41Mode(mode) {
   updateSim41();
 }
 
+function setSim41ReviewDist(distMode) {
+  window.sim41ReviewDist = distMode === 'zoned' ? 'zoned' : 'uniform';
+  const btnUniform = document.getElementById('sim41-btn-rev-uniform');
+  const btnZoned   = document.getElementById('sim41-btn-rev-zoned');
+  const boxUniform = document.getElementById('sim41-rev-uniform-box');
+  const boxZoned   = document.getElementById('sim41-rev-zoned-box');
+
+  if (window.sim41ReviewDist === 'zoned') {
+    if (btnUniform) btnUniform.classList.remove('active');
+    if (btnZoned)   btnZoned.classList.add('active');
+    if (boxUniform) boxUniform.style.display = 'none';
+    if (boxZoned)   boxZoned.style.display   = 'block';
+  } else {
+    if (btnUniform) btnUniform.classList.add('active');
+    if (btnZoned)   btnZoned.classList.remove('active');
+    if (boxUniform) boxUniform.style.display = 'block';
+    if (boxZoned)   boxZoned.style.display   = 'none';
+  }
+  updateSim41();
+}
+
 function updateSim41() {
   const lInput = document.getElementById('sim41-L');
   if (!lInput) return;
 
-  const isReview = window.sim41Mode === 'review';
+  const isReview    = window.sim41Mode === 'review';
+  const isZonedRev  = isReview && window.sim41ReviewDist === 'zoned';
   const L      = parseFloat(lInput.value);                                      // m (luz entre ejes)
   const cApoyo = parseFloat(document.getElementById('sim41-c').value);          // m (ancho apoyo)
   const wu     = parseFloat(document.getElementById('sim41-wu').value);         // kN/m (carga mayorada)
@@ -116,8 +151,16 @@ function updateSim41() {
   const barNo  = parseInt(document.getElementById('sim41-bar').value, 10);      // 2, 3, 4
   const legs   = parseInt(document.getElementById('sim41-legs').value, 10);     // 2, 3, 4
   const critAtD = document.getElementById('sim41-crit').value === 'd';          // true: a 'd' de cara; false: en cara
-  const sColInput = document.getElementById('sim41-scol');
-  const sColCm = sColInput ? parseFloat(sColInput.value) : 12.0;
+
+  const sColInput   = document.getElementById('sim41-scol');
+  const sColZ3Input = document.getElementById('sim41-scol-z3');
+  const sColZ2Input = document.getElementById('sim41-scol-z2');
+
+  const sColUniformCm = sColInput ? parseFloat(sColInput.value) : 12.0;
+  const sColZ3Cm      = sColZ3Input ? parseFloat(sColZ3Input.value) : 12.0;
+  const sColZ2Cm      = sColZ2Input ? parseFloat(sColZ2Input.value) : 20.0;
+
+  const sColCm = isZonedRev ? sColZ3Cm : sColUniformCm;
 
   // Actualizar etiquetas de controles
   document.getElementById('val-sim41-L').textContent   = `${L.toFixed(2)} m`;
@@ -127,8 +170,13 @@ function updateSim41() {
   document.getElementById('val-sim41-bw').textContent  = `${bw.toFixed(0)} cm`;
   document.getElementById('val-sim41-h').textContent   = `${h.toFixed(0)} cm`;
   document.getElementById('val-sim41-rec').textContent = `${rec.toFixed(1)} cm`;
-  const valScolEl = document.getElementById('val-sim41-scol');
-  if (valScolEl) valScolEl.textContent = `${sColCm.toFixed(1)} cm`;
+
+  const valScolEl   = document.getElementById('val-sim41-scol');
+  const valScolZ3El = document.getElementById('val-sim41-scol-z3');
+  const valScolZ2El = document.getElementById('val-sim41-scol-z2');
+  if (valScolEl)   valScolEl.textContent   = `${sColUniformCm.toFixed(1)} cm`;
+  if (valScolZ3El) valScolZ3El.textContent = `${sColZ3Cm.toFixed(1)} cm`;
+  if (valScolZ2El) valScolZ2El.textContent = `${sColZ2Cm.toFixed(1)} cm`;
 
   const phi = 0.75; // NSR-10 C.9.3.2.3
   const dCm = Math.max(h - rec, 10.0);
@@ -151,10 +199,8 @@ function updateSim41() {
   let factorAxial = 1.0;
   const sigmaAxialMPa = (Nu * 1000.0) / AgMm2; // MPa
   if (Nu > 0.01) {
-    // Compresión axial C.11.2.1.2 (Ec. C.11-4)
     factorAxial = 1.0 + sigmaAxialMPa / 14.0;
   } else if (Nu < -0.01) {
-    // Tracción axial C.11.2.2.3 (Ec. C.11-8)
     factorAxial = Math.max(0.0, 1.0 + 0.29 * sigmaAxialMPa);
   }
   const Vc = (0.17 * factorAxial * lambda * Math.sqrt(fc) * bwMm * dMm) / 1000.0; // kN
@@ -181,12 +227,12 @@ function updateSim41() {
   const sMaxAvMin2Mm = (AvMm2 * fyt) / (0.35 * bwMm);
   const sMaxAvMinCm  = Math.min(sMaxAvMin1Mm, sMaxAvMin2Mm) / 10.0;
 
-  // En modo Revisión, evaluamos Vs provisto con sColCm
-  const VsColRaw = (AvMm2 * fyt * dMm) / (sColCm * 10.0) / 1000.0; // kN
+  // En modo Revisión, evaluamos Vs provisto en la sección crítica (con sColCm = sColZ3Cm o sColUniformCm)
+  const VsColRaw    = (AvMm2 * fyt * dMm) / (sColCm * 10.0) / 1000.0; // kN
   const VsColCapped = Math.min(VsColRaw, VsMax);
-  const phiVsCol = phi * VsColCapped;
-  const phiVnCol = phiVc + phiVsCol;
-  const dcRatio  = phiVnCol > 0 ? (VuCrit / phiVnCol) : 99.9;
+  const phiVsCol    = phi * VsColCapped;
+  const phiVnCol    = phiVc + phiVsCol;
+  const dcRatio     = phiVnCol > 0 ? (VuCrit / phiVnCol) : 99.9;
 
   // 2) Por geometría según nivel de Vs (NSR-10 C.11.4.5.1 y C.11.4.5.3)
   const vsForGeomCheck = isReview ? Math.max(VsReq, VsColCapped) : VsReq;
@@ -196,6 +242,8 @@ function updateSim41() {
     : Math.min(dCm / 2.0, 60.0);
 
   const sMaxNormCm = Math.min(sMaxAvMinCm, sMaxGeomCm);
+  // En Zona 2 (donde Vs = 0), el límite geométrico siempre es min(d/2, 60 cm)
+  const sMaxZone2Cm = Math.min(sMaxAvMinCm, Math.min(dCm / 2.0, 60.0));
 
   // Espaciamiento requerido por resistencia en la sección crítica (cm)
   let sStrengthCm = 999.0;
@@ -203,20 +251,25 @@ function updateSim41() {
     sStrengthCm = (phi * AvMm2 * fyt * dMm) / (phiVsReq * 1000.0) / 10.0;
   }
 
-  // Espaciamiento de diseño en zona crítica y en zona mínima (redondeado hacia abajo a cada 1 cm o 0.5 cm)
+  // Espaciamiento de diseño/revisión en Zona 3 y en Zona 2
   const sCritDesignCm = isReview
     ? sColCm
     : Math.max(5.0, Math.floor(Math.min(sStrengthCm, sMaxNormCm) * 2.0) / 2.0);
   const sMinZoneCm    = isReview
-    ? sColCm
-    : Math.max(5.0, Math.floor(sMaxNormCm * 2.0) / 2.0);
+    ? (isZonedRev ? sColZ2Cm : sColUniformCm)
+    : Math.max(5.0, Math.floor(sMaxZone2Cm * 2.0) / 2.0);
 
   // Capacidad real con sCritDesignCm
   const VsProv = Math.min(VsMax, (AvMm2 * fyt * dMm) / (sCritDesignCm * 10.0) / 1000.0); // kN
   const phiVnProv = phi * (Vc + VsProv);
 
   // Zonificación longitudinal desde la cara del apoyo (m)
-  // S = distancia desde la cara del apoyo hasta donde Vu(x) = phi*Vc
+  // S_zone4 = distancia desde la cara del apoyo hasta donde Vu(x) = phi*Vn,max
+  let S_zone4 = 0.0;
+  if (VuCara > phiVnMax && wu > 0) {
+    S_zone4 = Math.min(Ltotal, (VuCara - phiVnMax) / wu);
+  }
+  // S_zone3 = distancia desde la cara del apoyo hasta donde Vu(x) = phi*Vc
   let S_zone3 = 0.0;
   if (VuCara > phiVc && wu > 0) {
     S_zone3 = Math.min(Ltotal, (VuCara - phiVc) / wu);
@@ -226,12 +279,12 @@ function updateSim41() {
   if (VuCara > halfPhiVc && wu > 0) {
     X_zone2 = Math.min(Ltotal, (VuCara - halfPhiVc) / wu);
   }
+  const lenZone3 = Math.max(0.0, S_zone3 - S_zone4);
   const lenZone2 = Math.max(0.0, X_zone2 - S_zone3);
   const lenZone1 = Math.max(0.0, Ltotal - X_zone2);
 
   // Conteo de estribos desde la cara del apoyo hasta L/2
   const firstStirrupM = 0.05; // Primer estribo a 5 cm de la cara del apoyo
-  let nStirrupsZone3 = 0;
   let posM = firstStirrupM;
   const sCritM = sCritDesignCm / 100.0;
   const sMinM  = sMinZoneCm / 100.0;
@@ -239,13 +292,12 @@ function updateSim41() {
   const stirrupPositionsM = [];
   if (isReview || VuCrit > halfPhiVc) {
     stirrupPositionsM.push(posM);
-    const limitZoneM = isReview ? Ltotal : S_zone3;
-    while (posM + sCritM <= limitZoneM + 0.001 && stirrupPositionsM.length < 120) {
+    const limitZone3M = (isReview && !isZonedRev) ? Ltotal : S_zone3;
+    while (posM + sCritM <= limitZone3M + 0.001 && stirrupPositionsM.length < 120) {
       posM += sCritM;
       stirrupPositionsM.push(posM);
-      nStirrupsZone3++;
     }
-    if (!isReview) {
+    if (!isReview || isZonedRev) {
       while (posM + sMinM <= X_zone2 + 0.001 && stirrupPositionsM.length < 150) {
         posM += sMinM;
         stirrupPositionsM.push(posM);
@@ -260,42 +312,57 @@ function updateSim41() {
   document.getElementById('res41-phivc').textContent   = `${phiVc.toFixed(2)} kN (Vc = ${Vc.toFixed(1)} kN)`;
   document.getElementById('res41-av').textContent      = `${AvCm2.toFixed(2)} cm² (${legs} ramas ${stirrup.label.split(' ')[0]} ${stirrup.label.split(' ')[1]})`;
   document.getElementById('res41-smax').textContent    = `${sMaxNormCm.toFixed(1)} cm (Geom: ${sMaxGeomCm.toFixed(1)} | Av,mín: ${sMaxAvMinCm.toFixed(1)})`;
-  document.getElementById('res41-zonas').textContent   = `S (Zona 3) = ${S_zone3.toFixed(2)} m | L2 (Zona 2) = ${lenZone2.toFixed(2)} m | L1 (Zona 1) = ${lenZone1.toFixed(2)} m (Ltotal = ${Ltotal.toFixed(2)} m)`;
+
+  const zona4Text = S_zone4 > 0.005 ? `🚨 Zona 4 = ${S_zone4.toFixed(2)} m | ` : '';
+  document.getElementById('res41-zonas').textContent   = `${zona4Text}S (Zona 3) = ${S_zone3.toFixed(2)} m | L2 (Zona 2) = ${lenZone2.toFixed(2)} m | L1 (Zona 1) = ${lenZone1.toFixed(2)} m (Ltotal = ${Ltotal.toFixed(2)} m)`;
 
   const statusEl = document.getElementById('res41-status');
 
   if (isReview) {
-    document.getElementById('res41-phivs').textContent  = `${phiVsCol.toFixed(2)} kN (Vs = ${VsColCapped.toFixed(1)} kN @ s=${sColCm.toFixed(1)} cm)`;
-    document.getElementById('res41-sreq').textContent   = `φVn = ${phiVnCol.toFixed(2)} kN`;
-    document.getElementById('res41-sadopt').textContent = `D/C = ${dcRatio.toFixed(2)} (${dcRatio <= 1.0 && sColCm <= sMaxNormCm + 0.05 ? 'CUMPLE ✓' : 'NO CUMPLE ✗'})`;
+    const spacingZ3Ok = (VuCrit <= phiVc) || (sColCm <= sMaxNormCm + 0.05);
+    const spacingZ2Ok = !isZonedRev
+      ? ((VuCrit <= halfPhiVc) || (sColUniformCm <= sMaxZone2Cm + 0.05))
+      : ((VuCara <= halfPhiVc) || (sColZ2Cm <= sMaxZone2Cm + 0.05));
+    const spacingOk   = spacingZ3Ok && spacingZ2Ok;
+    const strengthOk  = phiVnCol >= VuCrit - 0.05;
+    const webOk       = VsReq <= VsMax && VuCara <= phiVnMax;
 
-    const spacingOk  = (VuCrit <= halfPhiVc) || (sColCm <= sMaxNormCm + 0.05);
-    const strengthOk = phiVnCol >= VuCrit - 0.05;
-    const webOk      = VsReq <= VsMax;
+    const revDistLabel = isZonedRev
+      ? `s_Z3=${sColZ3Cm.toFixed(1)} cm / s_Z2=${sColZ2Cm.toFixed(1)} cm`
+      : `s_col=${sColUniformCm.toFixed(1)} cm`;
+
+    document.getElementById('res41-phivs').textContent  = `${phiVsCol.toFixed(2)} kN (Vs = ${VsColCapped.toFixed(1)} kN @ ${revDistLabel})`;
+    document.getElementById('res41-sreq').textContent   = `φVn = ${phiVnCol.toFixed(2)} kN`;
+    document.getElementById('res41-sadopt').textContent = `D/C = ${dcRatio.toFixed(2)} (${webOk && strengthOk && spacingOk ? 'CUMPLE ✓' : 'NO CUMPLE ✗'})`;
 
     if (!webOk) {
       statusEl.className = 'status-badge status-danger';
-      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE (APLASTAMIENTO DEL ALMA): La demanda Vs,req = ${VsReq.toFixed(1)} kN supera Vs,máx = ${VsMax.toFixed(1)} kN (0.66√f'c bw d). Debe ampliarse la sección.`;
+      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE — ZONA 4 (APLASTAMIENTO DEL ALMA): La demanda supera φVn,máx = ${phiVnMax.toFixed(1)} kN (Vs,máx = ${VsMax.toFixed(1)} kN). Debe ampliarse bw, d o f'c.`;
     } else if (!strengthOk) {
       statusEl.className = 'status-badge status-danger';
-      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE POR RESISTENCIA (D/C = ${dcRatio.toFixed(2)} > 1.00): Con estribos @ ${sColCm.toFixed(1)} cm, φVn = ${phiVnCol.toFixed(1)} kN < Vu,crit = ${VuCrit.toFixed(1)} kN (se requiere s ≤ ${Math.min(sStrengthCm, sMaxNormCm).toFixed(1)} cm).`;
-    } else if (!spacingOk) {
+      statusEl.innerHTML = `❌ REVISIÓN NO CUMPLE POR RESISTENCIA (D/C = ${dcRatio.toFixed(2)} > 1.00): Con ${revDistLabel}, φVn = ${phiVnCol.toFixed(1)} kN < Vu,crit = ${VuCrit.toFixed(1)} kN (se requiere s ≤ ${Math.min(sStrengthCm, sMaxNormCm).toFixed(1)} cm).`;
+    } else if (!spacingZ3Ok) {
       statusEl.className = 'status-badge status-warn';
-      statusEl.innerHTML = `⚠️ REVISIÓN NO CUMPLE ESPACIAMIENTO MÁXIMO: Aunque φVn = ${phiVnCol.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN (D/C = ${dcRatio.toFixed(2)}), la separación existente s_col = ${sColCm.toFixed(1)} cm excede s_máx = ${sMaxNormCm.toFixed(1)} cm.`;
+      statusEl.innerHTML = `⚠️ REVISIÓN NO CUMPLE ESPACIAMIENTO EN ZONA 3: Aunque φVn = ${phiVnCol.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN, la separación en Zona 3 (${sColCm.toFixed(1)} cm) excede s_máx,3 = ${sMaxNormCm.toFixed(1)} cm.`;
+    } else if (!spacingZ2Ok) {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ REVISIÓN NO CUMPLE ESPACIAMIENTO EN ZONA 2: La separación en Zona 2 (${sColZ2Cm.toFixed(1)} cm) excede el tope normativo s_máx,2 = ${sMaxZone2Cm.toFixed(1)} cm.`;
     } else {
       statusEl.className = 'status-badge status-ok';
-      statusEl.innerHTML = `✅ REVISIÓN SATISFACTORIA (D/C = ${dcRatio.toFixed(2)} ≤ 1.00): Con estribos @ s_col = ${sColCm.toFixed(1)} cm ≤ s_máx (${sMaxNormCm.toFixed(1)} cm), la capacidad φVn = ${phiVnCol.toFixed(1)} kN supera la demanda Vu,crit = ${VuCrit.toFixed(1)} kN.`;
+      statusEl.innerHTML = `✅ REVISIÓN SATISFACTORIA (D/C = ${dcRatio.toFixed(2)} ≤ 1.00): Con despiece (${revDistLabel}), la capacidad φVn = ${phiVnCol.toFixed(1)} kN supera Vu,crit = ${VuCrit.toFixed(1)} kN y cumple espaciamientos máximos.`;
     }
   } else {
     document.getElementById('res41-phivs').textContent  = `${phiVsReq.toFixed(2)} kN (Vs = ${VsReq.toFixed(1)} kN)`;
     document.getElementById('res41-sreq').textContent   = phiVsReq > 0.001 ? `${sStrengthCm.toFixed(1)} cm` : 'No req. por cálculo (rige Av,mín)';
-    document.getElementById('res41-sadopt').textContent = VuCrit <= halfPhiVc
-      ? 'Zona 1: No requiere por resistencia'
-      : `1 E @ 5 cm + E @ ${sCritDesignCm.toFixed(1)} cm (Zona 3) y @ ${sMinZoneCm.toFixed(1)} cm (Zona 2)`;
+    document.getElementById('res41-sadopt').textContent = (VsReq > VsMax || VuCara > phiVnMax)
+      ? '❌ Zona 4: Aumentar sección (bw, d o f\'c)'
+      : (VuCrit <= halfPhiVc
+        ? 'Zona 1: No requiere por resistencia'
+        : `1 E @ 5 cm + Zona 3 @ ${sCritDesignCm.toFixed(1)} cm y Zona 2 @ ${sMinZoneCm.toFixed(1)} cm`);
 
-    if (VsReq > VsMax) {
+    if (VsReq > VsMax || VuCara > phiVnMax) {
       statusEl.className = 'status-badge status-danger';
-      statusEl.innerHTML = `❌ SECCIÓN INSUFICIENTE (ZONA 4): Vs = ${VsReq.toFixed(1)} kN > Vs,máx = ${VsMax.toFixed(1)} kN (0.66√f'c bw d). Aumente bw, d o f'c.`;
+      statusEl.innerHTML = `❌ SECCIÓN INSUFICIENTE — ZONA 4 (APLASTAMIENTO DEL ALMA): Vu supera φVn,máx = ${phiVnMax.toFixed(1)} kN (Vs,máx = ${VsMax.toFixed(1)} kN = 0.66√f'c bw d). Aumente bw, d o f'c.`;
     } else if (VuCrit <= halfPhiVc) {
       statusEl.className = 'status-badge status-ok';
       statusEl.innerHTML = `✅ ZONA 1 (Vu ≤ 0.5 φVc = ${halfPhiVc.toFixed(1)} kN): El concreto resiste holgadamente. Se colocan estribos constructivos @ d/2 = ${(dCm / 2).toFixed(0)} cm.`;
@@ -304,10 +371,10 @@ function updateSim41() {
       statusEl.innerHTML = `✅ ZONA 2 (0.5 φVc < Vu ≤ φVc): Requiere armadura mínima Av,mín @ s_máx = ${sMinZoneCm.toFixed(1)} cm hasta x = ${X_zone2.toFixed(2)} m de la cara.`;
     } else if (isHighShear) {
       statusEl.className = 'status-badge status-warn';
-      statusEl.innerHTML = `⚠️ ZONA 3 DE CORTANTE ALTO (0.33√f'c bw d < Vs ≤ 0.66√f'c bw d): s_máx se reduce a mín(d/4, 30 cm) = ${sMaxGeomCm.toFixed(1)} cm. Estribos @ ${sCritDesignCm.toFixed(1)} cm (φVn = ${phiVnProv.toFixed(1)} kN).`;
+      statusEl.innerHTML = `⚠️ ZONA 3B DE CORTANTE ALTO (0.33√f'c bw d < Vs ≤ 0.66√f'c bw d): s_máx se reduce a mín(d/4, 30 cm) = ${sMaxGeomCm.toFixed(1)} cm. Estribos @ ${sCritDesignCm.toFixed(1)} cm (φVn = ${phiVnProv.toFixed(1)} kN).`;
     } else {
       statusEl.className = 'status-badge status-ok';
-      statusEl.innerHTML = `✅ ZONA 3 DE DISEÑO ESTÁNDAR (Vs ≤ 0.33√f'c bw d = ${VsLim1.toFixed(1)} kN): Estribos @ ${sCritDesignCm.toFixed(1)} cm en S = ${S_zone3.toFixed(2)} m (φVn = ${phiVnProv.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN).`;
+      statusEl.innerHTML = `✅ ZONA 3A DE DISEÑO ESTÁNDAR (Vs ≤ 0.33√f'c bw d = ${VsLim1.toFixed(1)} kN): Estribos @ ${sCritDesignCm.toFixed(1)} cm en S = ${S_zone3.toFixed(2)} m (φVn = ${phiVnProv.toFixed(1)} kN ≥ Vu = ${VuCrit.toFixed(1)} kN).`;
     }
   }
 
@@ -320,29 +387,31 @@ function updateSim41() {
 
   if (tachoNeedle && tachoBadge && tachoRatio && tachoVs && tachoZone) {
     const phiVnLim1 = phiVc + phi * VsLim1;
+    // Evaluamos el tacómetro con VuCrit (o VuCara si VuCara ya entró en Zona 4)
+    const vuRef = VuCara > phiVnMax ? Math.max(VuCrit, VuCara) : VuCrit;
     let needlePct = 5.0;
 
-    if (VuCrit <= halfPhiVc && halfPhiVc > 0) {
-      needlePct = (VuCrit / halfPhiVc) * 18.0;
-      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
-      tachoBadge.textContent = 'ZONA 1 • Vu ≤ 0.5φVc (ESTRIBOS CONSTRUCTIVOS)';
-    } else if (VuCrit <= phiVc && phiVc > halfPhiVc) {
-      needlePct = 18.0 + ((VuCrit - halfPhiVc) / (phiVc - halfPhiVc)) * 20.0;
-      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
-      tachoBadge.textContent = 'ZONA 2 • 0.5φVc < Vu ≤ φVc (RIGE Av,mín)';
-    } else if (VuCrit <= phiVnLim1 && phiVnLim1 > phiVc) {
-      needlePct = 38.0 + ((VuCrit - phiVc) / (phiVnLim1 - phiVc)) * 27.0;
-      tachoBadge.className = 'sim-tacho-zone-badge zone-tension';
-      tachoBadge.textContent = 'ZONA 3A • DISEÑO ESTÁNDAR (s ≤ d/2)';
-    } else if (VuCrit <= phiVnMax && phiVnMax > phiVnLim1) {
-      needlePct = 65.0 + ((VuCrit - phiVnLim1) / (phiVnMax - phiVnLim1)) * 20.0;
-      tachoBadge.className = 'sim-tacho-zone-badge zone-trans';
-      tachoBadge.textContent = 'ZONA 3B • CORTANTE ALTO (s ≤ d/4)';
+    if (vuRef <= halfPhiVc && halfPhiVc > 0) {
+      needlePct = (vuRef / halfPhiVc) * 18.0;
+      tachoBadge.style.cssText = 'background:#DCFCE7; color:#166534; border:1px solid #86EFAC;';
+      tachoBadge.textContent = '🟢 ZONA 1 • Vu ≤ 0.5φVc (CORTANTE BAJO)';
+    } else if (vuRef <= phiVc && phiVc > halfPhiVc) {
+      needlePct = 18.0 + ((vuRef - halfPhiVc) / (phiVc - halfPhiVc)) * 20.0;
+      tachoBadge.style.cssText = 'background:#DBEAFE; color:#1E40AF; border:1px solid #93C5FD;';
+      tachoBadge.textContent = '🔵 ZONA 2 • 0.5φVc < Vu ≤ φVc (RIGE Av,mín)';
+    } else if (vuRef <= phiVnLim1 && phiVnLim1 > phiVc) {
+      needlePct = 38.0 + ((vuRef - phiVc) / (phiVnLim1 - phiVc)) * 27.0;
+      tachoBadge.style.cssText = 'background:#FEF3C7; color:#B45309; border:1px solid #FDE68A;';
+      tachoBadge.textContent = '🟡 ZONA 3A • DISEÑO POR RESISTENCIA (s ≤ d/2)';
+    } else if (vuRef <= phiVnMax && phiVnMax > phiVnLim1) {
+      needlePct = 65.0 + ((vuRef - phiVnLim1) / (phiVnMax - phiVnLim1)) * 20.0;
+      tachoBadge.style.cssText = 'background:#FFEDD5; color:#9A3412; border:1px solid #FDBA74;';
+      tachoBadge.textContent = '🟠 ZONA 3B • CORTANTE ALTO (s ≤ d/4)';
     } else {
-      const overRatio = phiVnMax > 0 ? (VuCrit - phiVnMax) / (0.35 * phiVnMax) : 1.0;
+      const overRatio = phiVnMax > 0 ? (vuRef - phiVnMax) / (0.35 * phiVnMax) : 1.0;
       needlePct = Math.min(98.0, 85.0 + Math.max(0.0, overRatio) * 13.0);
-      tachoBadge.className = 'sim-tacho-zone-badge zone-comp';
-      tachoBadge.textContent = 'ZONA 4 • SECCIÓN INSUFICIENTE (Vs > Vs,máx)';
+      tachoBadge.style.cssText = 'background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;';
+      tachoBadge.textContent = '🔴 ZONA 4 • SECCIÓN INSUFICIENTE (Vs > Vs,máx)';
     }
 
     tachoNeedle.style.left = `${Math.max(2.0, Math.min(98.0, needlePct)).toFixed(1)}%`;
@@ -350,7 +419,9 @@ function updateSim41() {
     if (isReview) {
       tachoRatio.textContent = `Índice D/C = Vu,crit / φVn = ${dcRatio.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnCol.toFixed(1)} kN)`;
       tachoVs.textContent    = `Vs,prov = ${VsColCapped.toFixed(1)} kN vs. Vs,req = ${VsReq.toFixed(1)} kN (Vs,máx = ${VsMax.toFixed(1)} kN)`;
-      tachoZone.textContent  = `s_col = ${sColCm.toFixed(1)} cm ${sColCm <= sMaxNormCm + 0.05 ? '≤' : '>'} s_máx = ${sMaxNormCm.toFixed(1)} cm`;
+      tachoZone.textContent  = isZonedRev
+        ? `Zona 3: ${sColZ3Cm.toFixed(1)} cm (máx ${sMaxNormCm.toFixed(1)}) | Zona 2: ${sColZ2Cm.toFixed(1)} cm (máx ${sMaxZone2Cm.toFixed(1)})`
+        : `s_col = ${sColUniformCm.toFixed(1)} cm ${sColUniformCm <= sMaxNormCm + 0.05 ? '≤' : '>'} s_máx = ${sMaxNormCm.toFixed(1)} cm`;
     } else {
       tachoRatio.textContent = `Vu,crit / φVn,máx = ${ratioDemMax.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnMax.toFixed(1)} kN)`;
       tachoVs.textContent    = `Vs = ${VsReq.toFixed(1)} kN ${VsReq <= VsMax ? '≤' : '>'} Vs,máx (${VsMax.toFixed(1)} kN)`;
@@ -359,11 +430,11 @@ function updateSim41() {
   }
 
   drawSim41Canvas({
-    isReview, sColCm, phiVnCol, dcRatio,
+    isReview, isZonedRev, sColCm, sColZ2Cm, phiVnCol, dcRatio,
     L, cApoyo, wu, bw, h, dCm, dM, Ltotal,
     VuEje, VuCara, VuCrit, xCritFromFace,
     phiVc, halfPhiVc, phiVsReq, phiVnMax,
-    S_zone3, X_zone2, sCritDesignCm, sMinZoneCm,
+    S_zone4, S_zone3, X_zone2, sCritDesignCm, sMinZoneCm,
     stirrupPositionsM, legs, stirrup, critAtD
   });
 }
@@ -405,9 +476,6 @@ function drawSim41Canvas(state) {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
 
-  // Dividir lienzo:
-  // Izquierda (x: 55..620): Arriba Diagrama de Cortante (y: 40..245), Abajo Viga + Estribos (y: 295..415)
-  // Derecha (x: 650..900): Sección transversal de la viga con ramas y ganchos 135°
   const plotLeft = 75;
   const plotRight = 610;
   const plotW = plotRight - plotLeft;
@@ -422,63 +490,125 @@ function drawSim41Canvas(state) {
   const xFacePx = plotLeft + (halfC / totalHorizM) * plotW;
   const mToPx = (mFromFace) => xFacePx + (mFromFace / totalHorizM) * plotW;
 
-  // Escala vertical de fuerza cortante
-  const vMaxPlot = Math.max(state.VuEje * 1.15, state.phiVc * 1.35, 50.0);
-  const vToY = (v) => diagBot - Math.min(1.08, Math.max(0.0, v / vMaxPlot)) * diagH;
+  // Escala vertical de fuerza cortante: garantiza que phiVnMax sea visible cuando Vu se acerca o supera Zona 4
+  const vMaxPlot = Math.max(
+    state.VuEje * 1.12,
+    state.phiVc * 1.45,
+    state.VuCara > state.phiVnMax * 0.75 ? state.phiVnMax * 1.18 : 50.0,
+    50.0
+  );
+  const vToY = (v) => diagBot - Math.min(1.06, Math.max(0.0, v / vMaxPlot)) * diagH;
 
   // Título superior izquierdo
   ctx.fillStyle = pal.textMain;
-  ctx.font = 'bold 13px Inter, sans-serif';
+  ctx.font = 'bold 12.5px Inter, sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('DIAGRAMA DE CORTANTE MAYORADO Vu(x) Y ZONIFICACIÓN (MITAD SIMÉTRICA DE LA VIGA)', plotLeft - 15, 24);
+  ctx.fillText('DIAGRAMA DE CORTANTE Vu(x) Y LAS 4 ZONAS NORMATIVAS (VERDE / AZUL / OCRE / ROJO)', plotLeft - 15, 24);
 
-  // Sombreado de capacidad del concreto phi*Vc (desde cara del apoyo x=0 hasta Ltotal)
-  const yPhiVc = vToY(state.phiVc);
+  const yPhiVnMax  = vToY(state.phiVnMax);
+  const yPhiVc     = vToY(state.phiVc);
   const yHalfPhiVc = vToY(state.halfPhiVc);
-  const yVuCara = vToY(state.VuCara);
-  const yVuCrit = vToY(state.VuCrit);
-  const xCritPx = mToPx(state.xCritFromFace);
+  const yVuCara    = vToY(state.VuCara);
+  const yVuCrit    = vToY(state.VuCrit);
+
+  const xCritPx  = mToPx(state.xCritFromFace);
+  const xZone4Px = mToPx(state.S_zone4);
   const xZone3Px = mToPx(state.S_zone3);
   const xZone2Px = mToPx(state.X_zone2);
 
-  // Polígono verde: resistencia aportada por el concreto (mínimo entre Vu(x) y phi*Vc)
-  ctx.fillStyle = pal.vcFill;
-  ctx.beginPath();
-  ctx.moveTo(xFacePx, diagBot);
-  if (state.VuCara > state.phiVc) {
-    ctx.lineTo(xFacePx, yPhiVc);
-    ctx.lineTo(xZone3Px, yPhiVc);
-  } else {
-    ctx.lineTo(xFacePx, yVuCara);
-  }
-  ctx.lineTo(plotRight, diagBot);
-  ctx.closePath();
-  ctx.fill();
+  // Función auxiliar para evaluar Vu(x) y su coordenada Y en cualquier abscisa x (m desde cara)
+  const vuAtM = (m) => Math.max(0.0, state.VuCara - state.wu * m);
 
-  // Polígono rojo: demanda que deben tomar los estribos (Vu - phi*Vc) en Zona 3
-  if (state.VuCara > state.phiVc) {
-    ctx.fillStyle = pal.vsFill;
+  // 1) SOMBREADO ZONA 1 (VERDE: x desde X_zone2 hasta Ltotal, donde Vu(x) <= 0.5*phiVc)
+  if (state.Ltotal > state.X_zone2) {
+    const xStartM = state.X_zone2;
+    const xStartPx = mToPx(xStartM);
+    const yStartPx = vToY(vuAtM(xStartM));
+    ctx.fillStyle = pal.zone1Fill;
     ctx.beginPath();
-    ctx.moveTo(xFacePx, yPhiVc);
-    ctx.lineTo(xFacePx, yVuCara);
-    ctx.lineTo(xZone3Px, yPhiVc);
+    ctx.moveTo(xStartPx, diagBot);
+    ctx.lineTo(xStartPx, yStartPx);
+    ctx.lineTo(plotRight, diagBot);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // 2) SOMBREADO ZONA 2 (AZUL: x desde S_zone3 hasta X_zone2, donde 0.5*phiVc < Vu(x) <= phiVc)
+  if (state.X_zone2 > state.S_zone3) {
+    const x1Px = mToPx(state.S_zone3);
+    const y1Px = vToY(vuAtM(state.S_zone3));
+    const x2Px = mToPx(state.X_zone2);
+    const y2Px = vToY(vuAtM(state.X_zone2));
+    ctx.fillStyle = pal.zone2Fill;
+    ctx.beginPath();
+    ctx.moveTo(x1Px, diagBot);
+    ctx.lineTo(x1Px, y1Px);
+    ctx.lineTo(x2Px, y2Px);
+    ctx.lineTo(x2Px, diagBot);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // 3) SOMBREADO ZONA 3 (AMARILLO OCRE: x desde S_zone4 hasta S_zone3, donde phiVc < Vu(x) <= phiVn,max)
+  if (state.S_zone3 > state.S_zone4) {
+    const x1Px = mToPx(state.S_zone4);
+    const y1Px = vToY(vuAtM(state.S_zone4));
+    const x2Px = mToPx(state.S_zone3);
+    const y2Px = vToY(vuAtM(state.S_zone3));
+    ctx.fillStyle = pal.zone3Fill;
+    ctx.beginPath();
+    ctx.moveTo(x1Px, diagBot);
+    ctx.lineTo(x1Px, y1Px);
+    ctx.lineTo(x2Px, y2Px);
+    ctx.lineTo(x2Px, diagBot);
     ctx.closePath();
     ctx.fill();
 
-    // Achurado diagonal dentro del triángulo (Vu - phi*Vc)
+    // Achurado diagonal en la parte superior (Vu - phiVc) de Zona 3
     ctx.save();
     ctx.beginPath();
-    ctx.moveTo(xFacePx, yPhiVc);
-    ctx.lineTo(xFacePx, yVuCara);
-    ctx.lineTo(xZone3Px, yPhiVc);
+    ctx.moveTo(x1Px, yPhiVc);
+    ctx.lineTo(x1Px, y1Px);
+    ctx.lineTo(x2Px, yPhiVc);
     ctx.closePath();
     ctx.clip();
-    ctx.strokeStyle = pal.vsStroke;
+    ctx.strokeStyle = pal.zone3Stroke;
     ctx.lineWidth = 1;
-    for (let hx = xFacePx - 150; hx < xZone3Px + 50; hx += 10) {
+    for (let hx = x1Px - 140; hx < x2Px + 40; hx += 10) {
       ctx.beginPath();
-      ctx.moveTo(hx, yVuCara - 10);
+      ctx.moveTo(hx, y1Px - 10);
       ctx.lineTo(hx + 120, yPhiVc + 10);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // 4) SOMBREADO ZONA 4 (ROJO: x desde 0 hasta S_zone4, donde Vu(x) > phiVn,max)
+  if (state.S_zone4 > 0.001) {
+    ctx.fillStyle = pal.zone4Fill;
+    ctx.beginPath();
+    ctx.moveTo(xFacePx, diagBot);
+    ctx.lineTo(xFacePx, yVuCara);
+    ctx.lineTo(xZone4Px, yPhiVnMax);
+    ctx.lineTo(xZone4Px, diagBot);
+    ctx.closePath();
+    ctx.fill();
+
+    // Achurado cruzado de alerta en Zona 4
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(xFacePx, diagBot);
+    ctx.lineTo(xFacePx, yVuCara);
+    ctx.lineTo(xZone4Px, yPhiVnMax);
+    ctx.lineTo(xZone4Px, diagBot);
+    ctx.closePath();
+    ctx.clip();
+    ctx.strokeStyle = pal.zone4Stroke;
+    ctx.lineWidth = 1.2;
+    for (let hx = xFacePx - 160; hx < xZone4Px + 40; hx += 9) {
+      ctx.beginPath();
+      ctx.moveTo(hx, diagTop);
+      ctx.lineTo(hx + 140, diagBot);
       ctx.stroke();
     }
     ctx.restore();
@@ -502,16 +632,57 @@ function drawSim41Canvas(state) {
   ctx.lineTo(xFacePx, diagBot + 55);
   ctx.stroke();
 
-  // Línea horizontal de phi*Vc y 0.5*phi*Vc
-  ctx.strokeStyle = pal.vcStroke;
+  // Líneas verticales divisorias de zonas
+  if (state.S_zone4 > 0.005) {
+    ctx.strokeStyle = pal.zone4Stroke;
+    ctx.beginPath();
+    ctx.moveTo(xZone4Px, yPhiVnMax);
+    ctx.lineTo(xZone4Px, diagBot + 36);
+    ctx.stroke();
+  }
+  if (state.S_zone3 > 0.005) {
+    ctx.strokeStyle = pal.zone3Stroke;
+    ctx.beginPath();
+    ctx.moveTo(xZone3Px, yPhiVc);
+    ctx.lineTo(xZone3Px, diagBot + 36);
+    ctx.stroke();
+  }
+  if (state.X_zone2 > 0.005) {
+    ctx.strokeStyle = pal.zone2Stroke;
+    ctx.beginPath();
+    ctx.moveTo(xZone2Px, yHalfPhiVc);
+    ctx.lineTo(xZone2Px, diagBot + 36);
+    ctx.stroke();
+  }
+
+  // Línea horizontal de phi*Vn,max (si es visible en la escala o si hay Zona 4)
+  if (yPhiVnMax >= diagTop - 4) {
+    ctx.strokeStyle = pal.zone4Stroke;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 3]);
+    ctx.beginPath();
+    ctx.moveTo(xFacePx, yPhiVnMax);
+    ctx.lineTo(plotRight, yPhiVnMax);
+    ctx.stroke();
+
+    ctx.font = 'bold 10.5px JetBrains Mono, monospace';
+    ctx.fillStyle = pal.zone4Stroke;
+    ctx.textAlign = 'right';
+    ctx.fillText(`φVn,máx = ${state.phiVnMax.toFixed(1)} kN (Límite Zona 4)`, plotRight - 6, Math.max(diagTop + 11, yPhiVnMax - 4));
+  }
+
+  // Línea horizontal de phi*Vc (Umbral entre Zona 3 y Zona 2)
+  ctx.strokeStyle = pal.zone3Stroke;
   ctx.lineWidth = 1.6;
+  ctx.setLineDash([5, 4]);
   ctx.beginPath();
   ctx.moveTo(xFacePx, yPhiVc);
   ctx.lineTo(plotRight, yPhiVc);
   ctx.stroke();
 
+  // Línea horizontal de 0.5*phi*Vc (Umbral entre Zona 2 y Zona 1)
   ctx.strokeStyle = pal.zone2Stroke;
-  ctx.lineWidth = 1.3;
+  ctx.lineWidth = 1.4;
   ctx.beginPath();
   ctx.moveTo(xFacePx, yHalfPhiVc);
   ctx.lineTo(plotRight, yHalfPhiVc);
@@ -519,13 +690,13 @@ function drawSim41Canvas(state) {
   ctx.setLineDash([]);
 
   // Etiquetas de phi*Vc y 0.5*phi*Vc
-  ctx.font = 'bold 11px JetBrains Mono, monospace';
-  ctx.fillStyle = pal.vcStroke;
+  ctx.font = 'bold 10.5px JetBrains Mono, monospace';
+  ctx.fillStyle = pal.zone3Stroke;
   ctx.textAlign = 'right';
-  ctx.fillText(`φVc = ${state.phiVc.toFixed(1)} kN`, plotRight - 6, yPhiVc - 5);
+  ctx.fillText(`φVc = ${state.phiVc.toFixed(1)} kN`, plotRight - 6, yPhiVc - 4);
 
   ctx.fillStyle = pal.zone2Stroke;
-  ctx.fillText(`0.5φVc = ${state.halfPhiVc.toFixed(1)} kN`, plotRight - 6, yHalfPhiVc - 5);
+  ctx.fillText(`0.5φVc = ${state.halfPhiVc.toFixed(1)} kN`, plotRight - 6, yHalfPhiVc - 4);
 
   // Recta principal de cortante Vu(x) desde el eje hasta L/2
   const yVuEje = vToY(state.VuEje);
@@ -537,15 +708,16 @@ function drawSim41Canvas(state) {
   ctx.lineTo(plotRight, diagBot);
   ctx.stroke();
 
-  // Punto y ordenada de la sección crítica (a distancia d de la cara)
-  ctx.strokeStyle = pal.vsStroke;
+  // Punto y ordenada de la sección crítica
+  const critColor = state.S_zone4 > 0.001 ? pal.zone4Stroke : pal.zone3Stroke;
+  ctx.strokeStyle = critColor;
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(xCritPx, diagBot);
   ctx.lineTo(xCritPx, yVuCrit);
   ctx.stroke();
 
-  ctx.fillStyle = pal.vsStroke;
+  ctx.fillStyle = critColor;
   ctx.beginPath();
   ctx.arc(xCritPx, yVuCrit, 4.5, 0, Math.PI * 2);
   ctx.fill();
@@ -553,7 +725,7 @@ function drawSim41Canvas(state) {
   ctx.font = 'bold 11px JetBrains Mono, monospace';
   ctx.textAlign = 'left';
   ctx.fillText(
-    state.critAtD ? `Vu(d) = ${state.VuCrit.toFixed(1)} kN` : `Vu(cara) = ${state.VuCrit.toFixed(1)} kN`,
+    state.critAtD ? `Vu(d) = ${state.VuCrit.toFixed(1)} kN` : `Vu(0) = ${state.VuCrit.toFixed(1)} kN`,
     xCritPx + 6,
     Math.max(diagTop + 14, yVuCrit - 6)
   );
@@ -564,22 +736,36 @@ function drawSim41Canvas(state) {
   ctx.fillText(`${state.VuEje.toFixed(0)} kN`, plotLeft - 6, yVuEje + 4);
   ctx.fillText('0 kN', plotLeft - 6, diagBot + 4);
 
-  // Cotas de Zonas debajo del diagrama (y = 255..282)
+  // Cotas de Zonas debajo del diagrama (y = 258..276) con colores idénticos a Figura 4.3
   const yZoneBar = 258;
-  // Zona 3: 0 a S_zone3
-  if (state.S_zone3 > 0.01) {
-    ctx.fillStyle = pal.vsFill;
-    ctx.fillRect(xFacePx, yZoneBar, xZone3Px - xFacePx, 18);
-    ctx.strokeStyle = pal.vsStroke;
-    ctx.strokeRect(xFacePx, yZoneBar, xZone3Px - xFacePx, 18);
-    ctx.fillStyle = pal.vsStroke;
-    ctx.font = 'bold 10px JetBrains Mono, monospace';
+  // Zona 4 (Rojo): 0 a S_zone4
+  if (state.S_zone4 > 0.01) {
+    ctx.fillStyle = pal.zone4Fill;
+    ctx.fillRect(xFacePx, yZoneBar, xZone4Px - xFacePx, 18);
+    ctx.strokeStyle = pal.zone4Stroke;
+    ctx.strokeRect(xFacePx, yZoneBar, xZone4Px - xFacePx, 18);
+    ctx.fillStyle = pal.zone4Stroke;
+    ctx.font = 'bold 9.5px JetBrains Mono, monospace';
     ctx.textAlign = 'center';
-    if (xZone3Px - xFacePx > 65) {
-      ctx.fillText(`ZONA 3 (S=${state.S_zone3.toFixed(2)}m)`, (xFacePx + xZone3Px) / 2, yZoneBar + 13);
+    if (xZone4Px - xFacePx > 42) {
+      ctx.fillText(`ZONA 4 (${state.S_zone4.toFixed(2)}m)`, (xFacePx + xZone4Px) / 2, yZoneBar + 13);
     }
   }
-  // Zona 2: S_zone3 a X_zone2
+  // Zona 3 (Amarillo Ocre): S_zone4 a S_zone3
+  if (state.S_zone3 - state.S_zone4 > 0.01) {
+    const z3LeftPx = state.S_zone4 > 0.01 ? xZone4Px : xFacePx;
+    ctx.fillStyle = pal.zone3Fill;
+    ctx.fillRect(z3LeftPx, yZoneBar, xZone3Px - z3LeftPx, 18);
+    ctx.strokeStyle = pal.zone3Stroke;
+    ctx.strokeRect(z3LeftPx, yZoneBar, xZone3Px - z3LeftPx, 18);
+    ctx.fillStyle = pal.zone3Stroke;
+    ctx.font = 'bold 10px JetBrains Mono, monospace';
+    ctx.textAlign = 'center';
+    if (xZone3Px - z3LeftPx > 55) {
+      ctx.fillText(`ZONA 3 (S=${state.S_zone3.toFixed(2)}m)`, (z3LeftPx + xZone3Px) / 2, yZoneBar + 13);
+    }
+  }
+  // Zona 2 (Azul): S_zone3 a X_zone2
   if (state.X_zone2 - state.S_zone3 > 0.01) {
     ctx.fillStyle = pal.zone2Fill;
     ctx.fillRect(xZone3Px, yZoneBar, xZone2Px - xZone3Px, 18);
@@ -588,20 +774,20 @@ function drawSim41Canvas(state) {
     ctx.fillStyle = pal.zone2Stroke;
     ctx.font = 'bold 10px JetBrains Mono, monospace';
     ctx.textAlign = 'center';
-    if (xZone2Px - xZone3Px > 60) {
+    if (xZone2Px - xZone3Px > 55) {
       ctx.fillText(`ZONA 2 (${(state.X_zone2 - state.S_zone3).toFixed(2)}m)`, (xZone3Px + xZone2Px) / 2, yZoneBar + 13);
     }
   }
-  // Zona 1: X_zone2 a Ltotal
+  // Zona 1 (Verde): X_zone2 a Ltotal
   if (state.Ltotal - state.X_zone2 > 0.01) {
-    ctx.fillStyle = pal.vcFill;
+    ctx.fillStyle = pal.zone1Fill;
     ctx.fillRect(xZone2Px, yZoneBar, plotRight - xZone2Px, 18);
-    ctx.strokeStyle = pal.vcStroke;
+    ctx.strokeStyle = pal.zone1Stroke;
     ctx.strokeRect(xZone2Px, yZoneBar, plotRight - xZone2Px, 18);
-    ctx.fillStyle = pal.vcStroke;
+    ctx.fillStyle = pal.zone1Stroke;
     ctx.font = 'bold 10px JetBrains Mono, monospace';
     ctx.textAlign = 'center';
-    if (plotRight - xZone2Px > 60) {
+    if (plotRight - xZone2Px > 55) {
       ctx.fillText(`ZONA 1 (${(state.Ltotal - state.X_zone2).toFixed(2)}m)`, (xZone2Px + plotRight) / 2, yZoneBar + 13);
     }
   }
@@ -676,13 +862,20 @@ function drawSim41Canvas(state) {
 
   // Etiqueta del despiece debajo de la viga
   ctx.fillStyle = pal.textMain;
-  ctx.font = 'bold 11px Inter, sans-serif';
+  ctx.font = 'bold 10.5px Inter, sans-serif';
   ctx.textAlign = 'left';
-  const despieceText = state.isReview
-    ? `Modo Revisión: Estribos @ s_col = ${state.sColCm.toFixed(1)} cm | φVn = ${state.phiVnCol.toFixed(1)} kN (D/C = ${state.dcRatio.toFixed(2)})`
-    : (state.VuCrit <= state.halfPhiVc
-      ? `Despiece constructivo: E @ ${(state.dCm / 2).toFixed(0)} cm`
-      : `Despiece: 1 E @ 5 cm + Zona 3 @ ${state.sCritDesignCm.toFixed(1)} cm + Zona 2 @ ${state.sMinZoneCm.toFixed(1)} cm`);
+  let despieceText = '';
+  if (state.isReview) {
+    despieceText = state.isZonedRev
+      ? `Revisión por Zonas: Zona 3 @ ${state.sColCm.toFixed(1)} cm + Zona 2 @ ${state.sColZ2Cm.toFixed(1)} cm | D/C = ${state.dcRatio.toFixed(2)}`
+      : `Revisión Uniforme: Estribos @ s_col = ${state.sColCm.toFixed(1)} cm | φVn = ${state.phiVnCol.toFixed(1)} kN (D/C = ${state.dcRatio.toFixed(2)})`;
+  } else if (state.S_zone4 > 0.001) {
+    despieceText = `🚨 ZONA 4 (Vs > Vs,máx): Sección insuficiente por aplastamiento del alma. Aumente bw, d o f'c.`;
+  } else if (state.VuCrit <= state.halfPhiVc) {
+    despieceText = `Despiece constructivo (Zona 1): E @ ${(state.dCm / 2).toFixed(0)} cm`;
+  } else {
+    despieceText = `Despiece: 1 E @ 5 cm + Zona 3 @ ${state.sCritDesignCm.toFixed(1)} cm + Zona 2 @ ${state.sMinZoneCm.toFixed(1)} cm`;
+  }
   ctx.fillText(despieceText, xFacePx + 4, beamBot + 22);
 
   // =========================================================================
@@ -744,12 +937,10 @@ function drawSim41Canvas(state) {
   const nBarsDraw = Math.max(2, state.legs);
   for (let i = 0; i < nBarsDraw; i++) {
     const bx = nBarsDraw === 1 ? stLeft + stW / 2 : stLeft + 5 + (i * (stW - 10)) / (nBarsDraw - 1);
-    // Superiores
     ctx.fillStyle = pal.rebarColor;
     ctx.beginPath();
     ctx.arc(bx, stTop + 5, 4.5, 0, Math.PI * 2);
     ctx.fill();
-    // Inferiores
     ctx.beginPath();
     ctx.arc(bx, stTop + stH - 5, 5.5, 0, Math.PI * 2);
     ctx.fill();
@@ -767,9 +958,10 @@ function drawSim41Canvas(state) {
 }
 
 function loadSim41Preset(presetKey) {
-  const sColEl = document.getElementById('sim41-scol');
+  const sColEl   = document.getElementById('sim41-scol');
+  const sColZ3El = document.getElementById('sim41-scol-z3');
+  const sColZ2El = document.getElementById('sim41-scol-z2');
   if (presetKey === 'ej41_clasico') {
-    // Ejemplo 4.1: Viga de 0.30 x 0.50 m, d = 0.41 m, L = 6.13 m (Ltotal = 2.94 m, apoyo = 0.25 m), wu = 52.85 kN/m -> Vu(d) = 133.72 kN, fc = 21.1 MPa, fyt = 240 MPa
     document.getElementById('sim41-L').value = 6.13;
     document.getElementById('sim41-c').value = 0.25;
     document.getElementById('sim41-wu').value = 52.85;
@@ -783,25 +975,10 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl) sColEl.value = 12.0;
-  } else if (presetKey === 'ej42_vigueta') {
-    // Ejemplo 4.2A: Vigueta 0.12 x 0.40 m, d = 35.5 cm, L = 6.50 m, c = 0.40 m, wu = 10.6 kN/m, fc = 28 MPa, fyt = 420 MPa, Estribo No. 2
-    document.getElementById('sim41-L').value = 6.50;
-    document.getElementById('sim41-c').value = 0.40;
-    document.getElementById('sim41-wu').value = 10.6;
-    document.getElementById('sim41-nu').value = 0;
-    document.getElementById('sim41-bw').value = 12;
-    document.getElementById('sim41-h').value = 40;
-    document.getElementById('sim41-rec').value = 4.5;
-    document.getElementById('sim41-fc').value = '28';
-    document.getElementById('sim41-fyt').value = '420';
-    document.getElementById('sim41-lambda').value = '1.0';
-    document.getElementById('sim41-bar').value = '2';
-    document.getElementById('sim41-legs').value = '2';
-    document.getElementById('sim41-crit').value = 'd';
-    if (sColEl) sColEl.value = 17.5;
-  } else if (presetKey === 'ej42_vigaB') {
-    // Ejemplo 4.2B: Viga Principal B 0.40 x 0.40 m, d = 34 cm, L = 5.78 m, c = 0.35 m, wu = 94.7 kN/m, fc = 28 MPa, fyt = 420 MPa, Estribo No. 3
+    if (sColEl)   sColEl.value   = 12.0;
+    if (sColZ3El) sColZ3El.value = 12.0;
+    if (sColZ2El) sColZ2El.value = 20.0;
+  } else if (presetKey === 'ej42_vigueta' || presetKey === 'ej42_vigaB') {
     document.getElementById('sim41-L').value = 5.78;
     document.getElementById('sim41-c').value = 0.35;
     document.getElementById('sim41-wu').value = 94.7;
@@ -815,9 +992,10 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl) sColEl.value = 11.5;
+    if (sColEl)   sColEl.value   = 11.5;
+    if (sColZ3El) sColZ3El.value = 11.5;
+    if (sColZ2El) sColZ2El.value = 17.0;
   } else if (presetKey === 'alta_demanda') {
-    // Viga con cortante muy elevado (0.33 sqrt(fc) bw d < Vs <= 0.66 sqrt(fc) bw d) y 4 ramas
     document.getElementById('sim41-L').value = 7.20;
     document.getElementById('sim41-c').value = 0.50;
     document.getElementById('sim41-wu').value = 185.0;
@@ -831,7 +1009,27 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '4';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl) sColEl.value = 11.0;
+    if (sColEl)   sColEl.value   = 11.0;
+    if (sColZ3El) sColZ3El.value = 11.0;
+    if (sColZ2El) sColZ2El.value = 25.0;
+  } else if (presetKey === 'zona4_aplastamiento') {
+    // Caso demostrativo de Zona 4: Vs > Vs,máx (0.66 sqrt(f'c) bw d)
+    document.getElementById('sim41-L').value = 6.60;
+    document.getElementById('sim41-c').value = 0.40;
+    document.getElementById('sim41-wu').value = 215.0;
+    document.getElementById('sim41-nu').value = 0;
+    document.getElementById('sim41-bw').value = 25;
+    document.getElementById('sim41-h').value = 45;
+    document.getElementById('sim41-rec').value = 6.0;
+    document.getElementById('sim41-fc').value = '21.1';
+    document.getElementById('sim41-fyt').value = '420';
+    document.getElementById('sim41-lambda').value = '1.0';
+    document.getElementById('sim41-bar').value = '4';
+    document.getElementById('sim41-legs').value = '4';
+    document.getElementById('sim41-crit').value = '0';
+    if (sColEl)   sColEl.value   = 7.0;
+    if (sColZ3El) sColZ3El.value = 7.0;
+    if (sColZ2El) sColZ2El.value = 15.0;
   }
   updateSim41();
 }

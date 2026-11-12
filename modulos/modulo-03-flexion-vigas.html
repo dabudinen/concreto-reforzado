@@ -2703,68 +2703,12 @@
             <strong>Nota técnica:</strong> Valores calculados conforme a NSR-10 C.10.2 y C.10.3 para acero longitudinal con $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}, \varepsilon_y = 0.0021$) y consideración de $d = d_t$ (una fila de armadura). Para secciones con armadura en dos o más capas ($d \neq d_t$), las cuantías se reducen multiplicando por el factor geométrico $(d_t / d) \lt 1.0$.
           </div>
         </div>
-      
-        <!-- REQUISITOS SISMORRESISTENTES DE DUCTILIDAD A FLEXIÓN (NSR-10 C.21: DMO Y DES) -->
-        <div class="tech-card" style="margin-top: 1.5rem; margin-bottom: 1.5rem; border-top: 4.5px solid #DC2626;">
-          <div class="tech-card-header">
-            <h3 class="tech-card-title">🛡️ Requisitos Sismorresistentes de Ductilidad a Flexión (NSR-10 Título C.21 — DMO y DES)</h3>
-            <span class="norm-pill" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA;">NSR-10 C.21.3 (DMO) y C.21.5 (DES)</span>
-          </div>
-          <p style="font-size: 0.88rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
-            En Colombia, debido a la amenaza sísmica intermedia y alta que cubre a la mayoría de las capitales y zonas urbanas, el diseño a flexión de vigas que forman parte del sistema de resistencia sísmica (pórticos resistentes a momentos) no puede limitarse a las ecuaciones de gravedad, sino que debe cumplir estrictamente las disposiciones del Capítulo C.21 para garantizar disipación de energía inelástica:
-          </p>
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1rem; margin-bottom: 0.85rem;">
-            <!-- Tarjeta DMO -->
-            <div style="background: #FFFBEB; border: 1.2px solid #FDE68A; border-radius: 8px; padding: 1rem 1.15rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span style="font-weight: 800; color: #B45309; font-size: 0.92rem;">1. Pórticos DMO (Disipación Moderada)</span>
-                <span style="background: #FEF3C7; color: #92400E; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">NSR-10 C.21.3.4</span>
-              </div>
-              <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.83rem; color: #451A03; line-height: 1.6;">
-                <li><strong>Cuantía máxima permitida:</strong> $\rho \le 0.025$ en cualquier sección del elemento.</li>
-                <li><strong>Continuidad de barras:</strong> Mínimo <strong>2 barras continuas</strong> tanto en el lecho superior como en el inferior a lo largo de toda la viga.</li>
-                <li><strong>Momento positivo en nudos:</strong> En la cara del apoyo, la resistencia a momento positivo debe satisfacer:
-                  $$M_n^+ \ge \frac{1}{3}\,M_n^-$$
-                </li>
-                <li><strong>Momento residual a lo largo de la luz:</strong> En cualquier sección a lo largo del vano:
-                  $$M_n^+ \text{ y } M_n^- \ge \frac{1}{5}\,\max(M_n^+ \text{ en nudos})$$
-                </li>
-              </ul>
-            </div>
-
-            <!-- Tarjeta DES -->
-            <div style="background: #FEF2F2; border: 1.2px solid #FECACA; border-radius: 8px; padding: 1rem 1.15rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span style="font-weight: 800; color: #DC2626; font-size: 0.92rem;">2. Pórticos DES (Disipación Especial)</span>
-                <span style="background: #FEE2E2; color: #991B1B; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">NSR-10 C.21.5.2</span>
-              </div>
-              <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.83rem; color: #7F1D1D; line-height: 1.6;">
-                <li><strong>Geometría límite:</strong> La luz libre $l_n \ge 4d$, ancho $b_w \ge 0.30 h \ge 250\text{ mm}$.</li>
-                <li><strong>Cuantía máxima:</strong> $\rho \le 0.025$ y al menos 2 barras continuas arriba y abajo.</li>
-                <li><strong>Momento positivo en nudos (mayor inversión sísmica):</strong> En la cara del apoyo:
-                  $$M_n^+ \ge \frac{1}{2}\,M_n^-$$
-                </li>
-                <li><strong>Momento residual a lo largo de la luz:</strong> En cualquier sección a lo largo del vano:
-                  $$M_n^+ \text{ y } M_n^- \ge \frac{1}{4}\,\max(M_n^+ \text{ en nudos})$$
-                </li>
-                <li><strong>Restricción de empalmes:</strong> Prohibido traslapar barras longitudinales dentro de los nudos ni a menos de $2h$ de la cara de las columnas.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
       </section>
 
       <!-- ===================================================================
            SECCIÓN 3.0: DISEÑO Y REVISIÓN DE VIGAS SIMPLEMENTE REFORZADAS
            =================================================================== -->
-      <div class="chapter-divider">
-        <span class="chapter-divider-num">ELEMENTO ESTRUCTURAL 03</span>
-        <span class="chapter-divider-title">Vigas Rectangulares Simplemente Reforzadas (Refuerzo a Tracción Únicamente)</span>
-        <span class="chapter-divider-line"></span>
-      </div>
-
       <section id="sec-vigas-simples" class="content-section">
         <div class="section-header">
           <div class="section-tag-row">
@@ -3052,14 +2996,11 @@
 
                   <!-- 5. CHEQUEOS FINALES Y DEFORMACIONES -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>5. Chequeos Finales: Compatibilidad, Deformaciones ($\varepsilon_c, \varepsilon_s, \varepsilon_t$) y Capacidad ($\phi M_n$):</strong>
+                    <strong>5. Chequeos Finales: Compatibilidad, Deformaciones ($\varepsilon_s, \varepsilon_t$) y Capacidad ($\phi M_n$):</strong>
                     <div style="margin-top: 0.25rem;">Con la armadura real colocada, calcular el peralte efectivo real $d_{\text{real}} = h - y_{cg}$ y el peralte a la fibra extrema $d_t = h - r - \phi_{\text{est}} - \phi_{\text{ext}}/2$:</div>
                     <ul style="margin: 0.3rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
                       <li><strong>Bloque de Whitney y Eje Neutro:</strong>
                         $$a = \frac{A_{s,\text{col}} \cdot f_y}{0.85\, f'_c\, b} \qquad \Longrightarrow \qquad c = \frac{a}{\beta_1}$$
-                      </li>
-                      <li><strong>Chequeo de Deformación del Concreto:</strong>
-                        $\varepsilon_c = \varepsilon_{cu} = 0.003$ en la fibra superior extrema a compresión (NSR-10 C.10.2.3).
                       </li>
                       <li><strong>Chequeo de Fluencia del Acero:</strong>
                         En el centroide de tracción ($d_{\text{real}}$):
@@ -3119,26 +3060,9 @@
                     </div>
                   </div>
 
-                  <!-- 4. BLOQUE a Y EJE NEUTRO c -->
-                  <div style="background: var(--bg-subtle); border-left: 3px solid #2563EB; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>4. Calcular Bloque Equivalente ($a$) y Eje Neutro ($c$):</strong>
-                    <div>Por equilibrio seccional interno entre compresión y tracción ($C_c = T$, suponiendo fluencia $f_s = f_y$):
-                      $$a = \frac{A_s\, f_y}{0.85\, f'_c\, b} \qquad \implies \qquad c = \frac{a}{\beta_1}$$
-                      <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">(Donde $\beta_1 = 0.85$ para $f'_c \le 28\text{ MPa}$, reduciéndose $0.05$ por cada $7\text{ MPa}$ adicionales hasta $\beta_{1,\min} = 0.65$).</div>
-                    </div>
-                  </div>
-
-                  <!-- 5. MOMENTO NOMINAL Mn -->
-                  <div style="background: var(--bg-subtle); border-left: 3px solid #7C3AED; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>5. Calcular Momento Nominal ($M_n$):</strong>
-                    <div>Calcular el momento nominal mediante el par interno resistente con brazo $z = d - a/2$:
-                      $$M_n = A_s\, f_y \left(d - \frac{a}{2}\right) = C_c \left(d - \frac{a}{2}\right)$$
-                    </div>
-                  </div>
-
-                  <!-- 6. CUANTÍA TRACCIÓN, DUCTILIDAD Y ÁRBOL DE DECISIÓN PHI -->
+                  <!-- 4. CUANTÍA TRACCIÓN, DUCTILIDAD Y ÁRBOL DE DECISIÓN PHI -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #DC2626; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>6. Revisar $\rho \le \rho_{\text{trac}}$ (De no ser así $\phi < 0.90$ — Árbol de Decisión):</strong>
+                    <strong>4. Revisar $\rho \le \rho_{\text{trac}}$ (De no ser así $\phi < 0.90$ — Árbol de Decisión):</strong>
                     <div>Calcular la deformación unitaria neta en la capa extrema $d_t$ por compatibilidad de Navier-Bernoulli:
                       $$\varepsilon_t = 0.003\left(\frac{d_t - c}{c}\right) \qquad \Longleftrightarrow \qquad \text{Evaluar si } \rho \le \rho_{\text{trac}} \approx 0.625\,\rho_b \quad (\varepsilon_t \ge 0.005)$$
                       <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
@@ -3151,14 +3075,24 @@
                     </div>
                   </div>
 
-                  <!-- 7. CAPACIDAD RESISTENTE DE DISEÑO Y VERIFICACIÓN -->
+                  <!-- 5. CAPACIDAD RESISTENTE DE DISEÑO Y VERIFICACIÓN (INTEGRANDO a, c, Mn y phiMn) -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>7. Revisar Capacidad Resistente de Diseño ($\phi M_n \ge M_u$):</strong>
-                    <div>Afectar el momento nominal por el factor $\phi$ y comparar frente a la solicitación última:
-                      $$\phi M_n = \phi \left[ A_s\, f_y\left(d - \frac{a}{2}\right) \right] \ge M_u \qquad \Longleftrightarrow \qquad \text{Ratio Demanda/Capacidad: } \frac{M_u}{\phi M_n} \le 1.00$$
+                    <strong>5. Revisar Capacidad Resistente de Diseño ($\phi M_n \ge M_u$):</strong>
+                    <div>Determinar el bloque equivalente ($a$), eje neutro ($c$), momento nominal ($M_n$) y evaluar la capacidad última frente a la solicitación ($M_u$):
                       <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
-                        <li><strong>Si $\phi M_n \ge M_u$ ($\text{D/C} \le 1.00$)</strong> $\implies$ <strong>¡Cumple Satisfactoriamente! ($\checkmark$)</strong> Margen de sobre-resistencia: $\left(\frac{\phi M_n}{M_u} - 1\right)\times 100\%$.</li>
-                        <li><strong>Si $\phi M_n < M_u$ ($\text{D/C} > 1.00$)</strong> $\implies$ <strong>¡Falla por Capacidad Insuficiente!</strong> La sección está sobrecargada a flexión y requiere refuerzo estructural.</li>
+                        <li><strong>Bloque Equivalente ($a$) y Eje Neutro ($c$):</strong> Por equilibrio horizontal ($C_c = T$, con $f_s = f_y$):
+                          $$a = \frac{A_s\, f_y}{0.85\, f'_c\, b} \qquad \implies \qquad c = \frac{a}{\beta_1}$$
+                        </li>
+                        <li><strong>Momento Nominal ($M_n$):</strong> Con brazo de palanca interno $z = d - a/2$:
+                          $$M_n = A_s\, f_y \left(d - \frac{a}{2}\right) = C_c \left(d - \frac{a}{2}\right)$$
+                        </li>
+                        <li><strong>Chequeo de Resistencia de Diseño ($\phi M_n \ge M_u$):</strong>
+                          $$\phi M_n = \phi \left[ A_s\, f_y\left(d - \frac{a}{2}\right) \right] \ge M_u \qquad \Longleftrightarrow \qquad \text{Ratio Demanda/Capacidad: } \frac{M_u}{\phi M_n} \le 1.00$$
+                          <div style="margin-top: 0.25rem; padding-left: 0.5rem; border-left: 2px solid #16A34A;">
+                            • <strong>Si $\phi M_n \ge M_u$ ($\text{D/C} \le 1.00$)</strong> $\implies$ <strong>¡Cumple Satisfactoriamente! ($\checkmark$)</strong> Margen de sobre-resistencia: $\left(\frac{\phi M_n}{M_u} - 1\right)\times 100\%$.<br>
+                            • <strong>Si $\phi M_n < M_u$ ($\text{D/C} > 1.00$)</strong> $\implies$ <strong>¡Falla por Capacidad Insuficiente!</strong> La sección está sobrecargada a flexión y requiere refuerzo estructural.
+                          </div>
+                        </li>
                       </ul>
                     </div>
                   </div>

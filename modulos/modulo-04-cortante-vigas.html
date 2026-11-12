@@ -662,63 +662,182 @@
           <div class="math-formula">
             $$\phi V_n \ge V_u \qquad \text{con} \qquad V_n = V_c + V_s \implies \mathbf{\phi V_c + \phi V_s \ge V_u} \qquad (\phi = 0.75)$$
           </div>
-          <div class="math-vars">
-            <div><strong>Condiciones simultáneas de <code>NSR-10 C.11.1.3.1</code> para diseñar a una distancia $d$ de la cara del apoyo:</strong> Se permite diseñar las secciones situadas entre la cara del apoyo y una distancia $d$ medida desde ella para el mismo cortante mayorado $\mathbf{V_{u,d}}$ únicamente cuando: <strong>(a)</strong> la reacción del apoyo, en dirección del cortante aplicado, introduce compresión en las regiones extremas del elemento; <strong>(b)</strong> las cargas se aplican en o cerca de la cara superior del elemento; y <strong>(c)</strong> no existe ninguna carga concentrada entre la cara del apoyo y la sección crítica ubicada a $d$.</div>
-            <div><strong>Casos donde es obligatorio diseñar con el cortante EN LA CARA del apoyo ($x = 0$):</strong> Cuando la reacción del apoyo induce tracción (viga colgada de un tensor o péndola), cuando la carga está suspendida de la cara inferior de la viga, o cuando actúa una carga puntual importante dentro de la distancia $d$ desde la cara del apoyo.</div>
+
+          <!-- FORMULACIÓN PRÁCTICA Y COMPARATIVA DE LA SECCIÓN CRÍTICA (NSR-10 C.11.1.3.1 vs C.11.1.3) -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.15rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed #CBD5E1;">
+            
+            <!-- TARJETA CASO A: DISEÑO A DISTANCIA "d" DE LA CARA DEL APOYO -->
+            <div style="background: #F0FDF4; border: 1px solid #86EFAC; border-left: 4.5px solid #16A34A; border-radius: 8px; padding: 1rem 1.15rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.55rem;">
+                <span style="font-size: 0.92rem; font-weight: 800; color: #166534;">✅ CASO A: Diseño a una distancia $d$ de la cara ($V_{u,d}$)</span>
+                <span style="background: #DCFCE7; color: #15803D; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid #86EFAC;">NSR-10 C.11.1.3.1</span>
+              </div>
+              <p style="font-size: 0.82rem; color: #1E293B; line-height: 1.5; margin: 0 0 0.6rem 0;">
+                Cuando la grieta diagonal a $45^\circ$ nace en el borde inferior de la cara del apoyo, la carga uniformemente distribuida $w_u$ situada en el tramo $0 \le x \le d$ se transmite por <strong>compresión directa</strong> al apoyo. Por ello, la norma permite diseñar todo el tramo entre $x = 0$ y $x = d$ con el cortante reducido $\mathbf{V_{u,d}}$:
+              </p>
+              <div style="background: #FFFFFF; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.55rem 0.75rem; margin-bottom: 0.65rem; text-align: center;">
+                $$V_{u,\text{cara}} = \frac{w_u\, L_n}{2} \implies \mathbf{V_{u,d} = V_{u,\text{cara}} - w_u \cdot d = w_u\left(\frac{L_n}{2} - d\right)}$$
+              </div>
+              <div style="font-size: 0.8rem; color: #334155; line-height: 1.55;">
+                <strong>3 Condiciones simultáneas obligatorias + Ejemplo práctico:</strong>
+                <ul style="margin: 0.35rem 0 0 1.1rem; padding: 0;">
+                  <li><strong>(a) Apoyo en compresión:</strong> La viga descansa <em>sobre</em> una columna, muro o pedestal inferior (la reacción empuja la viga hacia arriba comprimiendo el alma).</li>
+                  <li><strong>(b) Carga aplicada arriba:</strong> La losa de entrepiso o viguetas descargan por la cara superior de la viga.</li>
+                  <li><strong>(c) Sin carga puntual en $[0,\, d]$:</strong> No llegan vigas secundarias ni columnas apeadas a una distancia $a_p < d$ de la cara.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- TARJETA CASO B: DISEÑO EN LA CARA DEL APOYO (x = 0) -->
+            <div style="background: #FEF2F2; border: 1px solid #FCA5A5; border-left: 4.5px solid #DC2626; border-radius: 8px; padding: 1rem 1.15rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.55rem;">
+                <span style="font-size: 0.92rem; font-weight: 800; color: #991B1B;">⚠️ CASO B: Diseño EN LA CARA del apoyo ($x = 0 \implies V_{u,\text{cara}}$)</span>
+                <span style="background: #FEE2E2; color: #B91C1C; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid #FCA5A5;">Sin Reducción ($d = 0$)</span>
+              </div>
+              <p style="font-size: 0.82rem; color: #1E293B; line-height: 1.5; margin: 0 0 0.6rem 0;">
+                Si falla <strong>cualquiera</strong> de las tres condiciones anteriores, la fisura potencial ya no puentea la carga hacia el apoyo (o se abre hacia el interior del nudo en tracción). Es obligatorio diseñar los estribos con el <strong>cortante máximo en la cara del apoyo</strong> ($\mathbf{V_{u,\text{diseño}} = V_u(0)}$):
+              </p>
+              <div style="background: #FFFFFF; border: 1px solid #FECACA; border-radius: 6px; padding: 0.55rem 0.75rem; margin-bottom: 0.65rem; text-align: center;">
+                $$\mathbf{V_{u,\text{diseño}} = V_{u,\text{cara}} = V_u(0)} \qquad \left(\text{Por ejemplo: } V_u(0) = \frac{w_u\, L_n}{2} + P_u\right)$$
+              </div>
+              <div style="font-size: 0.8rem; color: #334155; line-height: 1.55;">
+                <strong>3 Ejemplos prácticos de ingeniería donde se diseña en la cara ($x = 0$):</strong>
+                <ul style="margin: 0.35rem 0 0 1.1rem; padding: 0;">
+                  <li><strong>1. Carga puntual cercana ($a_p \le d$):</strong> Una viga secundaria o columna apeada descarga una fuerza $P_u$ a $30\text{ cm}$ del apoyo siendo $d = 50\text{ cm}$ ($P_u$ cruza directamente el plano de falla).</li>
+                  <li><strong>2. Apoyo en tracción:</strong> Viga colgada de un tensor, péndola de puente o tirante superior.</li>
+                  <li><strong>3. Carga suspendida abajo:</strong> Vigas carril de puente grúa o losas colgadas de la cara inferior de vigas invertidas (debe adicionarse acero colgante $A_{v,\text{colg}} = P_u / \phi f_{yt}$).</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- EJEMPLO NUMÉRICO APLICADO DE COMPARACIÓN (CASO A vs CASO B) -->
+          <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 8px; padding: 0.95rem 1.15rem; margin-top: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.45rem;">
+              <span style="font-size: 0.88rem; font-weight: 800; color: #0F172A;">📐 Ejemplo Práctico Aplicado: ¿Cuánto cambia el cortante de diseño entre el Caso A y el Caso B?</span>
+              <span style="font-size: 0.74rem; font-weight: 700; color: #1E40AF; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 0.15rem 0.55rem; border-radius: 6px;">Aplicación Numérica Directa</span>
+            </div>
+            <p style="font-size: 0.82rem; color: #334155; line-height: 1.55; margin: 0 0 0.5rem 0;">
+              Sea una viga de entrepiso de luz libre $L_n = 6.00\text{ m}$, sección $b_w = 300\text{ mm}$, peralte efectivo $d = 0.50\text{ m}$ ($500\text{ mm}$), concreto $f'_c = 28\text{ MPa}$ ($\phi V_c = 0.75 \times 0.17\sqrt{28}\times 300 \times 500 = \mathbf{101.20\text{ kN}}$) y carga distribuida mayorada $w_u = 60.0\text{ kN/m}$:
+            </p>
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 6px; padding: 0.6rem 0.85rem;">
+              $$\begin{aligned}
+              \bullet\;\textbf{Escenario 1 (Viga normal apoyada sobre columnas — Caso A a distancia } d = 0.50\text{ m)}\textbf{:} \quad V_{u,\text{cara}} &= \frac{60(6.00)}{2} = 180.0\text{ kN} \implies \mathbf{V_{u,d} = 180.0 - 60(0.50) = 150.0\text{ kN}} \\[2pt]
+              \text{Cortante que deben tomar los estribos: } \phi V_s &= V_{u,d} - \phi V_c = 150.0 - 101.2 = \mathbf{48.8\text{ kN}} \quad \text{(Ahorro normativo de } 30.0\text{ kN por arco de compresión directa).} \\[6pt]
+              \bullet\;\textbf{Escenario 2 (Llega una viga secundaria con } P_u = 80\text{ kN a } a_p = 0.30\text{ m} < d \text{ del apoyo — Caso B en } x = 0\text{)}\textbf{:} \quad \mathbf{V_{u,\text{diseño}}} &= V_{u,\text{cara}} = 180.0 + 80.0\left(\frac{6.00 - 0.30}{6.00}\right) = \mathbf{256.0\text{ kN}} \\[2pt]
+              \text{Cortante que deben tomar los estribos desde la cara: } \phi V_s &= V_{u,\text{cara}} - \phi V_c = 256.0 - 101.2 = \mathbf{154.8\text{ kN}} \quad \text{(¡No se permite restar } w_u d \text{ ni ignorar } P_u\text{!).}
+              \end{aligned}$$
+            </div>
           </div>
         </div>
 
         <!-- DIAGRAMA SVG COMPARATIVO: SECCIÓN CRÍTICA A 'd' VS EN LA CARA DEL APOYO -->
         <div class="tech-card" style="margin-top: 1.25rem;">
           <div class="tech-card-header">
-            <h3 class="tech-card-title">Figura 4.2 — Comparación entre Sección Crítica a Distancia $d$ de la Cara vs. En la Cara del Apoyo ($x = 0$)</h3>
+            <h3 class="tech-card-title">Figura 4.2 — Comparación Mecánica y Práctica: Sección Crítica a Distancia $d$ (Caso A) vs. En la Cara del Apoyo $x = 0$ (Caso B)</h3>
             <div class="tech-card-icon">🔍</div>
           </div>
-          <svg viewBox="0 0 880 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #FFFFFF; border: 1px solid #CBD5E1; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <!-- CASO A: Sección crítica a 'd' de la cara del apoyo -->
-            <rect x="20" y="15" width="410" height="205" rx="8" fill="#0F172A" stroke="#059669" stroke-width="1.6"/>
-            <text x="225" y="38" text-anchor="middle" fill="#34D399" font-family="Inter, sans-serif" font-weight="700" font-size="12">CASO A: SECCIÓN CRÍTICA A DISTANCIA "d" DE LA CARA</text>
-            <!-- Columna inferior (compresión en el apoyo) -->
-            <rect x="45" y="130" width="50" height="65" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
-            <!-- Viga -->
-            <rect x="45" y="75" width="355" height="55" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
-            <!-- Flechas de carga distribuida arriba -->
-            <line x1="60" y1="52" x2="380" y2="52" stroke="#38BDF8" stroke-width="1.8"/>
-            <line x1="80" y1="52" x2="80" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <line x1="130" y1="52" x2="130" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <line x1="180" y1="52" x2="180" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <line x1="230" y1="52" x2="230" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <line x1="280" y1="52" x2="280" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <line x1="330" y1="52" x2="330" y2="73" stroke="#38BDF8" stroke-width="1.6"/>
-            <!-- Fisura a 45 grados desde cara del apoyo hasta x = d -->
-            <line x1="95" y1="130" x2="165" y2="75" stroke="#FB7185" stroke-width="2.5" stroke-dasharray="4,3"/>
-            <!-- Sección crítica en x = d -->
-            <line x1="165" y1="62" x2="165" y2="148" stroke="#34D399" stroke-width="2.4"/>
-            <!-- Cota d -->
-            <line x1="95" y1="146" x2="165" y2="146" stroke="#34D399" stroke-width="1.5"/>
-            <text x="130" y="160" text-anchor="middle" fill="#34D399" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11">d</text>
-            <text x="172" y="158" fill="#F8FAFC" font-family="JetBrains Mono, monospace" font-size="10">Sección Crítica: Vu(d)</text>
-            <text x="225" y="186" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">(a) Reacción introduce compresión • (b) Carga arriba</text>
-            <text x="225" y="203" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">(c) Sin carga puntual concentrada entre la cara y "d"</text>
+          <svg viewBox="0 0 920 275" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="border-radius: 8px; background: #FFFFFF; border: 1px solid #CBD5E1; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <defs>
+              <marker id="arr-sky" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0284C7"/>
+              </marker>
+              <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#16A34A"/>
+              </marker>
+              <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#DC2626"/>
+              </marker>
+            </defs>
 
-            <!-- CASO B: Sección crítica EN LA CARA DEL APOYO (x = 0) -->
-            <rect x="450" y="15" width="410" height="205" rx="8" fill="#0F172A" stroke="#E11D48" stroke-width="1.6"/>
-            <text x="655" y="38" text-anchor="middle" fill="#FB7185" font-family="Inter, sans-serif" font-weight="700" font-size="12">CASO B: SECCIÓN CRÍTICA EN LA CARA DEL APOYO (x = 0)</text>
-            <!-- Tensor / Colgante superior en tracción o carga puntual dentro de d -->
-            <rect x="475" y="45" width="50" height="35" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
-            <!-- Viga colgada -->
-            <rect x="475" y="80" width="355" height="55" fill="#1E293B" stroke="#94A3B8" stroke-width="1.6"/>
+            <!-- =========================================================
+                 PANEL IZQUIERDO: CASO A (SECCIÓN CRÍTICA A DISTANCIA "d")
+                 ========================================================= -->
+            <rect x="16" y="14" width="434" height="247" rx="8" fill="#F8FAFC" stroke="#16A34A" stroke-width="1.8"/>
+            <rect x="16" y="14" width="434" height="32" rx="8" fill="#DCFCE7"/>
+            <text x="233" y="34" text-anchor="middle" fill="#166534" font-family="Inter, sans-serif" font-weight="800" font-size="11.5">
+              CASO A: SECCIÓN CRÍTICA A DISTANCIA "d" (V<tspan dy="2" font-size="9">u,d</tspan><tspan dy="-2"> = V</tspan><tspan dy="2" font-size="9">u,cara</tspan><tspan dy="-2"> − w</tspan><tspan dy="2" font-size="9">u</tspan><tspan dy="-2">·d)</tspan>
+            </text>
+
+            <!-- Columna inferior en compresión -->
+            <rect x="44" y="140" width="54" height="68" fill="#CBD5E1" stroke="#475569" stroke-width="1.6"/>
+            <!-- Flecha de reacción R_u comprimiendo el apoyo -->
+            <line x1="71" y1="202" x2="71" y2="152" stroke="#16A34A" stroke-width="2.4" marker-end="url(#arr-green)"/>
+            <text x="71" y="218" text-anchor="middle" fill="#15803D" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9.5">(a) Reacción R<tspan dy="2" font-size="7.5">u</tspan><tspan dy="-2"> comprime</tspan></text>
+
+            <!-- Viga -->
+            <rect x="44" y="84" width="380" height="56" fill="#E2E8F0" stroke="#475569" stroke-width="1.6"/>
+
+            <!-- Puntal de compresión directa al apoyo para cargas entre 0 y d -->
+            <polygon points="98,140 112,140 168,84 152,84" fill="#BBF7D0" opacity="0.75"/>
+
+            <!-- Carga distribuida wu arriba -->
+            <line x1="55" y1="62" x2="412" y2="62" stroke="#0284C7" stroke-width="1.8"/>
+            <line x1="75" y1="62" x2="75" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="120" y1="62" x2="120" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="165" y1="62" x2="165" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="210" y1="62" x2="210" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="255" y1="62" x2="255" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="300" y1="62" x2="300" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="345" y1="62" x2="345" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <line x1="390" y1="62" x2="390" y2="81" stroke="#0284C7" stroke-width="1.5" marker-end="url(#arr-sky)"/>
+            <text x="245" y="57" text-anchor="middle" fill="#0369A1" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9.5">(b) Carga uniforme w<tspan dy="2" font-size="7.5">u</tspan><tspan dy="-2"> aplicada arriba</tspan></text>
+
+            <!-- Fisura diagonal a 45° desde cara del apoyo hasta x = d -->
+            <line x1="98" y1="140" x2="172" y2="84" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+            <!-- Plano de Sección Crítica en x = d -->
+            <line x1="172" y1="72" x2="172" y2="166" stroke="#16A34A" stroke-width="2.5"/>
+            <line x1="98" y1="158" x2="172" y2="158" stroke="#16A34A" stroke-width="1.6"/>
+            <text x="135" y="172" text-anchor="middle" fill="#15803D" font-family="JetBrains Mono, monospace" font-weight="800" font-size="11">d</text>
+            <text x="180" y="160" fill="#166534" font-family="JetBrains Mono, monospace" font-weight="800" font-size="10.5">Sección Crítica: V<tspan dy="2" font-size="8">u,d</tspan><tspan dy="-2"> = 150 kN</tspan></text>
+            <text x="180" y="175" fill="#475569" font-family="Inter, sans-serif" font-size="9.5">(c) Sin carga puntual P<tspan dy="2" font-size="7.5">u</tspan><tspan dy="-2"> en el tramo [0, d]</tspan></text>
+
+            <rect x="30" y="228" width="406" height="24" rx="5" fill="#DCFCE7" stroke="#86EFAC" stroke-width="1"/>
+            <text x="233" y="244" text-anchor="middle" fill="#14532D" font-family="Inter, sans-serif" font-weight="700" font-size="10">
+              ✓ Los estribos entre x = 0 y x = d se diseñan con la demanda reducida V<tspan dy="2" font-size="8">u,d</tspan>
+            </text>
+
+            <!-- =========================================================
+                 PANEL DERECHO: CASO B (SECCIÓN CRÍTICA EN LA CARA x = 0)
+                 ========================================================= -->
+            <rect x="470" y="14" width="434" height="247" rx="8" fill="#F8FAFC" stroke="#DC2626" stroke-width="1.8"/>
+            <rect x="470" y="14" width="434" height="32" rx="8" fill="#FEE2E2"/>
+            <text x="687" y="34" text-anchor="middle" fill="#991B1B" font-family="Inter, sans-serif" font-weight="800" font-size="11.5">
+              CASO B: SECCIÓN CRÍTICA EN LA CARA x = 0 (V<tspan dy="2" font-size="9">u,diseño</tspan><tspan dy="-2"> = V</tspan><tspan dy="2" font-size="9">u,cara</tspan><tspan dy="-2">)</tspan>
+            </text>
+
+            <!-- Tensor / Columna superior en tracción -->
+            <rect x="498" y="52" width="54" height="32" fill="#CBD5E1" stroke="#475569" stroke-width="1.6"/>
+            <line x1="525" y1="80" x2="525" y2="54" stroke="#DC2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
+            <text x="598" y="64" fill="#991B1B" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9">Tensor en tracción</text>
+
+            <!-- Viga -->
+            <rect x="498" y="84" width="380" height="56" fill="#E2E8F0" stroke="#475569" stroke-width="1.6"/>
+
             <!-- Carga concentrada Pu dentro de la distancia d -->
-            <line x1="560" y1="45" x2="560" y2="78" stroke="#FBBF24" stroke-width="3"/>
-            <polygon points="560,80 554,68 566,68" fill="#FBBF24"/>
-            <text x="568" y="62" fill="#FBBF24" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">Pu dentro de "d"</text>
-            <!-- Fisura interna hacia el interior del apoyo en tracción -->
-            <line x1="525" y1="80" x2="485" y2="135" stroke="#FB7185" stroke-width="2.5" stroke-dasharray="4,3"/>
-            <!-- Sección crítica en x = 0 (cara del apoyo) -->
-            <line x1="525" y1="62" x2="525" y2="152" stroke="#FB7185" stroke-width="2.6"/>
-            <text x="533" y="155" fill="#FB7185" font-family="JetBrains Mono, monospace" font-weight="700" font-size="10.5">Sección Crítica en la Cara: Vu(0)</text>
-            <text x="655" y="186" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">• Apoyo en tracción (péndola/tensor) o carga colgada abajo</text>
-            <text x="655" y="203" text-anchor="middle" fill="#CBD5E1" font-family="Inter, sans-serif" font-size="10.5">• O presencia de carga concentrada Pu entre la cara y "d"</text>
+            <line x1="590" y1="50" x2="590" y2="81" stroke="#D97706" stroke-width="3"/>
+            <polygon points="590,84 584,72 596,72" fill="#D97706"/>
+            <text x="598" y="77" fill="#B45309" font-family="JetBrains Mono, monospace" font-weight="800" font-size="10">o P<tspan dy="2" font-size="8">u</tspan><tspan dy="-2"> dentro de "d"</tspan></text>
+
+            <!-- Carga colgada en la cara inferior -->
+            <line x1="755" y1="140" x2="755" y2="172" stroke="#DC2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
+            <text x="755" y="185" text-anchor="middle" fill="#991B1B" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9">o Carga colgada abajo</text>
+
+            <!-- Fisuras críticas -->
+            <line x1="552" y1="84" x2="510" y2="140" stroke="#DC2626" stroke-width="2.4" stroke-dasharray="4,3"/>
+            <line x1="552" y1="140" x2="590" y2="84" stroke="#DC2626" stroke-width="2.4" stroke-dasharray="4,3"/>
+
+            <!-- Plano de Sección Crítica en x = 0 (Cara del apoyo) -->
+            <line x1="552" y1="70" x2="552" y2="168" stroke="#DC2626" stroke-width="2.8"/>
+            <text x="560" y="160" fill="#991B1B" font-family="JetBrains Mono, monospace" font-weight="800" font-size="10.5">Sección Crítica en x = 0: V<tspan dy="2" font-size="8">u</tspan><tspan dy="-2">(0) = 256 kN</tspan></text>
+            <text x="560" y="175" fill="#475569" font-family="Inter, sans-serif" font-size="9.5">La fisura intercepta P<tspan dy="2" font-size="7.5">u</tspan><tspan dy="-2"> o penetra en el apoyo traccionado</tspan></text>
+
+            <rect x="484" y="228" width="406" height="24" rx="5" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+            <text x="687" y="244" text-anchor="middle" fill="#7F1D1D" font-family="Inter, sans-serif" font-weight="700" font-size="10">
+              ⚠️ Prohibido reducir a distancia d: se diseña con el cortante total en la cara V<tspan dy="2" font-size="8">u</tspan><tspan dy="-2">(0)</tspan>
+            </text>
           </svg>
         </div>
       </section>

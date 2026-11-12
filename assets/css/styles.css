@@ -708,6 +708,11 @@ body.sidebar-collapsed:not(.presentation-mode) .btn-sidebar-float {
   align-items: center;
 }
 
+.hero-grid:has(.hero-diagram-box) {
+  grid-template-columns: 0.92fr 1.28fr;
+  gap: 1.75rem;
+}
+
 .hero-grid:has(> :only-child),
 .hero-grid.hero-single {
   grid-template-columns: 1fr;
@@ -2194,55 +2199,43 @@ input[type="range"] {
 
    ========================================================================== */
 
-body.presentation-mode .sidebar {
-
-  display: none;
-
+body.presentation-mode .sidebar,
+body.presentation-mode .btn-sidebar-float,
+body.presentation-mode .btn-sidebar-toggle {
+  display: none !important;
 }
 
 body.presentation-mode .workspace-layout,
-body.presentation-mode .main-layout {
-
-  grid-template-columns: 1fr;
-
+body.presentation-mode .main-layout,
+body.presentation-mode.sidebar-collapsed .workspace-layout,
+body.presentation-mode.sidebar-collapsed .main-layout {
+  grid-template-columns: 1fr !important;
 }
 
 body.presentation-mode .main-content {
-
   max-width: 1480px;
-
+  width: 100%;
+  margin: 0 auto;
   padding: 1.5rem 3rem 5.5rem;
-
 }
 
+body.presentation-mode .main-content > *,
 body.presentation-mode .lesson-section,
-
 body.presentation-mode .content-section,
-
+body.presentation-mode section.simulator-box,
 body.presentation-mode .chapter-divider,
-
 body.presentation-mode .hero-banner {
-
-  display: none;
-
+  display: none !important;
 }
 
 body.presentation-mode .slide-active {
-
   display: block !important;
-
   min-height: calc(100vh - var(--topbar-height) - 95px);
-
   font-size: 1.12rem;
-
   padding: 2.75rem 3.25rem;
-
   box-shadow: var(--shadow-lg);
-
   border-width: 2px;
-
   animation: slideFadeIn 0.28s ease-out;
-
 }
 
 body.presentation-mode .chapter-divider.slide-active {
@@ -5770,13 +5763,13 @@ html[data-theme="dark"] .sim-tacho-needle {
   background: var(--bg-surface) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: var(--radius-md) !important;
-  padding: 0.85rem !important;
+  padding: 0.65rem !important;
   box-shadow: var(--shadow-sm) !important;
   max-width: 100% !important;
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.75rem !important;
+  gap: 0.5rem !important;
 }
 
 .diagram-interactive-wrap {
@@ -5794,51 +5787,30 @@ html[data-theme="dark"] .sim-tacho-needle {
 }
 
 .diagram-interactive-wrap .zoom-badge-hint {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(15, 23, 42, 0.85);
-  color: #FFFFFF;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.35rem 0.65rem;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  pointer-events: none;
-  backdrop-filter: blur(4px);
-  opacity: 0.85;
-  transition: opacity var(--transition);
-}
-
-.diagram-interactive-wrap:hover .zoom-badge-hint {
-  opacity: 1;
-  background: var(--primary);
+  display: none !important;
 }
 
 .diagram-toolbar-strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding-top: 0.25rem;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-top: 0.15rem;
 }
 
 .btn-diagram-zoom {
-  width: 100%;
+  width: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
   background: var(--bg-subtle);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   color: var(--primary);
   font-family: inherit;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition);

@@ -188,7 +188,7 @@
      -------------------------------------------------------------------------- */
   function initSlidesList() {
     const candidates = Array.from(
-      document.querySelectorAll('.lesson-section, .content-section, .hero-banner')
+      document.querySelectorAll('.lesson-section, .content-section, .hero-banner, section.simulator-box')
     );
     const seen = new Set();
     slides = candidates.filter((el) => {

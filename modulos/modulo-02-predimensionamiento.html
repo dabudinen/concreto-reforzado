@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Módulo 2: Predimensionamiento de Elementos Estructurales | Diplomado Estructuras</title>
+  <title>Módulo 2: Predimensionamiento de Elementos Estructurales | Concreto Reforzado NSR-10</title>
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -88,8 +88,7 @@
           <li><a href="#sec-ejemplo-02" class="toc-link"><span class="toc-num">7.2</span> Ej. 2: Vigas, Viguetas y Losa</a></li>
           <li><a href="#ex3-container" class="toc-link"><span class="toc-num">7.3</span> Ej. 3: Columnas y Zapata (5P)</a></li>
           <li><a href="#ex4-container" class="toc-link"><span class="toc-num">7.4</span> Ej. 4: Columnas Edificio 8P (DES)</a></li>
-          <li><a href="#ex5-container" class="toc-link"><span class="toc-num">7.5</span> Ej. 5: Muros de Cortante (DES)</a></li>
-          <li><a href="#ex6-container" class="toc-link"><span class="toc-num">7.6</span> Ej. 6: Ejercicio Integrador</a></li>
+          <li><a href="#ex5-container" class="toc-link"><span class="toc-num">7.5</span> Ej. 5: Ejercicio Integrador</a></li>
         </ul>
       </div>
 
@@ -143,7 +142,7 @@
         <div class="hero-grid">
           <div>
             <div class="hero-badge-row">
-              <span class="hero-badge">Módulo 02 • Diplomado en Estructuras</span>
+              <span class="hero-badge">Módulo 02 • Concreto Reforzado NSR-10</span>
             </div>
             <h1 class="hero-title">
               Predimensionamiento de <span>Elementos Estructurales</span>
@@ -156,7 +155,7 @@
               <div class="professor-info">
                 <span class="professor-label">Profesor</span>
                 <span class="professor-name">Daniel Abudinen, I.C., M.Sc.</span>
-                <span class="professor-inst">Diplomado en Estructuras • Universidad de la Costa (CUC)</span>
+                <span class="professor-inst">Prof. Daniel Abudinen • <a href="mailto:dabudinen@gmail.com" style="color: inherit; text-decoration: none;">dabudinen@gmail.com</a></span>
               </div>
             </div>
 
@@ -2988,291 +2987,11 @@
       </section>
 
 
-      <!-- EJEMPLO NUMÉRICO 7.5: MUROS ESTRUCTURALES DE CORTANTE (SHEAR WALLS) -->
-      <section class="lesson-section" id="ex5-container">
+      <!-- EJEMPLO NUMÉRICO 7.5: EJERCICIO INTEGRADOR DE PREDIMENSIONAMIENTO COMPLETO -->
+            <section class="lesson-section" id="ex5-container">
         <div class="section-header">
           <div class="section-tag-row">
             <span class="section-num">Ejemplo Numérico 7.5</span>
-            <span class="section-tag">NSR-10 C.14 & C.21.9</span>
-          </div>
-          <h2 class="section-title">Predimensionamiento de Muros Estructurales de Cortante (Shear Walls) para Control de Derivas Sísmicas</h2>
-          <p class="section-lead">
-            <strong>Enunciado:</strong> Para un edificio de apartamentos de 12 pisos ($H = 36.0\text{ m}$, altura libre de entrepiso $h_u = 2.75\text{ m}$) ubicado en zona de amenaza sísmica alta (Bucaramanga, $A_a = 0.25, A_v = 0.25$, D.E.S.), estructurado mediante un sistema combinado de muros y pórticos de concreto ($f'_c = 28\text{ MPa}$, $f_y = 420\text{ MPa}$), con un área en planta por piso de $A_p = 480\text{ m}^2$ y una carga reactiva sísmica de $9.5\text{ kN/m}^2$: <strong>1)</strong> Determine el espesor mínimo de alma $b_w$ para evitar pandeo lateral por esbeltez según NSR-10 C.14 y C.21.9; <strong>2)</strong> Calcule la densidad de muros en planta recomendada ($\sum A_w / A_p$) y determine la longitud total requerida de muros $\sum L_w$ en cada dirección para garantizar que las derivas elásticas no superen el límite normativo del $1.0\%$; <strong>3)</strong> Verifique el esfuerzo cortante último nominal máximo $v_u$ frente al límite normativo de aplastamiento del concreto $\phi \cdot 0.83\sqrt{f'_c}$.
-          </p>
-        </div>
-
-        <div class="example-toolbar">
-          <div class="example-toolbar-title">
-            <span>🧑‍🏫</span> Modo Pizarra Docente: Haz clic sobre cada paso para ocultarlo o revelarlo durante la explicación en clase.
-          </div>
-          <div class="example-toolbar-actions">
-            <button type="button" class="btn-control" onclick="toggleAllSteps('ex5-container', false)">Ocultar Todos los Pasos</button>
-            <button type="button" class="btn-control" onclick="toggleAllSteps('ex5-container', true)">Revelar Todos los Pasos</button>
-          </div>
-        </div>
-
-        <!-- Esquema Vectorial SVG del Muro Estructural del Ejemplo 7.5 -->
-        <div class="tech-card accent-blue" style="margin-bottom: 1.25rem;">
-          <div class="tech-card-title">Planteamiento del Problema 7.5: Alzado y Sección Esquemática de Muro de Cortante a Predimensionar</div>
-          <svg viewBox="0 0 820 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; font-family: Inter, sans-serif;">
-  <!-- Alzado del Muro (12 pisos) -->
-  <g transform="translate(60, 20)">
-    <!-- Cimentación -->
-    <rect x="0" y="240" width="220" height="30" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5"/>
-    <text x="110" y="260" fill="#64748B" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Viga de Cimentación / Zapata</text>
-    <!-- Cuerpo del Muro -->
-    <rect x="30" y="10" width="160" height="230" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-    <!-- Elementos de borde en alzado -->
-    <rect x="30" y="10" width="24" height="230" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="3 2"/>
-    <rect x="166" y="10" width="24" height="230" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="3 2"/>
-    <!-- Cotas -->
-    <g stroke="#64748B" stroke-width="1">
-      <line x1="30" y1="5" x2="190" y2="5"/><line x1="30" y1="2" x2="30" y2="8"/><line x1="190" y1="2" x2="190" y2="8"/>
-      <line x1="205" y1="10" x2="205" y2="240"/><line x1="201" y1="10" x2="209" y2="10"/><line x1="201" y1="240" x2="209" y2="240"/>
-    </g>
-    <text x="110" y="-1" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Lw = 5.20 m (Dada)</text>
-    <text x="215" y="125" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">H = 36.0 m (12 P)</text>
-    <!-- Leyendas -->
-    <text x="42" y="115" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="700" transform="rotate(-90, 42, 115)" text-anchor="middle">BORDE CONFINADO (c = ?)</text>
-    <text x="178" y="115" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="7.5" font-weight="700" transform="rotate(-90, 178, 115)" text-anchor="middle">BORDE CONFINADO (c = ?)</text>
-    <text x="110" y="125" fill="#1D4ED8" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">ALMA DEL MURO (bw = ?)</text>
-  </g>
-
-  <!-- Detalle de Planta de Muro Acotada a la derecha -->
-  <g transform="translate(350, 35)">
-    <rect x="0" y="0" width="440" height="230" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
-    <text x="220" y="24" fill="#1D4ED8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">SECCIÓN TRANSVERSAL DEL MURO A PREDIMENSIONAR</text>
-    
-    <!-- Muro en planta esquemático -->
-    <rect x="30" y="60" width="380" height="34" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.8"/>
-    <!-- Elementos de borde esquemáticos -->
-    <rect x="30" y="60" width="55" height="34" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="3 2"/>
-    <rect x="355" y="60" width="55" height="34" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8" stroke-dasharray="3 2"/>
-
-    <!-- Cotas incógnitas -->
-    <g stroke="#64748B" stroke-width="1">
-      <line x1="18" y1="60" x2="18" y2="94"/><line x1="14" y1="60" x2="22" y2="60"/><line x1="14" y1="94" x2="22" y2="94"/>
-      <line x1="30" y1="110" x2="85" y2="110"/><line x1="30" y1="106" x2="30" y2="114"/><line x1="85" y1="106" x2="85" y2="114"/>
-      <line x1="30" y1="128" x2="410" y2="128"/><line x1="30" y1="124" x2="30" y2="132"/><line x1="410" y1="124" x2="410" y2="132"/>
-    </g>
-    <text x="14" y="80" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">bw = ?</text>
-    <text x="57" y="122" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">c = ?</text>
-    <text x="220" y="142" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Longitud Total del Muro Lw = 5.20 m (520 cm)</text>
-
-    <!-- Resumen de Requisitos y Datos del Enunciado -->
-    <g transform="translate(15, 155)">
-      <rect x="0" y="0" width="410" height="65" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
-      <text x="10" y="16" fill="#0F172A" font-size="8.8" font-weight="700">• Criterios de Predimensionamiento a Determinar:</text>
-      <text x="10" y="32" fill="#1D4ED8" font-size="8.2">1. Espesor mínimo bw por esbeltez lateral hu/16 o hu/10 (NSR-10 C.14 & C.21.9)</text>
-      <text x="10" y="46" fill="#047857" font-size="8.2">2. Densidad de muros ΣAw / Ap para control de derivas elásticas sísmicas ≤ 1.0%</text>
-      <text x="10" y="60" fill="#B91C1C" font-size="8.2">3. Verificación de esfuerzo cortante último nominal vu ≤ ϕ · 0.83√f'c</text>
-    </g>
-  </g>
-</svg>
-          <figcaption class="figure-caption" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: #64748B;">
-            Alzado esquemático del muro estructural de 12 pisos (H = 36.0 m, Lw = 5.20 m) y sección transversal con incógnitas de espesor bw y confinamiento.
-          </figcaption>
-        </div>
-
-        <!-- PASO 1: ESPESOR MÍNIMO DEL MURO bw -->
-        
-        <div class="example-solution-box">
-          <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
-            <span class="btn-text">👁️ Mostrar Solución Detallada (Paso a Paso)</span>
-            <span class="btn-badge">Pizarra Docente</span>
-            <span class="arrow-icon">▼</span>
-          </button>
-          <div class="solution-body" style="display: none;">
-<div class="calc-step-card step-collapsed">
-          <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
-            <div class="calc-step-title">
-              <span class="calc-step-badge">PASO 1</span>
-              <span>Determinación del Espesor de Alma ($b_w$) por Esbeltez y Requisitos DES</span>
-            </div>
-            <span class="calc-step-toggle">Mostrar / Ocultar</span>
-          </div>
-          <div class="calc-step-body">
-            <div class="math-card normative-blue">
-              <div class="math-card-header">
-                <span class="math-card-title">1.1 Control de Pandeo Lateral y Requisitos de Doble Capa</span>
-                <span class="norm-pill">NSR-10 C.14.3 & C.21.9.2</span>
-              </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                En edificios altos con disipación especial de energía (DES), el espesor de los muros estructurales debe satisfacer simultáneamente:
-              </p>
-              <div class="math-formula">
-                $$\begin{aligned}
-                \text{Espesor mínimo absoluto en DES (C.21.9.2):} \quad & b_w \ge \mathbf{150\text{ mm}}\;(15\text{ cm}) \\[4pt]
-                \text{Control de esbeltez de alma no arriostrada:} \quad & b_w \ge \frac{h_u}{16} = \frac{2\,750\text{ mm}}{16} = \mathbf{171.9\text{ mm}} \approx 17.2\text{ cm} \\[4pt]
-                \text{Requisito de doble cortina de refuerzo (C.14.3.4):} \quad & \text{Para } V_u \ge 0.17 A_{cv} \sqrt{f'_c} \text{ o muros en DES, obligatorio } 2 \text{ capas}
-                \end{aligned}$$
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.5rem;">
-                Para alojar cómodamente las dos capas de armadura con recubrimiento de $25\text{ mm}$ y los estribos de confinamiento en los extremos, se adopta:
-                $$\mathbf{b_w = 200\text{ mm}}\;(20\text{ cm})$$
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- PASO 2: DENSIDAD DE MUROS EN PLANTA Y LONGITUD REQUERIDA -->
-        <div class="calc-step-card step-collapsed">
-          <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
-            <div class="calc-step-title">
-              <span class="calc-step-badge">PASO 2</span>
-              <span>Criterio de Densidad de Muros en Planta y Longitud Requerida ($\sum L_w$)</span>
-            </div>
-            <span class="calc-step-toggle">Mostrar / Ocultar</span>
-          </div>
-          <div class="calc-step-body">
-            <div class="math-card normative-amber">
-              <div class="math-card-header">
-                <span class="math-card-title">2.1 Densidad de Área de Muros para Control de Deriva ($\Delta \le 1.0\%$)</span>
-                <span class="norm-pill">NSR-10 Tabla A.6.4-1</span>
-              </div>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-                La experiencia sismorresistente internacional y colombiana en edificios de más de 10 pisos demuestra que para garantizar que la deriva inelástica no supere el límite legal de $\Delta_{\max} \le 1.0\%$, la densidad de muros en cada dirección principal debe satisfacer:
-              </p>
-              <div class="math-formula">
-                $$\frac{\sum A_{w,x}}{A_p} \ge \mathbf{1.6\% \text{ a } 2.0\%} \quad \text{y} \quad \frac{\sum A_{w,y}}{A_p} \ge \mathbf{1.6\% \text{ a } 2.0\%}$$
-              </div>
-              <div class="math-formula">
-                $$\begin{aligned}
-                \text{Área en planta por piso:} \quad & A_p = 480\text{ m}^2 \\
-                \text{Área de muros requerida en cada dirección:} \quad & A_{w,\text{req}} = 0.0175 \times 480\text{ m}^2 = \mathbf{8.40\text{ m}^2} \\
-                \text{Longitud total requerida de muros } (b_w = 0.20\text{ m}): \quad & \sum L_w = \frac{A_{w,\text{req}}}{b_w} = \frac{8.40\text{ m}^2}{0.20\text{ m}} = \mathbf{42.0\text{ m}}
-                \end{aligned}$$
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.5rem;">
-                Se distribuyen <strong>8 muros de cortante de $L_w = 5.25\text{ m}$</strong> en cada dirección:
-                $$\sum L_{w,\text{prov}} = 8 \times 5.25\text{ m} = \mathbf{42.0\text{ m}} \implies A_w = 42.0 \times 0.20 = \mathbf{8.40\text{ m}^2} \quad (\text{Densidad } = 1.75\% \ge 1.6\% \quad \checkmark)$$
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- PASO 3: VERIFICACIÓN DEL ESFUERZO CORTANTE MÁXIMO PROMEDIO -->
-        <div class="calc-step-card step-collapsed">
-          <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
-            <div class="calc-step-title">
-              <span class="calc-step-badge">PASO 3</span>
-              <span>Estimación de Cortante Basal Sísmico y Verificación de Esfuerzo Cortante Máximo</span>
-            </div>
-            <span class="calc-step-toggle">Mostrar / Ocultar</span>
-          </div>
-          <div class="calc-step-body">
-            <div class="math-card normative-emerald">
-              <div class="math-card-header">
-                <span class="math-card-title">3.1 Verificación de Cortante Nominal Límite en Muros DES</span>
-                <span class="norm-pill">NSR-10 C.21.9.4.4</span>
-              </div>
-              <div class="math-formula">
-                $$\begin{aligned}
-                \text{Masa sísmica total del edificio } (W): \quad & W = 12 \text{ pisos} \times 480\text{ m}^2 \times 9.5\text{ kN/m}^2 = \mathbf{54\,720\text{ kN}} \\
-                \text{Coeficiente sísmico basal estimado } (C_s \approx 0.17): \quad & V_b = 0.17 \times 54\,720\text{ kN} = \mathbf{9\,302.4\text{ kN}} \\
-                \text{Cortante absorbido por los muros } (80\%): \quad & V_{u,\text{muros}} = 0.80 \times 9\,302.4 = \mathbf{7\,441.9\text{ kN}} \\[6pt]
-                \text{Esfuerzo cortante último promedio } (v_u): \quad & v_u = \frac{V_{u,\text{muros}}}{0.80 \sum A_{cv}} = \frac{7\,441.9 \times 10^3\text{ N}}{0.80 \times (8 \times 5\,250 \times 200)\text{ mm}^2} = \mathbf{1.11\text{ MPa}} \\[6pt]
-                \text{Resistencia máxima admisible a cortante (C.21.9.4.4):} \quad & \phi V_{n,\max} / A_{cv} \le \phi \cdot 0.83\sqrt{f'_c} = 0.75 \times 0.83\sqrt{28} = \mathbf{3.30\text{ MPa}} \\
-                & \mathbf{1.11\text{ MPa} \le 3.30\text{ MPa}} \quad \checkmark \;(\text{Margen amplio de seguridad contra aplastamiento})
-                \end{aligned}$$
-              </div>
-              <div class="math-vars">
-                <div><strong>Conclusión de Predimensionamiento para Muros DES:</strong></div>
-                <div>• Espesor adoptado: $\mathbf{b_w = 20\text{ cm}}$ ($0.20\text{ m}$), con doble malla de refuerzo electrosoldada o de barras $\#4$ @ $20\text{ cm}$.</div>
-                <div>• Longitud y cantidad: $\mathbf{8\text{ muros de } 5.25\text{ m}}$ por dirección ortogonal ($42\text{ m}$ lineales de muro).</div>
-                <div>• Elementos de borde confinados en extremos: Longitud de confinamiento estimada $c_b \approx 0.15 L_w \approx \mathbf{80\text{ cm}}$ en la base, con estribos cerrados $\#3$ @ $10\text{ cm}$.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SÍNTESIS GRÁFICA DE RESULTADOS (SOLUCIÓN COMPLETA) -->
-        <div class="tech-card accent-blue" style="margin-top: 1.5rem; margin-bottom: 0.5rem;">
-          <div class="tech-card-title">Síntesis Gráfica de Resultados: Sección Transversal y Detalle de Refuerzo del Muro (DES)</div>
-          <svg viewBox="0 0 820 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; font-family: Inter, sans-serif;">
-            <!-- Alzado del Muro (12 pisos) -->
-            <g transform="translate(60, 20)">
-              <!-- Cimentación -->
-              <rect x="0" y="240" width="220" height="30" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5"/>
-              <text x="110" y="260" fill="#64748B" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Viga de Cimentación / Zapata</text>
-              <!-- Cuerpo del Muro -->
-              <rect x="30" y="10" width="160" height="230" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-              <!-- Elementos de borde en alzado -->
-              <rect x="30" y="10" width="24" height="230" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
-              <rect x="166" y="10" width="24" height="230" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
-              <!-- Cotas -->
-              <g stroke="#64748B" stroke-width="1">
-                <!-- Cota Lw = 5.20 m -->
-                <line x1="30" y1="5" x2="190" y2="5"/>
-                <line x1="30" y1="2" x2="30" y2="8"/>
-                <line x1="190" y1="2" x2="190" y2="8"/>
-                <!-- Cota H = 36.0 m -->
-                <line x1="205" y1="10" x2="205" y2="240"/>
-                <line x1="201" y1="10" x2="209" y2="10"/>
-                <line x1="201" y1="240" x2="209" y2="240"/>
-              </g>
-              <text x="110" y="-1" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Lw = 5.20 m</text>
-              <text x="215" y="125" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">H = 36.0 m (12 P)</text>
-              <!-- Leyendas -->
-              <text x="42" y="115" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" transform="rotate(-90, 42, 115)" text-anchor="middle">BORDE CONFINADO</text>
-              <text x="178" y="115" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" transform="rotate(-90, 178, 115)" text-anchor="middle">BORDE CONFINADO</text>
-              <text x="110" y="125" fill="#1D4ED8" font-family="Inter, sans-serif" font-size="9" font-weight="700" text-anchor="middle">ALMA DEL MURO</text>
-            </g>
-            <!-- Detalle de Planta de Muro Acotada a la derecha -->
-            <g transform="translate(350, 40)">
-              <rect x="0" y="0" width="440" height="215" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
-              <text x="220" y="24" fill="#1D4ED8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">SECCIÓN TRANSVERSAL EN PLANTA DEL MURO (bw = 20 cm, Lw = 520 cm)</text>
-              <!-- Muro en planta -->
-              <rect x="30" y="60" width="380" height="34" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.8"/>
-              <!-- Elemento de borde Izquierdo (45x20) -->
-              <rect x="30" y="60" width="55" height="34" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
-              <!-- Elemento de borde Derecho (45x20) -->
-              <rect x="355" y="60" width="55" height="34" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
-              <!-- Armaduras del borde (puntos rojos) -->
-              <circle cx="38" cy="67" r="3.2" fill="#DC2626"/><circle cx="38" cy="87" r="3.2" fill="#DC2626"/>
-              <circle cx="58" cy="67" r="3.2" fill="#DC2626"/><circle cx="58" cy="87" r="3.2" fill="#DC2626"/>
-              <circle cx="78" cy="67" r="3.2" fill="#DC2626"/><circle cx="78" cy="87" r="3.2" fill="#DC2626"/>
-              <circle cx="362" cy="67" r="3.2" fill="#DC2626"/><circle cx="362" cy="87" r="3.2" fill="#DC2626"/>
-              <circle cx="382" cy="67" r="3.2" fill="#DC2626"/><circle cx="382" cy="87" r="3.2" fill="#DC2626"/>
-              <circle cx="402" cy="67" r="3.2" fill="#DC2626"/><circle cx="402" cy="87" r="3.2" fill="#DC2626"/>
-              <!-- Armaduras del alma (doble malla verde) -->
-              <line x1="85" y1="67" x2="355" y2="67" stroke="#059669" stroke-width="1.5" stroke-dasharray="8 6"/>
-              <line x1="85" y1="87" x2="355" y2="87" stroke="#059669" stroke-width="1.5" stroke-dasharray="8 6"/>
-              <!-- Cotas -->
-              <g stroke="#64748B" stroke-width="1">
-                <!-- Cota bw = 20 cm -->
-                <line x1="18" y1="60" x2="18" y2="94"/>
-                <line x1="14" y1="60" x2="22" y2="60"/>
-                <line x1="14" y1="94" x2="22" y2="94"/>
-                <!-- Cota c_borde = 50 cm -->
-                <line x1="30" y1="110" x2="85" y2="110"/>
-                <line x1="30" y1="106" x2="30" y2="114"/>
-                <line x1="85" y1="106" x2="85" y2="114"/>
-                <!-- Cota Lw = 520 cm -->
-                <line x1="30" y1="128" x2="410" y2="128"/>
-                <line x1="30" y1="124" x2="30" y2="132"/>
-                <line x1="410" y1="124" x2="410" y2="132"/>
-              </g>
-              <text x="14" y="80" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">bw = 20 cm</text>
-              <text x="57" y="122" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">c ≥ 50 cm</text>
-              <text x="220" y="142" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">Longitud Total Lw = 5.20 m (520 cm)</text>
-              <text x="220" y="165" fill="#475569" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Doble Malla: 2 #4 @ 20 cm (ρ_l ≥ 0.0025, ρ_t ≥ 0.0025)</text>
-              <text x="220" y="182" fill="#B45309" font-family="Inter, sans-serif" font-size="9" text-anchor="middle">Bordes Confinados: 6 #7 con estribos cerrados y ganchos #3 @ 10 cm</text>
-            </g>
-          </svg>
-          <figcaption class="figure-caption" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: #64748B;">
-            Sección de muro adoptada con espesor bw = 20 cm, longitud confinada c ≥ 50 cm en bordes con 6#7 y estribos #3 @ 10 cm, y doble malla #4 @ 20 cm en el alma.
-          </figcaption>
-        </div>
-          </div>
-        </div>
-        </section>
-
-      <!-- EJEMPLO NUMÉRICO 7.6: EJERCICIO INTEGRADOR DE PREDIMENSIONAMIENTO COMPLETO -->
-            <section class="lesson-section" id="ex6-container">
-        <div class="section-header">
-          <div class="section-tag-row">
-            <span class="section-num">Ejemplo Numérico 7.6</span>
             <span class="section-tag">Ejercicio Integrador • Predimensionamiento Integral de Edificación</span>
           </div>
           <h2 class="section-title">Predimensionamiento Completo de Edificación de 4 Pisos: Losa, Viguetas, Vigas, Columnas y Zapata</h2>
@@ -3305,8 +3024,8 @@
             <span>🧑‍🏫</span> Modo Pizarra Docente: Haz clic sobre cada paso para ocultarlo o revelarlo durante la explicación en clase.
           </div>
           <div class="example-toolbar-actions">
-            <button type="button" class="btn-control" onclick="toggleAllSteps('ex6-container', false)">Ocultar Todos los Pasos</button>
-            <button type="button" class="btn-control" onclick="toggleAllSteps('ex6-container', true)">Revelar Todos los Pasos</button>
+            <button type="button" class="btn-control" onclick="toggleAllSteps('ex5-container', false)">Ocultar Todos los Pasos</button>
+            <button type="button" class="btn-control" onclick="toggleAllSteps('ex5-container', true)">Revelar Todos los Pasos</button>
           </div>
         </div>
 
@@ -3860,7 +3579,7 @@
   </g>
 </svg>
           <figcaption class="figure-caption" style="text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: #64748B;">
-            Síntesis gráfica del Ejemplo Integrador 7.6: planta estructural resuelta con cotas de modulación y detalle acotado en planta y corte de la zapata central.
+            Síntesis gráfica del Ejemplo Integrador 7.5: planta estructural resuelta con cotas de modulación y detalle acotado en planta y corte de la zapata central.
           </figcaption>
         </div>
 

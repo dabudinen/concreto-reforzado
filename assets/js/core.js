@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CORE JS — DIPLOMADO EN DISEÑO ESTRUCTURAL DE CONCRETO REFORZADO (NSR-10)
+   CORE JS — DISEÑO ESTRUCTURAL DE CONCRETO REFORZADO (NSR-10)
    Control de Modo Dual (Estudio / Clase Magistral), Menú Responsive (Drawer / Off-canvas),
    Puntero Láser, Tema Claro/Oscuro, Lightbox de Imágenes, Scroll-Spy 60fps,
    Transiciones Suaves (Acordeones, Soluciones), Gestos Táctiles y Renderizado KaTeX
@@ -34,7 +34,7 @@
      1. TEMA CLARO / OSCURO
      -------------------------------------------------------------------------- */
   function initTheme() {
-    const saved = localStorage.getItem('diplomado_theme') || 'light';
+    const saved = localStorage.getItem('concrete_theme') || localStorage.getItem('diplomado_theme') || 'light';
     if (saved === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
@@ -45,10 +45,10 @@
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     if (isDark) {
       document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('diplomado_theme', 'light');
+      localStorage.setItem('concrete_theme', 'light');
     } else {
       document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('diplomado_theme', 'dark');
+      localStorage.setItem('concrete_theme', 'dark');
     }
     updateThemeButton();
     if (typeof window.redrawAllSimulators === 'function') {
@@ -61,15 +61,15 @@
     if (!btn) return;
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     btn.innerHTML = isDark
-      ? '<span>☀️</span> Modo Claro'
-      : '<span>🌙</span> Modo Oscuro';
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg> <span class="btn-label">Modo Claro</span>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="btn-label">Modo Oscuro</span>';
   }
 
   /* --------------------------------------------------------------------------
      1.1. MENÚ LATERAL RESPONSIVE Y COLAPSABLE (DRAWER OFF-CANVAS EN MÓVIL)
      -------------------------------------------------------------------------- */
   function initCollapsibleSidebar() {
-    const saved = localStorage.getItem('diplomado_sidebar_collapsed');
+    const saved = localStorage.getItem('concrete_sidebar_collapsed') ?? localStorage.getItem('diplomado_sidebar_collapsed');
     if (saved === 'true' && window.innerWidth > 1120) {
       document.body.classList.add('sidebar-collapsed');
     }
@@ -176,7 +176,7 @@
       document.body.classList.toggle('sidebar-mobile-open', shouldOpen);
     } else {
       const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
-      localStorage.setItem('diplomado_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+      localStorage.setItem('concrete_sidebar_collapsed', isCollapsed ? 'true' : 'false');
     }
     if (typeof window.redrawAllSimulators === 'function') {
       setTimeout(window.redrawAllSimulators, 150);
@@ -758,23 +758,16 @@
     const isHidden = body.style.display === 'none' || window.getComputedStyle(body).display === 'none';
 
     if (isHidden) {
-      body.style.display = 'flex';
-      body.style.opacity = '0';
-      body.style.maxHeight = '0px';
-      void body.offsetHeight;
+      body.style.display = 'block';
       body.style.opacity = '1';
-      body.style.maxHeight = (body.scrollHeight + 60) + 'px';
+      body.style.maxHeight = 'none';
       btn.classList.add('expanded');
       const textSpan = btn.querySelector('.btn-text');
       if (textSpan) textSpan.textContent = 'Ocultar Solución Completa';
       const arrow = btn.querySelector('.arrow-icon');
       if (arrow) arrow.textContent = '▲';
     } else {
-      body.style.maxHeight = '0px';
-      body.style.opacity = '0';
-      setTimeout(() => {
-        body.style.display = 'none';
-      }, 320);
+      body.style.display = 'none';
       btn.classList.remove('expanded');
       const textSpan = btn.querySelector('.btn-text');
       if (textSpan) textSpan.textContent = 'Mostrar Solución Detallada (Paso a Paso)';
@@ -896,13 +889,10 @@
 
     if (shouldOpen) {
       body.style.display = 'block';
-      body.style.opacity = '0';
-      body.style.maxHeight = '0px';
-      void body.offsetHeight;
       body.style.opacity = '1';
-      body.style.maxHeight = (body.scrollHeight + 60) + 'px';
+      body.style.maxHeight = 'none';
       if (btn) btn.innerHTML = '<span>Ocultar Ejercicio</span> <span class="macro-arrow">▲</span>';
-      if (card) card.style.borderColor = 'var(--brand-primary)';
+      if (card) card.style.borderColor = 'var(--primary)';
     } else {
       body.style.maxHeight = '0px';
       body.style.opacity = '0';

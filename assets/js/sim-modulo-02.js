@@ -1,5 +1,5 @@
 /**
- * DIPLOMADO EN DISEÑO DE ESTRUCTURAS DE CONCRETO REFORZADO
+ * DISEÑO DE ESTRUCTURAS DE CONCRETO REFORZADO
  * Archivo: assets/js/sim-modulo-02.js
  * Propósito: Simuladores interactivos de Predimensionamiento por Elemento Estructural:
  *            1) Vigas, Viguetas (Nervios), Riostras y Losas (NSR-10 C.9.5 y C.8.13 detallado por numeral)

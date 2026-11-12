@@ -147,7 +147,9 @@
            LÁMINA 00: PORTADA DEL MÓDULO 03 Y BIBLIOGRAFÍA DE REFERENCIA
            =================================================================== -->
       <section id="portada-mod03" class="hero-banner content-section">
-        <div class="hero-kicker">
+        <div class="hero-grid">
+          <div>
+<div class="hero-kicker">
           <span>MÓDULO TÉCNICO 03</span>
           <span>•</span>
           <span>MECÁNICA SECCIONAL Y RESISTENCIA ÚLTIMA A FLEXIÓN</span>
@@ -174,8 +176,346 @@
             <span class="hero-meta-value">7 Problemas Completos de Diseño y Revisión</span>
           </div>
         </div>
+          </div>
+          <div class="hero-visual-box hero-diagram-box">
+            <!-- Contenedor Interactivo con Indicador de Pizarra Docente -->
+            <div class="diagram-interactive-wrap" onclick="openFlexureModal()" title="Haz clic sobre el esquema para ampliarlo en pantalla completa (Modo Pizarra Docente)">
+              <div class="zoom-badge-hint">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                <span>Pizarra Docente (Clic para Ampliar)</span>
+              </div>
+              <svg viewBox="0 0 900 540" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, -apple-system, sans-serif; display: block;" role="img" aria-label="Diseño a Flexión: Mecánica Seccional, Deformaciones de Bernoulli y Bloque de Whitney">
+  <defs>
+    <!-- Filtros técnicos -->
+    <filter id="shadow-soft" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+    
+    <!-- Marcadores de flechas -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1D4ED8"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+
+    <!-- Gradientes -->
+    <linearGradient id="grad-beam-comp" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#DBEAFE" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="grad-whitney" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="900" height="42" rx="10" fill="#F8FAFC" />
+  <line x1="0" y1="42" x2="900" y2="42" stroke="#E2E8F0" stroke-width="1.2" />
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    MECÁNICA SECCIONAL A FLEXIÓN: DEFORMACIONES Y BLOQUE DE WHITNEY
+  </text>
+  <rect x="670" y="10" width="206" height="22" rx="11" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
+  <text x="773" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    NSR-10 C.10 • ACI 318 CAP. 22
+  </text>
+
+  <!-- ===================================================================
+       PARTE SUPERIOR: ALZADO LONGITUDINAL DE LA VIGA A FLEXIÓN PURA
+       =================================================================== -->
+  <g transform="translate(30, 52)">
+    <!-- Marco contenedor superior -->
+    <rect x="0" y="0" width="840" height="152" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2" />
+    
+    <!-- Etiqueta del Alzado -->
+    <rect x="12" y="10" width="220" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+    <text x="22" y="24" fill="#334155" font-size="9.5" font-weight="700">
+      1. Alzado Longitudinal • Viga Simplemente Apoyada (Luz L)
+    </text>
+
+    <!-- Cargas gravitacionales uniformes wu -->
+    <g transform="translate(140, 20)">
+      <line x1="0" y1="0" x2="560" y2="0" stroke="#DC2626" stroke-width="1.8" />
+      <text x="280" y="-7" fill="#DC2626" font-size="10" font-weight="800" text-anchor="middle">
+        Carga Mayorada de Diseño wu = 1.2D + 1.6L [kN/m]
+      </text>
+      <!-- Flechas hacia abajo -->
+      <line x1="20" y1="0" x2="20" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="65" y1="0" x2="65" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="110" y1="0" x2="110" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="155" y1="0" x2="155" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="200" y1="0" x2="200" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="245" y1="0" x2="245" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="290" y1="0" x2="290" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="335" y1="0" x2="335" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="380" y1="0" x2="380" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="425" y1="0" x2="425" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="470" y1="0" x2="470" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="515" y1="0" x2="515" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+    </g>
+
+    <!-- Cuerpo de la Viga Deformada/Cóncava -->
+    <g transform="translate(140, 42)">
+      <!-- Sombra/Deformada elástica sutil -->
+      <path d="M 0,0 Q 280,18 560,0 L 560,54 Q 280,72 0,54 Z" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.6"/>
       
-        </section>
+      <!-- Zona Comprimida Superior (arriba del Eje Neutro) -->
+      <path d="M 0,0 Q 280,18 560,0 L 560,20 Q 280,38 0,20 Z" fill="#DBEAFE" fill-opacity="0.6"/>
+      <text x="280" y="16" fill="#1E40AF" font-size="9" font-weight="700" text-anchor="middle">
+        Zona Comprimida Superior del Concreto (εc ≤ 0.003)
+      </text>
+      
+      <!-- Eje Neutro Longitudinal (Línea discontinua) -->
+      <path d="M 0,20 Q 280,38 560,20" stroke="#2563EB" stroke-width="1.4" stroke-dasharray="6 3"/>
+      <text x="25" y="27" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">E.N.</text>
+
+      <!-- Armadura Longitudinal Inferior de Tracción As -->
+      <path d="M 15,44 Q 280,62 545,44" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
+      <text x="280" y="52" fill="#B91C1C" font-size="9" font-weight="800" text-anchor="middle">
+        Refuerzo Principal de Tracción As (fs = fy)
+      </text>
+
+      <!-- Fisuras verticales de flexión en el tercio central inferior -->
+      <line x1="230" y1="52" x2="230" y2="34" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="260" y1="54" x2="260" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="280" y1="55" x2="280" y2="28" stroke="#64748B" stroke-width="1.8" stroke-dasharray="2 1"/>
+      <line x1="300" y1="54" x2="300" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="330" y1="52" x2="330" y2="34" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      
+      <!-- Flechas de Momento Flector en Extremos -->
+      <!-- Momento Izquierdo (horario M) -->
+      <path d="M -20,44 A 20 20 0 0 1 -20,10" fill="none" stroke="#D97706" stroke-width="2.2" marker-end="url(#arrow-amber)"/>
+      <text x="-40" y="30" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">+Mu</text>
+
+      <!-- Momento Derecho (antihorario M) -->
+      <path d="M 580,44 A 20 20 0 0 0 580,10" fill="none" stroke="#D97706" stroke-width="2.2" marker-end="url(#arrow-amber)"/>
+      <text x="595" y="30" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">+Mu</text>
+
+      <!-- Apoyos -->
+      <!-- Apoyo Fijo Izquierdo (Triángulo) -->
+      <polygon points="0,54 -10,70 10,70" fill="#475569" stroke="#334155" stroke-width="1.2"/>
+      <line x1="-16" y1="70" x2="16" y2="70" stroke="#334155" stroke-width="2"/>
+      
+      <!-- Apoyo Móvil Derecho (Rodillos) -->
+      <polygon points="560,54 550,66 570,66" fill="#475569" stroke="#334155" stroke-width="1.2"/>
+      <circle cx="554" cy="70" r="3" fill="#64748B"/>
+      <circle cx="566" cy="70" r="3" fill="#64748B"/>
+      <line x1="544" y1="74" x2="576" y2="74" stroke="#334155" stroke-width="2"/>
+
+      <!-- Plano de Corte A - A' -->
+      <g transform="translate(380, -8)">
+        <line x1="0" y1="0" x2="0" y2="75" stroke="#0F172A" stroke-width="2" stroke-dasharray="5 3"/>
+        <!-- Flecha A superior -->
+        <polygon points="0,0 8,-4 8,4" fill="#0F172A"/>
+        <text x="14" y="2" fill="#0F172A" font-size="11" font-weight="800">A</text>
+        <!-- Flecha A' inferior -->
+        <polygon points="0,75 8,71 8,79" fill="#0F172A"/>
+        <text x="14" y="78" fill="#0F172A" font-size="11" font-weight="800">A'</text>
+      </g>
+    </g>
+
+    <!-- Flecha indicativa de salto al corte -->
+    <path d="M 540,118 L 540,136 Q 540,144 520,144 L 200,144" fill="none" stroke="#0284C7" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow-blue)"/>
+    <text x="370" y="141" fill="#0369A1" font-size="8.5" font-weight="700">Sección Crítica de Máximo Momento Flector (Corte A - A')</text>
+  </g>
+
+  <!-- ===================================================================
+       PARTE INFERIOR: TRÍPTICO SECCIONAL (SECCIÓN, DEFORMACIONES, WHITNEY)
+       =================================================================== -->
+
+  <!-- ==================== PANEL 1: SECCIÓN CON REFUERZO ==================== -->
+  <g transform="translate(30, 218)">
+    <rect x="0" y="0" width="275" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 1 -->
+    <rect x="0" y="0" width="275" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="275" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="137" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (a) SECCIÓN TRANSVERSAL REFORZADA
+    </text>
+
+    <!-- Sección de Concreto bw x h -->
+    <!-- X: 70 a 195 (ancho bw = 125 mm escala). Y: 60 a 265 (altura h = 205 mm escala) -->
+    <!-- Fondo concreto comprimido (hasta c = 60 px) -->
+    <rect x="70" y="60" width="125" height="60" fill="#DBEAFE" fill-opacity="0.4"/>
+    <!-- Fondo concreto traccionado fisurado -->
+    <rect x="70" y="120" width="125" height="145" fill="#F8FAFC"/>
+    <!-- Contorno viga -->
+    <rect x="70" y="60" width="125" height="205" fill="none" stroke="#334155" stroke-width="2.2" rx="3"/>
+
+    <!-- Eje Neutro -->
+    <line x1="60" y1="120" x2="205" y2="120" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="52" y="123" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="end">E.N.</text>
+
+    <!-- Estribo Cerrado (Confinamiento) -->
+    <rect x="78" y="68" width="109" height="189" fill="none" stroke="#64748B" stroke-width="2" rx="5"/>
+    <text x="132" y="165" fill="#64748B" font-size="8" font-weight="600" text-anchor="middle">Estribo Cerrado</text>
+
+    <!-- Acero Superior de Montaje / Compresión A's (2 barras) -->
+    <!-- Barra Sup Izq -->
+    <circle cx="92" cy="82" r="6" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+    <!-- Barra Sup Der -->
+    <circle cx="173" cy="82" r="6" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+    <text x="132.5" y="85" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">2 #4 (A's)</text>
+
+    <!-- Acero Inferior de Tracción As (3 barras corrugadas) -->
+    <!-- Barra Inf Izq -->
+    <circle cx="92" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <!-- Barra Inf Centro -->
+    <circle cx="132.5" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <!-- Barra Inf Der -->
+    <circle cx="173" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <text x="132.5" y="230" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">3 #8 (As)</text>
+
+    <!-- COTAS TÉCNICAS -->
+    <!-- Cota ancho bw arriba -->
+    <line x1="70" y1="46" x2="195" y2="46" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="132.5" y="42" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">bw = 30 cm</text>
+
+    <!-- Cota altura total h a la izquierda -->
+    <line x1="28" y1="60" x2="28" y2="265" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="22" y="165" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle" transform="rotate(-90 22 165)">h = 50 cm</text>
+
+    <!-- Cota peralte efectivo d a la derecha -->
+    <line x1="218" y1="60" x2="218" y2="243" stroke="#DC2626" stroke-width="1.2" marker-start="url(#arrow-red)" marker-end="url(#arrow-red)"/>
+    <text x="226" y="155" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="start">d = 44 cm</text>
+
+    <!-- Cota recubrimiento r abajo -->
+    <text x="132.5" y="280" fill="#64748B" font-size="8" font-weight="600" text-anchor="middle">Recubrimiento r = 40 mm</text>
+    <rect x="35" y="286" width="205" height="15" rx="3" fill="#F1F5F9" />
+    <text x="137" y="297" fill="#334155" font-family="JetBrains Mono, monospace" font-size="7.8" font-weight="700" text-anchor="middle">Cuantía ρ = As / (bw · d)</text>
+  </g>
+
+  <!-- ==================== PANEL 2: DEFORMACIONES UNITARIAS (BERNOULLI) ==================== -->
+  <g transform="translate(320, 218)">
+    <rect x="0" y="0" width="265" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 2 -->
+    <rect x="0" y="0" width="265" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="265" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="132" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (b) DEFORMACIONES (BERNOULLI)
+    </text>
+
+    <!-- Eje de referencia neutro vertical a x = 110 -->
+    <line x1="110" y1="48" x2="110" y2="275" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Nivel fibra superior (y = 60) -->
+    <line x1="100" y1="60" x2="190" y2="60" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3 2"/>
+    <!-- Nivel Eje Neutro (y = 120) -->
+    <line x1="20" y1="120" x2="245" y2="120" stroke="#2563EB" stroke-width="1.2" stroke-dasharray="4 2"/>
+    <text x="18" y="117" fill="#2563EB" font-size="8" font-weight="700">c</text>
+    <!-- Nivel del acero As (y = 243) -->
+    <line x1="30" y1="243" x2="245" y2="243" stroke="#DC2626" stroke-width="1" stroke-dasharray="3 2"/>
+
+    <!-- Perfil Lineal de Deformaciones (Navier-Bernoulli) -->
+    <!-- Compresión arriba: de x=110 a x=165 (ancho 55 px = ecu = 0.003) en y=60 -->
+    <!-- Cruce en Eje Neutro: x=110, y=120 -->
+    <!-- Tracción abajo: de x=110 a x=40 (ancho 70 px = et >= 0.005) en y=243 -->
+    
+    <!-- Triángulo de Compresión (Azul) -->
+    <polygon points="110,120 110,60 165,60" fill="#DBEAFE" fill-opacity="0.8"/>
+    <!-- Triángulo de Tracción (Rojo) -->
+    <polygon points="110,120 110,243 38,243" fill="#FEE2E2" fill-opacity="0.8"/>
+
+    <!-- Línea recta continua de deformaciones -->
+    <line x1="165" y1="60" x2="38" y2="243" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Deformación en el concreto ecu = 0.003 -->
+    <line x1="110" y1="60" x2="165" y2="60" stroke="#1D4ED8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="172" y="64" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800">εcu = 0.003</text>
+    <text x="172" y="75" fill="#64748B" font-size="7.5">(Agotamiento concreto)</text>
+
+    <!-- Profundidad del Eje Neutro c -->
+    <line x1="18" y1="60" x2="18" y2="120" stroke="#2563EB" stroke-width="1.2" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)"/>
+    <text x="12" y="93" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="end">c</text>
+
+    <!-- Deformación en el acero et >= 0.005 -->
+    <line x1="110" y1="243" x2="38" y2="243" stroke="#DC2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <text x="115" y="247" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800">εt ≥ 0.005</text>
+    <text x="115" y="258" fill="#16A34A" font-size="8" font-weight="700">✓ Sección Dúctil (φ = 0.90)</text>
+
+    <!-- Nota pedagógica inferior -->
+    <rect x="15" y="278" width="235" height="22" rx="4" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+    <text x="132" y="292" fill="#1E40AF" font-size="8" font-weight="700" text-anchor="middle">
+      Compatibilidad: c / dt ≤ 0.375 (Falla Dúctil)
+    </text>
+  </g>
+
+  <!-- ==================== PANEL 3: ESFUERZOS Y BLOQUE DE WHITNEY ==================== -->
+  <g transform="translate(600, 218)">
+    <rect x="0" y="0" width="270" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 3 -->
+    <rect x="0" y="0" width="270" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="270" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="135" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (c) BLOQUE DE WHITNEY Y PAR (C - T)
+    </text>
+
+    <!-- Eje vertical de referencia a x = 50 -->
+    <line x1="50" y1="48" x2="50" y2="275" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Bloque Rectangular de Compresión de Whitney -->
+    <!-- Profundidad a = beta1 * c. Si c = 60 px, a = 0.85 * 60 = 51 px (de y = 60 a y = 111) -->
+    <!-- Esfuerzo uniforme 0.85 f'c (ancho = 65 px, de x=50 a x=115) -->
+    <rect x="50" y="60" width="65" height="51" fill="url(#grad-whitney)" stroke="#D97706" stroke-width="1.8"/>
+    
+    <!-- Flechas de Esfuerzo 0.85 f'c dentro del bloque -->
+    <line x1="115" y1="72" x2="55" y2="72" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    <line x1="115" y1="85" x2="55" y2="85" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    <line x1="115" y1="98" x2="55" y2="98" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    
+    <text x="122" y="88" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800">0.85 f'c</text>
+
+    <!-- Cota de profundidad del bloque a -->
+    <line x1="28" y1="60" x2="28" y2="111" stroke="#D97706" stroke-width="1.2" marker-start="url(#arrow-amber)" marker-end="url(#arrow-amber)"/>
+    <text x="22" y="88" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="end">a = β1·c</text>
+
+    <!-- Fuerza Resultante de Compresión Cc (aplicada en a/2 = y 85.5) -->
+    <line x1="240" y1="85.5" x2="135" y2="85.5" stroke="#D97706" stroke-width="3" marker-end="url(#arrow-amber)"/>
+    <rect x="145" y="73" width="92" height="16" rx="3" fill="#FFFFFF" stroke="#D97706" stroke-width="1"/>
+    <text x="191" y="85" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="middle">Cc = 0.85·f'c·a·bw</text>
+
+    <!-- Brazo de Palanca Interno jd = d - a/2 -->
+    <!-- De y = 85.5 (centro Cc) hasta y = 243 (nivel As / T) -->
+    <line x1="250" y1="85.5" x2="250" y2="243" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="256" y="168" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800">jd = d - a/2</text>
+
+    <!-- Fuerza Resultante de Tracción T (aplicada a y = 243) -->
+    <line x1="50" y1="243" x2="165" y2="243" stroke="#DC2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+    <rect x="75" y="231" width="85" height="16" rx="3" fill="#FFFFFF" stroke="#DC2626" stroke-width="1"/>
+    <text x="117" y="243" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="middle">T = As · fy</text>
+
+    <!-- Ecuación Maestra del Momento Nominal Mn en caja destacada -->
+    <rect x="15" y="266" width="240" height="34" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="135" y="280" fill="#92400E" font-size="8" font-weight="700" text-anchor="middle">
+      EQUILIBRIO: Cc = T  ⇒  Mn = T · (d - a/2)
+    </text>
+    <text x="135" y="294" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">
+      φ Mn = φ As fy (d - a/2) ≥ Mu
+    </text>
+  </g>
+</svg>
+            </div>
+            <div class="diagram-toolbar-strip">
+              <button type="button" class="btn-diagram-zoom" onclick="openFlexureModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                <span>🔍 Ampliar Esquema Seccional (Modo Pizarra Docente)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ===================================================================
            LÁMINA 00: BIBLIOGRAFÍA Y TEXTOS DE REFERENCIA DEL MÓDULO 03
@@ -4994,7 +5334,424 @@
   <!-- ==========================================================================
        MODAL SOBREPUESTO: NOMENCLATURA, VARIABLES Y UNIDADES DEL MÓDULO 03
        ========================================================================== -->
-  <div id="modal-variables" class="variables-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modal-vars-title">
+  
+  <!-- ==========================================================================
+       MODAL DE PIZARRA DOCENTE: ESQUEMA SECCIONAL A FLEXIÓN (MÓDULO 03)
+       ========================================================================== -->
+  <div id="modal-diagrama-flexion" class="diagram-modal-overlay" onclick="handleDiagramModalClick(event)" role="dialog" aria-modal="true" aria-labelledby="diagram-modal-title-mod03">
+    <div class="diagram-modal-backdrop"></div>
+    <div class="diagram-modal-content">
+      <div class="diagram-modal-header">
+        <div>
+          <div class="diagram-modal-eyebrow">PIZARRA DOCENTE • MECÁNICA SECCIONAL Y RESISTENCIA A FLEXIÓN</div>
+          <h2 id="diagram-modal-title-mod03" class="diagram-modal-title">Viga a Flexión: Deformaciones de Bernoulli, Bloque de Whitney y Detalle de Refuerzo ($A_s, A'_s$)</h2>
+        </div>
+        <button type="button" class="diagram-modal-close" onclick="closeFlexureModal()" aria-label="Cerrar modal (Esc)">
+          ✕
+        </button>
+      </div>
+      <div class="diagram-modal-body">
+        <!-- SVG EN ALTA DEFINICIÓN -->
+        <div class="diagram-modal-svg-wrap">
+          <svg viewBox="0 0 900 540" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, -apple-system, sans-serif; display: block;" role="img" aria-label="Diseño a Flexión: Mecánica Seccional, Deformaciones de Bernoulli y Bloque de Whitney">
+  <defs>
+    <!-- Filtros técnicos -->
+    <filter id="shadow-soft" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+    
+    <!-- Marcadores de flechas -->
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1D4ED8"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+
+    <!-- Gradientes -->
+    <linearGradient id="grad-beam-comp" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#DBEAFE" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="grad-whitney" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="900" height="42" rx="10" fill="#F8FAFC" />
+  <line x1="0" y1="42" x2="900" y2="42" stroke="#E2E8F0" stroke-width="1.2" />
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    MECÁNICA SECCIONAL A FLEXIÓN: DEFORMACIONES Y BLOQUE DE WHITNEY
+  </text>
+  <rect x="670" y="10" width="206" height="22" rx="11" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
+  <text x="773" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    NSR-10 C.10 • ACI 318 CAP. 22
+  </text>
+
+  <!-- ===================================================================
+       PARTE SUPERIOR: ALZADO LONGITUDINAL DE LA VIGA A FLEXIÓN PURA
+       =================================================================== -->
+  <g transform="translate(30, 52)">
+    <!-- Marco contenedor superior -->
+    <rect x="0" y="0" width="840" height="152" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2" />
+    
+    <!-- Etiqueta del Alzado -->
+    <rect x="12" y="10" width="220" height="20" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+    <text x="22" y="24" fill="#334155" font-size="9.5" font-weight="700">
+      1. Alzado Longitudinal • Viga Simplemente Apoyada (Luz L)
+    </text>
+
+    <!-- Cargas gravitacionales uniformes wu -->
+    <g transform="translate(140, 20)">
+      <line x1="0" y1="0" x2="560" y2="0" stroke="#DC2626" stroke-width="1.8" />
+      <text x="280" y="-7" fill="#DC2626" font-size="10" font-weight="800" text-anchor="middle">
+        Carga Mayorada de Diseño wu = 1.2D + 1.6L [kN/m]
+      </text>
+      <!-- Flechas hacia abajo -->
+      <line x1="20" y1="0" x2="20" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="65" y1="0" x2="65" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="110" y1="0" x2="110" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="155" y1="0" x2="155" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="200" y1="0" x2="200" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="245" y1="0" x2="245" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="290" y1="0" x2="290" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="335" y1="0" x2="335" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="380" y1="0" x2="380" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="425" y1="0" x2="425" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="470" y1="0" x2="470" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+      <line x1="515" y1="0" x2="515" y2="18" stroke="#DC2626" stroke-width="1.6" marker-end="url(#arrow-red)"/>
+    </g>
+
+    <!-- Cuerpo de la Viga Deformada/Cóncava -->
+    <g transform="translate(140, 42)">
+      <!-- Sombra/Deformada elástica sutil -->
+      <path d="M 0,0 Q 280,18 560,0 L 560,54 Q 280,72 0,54 Z" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.6"/>
+      
+      <!-- Zona Comprimida Superior (arriba del Eje Neutro) -->
+      <path d="M 0,0 Q 280,18 560,0 L 560,20 Q 280,38 0,20 Z" fill="#DBEAFE" fill-opacity="0.6"/>
+      <text x="280" y="16" fill="#1E40AF" font-size="9" font-weight="700" text-anchor="middle">
+        Zona Comprimida Superior del Concreto (εc ≤ 0.003)
+      </text>
+      
+      <!-- Eje Neutro Longitudinal (Línea discontinua) -->
+      <path d="M 0,20 Q 280,38 560,20" stroke="#2563EB" stroke-width="1.4" stroke-dasharray="6 3"/>
+      <text x="25" y="27" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">E.N.</text>
+
+      <!-- Armadura Longitudinal Inferior de Tracción As -->
+      <path d="M 15,44 Q 280,62 545,44" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
+      <text x="280" y="52" fill="#B91C1C" font-size="9" font-weight="800" text-anchor="middle">
+        Refuerzo Principal de Tracción As (fs = fy)
+      </text>
+
+      <!-- Fisuras verticales de flexión en el tercio central inferior -->
+      <line x1="230" y1="52" x2="230" y2="34" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="260" y1="54" x2="260" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="280" y1="55" x2="280" y2="28" stroke="#64748B" stroke-width="1.8" stroke-dasharray="2 1"/>
+      <line x1="300" y1="54" x2="300" y2="30" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      <line x1="330" y1="52" x2="330" y2="34" stroke="#64748B" stroke-width="1.5" stroke-dasharray="2 1"/>
+      
+      <!-- Flechas de Momento Flector en Extremos -->
+      <!-- Momento Izquierdo (horario M) -->
+      <path d="M -20,44 A 20 20 0 0 1 -20,10" fill="none" stroke="#D97706" stroke-width="2.2" marker-end="url(#arrow-amber)"/>
+      <text x="-40" y="30" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">+Mu</text>
+
+      <!-- Momento Derecho (antihorario M) -->
+      <path d="M 580,44 A 20 20 0 0 0 580,10" fill="none" stroke="#D97706" stroke-width="2.2" marker-end="url(#arrow-amber)"/>
+      <text x="595" y="30" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">+Mu</text>
+
+      <!-- Apoyos -->
+      <!-- Apoyo Fijo Izquierdo (Triángulo) -->
+      <polygon points="0,54 -10,70 10,70" fill="#475569" stroke="#334155" stroke-width="1.2"/>
+      <line x1="-16" y1="70" x2="16" y2="70" stroke="#334155" stroke-width="2"/>
+      
+      <!-- Apoyo Móvil Derecho (Rodillos) -->
+      <polygon points="560,54 550,66 570,66" fill="#475569" stroke="#334155" stroke-width="1.2"/>
+      <circle cx="554" cy="70" r="3" fill="#64748B"/>
+      <circle cx="566" cy="70" r="3" fill="#64748B"/>
+      <line x1="544" y1="74" x2="576" y2="74" stroke="#334155" stroke-width="2"/>
+
+      <!-- Plano de Corte A - A' -->
+      <g transform="translate(380, -8)">
+        <line x1="0" y1="0" x2="0" y2="75" stroke="#0F172A" stroke-width="2" stroke-dasharray="5 3"/>
+        <!-- Flecha A superior -->
+        <polygon points="0,0 8,-4 8,4" fill="#0F172A"/>
+        <text x="14" y="2" fill="#0F172A" font-size="11" font-weight="800">A</text>
+        <!-- Flecha A' inferior -->
+        <polygon points="0,75 8,71 8,79" fill="#0F172A"/>
+        <text x="14" y="78" fill="#0F172A" font-size="11" font-weight="800">A'</text>
+      </g>
+    </g>
+
+    <!-- Flecha indicativa de salto al corte -->
+    <path d="M 540,118 L 540,136 Q 540,144 520,144 L 200,144" fill="none" stroke="#0284C7" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow-blue)"/>
+    <text x="370" y="141" fill="#0369A1" font-size="8.5" font-weight="700">Sección Crítica de Máximo Momento Flector (Corte A - A')</text>
+  </g>
+
+  <!-- ===================================================================
+       PARTE INFERIOR: TRÍPTICO SECCIONAL (SECCIÓN, DEFORMACIONES, WHITNEY)
+       =================================================================== -->
+
+  <!-- ==================== PANEL 1: SECCIÓN CON REFUERZO ==================== -->
+  <g transform="translate(30, 218)">
+    <rect x="0" y="0" width="275" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 1 -->
+    <rect x="0" y="0" width="275" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="275" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="137" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (a) SECCIÓN TRANSVERSAL REFORZADA
+    </text>
+
+    <!-- Sección de Concreto bw x h -->
+    <!-- X: 70 a 195 (ancho bw = 125 mm escala). Y: 60 a 265 (altura h = 205 mm escala) -->
+    <!-- Fondo concreto comprimido (hasta c = 60 px) -->
+    <rect x="70" y="60" width="125" height="60" fill="#DBEAFE" fill-opacity="0.4"/>
+    <!-- Fondo concreto traccionado fisurado -->
+    <rect x="70" y="120" width="125" height="145" fill="#F8FAFC"/>
+    <!-- Contorno viga -->
+    <rect x="70" y="60" width="125" height="205" fill="none" stroke="#334155" stroke-width="2.2" rx="3"/>
+
+    <!-- Eje Neutro -->
+    <line x1="60" y1="120" x2="205" y2="120" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="5 3"/>
+    <text x="52" y="123" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="end">E.N.</text>
+
+    <!-- Estribo Cerrado (Confinamiento) -->
+    <rect x="78" y="68" width="109" height="189" fill="none" stroke="#64748B" stroke-width="2" rx="5"/>
+    <text x="132" y="165" fill="#64748B" font-size="8" font-weight="600" text-anchor="middle">Estribo Cerrado</text>
+
+    <!-- Acero Superior de Montaje / Compresión A's (2 barras) -->
+    <!-- Barra Sup Izq -->
+    <circle cx="92" cy="82" r="6" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+    <!-- Barra Sup Der -->
+    <circle cx="173" cy="82" r="6" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+    <text x="132.5" y="85" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">2 #4 (A's)</text>
+
+    <!-- Acero Inferior de Tracción As (3 barras corrugadas) -->
+    <!-- Barra Inf Izq -->
+    <circle cx="92" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <!-- Barra Inf Centro -->
+    <circle cx="132.5" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <!-- Barra Inf Der -->
+    <circle cx="173" cy="243" r="7.5" fill="#991B1B" stroke="#DC2626" stroke-width="2"/>
+    <text x="132.5" y="230" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">3 #8 (As)</text>
+
+    <!-- COTAS TÉCNICAS -->
+    <!-- Cota ancho bw arriba -->
+    <line x1="70" y1="46" x2="195" y2="46" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="132.5" y="42" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">bw = 30 cm</text>
+
+    <!-- Cota altura total h a la izquierda -->
+    <line x1="28" y1="60" x2="28" y2="265" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="22" y="165" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle" transform="rotate(-90 22 165)">h = 50 cm</text>
+
+    <!-- Cota peralte efectivo d a la derecha -->
+    <line x1="218" y1="60" x2="218" y2="243" stroke="#DC2626" stroke-width="1.2" marker-start="url(#arrow-red)" marker-end="url(#arrow-red)"/>
+    <text x="226" y="155" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="start">d = 44 cm</text>
+
+    <!-- Cota recubrimiento r abajo -->
+    <text x="132.5" y="280" fill="#64748B" font-size="8" font-weight="600" text-anchor="middle">Recubrimiento r = 40 mm</text>
+    <rect x="35" y="286" width="205" height="15" rx="3" fill="#F1F5F9" />
+    <text x="137" y="297" fill="#334155" font-family="JetBrains Mono, monospace" font-size="7.8" font-weight="700" text-anchor="middle">Cuantía ρ = As / (bw · d)</text>
+  </g>
+
+  <!-- ==================== PANEL 2: DEFORMACIONES UNITARIAS (BERNOULLI) ==================== -->
+  <g transform="translate(320, 218)">
+    <rect x="0" y="0" width="265" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 2 -->
+    <rect x="0" y="0" width="265" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="265" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="132" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (b) DEFORMACIONES (BERNOULLI)
+    </text>
+
+    <!-- Eje de referencia neutro vertical a x = 110 -->
+    <line x1="110" y1="48" x2="110" y2="275" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Nivel fibra superior (y = 60) -->
+    <line x1="100" y1="60" x2="190" y2="60" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3 2"/>
+    <!-- Nivel Eje Neutro (y = 120) -->
+    <line x1="20" y1="120" x2="245" y2="120" stroke="#2563EB" stroke-width="1.2" stroke-dasharray="4 2"/>
+    <text x="18" y="117" fill="#2563EB" font-size="8" font-weight="700">c</text>
+    <!-- Nivel del acero As (y = 243) -->
+    <line x1="30" y1="243" x2="245" y2="243" stroke="#DC2626" stroke-width="1" stroke-dasharray="3 2"/>
+
+    <!-- Perfil Lineal de Deformaciones (Navier-Bernoulli) -->
+    <!-- Compresión arriba: de x=110 a x=165 (ancho 55 px = ecu = 0.003) en y=60 -->
+    <!-- Cruce en Eje Neutro: x=110, y=120 -->
+    <!-- Tracción abajo: de x=110 a x=40 (ancho 70 px = et >= 0.005) en y=243 -->
+    
+    <!-- Triángulo de Compresión (Azul) -->
+    <polygon points="110,120 110,60 165,60" fill="#DBEAFE" fill-opacity="0.8"/>
+    <!-- Triángulo de Tracción (Rojo) -->
+    <polygon points="110,120 110,243 38,243" fill="#FEE2E2" fill-opacity="0.8"/>
+
+    <!-- Línea recta continua de deformaciones -->
+    <line x1="165" y1="60" x2="38" y2="243" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Deformación en el concreto ecu = 0.003 -->
+    <line x1="110" y1="60" x2="165" y2="60" stroke="#1D4ED8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+    <text x="172" y="64" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800">εcu = 0.003</text>
+    <text x="172" y="75" fill="#64748B" font-size="7.5">(Agotamiento concreto)</text>
+
+    <!-- Profundidad del Eje Neutro c -->
+    <line x1="18" y1="60" x2="18" y2="120" stroke="#2563EB" stroke-width="1.2" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)"/>
+    <text x="12" y="93" fill="#2563EB" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="end">c</text>
+
+    <!-- Deformación en el acero et >= 0.005 -->
+    <line x1="110" y1="243" x2="38" y2="243" stroke="#DC2626" stroke-width="2" marker-end="url(#arrow-red)"/>
+    <text x="115" y="247" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800">εt ≥ 0.005</text>
+    <text x="115" y="258" fill="#16A34A" font-size="8" font-weight="700">✓ Sección Dúctil (φ = 0.90)</text>
+
+    <!-- Nota pedagógica inferior -->
+    <rect x="15" y="278" width="235" height="22" rx="4" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+    <text x="132" y="292" fill="#1E40AF" font-size="8" font-weight="700" text-anchor="middle">
+      Compatibilidad: c / dt ≤ 0.375 (Falla Dúctil)
+    </text>
+  </g>
+
+  <!-- ==================== PANEL 3: ESFUERZOS Y BLOQUE DE WHITNEY ==================== -->
+  <g transform="translate(600, 218)">
+    <rect x="0" y="0" width="270" height="308" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4" filter="url(#shadow-soft)"/>
+    
+    <!-- Título Panel 3 -->
+    <rect x="0" y="0" width="270" height="32" rx="8" fill="#F8FAFC" />
+    <line x1="0" y1="32" x2="270" y2="32" stroke="#E2E8F0" stroke-width="1.2" />
+    <text x="135" y="21" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
+      (c) BLOQUE DE WHITNEY Y PAR (C - T)
+    </text>
+
+    <!-- Eje vertical de referencia a x = 50 -->
+    <line x1="50" y1="48" x2="50" y2="275" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Bloque Rectangular de Compresión de Whitney -->
+    <!-- Profundidad a = beta1 * c. Si c = 60 px, a = 0.85 * 60 = 51 px (de y = 60 a y = 111) -->
+    <!-- Esfuerzo uniforme 0.85 f'c (ancho = 65 px, de x=50 a x=115) -->
+    <rect x="50" y="60" width="65" height="51" fill="url(#grad-whitney)" stroke="#D97706" stroke-width="1.8"/>
+    
+    <!-- Flechas de Esfuerzo 0.85 f'c dentro del bloque -->
+    <line x1="115" y1="72" x2="55" y2="72" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    <line x1="115" y1="85" x2="55" y2="85" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    <line x1="115" y1="98" x2="55" y2="98" stroke="#D97706" stroke-width="1.5" marker-end="url(#arrow-amber)"/>
+    
+    <text x="122" y="88" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800">0.85 f'c</text>
+
+    <!-- Cota de profundidad del bloque a -->
+    <line x1="28" y1="60" x2="28" y2="111" stroke="#D97706" stroke-width="1.2" marker-start="url(#arrow-amber)" marker-end="url(#arrow-amber)"/>
+    <text x="22" y="88" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="end">a = β1·c</text>
+
+    <!-- Fuerza Resultante de Compresión Cc (aplicada en a/2 = y 85.5) -->
+    <line x1="240" y1="85.5" x2="135" y2="85.5" stroke="#D97706" stroke-width="3" marker-end="url(#arrow-amber)"/>
+    <rect x="145" y="73" width="92" height="16" rx="3" fill="#FFFFFF" stroke="#D97706" stroke-width="1"/>
+    <text x="191" y="85" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="middle">Cc = 0.85·f'c·a·bw</text>
+
+    <!-- Brazo de Palanca Interno jd = d - a/2 -->
+    <!-- De y = 85.5 (centro Cc) hasta y = 243 (nivel As / T) -->
+    <line x1="250" y1="85.5" x2="250" y2="243" stroke="#475569" stroke-width="1.2" marker-start="url(#arrow-slate)" marker-end="url(#arrow-slate)"/>
+    <text x="256" y="168" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800">jd = d - a/2</text>
+
+    <!-- Fuerza Resultante de Tracción T (aplicada a y = 243) -->
+    <line x1="50" y1="243" x2="165" y2="243" stroke="#DC2626" stroke-width="3" marker-end="url(#arrow-red)"/>
+    <rect x="75" y="231" width="85" height="16" rx="3" fill="#FFFFFF" stroke="#DC2626" stroke-width="1"/>
+    <text x="117" y="243" fill="#B91C1C" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="800" text-anchor="middle">T = As · fy</text>
+
+    <!-- Ecuación Maestra del Momento Nominal Mn en caja destacada -->
+    <rect x="15" y="266" width="240" height="34" rx="5" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="135" y="280" fill="#92400E" font-size="8" font-weight="700" text-anchor="middle">
+      EQUILIBRIO: Cc = T  ⇒  Mn = T · (d - a/2)
+    </text>
+    <text x="135" y="294" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">
+      φ Mn = φ As fy (d - a/2) ≥ Mu
+    </text>
+  </g>
+</svg>
+        </div>
+
+        <!-- GUÍA DE CÁTEDRA DOCENTE: FICHAS TÉCNICAS DE LOS 4 PILARES A FLEXIÓN -->
+        <div class="diagram-pedagogical-guide">
+          <div class="guide-header">
+            <span class="guide-tag">GUÍA DE CÁTEDRA DOCENTE</span>
+            <h3 class="guide-title">Fundamentos Analíticos de la Mecánica Seccional a Flexión (NSR-10 / ACI 318)</h3>
+          </div>
+          <div class="guide-cards-grid">
+            <!-- Pilar 1: Navier-Bernoulli -->
+            <div class="guide-card accent-blue">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 1</span>
+                <span class="guide-card-norma">NSR-10 C.10.2.2</span>
+              </div>
+              <h4 class="guide-card-heading">1. Hipótesis de Navier-Bernoulli</h4>
+              <p class="guide-card-desc">
+                Las secciones planas transversales al eje longitudinal permanecen planas tras la deformación por flexión (distribución lineal de deformaciones unitarias $\varepsilon$). La fibra extrema en compresión alcanza $\varepsilon_{cu} = 0.003$ en la rotura (C.10.2.3). Se desprecia la resistencia a tracción del concreto en flexión última (C.10.2.5).
+              </p>
+              <div class="guide-card-rule">
+                <strong>Distribución Lineal de Deformaciones:</strong>
+                $$\varepsilon_c(y) = \varepsilon_{cu} \cdot \frac{y}{c}$$
+              </div>
+            </div>
+
+            <!-- Pilar 2: Bloque de Whitney -->
+            <div class="guide-card accent-amber">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 2</span>
+                <span class="guide-card-norma">NSR-10 C.10.2.7</span>
+              </div>
+              <h4 class="guide-card-heading">2. Bloque Equivalente de Whitney</h4>
+              <p class="guide-card-desc">
+                Sustituye la parábola no lineal de esfuerzos a compresión del concreto por un bloque rectangular uniforme de magnitud <strong>$0.85 f'_c$</strong> sobre un peralte comprimido <strong>$a = \beta_1 \cdot c$</strong>, preservando el volumen de compresión y la posición del centroide.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Factor de Profundidad $\beta_1$:</strong>
+                $$\beta_1 = 0.85 - 0.05 \left(\frac{f'_c - 28}{7}\right) \ge 0.65$$
+              </div>
+            </div>
+
+            <!-- Pilar 3: Par Interno y Mn -->
+            <div class="guide-card accent-emerald">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 3</span>
+                <span class="guide-card-norma">NSR-10 C.10.2</span>
+              </div>
+              <h4 class="guide-card-heading">3. Par Interno y Momento Nominal</h4>
+              <p class="guide-card-desc">
+                El equilibrio estático longitudinal $\Sigma F_x = 0$ exige $C_c = T$, donde $C_c = 0.85 f'_c a b_w$ y $T = A_s f_y$ (con acero en fluencia). El brazo de palanca interno es $j d = d - a/2$, generando el momento nominal resistente $M_n$.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Resistencia de Diseño a Flexión:</strong>
+                $$a = \frac{A_s f_y}{0.85 f'_c b_w} \implies \phi M_n = \phi A_s f_y \left(d - \frac{a}{2}\right) \ge M_u$$
+              </div>
+            </div>
+
+            <!-- Pilar 4: Control de Ductilidad -->
+            <div class="guide-card accent-cyan">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">PILAR 4</span>
+                <span class="guide-card-norma">NSR-10 C.9.3.2 / C.10.3</span>
+              </div>
+              <h4 class="guide-card-heading">4. Control de Ductilidad ($\phi = 0.90$)</h4>
+              <p class="guide-card-desc">
+                Para garantizar falla dúctil con aviso previo (grandes deflexiones y fisuras visibles antes del colapso), la deformación neta de tracción en la capa de acero más alejada debe cumplir $\varepsilon_t \ge 0.005$, asegurando $\phi = 0.90$ y cuantías en el rango $\rho_{\min} \le \rho \le \rho_{\max}$.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Deformación Neta del Acero:</strong>
+                $$\varepsilon_t = 0.003 \cdot \frac{d_t - c}{c} \ge 0.005 \implies \phi = 0.90$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="modal-variables" class="variables-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modal-vars-title">
     <div class="variables-modal-backdrop" onclick="toggleVariablesModal()"></div>
     <div class="variables-modal-content">
       

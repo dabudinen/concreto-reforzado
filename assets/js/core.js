@@ -418,6 +418,12 @@
           window.closeLoadPathModal();
           return;
         }
+        const df = document.getElementById('modal-diagrama-flexion');
+        if (df && df.classList.contains('open')) {
+          e.preventDefault();
+          window.closeFlexureModal();
+          return;
+        }
         const vm = document.getElementById('modal-variables');
         if (vm && vm.classList.contains('open')) {
           e.preventDefault();
@@ -967,8 +973,47 @@
 
   window.handleDiagramModalClick = function (e) {
     if (e.target.classList.contains('diagram-modal-overlay') || e.target.classList.contains('diagram-modal-backdrop')) {
-      window.closeLoadPathModal();
+      const dm = document.getElementById('modal-diagrama-transferencia');
+      if (dm && dm.classList.contains('open')) window.closeLoadPathModal();
+      const df = document.getElementById('modal-diagrama-flexion');
+      if (df && df.classList.contains('open')) window.closeFlexureModal();
     }
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: ESQUEMA SECCIONAL A FLEXIÓN (MÓDULO 03)
+     -------------------------------------------------------------------------- */
+  window.openFlexureModal = function () {
+    const modal = document.getElementById('modal-diagrama-flexion');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeFlexureModal = function () {
+    const modal = document.getElementById('modal-diagrama-flexion');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
   };
 
 })();

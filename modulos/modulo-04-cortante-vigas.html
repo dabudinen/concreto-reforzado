@@ -949,6 +949,235 @@
           </table>
         </div>
 
+        <!-- FIGURA VECTORIAL: ZONIFICACIÓN DEL DIAGRAMA DE CORTANTE Vu(x) Y REQUISITOS DE ESTRIBOS -->
+        <figure class="diagram-figure" style="max-width: 960px; margin: 1.5rem auto 1.25rem;">
+          <svg class="diagram-svg" viewBox="0 0 960 545" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zonificación del Diagrama de Cortante Vu(x) y Requisitos de Estribos según NSR-10 C.11.4">
+            <defs>
+              <marker id="arr-dim-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0F172A"/>
+              </marker>
+              <marker id="arr-dim-l" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 10 1.5 L 1 5 L 10 8.5 z" fill="#0F172A"/>
+              </marker>
+              <marker id="arr-ptr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+                <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#1E293B"/>
+              </marker>
+            </defs>
+
+            <!-- Fondo de la lámina -->
+            <rect x="0" y="0" width="960" height="545" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+
+            <!-- TÍTULO PRINCIPAL -->
+            <text x="480" y="29" fill="#0F172A" font-family="Inter, sans-serif" font-size="14.5" font-weight="800" text-anchor="middle" letter-spacing="0.02em">
+              ZONIFICACIÓN DEL DIAGRAMA DE CORTANTE V<tspan dy="3" font-size="10.5">u</tspan><tspan dy="-3">(x) Y REQUISITOS DE ESTRIBOS (NSR-10 C.11.4)</tspan>
+            </text>
+
+            <!-- =========================================================================
+                 1. ALZADO DE LA VIGA Y DISTRIBUCIÓN DE ESTRIBOS (PARTE SUPERIOR)
+                 Coordenadas X clave:
+                 x = 120: Cara del apoyo (x = 0)
+                 x = 215: Sección crítica a distancia d (V_ud)
+                 x = 420: Fin de Zona 3 (donde Vu(x) = φVc, longitud S = 300 px)
+                 x = 640: Fin de Zona 2 (donde Vu(x) = 0.5·φVc)
+                 x = 860: Centro de la luz (x = Ln/2, donde Vu = 0)
+                 ========================================================================= -->
+            <!-- Columna de apoyo izquierda -->
+            <path d="M 76 48 L 120 48 L 120 184 L 76 184 Z" fill="#CBD5E1" stroke="#334155" stroke-width="1.8"/>
+            <!-- Símbolo de corte superior e inferior de la columna -->
+            <path d="M 70 48 L 90 48 L 95 41 L 101 55 L 106 48 L 126 48" fill="none" stroke="#334155" stroke-width="1.6"/>
+            <path d="M 70 184 L 90 184 L 95 177 L 101 191 L 106 184 L 126 184" fill="none" stroke="#334155" stroke-width="1.6"/>
+
+            <!-- Cuerpo de la viga de concreto -->
+            <rect x="120" y="68" width="755" height="72" fill="#F1F5F9" stroke="#334155" stroke-width="1.8"/>
+
+            <!-- Línea de simetría / corte en el centro de la luz (x = 860) -->
+            <path d="M 875 60 L 875 97 L 868 102 L 882 108 L 875 113 L 875 148" fill="none" stroke="#334155" stroke-width="1.6"/>
+            <line x1="860" y1="56" x2="860" y2="152" stroke="#64748B" stroke-width="1.3" stroke-dasharray="5,3"/>
+            <text x="860" y="51" fill="#475569" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle">℄ Centro de luz</text>
+
+            <!-- Armadura longitudinal superior e inferior (con gancho estándar dentro del apoyo) -->
+            <path d="M 868 76 L 94 76 Q 86 76 86 84 L 86 124 Q 86 132 94 132 L 868 132" fill="none" stroke="#475569" stroke-width="3.2"/>
+
+            <!-- Estribos en Zona 3 (x = 120 a 420): espaciamiento denso por resistencia -->
+            <g stroke="#B45309" stroke-width="2.2">
+              <line x1="128" y1="76" x2="128" y2="132"/>
+              <line x1="142" y1="76" x2="142" y2="132"/>
+              <line x1="156" y1="76" x2="156" y2="132"/>
+              <line x1="170" y1="76" x2="170" y2="132"/>
+              <line x1="184" y1="76" x2="184" y2="132"/>
+              <line x1="198" y1="76" x2="198" y2="132"/>
+              <line x1="215" y1="76" x2="215" y2="132"/>
+              <line x1="235" y1="76" x2="235" y2="132"/>
+              <line x1="255" y1="76" x2="255" y2="132"/>
+              <line x1="275" y1="76" x2="275" y2="132"/>
+              <line x1="295" y1="76" x2="295" y2="132"/>
+              <line x1="315" y1="76" x2="315" y2="132"/>
+              <line x1="335" y1="76" x2="335" y2="132"/>
+              <line x1="356" y1="76" x2="356" y2="132"/>
+              <line x1="377" y1="76" x2="377" y2="132"/>
+              <line x1="398" y1="76" x2="398" y2="132"/>
+              <line x1="420" y1="76" x2="420" y2="132"/>
+            </g>
+
+            <!-- Estribos en Zona 2 (x = 420 a 640): espaciamiento máximo smáx por Av,mín -->
+            <g stroke="#1D4ED8" stroke-width="2.2">
+              <line x1="464" y1="76" x2="464" y2="132"/>
+              <line x1="508" y1="76" x2="508" y2="132"/>
+              <line x1="552" y1="76" x2="552" y2="132"/>
+              <line x1="596" y1="76" x2="596" y2="132"/>
+              <line x1="640" y1="76" x2="640" y2="132"/>
+            </g>
+            <!-- Cota interna s = smáx entre estribos de Zona 2 -->
+            <line x1="510" y1="118" x2="550" y2="118" stroke="#1E3A8A" stroke-width="1.2" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="530" y="113" fill="#1E3A8A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">s<tspan dy="2" font-size="7.5">máx</tspan></text>
+
+            <!-- Estribos en Zona 1 (x = 640 a 860): constructivos (punteados) -->
+            <g stroke="#15803D" stroke-width="1.8" stroke-dasharray="4,3" opacity="0.65">
+              <line x1="713" y1="76" x2="713" y2="132"/>
+              <line x1="786" y1="76" x2="786" y2="132"/>
+            </g>
+
+            <!-- Sección crítica a distancia d (x = 215) -->
+            <line x1="215" y1="62" x2="215" y2="174" stroke="#0F172A" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <path d="M 235 50 L 222 50 L 216 64" fill="none" stroke="#0F172A" stroke-width="1.4" marker-end="url(#arr-ptr)"/>
+            <text x="239" y="54" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700">Sección crítica (a distancia <tspan font-style="italic" font-family="Georgia, serif">d</tspan>)</text>
+
+            <!-- Cota de distancia d (y = 162) -->
+            <line x1="122" y1="162" x2="213" y2="162" stroke="#0F172A" stroke-width="1.3" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="167.5" y="156" fill="#0F172A" font-family="Georgia, serif" font-size="13" font-style="italic" font-weight="700" text-anchor="middle">d</text>
+
+            <!-- Guías verticales continuas de frontera entre Zona 3, Zona 2 y Zona 1 -->
+            <line x1="420" y1="140" x2="420" y2="495" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+            <line x1="640" y1="140" x2="640" y2="455" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+            <line x1="860" y1="140" x2="860" y2="528" stroke="#475569" stroke-width="1.3" stroke-dasharray="4,3"/>
+
+            <!-- COTAS DE ZONA 3, ZONA 2 Y ZONA 1 ALINEADAS EXACTAMENTE A LA MISMA ALTURA (y = 190) -->
+            <!-- Zona 3 (x = 120 a 420) -->
+            <line x1="122" y1="190" x2="418" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="270" y="208" fill="#9A3412" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 3 (Diseño por Resistencia)</text>
+
+            <!-- Zona 2 (x = 420 a 640) -->
+            <line x1="422" y1="190" x2="638" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="530" y="208" fill="#1E40AF" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 2 (Armadura Mínima)</text>
+
+            <!-- Zona 1 (x = 640 a 860) -->
+            <line x1="642" y1="190" x2="858" y2="190" stroke="#0F172A" stroke-width="1.5" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="750" y="208" fill="#166534" font-family="Inter, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle">Zona 1 (Sin Estribos por Cálculo)</text>
+
+            <!-- =========================================================================
+                 2. DIAGRAMA DE FUERZA CORTANTE Vu(x) Y UMBRALES NORMATIVOS (PARTE CENTRAL)
+                 Geometría lineal exacta del triángulo Vu(x):
+                 x = 120 (apoyo)       -> y = 266
+                 x = 185 (límite Z4)   -> y = 282  (Umbral φVc + φVs,máx)
+                 x = 215 (sección d)   -> y = 289.4 (Cortante último de diseño V_ud)
+                 x = 420 (fin Zona 3)  -> y = 340  (Umbral φVc)
+                 x = 640 (fin Zona 2)  -> y = 394  (Umbral 0.5·φVc)
+                 x = 860 (centro luz)  -> y = 448  (Eje base Vu = 0)
+                 ========================================================================= -->
+
+            <!-- Franjas horizontales de fondo para lectura limpia de cada Zona -->
+            <!-- Banda Zona 4 (y = 240 a 282) -->
+            <rect x="120" y="240" width="785" height="42" fill="#FEE2E2" opacity="0.82"/>
+            <!-- Banda Zona 3 (y = 282 a 340) -->
+            <rect x="120" y="282" width="785" height="58" fill="#FEF3C7" opacity="0.78"/>
+            <!-- Banda Zona 2 (y = 340 a 394) -->
+            <rect x="120" y="340" width="785" height="54" fill="#DBEAFE" opacity="0.72"/>
+            <!-- Banda Zona 1 (y = 394 a 448) -->
+            <rect x="120" y="394" width="785" height="54" fill="#DCFCE7" opacity="0.75"/>
+
+            <!-- Polígonos rellenos bajo la recta Vu(x) por cada zona -->
+            <!-- Pico en Zona 4 (si Vu superara φVc + φVs,máx) -->
+            <polygon points="120,266 185,282 120,282" fill="#EF4444" opacity="0.88"/>
+            <!-- Región bajo la curva de Zona 3 (x = 120 a 420) -->
+            <polygon points="120,282 185,282 420,340 420,448 120,448" fill="#F59E0B" opacity="0.85"/>
+            <!-- Región bajo la curva de Zona 2 (x = 420 a 640) -->
+            <polygon points="420,340 640,394 640,448 420,448" fill="#3B82F6" opacity="0.82"/>
+            <!-- Región bajo la curva de Zona 1 (x = 640 a 860) -->
+            <polygon points="640,394 860,448 640,448" fill="#22C55E" opacity="0.82"/>
+
+            <!-- Líneas horizontales punteadas de los umbrales de resistencia -->
+            <line x1="120" y1="282" x2="905" y2="282" stroke="#991B1B" stroke-width="1.4" stroke-dasharray="6,4"/>
+            <line x1="120" y1="340" x2="905" y2="340" stroke="#92400E" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="120" y1="394" x2="905" y2="394" stroke="#1E40AF" stroke-width="1.4" stroke-dasharray="6,4"/>
+
+            <!-- Fronteras verticales internas del diagrama Vu(x) -->
+            <line x1="420" y1="340" x2="420" y2="448" stroke="#0F172A" stroke-width="1.8"/>
+            <line x1="640" y1="394" x2="640" y2="448" stroke="#0F172A" stroke-width="1.8"/>
+
+            <!-- Ejes principales y recta diagonal del diagrama de cortante Vu(x) -->
+            <line x1="120" y1="240" x2="120" y2="448" stroke="#0F172A" stroke-width="2.4"/>
+            <line x1="120" y1="448" x2="905" y2="448" stroke="#0F172A" stroke-width="2.4"/>
+            <line x1="120" y1="266" x2="860" y2="448" stroke="#0F172A" stroke-width="2.8"/>
+
+            <!-- Etiquetas de umbrales en el eje vertical izquierdo -->
+            <text x="112" y="286" fill="#991B1B" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="end">
+              ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">s,máx</tspan>
+            </text>
+            <text x="112" y="344" fill="#92400E" font-family="Georgia, serif" font-size="13" font-weight="700" text-anchor="end">
+              ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan>
+            </text>
+            <text x="112" y="398" fill="#1E40AF" font-family="Georgia, serif" font-size="12.5" font-weight="700" text-anchor="end">
+              0.5·ϕV<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">c</tspan>
+            </text>
+            <text x="112" y="452" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" text-anchor="end">0</text>
+
+            <!-- Etiquetas descriptivas dentro de cada una de las 4 franjas -->
+            <!-- Texto Zona 4 -->
+            <text x="515" y="266" fill="#7F1D1D" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              ZONA 4: V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> &gt; ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9">s,máx</tspan><tspan dy="-3"> — Sección Insuficiente (Aumentar b</tspan><tspan dy="3" font-size="9">w</tspan><tspan dy="-3"> × h o f'</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            </text>
+
+            <!-- Texto Zona 3 -->
+            <text x="615" y="315" fill="#78350F" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              ZONA 3: ϕV<tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> &lt; V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> + ϕV</tspan><tspan dy="3" font-size="9">s,máx</tspan><tspan dy="-3"> — Diseño por Resistencia: s = ϕ·A</tspan><tspan dy="3" font-size="9">v</tspan><tspan dy="-3">·f</tspan><tspan dy="3" font-size="9">yt</tspan><tspan dy="-3">·d / (V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> − ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            </text>
+
+            <!-- Texto Zona 2 -->
+            <text x="675" y="371" fill="#1E3A8A" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              ZONA 2: 0.5·ϕV<tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> &lt; V</tspan><tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> — Armadura Mínima Obligatoria (A</tspan><tspan dy="3" font-size="9">v,mín</tspan><tspan dy="-3"> con s = s</tspan><tspan dy="3" font-size="9">máx</tspan><tspan dy="-3">)</tspan>
+            </text>
+
+            <!-- Texto Zona 1 -->
+            <text x="780" y="425" fill="#14532D" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              ZONA 1: V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> ≤ 0.5·ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3"> — No Requiere Estribos por Cálculo</tspan>
+            </text>
+
+            <!-- Etiquetas dentro de los polígonos coloreados -->
+            <text x="265" y="405" fill="#78350F" font-family="Inter, sans-serif" font-size="13.5" font-weight="800" text-anchor="middle">ZONA 3</text>
+            <text x="530" y="422" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="13" font-weight="800" text-anchor="middle">ZONA 2</text>
+
+            <!-- =========================================================================
+                 3. COTAS HORIZONTALES INFERIORES: S (HASTA FIN DE ZONA 3) Y L_total
+                 ========================================================================= -->
+            <!-- Líneas de extensión inferiores -->
+            <line x1="120" y1="448" x2="120" y2="528" stroke="#0F172A" stroke-width="1.4"/>
+            <line x1="420" y1="448" x2="420" y2="495" stroke="#0F172A" stroke-width="1.4"/>
+
+            <!-- Etiquetas de abscisas x = 0 y x = Ln/2 -->
+            <text x="112" y="470" fill="#0F172A" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="end">Cara del apoyo</text>
+            <text x="112" y="485" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="end">x = 0</text>
+
+            <text x="868" y="470" fill="#0F172A" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="start">Centro de la luz</text>
+            <text x="868" y="485" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="start">x = L<tspan dy="2" font-size="8.5">n</tspan><tspan dy="-2">/2 (V</tspan><tspan dy="2" font-size="8.5">u</tspan><tspan dy="-2"> = 0)</tspan></text>
+
+            <!-- Cota S: Exactamente desde x = 120 hasta x = 420 (fin de la Zona 3 amarilla/naranja donde Vu = φVc) -->
+            <line x1="122" y1="485" x2="418" y2="485" stroke="#0F172A" stroke-width="1.6" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <text x="270" y="477" fill="#0F172A" font-family="Inter, sans-serif" font-size="12" font-weight="800" text-anchor="middle">
+              <tspan font-style="italic" font-family="Georgia, serif">S</tspan> (Longitud de Zona 3 donde V<tspan dy="3" font-size="9">u</tspan><tspan dy="-3"> &gt; ϕV</tspan><tspan dy="3" font-size="9">c</tspan><tspan dy="-3">)</tspan>
+            </text>
+
+            <!-- Cota L_total = Ln/2: Desde x = 120 hasta x = 860 -->
+            <line x1="122" y1="520" x2="858" y2="520" stroke="#0F172A" stroke-width="1.6" marker-start="url(#arr-dim-l)" marker-end="url(#arr-dim-r)"/>
+            <rect x="425" y="507" width="130" height="24" fill="#FFFFFF"/>
+            <text x="490" y="524" fill="#0F172A" font-family="Georgia, serif" font-size="13" font-weight="700" text-anchor="middle">
+              L<tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">total</tspan><tspan dy="-3"> = L</tspan><tspan dy="3" font-size="9.5" font-family="Inter, sans-serif">n</tspan><tspan dy="-3"> / 2</tspan>
+            </text>
+          </svg>
+          <figcaption class="diagram-caption">
+            <strong>Figura 4.1:</strong> Zonificación normativa del diagrama de fuerza cortante $V_u(x)$ entre la cara del apoyo ($x = 0$) y el centro de la luz ($x = L_n/2$): <strong>Zona 3</strong> ($V_u > \phi V_c$, longitud $S$ de diseño por resistencia), <strong>Zona 2</strong> ($0.5\phi V_c < V_u \le \phi V_c$, armadura mínima obligatoria $A_{v,\min}$ con $s = s_{\max}$), <strong>Zona 1</strong> ($V_u \le 0.5\phi V_c$) y umbral superior de <strong>Zona 4</strong> ($V_u > \phi V_c + \phi V_{s,\max}$).
+          </figcaption>
+        </figure>
+
         <div class="math-card normative-emerald" style="margin-top: 1.25rem;">
           <div class="math-card-header">
             <span class="math-card-title">Deducción por Triángulos Semejantes de la Longitud de Zonificación ($S$) para Carga Uniforme</span>

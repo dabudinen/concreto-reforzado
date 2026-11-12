@@ -2483,7 +2483,7 @@
 
           <!-- GRÁFICA VECTORIAL NSR-10 FIGURA C.9.3.2 -->
           <figure class="diagram-figure" style="margin: 0.85rem 0;">
-  <svg viewBox="0 0 540 240" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: transparent; font-family: Inter, sans-serif; display: block;">
+  <svg viewBox="0 0 540 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: transparent; font-family: Inter, sans-serif; display: block;">
     <!-- Título de la Figura de la Norma -->
     <text x="270" y="20" fill="#0F172A" font-size="10.5" font-weight="800" text-anchor="middle">
       FIGURA C.9.3.2 — Variación de ϕ con la deformación neta de tracción (ε_t)
@@ -2591,13 +2591,16 @@
     </g>
     <text x="455" y="165" fill="#15803D" font-size="7.5" font-weight="700" text-anchor="middle">Controlado por tensión</text>
 
-    <!-- Leyenda Normativa al Pie -->
-    <text x="270" y="228" fill="#64748B" font-size="7.5" text-anchor="middle">
-      NSR-10 C.9.3.2: Para aceros Grado 420 (f_y = 420 MPa), ε_y ≈ 0.002. En miembros sometidos a flexión (vigas) se exige estrictamente ε_t ≥ 0.004 (C.10.3.5).
+    <!-- Leyenda Normativa al Pie con dos líneas centradas y subíndices -->
+    <text x="270" y="224" fill="#64748B" font-size="8" font-weight="600" text-anchor="middle">
+      NSR-10 C.9.3.2: Para acero Grado 420 (f<tspan baseline-shift="sub" font-size="75%">y</tspan> = 420 MPa), ε<tspan baseline-shift="sub" font-size="75%">y</tspan> = 0.0021.
+    </text>
+    <text x="270" y="238" fill="#B45309" font-size="8" font-weight="700" text-anchor="middle">
+      En miembros a flexión (vigas) rige el límite mínimo absoluto: ε<tspan baseline-shift="sub" font-size="75%">t</tspan> ≥ 0.004 (C.10.3.5).
     </text>
   </svg>
-  <figcaption class="diagram-caption">
-    <strong>Figura C.9.3.2 (NSR-10 / ACI 318):</strong> Variación del factor de reducción de resistencia $\\phi$ según la deformación unitaria neta de tracción $\\varepsilon_t$ y la relación de profundidad del eje neutro $c/d_t$. Para vigas (miembros con estribos convencionales, curva «Otros»), $\\phi = 0.65 + (\\varepsilon_t - 0.002)\\left(\\frac{250}{3}\\right)$ en la zona de transición, alcanzando $\\phi = 0.90$ para $\\varepsilon_t \\ge 0.005$.
+  <figcaption class="diagram-caption" style="text-align: center; max-width: 720px; margin: 0.85rem auto 0 auto; line-height: 1.6; font-size: 0.85rem; color: #475569;">
+    <strong>Figura C.9.3.2 (NSR-10 / ACI 318):</strong> Variación del factor de reducción de resistencia $\phi$ según la deformación unitaria neta de tracción $\varepsilon_t$ y la relación de profundidad del eje neutro $c/d_t$. Para vigas (miembros con estribos convencionales, curva «Otros»), $\phi = 0.65 + (\varepsilon_t - 0.002)\left(\frac{250}{3}\right)$ en la zona de transición, alcanzando $\phi = 0.90$ para $\varepsilon_t \ge 0.005$.
   </figcaption>
 </figure>
 

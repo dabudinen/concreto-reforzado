@@ -610,16 +610,26 @@ body.sidebar-collapsed:not(.presentation-mode) .btn-sidebar-float {
 
 }
 
+.module-pill {
+  text-decoration: none;
+}
+
 .module-pill.current {
+  background: var(--primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--primary) !important;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(29, 78, 216, 0.25);
+}
 
-  background: var(--bg-header);
+.module-pill.current span {
+  color: #FFFFFF !important;
+}
 
-  color: #FFFFFF;
-
-  border-color: var(--primary);
-
-  font-weight: 600;
-
+.module-pill.current:hover {
+  background: var(--primary-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--primary-dark) !important;
 }
 
 .module-pill.disabled {

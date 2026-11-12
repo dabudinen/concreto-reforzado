@@ -80,8 +80,8 @@
           <li><a href="#portada-mod03" class="toc-link active"><span class="toc-num">0.0</span> <span>Portada del Módulo</span></a></li>
           <li><a href="#sec-bibliografia-mod3" class="toc-link"><span class="toc-num">0.1</span> <span>Textos de Referencia</span></a></li>
           <li><a href="#sec-hipotesis" class="toc-link"><span class="toc-num">1.0</span> <span>1. Hipótesis Fundamentales</span></a></li>
-          <li><a href="#sec-geometria-refuerzo" class="toc-link"><span class="toc-num">1.1</span> <span>Barras, Ancho Mínimo y Peralte (d, dt)</span></a></li>
-          <li><a href="#sec-cuantias" class="toc-link"><span class="toc-num">2.0</span> <span>2. Cuantías (ρ_b, ρ_mín, ρ_máx) y ϕ</span></a></li>
+          <li><a href="#sec-geometria-refuerzo" class="toc-link"><span class="toc-num">1.1</span> <span>Barras, Ancho Mínimo y Peralte (d, d<sub>t</sub>)</span></a></li>
+          <li><a href="#sec-cuantias" class="toc-link"><span class="toc-num">2.0</span> <span>2. Cuantías (ρ<sub>b</sub>, ρ<sub>mín</sub>, ρ<sub>máx</sub>) y ϕ</span></a></li>
           <li><a href="#sec-vigas-simples" class="toc-link"><span class="toc-num">3.0</span> <span>3. Vigas Simplemente Reforzadas</span></a></li>
           <li><a href="#sec-vigas-dobles" class="toc-link"><span class="toc-num">4.0</span> <span>4. Vigas Doblemente Reforzadas</span></a></li>
           <li><a href="#sec-vigas-t" class="toc-link"><span class="toc-num">5.0</span> <span>5. Vigas de Sección en T</span></a></li>
@@ -634,14 +634,14 @@
   <line x1="110" y1="36" x2="68" y2="36" stroke="#2563EB" stroke-width="2"/>
   <!-- Flecha de deformación hacia adentro (acortamiento) -->
   <polygon points="68,36 76,33 76,39" fill="#2563EB"/>
-  <text x="64" y="28" fill="#1E40AF" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε_c (compresión)</text>
+  <text x="64" y="28" fill="#1E40AF" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε<tspan baseline-shift="sub" font-size="75%">c</tspan> (compresión)</text>
 
   <!-- Triángulo Tracción (Abajo) -->
   <polygon points="110,88 152,152 110,152" fill="#FEF3C7" fill-opacity="0.85"/>
   <line x1="110" y1="152" x2="152" y2="152" stroke="#D97706" stroke-width="2"/>
   <!-- Flecha de deformación hacia afuera (alargamiento) -->
   <polygon points="152,152 144,149 144,155" fill="#D97706"/>
-  <text x="156" y="154" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε_s (tracción)</text>
+  <text x="156" y="154" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε<tspan baseline-shift="sub" font-size="75%">s</tspan> (tracción)</text>
 
   <!-- Plano Deformado (Línea continua que permanece recta) -->
   <line x1="68" y1="36" x2="152" y2="152" stroke="#1D4ED8" stroke-width="2.6"/>
@@ -691,7 +691,7 @@
                 <div>
                   <svg viewBox="0 0 450 210" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border: 1.2px solid #CBD5E1; border-radius: 8px; font-family: Inter, sans-serif;">
   <!-- Título Superior -->
-  <text x="225" y="20" fill="#0F172A" font-size="11" font-weight="800" text-anchor="middle">2. AGOTAMIENTO ÚLTIMO DEL CONCRETO (ε_cu = 0.003)</text>
+  <text x="225" y="20" fill="#0F172A" font-size="11" font-weight="800" text-anchor="middle">2. AGOTAMIENTO ÚLTIMO DEL CONCRETO (ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003)</text>
   
   <!-- ================= SECCIÓN DE LA VIGA (Izquierda) ================= -->
   <!-- Rótulo E.N. con pastilla visible y CERO recorte (desplazado a x=12) -->
@@ -727,7 +727,7 @@
     <circle cx="20" cy="114" r="6" fill="#D97706" stroke="#92400E" stroke-width="1.4"/>
     <circle cx="48" cy="114" r="6" fill="#D97706" stroke="#92400E" stroke-width="1.4"/>
     <circle cx="76" cy="114" r="6" fill="#D97706" stroke="#92400E" stroke-width="1.4"/>
-    <text x="48" y="127" fill="#B45309" font-size="6.5" font-weight="700" text-anchor="middle">Acero As (nivel d)</text>
+    <text x="48" y="127" fill="#B45309" font-size="6.5" font-weight="700" text-anchor="middle">Acero A<tspan baseline-shift="sub" font-size="75%">s</tspan> (nivel d)</text>
   </g>
 
   <!-- ================= DIAGRAMA DE DEFORMACIONES (Centro) ================= -->
@@ -754,14 +754,14 @@
 
   <!-- Punto y Cota en la base del acero: es > ey a y = 156 -->
   <circle cx="233" cy="156" r="3.8" fill="#D97706"/>
-  <text x="240" y="160" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε_s &gt; ε_y</text>
+  <text x="240" y="160" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="700">ε<tspan baseline-shift="sub" font-size="75%">s</tspan> &gt; ε<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
   <!-- LÍNEA ROJA INDICADORA DE ecu = 0.003 A LA ALTURA DEL APLASTAMIENTO (y = 66) -->
   <line x1="144" y1="66" x2="212" y2="66" stroke="#DC2626" stroke-width="1.8"/>
   <polygon points="168,66 165,63 165,69" fill="#DC2626"/>
   <circle cx="168.8" cy="66" r="3.2" fill="#DC2626"/>
   <!-- Texto ecu = 0.003 a la misma altura de la parte inferior del aplastamiento -->
-  <text x="218" y="69" fill="#DC2626" font-family="JetBrains Mono" font-size="9" font-weight="800">ε_cu = 0.003</text>
+  <text x="218" y="69" fill="#DC2626" font-family="JetBrains Mono" font-size="9" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
   <!-- Rótulo en la fibra extrema superior -->
   <text x="152" y="34" fill="#1E40AF" font-size="7.5" font-weight="700" text-anchor="middle">Fibra extrema superior</text>
@@ -772,7 +772,7 @@
   <text x="367" y="88" fill="#0F172A" font-size="8" font-weight="700" text-anchor="middle">Agotamiento del Concreto</text>
   <text x="367" y="103" fill="#475569" font-size="7.5" text-anchor="middle">Límite último utilizable</text>
   <text x="367" y="115" fill="#475569" font-size="7.5" text-anchor="middle">por aplastamiento inelástico:</text>
-  <text x="367" y="129" fill="#DC2626" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">ε_cu = 0.003</text>
+  <text x="367" y="129" fill="#DC2626" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
   <text x="367" y="142" fill="#059669" font-size="7" font-weight="600" text-anchor="middle">Compatibilidad lineal (verde)</text>
 </svg>
                 </div>
@@ -802,20 +802,20 @@
   <!-- Eje Y: Esfuerzo fs (MPa) - Bajado a y=46 para CERO traslape con el título -->
   <line x1="65" y1="155" x2="65" y2="48" stroke="#334155" stroke-width="1.8"/>
   <polygon points="65,42 61,51 69,51" fill="#334155"/>
-  <text x="65" y="36" fill="#0F172A" font-size="8.5" font-weight="800" text-anchor="middle">f_s (MPa)</text>
+  <text x="65" y="36" fill="#0F172A" font-size="8.5" font-weight="800" text-anchor="middle">f<tspan baseline-shift="sub" font-size="75%">s</tspan> (MPa)</text>
 
   <!-- Eje X: Deformación es -->
   <line x1="65" y1="155" x2="340" y2="155" stroke="#334155" stroke-width="1.8"/>
   <polygon points="345,155 336,151 336,159" fill="#334155"/>
-  <text x="360" y="159" fill="#0F172A" font-size="9" font-weight="800" text-anchor="middle">ε_s</text>
+  <text x="360" y="159" fill="#0F172A" font-size="9" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">s</tspan></text>
 
   <!-- Proyección dashed fy = 420 MPa -->
   <line x1="65" y1="80" x2="155" y2="80" stroke="#94A3B8" stroke-width="1.4" stroke-dasharray="3 3"/>
-  <text x="58" y="84" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="700" text-anchor="end">f_y = 420</text>
+  <text x="58" y="84" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="700" text-anchor="end">f<tspan baseline-shift="sub" font-size="75%">y</tspan> = 420</text>
 
   <!-- Proyección dashed ey = 0.0021 -->
   <line x1="155" y1="80" x2="155" y2="155" stroke="#94A3B8" stroke-width="1.4" stroke-dasharray="3 3"/>
-  <text x="155" y="172" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε_y = 0.0021</text>
+  <text x="155" y="172" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">y</tspan> = 0.0021</text>
 
   <!-- Tramo Elástico Lineal (Pendiente Es) - Totalmente limpio sin textos encima -->
   <line x1="65" y1="155" x2="155" y2="80" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
@@ -825,13 +825,13 @@
 
   <!-- Meseta de Fluencia Plástica Perfecta -->
   <line x1="155" y1="80" x2="315" y2="80" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
-  <text x="235" y="68" fill="#B45309" font-size="8.5" font-weight="800" text-anchor="middle">Fluencia: f_s = f_y</text>
+  <text x="235" y="68" fill="#B45309" font-size="8.5" font-weight="800" text-anchor="middle">Fluencia: f<tspan baseline-shift="sub" font-size="75%">s</tspan> = f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
   <!-- Badge de Plastificación Perfecta -->
   <rect x="180" y="92" width="195" height="52" rx="6" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.2"/>
   <text x="277" y="109" fill="#166534" font-size="8.5" font-weight="800" text-anchor="middle">Plastificación Perfecta (C.10.2.4)</text>
   <text x="277" y="123" fill="#15803D" font-size="7.5" text-anchor="middle">Sin endurecimiento por deformación</text>
-  <text x="277" y="135" fill="#047857" font-family="JetBrains Mono" font-size="7.5" font-weight="700" text-anchor="middle">Para ε_s ≥ ε_y  ⇒  f_s = 420 MPa cte.</text>
+  <text x="277" y="135" fill="#047857" font-family="JetBrains Mono" font-size="7.5" font-weight="700" text-anchor="middle">Para ε<tspan baseline-shift="sub" font-size="75%">s</tspan> ≥ ε<tspan baseline-shift="sub" font-size="75%">y</tspan>  ⇒  f<tspan baseline-shift="sub" font-size="75%">s</tspan> = 420 MPa cte.</text>
 </svg>
                 </div>
               </div>
@@ -855,7 +855,7 @@
                 <div>
                   <svg viewBox="0 0 450 225" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border: 1.2px solid #CBD5E1; border-radius: 8px; font-family: Inter, sans-serif;">
   <!-- Título Superior -->
-  <text x="225" y="20" fill="#0F172A" font-size="11" font-weight="800" text-anchor="middle">4. CONCRETO A TRACCIÓN DESPRECIADO (f_t = 0)</text>
+  <text x="225" y="20" fill="#0F172A" font-size="11" font-weight="800" text-anchor="middle">4. CONCRETO A TRACCIÓN DESPRECIADO (f<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0)</text>
   
   <!-- ================= RÓTULO E.N. TOTALMENTE VISIBLE ================= -->
   <rect x="12" y="85" width="34" height="20" rx="4" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.2"/>
@@ -873,13 +873,13 @@
     <!-- Flecha de Fuerza C_c: INVERTIDA HACIA LA IZQUIERDA (entrando a la sección) -->
     <line x1="150" y1="33" x2="38" y2="33" stroke="#1D4ED8" stroke-width="2.8"/>
     <polygon points="32,33 44,28 44,38" fill="#1D4ED8"/>
-    <text x="92" y="47" fill="#1E3A8A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">C_c (Compresión entra)</text>
+    <text x="92" y="47" fill="#1E3A8A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">C<tspan baseline-shift="sub" font-size="75%">c</tspan> (Compresión entra)</text>
 
     <!-- Línea Eje Neutro a y = 57 -->
     <line x1="-9" y1="57" x2="190" y2="57" stroke="#DC2626" stroke-width="1.5" stroke-dasharray="3 2"/>
 
     <!-- Zona en Tracción Inferior (y = 57 a 137) -->
-    <text x="92" y="75" fill="#991B1B" font-size="8" font-weight="700" text-anchor="middle">Fisuración: f_t = 0 (Despreciado)</text>
+    <text x="92" y="75" fill="#991B1B" font-size="8" font-weight="700" text-anchor="middle">Fisuración: f<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0 (Despreciado)</text>
 
     <!-- Fisuras de flexión verticales (dentro del concreto) -->
     <path d="M 28 116 L 28 78 M 60 116 L 60 70 M 92 116 L 92 68 M 124 116 L 124 72 M 156 116 L 156 79" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/>
@@ -897,7 +897,7 @@
   <!-- ================= TEXTO DE LA FUERZA DE TENSIÓN DEBAJO DE TODO EL CUADRO ================= -->
   <!-- Ubicado fuera del cuadro para CERO interferencia con las fisuras -->
   <rect x="55" y="184" width="185" height="28" rx="5" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1.2"/>
-  <text x="147" y="202" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">T = A_s · f_s  (Acero toma 100% T)</text>
+  <text x="147" y="202" fill="#B45309" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">T = A<tspan baseline-shift="sub" font-size="75%">s</tspan> · f<tspan baseline-shift="sub" font-size="75%">s</tspan>  (Acero toma 100% T)</text>
 
   <!-- ================= BADGE EXPLICATIVO NSR-10 (Derecha) ================= -->
   <rect x="255" y="38" width="185" height="174" rx="6" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.2"/>
@@ -909,7 +909,7 @@
   <text x="347" y="124" fill="#7F1D1D" font-size="7.5" text-anchor="middle">a tracción del concreto fisurado.</text>
   
   <rect x="275" y="137" width="145" height="26" rx="4" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="1"/>
-  <text x="347" y="154" fill="#B45309" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">T = A_s · f_y</text>
+  <text x="347" y="154" fill="#B45309" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">T = A<tspan baseline-shift="sub" font-size="75%">s</tspan> · f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
   
   <text x="347" y="180" fill="#DC2626" font-family="JetBrains Mono" font-size="7.5" font-weight="800" text-anchor="middle">El acero resiste 100% de T</text>
   <text x="347" y="195" fill="#475569" font-size="7" font-weight="600" text-anchor="middle">Garantiza ductilidad y aviso de falla</text>
@@ -947,7 +947,7 @@
     <!-- Resultante Cc real: INVERTIDA HACIA LA IZQUIERDA (entrando a la sección) -->
     <line x1="125" y1="52" x2="70" y2="52" stroke="#334155" stroke-width="2.2"/>
     <polygon points="65,52 75,48 75,56" fill="#334155"/>
-    <text x="130" y="55" fill="#334155" font-family="JetBrains Mono" font-size="8" font-weight="800">C_c</text>
+    <text x="130" y="55" fill="#334155" font-family="JetBrains Mono" font-size="8" font-weight="800">C<tspan baseline-shift="sub" font-size="75%">c</tspan></text>
     
     <!-- Cota c -->
     <line x1="18" y1="22" x2="18" y2="105" stroke="#64748B" stroke-width="1"/>
@@ -970,7 +970,7 @@
     <!-- Resultante Cc Whitney: INVERTIDA HACIA LA IZQUIERDA (entrando al bloque) -->
     <line x1="135" y1="54" x2="75" y2="54" stroke="#DC2626" stroke-width="2.6"/>
     <polygon points="70,54 80,50 80,58" fill="#DC2626"/>
-    <text x="140" y="57" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800">C_c</text>
+    <text x="140" y="57" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800">C<tspan baseline-shift="sub" font-size="75%">c</tspan></text>
     
     <!-- Cota a = beta1 * c -->
     <line x1="18" y1="22" x2="18" y2="87" stroke="#D97706" stroke-width="1.2"/>
@@ -981,7 +981,7 @@
 
   <!-- Badge conclusión inferior -->
   <rect x="25" y="162" width="330" height="26" rx="5" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
-  <text x="190" y="179" fill="#1E3A8A" font-size="8" font-weight="700" text-anchor="middle">Equivalencia estática: C_c = 0.85·f'c·a·b con a = β₁·c • Centroide en a/2</text>
+  <text x="190" y="179" fill="#1E3A8A" font-size="8" font-weight="700" text-anchor="middle">Equivalencia estática: C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·a·b con a = β₁·c • Centroide en a/2</text>
 </svg>
                 </div>
               </div>
@@ -1230,17 +1230,17 @@
   <!-- Separación 1-2 -->
   <line x1="190" y1="128" x2="274" y2="128" stroke="#059669" stroke-width="1.8"/>
   <circle cx="190" cy="128" r="2" fill="#059669"/><circle cx="274" cy="128" r="2" fill="#059669"/>
-  <text x="232" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s_libre</text>
+  <text x="232" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s<tspan baseline-shift="sub" font-size="75%">libre</tspan></text>
 
   <!-- Separación 2-3 -->
   <line x1="298" y1="128" x2="382" y2="128" stroke="#059669" stroke-width="1.8"/>
   <circle cx="298" cy="128" r="2" fill="#059669"/><circle cx="382" cy="128" r="2" fill="#059669"/>
-  <text x="340" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s_libre</text>
+  <text x="340" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s<tspan baseline-shift="sub" font-size="75%">libre</tspan></text>
 
   <!-- Separación 3-4 -->
   <line x1="406" y1="128" x2="490" y2="128" stroke="#059669" stroke-width="1.8"/>
   <circle cx="406" cy="128" r="2" fill="#059669"/><circle cx="490" cy="128" r="2" fill="#059669"/>
-  <text x="448" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s_libre</text>
+  <text x="448" y="121" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">s<tspan baseline-shift="sub" font-size="75%">libre</tspan></text>
 
   <!-- Cotas de Recubrimiento Lateral (r = 40 mm) -->
   <g stroke="#2563EB" stroke-width="1.2">
@@ -1253,10 +1253,10 @@
   <!-- Cuadro Inferior con la Regla y Ejemplo (SIN DESBORDAMIENTO) -->
   <rect x="25" y="168" width="630" height="50" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.3"/>
   <text x="340" y="186" fill="#166534" font-size="10" font-weight="800" text-anchor="middle">
-    Regla de separación libre: s_libre ≥ máx(d_b, 25 mm, 1.33·d_agregado) (NSR-10 C.7.6.1)
+    Regla de separación libre: s<tspan baseline-shift="sub" font-size="75%">libre</tspan> ≥ máx(d<tspan baseline-shift="sub" font-size="75%">b</tspan>, 25 mm, 1.33·d<tspan baseline-shift="sub" font-size="75%">agr</tspan>) (NSR-10 C.7.6.1)
   </text>
   <text x="340" y="205" fill="#1E293B" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">
-    Ejemplo 4 barras No. 7: b_mín = 2(40) + 2(9.5) + 4(22.2) + 3(25) = 262.8 mm → Adoptar b = 28 cm (o 30 cm)
+    Ejemplo 4 barras No. 7: b<tspan baseline-shift="sub" font-size="75%">mín</tspan> = 2(40) + 2(9.5) + 4(22.2) + 3(25) = 262.8 mm → Adoptar b = 28 cm (o 30 cm)
   </text>
 </svg>
           <figcaption class="diagram-caption">
@@ -1429,7 +1429,7 @@
     <line x1="145" y1="168.5" x2="145" y2="186.5" stroke="#475569" stroke-width="1.2"/>
     <polygon points="145,168.5 142.5,172 147.5,172" fill="#475569"/>
     <polygon points="145,186.5 142.5,183 147.5,183" fill="#475569"/>
-    <text x="149" y="179" fill="#475569" font-family="JetBrains Mono" font-size="7" font-weight="700">s_libre ≥ 25 mm</text>
+    <text x="149" y="179" fill="#475569" font-family="JetBrains Mono" font-size="7" font-weight="700">s<tspan baseline-shift="sub" font-size="75%">libre</tspan> ≥ 25 mm</text>
 
     <!-- Capa 2 (Inferior extrema): 3 Barras No. 7 (db = 22.2 mm) -->
     <circle cx="40" cy="195" r="8.5" fill="#D97706" stroke="#92400E" stroke-width="1.4"/>
@@ -1468,7 +1468,7 @@
     <polygon points="245,0 242,6 248,6" fill="#2563EB"/>
     <polygon points="245,195 242,189 248,189" fill="#2563EB"/>
     <rect x="225" y="105" width="40" height="20" rx="3" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
-    <text x="245" y="119" fill="#1D4ED8" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">d_t</text>
+    <text x="245" y="119" fill="#1D4ED8" font-family="JetBrains Mono" font-size="9" font-weight="800" text-anchor="middle">d<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
   </g>
 
   <!-- ================= LADO DERECHO: DIAGRAMA DE DEFORMACIONES Y APLICACIÓN ================= -->
@@ -1479,7 +1479,7 @@
     <!-- Fibra superior: ecu = 0.003 -->
     <line x1="45" y1="0" x2="0" y2="0" stroke="#2563EB" stroke-width="2"/>
     <circle cx="0" cy="0" r="3.5" fill="#DC2626"/>
-    <text x="-5" y="-5" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="end">ε_cu = 0.003</text>
+    <text x="-5" y="-5" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="end">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
     <!-- Línea de deformación plana (Navier-Bernoulli) -->
     <!-- Eje neutro a c = 70 mm -->
@@ -1495,15 +1495,15 @@
     <!-- Deformación en el centroide d (y = 181): epsilon_s -->
     <line x1="45" y1="181" x2="107" y2="181" stroke="#DC2626" stroke-width="1.5"/>
     <circle cx="107" cy="181" r="3.5" fill="#DC2626"/>
-    <text x="115" y="184" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800">ε_s (a nivel d)</text>
+    <text x="115" y="184" fill="#DC2626" font-family="JetBrains Mono" font-size="8.5" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">s</tspan> (a nivel d)</text>
 
     <!-- Deformación en la capa extrema dt (y = 195): epsilon_t -->
     <line x1="45" y1="195" x2="115" y2="195" stroke="#2563EB" stroke-width="1.8"/>
     <circle cx="115" cy="195" r="4" fill="#2563EB"/>
-    <text x="123" y="199" fill="#1D4ED8" font-family="JetBrains Mono" font-size="9" font-weight="800">ε_t (a nivel d_t)</text>
+    <text x="123" y="199" fill="#1D4ED8" font-family="JetBrains Mono" font-size="9" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> (a nivel d<tspan baseline-shift="sub" font-size="75%">t</tspan>)</text>
 
     <!-- Relación dt > d y et > es -->
-    <text x="75" y="222" fill="#B45309" font-family="JetBrains Mono" font-size="8" font-weight="800" text-anchor="middle">d_t &gt; d  ⇒  ε_t &gt; ε_s</text>
+    <text x="75" y="222" fill="#B45309" font-family="JetBrains Mono" font-size="8" font-weight="800" text-anchor="middle">d<tspan baseline-shift="sub" font-size="75%">t</tspan> &gt; d  ⇒  ε<tspan baseline-shift="sub" font-size="75%">t</tspan> &gt; ε<tspan baseline-shift="sub" font-size="75%">s</tspan></text>
 
     <!-- TARJETAS EXPLICATIVAS DE USO ANALÍTICO -->
     <g transform="translate(180, 10)">
@@ -1511,18 +1511,18 @@
       <rect x="0" y="0" width="185" height="85" rx="6" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.2"/>
       <text x="12" y="18" fill="#991B1B" font-size="8.5" font-weight="800">1. Peralte Centroidal (d)</text>
       <text x="12" y="33" fill="#7F1D1D" font-size="7.5" font-weight="600">• Brazo mecánico: z = d - a/2</text>
-      <text x="12" y="47" fill="#7F1D1D" font-size="7.5" font-weight="600">• Momento nominal Mn = As·fy·(d - a/2)</text>
-      <text x="12" y="61" fill="#7F1D1D" font-size="7.5" font-weight="600">• Cuantía: ρ = As / (b · d)</text>
+      <text x="12" y="47" fill="#7F1D1D" font-size="7.5" font-weight="600">• Momento nominal M<tspan baseline-shift="sub" font-size="75%">n</tspan> = A<tspan baseline-shift="sub" font-size="75%">s</tspan>·f<tspan baseline-shift="sub" font-size="75%">y</tspan>·(d - a/2)</text>
+      <text x="12" y="61" fill="#7F1D1D" font-size="7.5" font-weight="600">• Cuantía: ρ = A<tspan baseline-shift="sub" font-size="75%">s</tspan> / (b · d)</text>
       <text x="12" y="75" fill="#991B1B" font-family="JetBrains Mono" font-size="7.5" font-weight="700">Rige el equilibrio de fuerzas T = C</text>
 
       <!-- Card dt: Deformación y Factor Phi -->
       <rect x="0" y="98" width="185" height="95" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.2"/>
-      <text x="12" y="116" fill="#1E40AF" font-size="8.5" font-weight="800">2. Peralte Extremo (d_t)</text>
-      <text x="12" y="131" fill="#1E3A8A" font-size="7.5" font-weight="600">• ε_t = ε_cu · (d_t - c) / c</text>
+      <text x="12" y="116" fill="#1E40AF" font-size="8.5" font-weight="800">2. Peralte Extremo (d<tspan baseline-shift="sub" font-size="75%">t</tspan>)</text>
+      <text x="12" y="131" fill="#1E3A8A" font-size="7.5" font-weight="600">• ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> · (d<tspan baseline-shift="sub" font-size="75%">t</tspan> - c) / c</text>
       <text x="12" y="145" fill="#1E3A8A" font-size="7.5" font-weight="600">• Control de ductilidad seccional</text>
       <text x="12" y="159" fill="#1E3A8A" font-size="7.5" font-weight="600">• Factor de reducción φ (C.9.3.2)</text>
-      <text x="12" y="173" fill="#1D4ED8" font-family="JetBrains Mono" font-size="7.5" font-weight="700">Si ε_t ≥ 0.005  ⇒  φ = 0.90 (Dúctil)</text>
-      <text x="12" y="185" fill="#64748B" font-size="7" font-style="italic">En 1 capa: d_t = d  |  En 2 capas: d_t &gt; d</text>
+      <text x="12" y="173" fill="#1D4ED8" font-family="JetBrains Mono" font-size="7.5" font-weight="700">Si ε<tspan baseline-shift="sub" font-size="75%">t</tspan> ≥ 0.005  ⇒  φ = 0.90 (Dúctil)</text>
+      <text x="12" y="185" fill="#64748B" font-size="7" font-style="italic">En 1 capa: d<tspan baseline-shift="sub" font-size="75%">t</tspan> = d  |  En 2 capas: d<tspan baseline-shift="sub" font-size="75%">t</tspan> &gt; d</text>
     </g>
   </g>
 </svg>
@@ -1692,9 +1692,9 @@
             
             <!-- Columna Izquierda: Gráfico Mecánico Vectorial -->
             <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-              <svg viewBox="0 0 500 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
+              <svg viewBox="0 0 520 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
                 <!-- Título Superior -->
-                <text x="250" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">1. COMPATIBILIDAD Y CUANTÍA GENERAL (ρ)</text>
+                <text x="260" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">1. COMPATIBILIDAD Y CUANTÍA GENERAL (ρ)</text>
 
                 <!-- Pastilla E.N. -->
                 <rect x="6" y="80" width="30" height="18" rx="3" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.1"/>
@@ -1712,7 +1712,7 @@
                   <circle cx="20" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="40" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="60" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
-                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero As</text>
+                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero A<tspan baseline-shift="sub" font-size="75%">s</tspan></text>
                 </g>
 
                 <!-- Fuerzas Internas -->
@@ -1720,13 +1720,13 @@
                   <line x1="204" y1="59" x2="134" y2="59" stroke-width="2.5"/>
                   <polygon points="126,59 136,54 136,64" fill="#1D4ED8"/>
                 </g>
-                <text x="168" y="50" fill="#1E3A8A" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C_c = 0.85·f'c·a·b</text>
+                <text x="168" y="50" fill="#1E3A8A" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·a·b</text>
 
                 <g stroke="#D97706">
                   <line x1="128" y1="171" x2="198" y2="171" stroke-width="2.5"/>
                   <polygon points="206,171 196,166 196,176" fill="#D97706"/>
                 </g>
-                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = As · fy</text>
+                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = A<tspan baseline-shift="sub" font-size="75%">s</tspan> · f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
                 <line x1="216" y1="59" x2="216" y2="171" stroke="#64748B" stroke-width="1.2"/>
                 <line x1="211" y1="59" x2="221" y2="59" stroke="#64748B" stroke-width="1.2"/>
@@ -1742,17 +1742,18 @@
                 <line x1="305" y1="36" x2="305" y2="171" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="36" x2="311" y2="36" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="171" x2="311" y2="171" stroke="#0F172A" stroke-width="2"/>
-                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d_t</text>
+                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <!-- Deformaciones -->
                 <line x1="410" y1="36" x2="410" y2="185" stroke="#94A3B8" stroke-width="1.5"/>
                 <polygon points="410,36 365,36 410,90" fill="#DBEAFE" fill-opacity="0.85"/>
                 <line x1="410" y1="36" x2="365" y2="36" stroke="#2563EB" stroke-width="2.2"/>
-                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε_cu = 0.003</text>
+                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
+                <!-- Triángulo Tracción y Deformación et libre sin recorte -->
                 <polygon points="410,90 480,171 410,171" fill="#FEF3C7" fill-opacity="0.85"/>
                 <line x1="410" y1="171" x2="480" y2="171" stroke="#D97706" stroke-width="2.2"/>
-                <text x="485" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="12" font-weight="800">ε_t</text>
+                <text x="486" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="12" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <line x1="365" y1="36" x2="480" y2="171" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
 
@@ -1773,8 +1774,8 @@
               <!-- Tarjeta 1 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #2563EB; border-radius: 6px; padding: 0.6rem 0.8rem;">
                 <div style="font-size: 0.76rem; font-weight: 800; color: #1E40AF; text-transform: uppercase;">1. Compatibilidad Plana</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  c / d_t = 0.003 / (0.003 + &epsilon;_t)
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\frac{c}{d_t} = \frac{0.003}{0.003 + \varepsilon_t}$$
                 </div>
                 <div style="font-size: 0.72rem; color: #64748B;">Hipótesis de Navier-Bernoulli (sección plana)</div>
               </div>
@@ -1782,19 +1783,19 @@
               <!-- Tarjeta 2 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #2563EB; border-radius: 6px; padding: 0.6rem 0.8rem;">
                 <div style="font-size: 0.76rem; font-weight: 800; color: #1E40AF; text-transform: uppercase;">2. Equilibrio Seccional</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  C_c = T &implies; 0.85·f'c·a·b = As·fy
+                <div style="font-size: 0.92rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$C_c = T \implies 0.85 f'_c a b = A_s f_y$$
                 </div>
-                <div style="font-size: 0.72rem; color: #64748B;">Bloque de Whitney (a = &beta;₁·c)</div>
+                <div style="font-size: 0.72rem; color: #64748B;">Bloque de Whitney ($a = \beta_1 c$)</div>
               </div>
 
               <!-- Tarjeta 3 -->
               <div style="background: #F0FDF4; border: 1.2px solid #BBF7D0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">3. Cuantía General (&rho;)</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #14532D; margin: 0.2rem 0;">
-                  &rho; = 0.85·&beta;₁·(f'c/fy)·(c/d)
+                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">3. Cuantía General ($\rho$)</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #14532D; margin: 0.25rem 0;">
+                  $$\rho = 0.85 \beta_1 \left(\frac{f'_c}{f_y}\right) \left(\frac{c}{d}\right)$$
                 </div>
-                <div style="font-size: 0.72rem; color: #166534; font-weight: 600;">Mayor &epsilon;_t &implies; Mayor ductilidad seccional</div>
+                <div style="font-size: 0.72rem; color: #166534; font-weight: 600;">Mayor $\varepsilon_t \implies$ Mayor ductilidad seccional</div>
               </div>
             </div>
 
@@ -1865,27 +1866,27 @@
             
             <!-- Columna Izquierda: Gráfico Mecánico Vectorial -->
             <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-              <svg viewBox="0 0 500 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
+              <svg viewBox="0 0 520 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
                 <!-- Título Superior -->
-                <text x="250" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">2. CONDICIÓN DE FALLA BALANCEADA (ρ_b)</text>
+                <text x="260" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">2. CONDICIÓN DE FALLA BALANCEADA (ρ<tspan baseline-shift="sub" font-size="75%">b</tspan>)</text>
 
                 <!-- Pastilla E.N.b -->
                 <rect x="6" y="103" width="30" height="18" rx="3" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.1"/>
-                <text x="21" y="115.8" fill="#DC2626" font-size="8.5" font-weight="800" text-anchor="middle">E.N.b</text>
+                <text x="21" y="115.8" fill="#DC2626" font-size="8.5" font-weight="800" text-anchor="middle">E.N.<tspan baseline-shift="sub" font-size="75%">b</tspan></text>
 
                 <g transform="translate(40, 36)">
                   <!-- Viga b x h (80 x 165) -->
                   <rect x="0" y="0" width="80" height="165" fill="#FFFFFF" stroke="#64748B" stroke-width="1.6"/>
                   <!-- Bloque Whitney ab = 68 px -->
                   <rect x="0" y="0" width="80" height="68" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.2"/>
-                  <text x="40" y="38" fill="#DC2626" font-size="9" font-weight="700" text-anchor="middle">Bloque a_b = β₁·c_b</text>
+                  <text x="40" y="38" fill="#DC2626" font-size="9" font-weight="700" text-anchor="middle">Bloque a<tspan baseline-shift="sub" font-size="75%">b</tspan> = β₁·c<tspan baseline-shift="sub" font-size="75%">b</tspan></text>
                   <!-- Línea Eje Neutro a y = 80 -->
                   <line x1="-5" y1="80" x2="85" y2="80" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="3 2"/>
                   <!-- Acero As,b en d = 135 -->
                   <circle cx="20" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="40" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="60" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
-                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero As,b</text>
+                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero A<tspan baseline-shift="sub" font-size="75%">s,b</tspan></text>
                 </g>
 
                 <!-- Fuerzas Internas -->
@@ -1893,18 +1894,18 @@
                   <line x1="204" y1="70" x2="134" y2="70" stroke-width="2.5"/>
                   <polygon points="126,70 136,65 136,75" fill="#DC2626"/>
                 </g>
-                <text x="168" y="61" fill="#991B1B" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C_c,b = 0.85·f'c·a_b·b</text>
+                <text x="168" y="61" fill="#991B1B" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C<tspan baseline-shift="sub" font-size="75%">c,b</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·a<tspan baseline-shift="sub" font-size="75%">b</tspan>·b</text>
 
                 <g stroke="#D97706">
                   <line x1="128" y1="171" x2="198" y2="171" stroke-width="2.5"/>
                   <polygon points="206,171 196,166 196,176" fill="#D97706"/>
                 </g>
-                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T_b = As,b · fy</text>
+                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T<tspan baseline-shift="sub" font-size="75%">b</tspan> = A<tspan baseline-shift="sub" font-size="75%">s,b</tspan> · f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
                 <line x1="216" y1="70" x2="216" y2="171" stroke="#64748B" stroke-width="1.2"/>
                 <line x1="211" y1="70" x2="221" y2="70" stroke="#64748B" stroke-width="1.2"/>
                 <line x1="211" y1="171" x2="221" y2="171" stroke="#64748B" stroke-width="1.2"/>
-                <text x="224" y="125" fill="#475569" font-family="JetBrains Mono" font-size="10" font-weight="700">z = d - a_b/2</text>
+                <text x="224" y="125" fill="#475569" font-family="JetBrains Mono" font-size="10" font-weight="700">z = d - a<tspan baseline-shift="sub" font-size="75%">b</tspan>/2</text>
 
                 <!-- Líneas Guías -->
                 <line x1="120" y1="36" x2="410" y2="36" stroke="#94A3B8" stroke-width="0.8" stroke-dasharray="2 2"/>
@@ -1915,17 +1916,17 @@
                 <line x1="305" y1="36" x2="305" y2="171" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="36" x2="311" y2="36" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="171" x2="311" y2="171" stroke="#0F172A" stroke-width="2"/>
-                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d_t</text>
+                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <!-- Deformaciones -->
                 <line x1="410" y1="36" x2="410" y2="185" stroke="#94A3B8" stroke-width="1.5"/>
                 <polygon points="410,36 365,36 410,116" fill="#FEE2E2" fill-opacity="0.85"/>
                 <line x1="410" y1="36" x2="365" y2="36" stroke="#DC2626" stroke-width="2.2"/>
-                <text x="387.5" y="27" fill="#DC2626" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε_cu = 0.003</text>
+                <text x="387.5" y="27" fill="#DC2626" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
                 <polygon points="410,116 442,171 410,171" fill="#FEF3C7" fill-opacity="0.85"/>
                 <line x1="410" y1="171" x2="442" y2="171" stroke="#D97706" stroke-width="2.2"/>
-                <text x="447" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="11.5" font-weight="800">ε_y = 0.0021</text>
+                <text x="447" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="11.5" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">y</tspan> = 0.0021</text>
 
                 <line x1="365" y1="36" x2="442" y2="171" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
 
@@ -1933,7 +1934,7 @@
                 <line x1="420" y1="36" x2="420" y2="116" stroke="#DC2626" stroke-width="2"/>
                 <line x1="414" y1="36" x2="426" y2="36" stroke="#DC2626" stroke-width="2"/>
                 <line x1="414" y1="116" x2="426" y2="116" stroke="#DC2626" stroke-width="2"/>
-                <text x="431" y="80" fill="#DC2626" font-family="JetBrains Mono" font-size="13" font-weight="800">c_b</text>
+                <text x="431" y="80" fill="#DC2626" font-family="JetBrains Mono" font-size="13" font-weight="800">c<tspan baseline-shift="sub" font-size="75%">b</tspan></text>
               </svg>
             </div>
 
@@ -1945,18 +1946,18 @@
 
               <!-- Tarjeta 1 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #DC2626; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #991B1B; text-transform: uppercase;">1. E.N. Balanceado (c_b)</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  c_b / d_t = 600 / (600 + fy) = 0.5882
+                <div style="font-size: 0.76rem; font-weight: 800; color: #991B1B; text-transform: uppercase;">1. E.N. Balanceado ($c_b$)</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\frac{c_b}{d_t} = \frac{600}{600 + f_y} \approx 0.5882$$
                 </div>
-                <div style="font-size: 0.72rem; color: #64748B;">Para fy = 420 MPa (Es = 200,000 MPa)</div>
+                <div style="font-size: 0.72rem; color: #64748B;">Para $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$)</div>
               </div>
 
               <!-- Tarjeta 2 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #DC2626; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #991B1B; text-transform: uppercase;">2. Cuantía Balanceada (&rho;_b)</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  &rho;_b = 0.85·&beta;₁·(f'c/fy)·(c_b/d)
+                <div style="font-size: 0.76rem; font-weight: 800; color: #991B1B; text-transform: uppercase;">2. Cuantía Balanceada ($\rho_b$)</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\rho_b = 0.85 \beta_1 \left(\frac{f'_c}{f_y}\right) \left(\frac{c_b}{d}\right)$$
                 </div>
                 <div style="font-size: 0.72rem; color: #64748B;">Falla simultánea de concreto y acero</div>
               </div>
@@ -1964,8 +1965,8 @@
               <!-- Tarjeta 3 -->
               <div style="background: #FEF2F2; border: 1.2px solid #FECACA; border-left: 4px solid #DC2626; border-radius: 6px; padding: 0.6rem 0.8rem;">
                 <div style="font-size: 0.76rem; font-weight: 800; color: #B91C1C; text-transform: uppercase;">3. Criterio Normativo</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 800; color: #991B1B; margin: 0.2rem 0;">
-                  &rho; &ge; &rho;_b &implies; ¡PROHIBIDA COMO DISEÑO!
+                <div style="font-size: 0.95rem; font-weight: 800; color: #991B1B; margin: 0.25rem 0;">
+                  $$\rho \ge \rho_b \implies \text{¡PROHIBIDA COMO DISEÑO!}$$
                 </div>
                 <div style="font-size: 0.72rem; color: #B91C1C; font-weight: 600;">Falla frágil por compresión sin preaviso</div>
               </div>
@@ -2041,13 +2042,13 @@
             
             <!-- Columna Izquierda: Gráfico Mecánico Vectorial -->
             <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-              <svg viewBox="0 0 500 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
+              <svg viewBox="0 0 520 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
                 <!-- Título Superior -->
-                <text x="250" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">3. SECCIÓN CONTROLADA POR TRACCIÓN (ε_t = 0.005, ϕ = 0.90)</text>
+                <text x="260" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">3. SECCIÓN CONTROLADA POR TRACCIÓN (ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.005, ϕ = 0.90)</text>
 
                 <!-- Pastilla E.N.t -->
                 <rect x="6" y="72" width="30" height="18" rx="3" fill="#DCFCE7" stroke="#22C55E" stroke-width="1.1"/>
-                <text x="21" y="84.8" fill="#15803D" font-size="8.5" font-weight="800" text-anchor="middle">E.N.t</text>
+                <text x="21" y="84.8" fill="#15803D" font-size="8.5" font-weight="800" text-anchor="middle">E.N.<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <g transform="translate(40, 36)">
                   <!-- Viga b x h (80 x 165) -->
@@ -2061,7 +2062,7 @@
                   <circle cx="20" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="40" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="60" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
-                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero As</text>
+                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero A<tspan baseline-shift="sub" font-size="75%">s</tspan></text>
                 </g>
 
                 <!-- Fuerzas Internas -->
@@ -2069,13 +2070,13 @@
                   <line x1="204" y1="57" x2="134" y2="57" stroke-width="2.5"/>
                   <polygon points="126,57 136,52 136,62" fill="#16A34A"/>
                 </g>
-                <text x="168" y="48" fill="#14532D" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C_c = 0.85·f'c·a·b</text>
+                <text x="168" y="48" fill="#14532D" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·a·b</text>
 
                 <g stroke="#D97706">
                   <line x1="128" y1="171" x2="198" y2="171" stroke-width="2.5"/>
                   <polygon points="206,171 196,166 196,176" fill="#D97706"/>
                 </g>
-                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = As · fy</text>
+                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = A<tspan baseline-shift="sub" font-size="75%">s</tspan> · f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
                 <line x1="216" y1="57" x2="216" y2="171" stroke="#64748B" stroke-width="1.2"/>
                 <line x1="211" y1="57" x2="221" y2="57" stroke="#64748B" stroke-width="1.2"/>
@@ -2091,17 +2092,17 @@
                 <line x1="305" y1="36" x2="305" y2="171" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="36" x2="311" y2="36" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="171" x2="311" y2="171" stroke="#0F172A" stroke-width="2"/>
-                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d_t</text>
+                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <!-- Deformaciones -->
                 <line x1="410" y1="36" x2="410" y2="185" stroke="#94A3B8" stroke-width="1.5"/>
                 <polygon points="410,36 365,36 410,86" fill="#DBEAFE" fill-opacity="0.85"/>
                 <line x1="410" y1="36" x2="365" y2="36" stroke="#2563EB" stroke-width="2.2"/>
-                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε_cu = 0.003</text>
+                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
                 <polygon points="410,86 485,171 410,171" fill="#DCFCE7" fill-opacity="0.85"/>
                 <line x1="410" y1="171" x2="485" y2="171" stroke="#16A34A" stroke-width="2.2"/>
-                <text x="489" y="175" fill="#15803D" font-family="JetBrains Mono" font-size="12" font-weight="800">ε_t = 0.005</text>
+                <text x="489" y="175" fill="#15803D" font-family="JetBrains Mono" font-size="12" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.005</text>
 
                 <line x1="365" y1="36" x2="485" y2="171" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/>
 
@@ -2122,26 +2123,26 @@
               <!-- Tarjeta 1 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 0.6rem 0.8rem;">
                 <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">1. Eje Neutro Dúctil</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  c / d_t = 0.003 / 0.008 = 3/8 = 0.375
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\frac{c}{d_t} = \frac{0.003}{0.008} = \frac{3}{8} = 0.375$$
                 </div>
-                <div style="font-size: 0.72rem; color: #64748B;">Eje neutro alto &implies; Gran deformación en acero</div>
+                <div style="font-size: 0.72rem; color: #64748B;">Eje neutro alto $\implies$ Gran deformación en acero</div>
               </div>
 
               <!-- Tarjeta 2 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">2. Proporción con &rho;_b</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  &rho;_{0.005} = (51/80)·&rho;_b = 0.6375·&rho;_b
+                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">2. Proporción con $\rho_b$</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\rho_{0.005} = \frac{51}{80} \rho_b = 0.6375 \rho_b$$
                 </div>
-                <div style="font-size: 0.72rem; color: #64748B;">Para fy = 420 MPa (acero Grado 60)</div>
+                <div style="font-size: 0.72rem; color: #64748B;">Para $f_y = 420\text{ MPa}$ (acero Grado 60)</div>
               </div>
 
               <!-- Tarjeta 3 -->
               <div style="background: #F0FDF4; border: 1.2px solid #BBF7D0; border-left: 4px solid #16A34A; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">3. Factor de Reducción &phi;</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 800; color: #14532D; margin: 0.2rem 0;">
-                  &epsilon;_t &ge; 0.005 &implies; &phi; = 0.90
+                <div style="font-size: 0.76rem; font-weight: 800; color: #15803D; text-transform: uppercase;">3. Factor de Reducción $\phi$</div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #14532D; margin: 0.25rem 0;">
+                  $$\varepsilon_t \ge 0.005 \implies \phi = 0.90$$
                 </div>
                 <div style="font-size: 0.72rem; color: #166534; font-weight: 600;">Máxima economía y aviso visual por fisuras</div>
               </div>
@@ -2214,13 +2215,13 @@
             
             <!-- Columna Izquierda: Gráfico Mecánico Vectorial -->
             <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-              <svg viewBox="0 0 500 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
+              <svg viewBox="0 0 520 235" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: Inter, sans-serif; display: block;">
                 <!-- Título Superior -->
-                <text x="250" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">4. LÍMITE ABSOLUTO EN FLEXIÓN (ε_t = 0.004, ϕ ≈ 0.814)</text>
+                <text x="260" y="20" fill="#0F172A" font-size="12.5" font-weight="800" text-anchor="middle">4. LÍMITE ABSOLUTO EN FLEXIÓN (ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.004, ϕ ≈ 0.814)</text>
 
                 <!-- Pastilla E.N.máx -->
                 <rect x="6" y="80" width="30" height="18" rx="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.1"/>
-                <text x="21" y="92.8" fill="#B45309" font-size="8.5" font-weight="800" text-anchor="middle">E.N.m</text>
+                <text x="21" y="92.8" fill="#B45309" font-size="8.5" font-weight="800" text-anchor="middle">E.N.<tspan baseline-shift="sub" font-size="75%">máx</tspan></text>
 
                 <g transform="translate(40, 36)">
                   <!-- Viga b x h (80 x 165) -->
@@ -2234,7 +2235,7 @@
                   <circle cx="20" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="40" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
                   <circle cx="60" cy="135" r="4.5" fill="#D97706" stroke="#92400E" stroke-width="1.2"/>
-                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero As,máx</text>
+                  <text x="40" y="154" fill="#64748B" font-family="JetBrains Mono" font-size="8.2" font-weight="600" text-anchor="middle">Acero A<tspan baseline-shift="sub" font-size="75%">s,máx</tspan></text>
                 </g>
 
                 <!-- Fuerzas Internas -->
@@ -2242,13 +2243,13 @@
                   <line x1="204" y1="60" x2="134" y2="60" stroke-width="2.5"/>
                   <polygon points="126,60 136,55 136,65" fill="#D97706"/>
                 </g>
-                <text x="168" y="51" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C_c = 0.85·f'c·a·b</text>
+                <text x="168" y="51" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·a·b</text>
 
                 <g stroke="#D97706">
                   <line x1="128" y1="171" x2="198" y2="171" stroke-width="2.5"/>
                   <polygon points="206,171 196,166 196,176" fill="#D97706"/>
                 </g>
-                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = As,máx · fy</text>
+                <text x="168" y="162" fill="#B45309" font-family="JetBrains Mono" font-size="10.8" font-weight="800" text-anchor="middle">T = A<tspan baseline-shift="sub" font-size="75%">s,máx</tspan> · f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
 
                 <line x1="216" y1="60" x2="216" y2="171" stroke="#64748B" stroke-width="1.2"/>
                 <line x1="211" y1="60" x2="221" y2="60" stroke="#64748B" stroke-width="1.2"/>
@@ -2264,17 +2265,17 @@
                 <line x1="305" y1="36" x2="305" y2="171" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="36" x2="311" y2="36" stroke="#0F172A" stroke-width="2"/>
                 <line x1="299" y1="171" x2="311" y2="171" stroke="#0F172A" stroke-width="2"/>
-                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d_t</text>
+                <text x="316" y="108" fill="#0F172A" font-family="JetBrains Mono" font-size="13" font-weight="800">d<tspan baseline-shift="sub" font-size="75%">t</tspan></text>
 
                 <!-- Deformaciones -->
                 <line x1="410" y1="36" x2="410" y2="185" stroke="#94A3B8" stroke-width="1.5"/>
                 <polygon points="410,36 365,36 410,93" fill="#DBEAFE" fill-opacity="0.85"/>
                 <line x1="410" y1="36" x2="365" y2="36" stroke="#2563EB" stroke-width="2.2"/>
-                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε_cu = 0.003</text>
+                <text x="387.5" y="27" fill="#1E40AF" font-family="JetBrains Mono" font-size="11.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
 
                 <polygon points="410,93 470,171 410,171" fill="#FEF3C7" fill-opacity="0.85"/>
                 <line x1="410" y1="171" x2="470" y2="171" stroke="#D97706" stroke-width="2.2"/>
-                <text x="475" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="12" font-weight="800">ε_t = 0.004</text>
+                <text x="475" y="175" fill="#B45309" font-family="JetBrains Mono" font-size="12" font-weight="800">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.004</text>
 
                 <line x1="365" y1="36" x2="470" y2="171" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
 
@@ -2282,7 +2283,7 @@
                 <line x1="420" y1="36" x2="420" y2="93" stroke="#D97706" stroke-width="2"/>
                 <line x1="414" y1="36" x2="426" y2="36" stroke="#D97706" stroke-width="2"/>
                 <line x1="414" y1="93" x2="426" y2="93" stroke="#D97706" stroke-width="2"/>
-                <text x="431" y="69" fill="#D97706" font-family="JetBrains Mono" font-size="13" font-weight="800">c</text>
+                <text x="431" y="69" fill="#D97706" font-family="JetBrains Mono" font-size="13" font-weight="800">c<tspan baseline-shift="sub" font-size="75%">máx</tspan></text>
               </svg>
             </div>
 
@@ -2294,29 +2295,29 @@
 
               <!-- Tarjeta 1 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">1. Eje Neutro Límite (c_máx)</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  c / d_t = 0.003 / 0.007 = 3/7 &approx; 0.4286
+                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">1. Eje Neutro Límite ($c_{\max}$)</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\frac{c_{\max}}{d_t} = \frac{0.003}{0.007} = \frac{3}{7} \approx 0.4286$$
                 </div>
                 <div style="font-size: 0.72rem; color: #64748B;">Tope máximo normativo para vigas sin compresión</div>
               </div>
 
               <!-- Tarjeta 2 -->
               <div style="background: #FFFFFF; border: 1.2px solid #E2E8F0; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">2. Proporción con &rho;_b</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 700; color: #0F172A; margin: 0.2rem 0;">
-                  &rho;_{máx} = (51/70)·&rho;_b &approx; 0.7286·&rho;_b
+                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">2. Proporción con $\rho_b$</div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0F172A; margin: 0.25rem 0;">
+                  $$\rho_{\max} = \frac{51}{70} \rho_b \approx 0.7286 \rho_b$$
                 </div>
-                <div style="font-size: 0.72rem; color: #64748B;">Para fy = 420 MPa (acero Grado 60)</div>
+                <div style="font-size: 0.72rem; color: #64748B;">Para $f_y = 420\text{ MPa}$ (acero Grado 60)</div>
               </div>
 
               <!-- Tarjeta 3 -->
               <div style="background: #FFFBEB; border: 1.2px solid #FDE68A; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 0.6rem 0.8rem;">
-                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">3. Factor &phi; en Transición</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 800; color: #92400E; margin: 0.2rem 0;">
-                  &epsilon;_t = 0.004 &implies; &phi; &approx; 0.814
+                <div style="font-size: 0.76rem; font-weight: 800; color: #B45309; text-transform: uppercase;">3. Factor $\phi$ en Transición</div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #92400E; margin: 0.25rem 0;">
+                  $$\varepsilon_t = 0.004 \implies \phi \approx 0.814$$
                 </div>
-                <div style="font-size: 0.72rem; color: #92400E; font-weight: 600;">Penalización: requiere +10.6% de Mn nominal</div>
+                <div style="font-size: 0.72rem; color: #92400E; font-weight: 600;">Penalización: requiere $+10.6\%$ de $M_n$ nominal</div>
               </div>
             </div>
 
@@ -2334,7 +2335,7 @@
               <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                   <p style="font-size: 0.88rem; color: #334155; line-height: 1.6; margin-bottom: 0.65rem;">
-                    <strong>Paso 1: Hipótesis Cinemática y Límite Normativo Estricto.</strong> Para miembros no preesforzados a flexión con carga axial $P_u < 0.10 f'_c A_g$, la NSR-10 (C.10.3.5) impone un piso mínimo absoluto de deformación neta de tracción de $\varepsilon_t \ge 0.004$ para prevenir fallas frágiles no dúctiles.
+                    <strong>Paso 1: Hipótesis Cinemática y Límite Normativo Estricto.</strong> Para miembros no preesforzados a flexión con carga axial $P_u \lt 0.10 f'_c A_g$, la NSR-10 (C.10.3.5) impone un piso mínimo absoluto de deformación neta de tracción de $\varepsilon_t \ge 0.004$ para prevenir fallas frágiles no dúctiles.
                   </p>
                   <p style="font-size: 0.88rem; color: #334155; line-height: 1.6; margin-bottom: 0.65rem;">
                     <strong>Paso 2: Compatibilidad Geométrica (Eje Neutro Límite Absoluto).</strong> Igualando con el aplastamiento del concreto $\varepsilon_{cu} = 0.003$:
@@ -2491,7 +2492,7 @@
     <!-- Límite mínimo para vigas a flexión: eps_t = 0.004 (x = 328) -->
     <line x1="328" y1="32" x2="328" y2="170" stroke="#D97706" stroke-width="1.2" stroke-dasharray="2 2"/>
     <rect x="290" y="36" width="76" height="15" rx="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="0.8"/>
-    <text x="328" y="47" fill="#B45309" font-size="7" font-weight="800" text-anchor="middle">Vigas: ε_t ≥ 0.004</text>
+    <text x="328" y="47" fill="#B45309" font-size="7" font-weight="800" text-anchor="middle">Vigas: ε<tspan baseline-shift="sub" font-size="75%">t</tspan> ≥ 0.004</text>
 
     <!-- EJES CARTESIANOS (Eje phi y Eje eps_t) -->
     <!-- Eje vertical phi (x = 80) -->
@@ -2539,19 +2540,19 @@
     <path d="M 285 92 L 310 115 L 340 115" fill="none" stroke="#0F172A" stroke-width="1.2"/>
     <polygon points="282,90 286,96 290,92" fill="#0F172A"/>
     <text x="345" y="119" fill="#0F172A" font-family="JetBrains Mono" font-size="9" font-weight="800">
-      ϕ = 0.65 + (ε_t - 0.002)(250/3)
+      ϕ = 0.65 + (ε<tspan baseline-shift="sub" font-size="75%">t</tspan> - 0.002)(250/3)
     </text>
 
     <!-- PUNTOS CRÍTICOS Y COTAS HORIZONTALES (Abajo del eje) -->
     <!-- Punto eps_t = 0.002 -->
     <line x1="195" y1="170" x2="195" y2="175" stroke="#0F172A" stroke-width="1.5"/>
-    <text x="195" y="188" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε_t = 0.002</text>
-    <text x="195" y="202" fill="#475569" font-family="JetBrains Mono" font-size="8" font-weight="700" text-anchor="middle">c/d_t = 0.600</text>
+    <text x="195" y="188" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.002</text>
+    <text x="195" y="202" fill="#475569" font-family="JetBrains Mono" font-size="8" font-weight="700" text-anchor="middle">c/d<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.600</text>
 
     <!-- Punto eps_t = 0.005 -->
     <line x1="395" y1="170" x2="395" y2="175" stroke="#0F172A" stroke-width="1.5"/>
-    <text x="395" y="188" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε_t = 0.005</text>
-    <text x="395" y="202" fill="#475569" font-family="JetBrains Mono" font-size="8" font-weight="700" text-anchor="middle">c/d_t = 0.375</text>
+    <text x="395" y="188" fill="#0F172A" font-family="JetBrains Mono" font-size="8.5" font-weight="800" text-anchor="middle">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.005</text>
+    <text x="395" y="202" fill="#475569" font-family="JetBrains Mono" font-size="8" font-weight="700" text-anchor="middle">c/d<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.375</text>
 
     <!-- Franjas de Texto de Regiones con Flechas de Alcance -->
     <!-- Región Compresión -->
@@ -2707,7 +2708,7 @@
             </table>
           </div>
           <div style="font-size: 0.80rem; color: #64748B; margin-top: 0.65rem; line-height: 1.5;">
-            <strong>Nota técnica:</strong> Valores calculados conforme a NSR-10 C.10.2 y C.10.3 para acero longitudinal con $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}, \varepsilon_y = 0.0021$) y consideración de $d = d_t$ (una fila de armadura). Para secciones con armadura en dos o más capas ($d \neq d_t$), las cuantías se reducen multiplicando por el factor geométrico $(d_t / d) < 1.0$. El parámetro nominal de diseño es $R_{u,\max} = \phi\,\rho_{\text{tracción}}\,f_y\,(1 - 0.59\,\rho_{\text{tracción}}\,f_y / f'_c)$ con $\phi = 0.90$.
+            <strong>Nota técnica:</strong> Valores calculados conforme a NSR-10 C.10.2 y C.10.3 para acero longitudinal con $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}, \varepsilon_y = 0.0021$) y consideración de $d = d_t$ (una fila de armadura). Para secciones con armadura en dos o más capas ($d \neq d_t$), las cuantías se reducen multiplicando por el factor geométrico $(d_t / d) \lt 1.0$. El parámetro nominal de diseño es $R_{u,\max} = \phi\,\rho_{\text{tracción}}\,f_y\,(1 - 0.59\,\rho_{\text{tracción}}\,f_y / f'_c)$ con $\phi = 0.90$.
           </div>
         </div>
       
@@ -2834,8 +2835,8 @@
             <polygon points="265,140 185,245 265,245" fill="rgba(245, 158, 11, 0.2)"/>
             <!-- Línea Diagonal Navier-Bernoulli -->
             <line x1="325" y1="65" x2="185" y2="245" stroke="#2563EB" stroke-width="2.5"/>
-            <text x="330" y="73" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">ε_cu = 0.003</text>
-            <text x="178" y="249" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="end">ε_t ≥ 0.005</text>
+            <text x="330" y="73" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
+            <text x="178" y="249" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="end">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> ≥ 0.005</text>
             <text x="278" y="105" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9.5">c = β₁⁻¹·a</text>
 
             <!-- ================= COLUMNA 3: BLOQUE WHITNEY ================= -->
@@ -2844,7 +2845,7 @@
             <path d="M 425 65 Q 515 90 425 140" fill="none" stroke="#94A3B8" stroke-dasharray="3,3" stroke-width="1.6"/>
             <!-- Rectángulo Equivalente de Whitney -->
             <rect x="425" y="65" width="80" height="63.75" fill="rgba(244, 63, 94, 0.28)" stroke="#FB7185" stroke-width="2"/>
-            <text x="512" y="85" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Esfuerzo 0.85·f'c</text>
+            <text x="512" y="85" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700">Esfuerzo 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan></text>
             <text x="512" y="102" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5">Altura a = β₁·c</text>
             <!-- Cota a -->
             <line x1="417" y1="65" x2="417" y2="128.75" stroke="#FB7185" stroke-width="1.5"/>
@@ -2863,22 +2864,22 @@
             <!-- Resultante Cc entrando hacia la izquierda hacia el bloque -->
             <line x1="730" y1="96.9" x2="635" y2="96.9" stroke="#FB7185" stroke-width="3"/>
             <polygon points="635,96.9 650,91 650,102.8" fill="#FB7185"/>
-            <text x="738" y="93" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">C_c = 0.85·f'c·b·a</text>
+            <text x="738" y="93" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·b·a</text>
             <text x="738" y="108" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9">(en centroide a/2)</text>
 
             <!-- Resultante T saliendo hacia la derecha desde el acero -->
             <line x1="635" y1="245" x2="730" y2="245" stroke="#D97706" stroke-width="3"/>
             <polygon points="730,245 715,239 715,251" fill="#D97706"/>
-            <text x="738" y="244" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">T = A_s·f_y</text>
+            <text x="738" y="244" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="800">T = A<tspan baseline-shift="sub" font-size="75%">s</tspan>·f<tspan baseline-shift="sub" font-size="75%">y</tspan></text>
             <text x="738" y="259" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9">(en centroide d)</text>
 
             <!-- ================= RECUADRO INFERIOR EN MODO CLARO ================= -->
             <rect x="35" y="288" width="850" height="46" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
             <text x="460" y="306" fill="#0F172A" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" text-anchor="middle">
-              Equilibrio Horizontal: <tspan fill="#B45309" font-weight="800">C_c = T</tspan> ⟹ 0.85·f'c·b·a = A_s·f_y ⟹ <tspan fill="#1D4ED8" font-weight="800">a = (A_s·f_y) / (0.85·f'c·b) = (ρ·f_y·d) / (0.85·f'c)</tspan>
+              Equilibrio Horizontal: <tspan fill="#B45309" font-weight="800">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = T</tspan> ⟹ 0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·b·a = A<tspan baseline-shift="sub" font-size="75%">s</tspan>·f<tspan baseline-shift="sub" font-size="75%">y</tspan> ⟹ <tspan fill="#1D4ED8" font-weight="800">a = (A<tspan baseline-shift="sub" font-size="75%">s</tspan>·f<tspan baseline-shift="sub" font-size="75%">y</tspan>) / (0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>·b) = (ρ·f<tspan baseline-shift="sub" font-size="75%">y</tspan>·d) / (0.85·f′<tspan baseline-shift="sub" font-size="75%">c</tspan>)</tspan>
             </text>
-            <text x="460" y="323" fill="#334155" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">
-              Momento Resistente: <tspan fill="#0F172A" font-weight="700">M_n = T·(d - a/2)</tspan> = ρ·b·d²·f_y·(1 - 0.59·ρ·f_y/f'c) ⟹ <tspan fill="#15803D" font-weight="800">Ecuación Cuadrática en ρ</tspan>
+            <text x="460" y="323" fill="#334155" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">
+              Momento Resistente: <tspan fill="#0F172A" font-weight="700">M<tspan baseline-shift="sub" font-size="75%">n</tspan> = T·(d - a/2)</tspan> = ρ·b·d²·f<tspan baseline-shift="sub" font-size="75%">y</tspan>·(1 - 0.59·ρ·f<tspan baseline-shift="sub" font-size="75%">y</tspan>/f′<tspan baseline-shift="sub" font-size="75%">c</tspan>) ⟹ <tspan fill="#15803D" font-weight="800">Ecuación Cuadrática en ρ</tspan>
             </text>
           </svg>
           <figcaption class="diagram-caption">
@@ -3023,8 +3024,8 @@
                     <strong>4. Clasificación y Determinación del Factor $\phi$:</strong>
                     <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5;">
                       <li>$\varepsilon_t \ge 0.005 \implies$ Controlada por tracción, $\phi = 0.90$.</li>
-                      <li>$0.004 \le \varepsilon_t < 0.005 \implies$ Transición, $\phi = 0.65 + (\varepsilon_t - 0.002)\frac{250}{3}$.</li>
-                      <li>$\varepsilon_t < 0.004 \implies$ ¡RECHAZADA! Prohibida por NSR-10 C.10.3.5.</li>
+                      <li>$0.004 \le \varepsilon_t \lt 0.005 \implies$ Transición, $\phi = 0.65 + (\varepsilon_t - 0.002)\frac{250}{3}$.</li>
+                      <li>$\varepsilon_t \lt 0.004 \implies$ ¡RECHAZADA! Prohibida por NSR-10 C.10.3.5.</li>
                     </ul>
                   </div>
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
@@ -3576,7 +3577,7 @@
                 </div>
                 <div class="sim-metric-card">
                   <span class="sim-metric-label" id="lbl-sim31-bmin">Chequeo Ancho Mínimo $b_{\min}$ (C.7.6.1)</span>
-                  <span id="out-sim31-bmin" class="sim-metric-value">b_mín = 36.0 cm</span>
+                  <span id="out-sim31-bmin" class="sim-metric-value">b<sub>mín</sub> = 36.0 cm</span>
                 </div>
                 <div class="sim-metric-card">
                   <span class="sim-metric-label" id="lbl-sim31-strains">Compatibilidad ($c, a, \varepsilon_t, \phi$)</span>
@@ -4681,13 +4682,13 @@
                 <line x1="15" y1="0" x2="110" y2="205" stroke="#2563EB" stroke-width="2.2"/>
                 <!-- Flecha epsilon_cu = 0.003 -->
                 <line x1="50" y1="0" x2="15" y2="0" stroke="#EF4444" stroke-width="1.5"/>
-                <text x="10" y="12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">ε_cu = 0.003</text>
+                <text x="10" y="12" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="end">ε<tspan baseline-shift="sub" font-size="75%">cu</tspan> = 0.003</text>
                 <!-- Flecha epsilon_s en centroide (y = 197) -->
                 <line x1="50" y1="197" x2="105" y2="197" stroke="#059669" stroke-width="1.5"/>
-                <text x="110" y="195" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9">ε_s = 0.00438</text>
+                <text x="110" y="195" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9">ε<tspan baseline-shift="sub" font-size="75%">s</tspan> = 0.00438</text>
                 <!-- Flecha epsilon_t en capa extrema (y = 205) -->
                 <line x1="50" y1="205" x2="110" y2="205" stroke="#D97706" stroke-width="1.8"/>
-                <text x="115" y="210" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">ε_t = 0.00462</text>
+                <text x="115" y="210" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">ε<tspan baseline-shift="sub" font-size="75%">t</tspan> = 0.00462</text>
               </g>
               <!-- Diagrama de Esfuerzos y Fuerzas Whitney -->
               <g transform="translate(580, 20)">
@@ -4699,11 +4700,11 @@
                 <!-- Fuerza Cc -->
                 <line x1="75" y1="34" x2="140" y2="34" stroke="#EF4444" stroke-width="2.5"/>
                 <polygon points="140,34 132,30 132,38" fill="#EF4444"/>
-                <text x="145" y="38" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">Cc = 1,285 kN</text>
+                <text x="145" y="38" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">C<tspan baseline-shift="sub" font-size="75%">c</tspan> = 1,285 kN</text>
                 <!-- Fuerza Ts -->
                 <line x1="20" y1="197" x2="90" y2="197" stroke="#059669" stroke-width="2.5"/>
                 <polygon points="90,197 82,193 82,201" fill="#34D399"/>
-                <text x="95" y="201" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">Ts = 1,285 kN</text>
+                <text x="95" y="201" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">T<tspan baseline-shift="sub" font-size="75%">s</tspan> = 1,285 kN</text>
                 <!-- Brazo z = d - a/2 -->
                 <line x1="150" y1="34" x2="150" y2="197" stroke="#D97706" stroke-width="1.2"/>
                 <line x1="146" y1="34" x2="154" y2="34" stroke="#D97706" stroke-width="1.2"/>
@@ -5229,7 +5230,7 @@
                 <div class="callout warning" style="margin-top: 0.75rem;">
                   <div class="callout-title" style="font-size: 0.88rem; font-weight: 700;">⚠️ Diagnóstico Seccional Ineludible:</div>
                   <div class="callout-body" style="font-size: 0.85rem; line-height: 1.5;">
-                    Dado que el momento flector actuante $M_u = \mathbf{980.0\text{ kN}\cdot\text{m}} > M_{uf} = 715.4\text{ kN}\cdot\text{m}$, la zona de compresión requiere una profundidad $a > 100\text{ mm}$, por lo que el bloque de Whitney <strong>penetra profundamente en el alma</strong>. Es obligatorio aplicar el método de dos componentes de la NSR-10 (C.10.3.3).
+                    Dado que el momento flector actuante $M_u = \mathbf{980.0\text{ kN}\cdot\text{m}} \gt M_{uf} = 715.4\text{ kN}\cdot\text{m}$, la zona de compresión requiere una profundidad $a > 100\text{ mm}$, por lo que el bloque de Whitney <strong>penetra profundamente en el alma</strong>. Es obligatorio aplicar el método de dos componentes de la NSR-10 (C.10.3.3).
                   </div>
                 </div>
               </div>

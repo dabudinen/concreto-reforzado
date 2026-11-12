@@ -3028,37 +3028,75 @@
                   <span style="background: #EFF6FF; color: #1D4ED8; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">Mu Conocido</span>
                 </div>
                 <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
-                  Procedimiento estandarizado cuando el análisis estructural suministra el momento solicitante mayorado $M_u$:
+                  Procedimiento estandarizado para vigas rectangulares simplemente reforzadas cuando el análisis estructural suministra el momento solicitante mayorado $M_u$:
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.84rem; color: var(--text-main);">
+                  <!-- 1. GEOMETRÍA -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #2563EB; border-radius: 4px; padding: 0.55rem 0.75rem;">
                     <strong>1. Geometría y Estimación de Peralte ($d$):</strong>
-                    <div>Fijar $b$ y $h$. Estimar inicialmente $d \approx h - 6.0\text{ cm}$ (si cabe en 1 fila) o $d \approx h - 8.5\text{ cm}$ (si requiere 2 filas).</div>
+                    <div>Fijar base $b$ y altura total $h$. Estimar inicialmente el peralte efectivo útil: $d \approx h - 6.0\text{ cm}$ (si cabe en 1 fila) o $d \approx h - 8.5\text{ cm}$ (si requiere 2 filas de barras).</div>
                   </div>
+
+                  <!-- 2. COEFICIENTE DE RESISTENCIA Rn -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #0284C7; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>2. Clasificación de Sección:</strong>
-                    <div>¿Es viga T con momento positivo? Si sí, calcular $\phi M_{n,\text{ala}} = \phi (0.85 f'_c b_{\text{ef}} h_f)(d - h_f/2)$. Si $M_u \le \phi M_{n,\text{ala}}$, diseñar como viga rectangular con ancho $b = b_{\text{ef}}$.</div>
-                  </div>
-                  <div style="background: var(--bg-subtle); border-left: 3px solid #2563EB; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>3. Parámetro de Resistencia Requerida ($R_n$):</strong>
-                    <div>Asumir preliminarmente comportamiento dúctil controlada por tracción ($\phi = 0.90$):
-                      $$R_n = \frac{M_u \times 10^6}{\phi\,b\,d^2} \quad [\text{MPa}]$$
+                    <strong>2. Parámetro de Resistencia Requerida ($R_n$):</strong>
+                    <div>Asumir preliminarmente comportamiento dúctil gobernado por tracción ($\phi = 0.90$):
+                      $$R_n = \frac{M_u \times 10^6}{\phi\, b\, d^2} \quad [\text{MPa}]$$
                       <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">(Con $M_u$ en $\text{kN}\cdot\text{m}$ y $b, d$ en $\text{mm}$, obteniendo $R_n$ directamente en $\text{MPa}$)</div>
                     </div>
                   </div>
+
+                  <!-- 3. CUANTÍA Y ÁRBOL DE DECISIÓN -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #D97706; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>4. Cuantía $\rho$ y Árbol de Decisión:</strong>
-                    $$\rho = \frac{0.85 f'_c}{f_y}\left[1 - \sqrt{1 - \frac{2 R_n}{0.85 f'_c}}\right]$$
-                    <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5;">
-                      <li>Si $\rho < \rho_{\min} \implies$ Usar $\rho = \rho_{\min} = \max\left(\frac{0.25\sqrt{f'_c}}{f_y}, \frac{1.4}{f_y}\right)$.</li>
-                      <li>Si $\rho_{\min} \le \rho \le \rho_{0.005} \implies$ Sección simple dúctil ($\phi = 0.90$).</li>
-                      <li>Si $\rho > \rho_{0.005} \implies$ <strong>Aumentar peralte</strong> o incorporar refuerzo a compresión ($A'_s$ y $A_{s2}$).</li>
+                    <strong>3. Cuantía $\rho$ y Árbol de Decisión Normativo:</strong>
+                    $$\rho = \frac{0.85\, f'_c}{f_y}\left[ 1 - \sqrt{1 - \frac{2\, R_n}{0.85\, f'_c}} \right]$$
+                    <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
+                      <li><strong>Si $\rho < \rho_{\min}$</strong> $\implies$ Usar $\rho = \rho_{\min} = \max\left(\frac{0.25\sqrt{f'_c}}{f_y}, \frac{1.4}{f_y}\right)$ para evitar falla frágil al agrietar (NSR-10 C.10.5.1).</li>
+                      <li><strong>Si $\rho_{\min} \le \rho \le \rho_{0.005}$</strong> $\implies$ <strong>Zona Controlada por Tracción</strong> ($\varepsilon_t \ge 0.005$). Sección simple plenamente dúctil; se confirma $\phi = 0.90$ asumido. ¡Diseño óptimo!</li>
+                      <li><strong>Si $\rho_{0.005} < \rho \le \rho_{0.004}$</strong> $\implies$ <strong>Zona de Transición</strong> ($0.004 \le \varepsilon_t < 0.005$). Se permite por norma pero se penaliza el factor: $\phi = 0.65 + (\varepsilon_t - 0.002)\frac{250}{3} < 0.90$. El diseñador debe decidir:
+                        <div style="margin-top: 0.2rem; padding-left: 0.5rem; border-left: 2px solid #D97706;">
+                          • <em>Alternativa A:</em> Aceptar la penalización y recalcular $R_n$ y $\rho$ con el nuevo $\phi$ reducido.<br>
+                          • <em>Alternativa B (Recomendada):</em> <strong>Aumentar el peralte ($h$)</strong> para retornar a la zona dúctil controlada por tracción ($\varepsilon_t \ge 0.005, \phi = 0.90$).
+                        </div>
+                      </li>
+                      <li><strong>Si $\rho > \rho_{0.004}$</strong> $\implies$ <strong>¡PROHIBIDO EN VIGAS!</strong> Viola NSR-10 C.10.3.5 ($\varepsilon_t < 0.004$). Es obligatorio <strong>aumentar sección ($b \times h$)</strong> o incorporar acero a compresión ($A'_s$, viga doblemente reforzada).</li>
                     </ul>
                   </div>
+
+                  <!-- 4. SELECCIÓN DE BARRAS Y ANCHO MÍNIMO -->
+                  <div style="background: var(--bg-subtle); border-left: 3px solid #7C3AED; border-radius: 4px; padding: 0.55rem 0.75rem;">
+                    <strong>4. Selección de Barras ($A_s$) y Chequeo $b_{\min}$:</strong>
+                    <div>Calcular $A_{s,\text{req}} = \rho \cdot b \cdot d$ en $\text{mm}^2$ ($A_{s,\text{req}} = \frac{\rho b d}{100}$ en $\text{cm}^2$). Seleccionar combinación comercial de varillas ($A_{s,\text{col}} \ge A_{s,\text{req}}$).</div>
+                    <div style="margin-top: 0.3rem;">Verificar separación libre $s_l \ge \max(d_b, 25\text{ mm}, \frac{4}{3}d_{\text{agg}})$ y que quepan en el ancho provisto (NSR-10 C.7.6.1):
+                      $$b \ge b_{\min} = 2\, r + 2\, \phi_{\text{est}} + n\, d_b + (n - 1)\, s_l$$
+                    </div>
+                  </div>
+
+                  <!-- 5. CHEQUEOS FINALES Y DEFORMACIONES -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>5. Selección de Barras y Chequeo $b_{\min}$:</strong>
-                    <div>Calcular $A_{s,\text{req}} = \rho b d$ en $\text{mm}^2$ ($A_{s,\text{req}} = \frac{\rho b d}{100}$ en $\text{cm}^2$), seleccionar combinación comercial de barras y verificar que el ancho de la viga cumpla $b \ge b_{\min}$ (NSR-10 C.7.6.1). Recalcular $d_{\text{real}}$ y verificar $\phi M_n \ge M_u$.</div>
+                    <strong>5. Chequeos Finales: Compatibilidad, Deformaciones ($\varepsilon_c, \varepsilon_s, \varepsilon_t$) y Capacidad ($\phi M_n$):</strong>
+                    <div style="margin-top: 0.25rem;">Con la armadura real colocada, calcular el peralte efectivo real $d_{\text{real}} = h - y_{cg}$ y el peralte a la fibra extrema $d_t = h - r - \phi_{\text{est}} - \phi_{\text{ext}}/2$:</div>
+                    <ul style="margin: 0.3rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
+                      <li><strong>Bloque de Whitney y Eje Neutro:</strong>
+                        $$a = \frac{A_{s,\text{col}} \cdot f_y}{0.85\, f'_c\, b} \qquad \Longrightarrow \qquad c = \frac{a}{\beta_1}$$
+                      </li>
+                      <li><strong>Chequeo de Deformación del Concreto:</strong>
+                        $\varepsilon_c = \varepsilon_{cu} = 0.003$ en la fibra superior extrema a compresión (NSR-10 C.10.2.3).
+                      </li>
+                      <li><strong>Chequeo de Fluencia del Acero:</strong>
+                        En el centroide de tracción ($d_{\text{real}}$):
+                        $$\varepsilon_s = 0.003\left(\frac{d_{\text{real}} - c}{c}\right) \ge \varepsilon_y \approx 0.0021 \quad \checkmark \quad (f_s = f_y \text{ confirmado})$$
+                      </li>
+                      <li><strong>Deformación Neta y Factor $\phi$ Final:</strong>
+                        En la barra más traccionada ($d_t$):
+                        $$\varepsilon_t = 0.003\left(\frac{d_t - c}{c}\right) \ge 0.005 \implies \phi = 0.90 \quad \text{(Dúctil)}$$
+                        (Si $0.004 \le \varepsilon_t < 0.005$, usar $\phi$ de transición).
+                      </li>
+                      <li><strong>Capacidad Resistente de Diseño:</strong>
+                        $$\phi M_n = \phi \left[ A_{s,\text{col}} \cdot f_y \left(d_{\text{real}} - \frac{a}{2}\right) \right] \ge M_u \quad \checkmark \qquad \left(\frac{M_u}{\phi M_n} \le 1.00\right)$$
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>

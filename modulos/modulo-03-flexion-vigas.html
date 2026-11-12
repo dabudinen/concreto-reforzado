@@ -3021,11 +3021,11 @@
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; align-items: stretch;">
             
-            <!-- RUTA A: ALGORITMO DE DISEÑO A FLEXIÓN (Mu -> Geometría y As) -->
+            <!-- DISEÑO A FLEXIÓN (Mu -> Geometría y As) -->
             <div style="background: var(--bg-surface); border: 1.5px solid var(--border-color); border-top: 4.5px solid #2563EB; border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-                  <span style="font-weight: 800; font-size: 0.95rem; color: #1D4ED8;">🛠️ RUTA A: Algoritmo de Diseño a Flexión</span>
+                  <span style="font-weight: 800; font-size: 0.95rem; color: #1D4ED8;">🛠️ Diseño a flexión</span>
                   <span style="background: #EFF6FF; color: #1D4ED8; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">Mu Conocido</span>
                 </div>
                 <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
@@ -3103,48 +3103,87 @@
               </div>
             </div>
 
-            <!-- RUTA B: ALGORITMO DE REVISIÓN DE CAPACIDAD (b, h, As -> phiMn) -->
+            <!-- REVISIÓN A FLEXIÓN (b, h, As -> phiMn) -->
             <div style="background: var(--bg-surface); border: 1.5px solid var(--border-color); border-top: 4.5px solid #059669; border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);">
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-                  <span style="font-weight: 800; font-size: 0.95rem; color: #059669;">🔍 RUTA B: Algoritmo de Revisión de Capacidad</span>
+                  <span style="font-weight: 800; font-size: 0.95rem; color: #059669;">🔍 Revisión a flexión</span>
                   <span style="background: #F0FDF4; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px;">Sección y As Dados</span>
                 </div>
                 <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.85rem;">
-                  Procedimiento de auditoría y verificación estructural cuando la sección y las varillas de acero ya están definidas:
+                  Donde las dimensiones de la sección transversal, materiales y el refuerzo son conocidos, y el estudio se dirige a determinar la capacidad a flexión de la sección ($\phi M_n$) y auditarla frente al momento mayorado requerido ($M_u$):
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.84rem; color: var(--text-main);">
+                  <!-- 1. GEOMETRÍA -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #059669; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>1. Propiedades y Cuantía Instalada:</strong>
-                    <div>Determinar $b, d, d_t, \beta_1$ y el área de acero total $A_s$. Comprobar que $\rho = \frac{A_s}{b d} \ge \rho_{\min}$.</div>
+                    <strong>1. Revisar Geometría de la Sección:</strong>
+                    <div>Revisar dimensiones transversales ($b, h$), recubrimiento libre normativo ($r \ge 40\text{ mm}$ en vigas, NSR-10 C.7.7.1), separación libre entre el refuerzo ($s_{\text{libre}} \ge \max(d_b, 25\text{ mm}, 1.33\, d_{\text{agg}})$), ancho mínimo ($b \ge b_{\min}$, C.7.6.1) y verificar si clasifica como viga de gran altura ($l_n/h \le 4$, C.10.7).</div>
                   </div>
-                  <div style="background: var(--bg-subtle); border-left: 3px solid #059669; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>2. Equilibrio Interno y Profundidad del Bloque:</strong>
-                    <div>Suponiendo fluencia ($f_s = f_y$):
-                      $$a = \frac{A_s\,f_y - C_s}{0.85\,f'_c\,b} \quad \implies \quad c = \frac{a}{\beta_1}$$
-                      Si hay $A'_s$, verificar si $\varepsilon'_s = 0.003\left(\frac{c - d'}{c}\right) \ge \varepsilon_y$.
+
+                  <!-- 2. PERALTE d Y dt -->
+                  <div style="background: var(--bg-subtle); border-left: 3px solid #0284C7; border-radius: 4px; padding: 0.55rem 0.75rem;">
+                    <strong>2. Calcular Peralte Efectivo ($d$) y Peralte Extremo ($d_t$):</strong>
+                    <div>Calcular la distancia de la fibra extrema comprimida al centroide de la armadura a tracción ($d$) y al centroide de la capa extrema inferior ($d_t$):
+                      $$d = h - r - d_{\text{estribo}} - y_c \qquad \text{y} \qquad d_t = h - r - d_{\text{estribo}} - \frac{d_b}{2}$$
+                      <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">(Si el refuerzo se ubica en 1 sola capa, $d_t = d$. En 2 o más capas, $d_t > d$).</div>
                     </div>
                   </div>
+
+                  <!-- 3. CUANTÍA Y LÍMITES NORMATIVOS CON ÁRBOL DE DECISIÓN -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #D97706; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>3. Deformación Neta de Tracción ($\varepsilon_t$):</strong>
-                    <div>Calcular en la fibra más traccionada extrema (peralte $d_t$):
-                      $$\varepsilon_t = 0.003\left(\frac{d_t - c}{c}\right)$$
+                    <strong>3. Revisar $\rho_{\min} \le \rho \le \rho_{\max}$ (Árbol de Decisión Normativo):</strong>
+                    <div>Calcular la cuantía geométrica instalada $\rho = \frac{A_s}{b\, d}$ y evaluar frente a los límites normativos:
+                      $$\rho_{\min} = \max\left(\frac{0.25\sqrt{f'_c}}{f_y},\; \frac{1.4}{f_y}\right) \qquad \rho_b = 0.85\,\beta_1\,\frac{f'_c}{f_y}\left(\frac{600}{600 + f_y}\right) \qquad \rho_{\max} = \frac{51}{70}\,\rho_b \quad (\varepsilon_t = 0.004)$$
+                      <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
+                        <li><strong>Si $\rho < \rho_{\min}$</strong> $\implies$ <strong>¡Riesgo de Falla Frágil Súbita!</strong> El momento de agrietamiento superaría la capacidad última ($M_{cr} > M_n$), no admitido por NSR-10 C.10.5.1 (salvo excepción C.10.5.3 si $A_s \ge 1.33\, A_{s,\text{req}}$).</li>
+                        <li><strong>Si $\rho_{\min} \le \rho \le \rho_{\max}$</strong> $\implies$ <strong>Cuantía Normativamente Válida.</strong> La viga cumple con la seguridad ante rotura frágil y garantiza ductilidad básica.</li>
+                        <li><strong>Si $\rho > \rho_{\max}$</strong> $\implies$ <strong>¡Prohibido en Flexión Simple!</strong> La sección desarrollaría una deformación $\varepsilon_t < 0.004$, violando el límite absoluto de ductilidad (C.10.3.5). Exige rediseñar aumentando $h$ o incorporar acero a compresión ($A'_s$).</li>
+                      </ul>
                     </div>
                   </div>
-                  <div style="background: var(--bg-subtle); border-left: 3px solid #DC2626; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>4. Clasificación y Determinación del Factor $\phi$:</strong>
-                    <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5;">
-                      <li>$\varepsilon_t \ge 0.005 \implies$ Controlada por tracción, $\phi = 0.90$.</li>
-                      <li>$0.004 \le \varepsilon_t \lt 0.005 \implies$ Transición, $\phi = 0.65 + (\varepsilon_t - 0.002)\frac{250}{3}$.</li>
-                      <li>$\varepsilon_t \lt 0.004 \implies$ ¡RECHAZADA! Prohibida por NSR-10 C.10.3.5.</li>
-                    </ul>
+
+                  <!-- 4. BLOQUE a Y EJE NEUTRO c -->
+                  <div style="background: var(--bg-subtle); border-left: 3px solid #2563EB; border-radius: 4px; padding: 0.55rem 0.75rem;">
+                    <strong>4. Calcular Bloque Equivalente ($a$) y Eje Neutro ($c$):</strong>
+                    <div>Por equilibrio seccional interno entre compresión y tracción ($C_c = T$, suponiendo fluencia $f_s = f_y$):
+                      $$a = \frac{A_s\, f_y}{0.85\, f'_c\, b} \qquad \implies \qquad c = \frac{a}{\beta_1}$$
+                      <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">(Donde $\beta_1 = 0.85$ para $f'_c \le 28\text{ MPa}$, reduciéndose $0.05$ por cada $7\text{ MPa}$ adicionales hasta $\beta_{1,\min} = 0.65$).</div>
+                    </div>
                   </div>
+
+                  <!-- 5. MOMENTO NOMINAL Mn -->
+                  <div style="background: var(--bg-subtle); border-left: 3px solid #7C3AED; border-radius: 4px; padding: 0.55rem 0.75rem;">
+                    <strong>5. Calcular Momento Nominal ($M_n$):</strong>
+                    <div>Calcular el momento nominal mediante el par interno resistente con brazo $z = d - a/2$:
+                      $$M_n = A_s\, f_y \left(d - \frac{a}{2}\right) = C_c \left(d - \frac{a}{2}\right)$$
+                    </div>
+                  </div>
+
+                  <!-- 6. CUANTÍA TRACCIÓN, DUCTILIDAD Y ÁRBOL DE DECISIÓN PHI -->
+                  <div style="background: var(--bg-subtle); border-left: 3px solid #DC2626; border-radius: 4px; padding: 0.55rem 0.75rem;">
+                    <strong>6. Revisar $\rho \le \rho_{\text{trac}}$ (De no ser así $\phi < 0.90$ — Árbol de Decisión):</strong>
+                    <div>Calcular la deformación unitaria neta en la capa extrema $d_t$ por compatibilidad de Navier-Bernoulli:
+                      $$\varepsilon_t = 0.003\left(\frac{d_t - c}{c}\right) \qquad \Longleftrightarrow \qquad \text{Evaluar si } \rho \le \rho_{\text{trac}} \approx 0.625\,\rho_b \quad (\varepsilon_t \ge 0.005)$$
+                      <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
+                        <li><strong>Si $\rho \le \rho_{\text{trac}}$ ($\varepsilon_t \ge 0.005$)</strong> $\implies$ <strong>Controlada por Tracción ($\phi = 0.90$).</strong> Falla con amplio aviso previo; disipación dúctil óptima.</li>
+                        <li><strong>Si $\rho_{\text{trac}} < \rho \le \rho_{\max}$ ($0.004 \le \varepsilon_t < 0.005$)</strong> $\implies$ <strong>Zona de Transición ($\phi < 0.90$).</strong> Menor advertencia; se castiga el factor de reducción linealmente:
+                          $$\phi = 0.65 + (\varepsilon_t - 0.002)\frac{250}{3} \quad (0.65 < \phi < 0.90)$$
+                        </li>
+                        <li><strong>Si $\rho > \rho_{\max}$ ($\varepsilon_t < 0.004$)</strong> $\implies$ <strong>¡SECCIÓN RECHAZADA!</strong> Prohibida estrictamente para vigas por NSR-10 C.10.3.5 por fragilidad inaceptable.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- 7. CAPACIDAD RESISTENTE DE DISEÑO Y VERIFICACIÓN -->
                   <div style="background: var(--bg-subtle); border-left: 3px solid #16A34A; border-radius: 4px; padding: 0.55rem 0.75rem;">
-                    <strong>5. Capacidad Resistente de Diseño ($\phi M_n$):</strong>
-                    <div>Calcular el momento nominal y resistente:
-                      $$\phi M_n = \phi \left[ A_s\,f_y\left(d - \frac{a}{2}\right) \right] \ge M_u$$
-                      Obtener el ratio Demanda/Capacidad: $\text{D/C} = M_u / \phi M_n \le 1.00$.
+                    <strong>7. Revisar Capacidad Resistente de Diseño ($\phi M_n \ge M_u$):</strong>
+                    <div>Afectar el momento nominal por el factor $\phi$ y comparar frente a la solicitación última:
+                      $$\phi M_n = \phi \left[ A_s\, f_y\left(d - \frac{a}{2}\right) \right] \ge M_u \qquad \Longleftrightarrow \qquad \text{Ratio Demanda/Capacidad: } \frac{M_u}{\phi M_n} \le 1.00$$
+                      <ul style="margin: 0.35rem 0 0 0; padding-left: 1.15rem; line-height: 1.5; font-size: 0.82rem;">
+                        <li><strong>Si $\phi M_n \ge M_u$ ($\text{D/C} \le 1.00$)</strong> $\implies$ <strong>¡Cumple Satisfactoriamente! ($\checkmark$)</strong> Margen de sobre-resistencia: $\left(\frac{\phi M_n}{M_u} - 1\right)\times 100\%$.</li>
+                        <li><strong>Si $\phi M_n < M_u$ ($\text{D/C} > 1.00$)</strong> $\implies$ <strong>¡Falla por Capacidad Insuficiente!</strong> La sección está sobrecargada a flexión y requiere refuerzo estructural.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>

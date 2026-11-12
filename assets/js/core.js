@@ -1060,4 +1060,37 @@
     }, 220);
   };
 
+
+  /* --------------------------------------------------------------------------
+     CONTROL DE DENSIDAD DE TABLAS TÉCNICAS (MODO COMPACTO / MODO AMPLIADO)
+     -------------------------------------------------------------------------- */
+  window.setRebarTableMode = function (mode) {
+    const wrapper = document.getElementById('rebar-table-wrapper');
+    const btnCompact = document.getElementById('btn-density-compact');
+    const btnExpanded = document.getElementById('btn-density-expanded');
+    if (!wrapper) return;
+
+    if (mode === 'expanded') {
+      wrapper.classList.remove('mode-compact');
+      wrapper.classList.add('mode-expanded');
+      if (btnExpanded) btnExpanded.classList.add('active');
+      if (btnCompact) btnCompact.classList.remove('active');
+    } else {
+      wrapper.classList.remove('mode-expanded');
+      wrapper.classList.add('mode-compact');
+      if (btnCompact) btnCompact.classList.add('active');
+      if (btnExpanded) btnExpanded.classList.remove('active');
+    }
+  };
+
+  window.toggleRebarTableDensity = function () {
+    const wrapper = document.getElementById('rebar-table-wrapper');
+    if (!wrapper) return;
+    if (wrapper.classList.contains('mode-expanded')) {
+      window.setRebarTableMode('compact');
+    } else {
+      window.setRebarTableMode('expanded');
+    }
+  };
+
 })();

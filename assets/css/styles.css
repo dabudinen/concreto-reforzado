@@ -6077,3 +6077,147 @@ html[data-theme="dark"] .sim-tacho-needle {
   text-transform: uppercase;
   margin-bottom: 0.25rem;
 }
+
+
+/* ==========================================================================
+   TABLA DE PROPIEDADES DE ACEROS DE REFUERZO (NSR-10 TABLA C.3.5.3-2)
+   Selector de Densidad: Modo Compacto / Modo Ampliado
+   ========================================================================== */
+.rebar-table-wrapper {
+  margin: 0.75rem auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  background: var(--bg-surface);
+  transition: max-width 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Modo Compacto (por defecto: optimizado para lectura técnica sin espacio desperdiciado) */
+.rebar-table-wrapper.mode-compact {
+  max-width: 680px;
+}
+
+.rebar-table-wrapper.mode-compact .rebar-table {
+  font-size: 0.77rem;
+}
+
+.rebar-table-wrapper.mode-compact .rebar-table th {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.74rem;
+}
+
+.rebar-table-wrapper.mode-compact .rebar-table td {
+  padding: 0.25rem 0.55rem;
+  font-size: 0.79rem;
+}
+
+/* Modo Ampliado (legibilidad holgada en pantallas amplias sin desbordamiento) */
+.rebar-table-wrapper.mode-expanded {
+  max-width: 980px;
+}
+
+.rebar-table-wrapper.mode-expanded .rebar-table {
+  font-size: 0.86rem;
+}
+
+.rebar-table-wrapper.mode-expanded .rebar-table th {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+}
+
+.rebar-table-wrapper.mode-expanded .rebar-table td {
+  padding: 0.42rem 0.85rem;
+  font-size: 0.88rem;
+}
+
+/* Estructura común de la tabla de aceros */
+.rebar-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+}
+
+.rebar-table th {
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  border-right: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.rebar-table th:last-child {
+  border-right: none;
+}
+
+.rebar-table td {
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+}
+
+.rebar-table td:last-child {
+  border-right: none;
+}
+
+.rebar-table tr:nth-child(even) td {
+  background: rgba(248, 250, 252, 0.6);
+}
+
+.rebar-table tr:hover td {
+  background: #EFF6FF;
+}
+
+.rebar-table td.col-area {
+  font-weight: 700;
+  color: #1D4ED8;
+  background: rgba(239, 246, 255, 0.75);
+}
+
+.rebar-table td.col-barra {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Selector Segmentado de Densidad */
+.table-density-switch {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+.density-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.density-btn:hover {
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.density-btn.active {
+  background: var(--bg-surface);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}

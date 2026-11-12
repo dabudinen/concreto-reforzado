@@ -27,6 +27,7 @@
 
   /* Paleta Técnica de Ingeniería Estructural */
   --primary: #1D4ED8;
+  --brand-primary: #1D4ED8;
   --primary-dark: #1E40AF;
   --primary-light: #EFF6FF;
   --primary-border: #BFDBFE;
@@ -72,6 +73,7 @@
 
 [data-theme="dark"] {
   /* Modo Plano / Turno Nocturno de Ingeniería */
+  --brand-primary: #3B82F6;
   --bg-body: #0B1120;
   --bg-surface: #131C31;
   --bg-subtle: #1E293B;
@@ -5684,7 +5686,7 @@ html[data-theme="dark"] .example-macro-header:hover {
 .macro-toggle-btn {
   font-size: 0.80rem;
   font-weight: 700;
-  color: var(--brand-primary);
+  color: #1D4ED8;
   background: rgba(37, 99, 235, 0.08);
   border: 1px solid rgba(37, 99, 235, 0.3);
   padding: 0.4rem 0.85rem;
@@ -5695,10 +5697,24 @@ html[data-theme="dark"] .example-macro-header:hover {
   transition: all 0.2s ease;
 }
 
-.example-macro-header:hover .macro-toggle-btn {
-  background: var(--brand-primary);
-  color: #FFFFFF;
-  border-color: var(--brand-primary);
+html[data-theme="dark"] .macro-toggle-btn {
+  color: #60A5FA;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.example-macro-header:hover .macro-toggle-btn,
+.macro-toggle-btn:hover {
+  background: #1D4ED8 !important;
+  color: #FFFFFF !important;
+  border-color: #1D4ED8 !important;
+}
+
+html[data-theme="dark"] .example-macro-header:hover .macro-toggle-btn,
+html[data-theme="dark"] .macro-toggle-btn:hover {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
 }
 
 .example-macro-body {
@@ -6220,4 +6236,40 @@ html[data-theme="dark"] .sim-tacho-needle {
   color: var(--primary);
   font-weight: 700;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Proyector / Masterclass: Enunciados de Alto Contraste */
+.example-statement {
+  background: #F8FAFC !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-left: 4.5px solid #1D4ED8 !important;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem !important;
+  margin: 0.85rem 0 1.15rem 0 !important;
+  line-height: 1.65;
+  color: #0F172A !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+.example-statement p,
+.example-statement li {
+  color: #0F172A !important;
+  font-size: 0.94rem !important;
+  line-height: 1.65 !important;
+}
+.example-statement strong {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+html[data-theme="dark"] .example-statement {
+  background: #131C31 !important;
+  border-color: #334155 !important;
+  border-left-color: #3B82F6 !important;
+  color: #F8FAFC !important;
+}
+html[data-theme="dark"] .example-statement p,
+html[data-theme="dark"] .example-statement li {
+  color: #F8FAFC !important;
+}
+html[data-theme="dark"] .example-statement strong {
+  color: #60A5FA !important;
 }

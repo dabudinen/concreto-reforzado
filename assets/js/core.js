@@ -713,6 +713,39 @@
   };
 
   window.toggleAllExampleSteps = function (containerId, reveal) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Controlar el acordeón mayor de solución (.example-solution-box / .solution-body)
+    const solutionBoxes = container.querySelectorAll('.example-solution-box');
+    solutionBoxes.forEach((box) => {
+      const btn = box.querySelector('.solution-master-btn');
+      const body = box.querySelector('.solution-body');
+      if (body) {
+        if (reveal) {
+          body.style.display = 'block';
+          body.style.opacity = '1';
+          body.style.maxHeight = 'none';
+          if (btn) {
+            btn.classList.add('expanded');
+            const textSpan = btn.querySelector('.btn-text');
+            if (textSpan) textSpan.textContent = 'Ocultar Solución Detallada (Paso a Paso)';
+            const arrow = btn.querySelector('.arrow-icon');
+            if (arrow) arrow.textContent = '▲';
+          }
+        } else {
+          body.style.display = 'none';
+          if (btn) {
+            btn.classList.remove('expanded');
+            const textSpan = btn.querySelector('.btn-text');
+            if (textSpan) textSpan.textContent = 'Mostrar Solución Detallada (Paso a Paso)';
+            const arrow = btn.querySelector('.arrow-icon');
+            if (arrow) arrow.textContent = '▼';
+          }
+        }
+      }
+    });
+
     for (let s = 1; s <= 12; s++) {
       const content = document.getElementById(`${containerId}-step-${s}`);
       const arrow = document.getElementById(`${containerId}-arrow-${s}`);
@@ -722,7 +755,7 @@
           content.style.display = 'block';
           content.style.opacity = '1';
           content.style.maxHeight = (content.scrollHeight + 40) + 'px';
-          if (arrow) arrow.textContent = '▼';
+          if (arrow) arrow.textContent = '▲';
         } else {
           content.classList.add('step-collapsed');
           content.style.maxHeight = '0px';
@@ -732,36 +765,33 @@
               content.style.display = 'none';
             }
           }, 300);
-          if (arrow) arrow.textContent = '▶';
+          if (arrow) arrow.textContent = '▼';
         }
       }
     }
 
-    const container = document.getElementById(containerId);
-    if (container) {
-      container.querySelectorAll('.calc-step-card, .example-step').forEach((card) => {
-        const sc = card.querySelector('.step-content, .calc-step-body');
-        if (reveal) {
-          card.classList.remove('step-collapsed');
-          if (sc) {
-            sc.style.display = 'block';
-            sc.style.opacity = '1';
-            sc.style.maxHeight = (sc.scrollHeight + 40) + 'px';
-          }
-        } else {
-          card.classList.add('step-collapsed');
-          if (sc) {
-            sc.style.maxHeight = '0px';
-            sc.style.opacity = '0';
-            setTimeout(() => {
-              if (card.classList.contains('step-collapsed')) {
-                sc.style.display = 'none';
-              }
-            }, 300);
-          }
+    container.querySelectorAll('.calc-step-card, .example-step').forEach((card) => {
+      const sc = card.querySelector('.step-content, .calc-step-body');
+      if (reveal) {
+        card.classList.remove('step-collapsed');
+        if (sc) {
+          sc.style.display = 'block';
+          sc.style.opacity = '1';
+          sc.style.maxHeight = 'none';
         }
-      });
-    }
+      } else {
+        card.classList.add('step-collapsed');
+        if (sc) {
+          sc.style.maxHeight = '0px';
+          sc.style.opacity = '0';
+          setTimeout(() => {
+            if (card.classList.contains('step-collapsed')) {
+              sc.style.display = 'none';
+            }
+          }, 300);
+        }
+      }
+    });
   };
 
   /* --------------------------------------------------------------------------

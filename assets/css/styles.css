@@ -5735,3 +5735,335 @@ html[data-theme="dark"] .sim-tacho-needle {
   border-color: #0F172A;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
 }
+
+
+/* ==========================================================================
+   DIAGRAMA INTERACTIVO Y MODAL DE RUTA DE TRANSFERENCIA (PIZARRA DOCENTE)
+   ========================================================================== */
+.hero-diagram-box {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.85rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.diagram-interactive-wrap {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.diagram-interactive-wrap:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.15);
+}
+
+.diagram-interactive-wrap .zoom-badge-hint {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  opacity: 0.85;
+  transition: opacity var(--transition);
+}
+
+.diagram-interactive-wrap:hover .zoom-badge-hint {
+  opacity: 1;
+  background: var(--primary);
+}
+
+.diagram-toolbar-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.btn-diagram-zoom {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--primary);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-diagram-zoom:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Modal Lightbox de Pantalla Completa */
+.diagram-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 5500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.diagram-modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.diagram-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.diagram-modal-content {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.45);
+  width: 100%;
+  max-width: 1220px;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: diagramModalIn 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes diagramModalIn {
+  from {
+    transform: scale(0.96) translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.diagram-modal-header {
+  padding: 1.15rem 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-subtle);
+  flex-shrink: 0;
+}
+
+.diagram-modal-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.diagram-modal-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0.2rem 0 0 0;
+  letter-spacing: -0.01em;
+}
+
+.diagram-modal-close {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: all var(--transition);
+}
+
+.diagram-modal-close:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
+}
+
+.diagram-modal-body {
+  padding: 1.5rem 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  background: var(--bg-base);
+}
+
+.diagram-modal-svg-wrap {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+/* Guía de Cátedra de 5 Elementos */
+.diagram-pedagogical-guide {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+}
+
+.guide-header {
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.guide-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 0.35rem;
+}
+
+.guide-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.guide-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.guide-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.guide-card:hover {
+  transform: translateY(-2px);
+}
+
+.guide-card.accent-cyan { border-top: 4px solid #0284C7; }
+.guide-card.accent-slate { border-top: 4px solid #475569; }
+.guide-card.accent-amber { border-top: 4px solid #D97706; }
+.guide-card.accent-blue { border-top: 4px solid #2563EB; }
+.guide-card.accent-emerald { border-top: 4px solid #16A34A; }
+
+.guide-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.guide-step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+}
+
+.guide-card.accent-cyan .guide-step-badge { background: #0284C7; }
+.guide-card.accent-slate .guide-step-badge { background: #475569; }
+.guide-card.accent-amber .guide-step-badge { background: #D97706; }
+.guide-card.accent-blue .guide-step-badge { background: #2563EB; }
+.guide-card.accent-emerald .guide-step-badge { background: #16A34A; }
+
+.guide-card-norma {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.guide-card-heading {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.guide-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.guide-card-rule {
+  font-size: 0.78rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.6rem;
+  margin-top: auto;
+  color: var(--text-main);
+}
+
+.guide-card-rule strong {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}

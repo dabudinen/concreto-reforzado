@@ -412,6 +412,12 @@
         e.preventDefault();
         window.prevSlide();
       } else if (e.key === 'Escape') {
+        const dm = document.getElementById('modal-diagrama-transferencia');
+        if (dm && dm.classList.contains('open')) {
+          e.preventDefault();
+          window.closeLoadPathModal();
+          return;
+        }
         const vm = document.getElementById('modal-variables');
         if (vm && vm.classList.contains('open')) {
           e.preventDefault();
@@ -920,6 +926,48 @@
       const topbarHeight = topbar ? topbar.offsetHeight : 64;
       const targetY = card.getBoundingClientRect().top + window.scrollY - topbarHeight - 16;
       window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     13. MODAL DE PANTALLA COMPLETA: DIAGRAMA DE RUTA DE TRANSFERENCIA DE CARGAS
+     -------------------------------------------------------------------------- */
+  window.openLoadPathModal = function () {
+    const modal = document.getElementById('modal-diagrama-transferencia');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeLoadPathModal = function () {
+    const modal = document.getElementById('modal-diagrama-transferencia');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  window.handleDiagramModalClick = function (e) {
+    if (e.target.classList.contains('diagram-modal-overlay') || e.target.classList.contains('diagram-modal-backdrop')) {
+      window.closeLoadPathModal();
     }
   };
 

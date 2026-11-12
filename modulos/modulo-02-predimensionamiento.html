@@ -162,162 +162,308 @@
             <!-- TARJETA BIBLIOGRÁFICA Y NORMATIVA DOCENTE -->
             
           </div>
-          <div class="hero-visual-box" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 12px; padding: 1rem; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
-            <!-- Esquema Vectorial Técnico de los 5 Elementos Estructurales -->
-            <svg viewBox="0 0 500 370" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; border: 1px solid #CBD5E1; box-shadow: 0 2px 8px rgba(15,23,42,0.06);">
-  <!-- TÍTULO -->
-  <rect x="0" y="0" width="500" height="38" rx="10" fill="#F8FAFC" />
-  <line x1="0" y1="38" x2="500" y2="38" stroke="#E2E8F0" stroke-width="1.2" />
-  <text x="16" y="24" fill="#0F172A" font-family="Inter, sans-serif" font-size="12" font-weight="800" letter-spacing="0.02em">RUTA DE TRANSFERENCIA DE CARGAS Y PREDIMENSIONAMIENTO</text>
-  <rect x="420" y="10" width="68" height="18" rx="9" fill="#DBEAFE" />
-  <text x="454" y="23" fill="#1D4ED8" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" text-anchor="middle">5 NIVELES</text>
+          <div class="hero-visual-box hero-diagram-box">
+            <!-- Contenedor Interactivo con Indicador de Pizarra Docente -->
+            <div class="diagram-interactive-wrap" onclick="openLoadPathModal()" title="Haz clic sobre el esquema para ampliarlo en pantalla completa">
+              <div class="zoom-badge-hint">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                <span>Pizarra Docente (Clic para Ampliar)</span>
+              </div>
+              <svg viewBox="0 0 960 560" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, sans-serif; display: block;" role="img" aria-label="Ruta de Transferencia de Cargas y Secuencia de Predimensionamiento">
+  <defs>
+    <!-- Filtros de sombra suave para realismo arquitectónico -->
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <!-- Gradientes sutiles técnicos -->
+    <linearGradient id="grad-viga-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="grad-col-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF"/>
+      <stop offset="100%" stop-color="#DBEAFE"/>
+    </linearGradient>
+    <linearGradient id="grad-zap-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#DCFCE7"/>
+    </linearGradient>
+  </defs>
 
-  <!-- 1. LOSETA SUPERIOR (Placa) -->
-  <g id="elem-loseta">
-    <!-- Cargas distribuidas w -->
-    <path d="M 40 54 L 40 68 M 75 54 L 75 68 M 110 54 L 110 68 M 145 54 L 145 68 M 180 54 L 180 68 M 215 54 L 215 68 M 250 54 L 250 68" stroke="#EF4444" stroke-width="1.8" stroke-linecap="round"/>
-    <polygon points="40,70 37,64 43,64" fill="#EF4444"/>
-    <polygon points="75,70 72,64 78,64" fill="#EF4444"/>
-    <polygon points="110,70 107,64 113,64" fill="#EF4444"/>
-    <polygon points="145,70 142,64 148,64" fill="#EF4444"/>
-    <polygon points="180,70 177,64 183,64" fill="#EF4444"/>
-    <polygon points="215,70 212,64 218,64" fill="#EF4444"/>
-    <polygon points="250,70 247,64 253,64" fill="#EF4444"/>
-    <text x="145" y="50" fill="#EF4444" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Cargas Gravitacionales (w = 1.2D + 1.6L)</text>
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="960" height="42" rx="10" fill="#F8FAFC" />
+  <line x1="0" y1="42" x2="960" y2="42" stroke="#E2E8F0" stroke-width="1.2" />
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    RUTA DE TRANSFERENCIA DE CARGAS Y PREDIMENSIONAMIENTO ESTRUCTURAL
+  </text>
+  <rect x="740" y="10" width="195" height="22" rx="11" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" />
+  <text x="837" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    5 NIVELES • NSR-10 / ACI 318
+  </text>
+
+  <!-- ==================== MODELO AXONOMÉTRICO 3D (IZQUIERDA) ==================== -->
+  
+  <!-- 0. Estrato de Suelo y Terreno de Apoyo -->
+  <g id="capa-terreno">
+    <polygon points="55.0,520.0 495.0,520.0 586.0,466.8 146.0,466.8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="4 3" />
     
-    <!-- Placa de Loseta -->
-    <polygon points="30,72 260,72 320,102 90,102" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.8" />
-    <polygon points="30,72 90,102 90,114 30,84" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" />
-    <polygon points="90,102 320,102 320,114 90,114" fill="#7DD3FC" stroke="#0284C7" stroke-width="1.8" />
-    <text x="180" y="92" fill="#0369A1" font-family="Inter, sans-serif" font-size="10.5" font-weight="700">1. Loseta Superior (t ≥ 45 mm, A/20)</text>
+    <!-- Flechas reacción admisible suelo zapata izquierda (x=130) -->
+    <line x1="142.5" y1="505.0" x2="142.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="142.5,503.0 139.5,511.0 145.5,511.0" fill="#16A34A" />
+
+    <line x1="172.5" y1="505.0" x2="172.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="172.5,503.0 169.5,511.0 175.5,511.0" fill="#16A34A" />
+
+    <line x1="202.5" y1="505.0" x2="202.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="202.5,503.0 199.5,511.0 205.5,511.0" fill="#16A34A" />
+
+    <line x1="232.5" y1="505.0" x2="232.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="232.5,503.0 229.5,511.0 235.5,511.0" fill="#16A34A" />
+
+    <!-- Flechas reacción admisible suelo zapata derecha (x=370) -->
+    <line x1="382.5" y1="505.0" x2="382.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="382.5,503.0 379.5,511.0 385.5,511.0" fill="#16A34A" />
+
+    <line x1="412.5" y1="505.0" x2="412.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="412.5,503.0 409.5,511.0 415.5,511.0" fill="#16A34A" />
+
+    <line x1="442.5" y1="505.0" x2="442.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="442.5,503.0 439.5,511.0 445.5,511.0" fill="#16A34A" />
+
+    <line x1="472.5" y1="505.0" x2="472.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="472.5,503.0 469.5,511.0 475.5,511.0" fill="#16A34A" />
+
+    <!-- Rótulo Suelo -->
+    <rect x="142.5" y="532.0" width="330" height="22" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
+    <text x="307.5" y="547.0" fill="#15803D" font-size="10" font-weight="700" text-anchor="middle">
+      Transmisión al Terreno: Presión Admisible de Contacto (q ≤ q_adm)
+    </text>
   </g>
 
-  <!-- 2. VIGUETAS / NERVIOS -->
-  <g id="elem-viguetas">
+  <!-- 5. ZAPATAS AISLADAS (z: 0 -> 35) -->
+  <g id="3d-zapatas">
+    <!-- Zapata Izquierda (x: 60 -> 200, y: 5 -> 95) -->
+    <polygon points="88.2,518.1 228.2,518.1 228.2,483.1 88.2,483.1" fill="url(#grad-zap-front)" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="228.2,518.1 286.8,483.9 286.8,448.9 228.2,483.1" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="88.2,483.1 228.2,483.1 286.8,448.9 146.8,448.9" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.8" />
+    
+    <!-- Zapata Derecha (x: 300 -> 440, y: 5 -> 95) -->
+    <polygon points="328.2,518.1 468.2,518.1 468.2,483.1 328.2,483.1" fill="url(#grad-zap-front)" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="468.2,518.1 526.8,483.9 526.8,448.9 468.2,483.1" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="328.2,483.1 468.2,483.1 526.8,448.9 386.8,448.9" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.8" />
+
+    <!-- Badges Zapatas -->
+    <rect x="98.19999999999999" y="493.1" width="120" height="18" rx="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1" />
+    <text x="158.2" y="505.1" fill="#166534" font-size="9" font-weight="700" text-anchor="middle">5. Zapata (B × L)</text>
+
+    <rect x="338.2" y="493.1" width="120" height="18" rx="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1" />
+    <text x="398.2" y="505.1" fill="#166534" font-size="9" font-weight="700" text-anchor="middle">5. Zapata (B × L)</text>
+  </g>
+
+  <!-- 4. COLUMNAS (z: 35 -> 235) -->
+  <g id="3d-columnas">
+    <!-- Columna Izquierda (x: 108 -> 152, y: 28 -> 72) -->
+    <polygon points="151.2,474.4 195.2,474.4 195.2,274.4 151.2,274.4" fill="url(#grad-col-front)" stroke="#2563EB" stroke-width="1.8" />
+    <polygon points="195.2,474.4 223.8,457.6 223.8,257.6 195.2,274.4" fill="#BFDBFE" stroke="#2563EB" stroke-width="1.8" />
+
+    <!-- Columna Derecha (x: 348 -> 392, y: 28 -> 72) -->
+    <polygon points="391.2,474.4 435.2,474.4 435.2,274.4 391.2,274.4" fill="url(#grad-col-front)" stroke="#2563EB" stroke-width="1.8" />
+    <polygon points="435.2,474.4 463.8,457.6 463.8,257.6 435.2,274.4" fill="#BFDBFE" stroke="#2563EB" stroke-width="1.8" />
+
+    <!-- Flecha Pu Columna Izquierda -->
+    <line x1="173.2" y1="294.4" x2="173.2" y2="444.4" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="173.2,454.4 168.2,439.4 178.2,439.4" fill="#1D4ED8" />
+    <rect x="159.2" y="364.4" width="28" height="18" rx="3" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
+    <text x="173.2" y="377.4" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" text-anchor="middle">Pu</text>
+
+    <!-- Flecha Pu Columna Derecha -->
+    <line x1="413.2" y1="294.4" x2="413.2" y2="444.4" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="413.2,454.4 408.2,439.4 418.2,439.4" fill="#1D4ED8" />
+    <rect x="399.2" y="364.4" width="28" height="18" rx="3" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
+    <text x="413.2" y="377.4" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" text-anchor="middle">Pu</text>
+
+    <!-- Rótulo Central Columnas -->
+    <rect x="198.2" y="363.4" width="190" height="22" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2" />
+    <text x="293.2" y="378.4" fill="#1E40AF" font-size="9.5" font-weight="700" text-anchor="middle">
+      4. Columnas: Carga Axial Acumulada Pu
+    </text>
+  </g>
+
+  <!-- 3. VIGA PRINCIPAL (z: 235 -> 290) -->
+  <g id="3d-viga">
+    <!-- Viga: x: 50 -> 450, y: 28 -> 72 -->
+    <polygon points="93.2,274.4 493.2,274.4 493.2,219.4 93.2,219.4" fill="url(#grad-viga-front)" stroke="#D97706" stroke-width="2" />
+    <polygon points="493.2,274.4 521.8,257.6 521.8,202.6 493.2,219.4" fill="#FDE68A" stroke="#D97706" stroke-width="2" />
+    <polygon points="93.2,219.4 493.2,219.4 521.8,202.6 121.8,202.6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.8" />
+    
+    <!-- Rótulo Viga -->
+    <rect x="148.2" y="236.4" width="290" height="22" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+    <text x="293.2" y="251.4" fill="#92400E" font-size="10" font-weight="800" text-anchor="middle">
+      3. Viga Principal (h_min = L / Divisor • bw ≥ 20/25 cm)
+    </text>
+  </g>
+
+  <!-- 2. VIGUETAS / NERVIOS Y CASETONES (z: 250 -> 290, y: 72 -> 210) -->
+  <g id="3d-viguetas">
+    <!-- Casetón 1 -->
+    <polygon points="158.8,204.6 223.8,204.6 310.2,154.1 245.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="232.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 2 -->
+    <polygon points="245.8,204.6 310.8,204.6 397.2,154.1 332.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="319.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 3 -->
+    <polygon points="332.8,204.6 397.8,204.6 484.2,154.1 419.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="406.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 4 -->
+    <polygon points="419.8,204.6 484.8,204.6 571.2,154.1 506.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="493.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
     <!-- Nervio 1 -->
-    <polygon points="40,84 62,84 122,114 100,114" fill="#F1F5F9" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="40,84 100,114 100,140 40,110" fill="#E2E8F0" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="100,114 122,114 122,140 100,140" fill="#CBD5E1" stroke="#475569" stroke-width="1.4"/>
-
+    <polygon points="158.8,242.6 245.2,192.1 245.2,152.1 158.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="136.8,202.6 158.8,202.6 245.2,152.1 223.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
     <!-- Nervio 2 -->
-    <polygon points="115,84 137,84 197,114 175,114" fill="#F1F5F9" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="115,84 175,114 175,140 115,110" fill="#E2E8F0" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="175,114 197,114 197,140 175,140" fill="#CBD5E1" stroke="#475569" stroke-width="1.4"/>
-
+    <polygon points="245.8,242.6 332.2,192.1 332.2,152.1 245.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="223.8,202.6 245.8,202.6 332.2,152.1 310.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
     <!-- Nervio 3 -->
-    <polygon points="190,84 212,84 272,114 250,114" fill="#F1F5F9" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="190,84 250,114 250,140 190,110" fill="#E2E8F0" stroke="#475569" stroke-width="1.4"/>
-    <polygon points="250,114 272,114 272,140 250,140" fill="#CBD5E1" stroke="#475569" stroke-width="1.4"/>
-
-    <!-- Casetones Aligerantes (vacíos) -->
-    <polygon points="63,84 114,84 174,114 123,114" fill="#F8FAFC" stroke="#94A3B8" stroke-dasharray="3 2"/>
-    <polygon points="138,84 189,84 249,114 198,114" fill="#F8FAFC" stroke="#94A3B8" stroke-dasharray="3 2"/>
-    <text x="145" y="103" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="600" text-anchor="middle">Casetón (A)</text>
-    <text x="220" y="103" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="600" text-anchor="middle">Casetón (A)</text>
-    
+    <polygon points="332.8,242.6 419.2,192.1 419.2,152.1 332.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="310.8,202.6 332.8,202.6 419.2,152.1 397.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 4 -->
+    <polygon points="419.8,242.6 506.2,192.1 506.2,152.1 419.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="397.8,202.6 419.8,202.6 506.2,152.1 484.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 5 -->
+    <polygon points="506.8,242.6 593.2,192.1 593.2,152.1 506.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="484.8,202.6 506.8,202.6 593.2,152.1 571.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
     <!-- Riostra Transversal Central -->
-    <line x1="80" y1="126" x2="230" y2="126" stroke="#D97706" stroke-width="2.2" stroke-dasharray="4 2"/>
-    <text x="155" y="136" fill="#B45309" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" text-anchor="middle">Riostra de Repartición (l &gt; 4m)</text>
+    <polygon points="177.8,179.7 547.8,179.7 555.5,175.1 185.6,175.1" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.4" />
+    <text x="366.6" y="173.4" fill="#A16207" font-size="8.5" font-weight="800" text-anchor="middle">Riostra de Repartición (L &gt; 4 m)</text>
   </g>
-
-  <!-- 3. VIGA PRINCIPAL DE PÓRTICO -->
-  <g id="elem-viga">
-    <!-- Viga que recibe los nervios -->
-    <polygon points="85,130 335,130 335,168 85,168" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-    <polygon points="335,130 365,145 365,183 335,168" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
-    <polygon points="85,130 115,145 365,145 335,130" fill="#FFFBEB" stroke="#D97706" stroke-width="1.4"/>
-    <text x="210" y="154" fill="#92400E" font-family="Inter, sans-serif" font-size="11" font-weight="800" text-anchor="middle">3. Viga Principal (h_min = l / Divisor • bw ≥ 20/25 cm)</text>
+  <!-- 1. LOSETA SUPERIOR (Placa) -->
+  <g id="3d-loseta">
+    <polygon points="161.2,182.5 551.2,182.5 551.2,167.5 161.2,167.5" fill="#0284C7" stroke="#0369A1" stroke-width="1.8" />
+    <polygon points="551.2,182.5 606.5,150.2 606.5,135.2 551.2,167.5" fill="#0369A1" stroke="#075985" stroke-width="1.8" />
+    <polygon points="161.2,167.5 551.2,167.5 606.5,135.2 216.5,135.2" fill="#BAE6FD" fill-opacity="0.94" stroke="#0284C7" stroke-width="1.8" />
+    
+    <!-- Cargas Distribuidas w (Flechas rojas hacia abajo) -->
+    <line x1="222.2" y1="107.3" x2="222.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="222.2,149.3 219.2,141.3 225.2,141.3" fill="#EF4444" />
+    <line x1="282.2" y1="107.3" x2="282.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="282.2,149.3 279.2,141.3 285.2,141.3" fill="#EF4444" />
+    <line x1="342.2" y1="107.3" x2="342.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="342.2,149.3 339.2,141.3 345.2,141.3" fill="#EF4444" />
+    <line x1="402.2" y1="107.3" x2="402.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="402.2,149.3 399.2,141.3 405.2,141.3" fill="#EF4444" />
+    <line x1="462.2" y1="107.3" x2="462.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="462.2,149.3 459.2,141.3 465.2,141.3" fill="#EF4444" />
+    <line x1="522.2" y1="107.3" x2="522.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="522.2,149.3 519.2,141.3 525.2,141.3" fill="#EF4444" />
+    <!-- Rótulo de Cargas -->
+    <rect x="237.2" y="83.3" width="290" height="22" rx="4" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.2" />
+    <text x="382.2" y="98.3" fill="#B91C1C" font-size="9.5" font-weight="800" text-anchor="middle">
+      Cargas Gravitacionales Superficiales: w = 1.2D + 1.6L [kN/m²]
+    </text>
+    
+    <!-- Rótulo Loseta -->
+    <text x="395.2" y="142.7" fill="#0369A1" font-size="10.5" font-weight="800" text-anchor="middle">
+      1. Loseta Superior (t ≥ max(45 mm, A/20))
+    </text>
   </g>
+  <!-- ==================== PANEL LATERAL: SECUENCIA DE TRANSFERENCIA ==================== -->
+  <g id="panel-secuencia" transform="translate(660, 52)">
+    <!-- Marco del panel -->
+    <rect x="0" y="0" width="275" height="490" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.4" filter="url(#card-shadow)" />
+    
+    <!-- Cabecera del Panel -->
+    <rect x="0" y="0" width="275" height="42" rx="8" fill="#F1F5F9" />
+    <line x1="0" y1="42" x2="275" y2="42" stroke="#CBD5E1" stroke-width="1.2" />
+    <text x="137.5" y="20" fill="#0F172A" font-size="11.5" font-weight="800" letter-spacing="0.03em" text-anchor="middle">
+      SECUENCIA DE TRANSFERENCIA
+    </text>
+    <text x="137.5" y="34" fill="#64748B" font-size="8.5" font-weight="600" text-anchor="middle">
+      Flujo de Cargas y Orden de Prediseño
+    </text>
+    
+    <!-- Paso 1: LOSETA -->
+    <g transform="translate(12, 52)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.3" />
+      <rect x="8" y="7" width="64" height="17" rx="3" fill="#0284C7" />
+      <text x="40" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">1. LOSETA</text>
+      <text x="78" y="19" fill="#0369A1" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">t ≥ 45 mm, A/20</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Recibe carga superficial w (kN/m²)</text>
+      <text x="10" y="50" fill="#0369A1" font-size="8" font-weight="500">Flexión local entre nervios • NSR-10 C.8.13.6</text>
+    </g>
+    
+    <!-- Flecha 1 -> 2 -->
+    <line x1="137.5" y1="114" x2="137.5" y2="126" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,130 133.5,122 141.5,122" fill="#0284C7" />
+    
+    <!-- Paso 2: VIGUETAS -->
+    <g transform="translate(12, 132)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#F1F5F9" stroke="#475569" stroke-width="1.3" />
+      <rect x="8" y="7" width="76" height="17" rx="3" fill="#475569" />
+      <text x="46" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">2. VIGUETAS</text>
+      <text x="90" y="19" fill="#334155" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">bw, ht, S ≤ 1.2m</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Salva la luz menor (Ly) de entrepiso</text>
+      <text x="10" y="50" fill="#475569" font-size="8" font-weight="500">Nervios + casetones + riostras • C.8.13.3</text>
+    </g>
 
-  <!-- 4. COLUMNAS -->
-  <g id="elem-columnas">
-    <!-- Columna Izquierda -->
-    <rect x="95" y="168" width="46" height="96" fill="#F1F5F9" stroke="#2563EB" stroke-width="2"/>
-    <polygon points="141,168 156,178 156,274 141,264" fill="#E2E8F0" stroke="#2563EB" stroke-width="1.8"/>
-    <!-- Columna Derecha -->
-    <rect x="290" y="168" width="46" height="96" fill="#F1F5F9" stroke="#2563EB" stroke-width="2"/>
-    <polygon points="336,168 351,178 351,274 336,264" fill="#E2E8F0" stroke="#2563EB" stroke-width="1.8"/>
-    <!-- Flechas de bajada de carga axial Pu -->
-    <line x1="118" y1="180" x2="118" y2="240" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
-    <polygon points="118,246 113,237 123,237" fill="#2563EB"/>
-    <text x="118" y="215" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">Pu</text>
-    
-    <line x1="313" y1="180" x2="313" y2="240" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
-    <polygon points="313,246 308,237 318,237" fill="#2563EB"/>
-    <text x="313" y="215" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9" font-weight="800" text-anchor="middle">Pu</text>
-    <text x="215" y="218" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">4. Columnas (Ag por Pu y A_af)</text>
-  </g>
+    <!-- Flecha 2 -> 3 -->
+    <line x1="137.5" y1="194" x2="137.5" y2="206" stroke="#475569" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,210 133.5,202 141.5,202" fill="#475569" />
 
-  <!-- 5. ZAPATAS AISLADAS -->
-  <g id="elem-zapatas">
-    <!-- Pedestal y Zapata Izquierda -->
-    <polygon points="70,264 170,264 190,278 90,278" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.8"/>
-    <rect x="70" y="264" width="100" height="34" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.8"/>
-    <polygon points="170,264 190,278 190,312 170,298" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8"/>
-    <rect x="70" y="298" width="100" height="12" fill="#86EFAC" stroke="#16A34A" stroke-width="1.4"/>
-    
-    <!-- Pedestal y Zapata Derecha -->
-    <polygon points="265,264 365,264 385,278 285,278" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.8"/>
-    <rect x="265" y="264" width="100" height="34" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.8"/>
-    <polygon points="365,264 385,278 385,312 365,298" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8"/>
-    <rect x="265" y="298" width="100" height="12" fill="#86EFAC" stroke="#16A34A" stroke-width="1.4"/>
-    
-    <!-- Presión del suelo q_adm -->
-    <line x1="80" y1="324" x2="80" y2="314" stroke="#16A34A" stroke-width="1.8"/>
-    <polygon points="80,312 77,317 83,317" fill="#16A34A"/>
-    <line x1="120" y1="324" x2="120" y2="314" stroke="#16A34A" stroke-width="1.8"/>
-    <polygon points="120,312 117,317 123,317" fill="#16A34A"/>
-    <line x1="160" y1="324" x2="160" y2="314" stroke="#16A34A" stroke-width="1.8"/>
-    <polygon points="160,312 157,317 163,317" fill="#16A34A"/>
-    
-    <text x="215" y="290" fill="#15803D" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">5. Zapatas Aisladas (Azap = P_serv / q_adm • hz)</text>
-    <text x="215" y="306" fill="#16A34A" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Transmisión al Suelo Portante (q_adm)</text>
-  </g>
+    <!-- Paso 3: VIGAS -->
+    <g transform="translate(12, 212)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.3" />
+      <rect x="8" y="7" width="60" height="17" rx="3" fill="#D97706" />
+      <text x="38" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">3. VIGAS</text>
+      <text x="74" y="19" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">h_min = L/Divisor</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Recibe reacciones de viguetas en vano</text>
+      <text x="10" y="50" fill="#92400E" font-size="8" font-weight="500">Control deflexiones (C.9.5) • bw ≥ 20/25cm</text>
+    </g>
 
-  <!-- PANEL DERECHO: SECUENCIA DE TRANSMISIÓN DE CARGAS -->
-  <g transform="translate(376, 52)">
-    <rect x="0" y="0" width="112" height="268" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="56" y="18" fill="#0F172A" font-family="Inter, sans-serif" font-size="9" font-weight="800" text-anchor="middle">SECUENCIA DE</text>
-    <text x="56" y="29" fill="#0F172A" font-family="Inter, sans-serif" font-size="9" font-weight="800" text-anchor="middle">TRANSFERENCIA</text>
-    
-    <!-- Paso 1 -->
-    <rect x="6" y="38" width="100" height="34" rx="5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1"/>
-    <text x="12" y="52" fill="#0369A1" font-family="Inter, sans-serif" font-size="8.5" font-weight="700">1. LOSETA (t)</text>
-    <text x="12" y="64" fill="#0284C7" font-family="Inter, sans-serif" font-size="7.5">w [kN/m²] sup.</text>
-    
-    <line x1="56" y1="74" x2="56" y2="82" stroke="#0284C7" stroke-width="1.8"/>
-    <polygon points="56,84 53,79 59,79" fill="#0284C7"/>
-    
-    <!-- Paso 2 -->
-    <rect x="6" y="86" width="100" height="34" rx="5" fill="#F1F5F9" stroke="#475569" stroke-width="1"/>
-    <text x="12" y="100" fill="#334155" font-family="Inter, sans-serif" font-size="8.5" font-weight="700">2. VIGUETAS (bw,ht)</text>
-    <text x="12" y="112" fill="#64748B" font-family="Inter, sans-serif" font-size="7.5">Salva luz menor</text>
-    
-    <line x1="56" y1="122" x2="56" y2="130" stroke="#475569" stroke-width="1.8"/>
-    <polygon points="56,132 53,127 59,127" fill="#475569"/>
+    <!-- Flecha 3 -> 4 -->
+    <line x1="137.5" y1="274" x2="137.5" y2="286" stroke="#D97706" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,290 133.5,282 141.5,282" fill="#D97706" />
 
-    <!-- Paso 3 -->
-    <rect x="6" y="134" width="100" height="34" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
-    <text x="12" y="148" fill="#92400E" font-family="Inter, sans-serif" font-size="8.5" font-weight="700">3. VIGAS (h, bw)</text>
-    <text x="12" y="160" fill="#B45309" font-family="Inter, sans-serif" font-size="7.5">Recibe nervios</text>
-    
-    <line x1="56" y1="170" x2="56" y2="178" stroke="#D97706" stroke-width="1.8"/>
-    <polygon points="56,180 53,175 59,175" fill="#D97706"/>
+    <!-- Paso 4: COLUMNAS -->
+    <g transform="translate(12, 292)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.3" />
+      <rect x="8" y="7" width="80" height="17" rx="3" fill="#2563EB" />
+      <text x="48" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">4. COLUMNAS</text>
+      <text x="94" y="19" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Ag ≥ Pu/(α·φ·f'c)</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Bajada de carga axial tributaria (Pu)</text>
+      <text x="10" y="50" fill="#1E40AF" font-size="8" font-weight="500">Áreas aferentes • Columna Fuerte (C.21)</text>
+    </g>
 
-    <!-- Paso 4 -->
-    <rect x="6" y="182" width="100" height="34" rx="5" fill="#DBEAFE" stroke="#2563EB" stroke-width="1"/>
-    <text x="12" y="196" fill="#1E40AF" font-family="Inter, sans-serif" font-size="8.5" font-weight="700">4. COLUMNAS (Ag)</text>
-    <text x="12" y="208" fill="#2563EB" font-family="Inter, sans-serif" font-size="7.5">Baja carga Pu</text>
-    
-    <line x1="56" y1="218" x2="56" y2="226" stroke="#2563EB" stroke-width="1.8"/>
-    <polygon points="56,228 53,223 59,223" fill="#2563EB"/>
+    <!-- Flecha 4 -> 5 -->
+    <line x1="137.5" y1="354" x2="137.5" y2="366" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,370 133.5,362 141.5,362" fill="#2563EB" />
 
-    <!-- Paso 5 -->
-    <rect x="6" y="230" width="100" height="32" rx="5" fill="#DCFCE7" stroke="#16A34A" stroke-width="1"/>
-    <text x="12" y="244" fill="#15803D" font-family="Inter, sans-serif" font-size="8.5" font-weight="700">5. ZAPATAS (Az)</text>
-    <text x="12" y="255" fill="#16A34A" font-family="Inter, sans-serif" font-size="7.5">Disipa al suelo</text>
+    <!-- Paso 5: ZAPATAS -->
+    <g transform="translate(12, 372)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.3" />
+      <rect x="8" y="7" width="76" height="17" rx="3" fill="#16A34A" />
+      <text x="46" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">5. ZAPATAS</text>
+      <text x="90" y="19" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Az = P_serv/q_adm</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Disipa la carga total al terreno portante</text>
+      <text x="10" y="50" fill="#15803D" font-size="8" font-weight="500">Punzonamiento a d/2 • Flexión (C.15)</text>
+    </g>
+    
+    <!-- Pie de secuencia -->
+    <rect x="12" y="448" width="251" height="28" rx="5" fill="#F1F5F9" stroke="#CBD5E1" />
+    <text x="137.5" y="466" fill="#334155" font-size="9" font-weight="700" text-anchor="middle">
+      ✓ Ruta Completa de Equilibrio Estático
+    </text>
   </g>
 </svg>
+            </div>
+            
+            <div class="diagram-toolbar-strip">
+              <button type="button" class="btn-diagram-zoom" onclick="openLoadPathModal()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                <span>Ampliar Diagrama en Pantalla Completa (Modo Explicación)</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -3965,6 +4111,409 @@ ho_g = A_{st} / A_g$, limitada entre $0.01$ y $0.04$ en pórticos sísmicos).</t
         </div>
       </div>
 
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       MODAL DE PANTALLA COMPLETA: RUTA DE TRANSFERENCIA DE CARGAS (PIZARRA DOCENTE)
+       ========================================================================== -->
+  <div id="modal-diagrama-transferencia" class="diagram-modal-overlay" onclick="handleDiagramModalClick(event)" role="dialog" aria-modal="true" aria-labelledby="diagram-modal-title">
+    <div class="diagram-modal-backdrop"></div>
+    <div class="diagram-modal-content">
+      <div class="diagram-modal-header">
+        <div>
+          <div class="diagram-modal-eyebrow">PIZARRA DOCENTE • ESQUEMA AXONOMÉTRICO DE PREDIMENSIONAMIENTO</div>
+          <h2 id="diagram-modal-title" class="diagram-modal-title">Ruta de Transferencia de Cargas y Secuencia Normativa (NSR-10 / ACI 318)</h2>
+        </div>
+        <button type="button" class="diagram-modal-close" onclick="closeLoadPathModal()" aria-label="Cerrar modal (Esc)">
+          ✕
+        </button>
+      </div>
+      <div class="diagram-modal-body">
+        <!-- SVG EN ALTA DEFINICIÓN -->
+        <div class="diagram-modal-svg-wrap">
+          <svg viewBox="0 0 960 560" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 10px; font-family: Inter, sans-serif; display: block;" role="img" aria-label="Ruta de Transferencia de Cargas y Secuencia de Predimensionamiento">
+  <defs>
+    <!-- Filtros de sombra suave para realismo arquitectónico -->
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <!-- Gradientes sutiles técnicos -->
+    <linearGradient id="grad-viga-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="grad-col-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF"/>
+      <stop offset="100%" stop-color="#DBEAFE"/>
+    </linearGradient>
+    <linearGradient id="grad-zap-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#DCFCE7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ==================== BANNER SUPERIOR ==================== -->
+  <rect x="0" y="0" width="960" height="42" rx="10" fill="#F8FAFC" />
+  <line x1="0" y1="42" x2="960" y2="42" stroke="#E2E8F0" stroke-width="1.2" />
+  <text x="24" y="26" fill="#0F172A" font-size="13" font-weight="800" letter-spacing="0.02em">
+    RUTA DE TRANSFERENCIA DE CARGAS Y PREDIMENSIONAMIENTO ESTRUCTURAL
+  </text>
+  <rect x="740" y="10" width="195" height="22" rx="11" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" />
+  <text x="837" y="25" fill="#1D4ED8" font-size="10" font-weight="700" text-anchor="middle">
+    5 NIVELES • NSR-10 / ACI 318
+  </text>
+
+  <!-- ==================== MODELO AXONOMÉTRICO 3D (IZQUIERDA) ==================== -->
+  
+  <!-- 0. Estrato de Suelo y Terreno de Apoyo -->
+  <g id="capa-terreno">
+    <polygon points="55.0,520.0 495.0,520.0 586.0,466.8 146.0,466.8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="4 3" />
+    
+    <!-- Flechas reacción admisible suelo zapata izquierda (x=130) -->
+    <line x1="142.5" y1="505.0" x2="142.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="142.5,503.0 139.5,511.0 145.5,511.0" fill="#16A34A" />
+
+    <line x1="172.5" y1="505.0" x2="172.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="172.5,503.0 169.5,511.0 175.5,511.0" fill="#16A34A" />
+
+    <line x1="202.5" y1="505.0" x2="202.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="202.5,503.0 199.5,511.0 205.5,511.0" fill="#16A34A" />
+
+    <line x1="232.5" y1="505.0" x2="232.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="232.5,503.0 229.5,511.0 235.5,511.0" fill="#16A34A" />
+
+    <!-- Flechas reacción admisible suelo zapata derecha (x=370) -->
+    <line x1="382.5" y1="505.0" x2="382.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="382.5,503.0 379.5,511.0 385.5,511.0" fill="#16A34A" />
+
+    <line x1="412.5" y1="505.0" x2="412.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="412.5,503.0 409.5,511.0 415.5,511.0" fill="#16A34A" />
+
+    <line x1="442.5" y1="505.0" x2="442.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="442.5,503.0 439.5,511.0 445.5,511.0" fill="#16A34A" />
+
+    <line x1="472.5" y1="505.0" x2="472.5" y2="529.0" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="472.5,503.0 469.5,511.0 475.5,511.0" fill="#16A34A" />
+
+    <!-- Rótulo Suelo -->
+    <rect x="142.5" y="532.0" width="330" height="22" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2" />
+    <text x="307.5" y="547.0" fill="#15803D" font-size="10" font-weight="700" text-anchor="middle">
+      Transmisión al Terreno: Presión Admisible de Contacto (q ≤ q_adm)
+    </text>
+  </g>
+
+  <!-- 5. ZAPATAS AISLADAS (z: 0 -> 35) -->
+  <g id="3d-zapatas">
+    <!-- Zapata Izquierda (x: 60 -> 200, y: 5 -> 95) -->
+    <polygon points="88.2,518.1 228.2,518.1 228.2,483.1 88.2,483.1" fill="url(#grad-zap-front)" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="228.2,518.1 286.8,483.9 286.8,448.9 228.2,483.1" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="88.2,483.1 228.2,483.1 286.8,448.9 146.8,448.9" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.8" />
+    
+    <!-- Zapata Derecha (x: 300 -> 440, y: 5 -> 95) -->
+    <polygon points="328.2,518.1 468.2,518.1 468.2,483.1 328.2,483.1" fill="url(#grad-zap-front)" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="468.2,518.1 526.8,483.9 526.8,448.9 468.2,483.1" fill="#BBF7D0" stroke="#16A34A" stroke-width="1.8" />
+    <polygon points="328.2,483.1 468.2,483.1 526.8,448.9 386.8,448.9" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.8" />
+
+    <!-- Badges Zapatas -->
+    <rect x="98.19999999999999" y="493.1" width="120" height="18" rx="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1" />
+    <text x="158.2" y="505.1" fill="#166534" font-size="9" font-weight="700" text-anchor="middle">5. Zapata (B × L)</text>
+
+    <rect x="338.2" y="493.1" width="120" height="18" rx="3" fill="#FFFFFF" stroke="#16A34A" stroke-width="1" />
+    <text x="398.2" y="505.1" fill="#166534" font-size="9" font-weight="700" text-anchor="middle">5. Zapata (B × L)</text>
+  </g>
+
+  <!-- 4. COLUMNAS (z: 35 -> 235) -->
+  <g id="3d-columnas">
+    <!-- Columna Izquierda (x: 108 -> 152, y: 28 -> 72) -->
+    <polygon points="151.2,474.4 195.2,474.4 195.2,274.4 151.2,274.4" fill="url(#grad-col-front)" stroke="#2563EB" stroke-width="1.8" />
+    <polygon points="195.2,474.4 223.8,457.6 223.8,257.6 195.2,274.4" fill="#BFDBFE" stroke="#2563EB" stroke-width="1.8" />
+
+    <!-- Columna Derecha (x: 348 -> 392, y: 28 -> 72) -->
+    <polygon points="391.2,474.4 435.2,474.4 435.2,274.4 391.2,274.4" fill="url(#grad-col-front)" stroke="#2563EB" stroke-width="1.8" />
+    <polygon points="435.2,474.4 463.8,457.6 463.8,257.6 435.2,274.4" fill="#BFDBFE" stroke="#2563EB" stroke-width="1.8" />
+
+    <!-- Flecha Pu Columna Izquierda -->
+    <line x1="173.2" y1="294.4" x2="173.2" y2="444.4" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="173.2,454.4 168.2,439.4 178.2,439.4" fill="#1D4ED8" />
+    <rect x="159.2" y="364.4" width="28" height="18" rx="3" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
+    <text x="173.2" y="377.4" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" text-anchor="middle">Pu</text>
+
+    <!-- Flecha Pu Columna Derecha -->
+    <line x1="413.2" y1="294.4" x2="413.2" y2="444.4" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="413.2,454.4 408.2,439.4 418.2,439.4" fill="#1D4ED8" />
+    <rect x="399.2" y="364.4" width="28" height="18" rx="3" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1" />
+    <text x="413.2" y="377.4" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800" text-anchor="middle">Pu</text>
+
+    <!-- Rótulo Central Columnas -->
+    <rect x="198.2" y="363.4" width="190" height="22" rx="4" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.2" />
+    <text x="293.2" y="378.4" fill="#1E40AF" font-size="9.5" font-weight="700" text-anchor="middle">
+      4. Columnas: Carga Axial Acumulada Pu
+    </text>
+  </g>
+
+  <!-- 3. VIGA PRINCIPAL (z: 235 -> 290) -->
+  <g id="3d-viga">
+    <!-- Viga: x: 50 -> 450, y: 28 -> 72 -->
+    <polygon points="93.2,274.4 493.2,274.4 493.2,219.4 93.2,219.4" fill="url(#grad-viga-front)" stroke="#D97706" stroke-width="2" />
+    <polygon points="493.2,274.4 521.8,257.6 521.8,202.6 493.2,219.4" fill="#FDE68A" stroke="#D97706" stroke-width="2" />
+    <polygon points="93.2,219.4 493.2,219.4 521.8,202.6 121.8,202.6" fill="#FFFBEB" stroke="#D97706" stroke-width="1.8" />
+    
+    <!-- Rótulo Viga -->
+    <rect x="148.2" y="236.4" width="290" height="22" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.2" />
+    <text x="293.2" y="251.4" fill="#92400E" font-size="10" font-weight="800" text-anchor="middle">
+      3. Viga Principal (h_min = L / Divisor • bw ≥ 20/25 cm)
+    </text>
+  </g>
+
+  <!-- 2. VIGUETAS / NERVIOS Y CASETONES (z: 250 -> 290, y: 72 -> 210) -->
+  <g id="3d-viguetas">
+    <!-- Casetón 1 -->
+    <polygon points="158.8,204.6 223.8,204.6 310.2,154.1 245.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="232.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 2 -->
+    <polygon points="245.8,204.6 310.8,204.6 397.2,154.1 332.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="319.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 3 -->
+    <polygon points="332.8,204.6 397.8,204.6 484.2,154.1 419.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="406.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Casetón 4 -->
+    <polygon points="419.8,204.6 484.8,204.6 571.2,154.1 506.2,154.1" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2" />
+    <text x="493.2" y="178.7" fill="#64748B" font-size="8.5" font-weight="700" text-anchor="middle">Casetón (A)</text>
+    <!-- Nervio 1 -->
+    <polygon points="158.8,242.6 245.2,192.1 245.2,152.1 158.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="136.8,202.6 158.8,202.6 245.2,152.1 223.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 2 -->
+    <polygon points="245.8,242.6 332.2,192.1 332.2,152.1 245.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="223.8,202.6 245.8,202.6 332.2,152.1 310.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 3 -->
+    <polygon points="332.8,242.6 419.2,192.1 419.2,152.1 332.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="310.8,202.6 332.8,202.6 419.2,152.1 397.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 4 -->
+    <polygon points="419.8,242.6 506.2,192.1 506.2,152.1 419.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="397.8,202.6 419.8,202.6 506.2,152.1 484.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Nervio 5 -->
+    <polygon points="506.8,242.6 593.2,192.1 593.2,152.1 506.8,202.6" fill="#CBD5E1" stroke="#475569" stroke-width="1.4" />
+    <polygon points="484.8,202.6 506.8,202.6 593.2,152.1 571.2,152.1" fill="#E2E8F0" stroke="#475569" stroke-width="1.4" />
+    <!-- Riostra Transversal Central -->
+    <polygon points="177.8,179.7 547.8,179.7 555.5,175.1 185.6,175.1" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.4" />
+    <text x="366.6" y="173.4" fill="#A16207" font-size="8.5" font-weight="800" text-anchor="middle">Riostra de Repartición (L &gt; 4 m)</text>
+  </g>
+  <!-- 1. LOSETA SUPERIOR (Placa) -->
+  <g id="3d-loseta">
+    <polygon points="161.2,182.5 551.2,182.5 551.2,167.5 161.2,167.5" fill="#0284C7" stroke="#0369A1" stroke-width="1.8" />
+    <polygon points="551.2,182.5 606.5,150.2 606.5,135.2 551.2,167.5" fill="#0369A1" stroke="#075985" stroke-width="1.8" />
+    <polygon points="161.2,167.5 551.2,167.5 606.5,135.2 216.5,135.2" fill="#BAE6FD" fill-opacity="0.94" stroke="#0284C7" stroke-width="1.8" />
+    
+    <!-- Cargas Distribuidas w (Flechas rojas hacia abajo) -->
+    <line x1="222.2" y1="107.3" x2="222.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="222.2,149.3 219.2,141.3 225.2,141.3" fill="#EF4444" />
+    <line x1="282.2" y1="107.3" x2="282.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="282.2,149.3 279.2,141.3 285.2,141.3" fill="#EF4444" />
+    <line x1="342.2" y1="107.3" x2="342.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="342.2,149.3 339.2,141.3 345.2,141.3" fill="#EF4444" />
+    <line x1="402.2" y1="107.3" x2="402.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="402.2,149.3 399.2,141.3 405.2,141.3" fill="#EF4444" />
+    <line x1="462.2" y1="107.3" x2="462.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="462.2,149.3 459.2,141.3 465.2,141.3" fill="#EF4444" />
+    <line x1="522.2" y1="107.3" x2="522.2" y2="147.3" stroke="#EF4444" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="522.2,149.3 519.2,141.3 525.2,141.3" fill="#EF4444" />
+    <!-- Rótulo de Cargas -->
+    <rect x="237.2" y="83.3" width="290" height="22" rx="4" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.2" />
+    <text x="382.2" y="98.3" fill="#B91C1C" font-size="9.5" font-weight="800" text-anchor="middle">
+      Cargas Gravitacionales Superficiales: w = 1.2D + 1.6L [kN/m²]
+    </text>
+    
+    <!-- Rótulo Loseta -->
+    <text x="395.2" y="142.7" fill="#0369A1" font-size="10.5" font-weight="800" text-anchor="middle">
+      1. Loseta Superior (t ≥ max(45 mm, A/20))
+    </text>
+  </g>
+  <!-- ==================== PANEL LATERAL: SECUENCIA DE TRANSFERENCIA ==================== -->
+  <g id="panel-secuencia" transform="translate(660, 52)">
+    <!-- Marco del panel -->
+    <rect x="0" y="0" width="275" height="490" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.4" filter="url(#card-shadow)" />
+    
+    <!-- Cabecera del Panel -->
+    <rect x="0" y="0" width="275" height="42" rx="8" fill="#F1F5F9" />
+    <line x1="0" y1="42" x2="275" y2="42" stroke="#CBD5E1" stroke-width="1.2" />
+    <text x="137.5" y="20" fill="#0F172A" font-size="11.5" font-weight="800" letter-spacing="0.03em" text-anchor="middle">
+      SECUENCIA DE TRANSFERENCIA
+    </text>
+    <text x="137.5" y="34" fill="#64748B" font-size="8.5" font-weight="600" text-anchor="middle">
+      Flujo de Cargas y Orden de Prediseño
+    </text>
+    
+    <!-- Paso 1: LOSETA -->
+    <g transform="translate(12, 52)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.3" />
+      <rect x="8" y="7" width="64" height="17" rx="3" fill="#0284C7" />
+      <text x="40" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">1. LOSETA</text>
+      <text x="78" y="19" fill="#0369A1" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">t ≥ 45 mm, A/20</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Recibe carga superficial w (kN/m²)</text>
+      <text x="10" y="50" fill="#0369A1" font-size="8" font-weight="500">Flexión local entre nervios • NSR-10 C.8.13.6</text>
+    </g>
+    
+    <!-- Flecha 1 -> 2 -->
+    <line x1="137.5" y1="114" x2="137.5" y2="126" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,130 133.5,122 141.5,122" fill="#0284C7" />
+    
+    <!-- Paso 2: VIGUETAS -->
+    <g transform="translate(12, 132)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#F1F5F9" stroke="#475569" stroke-width="1.3" />
+      <rect x="8" y="7" width="76" height="17" rx="3" fill="#475569" />
+      <text x="46" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">2. VIGUETAS</text>
+      <text x="90" y="19" fill="#334155" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">bw, ht, S ≤ 1.2m</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Salva la luz menor (Ly) de entrepiso</text>
+      <text x="10" y="50" fill="#475569" font-size="8" font-weight="500">Nervios + casetones + riostras • C.8.13.3</text>
+    </g>
+
+    <!-- Flecha 2 -> 3 -->
+    <line x1="137.5" y1="194" x2="137.5" y2="206" stroke="#475569" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,210 133.5,202 141.5,202" fill="#475569" />
+
+    <!-- Paso 3: VIGAS -->
+    <g transform="translate(12, 212)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.3" />
+      <rect x="8" y="7" width="60" height="17" rx="3" fill="#D97706" />
+      <text x="38" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">3. VIGAS</text>
+      <text x="74" y="19" fill="#92400E" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">h_min = L/Divisor</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Recibe reacciones de viguetas en vano</text>
+      <text x="10" y="50" fill="#92400E" font-size="8" font-weight="500">Control deflexiones (C.9.5) • bw ≥ 20/25cm</text>
+    </g>
+
+    <!-- Flecha 3 -> 4 -->
+    <line x1="137.5" y1="274" x2="137.5" y2="286" stroke="#D97706" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,290 133.5,282 141.5,282" fill="#D97706" />
+
+    <!-- Paso 4: COLUMNAS -->
+    <g transform="translate(12, 292)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.3" />
+      <rect x="8" y="7" width="80" height="17" rx="3" fill="#2563EB" />
+      <text x="48" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">4. COLUMNAS</text>
+      <text x="94" y="19" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Ag ≥ Pu/(α·φ·f'c)</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Bajada de carga axial tributaria (Pu)</text>
+      <text x="10" y="50" fill="#1E40AF" font-size="8" font-weight="500">Áreas aferentes • Columna Fuerte (C.21)</text>
+    </g>
+
+    <!-- Flecha 4 -> 5 -->
+    <line x1="137.5" y1="354" x2="137.5" y2="366" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round"/>
+    <polygon points="137.5,370 133.5,362 141.5,362" fill="#2563EB" />
+
+    <!-- Paso 5: ZAPATAS -->
+    <g transform="translate(12, 372)">
+      <rect x="0" y="0" width="251" height="60" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.3" />
+      <rect x="8" y="7" width="76" height="17" rx="3" fill="#16A34A" />
+      <text x="46" y="19" fill="#FFFFFF" font-size="8.5" font-weight="800" text-anchor="middle">5. ZAPATAS</text>
+      <text x="90" y="19" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700">Az = P_serv/q_adm</text>
+      <text x="10" y="37" fill="#0F172A" font-size="8.5" font-weight="600">Disipa la carga total al terreno portante</text>
+      <text x="10" y="50" fill="#15803D" font-size="8" font-weight="500">Punzonamiento a d/2 • Flexión (C.15)</text>
+    </g>
+    
+    <!-- Pie de secuencia -->
+    <rect x="12" y="448" width="251" height="28" rx="5" fill="#F1F5F9" stroke="#CBD5E1" />
+    <text x="137.5" y="466" fill="#334155" font-size="9" font-weight="700" text-anchor="middle">
+      ✓ Ruta Completa de Equilibrio Estático
+    </text>
+  </g>
+</svg>
+        </div>
+
+        <!-- GUÍA DE CÁTEDRA: FICHAS TÉCNICAS DE LOS 5 ELEMENTOS PARA EXPLICACIÓN EN CLASE -->
+        <div class="diagram-pedagogical-guide">
+          <div class="guide-header">
+            <span class="guide-tag">GUÍA DE CÁTEDRA DOCENTE</span>
+            <h3 class="guide-title">Fundamentos del Flujo Gravitacional y Criterios de Predimensionamiento</h3>
+          </div>
+          <div class="guide-cards-grid">
+            <!-- Nivel 1: Loseta Superior -->
+            <div class="guide-card accent-cyan">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">NIVEL 1</span>
+                <span class="guide-card-norma">NSR-10 C.8.13.6</span>
+              </div>
+              <h4 class="guide-card-heading">1. Loseta Superior (t)</h4>
+              <p class="guide-card-desc">
+                Recibe la carga gravitacional superficial <strong>$w = 1.2D + 1.6L$</strong> [$	ext{kN/m}^2$]. Trabaja a flexión local como losa continua apoyada sobre nervios adyacentes y provee acción de diafragma rígido.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Espesor Mínimo:</strong>
+                $$t \ge \max\left(45\text{ mm},\; \frac{A}{20}\right)$$
+                donde $A$ es el ancho del casetón aligerante (típicamente $50\text{--}80\text{ cm}$).
+              </div>
+            </div>
+
+            <!-- Nivel 2: Viguetas -->
+            <div class="guide-card accent-slate">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">NIVEL 2</span>
+                <span class="guide-card-norma">NSR-10 C.8.13</span>
+              </div>
+              <h4 class="guide-card-heading">2. Viguetas de Entrepiso</h4>
+              <p class="guide-card-desc">
+                Salvan la luz menor ($L_y$) del paño para minimizar deflexiones instantáneas y diferidas. Reciben la carga tributaria de la loseta y la transmiten a las vigas maestras.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Límites Geométricos:</strong>
+                $$b_w \ge 100\text{ mm}, \quad h_t \le 3.5\,b_w$$
+                Separación máxima $S \le \min(2.5 h_t, 1.20\text{ m})$. Riostras transversales cuando $L_y > 4.0\text{ m}$ (C.8.13.3.1).
+              </div>
+            </div>
+
+            <!-- Nivel 3: Vigas Principales -->
+            <div class="guide-card accent-amber">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">NIVEL 3</span>
+                <span class="guide-card-norma">NSR-10 Tabla C.9.5(a) & C.21</span>
+              </div>
+              <h4 class="guide-card-heading">3. Vigas de Pórtico</h4>
+              <p class="guide-card-desc">
+                Reciben las reacciones de las viguetas a lo largo de su luz ($L_x$). Gobiernan el control de deflexiones para proteger acabados frágiles y mampostería adherida.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Peralte y Ancho Sísmico:</strong>
+                $$h_{\min} = \frac{L}{\text{Divisor}} \approx \frac{L}{10}\text{ a }\frac{L}{12}$$
+                Ancho mínimo $b_w \ge 200\text{ mm}$ (DMO) o $250\text{ mm}$ (DES). Relación $h/b_w \le 3.0$.
+              </div>
+            </div>
+
+            <!-- Nivel 4: Columnas -->
+            <div class="guide-card accent-blue">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">NIVEL 4</span>
+                <span class="guide-card-norma">NSR-10 C.21.6 & C.10</span>
+              </div>
+              <h4 class="guide-card-heading">4. Columnas</h4>
+              <p class="guide-card-desc">
+                Reciben las reacciones de las vigas concurrentes en el nudo y bajan verticalmente la carga axial acumulada ($P_u$) de todos los niveles superiores hasta la base.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Área Bruta de Sección:</strong>
+                $$A_g \ge \frac{P_u}{\alpha \cdot \phi \cdot f'_c}$$
+                donde $\alpha \approx 0.20\text{--}0.30$ según posición (central, medianera, esquinera). Dimensión mínima $300\text{ mm}$ en DES.
+              </div>
+            </div>
+
+            <!-- Nivel 5: Zapatas -->
+            <div class="guide-card accent-emerald">
+              <div class="guide-card-top">
+                <span class="guide-step-badge">NIVEL 5</span>
+                <span class="guide-card-norma">NSR-10 C.15 & Título H</span>
+              </div>
+              <h4 class="guide-card-heading">5. Zapatas Aisladas</h4>
+              <p class="guide-card-desc">
+                Disipan la carga axial concentrada al terreno sin exceder el esfuerzo admisible del suelo ($q_{\text{adm}}$). Su espesor $h_z$ se predimensiona por punzonamiento.
+              </p>
+              <div class="guide-card-rule">
+                <strong>Área y Peralte Efectivo:</strong>
+                $$A_{\text{zap}} = \frac{P_{\text{servicio}}}{q_{\text{adm}}}, \quad d \text{ por punzonamiento a } d/2$$
+                Control de cortante en una dirección a distancia $d$ de la cara y esfuerzo máximo $V_u \le \phi V_c$.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

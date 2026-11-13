@@ -3853,10 +3853,6 @@
                   <strong>Enunciado del Problema:</strong> Diseñar a flexión una viga rectangular simplemente apoyada con sección $b = 300\text{ mm}$ ($30\text{ cm}$) y $h = 500\text{ mm}$ ($50\text{ cm}$), sometida a un momento último mayorado $M_u = 150\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 21\text{ MPa}$ ($210\text{ kgf/cm}^2$), $f_y = 420\text{ MPa}$ (Grado 60), recubrimiento libre $r = 40\text{ mm}$ (NSR-10 C.7.7.1), estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$) y tamaño máximo de agregado de $19\text{ mm}$ ($3/4"$). Aplicando los <strong>5 pasos de la Guía Didáctica de Diseño a Flexión</strong>: (1) estimar el peralte efectivo inicial como $d \approx h - 6.0\text{ cm}$, (2) calcular el parámetro de resistencia requerida $R_n$, (3) determinar la cuantía $\rho$ y evaluarla en el árbol de decisión normativo, (4) seleccionar las barras comerciales comprobando el ancho mínimo $b_{\min}$, y (5) realizar los chequeos finales de compatibilidad ($\varepsilon_s, \varepsilon_t$) y capacidad resistente ($\phi M_n \ge M_u$) con el peralte efectivo real $d_{\text{real}}$.
                 </div>
               </div>
-              <div style="display: flex; gap: 0.5rem;">
-                <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', false)">🙈 Ocultar Pasos</button>
-                <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-01', true)">👁️ Mostrar Todo</button>
-              </div>
             </div>
 
             <!-- ESQUEMA VECTORIAL SVG INICIAL: FIGURA 7.1a -->
@@ -4162,20 +4158,13 @@
           <div class="example-macro-body" id="sec-ejemplo-02" style="display: none;">
             <div class="example-toolbar">
               <div>
-                <h3 style="margin: 0; font-size: 1.08rem; color: var(--primary);">
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
                   📝 Ejemplo 7.2: Revisión a Flexión de Viga Rectangular Simplemente Reforzada ($b = 350\text{ mm}, h = 600\text{ mm}, 4\text{ No. 8}$)
                 </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema:</strong> Revisar y auditar analíticamente la capacidad a flexión ($\phi M_n$) de una viga rectangular simplemente apoyada de luz libre $l_n = 6.00\text{ m}$, con sección transversal $b = 350\text{ mm}$ y $h = 600\text{ mm}$, armada con <strong>4 barras No. 8</strong> ($d_b = 25.4\text{ mm}$, $A_b = 5.10\text{ cm}^2$, $A_s = 20.40\text{ cm}^2$) en una sola capa inferior, sometida a un momento último mayorado $M_u = 360.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 28\text{ MPa}$ ($\beta_1 = 0.85$), $f_y = 420\text{ MPa}$, estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$), recubrimiento libre $r = 40\text{ mm}$ y agregado máximo de $19\text{ mm}$. Desarrollar la revisión siguiendo estrictamente los <strong>5 pasos de la Guía Didáctica de Revisión a Flexión</strong>.
+                </div>
               </div>
-              <div style="display: flex; gap: 0.5rem;">
-                <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', false)">🙈 Ocultar Pasos</button>
-                <button class="btn-control" onclick="toggleAllExampleSteps('sec-ejemplo-02', true)">👁️ Mostrar Todo</button>
-              </div>
-            </div>
-
-            <div class="example-statement">
-              <p>
-                <strong>Enunciado:</strong> Revisar y auditar analíticamente la capacidad a flexión ($\phi M_n$) de una viga rectangular simplemente apoyada de luz libre $l_n = 6.00\text{ m}$, con sección transversal $b = 350\text{ mm}$ y $h = 600\text{ mm}$, armada con <strong>4 barras No. 8</strong> ($d_b = 25.4\text{ mm}$, $A_b = 5.10\text{ cm}^2$, $A_s = 20.40\text{ cm}^2$) en una sola capa inferior, sometida a un momento último mayorado $M_u = 360.0\text{ kN}\cdot\text{m}$. Materiales: $f'_c = 28\text{ MPa}$ ($\beta_1 = 0.85$), $f_y = 420\text{ MPa}$, estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$), recubrimiento libre $r = 40\text{ mm}$ y agregado máximo de $19\text{ mm}$. Desarrollar la revisión siguiendo estrictamente los <strong>5 pasos de la Guía Didáctica de Revisión a Flexión</strong>.
-              </p>
             </div>
 
             <!-- FIGURA 7.2a: ESQUEMA INICIAL DEL PROBLEMA -->
@@ -4430,72 +4419,93 @@
             </div>
           </div>
         </div>
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.3 EJEMPLO RESUELTO 3 — DISEÑO 2 (VIGA RECTANGULAR EN 1 CAPA CON AVALÚO DE CARGAS)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-03" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.3 — DISEÑO 2 (1 CAPA)</span>
-                <span>Diseño a Flexión de Viga Simple con Avalúo de Cargas ($b = 400\text{ mm}, h = 650\text{ mm}, L = 10.0\text{ m}$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.3 (DISEÑO 2 - 1 CAPA CON AVALÚO DE CARGAS)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-03">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-03')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.3 • DISEÑO (1 CAPA + CARGAS)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Diseño a Flexión de Viga Simple con Avalúo de Cargas ($b = 400\text{ mm}, h = 650\text{ mm}, L = 10.0\text{ m}$)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-03', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>400 × 650 mm (d ≈ h − 6 cm = 590 mm)</strong></span> <span>⚡ Momento: <strong>Mu = 753.60 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>5 No. 10 (As = 40.95 cm²)</strong></span> <span>✅ Estado: <strong>Dúctil ($\varepsilon_t = 0.00525$, $\phi = 0.90$)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Diseño a Flexión — Guía Didáctica de 5 Pasos):</strong><br>
-                Diseñe el refuerzo longitudinal a flexión de una viga rectangular simplemente apoyada de luz libre $L = 10.0\text{ m}$, sección transversal $b = 400\text{ mm}$ y altura total $h = 650\text{ mm}$. La viga soporta una carga muerta sobreimpuesta de servicio $w_{D,\text{sob}} = 20.0\text{ kN/m}$ (adicional a su peso propio, con $\gamma_c = 24.0\text{ kN/m}^3$) y una carga viva de servicio $w_L = 18.0\text{ kN/m}$. Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$ y estribos No. 3 ($\phi_{\text{est}} = 9.5\text{ mm}$). Aplique rigurosamente los <strong>5 pasos de la Guía Didáctica de Diseño a Flexión</strong> (estimando en el Paso 1 $d \approx h - 6.0\text{ cm}$ para 1 capa de acero).
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-03">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-03">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.3a: ESQUEMA ESTÁTICO Y GEOMETRÍA PRELIMINAR -->
-                <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 580 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <marker id="arr-load-73" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
-                      </marker>
-                    </defs>
-                    <rect x="0" y="0" width="580" height="260" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.3: VIGA SIMPLEMENTE APOYADA (L = 10.0 m) Y SECCIÓN PRELIMINAR (d ≈ h − 6 cm)
-                    </text>
-                    <!-- Viga longitudinal -->
-                    <line x1="40" y1="68" x2="330" y2="68" stroke="#DC2626" stroke-width="1.5"/>
-                    <line x1="50" y1="68" x2="50" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="95" y1="68" x2="95" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="140" y1="68" x2="140" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="185" y1="68" x2="185" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="230" y1="68" x2="230" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="275" y1="68" x2="275" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <line x1="320" y1="68" x2="320" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
-                    <text x="185" y="58" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">wD,sob = 20 kN/m + wpp | wL = 18 kN/m</text>
-                    <rect x="40" y="96" width="290" height="24" fill="#E2E8F0" stroke="#475569" stroke-width="2"/>
-                    <polygon points="40,120 30,136 50,136" fill="#64748B"/>
-                    <polygon points="330,120 320,136 340,136" fill="#64748B"/>
-                    <circle cx="325" cy="140" r="3" fill="#64748B"/>
-                    <circle cx="335" cy="140" r="3" fill="#64748B"/>
-                    <!-- Diagrama de momento -->
-                    <path d="M 40 165 Q 185 245 330 165 Z" fill="rgba(29, 78, 216, 0.10)" stroke="#1D4ED8" stroke-width="2"/>
-                    <text x="185" y="222" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">Mu,máx = wu·L²/8 = 753.6 kN·m</text>
-                    <text x="185" y="156" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">L = 10.0 m</text>
-                    <!-- Sección transversal -->
-                    <rect x="405" y="45" width="110" height="175" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="418" y="58" width="84" height="149" rx="4" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <line x1="405" y1="201" x2="515" y2="201" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,3"/>
-                    <text x="460" y="195" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">As = ? (1 capa)</text>
-                    <text x="460" y="238" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 400 mm | h = 650 mm</text>
-                    <text x="460" y="252" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">d ≈ h − 6 cm = 590 mm</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.3a:</strong> Modelo estructural de la viga simplemente apoyada de $L = 10.0\text{ m}$, avalúo de momento último $M_u = 753.60\text{ kN}\cdot\text{m}$ y estimación inicial de peralte $d \approx h - 6.0\text{ cm} = 590\text{ mm}$.
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-03" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.3: Diseño a Flexión de Viga Simple con Avalúo de Cargas ($b = 400\text{ mm}, h = 650\text{ mm}, L = 10.0\text{ m}$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Diseño a Flexión — Guía Didáctica de 5 Pasos):</strong> Diseñe el refuerzo longitudinal a flexión de una viga rectangular simplemente apoyada de luz libre $L = 10.0\text{ m}$, sección transversal $b = 400\text{ mm}$ y altura total $h = 650\text{ mm}$. La viga soporta una carga muerta sobreimpuesta de servicio $w_{D,\text{sob}} = 20.0\text{ kN/m}$ (adicional a su peso propio, con $\gamma_c = 24.0\text{ kN/m}^3$) y una carga viva de servicio $w_L = 18.0\text{ kN/m}$. Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$ y estribos No. 3 ($\phi_{\text{est}} = 9.5\text{ mm}$). Aplique rigurosamente los <strong>5 pasos de la Guía Didáctica de Diseño a Flexión</strong> (estimando en el Paso 1 $d \approx h - 6.0\text{ cm}$ para 1 capa de acero).
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.3a: ESQUEMA INICIAL DEL PROBLEMA (SOLO DATOS DE ENTRADA) -->
+            <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 580 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <marker id="arr-load-73" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+                  </marker>
+                </defs>
+                <rect x="0" y="0" width="580" height="260" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.3: ESQUEMA INICIAL DE CARGAS DE SERVICIO Y GEOMETRÍA PRELIMINAR
+                </text>
+                <!-- Viga longitudinal -->
+                <line x1="40" y1="68" x2="330" y2="68" stroke="#DC2626" stroke-width="1.5"/>
+                <line x1="50" y1="68" x2="50" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="95" y1="68" x2="95" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="140" y1="68" x2="140" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="185" y1="68" x2="185" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="230" y1="68" x2="230" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="275" y1="68" x2="275" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <line x1="320" y1="68" x2="320" y2="92" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arr-load-73)"/>
+                <text x="185" y="58" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">wD,sob = 20.0 kN/m + wpp | wL = 18.0 kN/m</text>
+                <rect x="40" y="96" width="290" height="24" fill="#E2E8F0" stroke="#475569" stroke-width="2"/>
+                <polygon points="40,120 30,136 50,136" fill="#64748B"/>
+                <polygon points="330,120 320,136 340,136" fill="#64748B"/>
+                <circle cx="325" cy="140" r="3" fill="#64748B"/>
+                <circle cx="335" cy="140" r="3" fill="#64748B"/>
+                <!-- Diagrama de momento por determinar -->
+                <path d="M 40 165 Q 185 245 330 165 Z" fill="rgba(29, 78, 216, 0.08)" stroke="#1D4ED8" stroke-width="1.8" stroke-dasharray="5,3"/>
+                <text x="185" y="218" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">¿wu = 1.2wD + 1.6wL = ? | ¿Mu,máx = wu·L²/8 = ?</text>
+                <text x="185" y="156" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">L = 10.0 m (γc = 24.0 kN/m³)</text>
+                <!-- Sección transversal -->
+                <rect x="405" y="45" width="110" height="175" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="418" y="58" width="84" height="149" rx="4" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-dasharray="4,2"/>
+                <line x1="405" y1="201" x2="515" y2="201" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <text x="460" y="195" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">¿As = ? (1 capa)</text>
+                <text x="460" y="238" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 400 mm | h = 650 mm</text>
+                <text x="460" y="252" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">f'c = 28 MPa | fy = 420 MPa</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.3a:</strong> Esquema inicial del ejercicio de diseño: Viga simplemente apoyada de $L = 10.0\text{ m}$ con cargas de servicio ($w_{D,\text{sob}} = 20.0\text{ kN/m}$, $w_L = 18.0\text{ kN/m}$) y sección transversal preliminar $400 \times 650\text{ mm}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: GEOMETRÍA, AVALÚO DE CARGAS Y ESTIMACIÓN DE PERALTE -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -4634,6 +4644,43 @@
                           Sección $400 \times 650\text{ mm}$ armada con <strong>$5\text{ No. 10}$ en 1 sola capa</strong> ($A_{s,\text{col}} = 40.95\text{ cm}^2$, $d_{\text{real}} = 584.35\text{ mm}$). Capacidad resistente $\phi M_n = 764.68\text{ kN}\cdot\text{m} \ge M_u = 753.60\text{ kN}\cdot\text{m}$ ($\text{Ratio D/C} = 0.986 \le 1.00$).
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.3b: ESQUEMA FINAL DE LA SOLUCIÓN -->
+                      <figure class="diagram-figure" style="max-width: 580px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 580 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="580" height="280" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.3: SECCIÓN DISEÑADA (5 No. 10) Y EQUILIBRIO ÚLTIMO VERIFICADO
+                          </text>
+                          <rect x="90" y="42" width="140" height="200" rx="4" fill="#F8FAFC" stroke="#475569" stroke-width="2"/>
+                          <rect x="91" y="43" width="138" height="55" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <text x="160" y="68" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">a = 180.66 mm</text>
+                          <text x="160" y="83" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">c = 212.54 mm</text>
+                          <rect x="106" y="58" width="108" height="168" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                          <circle cx="118" cy="70" r="4.5" fill="#64748B"/>
+                          <circle cx="202" cy="70" r="4.5" fill="#64748B"/>
+                          <circle cx="120" cy="216" r="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="140" cy="216" r="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="160" cy="216" r="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="180" cy="216" r="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="200" cy="216" r="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <text x="160" y="198" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">5 No. 10 (40.95 cm²)</text>
+                          <text x="160" y="258" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 400 mm | d_real = 584.35 mm</text>
+                          <rect x="275" y="45" width="280" height="195" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                          <rect x="285" y="55" width="260" height="22" rx="4" fill="#DCFCE7"/>
+                          <text x="415" y="70" fill="#166534" font-family="Inter, sans-serif" font-size="9.5" font-weight="800" text-anchor="middle">SÍNTESIS DE LA SOLUCIÓN (EJEMPLO 7.3)</text>
+                          <text x="295" y="95" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Carga última wu: 60.29 kN/m</text>
+                          <text x="295" y="114" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Momento último Mu: 753.60 kN·m</text>
+                          <text x="295" y="133" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Armadura: 5 No. 10 en 1 capa (bmin = 389.7 mm)</text>
+                          <text x="295" y="152" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Deformación εt = 0.00525 ≥ 0.005 (φ = 0.90)</text>
+                          <text x="295" y="171" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">• Capacidad φMn = 764.68 kN·m ≥ Mu</text>
+                          <rect x="295" y="190" width="240" height="26" rx="4" fill="#15803D"/>
+                          <text x="415" y="207" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">D/C = 0.986 ≤ 1.00 (✓ Diseño Aprobado)</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.3b:</strong> Esquema final de solución del Ejemplo 7.3: Sección $400 \times 650\text{ mm}$ con $5\text{ barras No. 10}$ en una sola capa, bloque de Whitney $a = 180.66\text{ mm}$ y capacidad verificada $\phi M_n = 764.68\text{ kN}\cdot\text{m} \ge M_u = 753.60\text{ kN}\cdot\text{m}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -4643,58 +4690,80 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.4 EJEMPLO RESUELTO 4 — REVISIÓN 2 (VIGA RECTANGULAR EN 1 CAPA)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-04" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.4 — REVISIÓN 2 (1 CAPA)</span>
-                <span>Revisión a Flexión de Viga Simplemente Reforzada en 1 Capa ($b = 300\text{ mm}, h = 550\text{ mm}, 3\text{ No. 7}$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.4 (REVISIÓN 2 - 1 CAPA): VIGA SIMPLEMENTE REFORZADA (b = 300, h = 550 mm, 3 No. 7)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-04">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-04')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.4 • REVISIÓN (1 CAPA)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Revisión a Flexión de Viga Simplemente Reforzada en 1 Capa ($300 \times 550\text{ mm}$, 3 No. 7)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-04', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>300 × 550 mm (d = dt = 489.4 mm)</strong></span> <span>⚡ Solicitación: <strong>Mu = 185.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 21 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>3 No. 7 (As = 11.61 cm²)</strong></span> <span>✅ Capacidad: <strong>φMn = 194.80 kN·m (D/C = 0.950, Dúctil)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Revisión de Secciones — Guía Didáctica de 5 Pasos):</strong><br>
-                Una viga interior existente de concreto reforzado tiene un ancho $b = 300\text{ mm}$, altura total $h = 550\text{ mm}$ y luz libre $l_n = 5.50\text{ m}$. La sección cuenta con refuerzo longitudinal en tracción compuesto por <strong>$3\text{ barras No. 7}$</strong> ($d_b = 22.2\text{ mm}, A_b = 3.87\text{ cm}^2$) dispuestas en <strong>una sola capa inferior</strong>, estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$) y recubrimiento libre $r = 40\text{ mm}$. Los materiales son concreto $f'_c = 21\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Verifique mediante los <strong>5 pasos de la Guía Didáctica de Revisión de Secciones</strong> si la viga es capaz de soportar un momento flector mayorado $M_u = 185.0\text{ kN}\cdot\text{m}$.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-04">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-04">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.4a: SECCIÓN EXISTENTE A REVISAR -->
-                <figure class="diagram-figure" style="max-width: 500px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 480 270" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="480" height="270" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="240" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.4: SECCIÓN EXISTENTE A REVISAR (3 No. 7 EN 1 CAPA)
-                    </text>
-                    <rect x="110" y="38" width="120" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="125" y="53" width="90" height="160" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
-                    <circle cx="137" cy="65" r="4.5" fill="#64748B"/>
-                    <circle cx="203" cy="65" r="4.5" fill="#64748B"/>
-                    <circle cx="139" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="170" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="201" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <text x="170" y="185" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">3 No. 7 (11.61 cm²)</text>
-                    <text x="170" y="248" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm</text>
-                    <text x="88" y="133" fill="#475569" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 88, 133)">h = 550 mm</text>
-                    <rect x="260" y="65" width="195" height="135" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="357" y="87" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">DATOS DE AUDITORÍA</text>
-                    <text x="274" y="108" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 21 MPa | fy = 420 MPa</text>
-                    <text x="274" y="126" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• As = 3 × 3.87 = 11.61 cm²</text>
-                    <text x="274" y="144" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• r = 40 mm | Estribo No. 3</text>
-                    <text x="274" y="162" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Luz libre ln = 5.50 m</text>
-                    <text x="274" y="182" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Demanda: Mu = 185.0 kN·m</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.4a:</strong> Sección existente $300 \times 550\text{ mm}$ armada con $3\text{ barras No. 7}$ ($A_s = 11.61\text{ cm}^2$) sometida a revisión estructural bajo $M_u = 185.0\text{ kN}\cdot\text{m}$.
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-04" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.4: Revisión a Flexión de Viga Simplemente Reforzada en 1 Capa ($b = 300\text{ mm}, h = 550\text{ mm}, 3\text{ No. 7}$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Revisión de Secciones — Guía Didáctica de 5 Pasos):</strong> Una viga interior existente de concreto reforzado tiene un ancho $b = 300\text{ mm}$, altura total $h = 550\text{ mm}$ y luz libre $l_n = 5.50\text{ m}$. La sección cuenta con refuerzo longitudinal en tracción compuesto por <strong>$3\text{ barras No. 7}$</strong> ($d_b = 22.2\text{ mm}, A_b = 3.87\text{ cm}^2$) dispuestas en <strong>una sola capa inferior</strong>, estribos cerrados No. 3 ($d_e = 9.5\text{ mm}$) y recubrimiento libre $r = 40\text{ mm}$. Los materiales son concreto $f'_c = 21\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Verifique mediante los <strong>5 pasos de la Guía Didáctica de Revisión de Secciones</strong> si la viga es capaz de soportar un momento flector mayorado $M_u = 185.0\text{ kN}\cdot\text{m}$.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.4a: SECCIÓN EXISTENTE A REVISAR (SOLO DATOS DE ENTRADA) -->
+            <figure class="diagram-figure" style="max-width: 500px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 480 270" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="480" height="270" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="240" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.4: SECCIÓN EXISTENTE A REVISAR (3 No. 7 EN 1 CAPA)
+                </text>
+                <rect x="110" y="38" width="120" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="125" y="53" width="90" height="160" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                <circle cx="137" cy="65" r="4.5" fill="#64748B"/>
+                <circle cx="203" cy="65" r="4.5" fill="#64748B"/>
+                <circle cx="139" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="170" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="201" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <text x="170" y="185" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">3 No. 7 (11.61 cm²)</text>
+                <text x="170" y="248" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm</text>
+                <text x="88" y="133" fill="#475569" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 88, 133)">h = 550 mm</text>
+                <rect x="260" y="65" width="195" height="145" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="357" y="87" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">DATOS DE AUDITORÍA</text>
+                <text x="274" y="108" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 21 MPa | fy = 420 MPa</text>
+                <text x="274" y="126" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• As = 3 × 3.87 = 11.61 cm²</text>
+                <text x="274" y="144" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• r = 40 mm | Estribo No. 3</text>
+                <text x="274" y="162" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Luz libre ln = 5.50 m</text>
+                <text x="274" y="180" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Demanda: Mu = 185.0 kN·m</text>
+                <text x="274" y="198" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• ¿Cumple φMn ≥ Mu?</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.4a:</strong> Esquema inicial del ejercicio de revisión: Sección existente $300 \times 550\text{ mm}$ armada con $3\text{ barras No. 7}$ ($A_s = 11.61\text{ cm}^2$) sometida a revisión estructural bajo $M_u = 185.0\text{ kN}\cdot\text{m}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: REVISAR GEOMETRÍA DE LA SECCIÓN -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -4827,6 +4896,40 @@
                           La sección existente cumple satisfactoriamente todos los requisitos geométricos, de ductilidad y de resistencia a flexión de la NSR-10.
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.4b: ESQUEMA FINAL RESUELTO -->
+                      <figure class="diagram-figure" style="max-width: 540px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 540 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="540" height="280" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.4: SECCIÓN AUDITADA Y CAPACIDAD RESISTENTE VERIFICADA
+                          </text>
+                          <rect x="85" y="42" width="120" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="86" y="43" width="118" height="36" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <text x="145" y="64" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 91.06 mm</text>
+                          <line x1="75" y1="85" x2="215" y2="85" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="4,2"/>
+                          <text x="145" y="96" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" text-anchor="middle">c = 107.13 mm</text>
+                          <rect x="100" y="53" width="90" height="160" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                          <circle cx="114" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="145" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="176" cy="200" r="7.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <text x="145" y="185" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">3 No. 7 (11.61 cm²)</text>
+                          <text x="145" y="250" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 300 mm | d = 489.4 mm</text>
+                          <rect x="245" y="42" width="270" height="195" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                          <rect x="255" y="52" width="250" height="22" rx="4" fill="#DCFCE7"/>
+                          <text x="380" y="67" fill="#166534" font-family="Inter, sans-serif" font-size="9.5" font-weight="800" text-anchor="middle">RESULTADOS DE AUDITORÍA (EJ. 7.4)</text>
+                          <text x="265" y="92" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Cuantía instalada: ρ = 0.00791</text>
+                          <text x="265" y="111" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Deformación neta: εt = 0.01070 ≥ 0.005</text>
+                          <text x="265" y="130" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Factor reducción: φ = 0.90 (Dúctil)</text>
+                          <text x="265" y="149" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Momento nominal: Mn = 216.45 kN·m</text>
+                          <text x="265" y="168" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">• Capacidad: φMn = 194.80 kN·m ≥ 185.0</text>
+                          <rect x="265" y="186" width="230" height="26" rx="4" fill="#15803D"/>
+                          <text x="380" y="203" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">D/C = 0.950 ≤ 1.00 (✓ Cumple)</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.4b:</strong> Esquema final verificado del Ejemplo 7.4: Bloque de compresión $a = 91.06\text{ mm}$, eje neutro $c = 107.13\text{ mm}$, deformación neta $\varepsilon_t = 0.01070$ y capacidad resistente $\phi M_n = 194.80\text{ kN}\cdot\text{m} \ge M_u = 185.0\text{ kN}\cdot\text{m}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -4836,65 +4939,81 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.5 EJEMPLO RESUELTO 5 — DISEÑO EN 2 CAPAS DE TRACCIÓN
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-05" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.5 — DISEÑO 2 CAPAS</span>
-                <span>Diseño a Flexión de Viga con 2 Capas en Tracción ($b = 300\text{ mm}, h = 600\text{ mm}, M_u = 420.0\text{ kN}\cdot\text{m}$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.5 (DISEÑO EN 2 CAPAS DE TRACCIÓN)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-05">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-05')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.5 • DISEÑO (2 CAPAS)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Diseño a Flexión de Viga con 2 Capas en Tracción ($300 \times 600\text{ mm}, M_u = 420.0\text{ kN}\cdot\text{m}$)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-05', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>300 × 600 mm (d = 517.64 mm, dt = 537.80 mm)</strong></span> <span>⚡ Momento: <strong>Mu = 420.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>5 No. 8 en 2 capas (3 + 2, As = 25.50 cm²)</strong></span> <span>✅ Estado: <strong>Dúctil ($\varepsilon_t = 0.00614$, $\phi = 0.90$)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Diseño a Flexión en 2 Capas — Guía Didáctica de 5 Pasos):</strong><br>
-                Diseñe el refuerzo longitudinal en tracción de una viga rectangular simplemente reforzada de ancho $b = 300\text{ mm}$ y altura total $h = 600\text{ mm}$, sometida a un momento flector mayorado $M_u = 420.0\text{ kN}\cdot\text{m}$. Debido a la restricción arquitectónica de ancho ($b = 300\text{ mm}$) y a la magnitud del momento, se prevé disponer el acero de tracción en <strong>dos capas</strong>. Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$, estribos No. 3 ($\phi_{\text{est}} = 9.5\text{ mm}$) y separadores verticales de $s_v = 25.0\text{ mm}$ entre capas. Aplique los <strong>5 pasos de la Guía Didáctica de Diseño a Flexión</strong> estimando en el Paso 1 $d \approx h - 8.5\text{ cm}$ para 2 filas de barras.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-05">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-05">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.5a: SECCIÓN DE DISEÑO EN 2 CAPAS -->
-                <figure class="diagram-figure" style="max-width: 520px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 500 275" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="500" height="275" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="250" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.5: DISEÑO CON 2 CAPAS DE TRACCIÓN (d ≈ h − 8.5 cm = 515 mm)
-                    </text>
-                    <rect x="105" y="38" width="120" height="195" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="120" y="53" width="90" height="165" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
-                    <circle cx="132" cy="65" r="4.5" fill="#64748B"/>
-                    <circle cx="198" cy="65" r="4.5" fill="#64748B"/>
-                    <!-- 2 capas preliminares -->
-                    <line x1="105" y1="186" x2="225" y2="186" stroke="#1D4ED8" stroke-width="1.2" stroke-dasharray="3,2"/>
-                    <line x1="105" y1="206" x2="225" y2="206" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="3,2"/>
-                    <circle cx="136" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
-                    <circle cx="165" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
-                    <circle cx="194" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
-                    <circle cx="136" cy="186" r="7.5" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
-                    <circle cx="194" cy="186" r="7.5" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
-                    <line x1="95" y1="194" x2="235" y2="194" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4,3"/>
-                    <text x="165" y="172" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">Centroide d ≈ 515 mm</text>
-                    <text x="165" y="252" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm</text>
-                    <text x="82" y="135" fill="#475569" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 82, 135)">h = 600 mm</text>
-                    <rect x="255" y="62" width="220" height="145" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="365" y="84" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">PARÁMETROS DE DISEÑO (2 FILAS)</text>
-                    <text x="268" y="105" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Mu = 420.0 kN·m</text>
-                    <text x="268" y="123" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
-                    <text x="268" y="141" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• d ≈ h − 8.5 cm = 515 mm</text>
-                    <text x="268" y="159" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5">• Capa 1 (extrema): dt &gt; d</text>
-                    <text x="268" y="177" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5">• Separador vertical sv = 25 mm</text>
-                    <text x="268" y="195" fill="#16A34A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Diseño: 5 No. 8 (3 + 2)</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.5a:</strong> Esquema de diseño en dos capas de tracción para una sección $300 \times 600\text{ mm}$ bajo $M_u = 420.0\text{ kN}\cdot\text{m}$, con estimación inicial $d \approx h - 8.5\text{ cm} = 515\text{ mm}$ y distinción entre $d$ (centroide) y $d_t$ (capa extrema).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-05" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.5: Diseño a Flexión de Viga con 2 Capas en Tracción ($b = 300\text{ mm}, h = 600\text{ mm}, M_u = 420.0\text{ kN}\cdot\text{m}$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Diseño a Flexión en 2 Capas — Guía Didáctica de 5 Pasos):</strong> Diseñe el refuerzo longitudinal en tracción de una viga rectangular simplemente reforzada de ancho $b = 300\text{ mm}$ y altura total $h = 600\text{ mm}$, sometida a un momento flector mayorado $M_u = 420.0\text{ kN}\cdot\text{m}$. Debido a la restricción arquitectónica de ancho ($b = 300\text{ mm}$) y a la magnitud del momento, se prevé disponer el acero de tracción en <strong>dos capas</strong>. Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$, estribos No. 3 ($\phi_{\text{est}} = 9.5\text{ mm}$) y separadores verticales de $s_v = 25.0\text{ mm}$ entre capas. Aplique los <strong>5 pasos de la Guía Didáctica de Diseño a Flexión</strong> estimando en el Paso 1 $d \approx h - 8.5\text{ cm}$ para 2 filas de barras.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.5a: ESQUEMA INICIAL DE DISEÑO EN 2 CAPAS (SOLO DATOS DE ENTRADA) -->
+            <figure class="diagram-figure" style="max-width: 520px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 500 275" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="500" height="275" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="250" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.5: ESQUEMA INICIAL DE DISEÑO CON 2 CAPAS (DATOS Y GEOMETRÍA)
+                </text>
+                <rect x="105" y="38" width="120" height="195" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="120" y="53" width="90" height="165" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                <circle cx="132" cy="65" r="4.5" fill="#64748B"/>
+                <circle cx="198" cy="65" r="4.5" fill="#64748B"/>
+                <rect x="126" y="176" width="78" height="36" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4,3"/>
+                <text x="165" y="192" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">¿As = ? (2 Capas)</text>
+                <text x="165" y="205" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle">sv = 25.0 mm</text>
+                <line x1="95" y1="194" x2="235" y2="194" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <text x="165" y="168" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">d ≈ h − 8.5 cm = 515 mm</text>
+                <text x="165" y="252" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm</text>
+                <text x="82" y="135" fill="#475569" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 82, 135)">h = 600 mm</text>
+                <rect x="255" y="62" width="220" height="145" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="365" y="84" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">PARÁMETROS INICIALES (2 FILAS)</text>
+                <text x="268" y="105" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Mu = 420.0 kN·m</text>
+                <text x="268" y="123" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
+                <text x="268" y="141" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• d ≈ h − 8.5 cm = 515 mm</text>
+                <text x="268" y="159" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• r = 40 mm | Estribo No. 3</text>
+                <text x="268" y="177" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5">• Separador vertical sv = 25 mm</text>
+                <text x="268" y="195" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Objetivo: Diseñar As en 2 capas</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.5a:</strong> Esquema inicial del ejercicio de diseño en dos capas: Sección $300 \times 600\text{ mm}$ bajo $M_u = 420.0\text{ kN}\cdot\text{m}$, con estimación inicial de peralte $d \approx h - 8.5\text{ cm} = 515\text{ mm}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: GEOMETRÍA Y ESTIMACIÓN DE PERALTE (2 FILAS) -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -5026,6 +5145,45 @@
                           Sección $300 \times 600\text{ mm}$ armada con <strong>$5\text{ No. 8}$ en 2 capas</strong> ($3\text{ No. 8}$ abajo + $2\text{ No. 8}$ arriba, $A_{s,\text{col}} = 25.50\text{ cm}^2$). Peraltes reales: $d_{\text{real}} = 517.64\text{ mm}$ y $d_t = 537.80\text{ mm}$. Capacidad $\phi M_n = 426.67\text{ kN}\cdot\text{m} \ge 420.0\text{ kN}\cdot\text{m}$ ($\text{Ratio D/C} = 0.984 \le 1.00$).
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.5b: ESQUEMA FINAL DE LA SOLUCIÓN EN 2 CAPAS -->
+                      <figure class="diagram-figure" style="max-width: 540px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 540 285" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="540" height="285" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.5: SECCIÓN FINAL EN 2 CAPAS (3 No. 8 + 2 No. 8) Y VERIFICACIÓN
+                          </text>
+                          <rect x="95" y="38" width="120" height="195" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="96" y="39" width="118" height="49" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <text x="155" y="66" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 150.0 mm</text>
+                          <rect x="110" y="53" width="90" height="165" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                          <circle cx="122" cy="65" r="4.5" fill="#64748B"/>
+                          <circle cx="188" cy="65" r="4.5" fill="#64748B"/>
+                          <line x1="95" y1="186" x2="215" y2="186" stroke="#1D4ED8" stroke-width="1.2" stroke-dasharray="3,2"/>
+                          <line x1="95" y1="206" x2="215" y2="206" stroke="#DC2626" stroke-width="1.2" stroke-dasharray="3,2"/>
+                          <circle cx="126" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
+                          <circle cx="155" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
+                          <circle cx="184" cy="206" r="7.5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.8"/>
+                          <circle cx="126" cy="186" r="7.5" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
+                          <circle cx="184" cy="186" r="7.5" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
+                          <line x1="85" y1="194" x2="225" y2="194" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4,3"/>
+                          <text x="155" y="172" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">d_real = 517.64 mm</text>
+                          <text x="155" y="252" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 300 mm | dt = 537.8 mm</text>
+                          <rect x="245" y="42" width="275" height="200" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                          <rect x="255" y="52" width="255" height="22" rx="4" fill="#DCFCE7"/>
+                          <text x="382" y="67" fill="#166534" font-family="Inter, sans-serif" font-size="9.5" font-weight="800" text-anchor="middle">SOLUCIÓN DETALLADA (EJEMPLO 7.5)</text>
+                          <text x="265" y="92" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 1: 3 No. 8 (dt = 537.80 mm)</text>
+                          <text x="265" y="111" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 2: 2 No. 8 (d2 = 487.40 mm)</text>
+                          <text x="265" y="130" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Centroide real: d_real = 517.64 mm</text>
+                          <text x="265" y="149" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Deformación: εt = 0.00614 (φ = 0.90)</text>
+                          <text x="265" y="168" fill="#166534" font-family="JetBrains Mono, monospace" font-size="10" font-weight="800">• Capacidad: φMn = 426.67 kN·m ≥ 420.0</text>
+                          <rect x="265" y="188" width="235" height="26" rx="4" fill="#15803D"/>
+                          <text x="382" y="205" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">D/C = 0.984 ≤ 1.00 (✓ Cumple)</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.5b:</strong> Esquema final verificado del Ejemplo 7.5: Disposición constructiva de $5\text{ barras No. 8}$ en dos capas ($3 + 2$), peralte centroide $d_{\text{real}} = 517.64\text{ mm}$, peralte extremo $d_t = 537.80\text{ mm}$ y capacidad $\phi M_n = 426.67\text{ kN}\cdot\text{m}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -5035,66 +5193,83 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.6 EJEMPLO RESUELTO 6 — REVISIÓN EN 2 CAPAS DE TRACCIÓN (ZONA DE TRANSICIÓN)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-06" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.6 — REVISIÓN 2 CAPAS</span>
-                <span>Revisión de Viga con 2 Capas de Acero en Tracción ($d \neq d_t$) e Interpolación de $\phi$ en Zona de Transición</span>
+        <!-- ===============================================================
+             EJEMPLO 7.6 (REVISIÓN EN 2 CAPAS DE TRACCIÓN - ZONA DE TRANSICIÓN)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-06">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-06')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.6 • REVISIÓN (2 CAPAS • TRANSICIÓN)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Revisión de Viga con 2 Capas en Tracción ($d \neq d_t$) e Interpolación de $\phi$ en Transición</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-06', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>300 × 600 mm (d = 521.0 mm, dt = 537.8 mm)</strong></span> <span>⚡ Solicitación: <strong>Mu = 465.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>6 No. 8 (4 + 2, As = 30.60 cm²)</strong></span> <span>✅ Estado: <strong>Transición ($\varepsilon_t = 0.00462$, $\phi = 0.868$, D/C = 0.967)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Revisión de Secciones en 2 Capas — Guía Didáctica de 5 Pasos):</strong><br>
-                Una viga rectangular existente de ancho $b = 300\text{ mm}$, altura total $h = 600\text{ mm}$ y luz libre $l_n = 6.50\text{ m}$ está reforzada en tracción con <strong>$6\text{ barras No. 8}$</strong> ($d_b = 25.4\text{ mm}, A_b = 5.10\text{ cm}^2$) dispuestas en <strong>dos capas</strong>: una primera capa inferior (extrema) con $4\text{ No. 8}$ y una segunda capa superior con $2\text{ No. 8}$, separadas libremente en sentido vertical por $s_v = 25\text{ mm}$ (NSR-10 C.7.6.2). El recubrimiento libre es $r = 40\text{ mm}$ y cuenta con estribos No. 3 ($d_e = 9.5\text{ mm}$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Aplique los <strong>5 pasos de la Guía Didáctica de Revisión de Secciones</strong> para verificar si la viga soporta un momento mayorado $M_u = 465.0\text{ kN}\cdot\text{m}$.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-06">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-06">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.6a: SECCIÓN CON 2 CAPAS EN TRACCIÓN (d vs dt) -->
-                <figure class="diagram-figure" style="max-width: 560px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 540 290" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="540" height="290" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.6: SECCIÓN CON 2 CAPAS EN TRACCIÓN (d = 521.0 mm vs. dt = 537.8 mm)
-                    </text>
-                    <rect x="115" y="38" width="126" height="210" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="131" y="54" width="94" height="178" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
-                    <circle cx="143" cy="66" r="4.5" fill="#64748B"/>
-                    <circle cx="213" cy="66" r="4.5" fill="#64748B"/>
-                    <circle cx="144" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-                    <circle cx="167" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-                    <circle cx="189" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-                    <circle cx="212" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-                    <circle cx="144" cy="197" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                    <circle cx="212" cy="197" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                    <line x1="105" y1="210" x2="255" y2="210" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4,3"/>
-                    <line x1="78" y1="38" x2="78" y2="210" stroke="#D97706" stroke-width="1.5"/>
-                    <text x="68" y="125" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 68, 125)">d = 521.0 mm (Centroide)</text>
-                    <line x1="100" y1="38" x2="100" y2="218" stroke="#DC2626" stroke-width="1.5"/>
-                    <text x="91" y="130" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 91, 130)">dt = 537.8 mm (Extrema)</text>
-                    <text x="178" y="268" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm | h = 600 mm</text>
-                    <rect x="275" y="55" width="245" height="175" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="397" y="76" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">DISTINCIÓN NORMATIVA: d vs. dt</text>
-                    <text x="288" y="98" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 1 (4 No. 8): d1 = dt = 537.8 mm</text>
-                    <text x="288" y="116" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 2 (2 No. 8): d2 = 487.4 mm</text>
-                    <text x="288" y="134" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Centroide d = 521.0 mm (para Mn)</text>
-                    <text x="288" y="154" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• As,tot = 6 × 5.10 = 30.60 cm²</text>
-                    <text x="288" y="172" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• Separación vertical sv = 25 mm</text>
-                    <text x="288" y="190" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• εt = 0.00462 (Transición: φ = 0.868)</text>
-                    <text x="288" y="210" fill="#16A34A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• φMn = 480.8 kN·m ≥ Mu = 465.0 kN·m</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.6a:</strong> Disposición constructiva en dos capas ($4\text{ No. 8}$ en Capa 1 inferior y $2\text{ No. 8}$ en Capa 2 superior), diferenciando $d = 521.0\text{ mm}$ (para brazo de palanca de $M_n$) y $d_t = 537.8\text{ mm}$ (para calcular $\varepsilon_t$ y $\phi$).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-06" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.6: Revisión de Viga con 2 Capas de Acero en Tracción ($d \neq d_t$) e Interpolación de $\phi$ en Zona de Transición
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Revisión de Secciones en 2 Capas — Guía Didáctica de 5 Pasos):</strong> Una viga rectangular existente de ancho $b = 300\text{ mm}$, altura total $h = 600\text{ mm}$ y luz libre $l_n = 6.50\text{ m}$ está reforzada en tracción con <strong>$6\text{ barras No. 8}$</strong> ($d_b = 25.4\text{ mm}, A_b = 5.10\text{ cm}^2$) dispuestas en <strong>dos capas</strong>: una primera capa inferior (extrema) con $4\text{ No. 8}$ y una segunda capa superior con $2\text{ No. 8}$, separadas libremente en sentido vertical por $s_v = 25\text{ mm}$ (NSR-10 C.7.6.2). El recubrimiento libre es $r = 40\text{ mm}$ y cuenta con estribos No. 3 ($d_e = 9.5\text{ mm}$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Aplique los <strong>5 pasos de la Guía Didáctica de Revisión de Secciones</strong> para verificar si la viga soporta un momento mayorado $M_u = 465.0\text{ kN}\cdot\text{m}$.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.6a: SECCIÓN EXISTENTE EN 2 CAPAS A REVISAR (SOLO DATOS DE ENTRADA) -->
+            <figure class="diagram-figure" style="max-width: 540px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 540 280" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="540" height="280" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.6: SECCIÓN EXISTENTE CON 6 No. 8 EN 2 CAPAS (4 ABAJO + 2 ARRIBA)
+                </text>
+                <rect x="115" y="38" width="126" height="205" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="131" y="54" width="94" height="173" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                <circle cx="143" cy="66" r="4.5" fill="#64748B"/>
+                <circle cx="213" cy="66" r="4.5" fill="#64748B"/>
+                <circle cx="144" cy="213" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                <circle cx="167" cy="213" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                <circle cx="189" cy="213" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                <circle cx="212" cy="213" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                <circle cx="144" cy="192" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                <circle cx="212" cy="192" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                <text x="178" y="176" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Capa 2: 2 No. 8</text>
+                <text x="178" y="236" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Capa 1: 4 No. 8</text>
+                <text x="178" y="262" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm | h = 600 mm</text>
+                <rect x="275" y="52" width="245" height="175" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="397" y="74" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10.5" font-weight="800" text-anchor="middle">DATOS DE AUDITORÍA (2 CAPAS)</text>
+                <text x="288" y="96" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
+                <text x="288" y="114" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 1 (inferior): 4 No. 8</text>
+                <text x="288" y="132" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 2 (superior): 2 No. 8</text>
+                <text x="288" y="150" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• r = 40 mm | Est. #3 | sv = 25 mm</text>
+                <text x="288" y="168" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Demanda: Mu = 465.0 kN·m</text>
+                <text x="288" y="188" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• ¿d = ? ¿dt = ? ¿φ = ? ¿φMn = ?</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.6a:</strong> Esquema inicial del ejercicio de revisión en dos capas: Sección $300 \times 600\text{ mm}$ con $4\text{ No. 8}$ en la primera capa y $2\text{ No. 8}$ en la segunda capa ($s_v = 25\text{ mm}$), sometida a $M_u = 465.0\text{ kN}\cdot\text{m}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: REVISAR GEOMETRÍA DE LA SECCIÓN -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -5225,6 +5400,46 @@
                           Incluso tras aplicar la reducción del factor $\phi = 0.868$ por encontrarse en zona de transición ($\varepsilon_t = 0.00462$), la sección resiste satisfactoriamente el momento mayorado $M_u = 465.0\text{ kN}\cdot\text{m}$.
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.6b: ESQUEMA FINAL RESUELTO CON d vs dt Y TRANSICIÓN -->
+                      <figure class="diagram-figure" style="max-width: 560px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 540 290" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="540" height="290" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.6: SOLUCIÓN CON 2 CAPAS (d = 521.0 mm vs. dt = 537.8 mm) Y TRANSICIÓN
+                          </text>
+                          <rect x="115" y="38" width="126" height="210" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="116" y="39" width="124" height="58" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <text x="178" y="70" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 180.0 mm</text>
+                          <rect x="131" y="54" width="94" height="178" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                          <circle cx="143" cy="66" r="4.5" fill="#64748B"/>
+                          <circle cx="213" cy="66" r="4.5" fill="#64748B"/>
+                          <circle cx="144" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                          <circle cx="167" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                          <circle cx="189" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                          <circle cx="212" cy="218" r="7" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                          <circle cx="144" cy="197" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                          <circle cx="212" cy="197" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                          <line x1="105" y1="210" x2="255" y2="210" stroke="#D97706" stroke-width="1.8" stroke-dasharray="4,3"/>
+                          <line x1="78" y1="38" x2="78" y2="210" stroke="#D97706" stroke-width="1.5"/>
+                          <text x="68" y="125" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 68, 125)">d = 521.0 mm (Centroide)</text>
+                          <line x1="100" y1="38" x2="100" y2="218" stroke="#DC2626" stroke-width="1.5"/>
+                          <text x="91" y="130" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(-90, 91, 130)">dt = 537.8 mm (Extrema)</text>
+                          <text x="178" y="268" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 300 mm | h = 600 mm</text>
+                          <rect x="275" y="55" width="245" height="175" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                          <text x="397" y="76" fill="#166534" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">RESULTADOS VERIFICADOS (EJ. 7.6)</text>
+                          <text x="288" y="98" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 1 (4 No. 8): d1 = dt = 537.8 mm</text>
+                          <text x="288" y="116" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Capa 2 (2 No. 8): d2 = 487.4 mm</text>
+                          <text x="288" y="134" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Centroide d = 521.0 mm (para Mn)</text>
+                          <text x="288" y="154" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• As,tot = 6 × 5.10 = 30.60 cm²</text>
+                          <text x="288" y="172" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• εt = 0.00462 (Transición: φ = 0.868)</text>
+                          <text x="288" y="192" fill="#166534" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="800">• φMn = 480.8 kN·m ≥ Mu = 465.0 kN·m</text>
+                          <text x="288" y="212" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• D/C = 0.967 ≤ 1.00 (✓ Cumple)</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.6b:</strong> Esquema final de solución del Ejemplo 7.6: Distinción entre $d = 521.0\text{ mm}$ (brazo de palanca de $M_n = 553.92\text{ kN}\cdot\text{m}$) y $d_t = 537.8\text{ mm}$ (deformación extrema $\varepsilon_t = 0.00462 \implies \phi = 0.868$), con $\phi M_n = 480.80\text{ kN}\cdot\text{m} \ge M_u$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -5234,84 +5449,77 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.7 EJEMPLO RESUELTO 7 — DISEÑO VIGA DOBLEMENTE REFORZADA (A's FLUYE)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-07" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.7 — DOBLEMENTE REFORZADA 1</span>
-                <span>Diseño de Viga Doblemente Reforzada con Acero a Compresión Fluyendo ($b = 350\text{ mm}, h = 600\text{ mm}, M_u = 780.0\text{ kN}\cdot\text{m}$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.7 (DISEÑO VIGA DOBLEMENTE REFORZADA - A's FLUYE)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-07">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-07')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.7 • DISEÑO DOBLE REFUERZO (A's FLUYE)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Diseño de Viga Doblemente Reforzada con Acero a Compresión Fluyendo ($350 \times 600\text{ mm}, M_u = 780.0\text{ kN}\cdot\text{m}$)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-07', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>350 × 600 mm (d = 515 mm, d' = 60 mm)</strong></span> <span>⚡ Momento: <strong>Mu = 780.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>As = 8 No. 9 + A's = 3 No. 8</strong></span> <span>✅ Estado: <strong>Fluencia A's ($\varepsilon'_s = 0.00211 \ge \varepsilon_y$, $\phi = 0.90$)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Diseño de Viga Doblemente Reforzada — Guía de 5 Pasos):</strong><br>
-                Una viga arquitectónica tiene dimensiones restringidas $b = 350\text{ mm}$ y $h = 600\text{ mm}$, y debe resistir un momento flector mayorado $M_u = 780.0\text{ kN}\cdot\text{m}$ manteniendo comportamiento controlado por tracción ($\varepsilon_t \ge 0.005 \implies \phi = 0.90$). Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$ y estribos No. 3. Como el acero en tracción requerirá <strong>2 capas</strong>, se estima $d \approx h - 8.5\text{ cm} = 515\text{ mm}$ (con capa extrema en $d_t = 540\text{ mm}$) y recubrimiento al centroide del acero de compresión $d' = 60\text{ mm}$. Diseñe el refuerzo en tracción ($A_s$) y en compresión ($A'_s$).
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-07">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-07">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.7a: PRINCIPIO DE SUPERPOSICIÓN EN VIGA DOBLEMENTE REFORZADA -->
-                <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 580 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="580" height="250" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.7: DESCOMPOSICIÓN DE VIGA DOBLEMENTE REFORZADA (Mu = Mu1 + Mu2)
-                    </text>
-                    <!-- Sección Total -->
-                    <rect x="35" y="42" width="110" height="165" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <circle cx="58" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
-                    <circle cx="90" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
-                    <circle cx="122" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
-                    <text x="90" y="76" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's (3 No. 8)</text>
-                    <circle cx="54" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="78" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="102" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="126" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="54" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="78" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="102" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="126" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <text x="90" y="158" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As (8 No. 9)</text>
-                    <text x="90" y="224" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu = 780.0 kN·m</text>
-                    <text x="90" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">350 × 600 mm</text>
-                    <text x="172" y="128" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">=</text>
-                    <!-- Sub-sistema 1 -->
-                    <rect x="200" y="42" width="110" height="165" rx="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.8"/>
-                    <rect x="201" y="43" width="108" height="48" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
-                    <text x="255" y="70" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Cc (a1 = 172 mm)</text>
-                    <line x1="215" y1="180" x2="295" y2="180" stroke="#D97706" stroke-width="3"/>
-                    <text x="255" y="170" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As1 = 34.12 cm²</text>
-                    <text x="255" y="224" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu1 = 553.6 kN·m</text>
-                    <text x="255" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Par Concreto-Acero</text>
-                    <text x="338" y="128" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">+</text>
-                    <!-- Sub-sistema 2 -->
-                    <rect x="365" y="42" width="110" height="165" rx="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.8"/>
-                    <line x1="380" y1="60" x2="460" y2="60" stroke="#1D4ED8" stroke-width="3"/>
-                    <text x="420" y="76" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's = 13.17 cm²</text>
-                    <line x1="380" y1="180" x2="460" y2="180" stroke="#D97706" stroke-width="3"/>
-                    <text x="420" y="170" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As2 = 13.17 cm²</text>
-                    <text x="420" y="125" fill="#334155" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">z2 = d − d' = 455 mm</text>
-                    <text x="420" y="224" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu2 = 226.5 kN·m</text>
-                    <text x="420" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Par Acero-Acero</text>
-                    <!-- Resumen lateral -->
-                    <rect x="490" y="65" width="78" height="120" rx="5" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
-                    <text x="529" y="88" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">ε's = 0.00211</text>
-                    <text x="529" y="104" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">≥ εy (Fluye)</text>
-                    <text x="529" y="128" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">εt = 0.0050</text>
-                    <text x="529" y="144" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">φ = 0.90</text>
-                    <text x="529" y="168" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">D/C = 0.961</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.7a:</strong> Superposición mecánica en el Ejemplo 7.7: Sub-sistema 1 (bloque de concreto en el límite dúctil $\varepsilon_t = 0.005$, $M_{u1} = 553.55\text{ kN}\cdot\text{m}$) más Sub-sistema 2 (cupla de aceros $A'_s$ y $A_{s2}$, $M_{u2} = 226.45\text{ kN}\cdot\text{m}$).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-07" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.7: Diseño de Viga Doblemente Reforzada con Acero a Compresión Fluyendo ($b = 350\text{ mm}, h = 600\text{ mm}, M_u = 780.0\text{ kN}\cdot\text{m}$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Diseño de Viga Doblemente Reforzada — Guía de 5 Pasos):</strong> Una viga arquitectónica tiene dimensiones restringidas $b = 350\text{ mm}$ y $h = 600\text{ mm}$, y debe resistir un momento flector mayorado $M_u = 780.0\text{ kN}\cdot\text{m}$ manteniendo comportamiento controlado por tracción ($\varepsilon_t \ge 0.005 \implies \phi = 0.90$). Materiales: concreto $f'_c = 28\text{ MPa}$ y acero $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Recubrimiento libre $r = 40\text{ mm}$ y estribos No. 3. Como el acero en tracción requerirá <strong>2 capas</strong>, se estima $d \approx h - 8.5\text{ cm} = 515\text{ mm}$ (con capa extrema en $d_t = 540\text{ mm}$) y recubrimiento al centroide del acero de compresión $d' = 60\text{ mm}$. Diseñe el refuerzo en tracción ($A_s$) y en compresión ($A'_s$).
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.7a: ESQUEMA INICIAL DEL EJERCICIO DE DISEÑO DOBLEMENTE REFORZADO -->
+            <figure class="diagram-figure" style="max-width: 520px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 500 275" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="500" height="275" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="250" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.7: ESQUEMA INICIAL DE VIGA CON PERALTE RESTRINGIDO (350 × 600 mm)
+                </text>
+                <rect x="95" y="38" width="130" height="195" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="110" y="53" width="100" height="165" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                <rect x="118" y="58" width="84" height="24" rx="4" fill="rgba(37, 99, 235, 0.08)" stroke="#1D4ED8" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <text x="160" y="73" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">¿A's = ? (d' = 60 mm)</text>
+                <rect x="118" y="176" width="84" height="36" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <text x="160" y="196" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">¿As = ? (2 Capas)</text>
+                <text x="160" y="252" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" text-anchor="middle">b = 350 mm | h = 600 mm</text>
+                <rect x="255" y="52" width="225" height="165" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="367" y="74" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">DATOS Y RESTRICCIONES (EJ. 7.7)</text>
+                <text x="268" y="96" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Momento último: Mu = 780.0 kN·m</text>
+                <text x="268" y="114" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
+                <text x="268" y="132" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• d ≈ 515 mm | dt = 540 mm</text>
+                <text x="268" y="150" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Recubrimiento compresión: d' = 60 mm</text>
+                <text x="268" y="168" fill="#059669" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Exigencia: εt ≥ 0.005 (φ = 0.90)</text>
+                <text x="268" y="188" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Objetivo: Diseñar As y A's</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.7a:</strong> Esquema inicial del ejercicio de diseño doblemente reforzado: Sección con dimensiones arquitectónicas restringidas ($350 \times 600\text{ mm}$, $d \approx 515\text{ mm}, d_t = 540\text{ mm}, d' = 60\text{ mm}$) bajo $M_u = 780.0\text{ kN}\cdot\text{m}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: GEOMETRÍA Y ESTIMACIÓN DE PERALTES -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -5441,6 +5649,58 @@
                           Sección $350 \times 600\text{ mm}$ armada con <strong>$8\text{ No. 9}$ en tracción</strong> ($2$ capas de $4$, $A_{s,\text{col}} = 51.60\text{ cm}^2$) y <strong>$3\text{ No. 8}$ en compresión</strong> ($A'_{s,\text{col}} = 15.30\text{ cm}^2$), confinadas con estribos cerrados No. 3 según NSR-10 C.7.10.5 ($\text{Ratio D/C} = 0.961 \le 1.00$).
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.7b: ESQUEMA FINAL DE SUPERPOSICIÓN Y SOLUCIÓN -->
+                      <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 580 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="580" height="250" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.7: SOLUCIÓN POR SUPERPOSICIÓN (Mu = Mu1 + Mu2) Y DESPIECE FINAL
+                          </text>
+                          <rect x="35" y="42" width="110" height="165" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <circle cx="58" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
+                          <circle cx="90" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
+                          <circle cx="122" cy="60" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.8"/>
+                          <text x="90" y="76" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's (3 No. 8)</text>
+                          <circle cx="54" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="78" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="102" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="126" cy="188" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="54" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="78" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="102" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="126" cy="171" r="6" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <text x="90" y="158" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As (8 No. 9)</text>
+                          <text x="90" y="224" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu = 780.0 kN·m</text>
+                          <text x="90" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">350 × 600 mm</text>
+                          <text x="172" y="128" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">=</text>
+                          <rect x="200" y="42" width="110" height="165" rx="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.8"/>
+                          <rect x="201" y="43" width="108" height="48" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <text x="255" y="70" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Cc (a1 = 172 mm)</text>
+                          <line x1="215" y1="180" x2="295" y2="180" stroke="#D97706" stroke-width="3"/>
+                          <text x="255" y="170" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As1 = 34.12 cm²</text>
+                          <text x="255" y="224" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu1 = 553.6 kN·m</text>
+                          <text x="255" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Par Concreto-Acero</text>
+                          <text x="338" y="128" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">+</text>
+                          <rect x="365" y="42" width="110" height="165" rx="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.8"/>
+                          <line x1="380" y1="60" x2="460" y2="60" stroke="#1D4ED8" stroke-width="3"/>
+                          <text x="420" y="76" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's = 13.17 cm²</text>
+                          <line x1="380" y1="180" x2="460" y2="180" stroke="#D97706" stroke-width="3"/>
+                          <text x="420" y="170" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As2 = 13.17 cm²</text>
+                          <text x="420" y="125" fill="#334155" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">z2 = d − d' = 455 mm</text>
+                          <text x="420" y="224" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu2 = 226.5 kN·m</text>
+                          <text x="420" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">Par Acero-Acero</text>
+                          <rect x="490" y="65" width="78" height="120" rx="5" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.2"/>
+                          <text x="529" y="88" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">ε's = 0.00211</text>
+                          <text x="529" y="104" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">≥ εy (Fluye)</text>
+                          <text x="529" y="128" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">εt = 0.0050</text>
+                          <text x="529" y="144" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">φ = 0.90</text>
+                          <text x="529" y="168" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">D/C = 0.961</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.7b:</strong> Esquema final de solución del Ejemplo 7.7: Superposición mecánica Sub-sistema 1 ($M_{u1} = 553.55\text{ kN}\cdot\text{m}$) + Sub-sistema 2 ($M_{u2} = 226.45\text{ kN}\cdot\text{m}$) y armado comercial $8\text{ No. 9}$ + $3\text{ No. 8}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -5450,73 +5710,83 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.8 EJEMPLO RESUELTO 8 — REVISIÓN VIGA DOBLEMENTE REFORZADA (A's NO FLUYE: f's < fy)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-08" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.8 — DOBLEMENTE REFORZADA 2</span>
-                <span>Revisión de Viga Doblemente Reforzada cuando $A'_s$ NO Fluye ($f'_s < f_y$) — Ecuación Cuadrática de Compatibilidad</span>
+        <!-- ===============================================================
+             EJEMPLO 7.8 (REVISIÓN VIGA DOBLEMENTE REFORZADA - A's NO FLUYE: f's < fy)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-08">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-08')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.8 • REVISIÓN DOBLE REFUERZO (f's &lt; fy)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Revisión de Viga Doblemente Reforzada cuando $A'_s$ NO Fluye ($f'_s < f_y$) — Ecuación Cuadrática</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-08', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>300 × 585 mm (d = 520 mm, d' = 60 mm)</strong></span> <span>⚡ Solicitación: <strong>Mu = 430.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>As = 5 No. 8 + A's = 3 No. 6</strong></span> <span>✅ Estado: <strong>A's Elástico ($f'_s = 294\text{ MPa}$, $\phi M_n = 449.8\text{ kN}\cdot\text{m}$)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Revisión de Viga Doblemente Reforzada — Guía de 5 Pasos):</strong><br>
-                Una viga rectangular existente de ancho $b = 300\text{ mm}$, altura total $h = 585\text{ mm}$, peralte efectivo $d = d_t = 520\text{ mm}$ y recubrimiento al centroide de compresión $d' = 60\text{ mm}$ está armada con <strong>$5\text{ barras No. 8}$ en tracción</strong> ($A_s = 25.50\text{ cm}^2 = 2\,550\text{ mm}^2$) y <strong>$3\text{ barras No. 6}$ en compresión</strong> ($A'_s = 8.52\text{ cm}^2 = 852\text{ mm}^2$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Verifique mediante los <strong>5 pasos de Revisión de Secciones</strong> su capacidad de diseño $\phi M_n$ ante un momento mayorado $M_u = 430.0\text{ kN}\cdot\text{m}$, comprobando rigurosamente si el acero a compresión alcanza o no la fluencia.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-08">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-08">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.8a: PERFIL DE DEFORMACIONES CON A's ELÁSTICO -->
-                <figure class="diagram-figure" style="max-width: 560px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 540 270" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="540" height="270" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.8: COMPATIBILIDAD CON A's EN RANGO ELÁSTICO (ε's = 0.00147 &lt; εy = 0.0021)
-                    </text>
-                    <rect x="45" y="42" width="115" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="46" y="43" width="113" height="39" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
-                    <line x1="35" y1="88" x2="335" y2="88" stroke="#64748B" stroke-width="1.5" stroke-dasharray="5,3"/>
-                    <text x="195" y="83" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Eje Neutro Real c = 117.6 mm</text>
-                    <circle cx="68" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                    <circle cx="102" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                    <circle cx="136" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                    <text x="102" y="56" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's: 3 No. 6 (d'=60)</text>
-                    <circle cx="62" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="82" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="102" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="122" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <circle cx="142" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
-                    <text x="102" y="196" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As: 5 No. 8 (d=520)</text>
-                    <text x="102" y="250" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 300 mm</text>
-                    <!-- Diagrama de deformaciones -->
-                    <line x1="250" y1="42" x2="250" y2="232" stroke="#334155" stroke-width="1.8"/>
-                    <polygon points="250,42 205,42 250,88" fill="rgba(245, 158, 11, 0.18)" stroke="#D97706" stroke-width="1.5"/>
-                    <polygon points="250,88 325,210 250,210" fill="rgba(37, 99, 235, 0.15)" stroke="#2563EB" stroke-width="1.5"/>
-                    <line x1="250" y1="64" x2="228" y2="64" stroke="#DC2626" stroke-width="2"/>
-                    <text x="245" y="36" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">εcu = 0.003</text>
-                    <text x="305" y="68" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">ε's = 0.00147 &lt; εy</text>
-                    <text x="290" y="226" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">εt = 0.01026 ≥ 0.005</text>
-                    <!-- Recuadro de resultados -->
-                    <rect x="345" y="88" width="180" height="135" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="435" y="108" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">SOLUCIÓN CUADRÁTICA</text>
-                    <text x="356" y="128" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• c = 117.63 mm</text>
-                    <text x="356" y="145" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• a = 99.98 mm</text>
-                    <text x="356" y="162" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• f's = 294.0 MPa &lt; fy</text>
-                    <text x="356" y="179" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• Mn = 499.74 kN·m</text>
-                    <text x="356" y="196" fill="#16A34A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• φMn = 449.8 kN·m</text>
-                    <text x="356" y="213" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• D/C = 0.956 ≤ 1.0 ✓</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.8a:</strong> Compatibilidad de deformaciones en el Ejemplo 7.8: al ser $c = 117.63\text{ mm}$ cercano a $d' = 60\text{ mm}$, el acero a compresión trabaja en rango elástico ($\varepsilon'_s = 0.00147 < \varepsilon_y = 0.0021 \implies f'_s = 294.0\text{ MPa}$).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-08" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.8: Revisión de Viga Doblemente Reforzada cuando $A'_s$ NO Fluye ($f'_s < f_y$) — Ecuación Cuadrática de Compatibilidad
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Revisión de Viga Doblemente Reforzada — Guía de 5 Pasos):</strong> Una viga rectangular existente de ancho $b = 300\text{ mm}$, altura total $h = 585\text{ mm}$, peralte efectivo $d = d_t = 520\text{ mm}$ y recubrimiento al centroide de compresión $d' = 60\text{ mm}$ está armada con <strong>$5\text{ barras No. 8}$ en tracción</strong> ($A_s = 25.50\text{ cm}^2 = 2\,550\text{ mm}^2$) y <strong>$3\text{ barras No. 6}$ en compresión</strong> ($A'_s = 8.52\text{ cm}^2 = 852\text{ mm}^2$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$ ($E_s = 200\,000\text{ MPa}$). Verifique mediante los <strong>5 pasos de Revisión de Secciones</strong> su capacidad de diseño $\phi M_n$ ante un momento mayorado $M_u = 430.0\text{ kN}\cdot\text{m}$, comprobando rigurosamente si el acero a compresión alcanza o no la fluencia.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.8a: ESQUEMA INICIAL DE LA SECCIÓN DOBLEMENTE REFORZADA A AUDITAR -->
+            <figure class="diagram-figure" style="max-width: 520px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 500 265" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="500" height="265" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="250" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.8: SECCIÓN EXISTENTE DOBLEMENTE REFORZADA A REVISAR
+                </text>
+                <rect x="95" y="38" width="115" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <rect x="108" y="51" width="89" height="164" rx="5" fill="none" stroke="#2563EB" stroke-width="2"/>
+                <circle cx="118" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                <circle cx="152" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                <circle cx="186" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                <text x="152" y="80" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's: 3 No. 6 (8.52 cm²)</text>
+                <circle cx="112" cy="202" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="132" cy="202" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="152" cy="202" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="172" cy="202" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <circle cx="192" cy="202" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                <text x="152" y="188" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As: 5 No. 8 (25.50 cm²)</text>
+                <text x="152" y="246" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 300 mm | h = 585 mm</text>
+                <rect x="245" y="48" width="235" height="170" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="362" y="70" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">DATOS DE REVISIÓN (EJ. 7.8)</text>
+                <text x="258" y="92" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
+                <text x="258" y="110" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• d = dt = 520 mm | d' = 60 mm</text>
+                <text x="258" y="128" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5">• A's = 3 No. 6 (852 mm²)</text>
+                <text x="258" y="146" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="9.5">• As = 5 No. 8 (2550 mm²)</text>
+                <text x="258" y="164" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Momento solicitante: Mu = 430.0 kN·m</text>
+                <text x="258" y="184" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• ¿Fluye A's? ¿c = ? ¿φMn ≥ Mu?</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.8a:</strong> Esquema inicial del ejercicio de revisión: Viga doblemente reforzada $300 \times 585\text{ mm}$ ($A'_s = 3\text{ No. 6}$, $A_s = 5\text{ No. 8}$, $d = 520\text{ mm}, d' = 60\text{ mm}$) bajo $M_u = 430.0\text{ kN}\cdot\text{m}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: REVISAR GEOMETRÍA -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -5639,6 +5909,49 @@
                           La sección doblemente reforzada cumple satisfactoriamente. Si se hubiese asumido erróneamente $f'_s = f_y = 420\text{ MPa}$, se habría sobreestimado la resistencia en $+3.6\%$, quedando del lado inseguro.
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.8b: PERFIL DE DEFORMACIONES RESUELTO CON A's ELÁSTICO -->
+                      <figure class="diagram-figure" style="max-width: 560px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 540 270" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="540" height="270" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.8: SOLUCIÓN DE COMPATIBILIDAD CON A's ELÁSTICO (ε's = 0.00147 &lt; εy)
+                          </text>
+                          <rect x="45" y="42" width="115" height="190" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="46" y="43" width="113" height="39" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                          <line x1="35" y1="88" x2="335" y2="88" stroke="#64748B" stroke-width="1.5" stroke-dasharray="5,3"/>
+                          <text x="195" y="83" fill="#475569" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Eje Neutro Real c = 117.6 mm</text>
+                          <circle cx="68" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                          <circle cx="102" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                          <circle cx="136" cy="64" r="6" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                          <text x="102" y="56" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">A's: 3 No. 6 (d'=60)</text>
+                          <circle cx="62" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="82" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="102" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="122" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <circle cx="142" cy="210" r="6.5" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+                          <text x="102" y="196" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">As: 5 No. 8 (d=520)</text>
+                          <text x="102" y="250" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">b = 300 mm</text>
+                          <line x1="250" y1="42" x2="250" y2="232" stroke="#334155" stroke-width="1.8"/>
+                          <polygon points="250,42 205,42 250,88" fill="rgba(245, 158, 11, 0.18)" stroke="#D97706" stroke-width="1.5"/>
+                          <polygon points="250,88 325,210 250,210" fill="rgba(37, 99, 235, 0.15)" stroke="#2563EB" stroke-width="1.5"/>
+                          <line x1="250" y1="64" x2="228" y2="64" stroke="#DC2626" stroke-width="2"/>
+                          <text x="245" y="36" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">εcu = 0.003</text>
+                          <text x="305" y="68" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">ε's = 0.00147 &lt; εy</text>
+                          <text x="290" y="226" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">εt = 0.01026 ≥ 0.005</text>
+                          <rect x="345" y="88" width="180" height="135" rx="6" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+                          <text x="435" y="108" fill="#166534" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">SOLUCIÓN CUADRÁTICA</text>
+                          <text x="356" y="128" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• c = 117.63 mm</text>
+                          <text x="356" y="145" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• a = 99.98 mm</text>
+                          <text x="356" y="162" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• f's = 294.0 MPa &lt; fy</text>
+                          <text x="356" y="179" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9">• Mn = 499.74 kN·m</text>
+                          <text x="356" y="196" fill="#166534" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• φMn = 449.8 kN·m</text>
+                          <text x="356" y="213" fill="#15803D" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• D/C = 0.956 ≤ 1.0 ✓</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.8b:</strong> Esquema final de solución del Ejemplo 7.8: Compatibilidad de deformaciones con eje neutro $c = 117.63\text{ mm}$, acero a compresión elástico ($\varepsilon'_s = 0.00147 \implies f'_s = 294.0\text{ MPa}$) y capacidad verificada $\phi M_n = 449.77\text{ kN}\cdot\text{m}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -5648,64 +5961,78 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.9 EJEMPLO RESUELTO 9 — DISEÑO VIGA T MONOLÍTICA (CASO 1 vs. CASO 2)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-09" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.9 — VIGA T 1</span>
-                <span>Diseño de Viga T Interior Monolítica: Ancho Efectivo $b_{\text{ef}}$ (NSR-10 C.8.12) y Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.9 (DISEÑO VIGA T MONOLÍTICA - CASO 1 vs CASO 2)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-09">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-09')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.9 • VIGA T (CASO 1 vs. CASO 2)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Diseño de Viga T Interior Monolítica: Ancho Efectivo $b_{\text{ef}}$ y Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-09', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>bef = 1500 mm, hf = 75 mm, bw = 300 mm, d = 470 mm</strong></span> <span>⚡ Momento: <strong>Mu = 320 / 680 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 21 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>4 No. 8 (Caso 1) | 6 No. 10 (Caso 2)</strong></span> <span>✅ Estado: <strong>Dúctil ($\phi = 0.90$)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Diseño de Viga T — Guía de 5 Pasos):</strong><br>
-                Un entrepiso monolítico está conformado por vigas secundarias continuas de luz libre $L = 6.0\text{ m}$, espaciadas centro a centro cada $s_{\text{ejes}} = 2.40\text{ m}$. El espesor de la losa maciza es $h_f = 75\text{ mm}$, el ancho del alma es $b_w = 300\text{ mm}$ y la altura total de la viga es $h = 555\text{ mm}$ (peralte efectivo para 2 capas $d \approx h - 8.5\text{ cm} = 470\text{ mm}$, con capa extrema en $d_t = 495\text{ mm}$). Materiales: $f'_c = 21\text{ MPa}$ y $f_y = 420\text{ MPa}$. Aplique la estructura de <strong>5 pasos</strong> para determinar el ancho efectivo del ala $b_{\text{ef}}$ y diseñar el refuerzo longitudinal para dos escenarios de momento positivo: <strong>Escenario A:</strong> $M_u = 320.0\text{ kN}\cdot\text{m}$ y <strong>Escenario B:</strong> $M_u = 680.0\text{ kN}\cdot\text{m}$.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-09">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-09">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.9a: SECCIÓN VIGA T Y ESCENARIOS -->
-                <figure class="diagram-figure" style="max-width: 580px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 560 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="560" height="250" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="280" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.9: VIGA T INTERIOR (bef = 1500 mm, hf = 75 mm, bw = 300 mm, d = 470 mm)
-                    </text>
-                    <!-- Escenario A -->
-                    <polygon points="35,48 245,48 245,78 165,78 165,205 115,205 115,78 35,78" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="36" y="49" width="208" height="14" fill="#DBEAFE" stroke="#2563EB" stroke-width="1"/>
-                    <text x="140" y="60" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 30.8 mm ≤ hf = 75 mm (Caso 1)</text>
-                    <circle cx="127" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="140" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="153" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <text x="140" y="224" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">ESCENARIO A: Mu = 320 kN·m</text>
-                    <text x="140" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">4 No. 8 (As = 20.40 cm²)</text>
-                    <!-- Escenario B -->
-                    <polygon points="305,48 515,48 515,78 435,78 435,205 385,205 385,78 305,78" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <rect x="306" y="49" width="79" height="28" fill="#FDE68A" stroke="#D97706" stroke-width="1"/>
-                    <rect x="435" y="49" width="79" height="28" fill="#FDE68A" stroke="#D97706" stroke-width="1"/>
-                    <rect x="385" y="49" width="50" height="44" fill="#FECACA" stroke="#DC2626" stroke-width="1"/>
-                    <text x="410" y="64" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 109.2 mm &gt; hf (Caso 2)</text>
-                    <circle cx="397" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="410" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="423" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="397" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="410" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="423" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <text x="410" y="224" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">ESCENARIO B: Mu = 680 kN·m</text>
-                    <text x="410" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">6 No. 9 (As = 38.70 cm²)</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.9a:</strong> Comparación de los dos escenarios de la Viga T ($b_{\text{ef}} = 1\,500\text{ mm}, h_f = 75\text{ mm}$): Escenario A ($a = 30.8\text{ mm} \le h_f$, comportamiento rectangular ancho) vs. Escenario B ($a = 109.2\text{ mm} > h_f$, descomposición en voladizos del patín + alma).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-09" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.9: Diseño de Viga T Interior Monolítica: Ancho Efectivo $b_{\text{ef}}$ (NSR-10 C.8.12) y Caso 1 ($a \le h_f$) vs. Caso 2 ($a > h_f$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Diseño de Viga T — Guía de 5 Pasos):</strong> Un entrepiso monolítico está conformado por vigas secundarias continuas de luz libre $L = 6.0\text{ m}$, espaciadas centro a centro cada $s_{\text{ejes}} = 2.40\text{ m}$. El espesor de la losa maciza es $h_f = 75\text{ mm}$, el ancho del alma es $b_w = 300\text{ mm}$ y la altura total de la viga es $h = 555\text{ mm}$ (peralte efectivo para 2 capas $d \approx h - 8.5\text{ cm} = 470\text{ mm}$, con capa extrema en $d_t = 495\text{ mm}$). Materiales: $f'_c = 21\text{ MPa}$ y $f_y = 420\text{ MPa}$. Aplique la estructura de <strong>5 pasos</strong> para determinar el ancho efectivo del ala $b_{\text{ef}}$ y diseñar el refuerzo longitudinal para dos escenarios de momento positivo: <strong>Escenario A:</strong> $M_u = 320.0\text{ kN}\cdot\text{m}$ y <strong>Escenario B:</strong> $M_u = 680.0\text{ kN}\cdot\text{m}$.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.9a: ESQUEMA INICIAL DE LA VIGA T Y DATOS DE ENTRADA -->
+            <figure class="diagram-figure" style="max-width: 560px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 540 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="540" height="250" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="270" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.9: GEOMETRÍA INICIAL DE VIGA T INTERIOR Y ESCENARIOS DE CARGA
+                </text>
+                <polygon points="35,52 245,52 245,84 165,84 165,205 115,205 115,84 35,84" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <line x1="35" y1="40" x2="245" y2="40" stroke="#1D4ED8" stroke-width="1.5"/>
+                <text x="140" y="35" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" text-anchor="middle">¿Ancho efectivo bef = ? (s_ejes = 2.40 m)</text>
+                <text x="72" y="71" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">hf = 75 mm</text>
+                <rect x="121" y="168" width="38" height="28" rx="3" fill="rgba(245, 158, 11, 0.08)" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <text x="140" y="185" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">¿As = ?</text>
+                <text x="140" y="224" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">bw = 300 mm | h = 555 mm</text>
+                <text x="140" y="238" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">d ≈ 470 mm | L = 6.0 m</text>
+                <rect x="275" y="48" width="245" height="165" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="397" y="70" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">DATOS DEL ENTREPISO MONOLÍTICO</text>
+                <text x="288" y="92" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 21 MPa | fy = 420 MPa</text>
+                <text x="288" y="110" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Luz L = 6.0 m | s_ejes = 2.40 m</text>
+                <text x="288" y="128" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Losa hf = 75 mm | Alma bw = 300 mm</text>
+                <text x="288" y="148" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Escenario A: Mu = 320.0 kN·m</text>
+                <text x="288" y="166" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Escenario B: Mu = 680.0 kN·m</text>
+                <text x="288" y="186" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">• ¿Caso 1 (a ≤ hf) o Caso 2 (a &gt; hf)?</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.9a:</strong> Esquema inicial del ejercicio de Viga T interior ($L = 6.0\text{ m}, s_{\text{ejes}} = 2.40\text{ m}, h_f = 75\text{ mm}, b_w = 300\text{ mm}, h = 555\text{ mm}$) para evaluar los Escenarios A ($M_u = 320\text{ kN}\cdot\text{m}$) y B ($M_u = 680\text{ kN}\cdot\text{m}$).
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: GEOMETRÍA, ANCHO EFECTIVO bef Y PERALTE d -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -5833,6 +6160,41 @@
                         \bullet\;\textbf{Escenario B (Caso 2):} \quad a_w &= \frac{3\,314(420)}{0.85(21)(300)} = 259.9\text{ mm} > h_f, \quad \mathbf{\phi M_n = M_{uf} + M_{uw} = 680.0\text{ kN}\cdot\text{m} \ge M_u} \quad \checkmark
                         \end{aligned}$$
                       </div>
+
+                      <!-- FIGURA 7.9b: ESQUEMA FINAL COMPARATIVO DE AMBOS ESCENARIOS RESUELTOS -->
+                      <figure class="diagram-figure" style="max-width: 580px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 560 250" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="560" height="250" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="280" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.9: SOLUCIÓN COMPARATIVA CASO 1 (a ≤ hf) vs. CASO 2 (a &gt; hf)
+                          </text>
+                          <polygon points="35,48 245,48 245,78 165,78 165,205 115,205 115,78 35,78" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="36" y="49" width="208" height="14" fill="#DBEAFE" stroke="#2563EB" stroke-width="1"/>
+                          <text x="140" y="60" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 32.0 mm ≤ hf = 75 mm (Caso 1)</text>
+                          <circle cx="123" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="134" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="146" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="157" cy="185" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <text x="140" y="224" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">ESCENARIO A: Mu = 320 kN·m</text>
+                          <text x="140" y="238" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">4 No. 8 (20.40 cm²) | φMn = 350 kN·m</text>
+                          <polygon points="305,48 515,48 515,78 435,78 435,205 385,205 385,78 305,78" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <rect x="306" y="49" width="79" height="28" fill="#FDE68A" stroke="#D97706" stroke-width="1"/>
+                          <rect x="435" y="49" width="79" height="28" fill="#FDE68A" stroke="#D97706" stroke-width="1"/>
+                          <rect x="385" y="49" width="50" height="44" fill="#FECACA" stroke="#DC2626" stroke-width="1"/>
+                          <text x="410" y="64" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a &gt; hf (Caso 2: Patín + Alma)</text>
+                          <circle cx="397" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="410" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="423" cy="188" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="397" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="410" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="423" cy="173" r="5.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <text x="410" y="224" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">ESCENARIO B: Mu = 680 kN·m</text>
+                          <text x="410" y="238" fill="#166534" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">6 No. 10 (49.14 cm²) | φMn ≥ 680 kN·m</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.9b:</strong> Esquema final de solución del Ejemplo 7.9: Comparación de los dos escenarios resueltos (Escenario A con $a \le h_f$ y $4\text{ No. 8}$; Escenario B con $a > h_f$ y $6\text{ No. 10}$ en dos capas).
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -5842,72 +6204,78 @@
           </div>
         </div>
 
-        <!-- ════════════════════════════════════════════════════════════════════════
-             7.10 EJEMPLO RESUELTO 10 — DISEÑO COMPLETO VIGA T VERDADERA (a > hf EN EL ALMA)
-             ════════════════════════════════════════════════════════════════════════ -->
-        <div class="example-block" id="sec-ejemplo-10" style="margin-top: 2rem;">
-          <div class="example-card">
-            <div class="example-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-              <div class="example-title">
-                <span class="example-badge">EJEMPLO RESUELTO 7.10 — VIGA T 2 (a &gt; hf)</span>
-                <span>Diseño Completo de Viga T con Eje Neutro en el Alma ($a > h_f$): Superposición Patín ($A_{sf}$) + Alma ($A_{sw}$)</span>
+        <!-- ===============================================================
+             EJEMPLO 7.10 (DISEÑO COMPLETO VIGA T VERDADERA CON a > hf EN EL ALMA)
+             =============================================================== -->
+        <div class="example-macro-card" id="macro-sec-ejemplo-10">
+          <div class="example-macro-header" onclick="toggleExampleMacro('sec-ejemplo-10')">
+            <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <div style="display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;">
+                <span class="status-pill status-ok" style="font-weight: 800; font-size: 0.74rem;">EJEMPLO 7.10 • VIGA T (a &gt; hf EN ALMA)</span>
+                <span style="font-weight: 700; font-size: 0.98rem; color: var(--text-main);">Diseño Completo de Viga T con Eje Neutro en el Alma ($a > h_f$): Superposición Patín ($A_{sf}$) + Alma ($A_{sw}$)</span>
               </div>
-              <button type="button" class="btn-step-action" onclick="toggleAllStepsInExample('sec-ejemplo-10', this)">Expandir / Colapsar todos los pasos</button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <span>📐 Sección: <strong>b = 900 mm, hf = 100 mm, bw = 300 mm, d = 600 mm</strong></span> <span>⚡ Momento: <strong>Mu = 980.0 kN·m</strong></span> <span>🧱 Materiales: <strong>f'c = 28 MPa | fy = 420 MPa</strong></span> <span>🔩 Armadura: <strong>6 No. 10 (As = 49.14 cm²)</strong></span> <span>✅ Capacidad: <strong>φMn = 1024.76 kN·m (D/C = 0.956, Dúctil)</strong></span>
+              </div>
             </div>
-            <div class="example-body">
-              <div class="example-statement">
-                <strong>Enunciado del Problema (Diseño de Viga T con $a > h_f$ — Guía Didáctica de 5 Pasos):</strong><br>
-                Una viga T de concreto reforzado tiene un ancho efectivo de patín $b = 900\text{ mm}$, espesor de losa $h_f = 100\text{ mm}$, ancho del alma $b_w = 300\text{ mm}$ y altura total $h = 685\text{ mm}$ (peralte efectivo al centroide de 2 capas en tracción $d \approx h - 8.5\text{ cm} = 600\text{ mm}$ y peralte a la capa extrema $d_t = 625\text{ mm}$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Diseñe el refuerzo longitudinal en tracción siguiendo los <strong>5 pasos de la Guía Didáctica</strong> para resistir un momento mayorado positivo $M_u = 980.0\text{ kN}\cdot\text{m}$.
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+              <span class="macro-toggle-btn" id="macro-btn-sec-ejemplo-10">
+                <span>Ver Ejercicio Completo</span>
+                <span class="macro-arrow" id="macro-arrow-sec-ejemplo-10">▼</span>
+              </span>
+            </div>
+          </div>
 
-                <!-- FIGURA 7.10a: DESCOMPOSICIÓN DE VIGA T CON a > hf -->
-                <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto 0.25rem;">
-                  <svg class="diagram-svg" viewBox="0 0 580 265" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="580" height="265" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-                    <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
-                      EJEMPLO 7.10: SUPERPOSICIÓN MECÁNICA EN VIGA T CON a = 152.7 mm &gt; hf = 100 mm
-                    </text>
-                    <!-- Sección Total T -->
-                    <polygon points="20,45 180,45 180,82 128,82 128,215 72,215 72,82 20,82" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
-                    <polygon points="21,46 179,46 179,81 127,81 127,102 73,102 73,81 21,81" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
-                    <text x="100" y="68" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">a = 152.7 mm &gt; hf</text>
-                    <circle cx="84" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="100" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="116" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="84" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="100" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <circle cx="116" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
-                    <text x="100" y="235" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Mu = 980.0 kN·m</text>
-                    <text x="100" y="250" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">6 No. 10 (49.14 cm²)</text>
-                    <text x="198" y="132" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">=</text>
-                    <!-- Sub-sistema Patín -->
-                    <polygon points="218,45 378,45 378,82 326,82 326,215 270,215 270,82 218,82" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <rect x="219" y="46" width="51" height="35" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
-                    <rect x="326" y="46" width="51" height="35" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
-                    <text x="298" y="67" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Cf = 1428 kN</text>
-                    <line x1="278" y1="189" x2="318" y2="189" stroke="#2563EB" stroke-width="3"/>
-                    <text x="298" y="178" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Asf = 34.00 cm²</text>
-                    <text x="298" y="235" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">φMnf = 706.9 kN·m</text>
-                    <text x="298" y="250" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">zf = d − hf/2 = 550 mm</text>
-                    <text x="396" y="132" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">+</text>
-                    <!-- Sub-sistema Alma -->
-                    <polygon points="415,45 565,45 565,82 518,82 518,215 462,215 462,82 415,82" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,2"/>
-                    <rect x="462" y="46" width="56" height="56" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
-                    <text x="490" y="76" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">aw = 152.7 mm</text>
-                    <line x1="470" y1="189" x2="510" y2="189" stroke="#DC2626" stroke-width="3"/>
-                    <text x="490" y="178" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Asw = 13.00 cm²</text>
-                    <text x="490" y="235" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">Muw = 273.1 kN·m</text>
-                    <text x="490" y="250" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">zw = d − aw/2 = 523.7 mm</text>
-                  </svg>
-                  <figcaption class="diagram-caption">
-                    <strong>Figura 7.10a:</strong> Descomposición mecánica del Ejemplo 7.10 ($a = 152.7\text{ mm} > h_f = 100\text{ mm}$): Sub-sistema 1 (aletas voladizas $b - b_w = 600\text{ mm}$, $\phi M_{nf} = 706.86\text{ kN}\cdot\text{m}$) más Sub-sistema 2 (alma central $b_w = 300\text{ mm}$, $M_{uw} = 273.14\text{ kN}\cdot\text{m}$).
-                  </figcaption>
-                </figure>
+          <div class="example-macro-body" id="sec-ejemplo-10" style="display: none;">
+            <div class="example-toolbar">
+              <div>
+                <h3 style="margin: 0; font-size: 1.08rem; color: var(--brand-primary);">
+                  📝 Ejemplo 7.10: Diseño Completo de Viga T con Eje Neutro en el Alma ($a > h_f$): Superposición Patín ($A_{sf}$) + Alma ($A_{sw}$)
+                </h3>
+                <div class="example-statement">
+                  <strong>Enunciado del Problema (Diseño de Viga T con $a > h_f$ — Guía Didáctica de 5 Pasos):</strong> Una viga T de concreto reforzado tiene un ancho efectivo de patín $b = 900\text{ mm}$, espesor de losa $h_f = 100\text{ mm}$, ancho del alma $b_w = 300\text{ mm}$ y altura total $h = 685\text{ mm}$ (peralte efectivo al centroide de 2 capas en tracción $d \approx h - 8.5\text{ cm} = 600\text{ mm}$ y peralte a la capa extrema $d_t = 625\text{ mm}$). Materiales: $f'_c = 28\text{ MPa}$ y $f_y = 420\text{ MPa}$. Diseñe el refuerzo longitudinal en tracción siguiendo los <strong>5 pasos de la Guía Didáctica</strong> para resistir un momento mayorado positivo $M_u = 980.0\text{ kN}\cdot\text{m}$.
+                </div>
               </div>
+            </div>
 
-              <div class="calc-steps-list">
+            <!-- FIGURA 7.10a: ESQUEMA INICIAL DE LA VIGA T A DISEÑAR -->
+            <figure class="diagram-figure" style="max-width: 540px; margin: 1.25rem auto;">
+              <svg class="diagram-svg" viewBox="0 0 520 255" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="520" height="255" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="260" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                  EJEMPLO 7.10: ESQUEMA INICIAL DE VIGA T (b = 900 mm, hf = 100 mm, bw = 300 mm)
+                </text>
+                <polygon points="40,50 220,50 220,90 160,90 160,210 100,210 100,90 40,90" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                <line x1="40" y1="38" x2="220" y2="38" stroke="#1D4ED8" stroke-width="1.5"/>
+                <text x="130" y="33" fill="#1D4ED8" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">b = 900 mm</text>
+                <text x="70" y="73" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">hf = 100 mm</text>
+                <rect x="108" y="168" width="44" height="32" rx="3" fill="rgba(245, 158, 11, 0.08)" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <text x="130" y="187" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">¿As = ?</text>
+                <text x="130" y="228" fill="#0F172A" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">bw = 300 mm | h = 685 mm</text>
+                <text x="130" y="242" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">d ≈ 600 mm | dt = 625 mm</text>
+                <rect x="255" y="48" width="245" height="165" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                <text x="377" y="70" fill="#1E40AF" font-family="Inter, sans-serif" font-size="10" font-weight="800" text-anchor="middle">DATOS DE DISEÑO VIGA T (EJ. 7.10)</text>
+                <text x="268" y="92" fill="#DC2626" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Momento último: Mu = 980.0 kN·m</text>
+                <text x="268" y="110" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• f'c = 28 MPa | fy = 420 MPa</text>
+                <text x="268" y="128" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Ancho patín: b = 900 mm</text>
+                <text x="268" y="146" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Espesor patín: hf = 100 mm</text>
+                <text x="268" y="164" fill="#334155" font-family="JetBrains Mono, monospace" font-size="9.5">• Alma: bw = 300 mm | d ≈ 600 mm</text>
+                <text x="268" y="184" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700">• Objetivo: Diseñar As = Asf + Asw</text>
+              </svg>
+              <figcaption class="diagram-caption">
+                <strong>Figura 7.10a:</strong> Esquema inicial del ejercicio de diseño de Viga T ($b = 900\text{ mm}, h_f = 100\text{ mm}, b_w = 300\text{ mm}, h = 685\text{ mm}, d \approx 600\text{ mm}$) sometida a $M_u = 980.0\text{ kN}\cdot\text{m}$.
+              </figcaption>
+            </figure>
+
+            <div class="example-solution-box">
+              <button class="solution-master-btn" onclick="toggleSolutionBox(this)">
+                <span class="btn-text">Mostrar Solución Detallada (Paso a Paso)</span>
+                <span class="arrow-icon">▼</span>
+              </button>
+              <div class="solution-body" style="display: none;">
 
                 <!-- PASO 1: GEOMETRÍA Y ESTIMACIÓN DE PERALTE -->
-                <div class="calc-step-card">
+                <div class="calc-step-card step-collapsed">
                   <div class="calc-step-header" onclick="toggleExampleStep(this.parentElement)">
                     <div class="calc-step-title">
                       <span class="calc-step-badge">PASO 1</span>
@@ -6040,6 +6408,47 @@
                           Sección T ($b = 900\text{ mm}, b_w = 300\text{ mm}, h_f = 100\text{ mm}, d = 600\text{ mm}$) armada en el alma con <strong>$6\text{ barras No. 10}$ en 2 capas de 3 barras</strong> ($A_{s,\text{col}} = 49.14\text{ cm}^2$). Capacidad resistente $\phi M_n = 1\,024.76\text{ kN}\cdot\text{m} \ge M_u = 980.00\text{ kN}\cdot\text{m}$ ($\text{Ratio D/C} = 0.956 \le 1.00$).
                         </div>
                       </div>
+
+                      <!-- FIGURA 7.10b: ESQUEMA FINAL DE SUPERPOSICIÓN Y SOLUCIÓN -->
+                      <figure class="diagram-figure" style="max-width: 600px; margin: 1.25rem auto 0.25rem;">
+                        <svg class="diagram-svg" viewBox="0 0 580 265" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0" y="0" width="580" height="265" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+                          <text x="290" y="22" fill="#0F172A" font-family="Inter, sans-serif" font-size="11.5" font-weight="700" text-anchor="middle">
+                            EJEMPLO 7.10: SOLUCIÓN POR SUPERPOSICIÓN MECÁNICA EN VIGA T (6 No. 10)
+                          </text>
+                          <polygon points="20,45 180,45 180,82 128,82 128,215 72,215 72,82 20,82" fill="#F1F5F9" stroke="#475569" stroke-width="2"/>
+                          <polygon points="21,46 179,46 179,81 127,81 127,102 73,102 73,81 21,81" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
+                          <text x="100" y="68" fill="#B45309" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Patín + Alma</text>
+                          <circle cx="84" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="100" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="116" cy="196" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="84" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="100" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <circle cx="116" cy="182" r="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.8"/>
+                          <text x="100" y="235" fill="#166534" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">φMn = 1024.8 kN·m</text>
+                          <text x="100" y="250" fill="#D97706" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">6 No. 10 (49.14 cm²)</text>
+                          <text x="198" y="132" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">=</text>
+                          <polygon points="218,45 378,45 378,82 326,82 326,215 270,215 270,82 218,82" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,2"/>
+                          <rect x="219" y="46" width="51" height="35" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+                          <rect x="326" y="46" width="51" height="35" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+                          <text x="298" y="67" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Cf = 1428 kN</text>
+                          <line x1="278" y1="189" x2="318" y2="189" stroke="#2563EB" stroke-width="3"/>
+                          <text x="298" y="178" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Asf = 34.00 cm²</text>
+                          <text x="298" y="235" fill="#1E40AF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">φMnf = 706.9 kN·m</text>
+                          <text x="298" y="250" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">zf = d − hf/2 = 550 mm</text>
+                          <text x="396" y="132" fill="#0F172A" font-family="Inter, sans-serif" font-size="20" font-weight="800" text-anchor="middle">+</text>
+                          <polygon points="415,45 565,45 565,82 518,82 518,215 462,215 462,82 415,82" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="4,2"/>
+                          <rect x="462" y="46" width="56" height="56" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+                          <text x="490" y="76" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">aw = 89.1 mm</text>
+                          <line x1="470" y1="189" x2="510" y2="189" stroke="#DC2626" stroke-width="3"/>
+                          <text x="490" y="178" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="700" text-anchor="middle">Asw = 15.14 cm²</text>
+                          <text x="490" y="235" fill="#991B1B" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="700" text-anchor="middle">φMnw = 317.9 kN·m</text>
+                          <text x="490" y="250" fill="#475569" font-family="JetBrains Mono, monospace" font-size="8.5" text-anchor="middle">D/C = 0.956 ✓</text>
+                        </svg>
+                        <figcaption class="diagram-caption">
+                          <strong>Figura 7.10b:</strong> Esquema final de solución del Ejemplo 7.10: Superposición mecánica Sub-sistema 1 (aletas voladizas $b - b_w = 600\text{ mm}$, $\phi M_{nf} = 706.86\text{ kN}\cdot\text{m}$) + Sub-sistema 2 (alma central $b_w = 300\text{ mm}$, $\phi M_{nw} = 317.90\text{ kN}\cdot\text{m}$), para $\phi M_n = 1\,024.76\text{ kN}\cdot\text{m} \ge 980.0\text{ kN}\cdot\text{m}$.
+                        </figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>

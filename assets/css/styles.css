@@ -6254,3 +6254,82 @@ html[data-theme="dark"] .example-statement li {
 html[data-theme="dark"] .example-statement strong {
   color: #60A5FA !important;
 }
+
+/* ==========================================================================
+   ICONO DE LUPA EN HOVER Y AMPLIACIÓN SVG EN EJERCICIOS (.diagram-figure)
+   ========================================================================== */
+.diagram-figure {
+  position: relative;
+}
+
+.svg-zoom-lens-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  background: rgba(255, 255, 255, 0.94);
+  color: #0369A1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.14);
+  z-index: 15;
+  padding: 0;
+}
+
+.diagram-figure:hover .svg-zoom-lens-btn,
+.svg-zoom-lens-btn:focus-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.svg-zoom-lens-btn:hover {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #0284C7;
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+
+html[data-theme="dark"] .svg-zoom-lens-btn {
+  background: rgba(15, 23, 42, 0.92);
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .svg-zoom-lens-btn:hover {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #38BDF8;
+}
+
+.lightbox-svg-stage {
+  width: min(92vw, 1100px);
+  max-height: 82vh;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  overflow: auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-svg-stage svg {
+  width: 100% !important;
+  max-width: 1040px !important;
+  height: auto !important;
+  max-height: 76vh !important;
+  display: block;
+  margin: 0 auto;
+}
+

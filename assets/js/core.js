@@ -570,7 +570,7 @@
   }
 
   /* --------------------------------------------------------------------------
-     6. LIGHTBOX DE IMÁGENES PARA ZOOM EN CLASE
+     6. LIGHTBOX DE IMÁGENES Y DIAGRAMAS SVG PARA ZOOM EN CLASE (CON LUPA HOVER)
      -------------------------------------------------------------------------- */
   function initLightbox() {
     let overlay = document.getElementById('lightbox-overlay');
@@ -580,13 +580,55 @@
       overlay.id = 'lightbox-overlay';
       overlay.innerHTML = `
         <div class="lightbox-content">
-          <img id="lightbox-img" src="" alt="Vista ampliada" />
+          <img id="lightbox-img" src="" alt="Vista ampliada" style="display: none;" />
+          <div id="lightbox-svg-stage" class="lightbox-svg-stage" style="display: none;"></div>
           <div id="lightbox-caption" class="lightbox-caption"></div>
         </div>
       `;
-      overlay.addEventListener('click', () => overlay.classList.remove('open'));
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay || e.target.classList.contains('lightbox-content') || e.target.classList.contains('lightbox-caption')) {
+          overlay.classList.remove('open');
+        }
+      });
       document.body.appendChild(overlay);
     }
+
+    const openImageLightbox = (src, caption) => {
+      const imgEl = document.getElementById('lightbox-img');
+      const svgStage = document.getElementById('lightbox-svg-stage');
+      const capEl = document.getElementById('lightbox-caption');
+      if (svgStage) {
+        svgStage.style.display = 'none';
+        svgStage.innerHTML = '';
+      }
+      if (imgEl) {
+        imgEl.src = src;
+        imgEl.style.display = 'block';
+      }
+      if (capEl) capEl.textContent = caption || '';
+      overlay.classList.add('open');
+    };
+
+    const openSvgLightbox = (svgEl, caption) => {
+      const imgEl = document.getElementById('lightbox-img');
+      const svgStage = document.getElementById('lightbox-svg-stage');
+      const capEl = document.getElementById('lightbox-caption');
+      if (imgEl) {
+        imgEl.style.display = 'none';
+        imgEl.src = '';
+      }
+      if (svgStage && svgEl) {
+        svgStage.innerHTML = '';
+        const clone = svgEl.cloneNode(true);
+        clone.removeAttribute('style');
+        clone.style.width = '100%';
+        clone.style.height = 'auto';
+        svgStage.appendChild(clone);
+        svgStage.style.display = 'flex';
+      }
+      if (capEl) capEl.textContent = caption || '';
+      overlay.classList.add('open');
+    };
 
     document.querySelectorAll('.figure-img-wrap, .book-cover-wrap').forEach((wrap) => {
       wrap.addEventListener('click', () => {
@@ -596,10 +638,41 @@
         const cap = card
           ? card.querySelector('.figure-caption, .book-title')?.innerText || img.alt
           : img.alt;
-        document.getElementById('lightbox-img').src = img.src;
-        document.getElementById('lightbox-caption').textContent = cap;
-        overlay.classList.add('open');
+        openImageLightbox(img.src, cap);
       });
+    });
+
+    // Inyectar icono de lupa superpuesto arriba a la derecha en todas las figuras de diagramas (.diagram-figure)
+    document.querySelectorAll('.diagram-figure').forEach((fig) => {
+      const svg = fig.querySelector('svg');
+      const img = fig.querySelector('img');
+      if (!svg && !img) return;
+
+      if (!fig.querySelector('.svg-zoom-lens-btn')) {
+        const lensBtn = document.createElement('button');
+        lensBtn.type = 'button';
+        lensBtn.className = 'svg-zoom-lens-btn';
+        lensBtn.title = 'Ampliar esquema técnico';
+        lensBtn.setAttribute('aria-label', 'Ampliar esquema técnico');
+        lensBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        `;
+        lensBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const cap = fig.querySelector('.diagram-caption, figcaption')?.innerText || '';
+          if (svg) {
+            openSvgLightbox(svg, cap);
+          } else if (img) {
+            openImageLightbox(img.src, cap);
+          }
+        });
+        fig.appendChild(lensBtn);
+      }
     });
   }
 
@@ -687,7 +760,7 @@
           content.classList.remove('step-collapsed');
           content.style.display = 'block';
           content.style.opacity = '1';
-          content.style.maxHeight = (content.scrollHeight + 40) + 'px';
+          content.style.maxHeight = 'none';
           if (arrow) {
             arrow.textContent = '▼';
             arrow.style.transform = 'rotate(0deg)';
@@ -708,7 +781,13 @@
         }
       }
     } else if (arg1 && arg1.nodeType) {
-      arg1.classList.toggle('step-collapsed');
+      const isNowCollapsed = arg1.classList.toggle('step-collapsed');
+      const sc = arg1.querySelector('.calc-step-body, .step-content');
+      if (sc) {
+        sc.style.display = isNowCollapsed ? 'none' : 'block';
+        sc.style.opacity = isNowCollapsed ? '0' : '1';
+        sc.style.maxHeight = isNowCollapsed ? '0px' : 'none';
+      }
     }
   };
 

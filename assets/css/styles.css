@@ -1736,6 +1736,23 @@ body.sidebar-collapsed:not(.presentation-mode) .btn-sidebar-float {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sim-mode-btn > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  white-space: nowrap;
+}
+
+.sim-mode-btn sub,
+.sim-mode-btn sup {
+  font-size: 0.74em;
+  line-height: 1;
+  vertical-align: baseline;
+  position: relative;
+  top: 0.22em;
 }
 
 .sim-mode-btn:hover {

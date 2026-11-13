@@ -5721,38 +5721,193 @@ html[data-theme="dark"] .macro-toggle-btn:hover {
   background: var(--bg-surface);
   border: 1.2px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  margin: 1.15rem 0;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+  padding: 1.15rem 1.25rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.sim-tachometer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.sim-tachometer-title {
+  font-weight: 800;
+  font-size: 0.94rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sim-tacho-zone-badge {
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .sim-tacho-track {
   position: relative;
-  height: 28px;
-  border-radius: 6px;
-  overflow: hidden;
+  height: 36px;
+  border-radius: 8px;
+  overflow: visible;
   display: flex;
   background: #E2E8F0;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.35rem;
+}
+
+.sim-tacho-seg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 2px;
+}
+
+.sim-tacho-seg small {
+  font-size: 0.62rem;
+  font-weight: 700;
+  opacity: 0.92;
 }
 
 .sim-tacho-needle {
   position: absolute;
-  top: -3px;
-  bottom: -3px;
-  width: 7px;
+  top: -6px;
+  bottom: -6px;
+  width: 9px;
   background: #0F172A;
-  border: 1.5px solid #FFFFFF;
-  border-radius: 3.5px;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
   transform: translateX(-50%);
   transition: left 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 html[data-theme="dark"] .sim-tacho-needle {
   background: #F8FAFC;
   border-color: #0F172A;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.sim-tacho-ticks {
+  position: relative;
+  height: 24px;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.sim-tacho-tick {
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+}
+
+.sim-tacho-tick::before {
+  content: "";
+  display: block;
+  width: 1.5px;
+  height: 5px;
+  background: var(--border-color);
+  margin: 0 auto 2px auto;
+}
+
+.sim-tacho-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.sim-tacho-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 6px;
+  background: var(--bg-accent-soft);
+  border: 1px solid var(--border-color);
+  font-size: 0.74rem;
+  line-height: 1.25;
+}
+
+.sim-tacho-legend-item strong {
+  display: block;
+  font-size: 0.76rem;
+  margin-bottom: 0.15rem;
+}
+
+.sim-tacho-legend-item small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+.sim-tacho-legend-item.z1 strong { color: #15803D; }
+.sim-tacho-legend-item.z2 strong { color: #1D4ED8; }
+.sim-tacho-legend-item.z3a strong { color: #B45309; }
+.sim-tacho-legend-item.z3b strong { color: #C2410C; }
+.sim-tacho-legend-item.z4 strong { color: #B91C1C; }
+
+.tacho-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.dot-z1 { background: #22C55E; }
+.dot-z2 { background: #3B82F6; }
+.dot-z3a { background: #F59E0B; }
+.dot-z3b { background: #EA580C; }
+.dot-z4 { background: #DC2626; }
+
+.sim-tacho-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.sim-tacho-metric-pill {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sim-tacho-metric-pill strong {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  font-family: var(--font-mono, monospace);
 }
 
 

@@ -59,6 +59,37 @@ function getThemePaletteMod04() {
  */
 window.sim41Mode = 'design';       // 'design' o 'review'
 window.sim41ReviewDist = 'uniform'; // 'uniform' o 'zoned'
+window.sim41LoadMode = 'wu';        // 'wu' (carga + luz) o 'direct' (cortante directo + L_V=0)
+
+function setSim41LoadMode(mode) {
+  window.sim41LoadMode = mode === 'direct' ? 'direct' : 'wu';
+  const btnWu  = document.getElementById('sim41-btn-load-wu');
+  const btnDir = document.getElementById('sim41-btn-load-direct');
+  const grpWu  = document.getElementById('sim41-load-wu-group');
+  const grpDir = document.getElementById('sim41-load-direct-group');
+  const badge  = document.getElementById('sim41-load-mode-badge');
+
+  if (window.sim41LoadMode === 'direct') {
+    if (btnWu)  btnWu.classList.remove('active');
+    if (btnDir) btnDir.classList.add('active');
+    if (grpWu)  grpWu.style.display  = 'none';
+    if (grpDir) grpDir.style.display = 'block';
+    if (badge) {
+      badge.textContent = 'Directo (Vu, LV=0)';
+      badge.style.background = '#D97706';
+    }
+  } else {
+    if (btnWu)  btnWu.classList.add('active');
+    if (btnDir) btnDir.classList.remove('active');
+    if (grpWu)  grpWu.style.display  = 'block';
+    if (grpDir) grpDir.style.display = 'none';
+    if (badge) {
+      badge.textContent = 'Carga wu y Luz L';
+      badge.style.background = '#0284C7';
+    }
+  }
+  updateSim41();
+}
 
 function setSim41Mode(mode) {
   window.sim41Mode = mode === 'review' ? 'review' : 'design';
@@ -138,9 +169,56 @@ function updateSim41() {
 
   const isReview    = window.sim41Mode === 'review';
   const isZonedRev  = isReview && window.sim41ReviewDist === 'zoned';
-  const L      = parseFloat(lInput.value);                                      // m (luz entre ejes)
+  const isDirectLoad = window.sim41LoadMode === 'direct';
+
   const cApoyo = parseFloat(document.getElementById('sim41-c').value);          // m (ancho apoyo)
-  const wu     = parseFloat(document.getElementById('sim41-wu').value);         // kN/m (carga mayorada)
+  let L, wu, VuEje;
+
+  if (isDirectLoad) {
+    const vDirInput = document.getElementById('sim41-vdirect');
+    const lv0Input  = document.getElementById('sim41-lv0');
+    const VuApoyo   = vDirInput ? parseFloat(vDirInput.value) : 162.0;
+    const Lv0       = lv0Input ? parseFloat(lv0Input.value) : 3.07;
+
+    const valVdir = document.getElementById('val-sim41-vdirect');
+    const valLv0  = document.getElementById('val-sim41-lv0');
+    if (valVdir) valVdir.textContent = `${VuApoyo.toFixed(1)} kN`;
+    if (valLv0)  valLv0.textContent  = `${Lv0.toFixed(2)} m`;
+
+    L = 2.0 * Lv0;
+    wu = Lv0 > 0 ? VuApoyo / Lv0 : 50.0;
+    VuEje = VuApoyo;
+
+    const weqDisplay = document.getElementById('sim41-weq-display');
+    const leqDisplay = document.getElementById('sim41-leq-display');
+    if (weqDisplay) weqDisplay.innerHTML = `w<sub>eq</sub> = ${wu.toFixed(1)} kN/m`;
+    if (leqDisplay) leqDisplay.innerHTML = `L = ${L.toFixed(2)} m`;
+
+    if (lInput) lInput.value = L.toFixed(2);
+    const wuInput = document.getElementById('sim41-wu');
+    if (wuInput) wuInput.value = Math.min(260.0, Math.max(8.0, wu)).toFixed(2);
+    const valLEl = document.getElementById('val-sim41-L');
+    if (valLEl) valLEl.textContent = `${L.toFixed(2)} m`;
+    const valWuEl = document.getElementById('val-sim41-wu');
+    if (valWuEl) valWuEl.textContent = `${wu.toFixed(1)} kN/m`;
+  } else {
+    L  = parseFloat(lInput.value);                                      // m (luz entre ejes)
+    wu = parseFloat(document.getElementById('sim41-wu').value);         // kN/m (carga mayorada)
+    VuEje = (wu * L) / 2.0;
+
+    document.getElementById('val-sim41-L').textContent  = `${L.toFixed(2)} m`;
+    document.getElementById('val-sim41-wu').textContent = `${wu.toFixed(1)} kN/m`;
+
+    const vDirInput = document.getElementById('sim41-vdirect');
+    const lv0Input  = document.getElementById('sim41-lv0');
+    if (vDirInput) vDirInput.value = VuEje.toFixed(1);
+    if (lv0Input)  lv0Input.value  = (L / 2.0).toFixed(2);
+    const valVdir = document.getElementById('val-sim41-vdirect');
+    if (valVdir) valVdir.textContent = `${VuEje.toFixed(1)} kN`;
+    const valLv0  = document.getElementById('val-sim41-lv0');
+    if (valLv0)  valLv0.textContent  = `${(L / 2.0).toFixed(2)} m`;
+  }
+
   const Nu     = parseFloat(document.getElementById('sim41-nu').value);         // kN (+ compresión, - tracción)
   const bw     = parseFloat(document.getElementById('sim41-bw').value);         // cm
   const h      = parseFloat(document.getElementById('sim41-h').value);          // cm
@@ -163,9 +241,7 @@ function updateSim41() {
   const sColCm = isZonedRev ? sColZ3Cm : sColUniformCm;
 
   // Actualizar etiquetas de controles
-  document.getElementById('val-sim41-L').textContent   = `${L.toFixed(2)} m`;
   document.getElementById('val-sim41-c').textContent   = `${cApoyo.toFixed(2)} m`;
-  document.getElementById('val-sim41-wu').textContent  = `${wu.toFixed(1)} kN/m`;
   document.getElementById('val-sim41-nu').textContent  = `${Nu >= 0 ? '+' : ''}${Nu.toFixed(0)} kN`;
   document.getElementById('val-sim41-bw').textContent  = `${bw.toFixed(0)} cm`;
   document.getElementById('val-sim41-h').textContent   = `${h.toFixed(0)} cm`;
@@ -188,9 +264,6 @@ function updateSim41() {
 
   const ln = Math.max(L - cApoyo, 0.5); // Luz libre (m)
   const Ltotal = ln / 2.0;              // Distancia desde cara de apoyo hasta Vu = 0 (m)
-
-  // Cortantes últimos (kN)
-  const VuEje  = (wu * L) / 2.0;
   const VuCara = wu * Ltotal;
   const xCritFromFace = critAtD ? Math.min(dM, Ltotal) : 0.0;
   const VuCrit = Math.max(0.0, VuCara - wu * xCritFromFace);
@@ -415,6 +488,20 @@ function updateSim41() {
     }
 
     tachoNeedle.style.left = `${Math.max(2.0, Math.min(98.0, needlePct)).toFixed(1)}%`;
+
+    // Actualizar valores de límites en el tacómetro dinámico
+    const tachoValZ1 = document.getElementById('tacho-val-z1');
+    const tachoValZ2 = document.getElementById('tacho-val-z2');
+    const tachoValZ3a = document.getElementById('tacho-val-z3a');
+    const tachoValZ3b = document.getElementById('tacho-val-z3b');
+    const tachoValZ4 = document.getElementById('tacho-val-z4');
+
+    if (tachoValZ1) tachoValZ1.textContent = `${halfPhiVc.toFixed(1)} kN`;
+    if (tachoValZ2) tachoValZ2.textContent = `${phiVc.toFixed(1)} kN`;
+    if (tachoValZ3a) tachoValZ3a.textContent = `${phiVnLim1.toFixed(1)} kN`;
+    if (tachoValZ3b) tachoValZ3b.textContent = `${phiVnMax.toFixed(1)} kN`;
+    if (tachoValZ4) tachoValZ4.textContent = `${phiVnMax.toFixed(1)} kN`;
+
     const ratioDemMax = phiVnMax > 0 ? (VuCrit / phiVnMax) : 0.0;
     if (isReview) {
       tachoRatio.textContent = `Índice D/C = Vu,crit / φVn = ${dcRatio.toFixed(2)} (${VuCrit.toFixed(1)} / ${phiVnCol.toFixed(1)} kN)`;

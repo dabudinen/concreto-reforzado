@@ -3174,21 +3174,87 @@
                   <div class="calc-step-body">
                     <div class="math-card">
                       <div class="math-card-header">
-                        <span class="math-card-title">Búsqueda del Eje Neutro $c_3$ y Descuento de Orificios $U_1, U_2$</span>
+                        <span class="math-card-title">Deducción Explícita del Eje Neutro $c_3$ (Ecuación Cuadrática) y Descuento de Orificios</span>
                         <span class="norm-pill">Punto 3 • Excentricidad Mínima</span>
                       </div>
+                      <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 0.55rem;">
+                        Buscamos la profundidad $c_3$ donde la carga axial teórica $P_n(c_3)$ iguala a la meseta $P_{n,\max} = 0.75\,P_0 = 4122.3\text{ kN} = 4\,122\,300\text{ N}$. Como $c_3$ está cerca de $d$, el acero superior $A'_s$ fluye en compresión ($f'_s = 420\text{ MPa}$, con orificio activo $U_1 = 0.85 f'_c A'_s$) y el acero inferior $A_s$ trabaja en rango elástico $f_s = 600\,\dfrac{387.8 - c_3}{c_3}$ (suponiendo inicialmente $a_3 = 0.85\,c_3 < d \implies U_2 = 0$):
+                      </p>
                       <div class="math-formula">
                         $$\begin{aligned}
-                        \text{Cuadrática }(U_2=0):\quad A &= 0.85(28)(400)(0.85) = 8092\text{ N/mm}, \quad C = 600(1530)(387.8) = 3.560\times 10^8\text{ N}\cdot\text{mm} \\[3pt]
-                        B &= 1530(420 - 23.8) + 600(1530) - 4\,122\,300 = -2\,598\,114\text{ N} \\[3pt]
-                        c_3 &= \frac{-(-2\,598\,114) + \sqrt{(-2\,598\,114)^2 + 4(8092)(3.560\times 10^8)}}{2(8092)} = \mathbf{424.7\text{ mm}} \\[4pt]
-                        \text{Verificación:}\quad a_3 &= 0.85(424.7) = \mathbf{361.0\text{ mm}} < d = 387.8\text{ mm}\;(U_2 = 0\;\checkmark) \\[4pt]
-                        \varepsilon'_s &= 0.003\frac{424.7 - 62.2}{424.7} = 0.00256 > \varepsilon_y \implies f'_s = 420\text{ MPa}; \qquad \varepsilon_t = 0.003\frac{387.8 - 424.7}{424.7} = -0.00026 \implies f_s = -52.1\text{ MPa} \\[4pt]
-                        C_c &= 0.85(28)(400)(361.0) = 3436.7\text{ kN}, \quad U_1 = 0.85(28)(1530) = 36.4\text{ kN} \\[4pt]
-                        \mathbf{M_{n3}} &= 3436.7\left(225 - \frac{361.0}{2}\right) + (642.6 - 36.4)(225 - 62.2) + (-79.7)(387.8 - 225) = \mathbf{238.7\text{ kN}\cdot\text{m}} \\[4pt]
-                        \mathbf{\phi M_{n3}} &= 0.65(238.7) = \mathbf{155.1\text{ kN}\cdot\text{m}} \quad \big(\text{para meseta } 0.80 P_0:\; c_3 = 452.3\text{ mm},\; \phi M_{n3} = \mathbf{128.3\text{ kN}\cdot\text{m}}\big)
+                        \textbf{1. Equilibrio } P_n(c_3) = P_{n,\max}:\quad &0.85(28)(400)(0.85\,c_3) + 1530(420 - 23.8) - 1530\!\left(600\,\frac{387.8 - c_3}{c_3}\right) = 4\,122\,300 \\[5pt]
+                        \textbf{2. Multiplicar por } c_3:\quad &\underbrace{8092}_{A}\,c_3^2 + \underbrace{\big(606\,186 + 918\,000 - 4\,122\,300\big)}_{B = -2\,598\,114}\,c_3 - \underbrace{356\,000\,400}_{C} = 0 \\[5pt]
+                        \textbf{3. Raíz positiva:}\quad c_3 &= \frac{-(-2\,598\,114) + \sqrt{(-2\,598\,114)^2 + 4(8092)(356\,000\,400)}}{2(8092)} = \frac{2\,598\,114 + 4\,274\,719}{16\,184} = \mathbf{424.7\text{ mm}} \\[5pt]
+                        \textbf{4. Verificación hipótesis:}\quad a_3 &= 0.85(424.7) = \mathbf{361.0\text{ mm}} < d = 387.8\text{ mm}\;\implies U_2 = 0\;\checkmark \\[3pt]
+                        \varepsilon'_s &= 0.003\frac{424.7 - 62.2}{424.7} = 0.00256 > \varepsilon_y \implies f'_s = 420\text{ MPa}\;\checkmark \\[3pt]
+                        \varepsilon_t &= 0.003\frac{387.8 - 424.7}{424.7} = -0.00026 \implies f_s = 200\,000(-0.00026) = \mathbf{-52.1\text{ MPa}}\;(\text{compresión elástica}\;\checkmark) \\[5pt]
+                        \textbf{5. Fuerzas y Momento:}\quad C_c &= 0.85(28)(400)(361.0) = \mathbf{3436.7\text{ kN}}, \quad F'_s - U_1 = 642.6 - 36.4 = \mathbf{606.2\text{ kN}}, \quad F_s = \mathbf{-79.7\text{ kN}} \\[3pt]
+                        \text{Chequeo } \sum F:\quad P_{n3} &= 3436.7 + 606.2 - (-79.7) = \mathbf{4122.6\text{ kN}} \approx 4122.3\text{ kN}\;\checkmark \\[3pt]
+                        \mathbf{M_{n3}} &= 3436.7\left(225 - \frac{361.0}{2}\right) + 606.2(225 - 62.2) + (-79.7)(387.8 - 225) = \mathbf{238.7\text{ kN}\cdot\text{m}} \\[3pt]
+                        \mathbf{\phi M_{n3}} &= 0.65(238.7) = \mathbf{155.1\text{ kN}\cdot\text{m}}, \qquad e_{\min} = \frac{238.7}{4122.3} = \mathbf{57.9\text{ mm}}\;(0.129\,h) \\[5pt]
+                        \text{Nota }(0.80\,P_0 = 4397.1\text{ kN}):\quad B &= -2\,872\,914\text{ N} \implies c_3 = \mathbf{452.3\text{ mm}},\; a_3 = 384.5\text{ mm} < d,\; \phi M_{n3} = \mathbf{128.3\text{ kN}\cdot\text{m}}
                         \end{aligned}$$
                       </div>
+
+                      <!-- Gráfica seccional numérica del Punto 3 (c3 = 424.7 mm) -->
+                      <figure class="diagram-figure" style="max-width: 780px; margin: 1rem auto 0.2rem;">
+                        <svg class="diagram-svg" viewBox="0 0 780 232" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #CBD5E1; font-family: Inter, sans-serif;">
+                          <rect x="0" y="0" width="780" height="28" fill="#F8FAFC"/>
+                          <line x1="0" y1="28" x2="780" y2="28" stroke="#E2E8F0" stroke-width="1"/>
+                          <text x="390" y="18" fill="#0F172A" font-size="10" font-weight="800" text-anchor="middle">
+                            ESTADO SECCIONAL EN EL PUNTO 3 (c₃ = 424.7 mm &gt; d = 387.8 mm  •  a₃ = 361.0 mm &lt; d → U₂ = 0)
+                          </text>
+
+                          <!-- Líneas guía horizontales (yTop=44, yBot=206 -> h=162px -> 0.36 px/mm) -->
+                          <!-- d'=62.2 -> y=66.4 | a3=361.0 -> y=174.0 | xcp=225 -> y=125.0 | d=387.8 -> y=183.6 | c3=424.7 -> y=196.9 -->
+                          <line x1="95"  y1="44"  x2="585" y2="44"  stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="175" y1="66"  x2="585" y2="66"  stroke="#93C5FD" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="175" y1="174" x2="585" y2="174" stroke="#93C5FD" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="175" y1="184" x2="585" y2="184" stroke="#FCA5A5" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="88"  y1="197" x2="430" y2="197" stroke="#059669" stroke-width="1.1" stroke-dasharray="4,2"/>
+                          <line x1="95"  y1="206" x2="585" y2="206" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+                          <!-- PANEL 1: SECCIÓN 400×450 mm -->
+                          <rect x="95" y="44" width="80" height="162" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.8"/>
+                          <rect x="96" y="45" width="78" height="129" fill="rgba(37,99,235,0.14)"/>
+                          <line x1="95" y1="125" x2="182" y2="125" stroke="#D97706" stroke-width="1.3" stroke-dasharray="4,2"/>
+                          <circle cx="112" cy="66" r="4" fill="#1D4ED8"/><circle cx="135" cy="66" r="4" fill="#1D4ED8"/><circle cx="158" cy="66" r="4" fill="#1D4ED8"/>
+                          <circle cx="112" cy="184" r="4" fill="#1D4ED8"/><circle cx="135" cy="184" r="4" fill="#1D4ED8"/><circle cx="158" cy="184" r="4" fill="#1D4ED8"/>
+                          <text x="135" y="108" fill="#1E40AF" font-size="8.2" font-weight="800" text-anchor="middle">a₃ = 361 mm</text>
+                          <text x="135" y="121" fill="#B45309" font-size="7.5" font-weight="800" text-anchor="middle">xcp = 225 mm</text>
+                          <!-- Cotas izquierda -->
+                          <line x1="48" y1="44" x2="48" y2="206" stroke="#334155" stroke-width="1.1" marker-start="url(#pm5-arr-dark)" marker-end="url(#pm5-arr-dark)"/>
+                          <text x="43" y="128" fill="#0F172A" font-size="8.2" font-weight="800" text-anchor="end" font-family="JetBrains Mono, monospace">450</text>
+                          <line x1="76" y1="44" x2="76" y2="197" stroke="#059669" stroke-width="1.2" marker-start="url(#pm5-arr-green)" marker-end="url(#pm5-arr-green)"/>
+                          <text x="71" y="152" fill="#047857" font-size="8.2" font-weight="800" text-anchor="end" font-family="JetBrains Mono, monospace">c₃=424.7</text>
+                          <text x="135" y="222" fill="#475569" font-size="7.8" font-weight="700" text-anchor="middle">b = 400 mm • 6 #8</text>
+
+                          <!-- PANEL 2: DEFORMACIONES -->
+                          <polygon points="370,44 286,44 370,197" fill="rgba(37,99,235,0.14)"/>
+                          <polygon points="370,197 375,206 370,206" fill="rgba(220,38,38,0.16)"/>
+                          <line x1="370" y1="40" x2="370" y2="210" stroke="#334155" stroke-width="1.4"/>
+                          <line x1="286" y1="44" x2="375" y2="206" stroke="#0F172A" stroke-width="2"/>
+                          <circle cx="370" cy="197" r="3.2" fill="#059669"/>
+                          <text x="328" y="39" fill="#1D4ED8" font-size="8.2" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">εcu = 0.003</text>
+                          <line x1="370" y1="66" x2="298" y2="66" stroke="#1D4ED8" stroke-width="1.4" marker-end="url(#pm5-arr-blue)"/>
+                          <text x="292" y="69" fill="#1E40AF" font-size="7.8" font-weight="800" text-anchor="end" font-family="JetBrains Mono, monospace">ε's=0.00256</text>
+                          <text x="380" y="185" fill="#1E40AF" font-size="7.8" font-weight="800" font-family="JetBrains Mono, monospace">εt=−0.00026 (comp.)</text>
+                          <text x="380" y="199" fill="#047857" font-size="7.6" font-weight="800">E.N. (c₃ = 424.7 mm)</text>
+
+                          <!-- PANEL 3: BLOQUE WHITNEY Y FUERZAS -->
+                          <rect x="530" y="44" width="55" height="130" fill="rgba(37,99,235,0.16)" stroke="#1D4ED8" stroke-width="1.6"/>
+                          <line x1="585" y1="40" x2="585" y2="210" stroke="#334155" stroke-width="1.4"/>
+                          <text x="557" y="39" fill="#1D4ED8" font-size="8" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">23.8 MPa</text>
+                          <!-- Vectores de fuerza -->
+                          <line x1="636" y1="66"  x2="590" y2="66"  stroke="#1E3A8A" stroke-width="2"   marker-end="url(#pm5-arr-blue)"/>
+                          <text x="641" y="69"  fill="#1E3A8A" font-size="8" font-weight="800" font-family="JetBrains Mono, monospace">F's−U₁ = 606.2 kN</text>
+                          <line x1="636" y1="109" x2="590" y2="109" stroke="#2563EB" stroke-width="2.6" marker-end="url(#pm5-arr-blue)"/>
+                          <text x="641" y="112" fill="#1D4ED8" font-size="8.2" font-weight="800" font-family="JetBrains Mono, monospace">Cc = 3436.7 kN</text>
+                          <line x1="636" y1="184" x2="590" y2="184" stroke="#1D4ED8" stroke-width="1.8" marker-end="url(#pm5-arr-blue)"/>
+                          <text x="641" y="187" fill="#1E40AF" font-size="8" font-weight="800" font-family="JetBrains Mono, monospace">Fs = 79.7 kN (← comp.)</text>
+                          <text x="680" y="220" fill="#065F46" font-size="8.2" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">ΣF = 4122.6 kN ≈ Pn,máx ✓</text>
+                        </svg>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -3233,17 +3299,76 @@
                   <div class="calc-step-body">
                     <div class="math-card">
                       <div class="math-card-header">
-                        <span class="math-card-title">Rama Dúctil del Diagrama de Interacción (Puntos 5 a 8)</span>
+                        <span class="math-card-title">Rama Dúctil del Diagrama de Interacción (Puntos 5 a 8) y Deducción Explícita de $c_7$</span>
                         <span class="norm-pill">NSR-10 C.9.3.2 y C.10.3.5</span>
                       </div>
                       <div class="math-formula">
                         $$\begin{aligned}
-                        \textbf{Pto. 5 (}\varepsilon_t=0.004,\; \phi=0.814\textbf{):}\quad c_5 &= \frac{3}{7}(387.8) = \mathbf{166.2\text{ mm}},\; f'_s = 375.5\text{ MPa} \implies P_{n5} = \mathbf{1240.3\text{ kN}},\; \phi M_{n5} = \mathbf{325.4\text{ kN}\cdot\text{m}} \\[6pt]
-                        \textbf{Pto. 6 (}\varepsilon_t=0.005,\; \phi=0.900\textbf{):}\quad c_6 &= \frac{3}{8}(387.8) = \mathbf{145.4\text{ mm}},\; f'_s = 343.4\text{ MPa} \implies P_{n6} = \mathbf{1023.1\text{ kN}},\; \phi M_{n6} = \mathbf{338.6\text{ kN}\cdot\text{m}} \\[6pt]
-                        \textbf{Pto. 7 (Flexión Pura, }P_n=0\textbf{):}\quad c_7 &= \mathbf{68.7\text{ mm}},\; a_7 = 58.4\text{ mm},\; f'_s = 56.7\text{ MPa} \implies \mathbf{M_{n7} = 227.6\text{ kN}\cdot\text{m}}\;(\mathbf{\phi M_{n7} = 204.8\text{ kN}\cdot\text{m}}) \\[6pt]
+                        \textbf{Pto. 5 (}\varepsilon_t=0.004,\; \phi=0.814\textbf{):}\quad c_5 &= \frac{3}{7}(387.8) = \mathbf{166.2\text{ mm}},\quad a_5 = 0.85(166.2) = 141.3\text{ mm} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
+                        f'_s &= 600\frac{166.2 - 62.2}{166.2} = \mathbf{375.5\text{ MPa}},\quad C_{c5} = 1344.9\text{ kN} \implies P_{n5} = \mathbf{1240.3\text{ kN}},\; \phi M_{n5} = \mathbf{325.4\text{ kN}\cdot\text{m}} \\[7pt]
+                        \textbf{Pto. 6 (}\varepsilon_t=0.005,\; \phi=0.900\textbf{):}\quad c_6 &= \frac{3}{8}(387.8) = \mathbf{145.4\text{ mm}},\quad a_6 = 0.85(145.4) = 123.6\text{ mm} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
+                        f'_s &= 600\frac{145.4 - 62.2}{145.4} = \mathbf{343.4\text{ MPa}},\quad C_{c6} = 1176.8\text{ kN} \implies P_{n6} = \mathbf{1023.1\text{ kN}},\; \phi M_{n6} = \mathbf{338.6\text{ kN}\cdot\text{m}} \\[7pt]
+                        \textbf{Pto. 7 (Flexión Pura, }P_n=0\textbf{):}\quad &\text{Con } A_s \text{ en fluencia }(T_s = 642.6\text{ kN}),\; A'_s \text{ elástico }\!\left(f'_s = 600\frac{c_7 - 62.2}{c_7}\right)\text{ y } U_1 = 0\text{ (si }a_7 < d'\text{):} \\[3pt]
+                        &0.85(28)(400)(0.85\,c_7) + 1530\!\left(600\,\frac{c_7 - 62.2}{c_7}\right) - 642\,600 = 0 \\[3pt]
+                        &\underbrace{8092}_{A}\,c_7^2 + \underbrace{(918\,000 - 642\,600)}_{B = +275\,400}\,c_7 - \underbrace{57\,099\,600}_{C} = 0 \\[3pt]
+                        c_7 &= \frac{-275\,400 + \sqrt{275\,400^2 + 4(8092)(57\,099\,600)}}{2(8092)} = \mathbf{68.7\text{ mm}} \\[3pt]
+                        \text{Verificación:}\quad a_7 &= 0.85(68.7) = \mathbf{58.4\text{ mm}} < d' = 62.2\text{ mm}\;(U_1 = 0\;\checkmark),\quad f'_s = 600\frac{68.7 - 62.2}{68.7} = \mathbf{56.7\text{ MPa}} \\[3pt]
+                        C_{c7} &= 555.8\text{ kN},\quad F'_{s7} = 86.8\text{ kN}\;\;(555.8 + 86.8 = 642.6 = T_s\;\checkmark) \\[3pt]
+                        \mathbf{M_{n7}} &= 555.8\!\left(387.8 - \frac{58.4}{2}\right) + 86.8(387.8 - 62.2) = \mathbf{227.6\text{ kN}\cdot\text{m}} \quad (\mathbf{\phi M_{n7} = 204.8\text{ kN}\cdot\text{m}}) \\[7pt]
                         \textbf{Pto. 8 (Tracción Pura, }M_n=0\textbf{):}\quad P_{n8} &= -3060(420) = \mathbf{-1285.2\text{ kN}}\quad (\mathbf{\phi P_{n8} = -1156.7\text{ kN}})
                         \end{aligned}$$
                       </div>
+
+                      <!-- Gráfica seccional numérica del Punto 7 (Flexión Pura, c7 = 68.7 mm) -->
+                      <figure class="diagram-figure" style="max-width: 780px; margin: 1rem auto 0.2rem;">
+                        <svg class="diagram-svg" viewBox="0 0 780 218" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="background: #FFFFFF; border-radius: 8px; border: 1px solid #CBD5E1; font-family: Inter, sans-serif;">
+                          <rect x="0" y="0" width="780" height="28" fill="#F8FAFC"/>
+                          <line x1="0" y1="28" x2="780" y2="28" stroke="#E2E8F0" stroke-width="1"/>
+                          <text x="390" y="18" fill="#0F172A" font-size="10" font-weight="800" text-anchor="middle">
+                            ESTADO SECCIONAL EN EL PUNTO 7 — FLEXIÓN PURA (c₇ = 68.7 mm  •  a₇ = 58.4 mm &lt; d' = 62.2 mm → U₁ = 0)
+                          </text>
+
+                          <!-- Líneas guía horizontales (yTop=44, yBot=194 -> h=150px -> 0.333 px/mm) -->
+                          <!-- a7=58.4 -> y=63.5 | d'=62.2 -> y=64.7 | c7=68.7 -> y=66.9 | d=387.8 -> y=173.3 -->
+                          <line x1="95"  y1="44"  x2="585" y2="44"  stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="88"  y1="67"  x2="455" y2="67"  stroke="#7C3AED" stroke-width="1.1" stroke-dasharray="4,2"/>
+                          <line x1="175" y1="173" x2="585" y2="173" stroke="#FCA5A5" stroke-width="0.8" stroke-dasharray="3,2"/>
+                          <line x1="95"  y1="194" x2="585" y2="194" stroke="#CBD5E1" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+                          <!-- PANEL 1: SECCIÓN 400×450 mm -->
+                          <rect x="95" y="44" width="80" height="150" fill="#FFFFFF" stroke="#1E293B" stroke-width="1.8"/>
+                          <rect x="96" y="45" width="78" height="19" fill="rgba(37,99,235,0.20)"/>
+                          <circle cx="112" cy="65" r="3.8" fill="#1D4ED8"/><circle cx="135" cy="65" r="3.8" fill="#1D4ED8"/><circle cx="158" cy="65" r="3.8" fill="#1D4ED8"/>
+                          <circle cx="112" cy="173" r="3.8" fill="#DC2626"/><circle cx="135" cy="173" r="3.8" fill="#DC2626"/><circle cx="158" cy="173" r="3.8" fill="#DC2626"/>
+                          <text x="135" y="57" fill="#1E40AF" font-size="7.6" font-weight="800" text-anchor="middle">a₇ = 58.4</text>
+                          <text x="135" y="122" fill="#64748B" font-size="7.6" font-weight="700" text-anchor="middle">Zona fisurada</text>
+                          <line x1="76" y1="44" x2="76" y2="67" stroke="#7C3AED" stroke-width="1.2"/>
+                          <text x="71" y="59" fill="#6D28D9" font-size="8" font-weight="800" text-anchor="end" font-family="JetBrains Mono, monospace">c₇=68.7</text>
+                          <text x="135" y="209" fill="#475569" font-size="7.6" font-weight="700" text-anchor="middle">d' = 62.2 &gt; a₇ (U₁ = 0)</text>
+
+                          <!-- PANEL 2: DEFORMACIONES -->
+                          <polygon points="340,44 300,44 340,67" fill="rgba(37,99,235,0.16)"/>
+                          <polygon points="340,67 450,194 340,194" fill="rgba(220,38,38,0.12)"/>
+                          <line x1="340" y1="40" x2="340" y2="198" stroke="#334155" stroke-width="1.4"/>
+                          <line x1="300" y1="44" x2="450" y2="194" stroke="#0F172A" stroke-width="2"/>
+                          <circle cx="340" cy="67" r="3.2" fill="#7C3AED"/>
+                          <text x="318" y="39" fill="#1D4ED8" font-size="8" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">εcu = 0.003</text>
+                          <text x="350" y="69" fill="#6D28D9" font-size="7.6" font-weight="800">E.N. (ε's = 0.00028)</text>
+                          <line x1="340" y1="173" x2="428" y2="173" stroke="#DC2626" stroke-width="1.6" marker-end="url(#pm5-arr-red)"/>
+                          <text x="394" y="167" fill="#DC2626" font-size="7.8" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">εt = 0.0139 ≫ 0.005</text>
+
+                          <!-- PANEL 3: PAR INTERNO PURO (C = T) -->
+                          <rect x="530" y="44" width="55" height="20" fill="rgba(37,99,235,0.20)" stroke="#1D4ED8" stroke-width="1.6"/>
+                          <line x1="585" y1="40" x2="585" y2="198" stroke="#334155" stroke-width="1.4"/>
+                          <line x1="636" y1="53"  x2="590" y2="53"  stroke="#2563EB" stroke-width="2.4" marker-end="url(#pm5-arr-blue)"/>
+                          <text x="641" y="56"  fill="#1D4ED8" font-size="8" font-weight="800" font-family="JetBrains Mono, monospace">Cc = 555.8 kN</text>
+                          <line x1="636" y1="68"  x2="590" y2="68"  stroke="#1E3A8A" stroke-width="1.6" marker-end="url(#pm5-arr-blue)"/>
+                          <text x="641" y="71"  fill="#1E3A8A" font-size="7.8" font-weight="800" font-family="JetBrains Mono, monospace">F's = 86.8 kN (U₁=0)</text>
+                          <line x1="589" y1="173" x2="636" y2="173" stroke="#DC2626" stroke-width="2.4" marker-end="url(#pm5-arr-red)"/>
+                          <text x="641" y="176" fill="#DC2626" font-size="8.2" font-weight="800" font-family="JetBrains Mono, monospace">Ts = 642.6 kN (→)</text>
+                          <text x="676" y="206" fill="#6D28D9" font-size="8" font-weight="800" text-anchor="middle" font-family="JetBrains Mono, monospace">C = 642.6 = T → Pn = 0 ✓</text>
+                        </svg>
+                      </figure>
                     </div>
                   </div>
                 </div>

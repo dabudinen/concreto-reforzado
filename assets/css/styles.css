@@ -6587,4 +6587,89 @@ html[data-theme="dark"] .sim-num-input-amber:focus {
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
 }
 
+/* ==========================================================================
+   ATLAS VISUAL DE LOS 8 PUNTOS NOTABLES DEL DIAGRAMA P-M (MÓDULO 5)
+   ========================================================================== */
+.pm-points-atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 0.5rem;
+}
 
+.pm-point-card {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.pm-point-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.10);
+  border-color: #94A3B8;
+}
+
+.pm-point-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.42rem 0.6rem;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+.pm-point-badge {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.67rem;
+  font-weight: 800;
+  padding: 0.12rem 0.42rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pm-point-card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #FFFFFF;
+}
+
+.pm-point-card-footer {
+  padding: 0.4rem 0.55rem;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  font-size: 0.71rem;
+  line-height: 1.38;
+  color: #334155;
+  text-align: center;
+}
+
+.pm-point-card-footer strong {
+  color: #0F172A;
+}
+
+html[data-theme="dark"] .pm-point-card {
+  border-color: #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1080px) {
+  .pm-points-atlas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .pm-points-atlas-grid {
+    grid-template-columns: 1fr;
+  }
+}

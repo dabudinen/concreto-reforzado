@@ -120,18 +120,18 @@ function updateSim71() {
   const quMin = Math.max(0.0, qAvg - dqX - dqY);
 
   // 3. Verificación de Punzonamiento (Cortante Bidireccional a d/2)
-  const b0Mm = 2.0 * (cxMm + dMm) + 2.0 * (cyMm + dMm);
-  const b0M = b0Mm / 1000.0;
-  const punchArea = ((cxMm + dMm) / 1000.0) * ((cyMm + dMm) / 1000.0);
-  const Vu1 = qAvg * Math.max(0.0, Aprov - punchArea); // kN
+  const isWallStrip = cxMm >= (L * 1000.0 - 5.0);
+  const b0Mm = isWallStrip ? 0 : (2.0 * (cxMm + dMm) + 2.0 * (cyMm + dMm));
+  const punchArea = isWallStrip ? Aprov : (((cxMm + dMm) / 1000.0) * ((cyMm + dMm) / 1000.0));
+  const Vu1 = isWallStrip ? 0.0 : qAvg * Math.max(0.0, Aprov - punchArea); // kN
 
   const betaC = Math.max(cxMm, cyMm) / Math.min(cxMm, cyMm);
   const alphaS = 40.0; // Columna interior
   const vc1 = 0.17 * (1.0 + 2.0 / betaC) * Math.sqrt(fc);
-  const vc2 = 0.083 * ((alphaS * dMm) / b0Mm + 2.0) * Math.sqrt(fc);
+  const vc2 = b0Mm > 0 ? (0.083 * ((alphaS * dMm) / b0Mm + 2.0) * Math.sqrt(fc)) : 0.33 * Math.sqrt(fc);
   const vc3 = 0.33 * Math.sqrt(fc);
   const vc = Math.min(vc1, vc2, vc3); // MPa
-  const phiVc1 = (0.75 * vc * b0Mm * dMm) / 1000.0; // kN
+  const phiVc1 = isWallStrip ? 99999.0 : (0.75 * vc * b0Mm * dMm) / 1000.0; // kN
 
   // 4. Verificación de Cortante como Viga (Unidireccional a distancia d)
   // En dirección L (vuelo largo X)
@@ -183,25 +183,35 @@ function updateSim71() {
     `A_prov = ${Aprov.toFixed(2)} m² (A_req = ${Areq.toFixed(2)} m²) | qe = ${qe.toFixed(0)} kPa`;
   document.getElementById('res71-press').textContent =
     `qu,máx = ${quMax.toFixed(1)} kPa | qu,mín = ${quMin.toFixed(1)} kPa ${inKern ? '(En núcleo central)' : '⚠️ (Excéntrica)'}`;
-  document.getElementById('res71-punch').textContent =
-    `Vu = ${Vu1.toFixed(1)} kN | φVc = ${phiVc1.toFixed(1)} kN (d = ${dMm.toFixed(1)} mm, b0 = ${b0Mm.toFixed(0)} mm)`;
+  document.getElementById('res71-punch').textContent = isWallStrip
+    ? 'N/A (Cimiento corrido 1D — solo cortante unidireccional)'
+    : `Vu = ${Vu1.toFixed(1)} kN | φVc = ${phiVc1.toFixed(1)} kN (d = ${dMm.toFixed(1)} mm, b0 = ${b0Mm.toFixed(0)} mm)`;
   document.getElementById('res71-shearx').textContent =
     `VuX = ${Vu2x.toFixed(1)} kN | φVcX = ${phiVc2x.toFixed(1)} kN (voladizo = ${lvX.toFixed(2)} m)`;
   document.getElementById('res71-sheary').textContent =
     `VuY = ${Vu2y.toFixed(1)} kN | φVcY = ${phiVc2y.toFixed(1)} kN (voladizo = ${lvY.toFixed(2)} m)`;
-  document.getElementById('res71-mux').textContent =
-    `MuX = ${MuFlexX.toFixed(1)} kN·m → ${numBarsX} No.${barKey} @ ${(sBarsX / 10.0).toFixed(0)} cm`;
+  document.getElementById('res71-mux').textContent = lvX <= 0.01
+    ? `As,long (temp. 0.0018) = ${AsMinX.toFixed(0)} mm² → ${numBarsX} No.${barKey}`
+    : `MuX = ${MuFlexX.toFixed(1)} kN·m → ${numBarsX} No.${barKey} @ ${(sBarsX / 10.0).toFixed(0)} cm`;
   document.getElementById('res71-muy').textContent =
     `MuY = ${MuFlexY.toFixed(1)} kN·m → ${numBarsY} No.${barKey} @ ${(sBarsY / 10.0).toFixed(0)} cm`;
   document.getElementById('res71-aplast').textContent =
     `φPn = ${phiPnAplast.toFixed(0)} kN ${aplastOk ? '≥' : '<'} Pu = ${Pu.toFixed(0)} kN (factor √(A2/A1) = ${factorAplast.toFixed(2)})`;
+
+  // Tacómetro Dinámico de Utilización Geotécnica y Cortante Bidireccional
+  const dcrSoil  = Aprov > 0 ? Areq / Aprov : 1.5;
+  const dcrPunch = isWallStrip ? 0.0 : (phiVc1 > 0 ? Vu1 / phiVc1 : 1.5);
+  const dcrBeamX = phiVc2x > 0 ? Vu2x / phiVc2x : 0;
+  const dcrBeamY = phiVc2y > 0 ? Vu2y / phiVc2y : 0;
+  const dcrBeam  = Math.max(dcrBeamX, dcrBeamY);
+  updateSim71Tachometer(dcrSoil, dcrPunch, dcrBeam, inKern, aplastOk, isWallStrip);
 
   // Estado global
   const statusEl = document.getElementById('res71-status');
   if (Aprov < Areq) {
     statusEl.className = 'status-badge status-danger';
     statusEl.innerHTML = `❌ ÁREA INSUFICIENTE: A_prov = ${Aprov.toFixed(2)} m² < A_req = ${Areq.toFixed(2)} m². Se supera la capacidad admisible del suelo.`;
-  } else if (Vu1 > phiVc1) {
+  } else if (!isWallStrip && Vu1 > phiVc1) {
     statusEl.className = 'status-badge status-danger';
     statusEl.innerHTML = `❌ FALLA POR PUNZONAMIENTO: Vu = ${Vu1.toFixed(0)} kN > φVc = ${phiVc1.toFixed(0)} kN. Aumente el espesor h de la zapata.`;
   } else if (Vu2x > phiVc2x || Vu2y > phiVc2y) {
@@ -397,20 +407,156 @@ function drawSim71Canvas(st) {
   ctx.fillText(`--- Sección Crítica Cortante como Viga (a d)`, pX0 + 260, H - 28);
 }
 
+function updateSim71Tachometer(dcrSoil, dcrPunch, dcrBeam, inKern, aplastOk, isWallStrip) {
+  const card = document.getElementById('sim71-tachometer-card');
+  if (!card) return;
+
+  const setBar = (barId, pctId, ratio, warnThreshold, naLabel) => {
+    const barEl = document.getElementById(barId);
+    const pctEl = document.getElementById(pctId);
+    if (naLabel) {
+      if (barEl) {
+        barEl.style.width = '0%';
+        barEl.style.background = '#94A3B8';
+      }
+      if (pctEl) pctEl.textContent = naLabel;
+      return;
+    }
+    const pctVal = Number.isFinite(ratio) ? Math.max(0, ratio * 100) : 120;
+    const widthPct = Math.min(100, pctVal);
+    let bg = 'linear-gradient(90deg, #16A34A, #22C55E)';
+    if (!Number.isFinite(ratio) || ratio > 1.0) {
+      bg = 'linear-gradient(90deg, #DC2626, #EF4444)';
+    } else if (ratio > (warnThreshold || 0.85)) {
+      bg = 'linear-gradient(90deg, #D97706, #F59E0B)';
+    } else if (ratio > 0.65) {
+      bg = 'linear-gradient(90deg, #2563EB, #3B82F6)';
+    }
+    if (barEl) {
+      barEl.style.width = `${widthPct.toFixed(1)}%`;
+      barEl.style.background = bg;
+    }
+    if (pctEl) {
+      pctEl.textContent = Number.isFinite(ratio) ? `${pctVal.toFixed(1)}% (D/C = ${ratio.toFixed(2)})` : 'Excedido';
+    }
+  };
+
+  setBar('sim71-bar-soil', 'sim71-pct-soil', dcrSoil, 0.90, null);
+  setBar('sim71-bar-punch', 'sim71-pct-punch', dcrPunch, 0.85, isWallStrip ? 'N/A (1D)' : null);
+  setBar('sim71-bar-beam', 'sim71-pct-beam', dcrBeam, 0.85, null);
+
+  const govDcr = Math.max(dcrSoil, dcrPunch, dcrBeam);
+
+  const needle = document.getElementById('sim71-tacho-needle');
+  if (needle) {
+    let pctNeedle = 12;
+    if (dcrSoil > 1.0 || dcrPunch > 1.0 || dcrBeam > 1.0) {
+      pctNeedle = Math.min(97, 85 + Math.max(0, govDcr - 1.0) * 35);
+    } else if (!inKern || !aplastOk) {
+      pctNeedle = 74;
+    } else if (govDcr > 0.85) {
+      pctNeedle = 65 + ((govDcr - 0.85) / 0.15) * 20;
+    } else if (govDcr > 0.65) {
+      pctNeedle = 38 + ((govDcr - 0.65) / 0.20) * 27;
+    } else {
+      pctNeedle = Math.max(4, (govDcr / 0.65) * 38);
+    }
+    needle.style.left = `${pctNeedle.toFixed(1)}%`;
+  }
+
+  const badge = document.getElementById('sim71-dcr-badge');
+  const msg = document.getElementById('sim71-regime-msg');
+
+  if (dcrSoil > 1.0) {
+    if (badge) {
+      badge.textContent = `ZONA 4 • CAPACIDAD DE SUELO EXCEDIDA (D/C = ${dcrSoil.toFixed(2)})`;
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'Areq supera Aprov en condiciones de servicio; aumente las dimensiones B o L en planta.';
+  } else if (dcrPunch > 1.0) {
+    if (badge) {
+      badge.textContent = `ZONA 4 • PUNZONAMIENTO EXCEDIDO (D/C = ${dcrPunch.toFixed(2)})`;
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'Cortante bidireccional Vu1 > φVc1 en el perímetro crítico a d/2; incremente el espesor h.';
+  } else if (dcrBeam > 1.0) {
+    if (badge) {
+      badge.textContent = `ZONA 4 • CORTANTE 1D EXCEDIDO (D/C = ${dcrBeam.toFixed(2)})`;
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'El cortante como viga a distancia d supera φVc2; incremente el peralte efectivo d o f\'c.';
+  } else if (!inKern || !aplastOk) {
+    if (badge) {
+      badge.textContent = !aplastOk
+        ? `ZONA 3 • ALERTA APLASTAMIENTO (D/C máx = ${govDcr.toFixed(2)})`
+        : `ZONA 3 • EXCÉNTRICA SIN NÚCLEO CENTRAL (D/C = ${govDcr.toFixed(2)})`;
+      badge.style.background = '#FEF3C7';
+      badge.style.color = '#92400E';
+      badge.style.borderColor = '#F59E0B';
+    }
+    if (msg) msg.textContent = !aplastOk
+      ? 'Resiste el suelo y cortantes, pero Pu supera φPn de aplastamiento: disponga espigos (dowels) NSR-10 C.15.8.1.2.'
+      : 'Excentricidad supera L/6 o B/6: verifique redistribución de presiones sin tracción en el contacto suelo-zapata.';
+  } else if (govDcr > 0.85) {
+    if (badge) {
+      badge.textContent = `ZONA 2 • DESEMPEÑO ÓPTIMO (D/C máx = ${govDcr.toFixed(2)})`;
+      badge.style.background = '#DBEAFE';
+      badge.style.color = '#1E40AF';
+      badge.style.borderColor = '#3B82F6';
+    }
+    if (msg) msg.textContent = 'Diseño eficiente cerca de capacidad admisible y cortante bidireccional sin estribos (NSR-10 C.15).';
+  } else {
+    if (badge) {
+      badge.textContent = `ZONA 1 • HOLGADO Y SEGURO (D/C máx = ${govDcr.toFixed(2)})`;
+      badge.style.background = '#DCFCE7';
+      badge.style.color = '#166534';
+      badge.style.borderColor = '#22C55E';
+    }
+    if (msg) msg.textContent = 'Amplia reserva en área geotécnica, punzonamiento a d/2, cortante como viga y aplastamiento.';
+  }
+}
+
 function loadSim71Preset(key) {
-  const set = (id, v) => { document.getElementById(id).value = v; };
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
   if (key === 'ej71_cuadrada') {
-    // Ejemplo de clase: 100 ton D, 70 ton L, col 45x45 cm, qadm = 25 ton/m2 = 245 kPa, Df = 1.5 m, B=L=2.80 m, h=60 cm
+    // Ejemplo 7.1: 100 tonf D, 70 tonf L, col 45x45 cm, qadm = 25 ton/m2 = 245 kPa, Df = 1.5 m, B=L=2.80 m, h=60 cm
     set('sim71-pd', 980); set('sim71-pl', 686); set('sim71-mux', 0); set('sim71-muy', 0);
     set('sim71-qadm', 245); set('sim71-df', 1.50); set('sim71-gammas', 17.0);
     set('sim71-b', 2.80); set('sim71-l', 2.80); set('sim71-h', 60);
     set('sim71-cx', 45); set('sim71-cy', 45); set('sim71-fc', '28'); set('sim71-bar', '8');
   } else if (key === 'ej72_excentrica') {
-    // Zapata rectangular con momento flector moderado
-    set('sim71-pd', 1100); set('sim71-pl', 700); set('sim71-mux', 220); set('sim71-muy', 0);
-    set('sim71-qadm', 220); set('sim71-df', 1.60); set('sim71-gammas', 18.0);
+    // Ejemplo 7.2: Pu = 1.2(820)+1.6(510) = 1800 kN, Mux = 220 kN·m, 2.60 x 3.20 m, h = 65 cm
+    set('sim71-pd', 820); set('sim71-pl', 510); set('sim71-mux', 220); set('sim71-muy', 0);
+    set('sim71-qadm', 250); set('sim71-df', 1.60); set('sim71-gammas', 18.0);
     set('sim71-b', 2.60); set('sim71-l', 3.20); set('sim71-h', 65);
     set('sim71-cx', 40); set('sim71-cy', 50); set('sim71-fc', '28'); set('sim71-bar', '6');
+  } else if (key === 'punzonamiento_critico') {
+    // Zapata delgada con punzonamiento crítico para demostrar falla Zona 4
+    set('sim71-pd', 1300); set('sim71-pl', 850); set('sim71-mux', 0); set('sim71-muy', 0);
+    set('sim71-qadm', 280); set('sim71-df', 1.50); set('sim71-gammas', 18.0);
+    set('sim71-b', 3.00); set('sim71-l', 3.00); set('sim71-h', 40);
+    set('sim71-cx', 35); set('sim71-cy', 35); set('sim71-fc', '21'); set('sim71-bar', '6');
+  } else if (key === 'ej76_aplastamiento') {
+    // Ejemplo 7.6: Columna 45x45 cm, Pu = 3400 kN, zapata 3.20x3.20 m, h=80 cm (segura a cortante), f'c,zap = 21 MPa
+    set('sim71-pd', 1400); set('sim71-pl', 1075); set('sim71-mux', 0); set('sim71-muy', 0);
+    set('sim71-qadm', 280); set('sim71-df', 1.50); set('sim71-gammas', 18.0);
+    set('sim71-b', 3.20); set('sim71-l', 3.20); set('sim71-h', 80);
+    set('sim71-cx', 45); set('sim71-cy', 45); set('sim71-fc', '21'); set('sim71-bar', '7');
+  } else if (key === 'ej77_corrido') {
+    // Ejemplo 7.7: Cimiento corrido por franja 1.00 m bajo muro bw = 20 cm, B = 2.10 m, h = 40 cm
+    set('sim71-pd', 180); set('sim71-pl', 80); set('sim71-mux', 0); set('sim71-muy', 0);
+    set('sim71-qadm', 150); set('sim71-df', 1.20); set('sim71-gammas', 18.0);
+    set('sim71-b', 2.10); set('sim71-l', 1.00); set('sim71-h', 40);
+    set('sim71-cx', 100); set('sim71-cy', 20); set('sim71-fc', '21'); set('sim71-bar', '5');
   }
   updateSim71();
 }
@@ -684,6 +830,38 @@ function drawSim72Canvas(st) {
   ctx.font = '11px Inter, sans-serif';
   ctx.fillText(`Luz entre ejes S = ${st.S.toFixed(2)} m | Excentricidad e = ${st.e.toFixed(3)} m`, (col1X + col2X) / 2.0, groundY - 55);
 }
+
+function loadSim72Preset(key) {
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
+  if (key === 'ej73_medianera') {
+    // Ejemplo 7.3: Zapata medianera c1=40, c2=40, P1=800 kN, P2=1400 kN, S=6.00 m, L1=1.80, B1=3.50, B2=3.10, bv=40, hv=80
+    set('sim72-s', 6.00); set('sim72-p1', 800); set('sim72-p2', 1400);
+    set('sim72-c1', 40); set('sim72-c2', 40); set('sim72-qe', 150);
+    set('sim72-l1', 1.80); set('sim72-b1', 3.50); set('sim72-b2', 3.10);
+    set('sim72-bv', 40); set('sim72-hv', 80); set('sim72-fc', '28');
+  } else if (key === 'ej75_combinada') {
+    // Ejemplo 7.5: Sistema equivalente 2 columnas S=4.50 m, P1=850 kN, P2=1450 kN, L1=2.20, B1=3.50, B2=3.10, bv=60, hv=90
+    set('sim72-s', 4.50); set('sim72-p1', 850); set('sim72-p2', 1450);
+    set('sim72-c1', 40); set('sim72-c2', 50); set('sim72-qe', 154);
+    set('sim72-l1', 2.20); set('sim72-b1', 3.50); set('sim72-b2', 3.10);
+    set('sim72-bv', 60); set('sim72-hv', 90); set('sim72-fc', '28');
+  } else if (key === 'lindero_critico') {
+    // Lindero crítico con zapata exterior subdimensionada para mostrar exceso de presión q1 > qe
+    set('sim72-s', 5.00); set('sim72-p1', 1200); set('sim72-p2', 1500);
+    set('sim72-c1', 40); set('sim72-c2', 45); set('sim72-qe', 120);
+    set('sim72-l1', 1.50); set('sim72-b1', 3.50); set('sim72-b2', 3.00);
+    set('sim72-bv', 35); set('sim72-hv', 65); set('sim72-fc', '28');
+  }
+  updateSim72();
+}
+
+window.redrawAllSimulators = () => {
+  updateSim71();
+  updateSim72();
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   updateSim71();

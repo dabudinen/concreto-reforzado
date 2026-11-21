@@ -3,10 +3,10 @@
  * SIMULADORES INTERACTIVOS — MÓDULO 06: LOSAS DE ENTREPISO (NSR-10 C.8, C.9, C.13)
  * ============================================================================
  * Autor: Prof. Daniel Abudinen, I.C., M.Sc.
- * Simulador 6.1: Diseñador de Losas en Una Dirección (Macizas y Aligeradas):
- *                espesor mínimo (Tabla C.9.5(a)), coeficientes de momento y
- *                cortante (C.8.3.3), acero a flexión, acero mínimo/retracción
- *                y verificación a cortante sin estribos (1.10 φVc en nervios).
+ * Simulador 6.1: Diseñador de Losas en Una Dirección (Macizas, Aligeradas y
+ *                Escaleras Equivalentes): espesor mínimo (Tabla C.9.5(a)),
+ *                coeficientes (C.8.3.3), flexión, retracción, cortante sin
+ *                estribos (1.10 φVc en nervios) y Tacómetro de Desempeño.
  * Simulador 6.2: Placa Plana en Dos Direcciones por el Método de Diseño
  *                Directo (C.13.6): M0, distribución longitudinal, franjas de
  *                columna/central y punzonamiento simplificado (C.11.11.2).
@@ -21,6 +21,7 @@ function getThemePaletteMod06() {
   return {
     isDark,
     bgCanvas: isDark ? '#0B1120' : '#F8FAFC',
+    panelBg: isDark ? '#111C33' : '#FFFFFF',
     gridLine: isDark ? 'rgba(148, 163, 184, 0.14)' : 'rgba(148, 163, 184, 0.22)',
     concreteFill: isDark ? '#1E293B' : '#E2E8F0',
     concreteStroke: isDark ? '#94A3B8' : '#334155',
@@ -31,7 +32,7 @@ function getThemePaletteMod06() {
     negFill: isDark ? 'rgba(251, 113, 133, 0.18)' : 'rgba(225, 29, 72, 0.12)',
     okColor: isDark ? '#34D399' : '#059669',
     warnColor: isDark ? '#FBBF24' : '#D97706',
-    rebarColor: isDark ? '#FBBF24' : '#D97706',
+    rebarColor: isDark ? '#F59E0B' : '#DC2626',
     stripCS: isDark ? 'rgba(251, 191, 36, 0.16)' : 'rgba(217, 119, 6, 0.12)',
     stripMS: isDark ? 'rgba(52, 211, 153, 0.12)' : 'rgba(5, 150, 105, 0.09)',
     textMain: isDark ? '#F1F5F9' : '#0F172A',
@@ -64,21 +65,131 @@ function flexDesignMod06(MuKNm, bMm, dMm, fc, fy) {
   const beta1 = fc <= 28 ? 0.85 : Math.max(0.65, 0.85 - (0.05 * (fc - 28)) / 7);
   const a = (As * fy) / (0.85 * fc * bMm);
   const c = a / beta1;
-  const et = (0.003 * (dMm - c)) / c;
+  const et = c > 1e-6 ? (0.003 * (dMm - c)) / c : 1.0;
   return { ok: true, Rn, rho, As, a, c, et };
 }
 
 /**
+ * Capacidad nominal de diseño φMn (kN·m) para un acero provisto dado
+ */
+function flexCapacityMod06(AsProvMm2, bMm, dMm, fc, fy) {
+  if (AsProvMm2 <= 0 || dMm <= 0) return 0;
+  const a = (AsProvMm2 * fy) / (0.85 * fc * bMm);
+  const phi = 0.90;
+  return (phi * AsProvMm2 * fy * (dMm - a / 2.0)) / 1e6;
+}
+
+/**
  * ============================================================================
- * SIMULADOR 6.1: LOSAS EN UNA DIRECCIÓN (MACIZAS Y ALIGERADAS)
+ * SIMULADOR 6.1: LOSAS EN UNA DIRECCIÓN (MACIZAS, ALIGERADAS Y ESCALERAS)
  * ============================================================================
  */
 const SUPPORT_CASES_MOD06 = {
-  simple:  { label: 'Simplemente apoyada', kPos: 8,  kNeg: 0,  kV: 0.50, tblMaciza: 20, tblNerv: 16 },
-  oneend:  { label: 'Tramo extremo (un extremo continuo, 2 vanos)', kPos: 11, kNeg: 9,  kV: 0.575, tblMaciza: 24, tblNerv: 18.5 },
-  both:    { label: 'Tramo interior (ambos extremos continuos)', kPos: 16, kNeg: 11, kV: 0.50, tblMaciza: 28, tblNerv: 21 },
-  cant:    { label: 'Voladizo', kPos: 0,  kNeg: 2,  kV: 1.00, tblMaciza: 10, tblNerv: 8 }
+  simple: { label: 'Simplemente apoyada', kPos: 8,  kNeg: 0,  kV: 0.50,  tblMaciza: 20, tblNerv: 16 },
+  oneend: { label: 'Tramo extremo (un extremo continuo, 2 vanos)', kPos: 11, kNeg: 9,  kV: 0.575, tblMaciza: 24, tblNerv: 18.5 },
+  both:   { label: 'Tramo interior (ambos extremos continuos)', kPos: 16, kNeg: 11, kV: 0.50,  tblMaciza: 28, tblNerv: 21 },
+  cant:   { label: 'Voladizo', kPos: 0,  kNeg: 2,  kV: 1.00,  tblMaciza: 10, tblNerv: 8 }
 };
+
+function updateSim61Tachometer(dcrFlex, dcrShear, ratioDefl, etMin, fOk, geomNervOk, hMm, hMinM) {
+  const card = document.getElementById('sim61-tachometer-card');
+  if (!card) return;
+
+  const setBar = (barId, pctId, ratio, warnThreshold) => {
+    const barEl = document.getElementById(barId);
+    const pctEl = document.getElementById(pctId);
+    const pctVal = Number.isFinite(ratio) ? Math.max(0, ratio * 100) : 120;
+    const widthPct = Math.min(100, pctVal);
+    let bg = 'linear-gradient(90deg, #16A34A, #22C55E)';
+    if (!Number.isFinite(ratio) || ratio > 1.0) {
+      bg = 'linear-gradient(90deg, #DC2626, #EF4444)';
+    } else if (ratio > (warnThreshold || 0.85)) {
+      bg = 'linear-gradient(90deg, #D97706, #F59E0B)';
+    } else if (ratio > 0.65) {
+      bg = 'linear-gradient(90deg, #2563EB, #3B82F6)';
+    }
+    if (barEl) {
+      barEl.style.width = `${widthPct.toFixed(1)}%`;
+      barEl.style.background = bg;
+    }
+    if (pctEl) {
+      pctEl.textContent = Number.isFinite(ratio) ? `${pctVal.toFixed(1)}% (D/C = ${ratio.toFixed(2)})` : 'Excedido';
+    }
+  };
+
+  setBar('sim61-bar-flex', 'sim61-pct-flex', fOk ? dcrFlex : 1.25, 0.88);
+  setBar('sim61-bar-shear', 'sim61-pct-shear', dcrShear, 0.85);
+  setBar('sim61-bar-defl', 'sim61-pct-defl', ratioDefl, 0.99);
+
+  const govDcr = Math.max(
+    fOk ? dcrFlex : 1.25,
+    dcrShear,
+    etMin < 0.005 ? 1.15 : 0
+  );
+
+  // Posición aguja sobre track (0% -> 100%)
+  const needle = document.getElementById('sim61-tacho-needle');
+  if (needle) {
+    let pctNeedle = 10;
+    if (!fOk || etMin < 0.005 || dcrShear > 1.0 || dcrFlex > 1.0) {
+      pctNeedle = Math.min(97, 85 + Math.max(0, govDcr - 1.0) * 35);
+    } else if (ratioDefl > 1.0 || !geomNervOk) {
+      pctNeedle = 72;
+    } else if (govDcr > 0.85) {
+      pctNeedle = 65 + ((govDcr - 0.85) / 0.15) * 20;
+    } else if (govDcr > 0.60) {
+      pctNeedle = 38 + ((govDcr - 0.60) / 0.25) * 27;
+    } else {
+      pctNeedle = Math.max(4, (govDcr / 0.60) * 38);
+    }
+    needle.style.left = `${pctNeedle.toFixed(1)}%`;
+  }
+
+  const badge = document.getElementById('sim61-dcr-badge');
+  const msg = document.getElementById('sim61-regime-msg');
+
+  if (!fOk || etMin < 0.005) {
+    if (badge) {
+      badge.textContent = 'ZONA 4 • SECCIÓN INSUFICIENTE / NO DÚCTIL';
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'La deformación εt < 0.005 o el momento excede φMn; aumente espesor h o ancho bw.';
+  } else if (dcrShear > 1.0) {
+    if (badge) {
+      badge.textContent = `ZONA 4 • CORTANTE EXCEDIDO (D/C = ${dcrShear.toFixed(2)})`;
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'Vu(d) supera la resistencia del concreto sin estribos; ensanche nervios cerca al apoyo o aumente h.';
+  } else if (hMm / 1000 < hMinM) {
+    if (badge) {
+      badge.textContent = `ZONA 3 • DEFLEXIÓN POR CALCULAR (h < ${(hMinM * 100).toFixed(1)} cm)`;
+      badge.style.background = '#FEF3C7';
+      badge.style.color = '#92400E';
+      badge.style.borderColor = '#F59E0B';
+    }
+    if (msg) msg.textContent = 'Resiste por flexión y cortante, pero requiere verificación explícita de flecha diferida (Branson Ie, C.9.5.2).';
+  } else if (govDcr > 0.85) {
+    if (badge) {
+      badge.textContent = `ZONA 2 • DESEMPEÑO AJUSTADO (D/C máx = ${govDcr.toFixed(2)})`;
+      badge.style.background = '#DBEAFE';
+      badge.style.color = '#1E40AF';
+      badge.style.borderColor = '#3B82F6';
+    }
+    if (msg) msg.textContent = 'Cumple espesor normativo, ductilidad εt ≥ 0.005 y cortante sin estribos con aprovechamiento óptimo.';
+  } else {
+    if (badge) {
+      badge.textContent = `ZONA 1 • ÓPTIMO Y HOLGADO (D/C máx = ${govDcr.toFixed(2)})`;
+      badge.style.background = '#DCFCE7';
+      badge.style.color = '#166534';
+      badge.style.borderColor = '#22C55E';
+    }
+    if (msg) msg.textContent = 'Holgura estructural amplia en flexión, cortante sin estribos y rigidez normativa NSR-10.';
+  }
+}
 
 function updateSim61() {
   const typeEl = document.getElementById('sim61-type');
@@ -86,12 +197,12 @@ function updateSim61() {
 
   const slabType = typeEl.value;                                               // 'maciza' | 'aligerada'
   const support  = document.getElementById('sim61-support').value;             // simple | oneend | both | cant
-  const ln       = parseFloat(document.getElementById('sim61-ln').value);      // m (luz libre)
+  const ln       = parseFloat(document.getElementById('sim61-ln').value);      // m (luz libre / cálculo)
   const hCm      = parseFloat(document.getElementById('sim61-h').value);       // cm
   const bwCm     = parseFloat(document.getElementById('sim61-bw').value);      // cm (ancho nervio)
   const sCm      = parseFloat(document.getElementById('sim61-s').value);       // cm (separación c/c nervios)
-  const Dsup     = parseFloat(document.getElementById('sim61-dead').value);    // kN/m² (carga muerta sobreimpuesta)
-  const Lv       = parseFloat(document.getElementById('sim61-live').value);    // kN/m² (carga viva)
+  const Dsup     = parseFloat(document.getElementById('sim61-dead').value);    // kN/m²
+  const Lv       = parseFloat(document.getElementById('sim61-live').value);    // kN/m²
   const fc       = parseFloat(document.getElementById('sim61-fc').value);      // MPa
   const barKey   = document.getElementById('sim61-bar').value;                 // '3' | '4' | '5' | '6'
   const fy = 420.0;
@@ -113,16 +224,16 @@ function updateSim61() {
   // 1. Espesor mínimo (Tabla C.9.5(a)) — fy = 420 MPa, concreto de peso normal
   const hMinM = ln / (isNerv ? cs.tblNerv : cs.tblMaciza);
 
-  // 2. Peso propio por m² y carga mayorada por franja de diseño
+  // 2. Peso propio concreto por m² y carga mayorada por franja de diseño o por nervio
   let selfW;
   if (isNerv) {
-    selfW = (tfMm / 1000) * 24.0 + ((bwMm / 1000) * ((hMm - tfMm) / 1000) * 24.0) / (sMm / 1000) + 0.30;
+    selfW = (tfMm / 1000) * 24.0 + ((bwMm / 1000) * ((hMm - tfMm) / 1000) * 24.0) / (sMm / 1000);
   } else {
     selfW = (hMm / 1000) * 24.0;
   }
   const D = selfW + Dsup;
   const qu = 1.2 * D + 1.6 * Lv;                          // kN/m²
-  const tribW = isNerv ? sMm / 1000 : 1.0;                // m (ancho aferente de la franja)
+  const tribW = isNerv ? sMm / 1000 : 1.0;                // m
   const wu = qu * tribW;                                  // kN/m por franja/nervio
 
   // 3. Momentos y cortante por coeficientes (C.8.3.3)
@@ -137,7 +248,7 @@ function updateSim61() {
   const dMm = hMm - cover - db / 2.0;
 
   const bNeg = isNerv ? bwMm : 1000.0;
-  const bPos = isNerv ? sMm : 1000.0;    // aleta comprimida (loseta) en momento positivo
+  const bPos = isNerv ? sMm : 1000.0;
   const fNeg = flexDesignMod06(Mneg, bNeg, dMm, fc, fy);
   const fPos = flexDesignMod06(Mpos, bPos, dMm, fc, fy);
 
@@ -156,17 +267,23 @@ function updateSim61() {
   const Vud = Math.max(0, Vcoef - wu * (dMm / 1000));
   const phiVc = (isNerv ? 1.10 : 1.0) * 0.75 * 0.17 * Math.sqrt(fc) * (isNerv ? bwMm : 1000.0) * dMm / 1000.0;
 
-  // 7. Armado propuesto
+  // 7. Armado propuesto y capacidad provista
   let armado;
   let sBars = 0;
+  let phiMnNegProv = 0, phiMnPosProv = 0;
   const sMax = Math.min(3.0 * hMm, 450.0);
   if (isNerv) {
     const nNeg = AsNegDes > 0 ? Math.max(1, Math.ceil(AsNegDes / Ab)) : 0;
     const nPos = AsPosDes > 0 ? Math.max(1, Math.ceil(AsPosDes / Ab)) : 0;
     armado = `Nervio: ${nPos > 0 ? nPos + ' No.' + barKey + ' inf.' : '—'} | ${nNeg > 0 ? nNeg + ' No.' + barKey + ' sup.' : '—'}`;
+    phiMnNegProv = flexCapacityMod06(nNeg * Ab, bNeg, dMm, fc, fy);
+    phiMnPosProv = flexCapacityMod06(nPos * Ab, bPos, dMm, fc, fy);
   } else {
-    sBars = Math.min(sMax, Math.floor(((Ab * 1000.0) / AsGov) / 10) * 10);
+    sBars = Math.max(70, Math.min(sMax, Math.floor(((Ab * 1000.0) / AsGov) / 10) * 10));
     armado = `No.${barKey} @ ${(sBars / 10).toFixed(0)} cm (smáx = ${(sMax / 10).toFixed(0)} cm)`;
+    const AsProv = (Ab * 1000.0) / sBars;
+    phiMnNegProv = flexCapacityMod06(AsProv, 1000.0, dMm, fc, fy);
+    phiMnPosProv = flexCapacityMod06(AsProv, 1000.0, dMm, fc, fy);
   }
   const AsTemp = isNerv ? 0.0018 * 1000.0 * tfMm : 0.0018 * 1000.0 * hMm;
   const sTempMax = isNerv ? Math.min(5 * tfMm, 450) : Math.min(5 * hMm, 450);
@@ -177,15 +294,24 @@ function updateSim61() {
   document.getElementById('res61-mneg').textContent = Mneg > 0 ? `Mu⁻ = ${Mneg.toFixed(2)} kN·m (wu·ln²/${cs.kNeg})` : 'Mu⁻ = 0 (apoyo simple)';
   document.getElementById('res61-mpos').textContent = Mpos > 0 ? `Mu⁺ = ${Mpos.toFixed(2)} kN·m (wu·ln²/${cs.kPos})` : 'Mu⁺ = 0 (voladizo)';
   document.getElementById('res61-as').textContent =
-    `As⁻ = ${Mneg > 0 ? (fNeg.ok ? fNeg.As.toFixed(0) : '∞') : '0'} mm² | As⁺ = ${Mpos > 0 ? (fPos.ok ? fPos.As.toFixed(0) : '∞') : '0'} mm²${isNerv ? '' : ' por metro'}`;
-  document.getElementById('res61-asmin').textContent = `As,mín = ${AsMin.toFixed(0)} mm² | Retracción ${isNerv ? 'loseta' : ''} = ${AsTemp.toFixed(0)} mm²/m (s ≤ ${(sTempMax / 10).toFixed(0)} cm)`;
+    `As⁻ = ${Mneg > 0 ? (fNeg.ok ? fNeg.As.toFixed(0) : '∞') : '0'} mm² | As⁺ = ${Mpos > 0 ? (fPos.ok ? fPos.As.toFixed(0) : '∞') : '0'} mm²${isNerv ? '' : ' /m'}`;
+  document.getElementById('res61-asmin').textContent = `As,mín = ${AsMin.toFixed(0)} mm² | Retracción = ${AsTemp.toFixed(0)} mm²/m (s ≤ ${(sTempMax / 10).toFixed(0)} cm)`;
   document.getElementById('res61-spacing').textContent = armado;
   document.getElementById('res61-shear').textContent = `Vu(d) = ${Vud.toFixed(2)} kN | ${isNerv ? '1.10' : ''}φVc = ${phiVc.toFixed(2)} kN`;
 
-  // Estado global
-  const status = document.getElementById('res61-status');
+  // Ratios para Tacómetro
+  const dcrNeg = Mneg > 0 && phiMnNegProv > 0 ? Mneg / phiMnNegProv : 0;
+  const dcrPos = Mpos > 0 && phiMnPosProv > 0 ? Mpos / phiMnPosProv : 0;
+  const dcrFlex = Math.max(dcrNeg, dcrPos);
+  const dcrShear = phiVc > 0 ? Vud / phiVc : 1.5;
+  const ratioDefl = hMm > 0 ? (hMinM * 1000.0) / hMm : 1.5;
   const etMin = Math.min(Mneg > 0 ? fNeg.et : 1, Mpos > 0 ? fPos.et : 1);
   const geomNervOk = !isNerv || (bwMm >= 100 && (hMm - tfMm) <= 5.0 * bwMm && sMm <= Math.min(2.5 * hMm, 1200));
+
+  updateSim61Tachometer(dcrFlex, dcrShear, ratioDefl, etMin, fNeg.ok && fPos.ok, geomNervOk, hMm, hMinM);
+
+  // Estado global
+  const status = document.getElementById('res61-status');
   if (!fNeg.ok || !fPos.ok) {
     status.className = 'status-badge status-danger';
     status.innerHTML = '❌ SECCIÓN INSUFICIENTE: El momento excede la capacidad de la sección (Rn demasiado alto). Aumente el espesor h.';
@@ -194,16 +320,16 @@ function updateSim61() {
     status.innerHTML = `❌ SECCIÓN NO CONTROLADA POR TRACCIÓN: εt = ${etMin.toFixed(4)} < 0.005. Aumente h o, en nervios, el ancho bw.`;
   } else if (Vud > phiVc) {
     status.className = 'status-badge status-danger';
-    status.innerHTML = `❌ CORTANTE EXCEDIDO: Vu = ${Vud.toFixed(1)} kN > φVc = ${phiVc.toFixed(1)} kN. ${isNerv ? 'Ensanche el nervio cerca del apoyo o aumente h.' : 'Aumente el espesor de la losa.'}`;
+    status.innerHTML = `❌ CORTANTE EXCEDIDO: Vu(d) = ${Vud.toFixed(1)} kN > ${isNerv ? '1.10' : ''}φVc = ${phiVc.toFixed(1)} kN. ${isNerv ? 'Macice el nervio cerca del apoyo o aumente h.' : 'Aumente el espesor de la losa.'}`;
   } else if (!geomNervOk) {
     status.className = 'status-badge status-warn';
     status.innerHTML = '⚠️ GEOMETRÍA DE NERVIOS FUERA DE C.8.13: verifique bw ≥ 10 cm, altura libre ≤ 5 bw y separación c/c ≤ min(2.5h, 1.20 m).';
   } else if (hMm / 1000 < hMinM) {
     status.className = 'status-badge status-warn';
-    status.innerHTML = `⚠️ RESISTE, PERO h = ${hCm.toFixed(0)} cm < h_mín = ${(hMinM * 100).toFixed(1)} cm (Tabla C.9.5(a)). Deben calcularse explícitamente las deflexiones.`;
+    status.innerHTML = `⚠️ RESISTE, PERO h = ${hCm.toFixed(0)} cm < h_mín = ${(hMinM * 100).toFixed(1)} cm (Tabla C.9.5(a)). Deben calcularse explícitamente las deflexiones (Branson).`;
   } else {
     status.className = 'status-badge status-ok';
-    status.innerHTML = `✅ LOSA CUMPLE: h ≥ h_mín, εt ≥ 0.005, Vu ≤ φVc sin estribos. Armado: ${armado}.`;
+    status.innerHTML = `✅ LOSA CUMPLE: h ≥ h_mín, εt ≥ 0.005, Vu ≤ ${isNerv ? '1.10' : ''}φVc sin estribos. Armado: ${armado}.`;
   }
 
   drawSim61Canvas({
@@ -224,12 +350,12 @@ function drawSim61Canvas(st) {
   ctx.fillStyle = pal.textMain;
   ctx.font = 'bold 13px Inter, sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(st.isNerv ? 'SECCIÓN TRANSVERSAL — LOSA ALIGERADA (NERVADA)' : 'SECCIÓN TRANSVERSAL — LOSA MACIZA (FRANJA 1.00 m)', 24, 26);
+  ctx.fillText(st.isNerv ? 'SECCIÓN TRANSVERSAL — LOSA ALIGERADA (NERVADA)' : 'SECCIÓN TRANSVERSAL — LOSA MACIZA (FRANJA 1.00 m)', 22, 26);
 
-  const secX0 = 30, secW = 360, secY0 = 70;
+  const secX0 = 28, secW = 365, secY0 = 66;
   const widthMm = st.isNerv ? Math.max(2 * st.sMm, 1200) : 1000;
   const sc = secW / widthMm;
-  const hPx = Math.max(24, Math.min(170, st.hMm * sc * 1.0));
+  const hPx = Math.max(28, Math.min(165, st.hMm * sc * 1.15));
   const hScale = hPx / st.hMm;
 
   if (!st.isNerv) {
@@ -238,60 +364,75 @@ function drawSim61Canvas(st) {
     ctx.lineWidth = 2;
     ctx.fillRect(secX0, secY0, secW, hPx);
     ctx.strokeRect(secX0, secY0, secW, hPx);
-    // barras inferiores con la separación calculada
+
+    // Barras principales inferiores + varilla transversal de retracción
     const yBar = secY0 + hPx - (20 + st.db / 2) * hScale;
-    const sPx = Math.max(8, (st.sBars || 300) * sc);
+    ctx.strokeStyle = pal.posColor;
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(secX0 + 8, yBar - 5); ctx.lineTo(secX0 + secW - 8, yBar - 5); ctx.stroke();
+
+    const sPx = Math.max(10, (st.sBars || 300) * sc);
     ctx.fillStyle = pal.rebarColor;
     for (let x = secX0 + sPx / 2; x < secX0 + secW; x += sPx) {
-      ctx.beginPath(); ctx.arc(x, yBar, Math.max(3, st.db * sc * 0.9), 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, yBar, Math.max(3.2, st.db * sc * 0.9), 0, Math.PI * 2); ctx.fill();
     }
     ctx.fillStyle = pal.textSub;
     ctx.font = '11px JetBrains Mono, monospace';
-    ctx.fillText(`b = 1000 mm | h = ${st.hMm.toFixed(0)} mm | d = ${st.dMm.toFixed(1)} mm`, secX0, secY0 + hPx + 22);
-    ctx.fillText(`Barras No.${st.barKey} @ ${(st.sBars / 10).toFixed(0)} cm`, secX0, secY0 + hPx + 40);
+    ctx.fillText(`Franja b = 1000 mm | h = ${st.hMm.toFixed(0)} mm | d = ${st.dMm.toFixed(1)} mm`, secX0, secY0 + hPx + 24);
+    ctx.fillText(`Principal: No.${st.barKey} @ ${(st.sBars / 10).toFixed(0)} cm | Retracción transversal`, secX0, secY0 + hPx + 42);
   } else {
-    // loseta + nervios
     const tfPx = st.tfMm * hScale;
     ctx.fillStyle = pal.concreteFill;
     ctx.strokeStyle = pal.concreteStroke;
     ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.rect(secX0, secY0, secW, tfPx);
-    ctx.fill(); ctx.stroke();
+    ctx.fillRect(secX0, secY0, secW, tfPx);
+    ctx.strokeRect(secX0, secY0, secW, tfPx);
+
     const sPx = st.sMm * sc;
-    const bwPx = Math.max(6, st.bwMm * sc);
-    let n = 0;
+    const bwPx = Math.max(7, st.bwMm * sc);
     for (let xc = secX0 + sPx / 2; xc < secX0 + secW; xc += sPx) {
+      // Casetón aligerante adyacente
+      if (xc + bwPx / 2 < secX0 + secW - sPx * 0.35) {
+        ctx.save();
+        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = pal.textSub;
+        ctx.fillStyle = pal.voidFill;
+        ctx.fillRect(xc + bwPx / 2 + 2, secY0 + tfPx + 2, Math.max(8, sPx - bwPx - 4), hPx - tfPx - 4);
+        ctx.strokeRect(xc + bwPx / 2 + 2, secY0 + tfPx + 2, Math.max(8, sPx - bwPx - 4), hPx - tfPx - 4);
+        ctx.restore();
+      }
       ctx.fillStyle = pal.concreteFill;
       ctx.fillRect(xc - bwPx / 2, secY0 + tfPx - 1, bwPx, hPx - tfPx + 1);
+      ctx.strokeStyle = pal.concreteStroke;
       ctx.strokeRect(xc - bwPx / 2, secY0 + tfPx, bwPx, hPx - tfPx);
-      // aligeramiento (casetón) entre nervios
+
       ctx.fillStyle = pal.rebarColor;
-      ctx.beginPath(); ctx.arc(xc, secY0 + hPx - 25 * hScale, Math.max(3, st.db * sc), 0, Math.PI * 2); ctx.fill();
-      n++;
+      ctx.beginPath(); ctx.arc(xc, secY0 + hPx - 25 * hScale, Math.max(3.2, st.db * sc), 0, Math.PI * 2); ctx.fill();
+      if (st.Mneg > 0) {
+        ctx.fillStyle = pal.negColor;
+        ctx.beginPath(); ctx.arc(xc, secY0 + 25 * hScale, Math.max(2.8, st.db * sc * 0.85), 0, Math.PI * 2); ctx.fill();
+      }
     }
     ctx.fillStyle = pal.textSub;
     ctx.font = '11px JetBrains Mono, monospace';
-    ctx.fillText(`bw = ${st.bwMm.toFixed(0)} mm | s = ${st.sMm.toFixed(0)} mm c/c | loseta = ${st.tfMm} mm`, secX0, secY0 + hPx + 22);
-    ctx.fillText(`h = ${st.hMm.toFixed(0)} mm | d = ${st.dMm.toFixed(1)} mm`, secX0, secY0 + hPx + 40);
+    ctx.fillText(`bw = ${st.bwMm.toFixed(0)} mm | s = ${st.sMm.toFixed(0)} mm c/c | loseta = ${st.tfMm} mm`, secX0, secY0 + hPx + 24);
+    ctx.fillText(`h = ${st.hMm.toFixed(0)} mm | d = ${st.dMm.toFixed(1)} mm`, secX0, secY0 + hPx + 42);
   }
 
   // ---------------- Panel derecho: diagrama de momentos ----------------
-  const bx0 = 470, bx1 = 875, beamY = 130;
+  const bx0 = 465, bx1 = 875, beamY = 126;
   ctx.fillStyle = pal.textMain;
   ctx.font = 'bold 13px Inter, sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText(`DIAGRAMA DE MOMENTOS POR COEFICIENTES (C.8.3.3)`, bx0 - 10, 26);
+  ctx.fillText('DIAGRAMA DE MOMENTOS POR COEFICIENTES (C.8.3.3)', bx0 - 10, 26);
   ctx.font = '11px Inter, sans-serif';
   ctx.fillStyle = pal.textSub;
   ctx.fillText(`${st.label} — ln = ${st.ln.toFixed(2)} m, wu = ${st.wu.toFixed(2)} kN/m`, bx0 - 10, 44);
 
-  // viga
   ctx.strokeStyle = pal.concreteStroke;
   ctx.lineWidth = 4;
   ctx.beginPath(); ctx.moveTo(bx0, beamY); ctx.lineTo(bx1, beamY); ctx.stroke();
 
-  // apoyos
   const drawPin = (x) => {
     ctx.fillStyle = pal.concreteStroke;
     ctx.beginPath(); ctx.moveTo(x, beamY + 2); ctx.lineTo(x - 9, beamY + 16); ctx.lineTo(x + 9, beamY + 16); ctx.closePath(); ctx.fill();
@@ -305,7 +446,6 @@ function drawSim61Canvas(st) {
   else if (st.support === 'both') { drawFixed(bx0); drawFixed(bx1); }
   else { drawFixed(bx0); }
 
-  // carga distribuida
   ctx.strokeStyle = pal.warnColor;
   ctx.lineWidth = 1.4;
   for (let x = bx0; x <= bx1; x += 25) {
@@ -314,11 +454,10 @@ function drawSim61Canvas(st) {
   }
   ctx.beginPath(); ctx.moveTo(bx0, beamY - 34); ctx.lineTo(bx1, beamY - 34); ctx.stroke();
 
-  // curva de momentos: parábola que cumple M(0), M(L) y máximo positivo de los coeficientes
   const baseY = 260;
   const L = bx1 - bx0;
   const maxM = Math.max(st.Mpos, st.Mneg, 1);
-  const scaleM = 95 / maxM;
+  const scaleM = 90 / maxM;
   let Ml = 0, Mr = 0;
   if (st.support === 'oneend') { Ml = 0; Mr = -st.Mneg; }
   if (st.support === 'both') { Ml = -st.Mneg; Mr = -st.Mneg; }
@@ -337,13 +476,12 @@ function drawSim61Canvas(st) {
     if (st.support === 'cant') {
       M = -st.Mneg * Math.pow(1 - t, 2);
     } else {
-      // M(t) = Ml(1-t) + Mr t + 4 Mp0 t(1-t), con Mp0 ajustado para que máx positivo ≈ Mpos
       const Mp0 = st.Mpos + Math.abs(Ml + Mr) / 2;
       M = Ml * (1 - t) + Mr * t + 4 * Mp0 * t * (1 - t);
     }
     pts.push({ x: bx0 + t * L, y: baseY + M * scaleM, M });
   }
-  // relleno positivo / negativo
+
   pts.forEach((p, i) => {
     if (i === 0) return;
     const p0 = pts[i - 1];
@@ -363,28 +501,39 @@ function drawSim61Canvas(st) {
   if (st.Mpos > 0) {
     ctx.fillStyle = pal.posColor;
     const pk = pts.reduce((a, b) => (b.M > a.M ? b : a));
-    ctx.fillText(`Mu⁺ = ${st.Mpos.toFixed(2)} kN·m`, pk.x, pk.y + 18);
+    ctx.fillText(`Mu⁺ = ${st.Mpos.toFixed(2)} kN·m`, pk.x, Math.min(H - 28, pk.y + 18));
   }
   if (st.Mneg > 0) {
     ctx.fillStyle = pal.negColor;
-    if (Ml < 0) ctx.fillText(`Mu⁻ = ${st.Mneg.toFixed(2)}`, bx0 + 45, baseY + Ml * scaleM - 8);
-    if (Mr < 0) ctx.fillText(`Mu⁻ = ${st.Mneg.toFixed(2)}`, bx1 - 45, baseY + Mr * scaleM - 8);
+    if (Ml < 0) ctx.fillText(`Mu⁻ = ${st.Mneg.toFixed(2)}`, bx0 + 50, baseY + Ml * scaleM - 8);
+    if (Mr < 0) ctx.fillText(`Mu⁻ = ${st.Mneg.toFixed(2)}`, bx1 - 50, baseY + Mr * scaleM - 8);
   }
   ctx.fillStyle = pal.textSub;
   ctx.font = '10px Inter, sans-serif';
-  ctx.fillText('(Momento positivo dibujado hacia abajo — lado traccionado)', (bx0 + bx1) / 2, H - 14);
+  ctx.fillText('(Momento positivo dibujado hacia abajo — cara traccionada)', (bx0 + bx1) / 2, H - 10);
 }
 
 function loadSim61Preset(key) {
-  const set = (id, v) => { document.getElementById(id).value = v; };
-  if (key === 'ej61_maciza') {
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
+  if (key === 'ej71_maciza' || key === 'ej61_maciza') {
     set('sim61-type', 'maciza'); set('sim61-support', 'simple'); set('sim61-ln', 3.69); set('sim61-h', 19);
     set('sim61-bw', 12); set('sim61-s', 80); set('sim61-dead', 1.54); set('sim61-live', 1.80);
     set('sim61-fc', '21'); set('sim61-bar', '4');
-  } else if (key === 'ej63_aligerada') {
+  } else if (key === 'ej72_escalera') {
+    set('sim61-type', 'maciza'); set('sim61-support', 'simple'); set('sim61-ln', 4.02); set('sim61-h', 20);
+    set('sim61-bw', 12); set('sim61-s', 80); set('sim61-dead', 3.55); set('sim61-live', 3.00);
+    set('sim61-fc', '21'); set('sim61-bar', '4');
+  } else if (key === 'ej73_aligerada' || key === 'ej63_aligerada') {
     set('sim61-type', 'aligerada'); set('sim61-support', 'oneend'); set('sim61-ln', 4.60); set('sim61-h', 40);
-    set('sim61-bw', 12); set('sim61-s', 80); set('sim61-dead', 4.35); set('sim61-live', 1.80);
+    set('sim61-bw', 12); set('sim61-s', 80); set('sim61-dead', 4.65); set('sim61-live', 1.80);
     set('sim61-fc', '28'); set('sim61-bar', '5');
+  } else if (key === 'voladizo_critico') {
+    set('sim61-type', 'maciza'); set('sim61-support', 'cant'); set('sim61-ln', 1.80); set('sim61-h', 18);
+    set('sim61-bw', 12); set('sim61-s', 80); set('sim61-dead', 2.00); set('sim61-live', 5.00);
+    set('sim61-fc', '21'); set('sim61-bar', '4');
   }
   updateSim61();
 }
@@ -428,14 +577,13 @@ function updateSim62() {
   const qu = 1.2 * D + 1.6 * Lv;
   const M0 = (qu * l2 * ln * ln) / 8.0;
 
-  // Distribución longitudinal (C.13.6.3.2 y C.13.6.3.3 — losa sin vigas entre apoyos interiores)
+  // Distribución longitudinal (C.13.6.3.2 y C.13.6.3.3)
   let fNegInt, fPos, fNegExt, csNegExt;
   if (pos === 'interior') { fNegInt = 0.65; fPos = 0.35; fNegExt = 0.65; csNegExt = 0.75; }
   else if (pos === 'ext_nobeam') { fNegInt = 0.70; fPos = 0.52; fNegExt = 0.26; csNegExt = 1.00; }
   else { fNegInt = 0.70; fPos = 0.50; fNegExt = 0.30; csNegExt = 0.75; }
 
   const MnegInt = fNegInt * M0, Mpos = fPos * M0, MnegExt = fNegExt * M0;
-  // Franja de columna (αf = 0): 75 % negativo interior, 60 % positivo
   const csNegInt = 0.75, csPos = 0.60;
   const csW = Math.min(l1, l2) / 2.0;          // ancho total franja de columna (m)
   const msW = l2 - csW;                        // ancho franja central (m)
@@ -443,16 +591,16 @@ function updateSim62() {
   const CS = { negInt: csNegInt * MnegInt, pos: csPos * Mpos, negExt: csNegExt * MnegExt };
   const MS = { negInt: (1 - csNegInt) * MnegInt, pos: (1 - csPos) * Mpos, negExt: (1 - csNegExt) * MnegExt };
 
-  // Diseño de la franja de columna (momento negativo interior, crítico) con barras No. 4
+  // Diseño de franja de columna (negativo interior) con barras No. 4
   const dFlex = hMm - 20.0 - 6.35;
   const fCS = flexDesignMod06(CS.negInt, csW * 1000.0, dFlex, fc, fy);
   const AsMinPerM = 0.0018 * 1000.0 * hMm;
   const AsCSperM = fCS.ok ? Math.max(fCS.As / csW, AsMinPerM) : NaN;
   const sMax = Math.min(2 * hMm, 450);
-  const sCS = fCS.ok ? Math.min(sMax, Math.floor(((129 * 1000) / AsCSperM) / 10) * 10) : 0;
+  const sCS = fCS.ok ? Math.max(80, Math.min(sMax, Math.floor(((129 * 1000) / AsCSperM) / 10) * 10)) : 0;
 
-  // Punzonamiento simplificado (sin transferencia de momento desbalanceado γv·Mu)
-  const dP = hMm - 20.0 - 12.7;        // peralte promedio de las dos capas (mm)
+  // Punzonamiento simplificado (sin transferencia de momento desbalanceado γv·Msc)
+  const dP = hMm - 20.0 - 12.7;
   const cMm = cCm * 10.0;
   let b0, alphaS, Atrib, Acrit;
   if (pos === 'interior') {
@@ -470,7 +618,7 @@ function updateSim62() {
   document.getElementById('res62-qu').textContent = `qu = 1.2(${D.toFixed(2)}) + 1.6(${Lv.toFixed(2)}) = ${qu.toFixed(2)} kN/m²`;
   document.getElementById('res62-m0').textContent = `M0 = qu·l2·ln²/8 = ${M0.toFixed(1)} kN·m (ln = ${ln.toFixed(2)} m)`;
   document.getElementById('res62-dist').textContent =
-    `M⁻ext = ${MnegExt.toFixed(1)} | M⁺ = ${Mpos.toFixed(1)} | M⁻int = ${MnegInt.toFixed(1)} kN·m (${fNegExt.toFixed(2)} / ${fPos.toFixed(2)} / ${fNegInt.toFixed(2)})`;
+    `M⁻ext = ${MnegExt.toFixed(1)} | M⁺ = ${Mpos.toFixed(1)} | M⁻int = ${MnegInt.toFixed(1)} kN·m (${fNegExt.toFixed(2)}/${fPos.toFixed(2)}/${fNegInt.toFixed(2)})`;
   document.getElementById('res62-cs').textContent =
     `CS (${csW.toFixed(2)} m): ${CS.negExt.toFixed(1)} / ${CS.pos.toFixed(1)} / ${CS.negInt.toFixed(1)} kN·m`;
   document.getElementById('res62-ms').textContent =
@@ -487,7 +635,7 @@ function updateSim62() {
     status.innerHTML = `❌ NO APLICA EL MÉTODO DIRECTO (C.13.6.1.2): l_larga/l_corta = ${ratioL.toFixed(2)} > 2.0 → la losa trabaja en una dirección.`;
   } else if (Vu > phiVc) {
     status.className = 'status-badge status-danger';
-    status.innerHTML = `❌ FALLA POR PUNZONAMIENTO: Vu = ${Vu.toFixed(1)} kN > φVc = ${phiVc.toFixed(1)} kN. Aumente h, use ábaco (drop panel), capitel o refuerzo de cortante.`;
+    status.innerHTML = `❌ FALLA POR PUNZONAMIENTO: Vu = ${Vu.toFixed(1)} kN > φVc = ${phiVc.toFixed(1)} kN (D/C = ${(Vu / phiVc).toFixed(2)}). Aumente h, use ábaco (drop panel) o stud rails.`;
   } else if (!fCS.ok || fCS.et < 0.005) {
     status.className = 'status-badge status-danger';
     status.innerHTML = '❌ FRANJA DE COLUMNA INSUFICIENTE A FLEXIÓN (εt < 0.005). Aumente el espesor h.';
@@ -521,7 +669,6 @@ function drawSim62Canvas(st) {
   const pw = st.l1 * sc, ph = st.l2 * sc;
   const px0 = 60, py0 = 60 + (300 - ph) / 2;
 
-  // franjas: medias franjas de columna en los bordes l2 (a lo largo de l1)
   const halfCS = (st.csW / 2) * sc;
   ctx.fillStyle = pal.stripMS;
   ctx.fillRect(px0, py0, pw, ph);
@@ -539,13 +686,12 @@ function drawSim62Canvas(st) {
   ctx.stroke();
   ctx.setLineDash([]);
 
-  // columnas
   const cPx = Math.max(8, st.c * sc);
   ctx.fillStyle = pal.concreteStroke;
   [[px0, py0], [px0 + pw, py0], [px0, py0 + ph], [px0 + pw, py0 + ph]].forEach(([x, y]) => {
     ctx.fillRect(x - cPx / 2, y - cPx / 2, cPx, cPx);
   });
-  // perímetro crítico de punzonamiento en la columna inferior derecha (interior)
+
   const pcPx = ((st.cMm + st.dP) / 1000) * sc;
   ctx.strokeStyle = pal.negColor;
   ctx.setLineDash([3, 3]);
@@ -597,11 +743,9 @@ function drawSim62Canvas(st) {
   groups.forEach((g, i) => {
     const xc = gx0 + gw * (i + 0.5);
     const bw = 34;
-    const dir = g.neg ? -1 : 1; // negativos hacia arriba
-    // barra CS
+    const dir = g.neg ? -1 : 1;
     ctx.fillStyle = pal.warnColor;
     ctx.fillRect(xc - bw - 3, gy0, bw, dir * g.cs * scM);
-    // barra MS
     ctx.fillStyle = pal.okColor;
     ctx.fillRect(xc + 3, gy0, bw, dir * g.ms * scM);
 
@@ -633,16 +777,30 @@ function drawSim62Canvas(st) {
 }
 
 function loadSim62Preset(key) {
-  const set = (id, v) => { document.getElementById(id).value = v; };
-  if (key === 'ej64_interior') {
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
+  if (key === 'ej74_interior' || key === 'ej64_interior') {
     set('sim62-l1', 6.0); set('sim62-l2', 5.0); set('sim62-c', 40); set('sim62-h', 18);
     set('sim62-dead', 1.50); set('sim62-live', 1.80); set('sim62-fc', '28'); set('sim62-pos', 'interior');
-  } else if (key === 'ej64_borde') {
+  } else if (key === 'ej74_borde' || key === 'ej64_borde') {
     set('sim62-l1', 6.0); set('sim62-l2', 5.0); set('sim62-c', 40); set('sim62-h', 20);
     set('sim62-dead', 1.50); set('sim62-live', 1.80); set('sim62-fc', '28'); set('sim62-pos', 'ext_nobeam');
+  } else if (key === 'ej76_vigas') {
+    set('sim62-l1', 6.0); set('sim62-l2', 4.8); set('sim62-c', 35); set('sim62-h', 16);
+    set('sim62-dead', 3.70); set('sim62-live', 2.50); set('sim62-fc', '28'); set('sim62-pos', 'ext_beam');
+  } else if (key === 'ej77_punzonamiento') {
+    set('sim62-l1', 7.5); set('sim62-l2', 7.0); set('sim62-c', 45); set('sim62-h', 22);
+    set('sim62-dead', 2.50); set('sim62-live', 3.00); set('sim62-fc', '28'); set('sim62-pos', 'interior');
   }
   updateSim62();
 }
+
+window.redrawAllSimulators = () => {
+  updateSim61();
+  updateSim62();
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   updateSim61();

@@ -4,10 +4,11 @@
  * ============================================================================
  * Autor: Prof. Daniel Abudinen, I.C., M.Sc.
  * Simulador 5.1: Generador Analítico del Diagrama de Interacción (Pn-Mn y
- *                phiPn-phiMn), Los 8 Puntos Notables y Verificador Biaxial
- *                de Bresler / PCA.
+ *                phiPn-phiMn), Los 8 Puntos Notables, Tacómetro Dinámico
+ *                y Verificador Biaxial de Bresler / PCA.
  * Simulador 5.2: Analizador de Esbeltez, Factor de Longitud Efectiva k
- *                (Jackson & Moreland) y Magnificación de Momentos (C.10.10).
+ *                (Jackson & Moreland) y Magnificación de Momentos (C.10.10:
+ *                δns y δs por Índice de Estabilidad Q).
  * ============================================================================
  */
 
@@ -232,7 +233,7 @@ function updateSim51() {
 
   const keyPoints = [pt1, pt2, pt3, pt4, pt5, pt6, pt7, pt8];
 
-  // Generar curva continua de 90 puntos desde c grande hasta tracción pura
+  // Generar curva continua de 82 puntos desde c grande hasta tracción pura
   const curvePts = [pt1];
   for (let i = 0; i <= 80; i++) {
     const t = i / 80.0;
@@ -243,8 +244,8 @@ function updateSim51() {
 
   // Capacidad de momento de diseño phiMnx0 al nivel de Pu actuante
   let phiMnxAtPu = 0.0;
+  let evAtPu = ev3;
   if (Pu <= phiPnMax && Pu >= pt8.phiPn) {
-    // Interpolamos en la curva o resolvemos por bisección de c tal que phiPn(c) = Pu
     let cA = 2.0, cB = hMm * 2.5;
     for (let it = 0; it < 40; it++) {
       const cM = 0.5 * (cA + cB);
@@ -252,7 +253,8 @@ function updateSim51() {
       if (ev.phiPn > Pu) cB = cM;
       else cA = cM;
     }
-    phiMnxAtPu = Math.max(0.1, evalRectColumnAtC(0.5 * (cA + cB), params).phiMn);
+    evAtPu = evalRectColumnAtC(0.5 * (cA + cB), params);
+    phiMnxAtPu = Math.max(0.1, evAtPu.phiMn);
   }
 
   // Capacidad aproximada alrededor del eje débil y (intercambiando b y h)
@@ -276,7 +278,7 @@ function updateSim51() {
   }
 
   // Índice de utilización biaxial por Contorno de Bresler (alpha = 1.50) y PCA (alpha = 1.61)
-  const ratioX = phiMnxAtPu > 0.1 ? Mux / phiMnxAtPu : 9.99;
+  const ratioX = phiMnxAtPu > 0.1 ? Mux / phiMnxAtPu : (Mux > 0 ? 9.99 : 0.0);
   const ratioY = phiMnyAtPu > 0.1 ? Muy / phiMnyAtPu : (Muy > 0 ? 9.99 : 0.0);
   const breslerIndex15 = Math.pow(Math.max(0, ratioX), 1.5) + Math.pow(Math.max(0, ratioY), 1.5);
   const pcaIndex161    = Math.pow(Math.max(0, ratioX), 1.61) + Math.pow(Math.max(0, ratioY), 1.61);
@@ -307,6 +309,69 @@ function updateSim51() {
         <td><strong>${p.phiMn.toFixed(2)}</strong></td>
       </tr>
     `).join('');
+  }
+
+  // Actualizar Tacómetro Dinámico de Flexocompresión (#sim51-tachometer-card)
+  const tachoNeedle = document.getElementById('sim51-tacho-needle');
+  const tachoBadge  = document.getElementById('sim51-tacho-badge');
+  const tachoRatio  = document.getElementById('sim51-tacho-val-ratio');
+  const tachoDc     = document.getElementById('sim51-tacho-val-dc');
+  const tachoStrain = document.getElementById('sim51-tacho-val-strain');
+
+  if (tachoNeedle && tachoBadge && tachoRatio && tachoDc && tachoStrain) {
+    const axialUtil = phiPnMax > 0.1 ? Pu / phiPnMax : 0.0;
+    const momentUtil = (Mux === 0 && Muy === 0) ? 0.0 : Math.pow(Math.max(0, breslerIndex15), 1.0 / 1.5);
+    const dcGlobal = Math.max(axialUtil, momentUtil);
+
+    let needlePct = 10.0;
+    if (rhoG < 0.01 || rhoG > 0.04 || Pu > phiPnMax || breslerIndex15 > 1.0) {
+      tachoBadge.style.cssText = 'background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;';
+      if (rhoG < 0.01 || rhoG > 0.04) {
+        tachoBadge.textContent = `🔴 ZONA 4 • CUANTÍA FUERA DE NORMA (ρg = ${(rhoG * 100).toFixed(2)}%)`;
+      } else {
+        tachoBadge.textContent = '🔴 ZONA 4 • FUERA DE ENVOLVENTE (FALLA SECCIONAL)';
+      }
+      needlePct = 85.0 + Math.min(13.0, Math.max(2.0, (dcGlobal - 1.0) * 30.0));
+    } else if (axialUtil > 0.85 || breslerIndex15 > 0.85) {
+      tachoBadge.style.cssText = 'background:#FFEDD5; color:#9A3412; border:1px solid #FDBA74;';
+      tachoBadge.textContent = '🟠 ZONA 3B • ALTA SOLICITACIÓN (CERCANA A LA ENVOLVENTE)';
+      const sub = Math.max(axialUtil, breslerIndex15);
+      needlePct = 65.0 + Math.min(19.0, Math.max(0.0, ((sub - 0.85) / 0.15) * 20.0));
+    } else if (evAtPu.et <= ey) {
+      tachoBadge.style.cssText = 'background:#FEF3C7; color:#B45309; border:1px solid #FDE68A;';
+      tachoBadge.textContent = `🟡 ZONA 3A • CONTROL POR COMPRESIÓN (φ = ${phiComp.toFixed(2)})`;
+      const spanP = Math.max(1.0, phiPnMax - pt4.phiPn);
+      const frac = Math.min(1.0, Math.max(0.0, (Pu - pt4.phiPn) / spanP));
+      needlePct = 38.0 + frac * 27.0;
+    } else if (evAtPu.et < 0.005) {
+      tachoBadge.style.cssText = 'background:#DBEAFE; color:#1E40AF; border:1px solid #93C5FD;';
+      tachoBadge.textContent = `🔵 ZONA 2 • REGIÓN DE TRANSICIÓN (φ = ${evAtPu.phi.toFixed(3)})`;
+      const frac = Math.min(1.0, Math.max(0.0, (0.005 - evAtPu.et) / Math.max(0.0005, 0.005 - ey)));
+      needlePct = 18.0 + frac * 20.0;
+    } else {
+      tachoBadge.style.cssText = 'background:#DCFCE7; color:#166534; border:1px solid #86EFAC;';
+      tachoBadge.textContent = '🟢 ZONA 1 • CONTROL POR TRACCIÓN DÚCTIL (φ = 0.90)';
+      const frac = Math.min(1.0, Math.max(0.0, breslerIndex15 / 0.85));
+      needlePct = 2.0 + frac * 16.0;
+    }
+
+    tachoNeedle.style.left = `${Math.max(2.0, Math.min(98.0, needlePct)).toFixed(1)}%`;
+
+    const tz1 = document.getElementById('tacho51-val-z1');
+    const tz2 = document.getElementById('tacho51-val-z2');
+    const tz3a = document.getElementById('tacho51-val-z3a');
+    const tz3b = document.getElementById('tacho51-val-z3b');
+    const tz4 = document.getElementById('tacho51-val-z4');
+
+    if (tz1) tz1.textContent = `Pu ≤ ${pt6.phiPn.toFixed(0)} kN`;
+    if (tz2) tz2.textContent = `Pu ≤ ${pt4.phiPn.toFixed(0)} kN`;
+    if (tz3a) tz3a.textContent = `Pu ≤ ${(0.85 * phiPnMax).toFixed(0)} kN`;
+    if (tz3b) tz3b.textContent = `Pu ≤ ${phiPnMax.toFixed(0)} kN`;
+    if (tz4) tz4.textContent = `> ${phiPnMax.toFixed(0)} kN o D/C > 1`;
+
+    tachoRatio.textContent = `Pu / φPn,máx = ${axialUtil.toFixed(2)} (${Pu.toFixed(0)} / ${phiPnMax.toFixed(1)} kN)`;
+    tachoDc.textContent = `Bresler (α=1.5) = ${breslerIndex15.toFixed(3)} | PCA = ${pcaIndex161.toFixed(3)}`;
+    tachoStrain.textContent = `εt = ${evAtPu.et.toFixed(4)} | φ = ${evAtPu.phi.toFixed(3)}`;
   }
 
   const status51 = document.getElementById('res51-status');
@@ -353,7 +418,7 @@ function drawSim51Canvas(state) {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
 
-  // Izquierda (x: 75..620): Diagrama de Interacción Pn-Mn y phiPn-phiMn
+  // Izquierda (x: 75..615): Diagrama de Interacción Pn-Mn y phiPn-phiMn
   // Derecha (x: 655..900): Sección transversal de la columna
   const plotLeft = 75;
   const plotRight = 615;
@@ -445,10 +510,9 @@ function drawSim51Canvas(state) {
   ctx.lineTo(mToX(0), pToY(state.keyPoints[7].phiPn));
   ctx.stroke();
 
-  // Dibujar los 8 Puntos Notables sobre ambas curvas
+  // Dibujar los 8 Puntos Notables sobre la curva de diseño
   ctx.font = 'bold 10px JetBrains Mono, monospace';
   state.keyPoints.forEach((pt) => {
-    // En curva de diseño
     const xd = mToX(Math.max(0, pt.phiMn));
     const yd = pToY(pt.phiPn);
     ctx.fillStyle = pal.desCurve;
@@ -475,7 +539,8 @@ function drawSim51Canvas(state) {
 
   ctx.fillStyle = isSafe ? pal.desCurve : pal.dangerStroke;
   ctx.font = 'bold 11px JetBrains Mono, monospace';
-  ctx.fillText(`(Mux=${state.Mux.toFixed(0)}, Pu=${state.Pu.toFixed(0)})`, xAct + 9, yAct - 6);
+  ctx.textAlign = xAct > plotRight - 140 ? 'right' : 'left';
+  ctx.fillText(`(Mux=${state.Mux.toFixed(0)}, Pu=${state.Pu.toFixed(0)})`, xAct > plotRight - 140 ? xAct - 10 : xAct + 9, yAct - 6);
 
   // Etiquetas de ejes
   ctx.fillStyle = pal.textSub;
@@ -550,8 +615,23 @@ function drawSim51Canvas(state) {
 }
 
 function loadSim51Preset(presetKey) {
-  if (presetKey === 'ej52_simetrica') {
-    // Columna de 40 x 45 cm con 6 No. 8 (3 No. 8 por cara -> As = A's = 15.30 cm2, d' = 6.22 cm, fc = 28, fy = 420)
+  if (presetKey === 'ej71_axial') {
+    // Ejemplo 7.1 (Parte B): Columna cuadrada 40 x 40 cm con 8 phi 3/4" (Ast = 22.80 cm2)
+    document.getElementById('sim51-b').value = 40;
+    document.getElementById('sim51-h').value = 40;
+    document.getElementById('sim51-dp').value = 6.00;
+    document.getElementById('sim51-fc').value = '28';
+    document.getElementById('sim51-fy').value = '420';
+    document.getElementById('sim51-ascomp').value = 8.55;
+    document.getElementById('sim51-astens').value = 8.55;
+    document.getElementById('sim51-asmid').value = 5.70;
+    document.getElementById('sim51-type').value = 'tied';
+    document.getElementById('sim51-cap').value = '0.80';
+    document.getElementById('sim51-pu').value = 2200;
+    document.getElementById('sim51-mux').value = 0;
+    document.getElementById('sim51-muy').value = 0;
+  } else if (presetKey === 'ej52_simetrica') {
+    // Ejemplo 7.2 (Caso Simétrico): Columna 40 x 45 cm con 6 No. 8 (3 No. 8 por cara)
     document.getElementById('sim51-b').value = 40;
     document.getElementById('sim51-h').value = 45;
     document.getElementById('sim51-dp').value = 6.22;
@@ -566,7 +646,7 @@ function loadSim51Preset(presetKey) {
     document.getElementById('sim51-mux').value = 220;
     document.getElementById('sim51-muy').value = 0;
   } else if (presetKey === 'ej52_asimetrica') {
-    // Columna de 40 x 45 cm con 3 No. 8 en tracción (15.30 cm2) y 2 No. 6 en compresión (5.70 cm2)
+    // Ejemplo 7.2 (Extensión Asimétrica): 3 No. 8 en tracción (15.30 cm2) y 2 No. 6 en compresión (5.70 cm2)
     document.getElementById('sim51-b').value = 40;
     document.getElementById('sim51-h').value = 45;
     document.getElementById('sim51-dp').value = 6.05;
@@ -581,7 +661,7 @@ function loadSim51Preset(presetKey) {
     document.getElementById('sim51-mux').value = 210;
     document.getElementById('sim51-muy').value = 0;
   } else if (presetKey === 'ej53_biaxial') {
-    // Columna cuadrada 60 x 60 cm sometida a flexocompresión biaxial
+    // Ejemplo 7.3 (Parte B): Columna cuadrada 60 x 60 cm sometida a flexocompresión biaxial
     document.getElementById('sim51-b').value = 60;
     document.getElementById('sim51-h').value = 60;
     document.getElementById('sim51-dp').value = 6.50;
@@ -595,6 +675,21 @@ function loadSim51Preset(presetKey) {
     document.getElementById('sim51-pu').value = 5300;
     document.getElementById('sim51-mux').value = 405;
     document.getElementById('sim51-muy').value = 170;
+  } else if (presetKey === 'ej77_parme') {
+    // Ejemplo 7.7 (Rediseño con 8 No. 9): Columna esquinera 50 x 50 cm, Pu = 1850 kN, Mux = 195, Muy = 145
+    document.getElementById('sim51-b').value = 50;
+    document.getElementById('sim51-h').value = 50;
+    document.getElementById('sim51-dp').value = 6.00;
+    document.getElementById('sim51-fc').value = '28';
+    document.getElementById('sim51-fy').value = '420';
+    document.getElementById('sim51-ascomp').value = 19.35;
+    document.getElementById('sim51-astens').value = 19.35;
+    document.getElementById('sim51-asmid').value = 12.90;
+    document.getElementById('sim51-type').value = 'tied';
+    document.getElementById('sim51-cap').value = '0.80';
+    document.getElementById('sim51-pu').value = 1850;
+    document.getElementById('sim51-mux').value = 195;
+    document.getElementById('sim51-muy').value = 145;
   }
   updateSim51();
 }
@@ -604,6 +699,18 @@ function loadSim51Preset(presetKey) {
  * SIMULADOR 5.2: COLUMNAS ESBELTAS, FACTOR k Y MAGNIFICACIÓN DE MOMENTOS
  * ============================================================================
  */
+function setSim52SwayMethod(method) {
+  const methodInput = document.getElementById('sim52-sway-method');
+  if (methodInput) methodInput.value = method;
+  const btnQ = document.getElementById('sim52-btn-sway-q');
+  const btnE = document.getElementById('sim52-btn-sway-euler');
+  if (btnQ) btnQ.classList.toggle('active', method === 'q');
+  if (btnE) btnE.classList.toggle('active', method === 'euler');
+  const qBox = document.getElementById('sim52-sway-q-box');
+  if (qBox) qBox.style.display = method === 'q' ? 'block' : 'none';
+  updateSim52();
+}
+
 function updateSim52() {
   const luInput = document.getElementById('sim52-lu');
   if (!luInput) return;
@@ -616,9 +723,20 @@ function updateSim52() {
   const psiB      = parseFloat(document.getElementById('sim52-psib').value);    // Rigidez relativa nudo inferior
   const Pu        = parseFloat(document.getElementById('sim52-pu').value);      // kN
   const M1        = parseFloat(document.getElementById('sim52-m1').value);      // kN·m (con signo: + curvatura simple, - doble)
-  const M2        = parseFloat(document.getElementById('sim52-m2').value);      // kN·m (> 0, mayor momento de extremo)
+  const M2        = parseFloat(document.getElementById('sim52-m2').value);      // kN·m (> 0, mayor momento de extremo o M2ns)
   const bdns      = parseFloat(document.getElementById('sim52-bdns').value);    // beta_dns
   const fc        = parseFloat(document.getElementById('sim52-fc').value);      // MPa
+
+  const swayControls = document.getElementById('sim52-sway-controls');
+  if (swayControls) {
+    swayControls.style.display = frameType === 'unbraced' ? 'block' : 'none';
+  }
+  const swayMethodEl = document.getElementById('sim52-sway-method');
+  const swayMethod = swayMethodEl ? swayMethodEl.value : 'q';
+  const qValEl = document.getElementById('sim52-q');
+  const m2sEl  = document.getElementById('sim52-m2s');
+  const qIndex = qValEl ? parseFloat(qValEl.value) : 0.069;
+  const M2s    = m2sEl ? parseFloat(m2sEl.value) : 110.0;
 
   // Actualizar etiquetas
   document.getElementById('val-sim52-lu').textContent   = `${lu.toFixed(2)} m`;
@@ -630,6 +748,10 @@ function updateSim52() {
   document.getElementById('val-sim52-m1').textContent   = `${M1 >= 0 ? '+' : ''}${M1.toFixed(1)} kN·m`;
   document.getElementById('val-sim52-m2').textContent   = `${M2.toFixed(1)} kN·m`;
   document.getElementById('val-sim52-bdns').textContent = bdns.toFixed(2);
+  const valQ = document.getElementById('val-sim52-q');
+  if (valQ) valQ.textContent = qIndex.toFixed(3);
+  const valM2s = document.getElementById('val-sim52-m2s');
+  if (valM2s) valM2s.textContent = `${M2s.toFixed(1)} kN·m`;
 
   // 1. Radio de giro r = 0.30 h (NSR-10 C.10.10.1.2)
   const rM = 0.30 * (hCm / 100.0);
@@ -661,29 +783,57 @@ function updateSim52() {
   const isSlender = slenderness > limitSlender;
 
   // 4. Rigidez a flexión EI (NSR-10 Ec. C.10-15: EI = 0.4 Ec Ig / (1 + bdns)) y Carga crítica de Euler Pc
-  const EcMPa = 3900.0 * Math.sqrt(fc); // MPa (promedio colombiano NSR-10 C.8.5.1) o 4700 sqrt(fc)
+  const EcMPa = 4700.0 * Math.sqrt(fc); // MPa (NSR-10 C.8.5.1 módulo normal)
   const bM = bCm / 100.0;
   const hM = hCm / 100.0;
   const IgM4 = (bM * Math.pow(hM, 3)) / 12.0;
   const EI_kNm2 = (0.40 * (EcMPa * 1000.0) * IgM4) / (1.0 + bdns); // kN·m2
   const Pc_kN = (Math.PI * Math.PI * EI_kNm2) / Math.pow(k * lu, 2);
 
-  // 5. Coeficiente Cm (Ec. C.10-16), Momento mínimo M2,mín (Ec. C.10-17) y Factor de magnificación delta
+  // 5. Coeficiente Cm (Ec. C.10-16), Momento mínimo M2,mín (Ec. C.10-17) y Magnificador delta
   const M2Min = Pu * (0.015 + 0.03 * hM); // kN·m
-  const M2DesignBase = Math.max(M2, M2Min);
-  const Cm = frameType === 'braced'
-    ? Math.max(0.40, 0.60 + 0.40 * ratioM1M2)
-    : 1.0;
-
+  let M2DesignBase = Math.max(M2, M2Min);
+  let Cm = 1.0;
   let delta = 1.0;
-  const denom = 1.0 - Pu / (0.75 * Pc_kN);
-  if (denom > 0.05) {
-    delta = Math.max(1.0, Cm / denom);
+  let Mc = M2DesignBase;
+  let isUnstable = false;
+  let deltaLabel = 'δns';
+
+  if (frameType === 'braced') {
+    Cm = Math.max(0.40, 0.60 + 0.40 * ratioM1M2);
+    const denom = 1.0 - Pu / (0.75 * Pc_kN);
+    if (denom > 0.02) {
+      delta = Math.max(1.0, Cm / denom);
+    } else {
+      delta = 9.99;
+      isUnstable = true;
+    }
+    Mc = delta * M2DesignBase;
+  } else if (swayMethod === 'q') {
+    deltaLabel = 'δs';
+    Cm = 1.0;
+    if (qIndex >= 0.95) {
+      delta = 9.99;
+      isUnstable = true;
+    } else {
+      delta = Math.max(1.0, 1.0 / (1.0 - qIndex));
+    }
+    const M1erOrden = M2 + M2s;
+    M2DesignBase = Math.max(M1erOrden, M2Min);
+    Mc = Math.max(M2 + delta * M2s, M2Min);
   } else {
-    delta = 9.99; // Inestabilidad por pandeo
+    deltaLabel = 'δs';
+    Cm = 1.0;
+    const denom = 1.0 - Pu / (0.75 * Pc_kN);
+    if (denom > 0.02) {
+      delta = Math.max(1.0, 1.0 / denom);
+    } else {
+      delta = 9.99;
+      isUnstable = true;
+    }
+    Mc = delta * M2DesignBase;
   }
 
-  const Mc = delta * M2DesignBase;
   const ratioAmplif = M2DesignBase > 0.01 ? Mc / M2DesignBase : 1.0;
 
   // Poblar resultados en el DOM
@@ -691,29 +841,36 @@ function updateSim52() {
   document.getElementById('res52-klur').textContent  = `${slenderness.toFixed(1)} (Límite C.10.10.1 = ${limitSlender.toFixed(1)})`;
   document.getElementById('res52-ei').textContent    = `${EI_kNm2.toFixed(0)} kN·m² (Ig = ${IgM4.toFixed(5)} m⁴)`;
   document.getElementById('res52-pc').textContent    = `${Pc_kN.toFixed(0)} kN (0.75 Pc = ${(0.75 * Pc_kN).toFixed(0)} kN)`;
-  document.getElementById('res52-cm').textContent    = `Cm = ${Cm.toFixed(3)} (${M1 >= 0 ? 'Curvatura Simple' : 'Curvatura Doble'})`;
+  document.getElementById('res52-cm').textContent    = frameType === 'unbraced' && swayMethod === 'q'
+    ? `Índice Q = ${qIndex.toFixed(3)} ${qIndex > 0.05 ? '(> 0.05 Traslacional)' : '(≤ 0.05 Arriostrado)'}`
+    : `Cm = ${Cm.toFixed(3)} (${M1 >= 0 ? 'Curvatura Simple' : 'Curvatura Doble'})`;
   document.getElementById('res52-m2min').textContent = `${M2Min.toFixed(1)} kN·m`;
-  document.getElementById('res52-delta').textContent = `δ = ${delta.toFixed(3)}`;
-  document.getElementById('res52-mc').textContent    = `Mc = ${Mc.toFixed(1)} kN·m`;
+  document.getElementById('res52-delta').textContent = `${deltaLabel} = ${delta.toFixed(3)}`;
+  document.getElementById('res52-mc').textContent    = `Mc = ${Mc.toFixed(1)} kN·m (Mc/M2 = ${ratioAmplif.toFixed(3)})`;
 
   const status52 = document.getElementById('res52-status');
-  if (Pu >= 0.75 * Pc_kN) {
+  if (isUnstable || (frameType === 'braced' && Pu >= 0.75 * Pc_kN) || (frameType === 'unbraced' && swayMethod === 'q' && qIndex > 0.25)) {
     status52.className = 'status-badge status-danger';
-    status52.innerHTML = `❌ INESTABILIDAD POR PANDEO: Pu (${Pu.toFixed(0)} kN) ≥ 0.75 Pc (${(0.75 * Pc_kN).toFixed(0)} kN). Aumente inmediatamente las dimensiones de la columna.`;
+    status52.innerHTML = frameType === 'unbraced' && swayMethod === 'q'
+      ? `❌ INESTABILIDAD GLOBAL DEL ENTREPISO (NSR-10 C.10.10.5.2): Q = ${qIndex.toFixed(3)} > 0.25. Rigidice inmediatamente el sistema lateral.`
+      : `❌ INESTABILIDAD POR PANDEO: Pu (${Pu.toFixed(0)} kN) ≥ 0.75 Pc (${(0.75 * Pc_kN).toFixed(0)} kN). Aumente inmediatamente las dimensiones de la columna.`;
   } else if (ratioAmplif > 1.40) {
     status52.className = 'status-badge status-danger';
     status52.innerHTML = `❌ EXCEDE LÍMITE DE SEGUNDO ORDEN (NSR-10 C.10.10.2.1): Mc / M2 = ${ratioAmplif.toFixed(2)} > 1.40. Debe rigidizar la columna.`;
+  } else if (frameType === 'unbraced' && swayMethod === 'q' && qIndex > 0.05) {
+    status52.className = 'status-badge status-warn';
+    status52.innerHTML = `⚠️ PÓRTICO TRASLACIONAL (Q = ${qIndex.toFixed(3)} > 0.05): δs = ${delta.toFixed(3)} → Mc = M2ns + δs·M2s = ${Mc.toFixed(1)} kN·m (Mc/M2 = ${ratioAmplif.toFixed(3)} ≤ 1.40).`;
   } else if (!isSlender) {
     status52.className = 'status-badge status-ok';
     status52.innerHTML = `✅ COLUMNA CORTA (k·lu/r = ${slenderness.toFixed(1)} ≤ ${limitSlender.toFixed(1)}): Se permite ignorar efectos de esbeltez. Diseñar con Mc = ${M2DesignBase.toFixed(1)} kN·m.`;
   } else {
     status52.className = 'status-badge status-warn';
-    status52.innerHTML = `⚠️ COLUMNA ESBELTA (k·lu/r = ${slenderness.toFixed(1)} > ${limitSlender.toFixed(1)}): Magnificador δ = ${delta.toFixed(3)} → Momento amplificado Mc = ${Mc.toFixed(1)} kN·m (≤ 1.40 M2).`;
+    status52.innerHTML = `⚠️ COLUMNA ESBELTA (k·lu/r = ${slenderness.toFixed(1)} > ${limitSlender.toFixed(1)}): Magnificador ${deltaLabel} = ${delta.toFixed(3)} → Momento amplificado Mc = ${Mc.toFixed(1)} kN·m (≤ 1.40 M2).`;
   }
 
   drawSim52Canvas({
     frameType, lu, k, slenderness, limitSlender,
-    M1, M2: M2DesignBase, Mc, delta, isSlender
+    M1, M2: M2DesignBase, Mc, delta, isSlender, deltaLabel
   });
 }
 
@@ -743,7 +900,7 @@ function drawSim52Canvas(state) {
   ctx.font = 'bold 13px Inter, sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText(
-    `DEFORMADA DE LA COLUMNA Y AMPLIFICACIÓN DE MOMENTOS DE SEGUNDO ORDEN (k = ${state.k.toFixed(2)}, δ = ${state.delta.toFixed(2)})`,
+    `DEFORMADA DE LA COLUMNA Y AMPLIFICACIÓN DE MOMENTOS DE SEGUNDO ORDEN (k = ${state.k.toFixed(2)}, ${state.deltaLabel} = ${state.delta.toFixed(3)})`,
     W / 2,
     24
   );
@@ -796,9 +953,9 @@ function drawSim52Canvas(state) {
   ctx.fillText(`lu = ${state.lu.toFixed(2)} m | k·lu = ${(state.k * state.lu).toFixed(2)} m`, colX, botY + 32);
 
   // Panel Derecho: Diagrama de Momentos de 1er Orden (M1, M2) vs Amplificado (Mc)
-  const diagX = 580;
+  const diagX = 520;
   const maxM = Math.max(state.Mc * 1.15, state.M2 * 1.3, 50.0);
-  const scaleM = 160.0 / maxM;
+  const scaleM = 145.0 / maxM;
 
   // Eje vertical de referencia del diagrama de momentos
   ctx.strokeStyle = pal.concreteStroke;
@@ -831,12 +988,17 @@ function drawSim52Canvas(state) {
   ctx.lineTo(diagX, botY);
   ctx.stroke();
 
-  // Envolvente amplificada de segundo orden Mc = delta * M2
+  // Envolvente amplificada de segundo orden Mc
   ctx.strokeStyle = pal.dangerStroke;
   ctx.lineWidth = 2.8;
   ctx.beginPath();
-  ctx.moveTo(xM2, topY);
-  ctx.quadraticCurveTo(xMc + 18, (topY + botY) / 2, xM1, botY);
+  if (state.frameType === 'unbraced') {
+    ctx.moveTo(xMc, topY);
+    ctx.lineTo(xM1, botY);
+  } else {
+    ctx.moveTo(xM2, topY);
+    ctx.quadraticCurveTo(xMc + 18, (topY + botY) / 2, xM1, botY);
+  }
   ctx.stroke();
 
   ctx.fillStyle = pal.nomCurve;
@@ -845,19 +1007,66 @@ function drawSim52Canvas(state) {
   ctx.fillText(`M1 = ${state.M1.toFixed(1)} kN·m`, xM1 + 8, botY - 6);
 
   ctx.fillStyle = pal.dangerStroke;
-  ctx.fillText(`2do Orden Mc = δ·M2 = ${state.Mc.toFixed(1)} kN·m`, Math.max(xM2, xMc) + 10, (topY + botY) / 2);
+  ctx.fillText(
+    `2do Orden Mc = ${state.Mc.toFixed(1)} kN·m`,
+    Math.max(xM2, xMc) + 10,
+    state.frameType === 'unbraced' ? topY + 30 : (topY + botY) / 2
+  );
 }
+
+function loadSim52Preset(presetKey) {
+  if (presetKey === 'ej74_braced') {
+    document.getElementById('sim52-frame').value = 'braced';
+    document.getElementById('sim52-fc').value = '28';
+    document.getElementById('sim52-lu').value = 3.35;
+    document.getElementById('sim52-b').value = 40;
+    document.getElementById('sim52-h').value = 50;
+    document.getElementById('sim52-psia').value = 1.92;
+    document.getElementById('sim52-psib').value = 1.03;
+    document.getElementById('sim52-pu').value = 1320;
+    document.getElementById('sim52-m1').value = -65;
+    document.getElementById('sim52-m2').value = 110;
+    document.getElementById('sim52-bdns').value = 0.45;
+  } else if (presetKey === 'ej76_sway') {
+    document.getElementById('sim52-frame').value = 'unbraced';
+    document.getElementById('sim52-fc').value = '28';
+    document.getElementById('sim52-lu').value = 3.60;
+    document.getElementById('sim52-b').value = 45;
+    document.getElementById('sim52-h').value = 45;
+    document.getElementById('sim52-psia').value = 1.50;
+    document.getElementById('sim52-psib').value = 1.50;
+    document.getElementById('sim52-pu').value = 1650;
+    document.getElementById('sim52-m1').value = 35;
+    document.getElementById('sim52-m2').value = 55;
+    document.getElementById('sim52-bdns').value = 0.30;
+    const qInput = document.getElementById('sim52-q');
+    const m2sInput = document.getElementById('sim52-m2s');
+    if (qInput) qInput.value = 0.069;
+    if (m2sInput) m2sInput.value = 110;
+    setSim52SwayMethod('q');
+    return;
+  } else if (presetKey === 'esbelta_critica') {
+    document.getElementById('sim52-frame').value = 'braced';
+    document.getElementById('sim52-fc').value = '21';
+    document.getElementById('sim52-lu').value = 5.60;
+    document.getElementById('sim52-b').value = 35;
+    document.getElementById('sim52-h').value = 35;
+    document.getElementById('sim52-psia').value = 2.60;
+    document.getElementById('sim52-psib').value = 2.40;
+    document.getElementById('sim52-pu').value = 950;
+    document.getElementById('sim52-m1').value = 70;
+    document.getElementById('sim52-m2').value = 100;
+    document.getElementById('sim52-bdns').value = 0.70;
+  }
+  updateSim52();
+}
+
+window.redrawAllSimulators = function () {
+  updateSim51();
+  updateSim52();
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   updateSim51();
   updateSim52();
-  const themeBtn = document.getElementById('btn-theme');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      setTimeout(() => {
-        updateSim51();
-        updateSim52();
-      }, 30);
-    });
-  }
 });

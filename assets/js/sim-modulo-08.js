@@ -245,6 +245,25 @@ function updateSim81() {
   setTxt('res81-lap-b', `${Math.round(lap_B)} mm (${(lap_B / 10).toFixed(1)} cm)`);
   setTxt('res81-lap-c', `${Math.round(lap_comp)} mm (${(lap_comp / 10).toFixed(1)} cm)`);
 
+  // Tacómetro Dinámico de Eficiencia de Adherencia y Confinamiento
+  updateSim81Tachometer(confTerm, confTermRaw, ld_gen, ld_simp, ldh, db, spacing, psi_t);
+
+  // Estado global de adherencia
+  const statusEl = document.getElementById('res81-status');
+  if (statusEl) {
+    const minSpacing = Math.max(25.0, db);
+    if (spacing < minSpacing) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ SEPARACIÓN LIBRE INSUFICIENTE: sb = ${spacing.toFixed(0)} mm < mín(${minSpacing.toFixed(1)} mm) según NSR-10 C.7.6.1.`;
+    } else if (confTerm < 1.35 || coating === 'epoxy_low') {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ ADHERENCIA EXIGENTE: Confinamiento limitado o epóxico severo; ld = ${Math.round(ld_gen)} mm. Evalúe gancho estándar ldh = ${Math.round(ldh)} mm.`;
+    } else {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ ADHERENCIA OPTIMIZADA (NSR-10 C.12): Ec. General ld = ${Math.round(ld_gen)} mm (ahorro del ${Math.max(0, (1 - ld_gen / ld_simp) * 100).toFixed(0)}% frente a Tabla C.12.2.2 = ${Math.round(ld_simp)} mm).`;
+    }
+  }
+
   // Dibujar Canvas
   drawSim81Canvas({
     barKey,
@@ -264,6 +283,125 @@ function updateSim81() {
     spacing,
     stirrupOpt
   });
+}
+
+function updateSim81Tachometer(confTerm, confTermRaw, ld_gen, ld_simp, ldh, db, spacing, psi_t) {
+  const card = document.getElementById('sim81-tachometer-card');
+  if (!card) return;
+
+  const setBar = (barId, pctId, ratio, isEfficiencyGoodHigh) => {
+    const barEl = document.getElementById(barId);
+    const pctEl = document.getElementById(pctId);
+    const pctVal = Number.isFinite(ratio) ? Math.max(0, ratio * 100) : 100;
+    const widthPct = Math.min(100, pctVal);
+    let bg = 'linear-gradient(90deg, #16A34A, #22C55E)';
+    if (isEfficiencyGoodHigh) {
+      if (ratio < 0.54) bg = 'linear-gradient(90deg, #DC2626, #EF4444)';
+      else if (ratio < 0.74) bg = 'linear-gradient(90deg, #D97706, #F59E0B)';
+      else if (ratio < 0.90) bg = 'linear-gradient(90deg, #2563EB, #3B82F6)';
+    } else {
+      if (ratio > 1.0) bg = 'linear-gradient(90deg, #DC2626, #EF4444)';
+      else if (ratio > 0.85) bg = 'linear-gradient(90deg, #D97706, #F59E0B)';
+      else if (ratio > 0.70) bg = 'linear-gradient(90deg, #2563EB, #3B82F6)';
+    }
+    if (barEl) {
+      barEl.style.width = `${widthPct.toFixed(1)}%`;
+      barEl.style.background = bg;
+    }
+    if (pctEl) {
+      pctEl.textContent = `${pctVal.toFixed(1)}%`;
+    }
+  };
+
+  const confRatio = confTerm / 2.5;
+  const saveRatio = ld_simp > 0 ? ld_gen / ld_simp : 1.0;
+  const hookRatio = ld_gen > 0 ? ldh / ld_gen : 1.0;
+
+  setBar('sim81-bar-conf', 'sim81-pct-conf', confRatio, true);
+  setBar('sim81-bar-save', 'sim81-pct-save', saveRatio, false);
+  setBar('sim81-bar-hook', 'sim81-pct-hook', hookRatio, false);
+
+  const minSpacing = Math.max(25.0, db);
+  const needle = document.getElementById('sim81-tacho-needle');
+  const badge = document.getElementById('sim81-dcr-badge');
+  const msg = document.getElementById('sim81-regime-msg');
+
+  let pctNeedle = 18;
+  if (spacing < minSpacing || confTerm < 1.35) {
+    pctNeedle = 91;
+    if (badge) {
+      badge.textContent = `ZONA 4 • RIESGO DE HENDIMIENTO / ESPACIAMIENTO (${spacing.toFixed(0)} mm)`;
+      badge.style.background = '#FEE2E2';
+      badge.style.color = '#991B1B';
+      badge.style.borderColor = '#EF4444';
+    }
+    if (msg) msg.textContent = 'Confinamiento bajo ((cb+Ktr)/db < 1.35) o separación libre < máx(25 mm, db): aumente recubrimiento, separación o estribos.';
+  } else if (confTerm < 1.85 || psi_t > 1.0) {
+    pctNeedle = 72;
+    if (badge) {
+      badge.textContent = psi_t > 1.0
+        ? `ZONA 3 • EFECTO BARRA SUPERIOR (ψt = 1.30, Ind. ${confTerm.toFixed(2)})`
+        : `ZONA 3 • CONFINAMIENTO MODERADO (Ind. ${confTerm.toFixed(2)}/2.50)`;
+      badge.style.background = '#FEF3C7';
+      badge.style.color = '#92400E';
+      badge.style.borderColor = '#F59E0B';
+    }
+    if (msg) msg.textContent = psi_t > 1.0
+      ? 'La exudación bajo barra superior penaliza en +30% a ld; en nudos exteriores conviene usar gancho estándar ldh.'
+      : 'Mejore Ktr con estribos más cerrados para acercar (cb+Ktr)/db al tope normativo de 2.50.';
+  } else if (confTerm < 2.40) {
+    pctNeedle = 50;
+    if (badge) {
+      badge.textContent = `ZONA 2 • ÓPTIMO C.12-1 (Ind. ${confTerm.toFixed(2)} / Ahorro ${((1 - saveRatio) * 100).toFixed(0)}%)`;
+      badge.style.background = '#DBEAFE';
+      badge.style.color = '#1E40AF';
+      badge.style.borderColor = '#3B82F6';
+    }
+    if (msg) msg.textContent = 'Buen nivel de confinamiento transversal: la Ec. General C.12-1 reduce sustancialmente la longitud frente a Tabla C.12.2.2.';
+  } else {
+    pctNeedle = 20;
+    if (badge) {
+      badge.textContent = `ZONA 1 • CONFINAMIENTO PLENO (2.50 / 2.50 Máx. NSR-10)`;
+      badge.style.background = '#DCFCE7';
+      badge.style.color = '#166534';
+      badge.style.borderColor = '#22C55E';
+    }
+    if (msg) msg.textContent = 'Se alcanza el tope normativo (cb+Ktr)/db = 2.50 con máxima economía de acero y seguridad frente a hendimiento.';
+  }
+  if (needle) needle.style.left = `${pctNeedle}%`;
+}
+
+function loadSim81Preset(key) {
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
+  if (key === 'ej81_general') {
+    // Ejemplo 8.1: 3 No. 6 inf., fc=21, fy=420, cc=40, sb=72, estribos #3@150 (standard)
+    set('sim81-bar', '6'); set('sim81-fc', '21'); set('sim81-fy', '420');
+    set('sim81-pos', 'bottom'); set('sim81-coating', 'black'); set('sim81-light', '1.0');
+    set('sim81-cover', 40); set('sim81-spacing', 72); set('sim81-stirrups', 'standard');
+    set('sim81-excess', 1.00); set('sim81-hook-type', '90'); set('sim81-hook-cover', 'normal'); set('sim81-hook-ties', 'no');
+  } else if (key === 'ej82_gancho') {
+    // Ejemplo 8.2: 3 No. 7 sup. en nudo exterior, fc=28, rec lateral >= 65mm, confinado s <= 3db
+    set('sim81-bar', '7'); set('sim81-fc', '28'); set('sim81-fy', '420');
+    set('sim81-pos', 'top'); set('sim81-coating', 'black'); set('sim81-light', '1.0');
+    set('sim81-cover', 70); set('sim81-spacing', 60); set('sim81-stirrups', 'seismic');
+    set('sim81-excess', 1.00); set('sim81-hook-type', '90'); set('sim81-hook-cover', 'large'); set('sim81-hook-ties', 'yes');
+  } else if (key === 'ej83_traslapo') {
+    // Ejemplo 8.3: 4 No. 8 sup. en viga DMO, fc=28, fy=420, traslapo Clase A vs Clase B
+    set('sim81-bar', '8'); set('sim81-fc', '28'); set('sim81-fy', '420');
+    set('sim81-pos', 'top'); set('sim81-coating', 'black'); set('sim81-light', '1.0');
+    set('sim81-cover', 40); set('sim81-spacing', 55); set('sim81-stirrups', 'seismic');
+    set('sim81-excess', 1.00); set('sim81-hook-type', '90'); set('sim81-hook-cover', 'normal'); set('sim81-hook-ties', 'yes');
+  } else if (key === 'ej85_compresion') {
+    // Ejemplo 8.5: 4 No. 8 a compresión en zapata fc=21, estribos No. 4 @ 80 mm (seismic), As_req/As_prov = 0.90
+    set('sim81-bar', '8'); set('sim81-fc', '21'); set('sim81-fy', '420');
+    set('sim81-pos', 'bottom'); set('sim81-coating', 'black'); set('sim81-light', '1.0');
+    set('sim81-cover', 40); set('sim81-spacing', 75); set('sim81-stirrups', 'seismic');
+    set('sim81-excess', 0.90); set('sim81-hook-type', '90'); set('sim81-hook-cover', 'normal'); set('sim81-hook-ties', 'no');
+  }
+  updateSim81();
 }
 
 function drawSim81Canvas(data) {
@@ -674,6 +812,27 @@ function updateSim82() {
   setTxt('res82-lbar', `${L_cut_bar.toFixed(2)} m (${Math.round(L_cut_bar * 100)} cm)`);
   setTxt('res82-pct-cont', `${pctCont.toFixed(1)}% ${pctOk ? '✓ Cumple (≥ 33.3%)' : '✗ Insuficiente (< 33.3%)'}`);
 
+  // Estado global del despiece
+  const statusEl = document.getElementById('res82-status');
+  if (statusEl) {
+    if (Mu_max > phiMn_total) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ CAPACIDAD INSUFICIENTE: Mu,máx = ${Mu_max.toFixed(1)} kN·m > φMn = ${phiMn_total.toFixed(1)} kN·m. Aumente d o el número de barras.`;
+    } else if (!pctOk) {
+      statusEl.className = 'status-badge status-danger';
+      statusEl.innerHTML = `❌ APOYO INSUFICIENTE (C.12.11.1): Solo ${pctCont.toFixed(1)}% llega al apoyo (< 33.3% mínimo para apoyos simples). Reduzca barras cortadas.`;
+    } else if (!cutFeasible) {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ CORTE INNECESARIO: Las ${nCont} barras continuas ya resisten φMn = ${phiMn_cont.toFixed(1)} kN·m ≥ Mu,máx.`;
+    } else if (!ld_ok_left || !ld_ok_right) {
+      statusEl.className = 'status-badge status-warn';
+      statusEl.innerHTML = `⚠️ DESARROLLO INSUFICIENTE DESDE Mmáx: Las barras cortadas no alcanzan ld = ${ld_est_m.toFixed(2)} m desde x = ${x_max.toFixed(2)} m.`;
+    } else {
+      statusEl.className = 'status-badge status-ok';
+      statusEl.innerHTML = `✅ DESPIECE CUMPLE NSR-10 C.12.10 Y C.12.11: Barras cortadas de L = ${L_cut_bar.toFixed(2)} m con extensión ≥ máx(d, 12db) y ${pctCont.toFixed(1)}% continuo al apoyo.`;
+    }
+  }
+
   // Dibujar Canvas
   drawSim82Canvas({
     span,
@@ -699,6 +858,33 @@ function updateSim82() {
     barKey,
     d_m: d_mm / 1000
   });
+}
+
+function loadSim82Preset(key) {
+  const set = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.value = v;
+  };
+  if (key === 'ej84_continua') {
+    // Ejemplo 8.4: Viga continua L=6.0m, wu=60 kN/m, Mu1=Mu2=90 kN·m, h=55, d=49, 4 No. 7 (corta 2)
+    set('sim82-span', 6.0); set('sim82-wu', 60.0);
+    set('sim82-mu-left', 90); set('sim82-mu-right', 90);
+    set('sim82-h', 55); set('sim82-d', 49);
+    set('sim82-bar-size', '7'); set('sim82-nbars-pos', '4'); set('sim82-nbars-cut', '2');
+  } else if (key === 'ej86_simple') {
+    // Ejemplo 8.6: Viga simplemente apoyada L=5.5m, wu=52 kN/m, Mu1=Mu2=0, 4 No. 6 (corta 2 -> 50% al apoyo)
+    set('sim82-span', 5.5); set('sim82-wu', 52.0);
+    set('sim82-mu-left', 0); set('sim82-mu-right', 0);
+    set('sim82-h', 50); set('sim82-d', 44);
+    set('sim82-bar-size', '6'); set('sim82-nbars-pos', '4'); set('sim82-nbars-cut', '2');
+  } else if (key === 'corte_excesivo') {
+    // Corte excesivo (< 33.3% continuo al apoyo simple) para demostrar alerta C.12.11.1
+    set('sim82-span', 6.5); set('sim82-wu', 55.0);
+    set('sim82-mu-left', 0); set('sim82-mu-right', 0);
+    set('sim82-h', 50); set('sim82-d', 44);
+    set('sim82-bar-size', '7'); set('sim82-nbars-pos', '4'); set('sim82-nbars-cut', '3');
+  }
+  updateSim82();
 }
 
 function drawSim82Canvas(data) {
@@ -944,6 +1130,11 @@ function drawSim82Canvas(data) {
  * INICIALIZACIÓN GLOBAL DE EVENTOS Y OBSERVERS
  * ============================================================================
  */
+window.redrawAllSimulators = () => {
+  updateSim81();
+  updateSim82();
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   // Listeners Simulador 8.1
   const sim81Ids = [
@@ -972,7 +1163,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Theme observer para re-renderizado
+  // Theme listener / observer para re-renderizado
+  const themeBtn = document.getElementById('btn-theme');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      setTimeout(() => {
+        updateSim81();
+        updateSim82();
+      }, 30);
+    });
+  }
   const observer = new MutationObserver(() => {
     updateSim81();
     updateSim82();
@@ -980,8 +1180,6 @@ document.addEventListener('DOMContentLoaded', () => {
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   // Render inicial
-  setTimeout(() => {
-    updateSim81();
-    updateSim82();
-  }, 100);
+  updateSim81();
+  updateSim82();
 });

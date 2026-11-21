@@ -430,6 +430,30 @@
           window.closeShearModal();
           return;
         }
+        const dc = document.getElementById('modal-diagrama-columnas');
+        if (dc && dc.classList.contains('open')) {
+          e.preventDefault();
+          window.closeColumnsModal();
+          return;
+        }
+        const dl = document.getElementById('modal-diagrama-losas');
+        if (dl && dl.classList.contains('open')) {
+          e.preventDefault();
+          window.closeSlabsModal();
+          return;
+        }
+        const dfo = document.getElementById('modal-diagrama-cimentaciones');
+        if (dfo && dfo.classList.contains('open')) {
+          e.preventDefault();
+          window.closeFoundationsModal();
+          return;
+        }
+        const dde = document.getElementById('modal-diagrama-despiece');
+        if (dde && dde.classList.contains('open')) {
+          e.preventDefault();
+          window.closeDetailingModal();
+          return;
+        }
         const vm = document.getElementById('modal-variables');
         if (vm && vm.classList.contains('open')) {
           e.preventDefault();
@@ -1094,6 +1118,14 @@
       if (df && df.classList.contains('open')) window.closeFlexureModal();
       const ds = document.getElementById('modal-diagrama-cortante');
       if (ds && ds.classList.contains('open')) window.closeShearModal();
+      const dc = document.getElementById('modal-diagrama-columnas');
+      if (dc && dc.classList.contains('open')) window.closeColumnsModal();
+      const dl = document.getElementById('modal-diagrama-losas');
+      if (dl && dl.classList.contains('open')) window.closeSlabsModal();
+      const dfo = document.getElementById('modal-diagrama-cimentaciones');
+      if (dfo && dfo.classList.contains('open')) window.closeFoundationsModal();
+      const dde = document.getElementById('modal-diagrama-despiece');
+      if (dde && dde.classList.contains('open')) window.closeDetailingModal();
     }
   };
 
@@ -1159,6 +1191,150 @@
 
   window.closeShearModal = function () {
     const modal = document.getElementById('modal-diagrama-cortante');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: FLEXOCOMPRESIÓN Y ESBELTEZ EN COLUMNAS (MÓDULO 05)
+     -------------------------------------------------------------------------- */
+  window.openColumnsModal = function () {
+    const modal = document.getElementById('modal-diagrama-columnas');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeColumnsModal = function () {
+    const modal = document.getElementById('modal-diagrama-columnas');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: LOSAS EN 1D, 2D Y PUNZONAMIENTO (MÓDULO 06)
+     -------------------------------------------------------------------------- */
+  window.openSlabsModal = function () {
+    const modal = document.getElementById('modal-diagrama-losas');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeSlabsModal = function () {
+    const modal = document.getElementById('modal-diagrama-losas');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: CIMENTACIONES SUPERFICIALES (MÓDULO 07)
+     -------------------------------------------------------------------------- */
+  window.openFoundationsModal = function () {
+    const modal = document.getElementById('modal-diagrama-cimentaciones');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeFoundationsModal = function () {
+    const modal = document.getElementById('modal-diagrama-cimentaciones');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!modal.classList.contains('open')) {
+        modal.style.display = 'none';
+      }
+    }, 220);
+  };
+
+  /* --------------------------------------------------------------------------
+     MODAL DE PIZARRA DOCENTE: ADHERENCIA, GANCHOS Y DESPIECE (MÓDULO 08)
+     -------------------------------------------------------------------------- */
+  window.openDetailingModal = function () {
+    const modal = document.getElementById('modal-diagrama-despiece');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof window.renderMathInElement === 'function') {
+      window.renderMathInElement(modal, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  };
+
+  window.closeDetailingModal = function () {
+    const modal = document.getElementById('modal-diagrama-despiece');
     if (!modal) return;
     modal.classList.remove('open');
     document.body.style.overflow = '';

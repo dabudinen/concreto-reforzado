@@ -6505,3 +6505,86 @@ html[data-theme="dark"] .svg-zoom-lens-btn:hover {
   margin: 0 auto;
 }
 
+/* ==========================================================================
+   INPUT BOXES PARA ENTRADA DE SOLICITACIONES EN SIMULADOR 4.1
+   ========================================================================== */
+.sim-input-box-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sim-num-input {
+  width: 84px;
+  height: 28px;
+  padding: 0.15rem 0.45rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: right;
+  color: #0284C7;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: var(--radius-sm, 6px);
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  box-sizing: border-box;
+}
+
+.sim-num-input:hover {
+  border-color: #0284C7;
+}
+
+.sim-num-input:focus {
+  border-color: #0284C7;
+  box-shadow: 0 0 0 2.5px rgba(2, 132, 199, 0.22);
+  background: #FFFFFF;
+}
+
+html[data-theme="dark"] .sim-num-input {
+  background: #1E293B;
+  border-color: #334155;
+  color: #38BDF8;
+}
+
+html[data-theme="dark"] .sim-num-input:hover {
+  border-color: #38BDF8;
+}
+
+html[data-theme="dark"] .sim-num-input:focus {
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 2.5px rgba(56, 189, 248, 0.25);
+  background: #1E293B;
+}
+
+.sim-num-input-amber {
+  border-color: #FCD34D !important;
+  color: #B45309 !important;
+}
+
+.sim-num-input-amber:hover,
+.sim-num-input-amber:focus {
+  border-color: #D97706 !important;
+  box-shadow: 0 0 0 2.5px rgba(217, 119, 6, 0.22) !important;
+}
+
+html[data-theme="dark"] .sim-num-input-amber {
+  background: #1E293B !important;
+  border-color: #78350F !important;
+  color: #FBBF24 !important;
+}
+
+html[data-theme="dark"] .sim-num-input-amber:hover,
+html[data-theme="dark"] .sim-num-input-amber:focus {
+  border-color: #F59E0B !important;
+  box-shadow: 0 0 0 2.5px rgba(245, 158, 11, 0.25) !important;
+}
+
+.sim-input-unit {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted, #64748B);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+

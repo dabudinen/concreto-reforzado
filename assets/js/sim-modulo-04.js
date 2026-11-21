@@ -91,6 +91,133 @@ function setSim41LoadMode(mode) {
   updateSim41();
 }
 
+window.sim41InputWidget = 'both'; // 'both', 'box', 'slider'
+
+function setSim41InputWidget(widgetMode) {
+  window.sim41InputWidget = widgetMode || 'both';
+  const btnBoth   = document.getElementById('sim41-btn-input-both');
+  const btnBox    = document.getElementById('sim41-btn-input-box');
+  const btnSlider = document.getElementById('sim41-btn-input-slider');
+
+  if (btnBoth)   btnBoth.classList.toggle('active', window.sim41InputWidget === 'both');
+  if (btnBox)    btnBox.classList.toggle('active', window.sim41InputWidget === 'box');
+  if (btnSlider) btnSlider.classList.toggle('active', window.sim41InputWidget === 'slider');
+
+  // Visibilidad de sliders
+  const sliders = document.querySelectorAll('.sim41-input-slider');
+  sliders.forEach(sl => {
+    sl.style.display = (window.sim41InputWidget === 'box') ? 'none' : 'block';
+  });
+
+  // Visibilidad de cajas numéricas
+  const boxWraps = document.querySelectorAll('.sim41-num-wrap');
+  boxWraps.forEach(bw => {
+    bw.style.display = (window.sim41InputWidget === 'slider') ? 'none' : 'inline-flex';
+  });
+
+  // Visibilidad de etiquetas fijas de texto (solo cuando está en modo exclusivo slider)
+  const textBadges = document.querySelectorAll('.sim41-text-badge');
+  textBadges.forEach(tb => {
+    tb.style.display = (window.sim41InputWidget === 'slider') ? 'inline-block' : 'none';
+  });
+}
+
+function syncSim41Input(param, source) {
+  if (param === 'L') {
+    const slider = document.getElementById('sim41-L');
+    const num    = document.getElementById('sim41-L-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(2);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 1);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(0.5, val - 0.5));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'wu') {
+    const slider = document.getElementById('sim41-wu');
+    const num    = document.getElementById('sim41-wu-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(2);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 10);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(1.0, val - 5));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'vdirect') {
+    const slider = document.getElementById('sim41-vdirect');
+    const num    = document.getElementById('sim41-vdirect-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(1);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 50);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(1.0, val - 10));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'lv0') {
+    const slider = document.getElementById('sim41-lv0');
+    const num    = document.getElementById('sim41-lv0-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(2);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 1);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(0.2, val - 0.5));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'scol') {
+    const slider = document.getElementById('sim41-scol');
+    const num    = document.getElementById('sim41-scol-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(1);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 5);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(1.0, val - 2));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'scol-z3') {
+    const slider = document.getElementById('sim41-scol-z3');
+    const num    = document.getElementById('sim41-scol-z3-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(1);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 5);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(1.0, val - 2));
+        slider.value = val;
+      }
+    }
+  } else if (param === 'scol-z2') {
+    const slider = document.getElementById('sim41-scol-z2');
+    const num    = document.getElementById('sim41-scol-z2-num');
+    if (source === 'slider' && slider && num && document.activeElement !== num) {
+      num.value = parseFloat(slider.value).toFixed(1);
+    } else if (source === 'num' && slider && num) {
+      const val = parseFloat(num.value);
+      if (!isNaN(val) && val > 0) {
+        if (val > parseFloat(slider.max)) slider.max = Math.ceil(val + 5);
+        if (val < parseFloat(slider.min)) slider.min = Math.floor(Math.max(1.0, val - 2));
+        slider.value = val;
+      }
+    }
+  }
+  updateSim41();
+}
+
 function setSim41Mode(mode) {
   window.sim41Mode = mode === 'review' ? 'review' : 'design';
 
@@ -176,9 +303,33 @@ function updateSim41() {
 
   if (isDirectLoad) {
     const vDirInput = document.getElementById('sim41-vdirect');
+    const vDirNum   = document.getElementById('sim41-vdirect-num');
     const lv0Input  = document.getElementById('sim41-lv0');
-    const VuApoyo   = vDirInput ? parseFloat(vDirInput.value) : 162.0;
-    const Lv0       = lv0Input ? parseFloat(lv0Input.value) : 3.07;
+    const lv0Num    = document.getElementById('sim41-lv0-num');
+
+    let VuApoyo = 162.0;
+    if (document.activeElement === vDirNum && vDirNum && vDirNum.value !== '') {
+      VuApoyo = parseFloat(vDirNum.value) || 0.0;
+      if (vDirInput) {
+        if (VuApoyo > parseFloat(vDirInput.max)) vDirInput.max = Math.ceil(VuApoyo + 50);
+        vDirInput.value = VuApoyo;
+      }
+    } else if (vDirInput) {
+      VuApoyo = parseFloat(vDirInput.value);
+      if (vDirNum && document.activeElement !== vDirNum) vDirNum.value = VuApoyo.toFixed(1);
+    }
+
+    let Lv0 = 3.07;
+    if (document.activeElement === lv0Num && lv0Num && lv0Num.value !== '') {
+      Lv0 = parseFloat(lv0Num.value) || 0.0;
+      if (lv0Input) {
+        if (Lv0 > parseFloat(lv0Input.max)) lv0Input.max = Math.ceil(Lv0 + 1);
+        lv0Input.value = Lv0;
+      }
+    } else if (lv0Input) {
+      Lv0 = parseFloat(lv0Input.value);
+      if (lv0Num && document.activeElement !== lv0Num) lv0Num.value = Lv0.toFixed(2);
+    }
 
     const valVdir = document.getElementById('val-sim41-vdirect');
     const valLv0  = document.getElementById('val-sim41-lv0');
@@ -194,25 +345,77 @@ function updateSim41() {
     if (weqDisplay) weqDisplay.innerHTML = `w<sub>eq</sub> = ${wu.toFixed(1)} kN/m`;
     if (leqDisplay) leqDisplay.innerHTML = `L = ${L.toFixed(2)} m`;
 
-    if (lInput) lInput.value = L.toFixed(2);
+    if (lInput) {
+      if (L > parseFloat(lInput.max)) lInput.max = Math.ceil(L + 1);
+      lInput.value = L.toFixed(2);
+    }
+    const lNum = document.getElementById('sim41-L-num');
+    if (lNum && document.activeElement !== lNum) lNum.value = L.toFixed(2);
+
     const wuInput = document.getElementById('sim41-wu');
-    if (wuInput) wuInput.value = Math.min(260.0, Math.max(8.0, wu)).toFixed(2);
+    if (wuInput) {
+      const wuVal = Math.min(1000.0, Math.max(1.0, wu));
+      if (wuVal > parseFloat(wuInput.max)) wuInput.max = Math.ceil(wuVal + 10);
+      wuInput.value = wuVal.toFixed(2);
+    }
+    const wuNum = document.getElementById('sim41-wu-num');
+    if (wuNum && document.activeElement !== wuNum) wuNum.value = wu.toFixed(2);
+
     const valLEl = document.getElementById('val-sim41-L');
     if (valLEl) valLEl.textContent = `${L.toFixed(2)} m`;
     const valWuEl = document.getElementById('val-sim41-wu');
     if (valWuEl) valWuEl.textContent = `${wu.toFixed(1)} kN/m`;
   } else {
-    L  = parseFloat(lInput.value);                                      // m (luz entre ejes)
-    wu = parseFloat(document.getElementById('sim41-wu').value);         // kN/m (carga mayorada)
+    const lNum = document.getElementById('sim41-L-num');
+    if (document.activeElement === lNum && lNum && lNum.value !== '') {
+      L = parseFloat(lNum.value) || 0.0;
+      if (lInput) {
+        if (L > parseFloat(lInput.max)) lInput.max = Math.ceil(L + 1);
+        lInput.value = L;
+      }
+    } else if (lInput) {
+      L = parseFloat(lInput.value);
+      if (lNum && document.activeElement !== lNum) lNum.value = L.toFixed(2);
+    }
+
+    const wuInput = document.getElementById('sim41-wu');
+    const wuNum   = document.getElementById('sim41-wu-num');
+    if (document.activeElement === wuNum && wuNum && wuNum.value !== '') {
+      wu = parseFloat(wuNum.value) || 0.0;
+      if (wuInput) {
+        if (wu > parseFloat(wuInput.max)) wuInput.max = Math.ceil(wu + 10);
+        wuInput.value = wu;
+      }
+    } else if (wuInput) {
+      wu = parseFloat(wuInput.value);
+      if (wuNum && document.activeElement !== wuNum) wuNum.value = wu.toFixed(2);
+    }
+
     VuEje = (wu * L) / 2.0;
 
-    document.getElementById('val-sim41-L').textContent  = `${L.toFixed(2)} m`;
-    document.getElementById('val-sim41-wu').textContent = `${wu.toFixed(1)} kN/m`;
+    const valLEl = document.getElementById('val-sim41-L');
+    if (valLEl) valLEl.textContent = `${L.toFixed(2)} m`;
+    const valWuEl = document.getElementById('val-sim41-wu');
+    if (valWuEl) valWuEl.textContent = `${wu.toFixed(1)} kN/m`;
 
     const vDirInput = document.getElementById('sim41-vdirect');
+    const vDirNum   = document.getElementById('sim41-vdirect-num');
     const lv0Input  = document.getElementById('sim41-lv0');
-    if (vDirInput) vDirInput.value = VuEje.toFixed(1);
-    if (lv0Input)  lv0Input.value  = (L / 2.0).toFixed(2);
+    const lv0Num    = document.getElementById('sim41-lv0-num');
+
+    if (vDirInput) {
+      if (VuEje > parseFloat(vDirInput.max)) vDirInput.max = Math.ceil(VuEje + 50);
+      vDirInput.value = VuEje.toFixed(1);
+    }
+    if (vDirNum && document.activeElement !== vDirNum) vDirNum.value = VuEje.toFixed(1);
+
+    if (lv0Input) {
+      const halfL = L / 2.0;
+      if (halfL > parseFloat(lv0Input.max)) lv0Input.max = Math.ceil(halfL + 1);
+      lv0Input.value = halfL.toFixed(2);
+    }
+    if (lv0Num && document.activeElement !== lv0Num) lv0Num.value = (L / 2.0).toFixed(2);
+
     const valVdir = document.getElementById('val-sim41-vdirect');
     if (valVdir) valVdir.textContent = `${VuEje.toFixed(1)} kN`;
     const valLv0  = document.getElementById('val-sim41-lv0');
@@ -231,12 +434,38 @@ function updateSim41() {
   const critAtD = document.getElementById('sim41-crit').value === 'd';          // true: a 'd' de cara; false: en cara
 
   const sColInput   = document.getElementById('sim41-scol');
+  const sColNum     = document.getElementById('sim41-scol-num');
   const sColZ3Input = document.getElementById('sim41-scol-z3');
+  const sColZ3Num   = document.getElementById('sim41-scol-z3-num');
   const sColZ2Input = document.getElementById('sim41-scol-z2');
+  const sColZ2Num   = document.getElementById('sim41-scol-z2-num');
 
-  const sColUniformCm = sColInput ? parseFloat(sColInput.value) : 12.0;
-  const sColZ3Cm      = sColZ3Input ? parseFloat(sColZ3Input.value) : 12.0;
-  const sColZ2Cm      = sColZ2Input ? parseFloat(sColZ2Input.value) : 20.0;
+  let sColUniformCm = 12.0;
+  if (document.activeElement === sColNum && sColNum && sColNum.value !== '') {
+    sColUniformCm = parseFloat(sColNum.value) || 0.0;
+    if (sColInput) sColInput.value = sColUniformCm;
+  } else if (sColInput) {
+    sColUniformCm = parseFloat(sColInput.value);
+    if (sColNum && document.activeElement !== sColNum) sColNum.value = sColUniformCm.toFixed(1);
+  }
+
+  let sColZ3Cm = 12.0;
+  if (document.activeElement === sColZ3Num && sColZ3Num && sColZ3Num.value !== '') {
+    sColZ3Cm = parseFloat(sColZ3Num.value) || 0.0;
+    if (sColZ3Input) sColZ3Input.value = sColZ3Cm;
+  } else if (sColZ3Input) {
+    sColZ3Cm = parseFloat(sColZ3Input.value);
+    if (sColZ3Num && document.activeElement !== sColZ3Num) sColZ3Num.value = sColZ3Cm.toFixed(1);
+  }
+
+  let sColZ2Cm = 20.0;
+  if (document.activeElement === sColZ2Num && sColZ2Num && sColZ2Num.value !== '') {
+    sColZ2Cm = parseFloat(sColZ2Num.value) || 0.0;
+    if (sColZ2Input) sColZ2Input.value = sColZ2Cm;
+  } else if (sColZ2Input) {
+    sColZ2Cm = parseFloat(sColZ2Input.value);
+    if (sColZ2Num && document.activeElement !== sColZ2Num) sColZ2Num.value = sColZ2Cm.toFixed(1);
+  }
 
   const sColCm = isZonedRev ? sColZ3Cm : sColUniformCm;
 
@@ -1045,13 +1274,22 @@ function drawSim41Canvas(state) {
 }
 
 function loadSim41Preset(presetKey) {
-  const sColEl   = document.getElementById('sim41-scol');
-  const sColZ3El = document.getElementById('sim41-scol-z3');
-  const sColZ2El = document.getElementById('sim41-scol-z2');
+  setSim41LoadMode('wu');
+  const sColEl      = document.getElementById('sim41-scol');
+  const sColZ3El    = document.getElementById('sim41-scol-z3');
+  const sColZ2El    = document.getElementById('sim41-scol-z2');
+  const sColNumEl   = document.getElementById('sim41-scol-num');
+  const sColZ3NumEl = document.getElementById('sim41-scol-z3-num');
+  const sColZ2NumEl = document.getElementById('sim41-scol-z2-num');
+  const lNumEl      = document.getElementById('sim41-L-num');
+  const wuNumEl     = document.getElementById('sim41-wu-num');
+
   if (presetKey === 'ej41_clasico') {
     document.getElementById('sim41-L').value = 6.13;
+    if (lNumEl) lNumEl.value = 6.13;
     document.getElementById('sim41-c').value = 0.25;
     document.getElementById('sim41-wu').value = 52.85;
+    if (wuNumEl) wuNumEl.value = 52.85;
     document.getElementById('sim41-nu').value = 0;
     document.getElementById('sim41-bw').value = 30;
     document.getElementById('sim41-h').value = 50;
@@ -1062,13 +1300,18 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl)   sColEl.value   = 12.0;
-    if (sColZ3El) sColZ3El.value = 12.0;
-    if (sColZ2El) sColZ2El.value = 20.0;
+    if (sColEl)      sColEl.value      = 12.0;
+    if (sColNumEl)   sColNumEl.value   = 12.0;
+    if (sColZ3El)    sColZ3El.value    = 12.0;
+    if (sColZ3NumEl) sColZ3NumEl.value = 12.0;
+    if (sColZ2El)    sColZ2El.value    = 20.0;
+    if (sColZ2NumEl) sColZ2NumEl.value = 20.0;
   } else if (presetKey === 'ej42_vigueta' || presetKey === 'ej42_vigaB') {
     document.getElementById('sim41-L').value = 5.78;
+    if (lNumEl) lNumEl.value = 5.78;
     document.getElementById('sim41-c').value = 0.35;
     document.getElementById('sim41-wu').value = 94.7;
+    if (wuNumEl) wuNumEl.value = 94.7;
     document.getElementById('sim41-nu').value = 0;
     document.getElementById('sim41-bw').value = 40;
     document.getElementById('sim41-h').value = 40;
@@ -1079,13 +1322,18 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '2';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl)   sColEl.value   = 11.5;
-    if (sColZ3El) sColZ3El.value = 11.5;
-    if (sColZ2El) sColZ2El.value = 17.0;
+    if (sColEl)      sColEl.value      = 11.5;
+    if (sColNumEl)   sColNumEl.value   = 11.5;
+    if (sColZ3El)    sColZ3El.value    = 11.5;
+    if (sColZ3NumEl) sColZ3NumEl.value = 11.5;
+    if (sColZ2El)    sColZ2El.value    = 17.0;
+    if (sColZ2NumEl) sColZ2NumEl.value = 17.0;
   } else if (presetKey === 'alta_demanda') {
     document.getElementById('sim41-L').value = 7.20;
+    if (lNumEl) lNumEl.value = 7.20;
     document.getElementById('sim41-c').value = 0.50;
     document.getElementById('sim41-wu').value = 185.0;
+    if (wuNumEl) wuNumEl.value = 185.0;
     document.getElementById('sim41-nu').value = 0;
     document.getElementById('sim41-bw').value = 40;
     document.getElementById('sim41-h').value = 65;
@@ -1096,14 +1344,19 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '3';
     document.getElementById('sim41-legs').value = '4';
     document.getElementById('sim41-crit').value = 'd';
-    if (sColEl)   sColEl.value   = 11.0;
-    if (sColZ3El) sColZ3El.value = 11.0;
-    if (sColZ2El) sColZ2El.value = 25.0;
+    if (sColEl)      sColEl.value      = 11.0;
+    if (sColNumEl)   sColNumEl.value   = 11.0;
+    if (sColZ3El)    sColZ3El.value    = 11.0;
+    if (sColZ3NumEl) sColZ3NumEl.value = 11.0;
+    if (sColZ2El)    sColZ2El.value    = 25.0;
+    if (sColZ2NumEl) sColZ2NumEl.value = 25.0;
   } else if (presetKey === 'zona4_aplastamiento') {
     // Caso demostrativo de Zona 4: Vs > Vs,máx (0.66 sqrt(f'c) bw d)
     document.getElementById('sim41-L').value = 6.60;
+    if (lNumEl) lNumEl.value = 6.60;
     document.getElementById('sim41-c').value = 0.40;
     document.getElementById('sim41-wu').value = 215.0;
+    if (wuNumEl) wuNumEl.value = 215.0;
     document.getElementById('sim41-nu').value = 0;
     document.getElementById('sim41-bw').value = 25;
     document.getElementById('sim41-h').value = 45;
@@ -1114,9 +1367,12 @@ function loadSim41Preset(presetKey) {
     document.getElementById('sim41-bar').value = '4';
     document.getElementById('sim41-legs').value = '4';
     document.getElementById('sim41-crit').value = '0';
-    if (sColEl)   sColEl.value   = 7.0;
-    if (sColZ3El) sColZ3El.value = 7.0;
-    if (sColZ2El) sColZ2El.value = 15.0;
+    if (sColEl)      sColEl.value      = 7.0;
+    if (sColNumEl)   sColNumEl.value   = 7.0;
+    if (sColZ3El)    sColZ3El.value    = 7.0;
+    if (sColZ3NumEl) sColZ3NumEl.value = 7.0;
+    if (sColZ2El)    sColZ2El.value    = 15.0;
+    if (sColZ2NumEl) sColZ2NumEl.value = 15.0;
   }
   updateSim41();
 }

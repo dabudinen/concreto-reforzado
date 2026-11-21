@@ -1667,12 +1667,17 @@
                 </div>
 
                 <!-- Sub-control 1: Separación Uniforme s_col -->
+                <!-- Sub-control 1: Separación Uniforme s_col -->
                 <div id="sim41-rev-uniform-box">
                   <div class="control-label">
                     <span style="font-weight: 700; color: #065F46;">Separación Uniforme $s_{\text{col}}$ (Obra/Planos)</span>
-                    <span id="val-sim41-scol" class="control-value" style="color: #047857; font-weight: 800;">12.0 cm</span>
+                    <div class="sim-input-box-wrap sim41-num-wrap">
+                      <input id="sim41-scol-num" type="number" min="3.0" max="60.0" step="0.5" value="12.0" class="sim-num-input" style="color: #047857;" oninput="syncSim41Input('scol', 'num')" onchange="syncSim41Input('scol', 'num')" />
+                      <span class="sim-input-unit" style="color: #065F46;">cm</span>
+                    </div>
+                    <span id="val-sim41-scol" class="control-value sim41-text-badge" style="display: none; color: #047857; font-weight: 800;">12.0 cm</span>
                   </div>
-                  <input id="sim41-scol" type="range" min="5.0" max="40.0" step="0.5" value="12.0" oninput="updateSim41()" />
+                  <input id="sim41-scol" class="sim-slider sim41-input-slider" type="range" min="5.0" max="40.0" step="0.5" value="12.0" oninput="syncSim41Input('scol', 'slider')" />
                 </div>
 
                 <!-- Sub-control 2: Separación por Zonas (s_Zona3 y s_Zona2) -->
@@ -1680,16 +1685,24 @@
                   <div style="margin-bottom: 0.5rem;">
                     <div class="control-label">
                       <span style="font-weight: 700; color: #B45309;">🟡 Zona 3 ($s_{\text{col,3}}$ en $V_u > \phi V_c$)</span>
-                      <span id="val-sim41-scol-z3" class="control-value" style="color: #B45309; font-weight: 800;">12.0 cm</span>
+                      <div class="sim-input-box-wrap sim41-num-wrap">
+                        <input id="sim41-scol-z3-num" type="number" min="3.0" max="50.0" step="0.5" value="12.0" class="sim-num-input sim-num-input-amber" oninput="syncSim41Input('scol-z3', 'num')" onchange="syncSim41Input('scol-z3', 'num')" />
+                        <span class="sim-input-unit" style="color: #B45309;">cm</span>
+                      </div>
+                      <span id="val-sim41-scol-z3" class="control-value sim41-text-badge" style="display: none; color: #B45309; font-weight: 800;">12.0 cm</span>
                     </div>
-                    <input id="sim41-scol-z3" type="range" min="5.0" max="35.0" step="0.5" value="12.0" oninput="updateSim41()" />
+                    <input id="sim41-scol-z3" class="sim-slider sim41-input-slider" type="range" min="5.0" max="35.0" step="0.5" value="12.0" oninput="syncSim41Input('scol-z3', 'slider')" />
                   </div>
                   <div>
                     <div class="control-label">
                       <span style="font-weight: 700; color: #1D4ED8;">🔵 Zona 2 ($s_{\text{col,2}}$ en $0.5\phi V_c < V_u \le \phi V_c$)</span>
-                      <span id="val-sim41-scol-z2" class="control-value" style="color: #1D4ED8; font-weight: 800;">20.0 cm</span>
+                      <div class="sim-input-box-wrap sim41-num-wrap">
+                        <input id="sim41-scol-z2-num" type="number" min="3.0" max="60.0" step="0.5" value="20.0" class="sim-num-input" style="color: #1D4ED8;" oninput="syncSim41Input('scol-z2', 'num')" onchange="syncSim41Input('scol-z2', 'num')" />
+                        <span class="sim-input-unit" style="color: #1D4ED8;">cm</span>
+                      </div>
+                      <span id="val-sim41-scol-z2" class="control-value sim41-text-badge" style="display: none; color: #1D4ED8; font-weight: 800;">20.0 cm</span>
                     </div>
-                    <input id="sim41-scol-z2" type="range" min="5.0" max="40.0" step="0.5" value="20.0" oninput="updateSim41()" />
+                    <input id="sim41-scol-z2" class="sim-slider sim41-input-slider" type="range" min="5.0" max="40.0" step="0.5" value="20.0" oninput="syncSim41Input('scol-z2', 'slider')" />
                   </div>
                 </div>
               </div>
@@ -1704,13 +1717,30 @@
                     Carga w<sub>u</sub> y Luz L
                   </span>
                 </div>
-                <div class="sim-mode-toggle">
+                <div class="sim-mode-toggle" style="margin-bottom: 0.5rem;">
                   <button type="button" id="sim41-btn-load-wu" class="sim-mode-btn active" onclick="setSim41LoadMode('wu')">
                     <span>Distribución (<i>w</i><sub>u</sub>, <i>L</i>)</span>
                   </button>
                   <button type="button" id="sim41-btn-load-direct" class="sim-mode-btn" onclick="setSim41LoadMode('direct')">
                     <span>Directo (<i>V</i><sub>u,apoyo</sub>, <i>L</i><sub>V=0</sub>)</span>
                   </button>
+                </div>
+                <!-- OPCIONES DE INGRESO: SLIDER, INPUT BOX O AMBOS -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.45rem; border-top: 1px dashed rgba(2, 132, 199, 0.25);">
+                  <span style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted);">
+                    Formato de ingreso:
+                  </span>
+                  <div class="sim-mode-toggle" style="margin: 0; width: auto; gap: 0.25rem;">
+                    <button type="button" id="sim41-btn-input-both" class="sim-mode-btn active" onclick="setSim41InputWidget('both')" style="font-size: 0.70rem; padding: 0.2rem 0.5rem;" title="Mostrar deslizadores y cajas numéricas simultáneamente">
+                      🔀 Ambos
+                    </button>
+                    <button type="button" id="sim41-btn-input-box" class="sim-mode-btn" onclick="setSim41InputWidget('box')" style="font-size: 0.70rem; padding: 0.2rem 0.5rem;" title="Ingreso directo mediante cajas de texto numéricas">
+                      ⌨️ Cajas
+                    </button>
+                    <button type="button" id="sim41-btn-input-slider" class="sim-mode-btn" onclick="setSim41InputWidget('slider')" style="font-size: 0.70rem; padding: 0.2rem 0.5rem;" title="Ingreso mediante barras deslizantes">
+                      🎚️ Sliders
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -1719,17 +1749,25 @@
                 <div class="control-group">
                   <div class="control-label">
                     <span>Luz entre ejes $L$</span>
-                    <span id="val-sim41-L" class="control-value">6.13 m</span>
+                    <div class="sim-input-box-wrap sim41-num-wrap">
+                      <input id="sim41-L-num" type="number" min="0.50" max="30.00" step="0.01" value="6.13" class="sim-num-input" oninput="syncSim41Input('L', 'num')" onchange="syncSim41Input('L', 'num')" />
+                      <span class="sim-input-unit">m</span>
+                    </div>
+                    <span id="val-sim41-L" class="control-value sim41-text-badge" style="display: none;">6.13 m</span>
                   </div>
-                  <input id="sim41-L" type="range" min="3.00" max="10.00" step="0.01" value="6.13" oninput="updateSim41()" />
+                  <input id="sim41-L" class="sim-slider sim41-input-slider" type="range" min="3.00" max="10.00" step="0.01" value="6.13" oninput="syncSim41Input('L', 'slider')" />
                 </div>
 
                 <div class="control-group">
                   <div class="control-label">
                     <span>Carga mayorada $w_u$</span>
-                    <span id="val-sim41-wu" class="control-value">52.9 kN/m</span>
+                    <div class="sim-input-box-wrap sim41-num-wrap">
+                      <input id="sim41-wu-num" type="number" min="1.0" max="1000.0" step="0.05" value="52.85" class="sim-num-input" oninput="syncSim41Input('wu', 'num')" onchange="syncSim41Input('wu', 'num')" />
+                      <span class="sim-input-unit">kN/m</span>
+                    </div>
+                    <span id="val-sim41-wu" class="control-value sim41-text-badge" style="display: none;">52.9 kN/m</span>
                   </div>
-                  <input id="sim41-wu" type="range" min="8.0" max="260.0" step="0.05" value="52.85" oninput="updateSim41()" />
+                  <input id="sim41-wu" class="sim-slider sim41-input-slider" type="range" min="8.0" max="260.0" step="0.05" value="52.85" oninput="syncSim41Input('wu', 'slider')" />
                 </div>
               </div>
 
@@ -1737,17 +1775,25 @@
               <div id="sim41-load-direct-group" style="display: none; background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 8px; padding: 0.65rem 0.75rem; margin-bottom: 0.75rem;">
                 <div class="control-group" style="margin-bottom: 0.5rem;">
                   <div class="control-label">
-                    <span style="font-weight: 700; color: #92400E;">Cortante en el Apoyo ($V_{u,	ext{apoyo}}$)</span>
-                    <span id="val-sim41-vdirect" class="control-value" style="color: #B45309; font-weight: 800;">162.0 kN</span>
+                    <span style="font-weight: 700; color: #92400E;">Cortante en el Apoyo ($V_{u,\text{apoyo}}$)</span>
+                    <div class="sim-input-box-wrap sim41-num-wrap">
+                      <input id="sim41-vdirect-num" type="number" min="5.0" max="2500.0" step="1.0" value="162.0" class="sim-num-input sim-num-input-amber" oninput="syncSim41Input('vdirect', 'num')" onchange="syncSim41Input('vdirect', 'num')" />
+                      <span class="sim-input-unit" style="color: #92400E;">kN</span>
+                    </div>
+                    <span id="val-sim41-vdirect" class="control-value sim41-text-badge" style="display: none; color: #B45309; font-weight: 800;">162.0 kN</span>
                   </div>
-                  <input id="sim41-vdirect" type="range" min="20.0" max="600.0" step="1.0" value="162.0" oninput="updateSim41()" />
+                  <input id="sim41-vdirect" class="sim-slider sim41-input-slider" type="range" min="20.0" max="600.0" step="1.0" value="162.0" oninput="syncSim41Input('vdirect', 'slider')" />
                 </div>
                 <div class="control-group">
                   <div class="control-label">
                     <span style="font-weight: 700; color: #92400E;">Distancia a Cortante Nulo ($L_{V=0}$)</span>
-                    <span id="val-sim41-lv0" class="control-value" style="color: #B45309; font-weight: 800;">3.07 m</span>
+                    <div class="sim-input-box-wrap sim41-num-wrap">
+                      <input id="sim41-lv0-num" type="number" min="0.20" max="15.00" step="0.01" value="3.07" class="sim-num-input sim-num-input-amber" oninput="syncSim41Input('lv0', 'num')" onchange="syncSim41Input('lv0', 'num')" />
+                      <span class="sim-input-unit" style="color: #92400E;">m</span>
+                    </div>
+                    <span id="val-sim41-lv0" class="control-value sim41-text-badge" style="display: none; color: #B45309; font-weight: 800;">3.07 m</span>
                   </div>
-                  <input id="sim41-lv0" type="range" min="1.00" max="6.00" step="0.05" value="3.07" oninput="updateSim41()" />
+                  <input id="sim41-lv0" class="sim-slider sim41-input-slider" type="range" min="1.00" max="6.00" step="0.05" value="3.07" oninput="syncSim41Input('lv0', 'slider')" />
                 </div>
                 <div style="font-size: 0.75rem; color: #78350F; margin-top: 0.35rem; line-height: 1.35;">
                   💡 <em>Pendiente equivalente:</em> <strong id="sim41-weq-display">w<sub>eq</sub> = 52.8 kN/m</strong> | <em>Luz simétrica:</em> <strong id="sim41-leq-display">L = 6.13 m</strong>

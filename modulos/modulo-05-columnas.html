@@ -81,6 +81,7 @@
           <li><a href="#sec-tipologia-detallamiento" class="toc-link"><span class="toc-num">1.0</span> <span>1. Definición, Tipología y Cuantías</span></a></li>
           <li><a href="#sec-compresion-axial" class="toc-link"><span class="toc-num">2.0</span> <span>2. Compresión Axial y P<sub>n,máx</sub></span></a></li>
           <li><a href="#sec-diagrama-interaccion" class="toc-link"><span class="toc-num">3.0</span> <span>3. Diagrama de Interacción (8 Puntos)</span></a></li>
+          <li style="padding-left: 1rem;"><a href="#sec-procedimiento-envolvente" class="toc-link" style="font-size: 0.82rem;"><span class="toc-num">3.2</span> <span>Paso a Paso Envolvente P-M</span></a></li>
           <li><a href="#sec-biaxial-bresler" class="toc-link"><span class="toc-num">4.0</span> <span>4. Flexocompresión Biaxial (Bresler/PCA)</span></a></li>
           <li><a href="#sec-columnas-esbeltas" class="toc-link"><span class="toc-num">5.0</span> <span>5. Columnas Esbeltas y Segundo Orden</span></a></li>
           <li><a href="#sec-requisitos-sismicos" class="toc-link"><span class="toc-num">6.0</span> <span>6. Requisitos Sísmicos (DMO / DES)</span></a></li>
@@ -1575,6 +1576,113 @@
               $$c_3 = \frac{600\,A_s\,d}{0.85\,f'_c(b\,h - A'_s - A_s) + A'_s f_y + 600\,A_s - P_{n,\max}}$$
             </div>
             <div><strong>Paso 4 — Momento y excentricidad mínima:</strong> Con el $c_3$ verificado se calcula $M_{n3} = M_n(c_3)$ y $e_{\min} = M_{n3} / P_{n,\max}$. En columnas con <strong>capas intermedias</strong> ($n > 2$ capas de barras), como $P_n(c)$ es estrictamente creciente con $c$, se halla $c_3$ por <strong>bisección</strong> en el intervalo $[c_b,\; 2.5h]$ hasta lograr $|P_n(c_3) - P_{n,\max}| < 0.01\text{ kN}$ (método usado en el Simulador 5.1).</div>
+          </div>
+        </div>
+
+        <!-- PROCEDIMIENTO EXPLÍCITO DE CÁLCULO DE c7 (PUNTO 7 - FLEXIÓN PURA) -->
+        <div class="math-card normative-emerald" style="margin-top: 1.05rem;">
+          <div class="math-card-header">
+            <span class="math-card-title">¿Cómo se determina explícitamente el eje neutro $c_7$ del Punto 7 (Flexión Pura, $P_n = 0$)?</span>
+            <span class="norm-pill">Solución Cerrada (Cuadrática / Lineal)</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 0.65rem;">
+            El <strong>Punto 7</strong> corresponde al corte de la envolvente con el eje horizontal ($P_n = 0$), donde la columna trabaja como viga doblemente reforzada: el acero inferior en tracción fluye ($f_s = f_y \implies T_s = A_s f_y$, con $U_2 = 0$), mientras que el acero superior $A'_s$ suele permanecer en <strong>rango elástico</strong> con $f'_s = 600\,\dfrac{c_7 - d'}{c_7}$ (en $\text{MPa}$, positivo si $c_7 > d'$ y negativo si $c_7 < d'$).
+          </p>
+
+          <div class="math-formula">
+            $$\begin{aligned}
+            &\textbf{Caso A (habitual, } |f'_s| < f_y \text{ elástico):}\quad 0.85\,f'_c\,b\,(\beta_1 c_7) + A'_s\!\left(600\,\frac{c_7 - d'}{c_7}\right) - U_1 - A_s f_y = 0 \\[4pt]
+            &\text{Multiplicando por } c_7:\quad A\,c_7^2 + B\,c_7 - C = 0 \implies \mathbf{c_7 = \frac{-B + \sqrt{B^2 + 4\,A\,C}}{2\,A}} \\[4pt]
+            &A = 0.85\,f'_c\,b\,\beta_1, \qquad B = 600\,A'_s - U_1 - A_s f_y, \qquad C = 600\,A'_s\,d' \quad \big(U_1 = 0 \text{ si } \beta_1 c_7 < d'\big) \\[7pt]
+            &\textbf{Caso B (si } f'_s \ge f_y \text{ fluye en compresión):}\quad a_7 = \frac{(A_s - A'_s)\,f_y + U_1}{0.85\,f'_c\,b}, \qquad c_7 = \frac{a_7}{\beta_1} \\[7pt]
+            &\textbf{Momento Puro (}\phi_7 = 0.90\textbf{):}\quad \mathbf{M_{n7} = M_{n0} = 0.85\,f'_c\,b\,a_7\!\left(d - \frac{a_7}{2}\right) + (A'_s f'_s - U_1)(d - d')}, \qquad \phi M_{n7} = 0.90\,M_{n7}
+            \end{aligned}$$
+          </div>
+          <div class="math-vars" style="margin-top: 0.55rem;">
+            <div><strong>Verificación obligatoria:</strong> Se inicia suponiendo $U_1 = 0$ (si $\beta_1 c_7 < d'$). Si resulta $\beta_1 c_7 \ge d'$, se activa $U_1 = 0.85 f'_c A'_s$ en $B$ y se recalcula $c_7$. Si $f'_s > f_y$, aplica el Caso B lineal. Con capas intermedias ($n > 2$), se resuelve $P_n(c_7) = 0$ por bisección en $[0.05\,d,\; c_6]$.</div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SUBSECCIÓN 3.2: GUÍA MAESTRA PASO A PASO PARA CONSTRUIR TODA LA ENVOLVENTE P-M
+             =================================================================== -->
+        <div id="sec-procedimiento-envolvente" style="margin-top: 1.85rem;">
+          <div class="section-header" style="margin-bottom: 0.95rem;">
+            <div class="section-tag-row">
+              <span class="section-num-badge">3.2</span>
+              <span class="norm-pill">Receta Completa NSR-10 C.10.2, C.10.3 y C.9.3.2</span>
+            </div>
+            <h3 class="section-title" style="font-size: 1.24rem;">3.2 Guía Paso a Paso para Desarrollar Toda la Envolvente Carga Axial–Momento ($P_n\text{-}M_n$ y $\phi P_n\text{-}\phi M_n$)</h3>
+            <p class="section-lead" style="font-size: 0.92rem;">
+              Construir la envolvente completa de una columna consiste simplemente en <strong>variar la profundidad del eje neutro $c$ desde $\infty$ (compresión pura) hasta $0$ (tracción pura)</strong>, aplicando en cada valor de $c$ la misma rutina de compatibilidad y equilibrio interno. Siga esta secuencia de <strong>6 pasos</strong> para trazar a mano, en Excel o en código ambas curvas sin omitir ningún tramo:
+            </p>
+          </div>
+
+          <div class="cards-grid-2">
+            <!-- PASO 0 -->
+            <div class="math-card">
+              <div class="math-card-header">
+                <span class="math-card-title">Paso 0: Datos, Parámetros NSR-10 ($\beta_1, \varepsilon_y, \alpha, \phi_{\text{comp}}$) y $x_{cp}$</span>
+                <span class="norm-pill">Preparación</span>
+              </div>
+              <ol style="padding-left: 1.15rem; font-size: 0.85rem; line-height: 1.58; color: var(--text-body); margin: 0 0 0.55rem 0;">
+                <li>Definir geometría ($b, h, d', d$), áreas de acero ($A'_s, A_s, A_{st} = \sum A_{si}$) y materiales ($f'_c, f_y, E_s = 200\,000\text{ MPa}$).</li>
+                <li>Calcular $\varepsilon_y = f_y / E_s$ ($0.0021$ para $420\text{ MPa}$) y el factor de bloque $\beta_1$ (<code>C.10.2.7.3</code>):
+                  $$\beta_1 = \begin{cases} 0.85 & f'_c \le 28\text{ MPa} \\ \max\!\left(0.65,\; 0.85 - 0.05\,\dfrac{f'_c - 28}{7}\right) & f'_c > 28\text{ MPa} \end{cases}$$
+                </li>
+                <li>Fijar factores según refuerzo transversal: <strong>Estribos</strong> ($\phi_{\text{comp}} = 0.65$, $\alpha = 0.80$ ó $0.75$) o <strong>Espiral</strong> ($\phi_{\text{comp}} = 0.75$, $\alpha = 0.85$ ó $0.80$).</li>
+                <li>Hallar el <strong>Centroide Plástico ($x_{cp}$)</strong>: $x_{cp} = h/2$ si la armadura es simétrica; si es asimétrica, usar la ecuación de equilibrio plástico de la Sección 3.0.</li>
+              </ol>
+            </div>
+
+            <!-- PASO 1 -->
+            <div class="math-card normative-amber">
+              <div class="math-card-header">
+                <span class="math-card-title">Paso 1: Rutina Universal para Evaluar Cualquier $c$ ($0 < c < \infty$)</span>
+                <span class="norm-pill">Motor de Cálculo</span>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--text-body); margin: 0 0 0.45rem 0;">
+                Para <strong>cualquier</strong> valor de eje neutro $c$ (sea un punto notable o un punto intermedio para suavizar la curva), ejecute siempre estos 6 cálculos en orden:
+              </p>
+              <ol style="padding-left: 1.15rem; font-size: 0.84rem; line-height: 1.56; color: var(--text-body); margin: 0;">
+                <li><strong>Bloque de concreto:</strong> $a = \min(\beta_1 c,\; h)$ y $C_c = 0.85\,f'_c\,b\,a$.</li>
+                <li><strong>Deformaciones ($\varepsilon_{cu}=0.003$):</strong> $\varepsilon'_s = 0.003\frac{c - d'}{c}$ (+ comp.) y $\varepsilon_t = 0.003\frac{d - c}{c}$ (+ trac.).</li>
+                <li><strong>Esfuerzos acotados:</strong> $f'_s = \text{clamp}(E_s\varepsilon'_s, -f_y, f_y)$ y $f_s = \text{clamp}(E_s\varepsilon_t, -f_y, f_y)$.</li>
+                <li><strong>Orificios activos:</strong> $U_1 = 0.85 f'_c A'_s$ si $a \ge d'$ (sino $0$); $U_2 = 0.85 f'_c A_s$ si $a \ge d$ (sino $0$).</li>
+                <li><strong>Equilibrio respecto a $x_{cp}$:</strong> $P_n = C_c + (A'_s f'_s - U_1) - (A_s f_s + U_2)$ y $M_n = C_c(x_{cp} - a/2) + (A'_s f'_s - U_1)(x_{cp} - d') + (A_s f_s + U_2)(d - x_{cp})$.</li>
+                <li><strong>Factor $\phi(\varepsilon_t)$ y pareja de diseño:</strong> $\phi = \phi_{\text{comp}}$ si $\varepsilon_t \le \varepsilon_y$; $\phi = \phi_{\text{comp}} + (0.90 - \phi_{\text{comp}})\frac{\varepsilon_t - \varepsilon_y}{0.005 - \varepsilon_y}$ si $\varepsilon_y < \varepsilon_t < 0.005$; $\phi = 0.90$ si $\varepsilon_t \ge 0.005$. Obtener $(\phi M_n,\; \phi P_n)$ con tope $\phi P_n \le \phi_{\text{comp}} P_{n,\max}$.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="cards-grid-2" style="margin-top: 1rem;">
+            <!-- PASOS 2 Y 3 -->
+            <div class="math-card">
+              <div class="math-card-header">
+                <span class="math-card-title">Pasos 2 y 3: Tramo Superior (Ptos. 1–3) y Zona Balanceada/Transición (Ptos. 4–6)</span>
+                <span class="norm-pill">Barrido $c: \infty \to c_6$</span>
+              </div>
+              <ul style="padding-left: 1.15rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-body); margin: 0;">
+                <li><strong>Paso 2 — Compresión Pura y Meseta (Puntos 1, 2 y 3):</strong>
+                  Calcule $P_0 = 0.85 f'_c(A_g - A_{st}) + f_y A_{st}$ (Punto 1: $(0, P_0)$ nominal) y trunque en $P_{n,\max} = \alpha P_0$ (Punto 2: $(0, \phi_{\text{comp}} P_{n,\max})$). Luego resuelva la cuadrática de $c_3$ (tal que $P_n(c_3) = P_{n,\max}$) y evalúe el <strong>Paso 1</strong> en $c_3$ para obtener $(\phi M_{n3}, \phi P_{n,\max})$. El segmento recto horizontal entre Punto 2 y Punto 3 forma la <strong>meseta superior</strong> de la envolvente de diseño.</li>
+                <li><strong>Paso 3 — Falla Balanceada y Transición (Puntos 4, 5 y 6 + Suavizado):</strong>
+                  Evalúe el <strong>Paso 1</strong> sucesivamente en: <strong>Punto 4</strong> ($c_b = \frac{600}{600+f_y}d$), <strong>Punto 5</strong> ($c_5 = \frac{3}{7}d$) y <strong>Punto 6</strong> ($c_6 = \frac{3}{8}d$). <em>Consejo práctico:</em> para obtener una curva suave entre la meseta y el punto balanceado, evalúe 1 ó 2 ejes neutros intermedios adicionales (p. ej. $c \approx 0.75\,d$ y $c \approx 0.90\,d$). Observe que entre el Punto 4 y el Punto 6 el factor $\phi$ sube de $0.65 \to 0.90$, lo que produce la característica <strong>"nariz o ensanchamiento"</strong> de la curva de diseño $\phi P_n\text{-}\phi M_n$.</li>
+              </ul>
+            </div>
+
+            <!-- PASOS 4 Y 5 -->
+            <div class="math-card normative-emerald">
+              <div class="math-card-header">
+                <span class="math-card-title">Pasos 4 y 5: Cierre en Tracción (Ptos. 7–8), Trazado de Envolventes y Verificación</span>
+                <span class="norm-pill">Barrido $c: c_6 \to 0$ y Uso</span>
+              </div>
+              <ul style="padding-left: 1.15rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-body); margin: 0;">
+                <li><strong>Paso 4 — Flexión Pura y Tracción Pura (Puntos 7 y 8):</strong>
+                  Resuelva $c_7$ (cuadrática/lineal de $P_n = 0$) para obtener el corte con el eje horizontal $(M_{n0}, 0)$ y $(0.90 M_{n0}, 0)$ (<strong>Punto 7</strong>). Cierre el diagrama en $c = 0$ con <strong>Punto 8</strong>: $(0,\; -A_{st}f_y)$ nominal y $(0,\; -0.90 A_{st}f_y)$ de diseño. (Opcional: añada un punto intermedio en tracción con $c \approx 0.5\,c_7$).</li>
+                <li><strong>Paso 5 — Trazado Final y Comprobación de $(M_u, P_u)$:</strong>
+                  Grafique momento $M$ en abscisas y carga axial $P$ en ordenadas, uniendo los puntos en orden estricto de $c$ decreciente: <strong>Curva Nominal</strong> ($1 \to 3 \to 4 \to 5 \to 6 \to 7 \to 8$) y <strong>Envolvente de Diseño</strong> ($2 \to 3 \to 4 \to 5 \to 6 \to 7 \to 8$). En columnas <strong>simétricas</strong>, la rama negativa ($-M$) es espejo exacto de $+M$; en columnas <strong>asimétricas</strong>, repita los Pasos 1–4 invirtiendo la cara comprimida ($A'_s \leftrightarrow A_s$ y $d' \leftrightarrow h - d$). Toda combinación solicitante $(M_u, P_u)$ dentro de la zona sombreada <strong>CUMPLE</strong> ($\text{D/C} \le 1.00$).</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -3304,10 +3412,16 @@
                       </div>
                       <div class="math-formula">
                         $$\begin{aligned}
-                        \textbf{Pto. 5 (}\varepsilon_t=0.004,\; \phi=0.814\textbf{):}\quad c_5 &= \frac{3}{7}(387.8) = \mathbf{166.2\text{ mm}},\quad a_5 = 0.85(166.2) = 141.3\text{ mm} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
-                        f'_s &= 600\frac{166.2 - 62.2}{166.2} = \mathbf{375.5\text{ MPa}},\quad C_{c5} = 1344.9\text{ kN} \implies P_{n5} = \mathbf{1240.3\text{ kN}},\; \phi M_{n5} = \mathbf{325.4\text{ kN}\cdot\text{m}} \\[7pt]
-                        \textbf{Pto. 6 (}\varepsilon_t=0.005,\; \phi=0.900\textbf{):}\quad c_6 &= \frac{3}{8}(387.8) = \mathbf{145.4\text{ mm}},\quad a_6 = 0.85(145.4) = 123.6\text{ mm} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
-                        f'_s &= 600\frac{145.4 - 62.2}{145.4} = \mathbf{343.4\text{ MPa}},\quad C_{c6} = 1176.8\text{ kN} \implies P_{n6} = \mathbf{1023.1\text{ kN}},\; \phi M_{n6} = \mathbf{338.6\text{ kN}\cdot\text{m}} \\[7pt]
+                        \textbf{Pto. 5 (}\varepsilon_t=0.004,\; \phi=0.8138\textbf{):}\quad c_5 &= \frac{3}{7}(387.8) = \mathbf{166.2\text{ mm}},\quad a_5 = 0.85(166.2) = \mathbf{141.3\text{ mm}} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
+                        f'_s &= 600\frac{166.2 - 62.2}{166.2} = \mathbf{375.5\text{ MPa}},\quad C_{c5} = 0.85(28)(400)(141.3) = \mathbf{1344.9\text{ kN}} \\[3pt]
+                        F'_{s5} - U_1 &= 1530(375.5)\times 10^{-3} - 36.4 = 574.4 - 36.4 = \mathbf{538.0\text{ kN}},\quad T_s = 1530(420)\times 10^{-3} = \mathbf{642.6\text{ kN}} \\[3pt]
+                        P_{n5} &= 1344.9 + 538.0 - 642.6 = \mathbf{1240.3\text{ kN}} \implies \mathbf{\phi P_{n5} = 0.8138(1240.3) = 1009.4\text{ kN}} \\[3pt]
+                        M_{n5} &= 1344.9\!\left(225 - \frac{141.3}{2}\right) + 538.0(162.8) + 642.6(162.8) = \mathbf{399.8\text{ kN}\cdot\text{m}} \implies \mathbf{\phi M_{n5} = 325.4\text{ kN}\cdot\text{m}} \\[8pt]
+                        \textbf{Pto. 6 (}\varepsilon_t=0.005,\; \phi=0.900\textbf{):}\quad c_6 &= \frac{3}{8}(387.8) = \mathbf{145.4\text{ mm}},\quad a_6 = 0.85(145.4) = \mathbf{123.6\text{ mm}} > d'\;(U_1 = 36.4\text{ kN}) \\[3pt]
+                        f'_s &= 600\frac{145.4 - 62.2}{145.4} = \mathbf{343.4\text{ MPa}},\quad C_{c6} = 0.85(28)(400)(123.6) = \mathbf{1176.8\text{ kN}} \\[3pt]
+                        F'_{s6} - U_1 &= 1530(343.4)\times 10^{-3} - 36.4 = 525.4 - 36.4 = \mathbf{488.9\text{ kN}},\quad T_s = \mathbf{642.6\text{ kN}} \\[3pt]
+                        P_{n6} &= 1176.8 + 488.9 - 642.6 = \mathbf{1023.1\text{ kN}} \implies \mathbf{\phi P_{n6} = 0.90(1023.1) = 920.8\text{ kN}} \\[3pt]
+                        M_{n6} &= 1176.8\!\left(225 - \frac{123.6}{2}\right) + 488.9(162.8) + 642.6(162.8) = \mathbf{376.3\text{ kN}\cdot\text{m}} \implies \mathbf{\phi M_{n6} = 338.6\text{ kN}\cdot\text{m}} \\[8pt]
                         \textbf{Pto. 7 (Flexión Pura, }P_n=0\textbf{):}\quad &\text{Con } A_s \text{ en fluencia }(T_s = 642.6\text{ kN}),\; A'_s \text{ elástico }\!\left(f'_s = 600\frac{c_7 - 62.2}{c_7}\right)\text{ y } U_1 = 0\text{ (si }a_7 < d'\text{):} \\[3pt]
                         &0.85(28)(400)(0.85\,c_7) + 1530\!\left(600\,\frac{c_7 - 62.2}{c_7}\right) - 642\,600 = 0 \\[3pt]
                         &\underbrace{8092}_{A}\,c_7^2 + \underbrace{(918\,000 - 642\,600)}_{B = +275\,400}\,c_7 - \underbrace{57\,099\,600}_{C} = 0 \\[3pt]
@@ -3395,6 +3509,124 @@
                         F_s\;(3\text{ No. }8) &= 1530(420 - 0.85\times 28) = \mathbf{606.2\text{ kN}}\;\;(d = 389.5\text{ mm}) \\[6pt]
                         \mathbf{x_{cp}} &= \frac{4284.0(225.0) + 225.8(60.5) + 606.2(389.5)}{4284.0 + 225.8 + 606.2} = \mathbf{237.23\text{ mm}} \quad (+12.23\text{ mm hacia la cara de }3\text{ No. }8)
                         \end{aligned}$$
+                      </div>
+
+                      <!-- Tabla Maestra de Coordenadas de los 8 Puntos Notables -->
+                      <div class="data-table-wrap" style="margin: 1rem 0;">
+                        <table class="data-table">
+                          <thead>
+                            <tr>
+                              <th>Punto</th>
+                              <th>$c$ (mm)</th>
+                              <th>$a$ (mm)</th>
+                              <th>$\varepsilon_t$</th>
+                              <th>$P_n$ (kN)</th>
+                              <th>$M_n$ (kN·m)</th>
+                              <th>$\phi$</th>
+                              <th>$\phi P_n$ (kN)</th>
+                              <th>$\phi M_n$ (kN·m)</th>
+                              <th>$e$ (mm)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><strong>1. Axial Pura</strong></td>
+                              <td>$\infty$</td>
+                              <td>$450.0$</td>
+                              <td>$-0.0030$</td>
+                              <td>$5\,496.4$</td>
+                              <td>$0.0$</td>
+                              <td>$0.650$</td>
+                              <td>$3\,572.6$</td>
+                              <td>$0.0$</td>
+                              <td>$0.0$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>2. Meseta ($M=0$)</strong></td>
+                              <td>$\infty$</td>
+                              <td>—</td>
+                              <td>—</td>
+                              <td>$4\,122.3$</td>
+                              <td>$0.0$</td>
+                              <td>$0.650$</td>
+                              <td>$2\,679.5$</td>
+                              <td>$0.0$</td>
+                              <td>$0.0$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>3. Meseta ($c_3$)</strong></td>
+                              <td>$424.7$</td>
+                              <td>$361.0$</td>
+                              <td>$-0.00026$</td>
+                              <td>$4\,122.3$</td>
+                              <td>$238.7$</td>
+                              <td>$0.650$</td>
+                              <td>$2\,679.5$</td>
+                              <td>$155.1$</td>
+                              <td>$57.9$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>4. Balanceado ($c_b$)</strong></td>
+                              <td>$228.1$</td>
+                              <td>$193.9$</td>
+                              <td>$0.00210$</td>
+                              <td>$1\,809.5$</td>
+                              <td>$439.7$</td>
+                              <td>$0.650$</td>
+                              <td>$1\,176.2$</td>
+                              <td>$285.8$</td>
+                              <td>$243.0$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>5. Límite $\varepsilon_t=0.004$</strong></td>
+                              <td>$166.2$</td>
+                              <td>$141.3$</td>
+                              <td>$0.00400$</td>
+                              <td>$1\,240.3$</td>
+                              <td>$399.8$</td>
+                              <td>$0.814$</td>
+                              <td>$1\,009.4$</td>
+                              <td>$325.4$</td>
+                              <td>$322.3$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>6. Tracción $\varepsilon_t=0.005$</strong></td>
+                              <td>$145.4$</td>
+                              <td>$123.6$</td>
+                              <td>$0.00500$</td>
+                              <td>$1\,023.1$</td>
+                              <td>$376.3$</td>
+                              <td>$0.900$</td>
+                              <td>$920.8$</td>
+                              <td>$338.6$</td>
+                              <td>$367.8$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>7. Flexión Pura</strong></td>
+                              <td>$68.7$</td>
+                              <td>$58.4$</td>
+                              <td>$0.01393$</td>
+                              <td>$0.0$</td>
+                              <td>$227.6$</td>
+                              <td>$0.900$</td>
+                              <td>$0.0$</td>
+                              <td>$204.8$</td>
+                              <td>$\infty$</td>
+                            </tr>
+                            <tr>
+                              <td><strong>8. Tracción Pura</strong></td>
+                              <td>$0.0$</td>
+                              <td>$0.0$</td>
+                              <td>$\infty$</td>
+                              <td>$-1\,285.2$</td>
+                              <td>$0.0$</td>
+                              <td>$0.900$</td>
+                              <td>$-1\,156.7$</td>
+                              <td>$0.0$</td>
+                              <td>$0.0$</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
 
                       <!-- Figura 8.2b: Diagrama de interacción resuelto en Modo Claro -->

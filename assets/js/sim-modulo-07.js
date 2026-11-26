@@ -98,31 +98,66 @@ function updateSim71() {
   const dMm = hMm - recMm - dbMm; // Peralte efectivo promedio
   const dM = dMm / 1000.0;
 
-  // 1. Presión neta admisible y dimensionamiento en servicio
+  // 1. Presión neta admisible y dimensionamiento en servicio (incluye flexión biaxial)
   const Pserv = PD + PL;
   const qe = qadm - Df * gammaS; // kPa
   const Areq = qe > 0 ? Pserv / qe : 999.0;
   const Aprov = B * L;
 
-  // 2. Cargas mayoradas y presiones del suelo
+  // 2. Cargas mayoradas, excentricidades y núcleo central romboidal (6ex/L + 6ey/B <= 1)
   const Pu = 1.2 * PD + 1.6 * PL;
-  const ex = Pu > 0 ? Muy / Pu : 0; // Excentricidad en dirección L (eje X)
-  const ey = Pu > 0 ? Mux / Pu : 0; // Excentricidad en dirección B (eje Y)
-  const kernX = L / 6.0;
-  const kernY = B / 6.0;
-  const inKern = ex <= kernX && ey <= kernY;
+  const ex = Pu > 0 ? Muy / Pu : 0; // Excentricidad en dirección L (eje X, causada por Muy)
+  const ey = Pu > 0 ? Mux / Pu : 0; // Excentricidad en dirección B (eje Y, causada por Mux)
+  const kernIndex = (6.0 * ex) / L + (6.0 * ey) / B;
+  const inKern = kernIndex <= 1.0001;
 
-  // Presiones mayoradas en las esquinas de la zapata (kN/m²)
+  // Presiones de servicio máximas (estimando Ms proporcional a Mu/Pu)
+  let qServMax = Pserv / Aprov;
+  let qServMin = qServMax;
+  if (inKern) {
+    qServMax = (Pserv / Aprov) * (1.0 + kernIndex);
+    qServMin = (Pserv / Aprov) * (1.0 - kernIndex);
+  } else if (ey < 1e-6) {
+    qServMax = (2.0 * Pserv) / (3.0 * B * Math.max(0.05, L / 2.0 - ex));
+    qServMin = 0.0;
+  } else if (ex < 1e-6) {
+    qServMax = (2.0 * Pserv) / (3.0 * L * Math.max(0.05, B / 2.0 - ey));
+    qServMin = 0.0;
+  } else {
+    const Leff = Math.max(0.20, L - 2.0 * ex);
+    const Beff = Math.max(0.20, B - 2.0 * ey);
+    qServMax = Math.max((Pserv / Aprov) * (1.0 + kernIndex), Pserv / (Leff * Beff));
+    qServMin = 0.0;
+  }
+
+  // Presiones mayoradas en las 4 esquinas de la zapata (kN/m²)
   const qAvg = Pu / Aprov;
   const dqX = (6.0 * Muy) / (B * Math.pow(L, 2));
   const dqY = (6.0 * Mux) / (L * Math.pow(B, 2));
-  const quMax = qAvg + dqX + dqY;
-  const quMin = Math.max(0.0, qAvg - dqX - dqY);
+  const qu1 = qAvg + dqX + dqY; // Esquina +X, +Y (máxima)
+  const qu2 = qAvg + dqX - dqY; // Esquina +X, -Y
+  const qu3 = qAvg - dqX + dqY; // Esquina -X, +Y
+  const qu4 = qAvg - dqX - dqY; // Esquina -X, -Y (mínima; < 0 indica despegue)
+  let quMax = qu1;
+  if (!inKern) {
+    if (ey < 1e-6) {
+      quMax = (2.0 * Pu) / (3.0 * B * Math.max(0.05, L / 2.0 - ex));
+    } else if (ex < 1e-6) {
+      quMax = (2.0 * Pu) / (3.0 * L * Math.max(0.05, B / 2.0 - ey));
+    } else {
+      const Leff = Math.max(0.20, L - 2.0 * ex);
+      const Beff = Math.max(0.20, B - 2.0 * ey);
+      quMax = Math.max(qu1, Pu / (Leff * Beff));
+    }
+  }
+  const quMin = Math.max(0.0, qu4);
 
-  // 3. Verificación de Punzonamiento (Cortante Bidireccional a d/2)
+  // 3. Verificación de Punzonamiento Biaxial (NSR-10 C.11.11.2 y C.11.11.7)
   const isWallStrip = cxMm >= (L * 1000.0 - 5.0);
-  const b0Mm = isWallStrip ? 0 : (2.0 * (cxMm + dMm) + 2.0 * (cyMm + dMm));
-  const punchArea = isWallStrip ? Aprov : (((cxMm + dMm) / 1000.0) * ((cyMm + dMm) / 1000.0));
+  const b1 = cxMm + dMm; // Lado perímetro crítico paralelo a X (L)
+  const b2 = cyMm + dMm; // Lado perímetro crítico paralelo a Y (B)
+  const b0Mm = isWallStrip ? 0 : (2.0 * b1 + 2.0 * b2);
+  const punchArea = isWallStrip ? Aprov : ((b1 / 1000.0) * (b2 / 1000.0));
   const Vu1 = isWallStrip ? 0.0 : qAvg * Math.max(0.0, Aprov - punchArea); // kN
 
   const betaC = Math.max(cxMm, cyMm) / Math.min(cxMm, cyMm);
@@ -131,22 +166,42 @@ function updateSim71() {
   const vc2 = b0Mm > 0 ? (0.083 * ((alphaS * dMm) / b0Mm + 2.0) * Math.sqrt(fc)) : 0.33 * Math.sqrt(fc);
   const vc3 = 0.33 * Math.sqrt(fc);
   const vc = Math.min(vc1, vc2, vc3); // MPa
-  const phiVc1 = isWallStrip ? 99999.0 : (0.75 * vc * b0Mm * dMm) / 1000.0; // kN
+  const phiVcStress = 0.75 * vc; // MPa
+  const phiVc1 = isWallStrip ? 99999.0 : (phiVcStress * b0Mm * dMm) / 1000.0; // kN
 
-  // 4. Verificación de Cortante como Viga (Unidireccional a distancia d)
-  // En dirección L (vuelo largo X)
-  const lvX = (L - cxMm / 1000.0) / 2.0;
-  const Vu2x = qAvg * B * Math.max(0.0, lvX - dM);
+  // Transferencia de momento no balanceado en punzonamiento (C.11.11.7)
+  const vuDir = isWallStrip ? 0.0 : (Vu1 * 1000.0) / (b0Mm * dMm); // MPa
+  const gammaVy = 1.0 - 1.0 / (1.0 + (2.0 / 3.0) * Math.sqrt(b1 / b2));
+  const gammaVx = 1.0 - 1.0 / (1.0 + (2.0 / 3.0) * Math.sqrt(b2 / b1));
+  const Jcy = (dMm * Math.pow(b1, 3)) / 6.0 + (b1 * Math.pow(dMm, 3)) / 6.0 + (dMm * b2 * Math.pow(b1, 2)) / 2.0;
+  const Jcx = (dMm * Math.pow(b2, 3)) / 6.0 + (b2 * Math.pow(dMm, 3)) / 6.0 + (dMm * b1 * Math.pow(b2, 2)) / 2.0;
+  const vuMomY = isWallStrip ? 0.0 : (gammaVy * (Muy * 1e6) * (b1 / 2.0)) / Jcy;
+  const vuMomX = isWallStrip ? 0.0 : (gammaVx * (Mux * 1e6) * (b2 / 2.0)) / Jcx;
+  const vuMax = vuDir + vuMomY + vuMomX; // MPa
+  const punchOk = isWallStrip || vuMax <= phiVcStress;
+
+  // 4. Verificación de Cortante como Viga (Unidireccional Trapecial a distancia d)
+  // En dirección L (eje X, ancho resistente B)
+  const lvX = Math.max(0.0, (L - cxMm / 1000.0) / 2.0);
+  const xCritX = Math.max(0.0, lvX - dM);
+  const qXEdge = qAvg + dqX;
+  const qXFace = qAvg + dqX * ((cxMm / 1000.0) / L);
+  const qXD    = qAvg + dqX * ((cxMm / 1000.0 + 2.0 * dM) / L);
+  const Vu2x = B * 0.5 * (qXEdge + qXD) * xCritX;
   const phiVc2x = (0.75 * 0.17 * Math.sqrt(fc) * (B * 1000.0) * dMm) / 1000.0;
 
-  // En dirección B (vuelo en Y)
-  const lvY = (B - cyMm / 1000.0) / 2.0;
-  const Vu2y = qAvg * L * Math.max(0.0, lvY - dM);
+  // En dirección B (eje Y, ancho resistente L)
+  const lvY = Math.max(0.0, (B - cyMm / 1000.0) / 2.0);
+  const xCritY = Math.max(0.0, lvY - dM);
+  const qYEdge = qAvg + dqY;
+  const qYFace = qAvg + dqY * ((cyMm / 1000.0) / B);
+  const qYD    = qAvg + dqY * ((cyMm / 1000.0 + 2.0 * dM) / B);
+  const Vu2y = L * 0.5 * (qYEdge + qYD) * xCritY;
   const phiVc2y = (0.75 * 0.17 * Math.sqrt(fc) * (L * 1000.0) * dMm) / 1000.0;
 
-  // 5. Diseño a Flexión en la cara de la columna
-  const MuFlexX = qAvg * B * Math.pow(lvX, 2) / 2.0; // Flexión en dirección L
-  const MuFlexY = qAvg * L * Math.pow(lvY, 2) / 2.0; // Flexión en dirección B
+  // 5. Diseño a Flexión Trapecial en la cara de la columna (en ambas direcciones)
+  const MuFlexX = B * (qXFace * Math.pow(lvX, 2) / 2.0 + (qXEdge - qXFace) * Math.pow(lvX, 2) / 3.0);
+  const MuFlexY = L * (qYFace * Math.pow(lvY, 2) / 2.0 + (qYEdge - qYFace) * Math.pow(lvY, 2) / 3.0);
 
   const phiFlex = 0.90;
   const calcAsFlex = (MuKNm, widthM) => {
@@ -171,36 +226,85 @@ function updateSim71() {
   const sBarsX = ((B * 1000.0 - 2.0 * recMm - dbMm) / (numBarsX - 1));
   const sBarsY = ((L * 1000.0 - 2.0 * recMm - dbMm) / (numBarsY - 1));
 
-  // 6. Aplastamiento en la base (NSR-10 C.15.8 y C.10.14)
+  // Banda central gamma_s en zapatas rectangulares (NSR-10 C.15.4.4.2)
+  const betaRect = Math.max(L, B) / Math.min(L, B);
+  const gammaBand = 2.0 / (betaRect + 1.0);
+  const isRect = !isWallStrip && betaRect > 1.01;
+  const bandInfoY = (isRect && L > B) ? ` | γs=${(gammaBand * 100).toFixed(0)}% (${Math.ceil(gammaBand * numBarsY)} en banda B)` : '';
+  const bandInfoX = (isRect && B > L) ? ` | γs=${(gammaBand * 100).toFixed(0)}% (${Math.ceil(gammaBand * numBarsX)} en banda L)` : '';
+
+  // 6. Aplastamiento en la base, Anclaje de Espigos y Criterio de Pedestal (NSR-10 C.15.8 / C.12.3)
   const A1 = (cxMm * cyMm);
   const A2 = Math.min((B * 1000.0) * (L * 1000.0), Math.pow(Math.min(cxMm + 4.0 * hMm, B * 1000.0), 2));
   const factorAplast = Math.min(2.0, Math.sqrt(A2 / A1));
   const phiPnAplast = (0.65 * 0.85 * fc * A1 * factorAplast) / 1000.0; // kN
   const aplastOk = phiPnAplast >= Pu;
 
+  // Longitud de desarrollo a compresión de referencia (espigo No. 7, db = 22.2 mm)
+  const dbRefCol = 22.2;
+  const ldcMm = Math.max((0.24 * fy * dbRefCol) / Math.sqrt(fc), 0.043 * fy * dbRefCol, 200.0);
+  const anchorageOk = isWallStrip || dMm >= ldcMm;
+  const hasUplift = !inKern || qu4 < -0.01;
+  const isThick = hCm >= 70;
+  const needTopSteel = hasUplift || isThick;
+
   // Actualizar métricas en el DOM
   document.getElementById('res71-area').textContent =
-    `A_prov = ${Aprov.toFixed(2)} m² (A_req = ${Areq.toFixed(2)} m²) | qe = ${qe.toFixed(0)} kPa`;
+    `A_prov = ${Aprov.toFixed(2)} m² (A_req = ${Areq.toFixed(2)} m²) | qs,máx = ${qServMax.toFixed(1)} ${qServMax <= qe ? '≤' : '>'} qe = ${qe.toFixed(0)} kPa`;
   document.getElementById('res71-press').textContent =
-    `qu,máx = ${quMax.toFixed(1)} kPa | qu,mín = ${quMin.toFixed(1)} kPa ${inKern ? '(En núcleo central)' : '⚠️ (Excéntrica)'}`;
+    (Mux > 0 || Muy > 0)
+      ? `q1=${quMax.toFixed(1)} | q2=${qu2.toFixed(1)} | q3=${qu3.toFixed(1)} | q4=${quMin.toFixed(1)} kPa | 6ex/L+6ey/B=${kernIndex.toFixed(2)} ${inKern ? '≤1 ✓' : '>1 ⚠️'}`
+      : `qu = ${qAvg.toFixed(1)} kPa (Uniforme concéntrica, e = 0)`;
   document.getElementById('res71-punch').textContent = isWallStrip
     ? 'N/A (Cimiento corrido 1D — solo cortante unidireccional)'
-    : `Vu = ${Vu1.toFixed(1)} kN | φVc = ${phiVc1.toFixed(1)} kN (d = ${dMm.toFixed(1)} mm, b0 = ${b0Mm.toFixed(0)} mm)`;
+    : ((Mux > 0 || Muy > 0)
+        ? `vu,máx = ${vuMax.toFixed(3)} MPa (dir=${vuDir.toFixed(2)}+M=${(vuMomX + vuMomY).toFixed(2)}) ${punchOk ? '≤' : '>'} φvc = ${phiVcStress.toFixed(3)} MPa`
+        : `Vu = ${Vu1.toFixed(1)} kN | φVc = ${phiVc1.toFixed(1)} kN (d = ${dMm.toFixed(1)} mm, b0 = ${b0Mm.toFixed(0)} mm)`);
   document.getElementById('res71-shearx').textContent =
     `VuX = ${Vu2x.toFixed(1)} kN | φVcX = ${phiVc2x.toFixed(1)} kN (voladizo = ${lvX.toFixed(2)} m)`;
   document.getElementById('res71-sheary').textContent =
     `VuY = ${Vu2y.toFixed(1)} kN | φVcY = ${phiVc2y.toFixed(1)} kN (voladizo = ${lvY.toFixed(2)} m)`;
   document.getElementById('res71-mux').textContent = lvX <= 0.01
     ? `As,long (temp. 0.0018) = ${AsMinX.toFixed(0)} mm² → ${numBarsX} No.${barKey}`
-    : `MuX = ${MuFlexX.toFixed(1)} kN·m → ${numBarsX} No.${barKey} @ ${(sBarsX / 10.0).toFixed(0)} cm`;
+    : `MuX = ${MuFlexX.toFixed(1)} kN·m → ${numBarsX} No.${barKey} @ ${(sBarsX / 10.0).toFixed(0)} cm${bandInfoX}`;
   document.getElementById('res71-muy').textContent =
-    `MuY = ${MuFlexY.toFixed(1)} kN·m → ${numBarsY} No.${barKey} @ ${(sBarsY / 10.0).toFixed(0)} cm`;
+    `MuY = ${MuFlexY.toFixed(1)} kN·m → ${numBarsY} No.${barKey} @ ${(sBarsY / 10.0).toFixed(0)} cm${bandInfoY}`;
   document.getElementById('res71-aplast').textContent =
-    `φPn = ${phiPnAplast.toFixed(0)} kN ${aplastOk ? '≥' : '<'} Pu = ${Pu.toFixed(0)} kN (factor √(A2/A1) = ${factorAplast.toFixed(2)})`;
+    `φPn = ${phiPnAplast.toFixed(0)} kN ${aplastOk ? '≥' : '<'} Pu = ${Pu.toFixed(0)} kN (√(A2/A1) = ${factorAplast.toFixed(2)})`;
+
+  const topSteelEl = document.getElementById('res71-topsteel');
+  if (topSteelEl) {
+    if (hasUplift) {
+      topSteelEl.textContent = `⚠️ REQUIERE PARRILLA SUPERIOR (Despegue q4 < 0; controlar tracción superior)`;
+    } else if (isThick) {
+      topSteelEl.textContent = `ℹ️ RECOMENDADA DOBLE PARRILLA (h = ${hCm.toFixed(0)} cm ≥ 70 cm: control térmico/retracción)`;
+    } else {
+      topSteelEl.textContent = `✅ SOLO PARRILLA INFERIOR (Sin despegue q4 = ${quMin.toFixed(0)} kPa > 0 y h < 70 cm)`;
+    }
+  }
+
+  const pedestalEl = document.getElementById('res71-pedestal');
+  if (pedestalEl) {
+    if (isWallStrip) {
+      pedestalEl.textContent = `N/A (Cimiento corrido bajo muro estructural)`;
+    } else {
+      const reasons = [];
+      if (!aplastOk) reasons.push('Aplastamiento Pu > φPn');
+      if (!punchOk) reasons.push('Punzonamiento excedido');
+      if (!anchorageOk) reasons.push(`d=${dMm.toFixed(0)}mm < ldc=${ldcMm.toFixed(0)}mm`);
+      if (reasons.length > 0) {
+        pedestalEl.textContent = `⚠️ EVALUAR PEDESTAL: ${reasons.join(' + ')}`;
+      } else if (Df >= 2.20) {
+        pedestalEl.textContent = `ℹ️ PEDESTAL OPCIONAL (Df = ${Df.toFixed(2)} m ≥ 2.20 m; col. cumple aplast., punz. y ldc=${ldcMm.toFixed(0)} mm)`;
+      } else {
+        pedestalEl.textContent = `✅ NO REQUIERE PEDESTAL (Col. cumple aplast., punz. y d ≥ ldc = ${ldcMm.toFixed(0)} mm)`;
+      }
+    }
+  }
 
   // Tacómetro Dinámico de Utilización Geotécnica y Cortante Bidireccional
-  const dcrSoil  = Aprov > 0 ? Areq / Aprov : 1.5;
-  const dcrPunch = isWallStrip ? 0.0 : (phiVc1 > 0 ? Vu1 / phiVc1 : 1.5);
+  const dcrSoil  = (Aprov > 0 && qe > 0) ? Math.max(Areq / Aprov, qServMax / qe) : 1.5;
+  const dcrPunch = isWallStrip ? 0.0 : (phiVcStress > 0 ? vuMax / phiVcStress : 1.5);
   const dcrBeamX = phiVc2x > 0 ? Vu2x / phiVc2x : 0;
   const dcrBeamY = phiVc2y > 0 ? Vu2y / phiVc2y : 0;
   const dcrBeam  = Math.max(dcrBeamX, dcrBeamY);
@@ -208,29 +312,30 @@ function updateSim71() {
 
   // Estado global
   const statusEl = document.getElementById('res71-status');
-  if (Aprov < Areq) {
+  if (dcrSoil > 1.0) {
     statusEl.className = 'status-badge status-danger';
-    statusEl.innerHTML = `❌ ÁREA INSUFICIENTE: A_prov = ${Aprov.toFixed(2)} m² < A_req = ${Areq.toFixed(2)} m². Se supera la capacidad admisible del suelo.`;
-  } else if (!isWallStrip && Vu1 > phiVc1) {
+    statusEl.innerHTML = `❌ PRESIÓN ADMISIBLE EXCEDIDA: qs,máx = ${qServMax.toFixed(1)} kPa > qe = ${qe.toFixed(0)} kPa (A_prov = ${Aprov.toFixed(2)} m², A_req = ${Areq.toFixed(2)} m²). Aumente L o B.`;
+  } else if (!punchOk) {
     statusEl.className = 'status-badge status-danger';
-    statusEl.innerHTML = `❌ FALLA POR PUNZONAMIENTO: Vu = ${Vu1.toFixed(0)} kN > φVc = ${phiVc1.toFixed(0)} kN. Aumente el espesor h de la zapata.`;
+    statusEl.innerHTML = `❌ FALLA POR PUNZONAMIENTO BIAXIAL: vu,máx = ${vuMax.toFixed(2)} MPa > φvc = ${phiVcStress.toFixed(2)} MPa (C.11.11.7). Aumente h o coloque pedestal.`;
   } else if (Vu2x > phiVc2x || Vu2y > phiVc2y) {
     statusEl.className = 'status-badge status-danger';
     statusEl.innerHTML = `❌ CORTANTE COMO VIGA EXCEDIDO: Vu > φVc en los voladizos. Aumente el espesor h de la zapata.`;
   } else if (!aplastOk) {
     statusEl.className = 'status-badge status-warn';
-    statusEl.innerHTML = `⚠️ APLASTAMIENTO EXCEDIDO: φPn = ${phiPnAplast.toFixed(0)} kN < Pu. Se requiere suministrar espigos (dowels) para transmitir el exceso de carga (NSR-10 C.15.8.1.2).`;
+    statusEl.innerHTML = `⚠️ APLASTAMIENTO EXCEDIDO: φPn = ${phiPnAplast.toFixed(0)} kN < Pu. Suministre espigos adicionales o amplíe con pedestal (NSR-10 C.15.8).`;
   } else if (!inKern) {
     statusEl.className = 'status-badge status-warn';
-    statusEl.innerHTML = `⚠️ EXCENTRICIDAD FUERA DEL NÚCLEO CENTRAL: Existe despegue parcial o distribución fuertemente triangular del suelo.`;
+    statusEl.innerHTML = `⚠️ EXCENTRICIDAD FUERA DEL NÚCLEO ROMBOIDAL (6ex/L + 6ey/B = ${kernIndex.toFixed(2)} > 1.0): Existe despegue parcial — requiere parrilla superior.`;
   } else {
     statusEl.className = 'status-badge status-ok';
-    statusEl.innerHTML = `✅ ZAPATA CUMPLE (NSR-10): Presiones admisibles, cortante por punzonamiento, cortante como viga y flexión en ambas direcciones verificados.`;
+    statusEl.innerHTML = `✅ ZAPATA CUMPLE (NSR-10): Servicio biaxial, punzonamiento C.11.11.7, cortante 1D X/Y, flexión y anclaje verificados.`;
   }
 
   drawSim71Canvas({
     B, L, hMm, cxMm, cyMm, dMm, lvX, lvY,
-    numBarsX, numBarsY, barKey, quMax, quMin,
+    numBarsX, numBarsY, barKey, quMax, quMin, qu1, qu2, qu3, qu4,
+    Mux, Muy, needTopSteel, isWallStrip,
     b0Mm, Vu1, phiVc1, Vu2x, phiVc2x, inKern
   });
 }
@@ -287,9 +392,11 @@ function drawSim71Canvas(st) {
   ctx.strokeRect(punchX, punchY, punchW, punchH);
   ctx.setLineDash([]);
 
-  // Secciones críticas de cortante como viga a distancia d
+  // Secciones críticas de cortante como viga a distancia d (en X e Y)
   const shearLineX1 = colX - (st.dMm / 1000.0) * sc;
   const shearLineX2 = colX + colW + (st.dMm / 1000.0) * sc;
+  const shearLineY1 = colY - (st.dMm / 1000.0) * sc;
+  const shearLineY2 = colY + colH + (st.dMm / 1000.0) * sc;
   ctx.strokeStyle = pal.shearBeamStroke;
   ctx.lineWidth = 1.6;
   ctx.setLineDash([6, 3]);
@@ -299,7 +406,25 @@ function drawSim71Canvas(st) {
   if (shearLineX2 < fX0 + drawW) {
     ctx.beginPath(); ctx.moveTo(shearLineX2, fY0); ctx.lineTo(shearLineX2, fY0 + drawH); ctx.stroke();
   }
+  if (shearLineY1 > fY0) {
+    ctx.beginPath(); ctx.moveTo(fX0, shearLineY1); ctx.lineTo(fX0 + drawW, shearLineY1); ctx.stroke();
+  }
+  if (shearLineY2 < fY0 + drawH) {
+    ctx.beginPath(); ctx.moveTo(fX0, shearLineY2); ctx.lineTo(fX0 + drawW, shearLineY2); ctx.stroke();
+  }
   ctx.setLineDash([]);
+
+  // Presiones en las 4 esquinas cuando hay momento uniaxial o biaxial
+  if (st.Mux > 0 || st.Muy > 0) {
+    ctx.fillStyle = pal.soilStroke;
+    ctx.font = 'bold 9.5px JetBrains Mono, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`q3=${Math.max(0, st.qu3).toFixed(0)}`, fX0 + 4, fY0 - 6);
+    ctx.fillText(`q4=${Math.max(0, st.qu4).toFixed(0)}`, fX0 + 4, fY0 + drawH + 12);
+    ctx.textAlign = 'right';
+    ctx.fillText(`q1=${st.quMax.toFixed(0)}`, fX0 + drawW - 4, fY0 - 6);
+    ctx.fillText(`q2=${Math.max(0, st.qu2).toFixed(0)}`, fX0 + drawW - 4, fY0 + drawH + 12);
+  }
 
   // Barras de refuerzo (parrilla inferior)
   ctx.strokeStyle = pal.rebarColor;
@@ -344,6 +469,28 @@ function drawSim71Canvas(st) {
   ctx.lineWidth = 2.0;
   ctx.fillRect(pX0, footTopY, pW, footHPx);
   ctx.strokeRect(pX0, footTopY, pW, footHPx);
+
+  // Parrilla inferior (siempre presente) y parrilla superior (si hay despegue o h >= 70 cm)
+  ctx.strokeStyle = pal.rebarColor;
+  ctx.lineWidth = 2.4;
+  ctx.beginPath();
+  ctx.moveTo(pX0 + 10, baseFootY - 6);
+  ctx.lineTo(pX1 - 10, baseFootY - 6);
+  ctx.stroke();
+  if (st.needTopSteel) {
+    ctx.strokeStyle = pal.punchStroke;
+    ctx.lineWidth = 2.0;
+    ctx.setLineDash([6, 3]);
+    ctx.beginPath();
+    ctx.moveTo(pX0 + 10, footTopY + 6);
+    ctx.lineTo(pX1 - 10, footTopY + 6);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = pal.punchStroke;
+    ctx.font = 'bold 9.5px Inter, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('Parrilla superior', pX1 - 6, footTopY - 5);
+  }
 
   // Columna saliendo hacia arriba
   const colPW = Math.max(25, (st.cxMm / 1000.0) * sc * 1.5);
@@ -534,11 +681,17 @@ function loadSim71Preset(key) {
     set('sim71-b', 2.80); set('sim71-l', 2.80); set('sim71-h', 60);
     set('sim71-cx', 45); set('sim71-cy', 45); set('sim71-fc', '28'); set('sim71-bar', '8');
   } else if (key === 'ej72_excentrica') {
-    // Ejemplo 7.2: Pu = 1.2(820)+1.6(510) = 1800 kN, Mux = 220 kN·m, 2.60 x 3.20 m, h = 65 cm
-    set('sim71-pd', 820); set('sim71-pl', 510); set('sim71-mux', 220); set('sim71-muy', 0);
+    // Ejemplo 7.2: Pu = 1.2(820)+1.6(510) = 1800 kN, Momento 220 kN·m a lo largo de L (Muy=220), 2.60 x 3.20 m, h = 65 cm
+    set('sim71-pd', 820); set('sim71-pl', 510); set('sim71-mux', 0); set('sim71-muy', 220);
     set('sim71-qadm', 250); set('sim71-df', 1.60); set('sim71-gammas', 18.0);
     set('sim71-b', 2.60); set('sim71-l', 3.20); set('sim71-h', 65);
     set('sim71-cx', 40); set('sim71-cy', 50); set('sim71-fc', '28'); set('sim71-bar', '6');
+  } else if (key === 'ej73_biaxial') {
+    // Ejemplo 7.3: Zapata rectangular biaxial Pu = 1560 kN, Muy = 150 kN·m (en L), Mux = 95 kN·m (en B), 3.20 x 2.80 m, h = 60 cm
+    set('sim71-pd', 700); set('sim71-pl', 450); set('sim71-mux', 95); set('sim71-muy', 150);
+    set('sim71-qadm', 260); set('sim71-df', 1.60); set('sim71-gammas', 18.0);
+    set('sim71-b', 2.80); set('sim71-l', 3.20); set('sim71-h', 60);
+    set('sim71-cx', 45); set('sim71-cy', 45); set('sim71-fc', '28'); set('sim71-bar', '6');
   } else if (key === 'punzonamiento_critico') {
     // Zapata delgada con punzonamiento crítico para demostrar falla Zona 4
     set('sim71-pd', 1300); set('sim71-pl', 850); set('sim71-mux', 0); set('sim71-muy', 0);
